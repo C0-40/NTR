@@ -759,10 +759,16 @@ html,body{color:var(--tx)}
   padding:6px 10px!important;width:100%!important;box-sizing:border-box
 }
 .stick.outing .silLayer{
-  top:56%!important;left:50%!important;transform:translate(-50%,-42%)!important;
-  width:min(100%,440px)!important;z-index:2!important;gap:0!important;overflow:visible!important
+  top:auto!important;bottom:0!important;left:50%!important;transform:translateX(-50%)!important;
+  width:min(100%,440px)!important;z-index:2!important;gap:0!important;overflow:visible!important;
+  justify-content:flex-end!important;align-items:center!important
 }
-.stick.outing .silStage{height:min(34vh,210px)!important;overflow:visible!important}
+.stick.outing .silStage{
+  height:min(34vh,210px)!important;overflow:visible!important;
+  display:flex!important;align-items:flex-end!important;justify-content:center!important
+}
+.stick.outing .silPair{align-self:stretch;height:100%}
+.stick.outing .silFig{bottom:0!important;object-position:center bottom!important}
 /* 外出心聲列：頭像＝文字框同高；左右邊距對齊底欄 dock（日常 dlg 無頭像） */
 .heartRow{display:none;flex:0 0 auto;width:100%;box-sizing:border-box;pointer-events:none}
 .homeui .stick.outing .scene{min-height:0!important;flex:1 1 auto}
@@ -819,7 +825,7 @@ html,body{color:var(--tx)}
   .stick.outing .dayClock{position:static!important;top:auto!important;right:auto!important;opacity:.9;filter:none;transform:none}
   .stick.outing .note{top:126px!important;width:min(90%,290px)!important;max-width:min(90%,290px)!important;padding:9px 10px!important}
   .stick.outing .note .note-title,.stick.outing .note #nh{font-size:13px!important}
-  .stick.outing .silLayer{top:64%!important}
+  .stick.outing .silLayer{top:auto!important;bottom:0!important;transform:translateX(-50%)!important}
   .stick.outing .silStage{height:min(32vh,180px)!important}
   .stick.outing .heartRow{--heart-size:88px}
   .stick.outing .heartFace.is-on{border-radius:14px}
