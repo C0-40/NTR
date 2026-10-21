@@ -903,27 +903,21 @@ html,body{color:var(--tx)}
 .homeui.outing-shell .note-acts .btn:active,
 .homeui .stick.outing .note-acts .btn:active{transform:translateY(1px);box-shadow:0 1px 0 rgba(0,0,0,.25)}
 
-/* ===== Top HUD band: one paper/wood chrome ===== */
+
+/* ===== Top HUD: separate pieces, shared rhythm (no single card) ===== */
 .homeui .topHud{
   position:absolute;top:0;left:0;right:0;z-index:6;
   padding:8px 8px 0;pointer-events:none;
 }
-.homeui .hudBand{
-  display:flex;align-items:stretch;gap:8px;
+.homeui .hudRow{
+  display:flex;align-items:flex-start;gap:10px;
   pointer-events:none;
-  padding:8px 9px 9px;
-  border-radius:16px;
-  border:1.5px solid rgba(140,100,55,.48);
-  background:
-    linear-gradient(165deg,rgba(255,252,244,.97) 0%,rgba(255,244,226,.94) 48%,rgba(246,230,204,.9) 100%);
-  box-shadow:
-    0 1px 0 rgba(255,255,255,.75) inset,
-    0 3px 10px rgba(90,59,42,.14),
-    0 1px 0 rgba(120,80,40,.08);
+  margin:0;padding:0;
+  background:none;border:none;box-shadow:none;border-radius:0;
 }
 .homeui .hudMain{
   flex:1 1 auto;min-width:0;
-  display:flex;flex-direction:column;gap:7px;
+  display:flex;flex-direction:column;gap:8px;
   pointer-events:none;
 }
 .homeui .topHud .chips.hudTools,
@@ -939,7 +933,7 @@ html,body{color:var(--tx)}
   border:1.5px solid #b88955;
   background:linear-gradient(180deg,#fffaf3,#f4e6cc);
   color:#4a2c16;
-  box-shadow:0 1px 0 rgba(255,255,255,.7) inset,0 1px 3px rgba(90,59,42,.1);
+  box-shadow:0 1px 0 rgba(255,255,255,.7) inset,0 1px 3px rgba(90,59,42,.12);
   height:32px;box-sizing:border-box;
   display:inline-flex;align-items:center;
   padding:0 10px;font-size:11px;font-weight:800;letter-spacing:.02em;line-height:1;
@@ -954,20 +948,24 @@ html,body{color:var(--tx)}
   border-radius:10px;border:1.5px solid #b88955;
   background:linear-gradient(180deg,#fffaf3,#f0e0c4);
   color:#4a2c16;
-  box-shadow:0 1px 0 rgba(255,255,255,.65) inset,0 1px 3px rgba(90,59,42,.1);
+  box-shadow:0 1px 0 rgba(255,255,255,.65) inset,0 1px 3px rgba(90,59,42,.12);
   font-size:14px;line-height:1;
   display:inline-flex!important;align-items:center;justify-content:center;
 }
 .homeui .topHud .chip.chip-ico#mus[aria-pressed="false"]{
-  opacity:.85;filter:none;
+  opacity:.88;filter:none;
   background:linear-gradient(180deg,#f3e8d8,#e6d4b8);
   color:#6a4a30;
 }
+/* Relationship strip: its own panel again */
 .homeui .topMeta{
   pointer-events:none;
-  margin:0!important;padding:0!important;
-  background:transparent!important;border:none!important;box-shadow:none!important;
-  border-radius:0;
+  margin:0!important;
+  padding:6px 10px 7px!important;
+  border-radius:12px;
+  border:1.5px solid rgba(170,130,80,.55)!important;
+  background:linear-gradient(180deg,rgba(255,252,245,.98),rgba(255,246,232,.92) 55%,rgba(255,242,224,.88))!important;
+  box-shadow:0 2px 8px rgba(90,59,42,.12),inset 0 1px 0 rgba(255,255,255,.7)!important;
 }
 .homeui .topMeta .bar{
   margin:4px 0 0;height:8px;background:#efe2d0;border:1px solid #d7c09a;
@@ -985,24 +983,22 @@ html,body{color:var(--tx)}
 .homeui .topAffRow .affVal{font-size:11.5px;color:#6e3518}
 .homeui .mbox{margin-top:6px!important;padding-top:5px;border-top:1px dashed rgba(140,100,55,.28)}
 
-/* Time column: day + dial + part as one unit, no overlap with aff bar */
+/* Day + clock: own stack on the right, never overlaps aff strip */
 .homeui .topHud .dayClock,
-.homeui .hudBand > .dayClock{
+.homeui .hudRow > .dayClock{
   position:static!important;top:auto!important;right:auto!important;
-  flex:0 0 auto;align-self:center;
-  display:flex;flex-direction:column;align-items:center;justify-content:center;
-  gap:3px;pointer-events:none;z-index:auto;
-  filter:none;
-  min-width:56px;padding:2px 2px 0 4px;
-  border-left:1px solid rgba(160,120,70,.28);
-  margin-left:2px;
+  flex:0 0 auto;align-self:flex-start;
+  display:flex;flex-direction:column;align-items:center;justify-content:flex-start;
+  gap:4px;pointer-events:none;z-index:auto;
+  filter:none;min-width:54px;padding:0;margin:0;
+  background:none;border:none;box-shadow:none;
 }
 .homeui .topHud .dayClock-day{
   font-size:10px;font-weight:800;color:#3f2410;letter-spacing:.04em;line-height:1.2;
   padding:2px 8px;border-radius:999px;
   background:linear-gradient(180deg,#fffaf3,#f0e0c4);
   border:1px solid rgba(170,130,80,.55);
-  box-shadow:0 1px 0 rgba(255,255,255,.65) inset;
+  box-shadow:0 1px 0 rgba(255,255,255,.65) inset,0 1px 3px rgba(90,59,42,.1);
   white-space:nowrap;order:0;
 }
 .homeui .topHud .dayClock-dial{
@@ -1015,23 +1011,23 @@ html,body{color:var(--tx)}
   opacity:.95;text-shadow:none;margin-top:0;
 }
 @media (max-width:420px){
-  .homeui .hudBand{gap:6px;padding:7px 7px 8px;border-radius:14px}
+  .homeui .hudRow{gap:8px}
   .homeui .topHud .dayClock-dial{width:42px;height:42px}
   .homeui .topHud .chip.chip-ico{width:30px;height:30px;min-width:30px;min-height:30px;font-size:13px}
+  .homeui .topHud .chip.chip-sta{height:30px;font-size:10.5px}
   .homeui .topMeta{margin-right:0!important}
 }
 
-/* Outing: keep band readable over darkened scene */
-.homeui .stick.outing .hudBand,
-.homeui.outing-shell .hudBand{
-  background:linear-gradient(165deg,rgba(255,250,240,.88),rgba(236,220,196,.82));
-  border-color:rgba(120,90,55,.45);
+/* Outing: pieces stay separate; no absolute clock */
+.homeui .stick.outing .hudRow,
+.homeui.outing-shell .hudRow{
+  background:none;border:none;box-shadow:none;
 }
-.homeui .stick.outing .topMeta{margin-right:0!important;opacity:1}
+.homeui .stick.outing .topMeta{margin-right:0!important;opacity:.92}
 .homeui .stick.outing .dayClock,
 .homeui .stick.outing .topHud .dayClock{
   position:static!important;top:auto!important;right:auto!important;
-  opacity:.92;filter:none;transform:none;
+  opacity:.9;filter:none;transform:none;
 }
 .homeui .stick.outing .topHud{z-index:7}
 .homeui .stick.outing .topMeta{max-width:none}
@@ -1042,7 +1038,7 @@ html,body{color:var(--tx)}
 <div class="w homeui">
   <div class="stick" id="homeStick"><div class="scene" id="scene">
     <div class="topHud">
-      <div class="hudBand">
+      <div class="hudRow">
         <div class="hudMain">
           <div class="chips hudTools">
             <span class="chip chip-sta">⚡ 體力 <span id="sta">5</span>/5</span>
