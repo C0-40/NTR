@@ -904,51 +904,59 @@ html,body{color:var(--tx)}
 .homeui .stick.outing .note-acts .btn:active{transform:translateY(1px);box-shadow:0 1px 0 rgba(0,0,0,.25)}
 
 
-/* ===== Top HUD: separate pieces, shared rhythm (no single card) ===== */
+
+/* ===== Top HUD: floating separate chips (wallpaper shows in gaps) ===== */
 .homeui .topHud{
   position:absolute;top:0;left:0;right:0;z-index:6;
-  padding:8px 8px 0;pointer-events:none;
+  padding:10px 10px 0;pointer-events:none;
+  background:transparent!important;border:none!important;box-shadow:none!important;
 }
 .homeui .hudRow{
-  display:flex;align-items:flex-start;gap:10px;
+  display:flex;align-items:flex-start;gap:12px;
   pointer-events:none;
   margin:0;padding:0;
-  background:none;border:none;box-shadow:none;border-radius:0;
+  background:transparent!important;border:none!important;box-shadow:none!important;border-radius:0!important;
 }
 .homeui .hudMain{
   flex:1 1 auto;min-width:0;
-  display:flex;flex-direction:column;gap:8px;
+  display:flex;flex-direction:column;align-items:stretch;
+  gap:16px; /* clear air so room art shows between tools and relationship */
   pointer-events:none;
+  background:transparent!important;border:none!important;box-shadow:none!important;border-radius:0!important;
+  padding:0;margin:0;
 }
+/* Tools: only as wide as chips — do NOT stretch into a plate */
 .homeui .topHud .chips.hudTools,
 .homeui .hudTools{
   position:static!important;left:auto;right:auto;top:auto;
   display:flex;align-items:center;gap:6px;
-  margin:0!important;padding:0;overflow:visible;
+  margin:0!important;padding:0!important;overflow:visible;
   pointer-events:auto;z-index:auto;
-  min-height:32px;
+  min-height:32px;width:max-content;max-width:100%;
+  align-self:flex-start;flex:0 0 auto;
+  background:transparent!important;border:none!important;box-shadow:none!important;border-radius:0!important;
 }
 .homeui .topHud .chip.chip-sta{
   border-radius:999px;
   border:1.5px solid #b88955;
   background:linear-gradient(180deg,#fffaf3,#f4e6cc);
   color:#4a2c16;
-  box-shadow:0 1px 0 rgba(255,255,255,.7) inset,0 1px 3px rgba(90,59,42,.12);
+  box-shadow:0 1px 0 rgba(255,255,255,.7) inset,0 2px 5px rgba(90,59,42,.14);
   height:32px;box-sizing:border-box;
   display:inline-flex;align-items:center;
   padding:0 10px;font-size:11px;font-weight:800;letter-spacing:.02em;line-height:1;
 }
 .homeui .topHud .chipIcons{
   display:inline-flex;align-items:center;gap:5px;
-  margin-left:0;margin-right:0;padding:0;flex:none;
-  height:32px;
+  margin:0!important;padding:0;flex:none;height:32px;
+  background:transparent!important;border:none!important;box-shadow:none!important;
 }
 .homeui .topHud .chip.chip-ico{
   width:32px;height:32px;min-width:32px;min-height:32px;padding:0!important;
   border-radius:10px;border:1.5px solid #b88955;
   background:linear-gradient(180deg,#fffaf3,#f0e0c4);
   color:#4a2c16;
-  box-shadow:0 1px 0 rgba(255,255,255,.65) inset,0 1px 3px rgba(90,59,42,.12);
+  box-shadow:0 1px 0 rgba(255,255,255,.65) inset,0 2px 5px rgba(90,59,42,.14);
   font-size:14px;line-height:1;
   display:inline-flex!important;align-items:center;justify-content:center;
 }
@@ -957,7 +965,7 @@ html,body{color:var(--tx)}
   background:linear-gradient(180deg,#f3e8d8,#e6d4b8);
   color:#6a4a30;
 }
-/* Relationship strip: its own panel again */
+/* Relationship: own strip only — not a wrapper for the tools above */
 .homeui .topMeta{
   pointer-events:none;
   margin:0!important;
@@ -966,6 +974,8 @@ html,body{color:var(--tx)}
   border:1.5px solid rgba(170,130,80,.55)!important;
   background:linear-gradient(180deg,rgba(255,252,245,.98),rgba(255,246,232,.92) 55%,rgba(255,242,224,.88))!important;
   box-shadow:0 2px 8px rgba(90,59,42,.12),inset 0 1px 0 rgba(255,255,255,.7)!important;
+  width:auto;max-width:100%;
+  align-self:stretch;
 }
 .homeui .topMeta .bar{
   margin:4px 0 0;height:8px;background:#efe2d0;border:1px solid #d7c09a;
@@ -983,7 +993,7 @@ html,body{color:var(--tx)}
 .homeui .topAffRow .affVal{font-size:11.5px;color:#6e3518}
 .homeui .mbox{margin-top:6px!important;padding-top:5px;border-top:1px dashed rgba(140,100,55,.28)}
 
-/* Day + clock: own stack on the right, never overlaps aff strip */
+/* Day + clock cluster — own shapes, no shared plate with left column */
 .homeui .topHud .dayClock,
 .homeui .hudRow > .dayClock{
   position:static!important;top:auto!important;right:auto!important;
@@ -991,7 +1001,7 @@ html,body{color:var(--tx)}
   display:flex;flex-direction:column;align-items:center;justify-content:flex-start;
   gap:4px;pointer-events:none;z-index:auto;
   filter:none;min-width:54px;padding:0;margin:0;
-  background:none;border:none;box-shadow:none;
+  background:transparent!important;border:none!important;box-shadow:none!important;border-radius:0!important;
 }
 .homeui .topHud .dayClock-day{
   font-size:10px;font-weight:800;color:#3f2410;letter-spacing:.04em;line-height:1.2;
@@ -1011,23 +1021,25 @@ html,body{color:var(--tx)}
   opacity:.95;text-shadow:none;margin-top:0;
 }
 @media (max-width:420px){
-  .homeui .hudRow{gap:8px}
+  .homeui .hudRow{gap:10px}
+  .homeui .hudMain{gap:14px}
   .homeui .topHud .dayClock-dial{width:42px;height:42px}
   .homeui .topHud .chip.chip-ico{width:30px;height:30px;min-width:30px;min-height:30px;font-size:13px}
   .homeui .topHud .chip.chip-sta{height:30px;font-size:10.5px}
   .homeui .topMeta{margin-right:0!important}
 }
-
-/* Outing: pieces stay separate; no absolute clock */
 .homeui .stick.outing .hudRow,
-.homeui.outing-shell .hudRow{
-  background:none;border:none;box-shadow:none;
+.homeui.outing-shell .hudRow,
+.homeui .stick.outing .hudMain,
+.homeui .stick.outing .topHud{
+  background:transparent!important;border:none!important;box-shadow:none!important;
 }
 .homeui .stick.outing .topMeta{margin-right:0!important;opacity:.92}
 .homeui .stick.outing .dayClock,
 .homeui .stick.outing .topHud .dayClock{
   position:static!important;top:auto!important;right:auto!important;
   opacity:.9;filter:none;transform:none;
+  background:transparent!important;
 }
 .homeui .stick.outing .topHud{z-index:7}
 .homeui .stick.outing .topMeta{max-width:none}
