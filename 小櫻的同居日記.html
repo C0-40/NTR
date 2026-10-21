@@ -1390,7 +1390,7 @@ mq.push(["🌙 她沒說出口的事",F.join("\n\n")+"\n\n💭 "+pick(thPool())]
 addLog("📅 第"+dayNow+"天結束，外出 "+ev.length+" 次"+(n?"，遇見大叔 "+n+" 次":"")+(force?"・提早睡覺":""));
 S.day=dayNow+1;S.dsec=force?0:Math.max(0,S.dsec-DL);S.sta=STA_MAX;S.dEv=[];S.sqToday=[];S.sqDone=false;S.outToday=false;S.pendingObs=null;S.motif=null;S.journalGlow=0;S.pendingChat=null;setObsBtn(false);hidePhoneRipple();
 nextPop()}
-function sleepDay(){if(busy||S.taken||dayLock||maskOpen())return;if(S.trip){say("（她還在外面。等她回來，或先點「立刻回家」再睡。）","pout");return}withBusy(function(){if(S.trip||dayLock||maskOpen()||S.taken)return;endDay(true);render()})}
+function sleepDay(){if(busy||S.taken||dayLock||maskOpen())return;if(S.trip){say("（她還在外面。等她回來，或先點「提前結束等待」再睡。）","pout");return}withBusy(function(){if(S.trip||dayLock||maskOpen()||S.taken)return;endDay(true);render()})}
 function releaseDayLock(){if(!maskOpen()&&!mq.length)dayLock=0}
 var S,tab="",mq=[],thT=0,busy=0,backLock=0,mbLock=0,dayLock=0;
 function def(){return {sta:STA_MAX,aff:0,exp:0,trip:null,log:[],seen:[],t:Date.now(),m:0,trips:0,taken:false,day:1,dsec:0,dEv:[],qa:[],viewM:0,sq:[],sqToday:[],sqDone:false,outToday:false,pendingObs:null,optSeen:{blank:{},sq:{},ask:{}},journals:[],journalOpen:null,motif:null,journalGlow:0,metOut:false,momIntroSeen:false,memSeen:[],memPending:[],uncleStarted:false}}
@@ -1721,8 +1721,8 @@ h+='<button class="btn" onclick="blankAct(\''+b[0]+'\')">'+b[1]+' '+b[2]+(isNew?
 h+='</div></div>'}
 PLACES.forEach(function(p,i){var lk=S.aff<p[3],bz=!!S.trip,used=!!S.outToday,ing=bz&&S.trip.id==i,left=ing?Math.max(0,Math.ceil((S.trip.end-Date.now())/1000)):0;
 h+='<div class="row '+(lk||(used&&!ing)?"lock":"")+'"><span class="i">'+p[0]+'</span><div class="m"><b>'+p[1]+'</b><div class="sm">'+(lk?"需要好感 "+p[3]:used&&!ing?"今天已外出・明天再派":(placeMeta(i).tag?placeMeta(i).tag+"・":"")+p[2]+" 秒・探索 +"+p[4])+'</div></div><button class="btn" '+(lk||bz||(used&&!ing)?"disabled":"")+' onclick="go('+i+')">'+(ing?"外出中":used?"今日已外出":"派出")+'</button></div>'});
-if(S.trip)h+='<div class="sm" style="margin-top:6px">她出門這段時間，下面幾個行動各能做一次。也可以提前結束等待；她回來後，可用「起疑」看痕跡。</div>';
-else if(S.outToday)h+='<div class="sm" style="margin-top:6px">今天已經外出過一次。睡覺或等到一天結束後，明天才能再派。</div>';
+if(S.trip)h+='<div class="sm" style="margin-top:6px">她出門這段時間，下面幾個空白行動可重複做（純敘事、不改好感）。也可以提前結束等待；她回來後，可用「起疑」看痕跡。</div>';
+else if(S.outToday)h+='<div class="sm" style="margin-top:6px">今天已經外出過一次。只有睡覺日結後，明天才能再派；時鐘走完只會停住，不會自動跨日。</div>';
 else h+='<div class="blank-slot sm" style="padding:8px;border:2px dashed transparent;border-radius:12px">派出後：她出門 → 你在家可行動 → 回來後可點「起疑」看痕跡 → 當晚。<br>彈窗點「繼續」再看下一則。</div>'}
 else if(tab=="ask"){QA.forEach(function(q,i){var lk=S.aff<q[2],dn=S.qa.indexOf(i)>=0,isNew=!lk&&askOptNew(i);h+='<div class="row '+(lk?"lock":"")+'"><span class="i">'+q[0]+'</span><div class="m"><b>'+(lk?"？？？":q[1])+(isNew?optNewBadge():"")+'</b><div class="sm">'+(lk?"需要好感 "+q[2]:dn?"已問過・再問一次也可以":"第一次提問有好感獎勵")+'</div></div><button class="btn" '+(lk||S.trip?"disabled":"")+' onclick="ask('+i+')">提問</button></div>'});if(S.trip)h+='<div class="sm" style="margin-top:6px">小櫻外出中，回來後再問她吧。</div>'}
 else if(tab=="herq"){h='<div class="sm">她的提問會在外出回家後以彈窗出現，每天一次。</div>'}
