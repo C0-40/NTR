@@ -905,82 +905,60 @@ html,body{color:var(--tx)}
 
 
 
-/* ===== Top HUD: floating separate chips (wallpaper shows in gaps) ===== */
+
+/* ===== Top HUD: independent chips on scene (no wrapper plate) ===== */
 .homeui .topHud{
   position:absolute;top:0;left:0;right:0;z-index:6;
   padding:10px 10px 0;pointer-events:none;
-  background:transparent!important;border:none!important;box-shadow:none!important;
-}
-.homeui .hudRow{
-  display:flex;align-items:flex-start;gap:12px;
-  pointer-events:none;
-  margin:0;padding:0;
+  display:grid;
+  grid-template-columns:minmax(0,1fr) auto;
+  grid-template-rows:auto auto;
+  column-gap:12px;row-gap:28px;
+  align-items:start;
   background:transparent!important;border:none!important;box-shadow:none!important;border-radius:0!important;
 }
-.homeui .hudMain{
-  flex:1 1 auto;min-width:0;
-  display:flex;flex-direction:column;align-items:stretch;
-  gap:16px; /* clear air so room art shows between tools and relationship */
-  pointer-events:none;
-  background:transparent!important;border:none!important;box-shadow:none!important;border-radius:0!important;
-  padding:0;margin:0;
-}
-/* Tools: only as wide as chips — do NOT stretch into a plate */
 .homeui .topHud .chips.hudTools,
 .homeui .hudTools{
+  grid-column:1;grid-row:1;
   position:static!important;left:auto;right:auto;top:auto;
   display:flex;align-items:center;gap:6px;
   margin:0!important;padding:0!important;overflow:visible;
   pointer-events:auto;z-index:auto;
-  min-height:32px;width:max-content;max-width:100%;
-  align-self:flex-start;flex:0 0 auto;
+  width:max-content;max-width:100%;
   background:transparent!important;border:none!important;box-shadow:none!important;border-radius:0!important;
 }
 .homeui .topHud .chip.chip-sta{
-  border-radius:999px;
-  border:1.5px solid #b88955;
-  background:linear-gradient(180deg,#fffaf3,#f4e6cc);
-  color:#4a2c16;
-  box-shadow:0 1px 0 rgba(255,255,255,.7) inset,0 2px 5px rgba(90,59,42,.14);
-  height:32px;box-sizing:border-box;
-  display:inline-flex;align-items:center;
+  border-radius:999px;border:1.5px solid #b88955;
+  background:linear-gradient(180deg,#fffaf3,#f4e6cc);color:#4a2c16;
+  box-shadow:0 1px 0 rgba(255,255,255,.7) inset,0 2px 3px rgba(90,59,42,.1);
+  height:32px;box-sizing:border-box;display:inline-flex;align-items:center;
   padding:0 10px;font-size:11px;font-weight:800;letter-spacing:.02em;line-height:1;
 }
 .homeui .topHud .chipIcons{
-  display:inline-flex;align-items:center;gap:5px;
-  margin:0!important;padding:0;flex:none;height:32px;
+  display:inline-flex;align-items:center;gap:5px;margin:0!important;padding:0;flex:none;height:32px;
   background:transparent!important;border:none!important;box-shadow:none!important;
 }
 .homeui .topHud .chip.chip-ico{
   width:32px;height:32px;min-width:32px;min-height:32px;padding:0!important;
   border-radius:10px;border:1.5px solid #b88955;
-  background:linear-gradient(180deg,#fffaf3,#f0e0c4);
-  color:#4a2c16;
-  box-shadow:0 1px 0 rgba(255,255,255,.65) inset,0 2px 5px rgba(90,59,42,.14);
-  font-size:14px;line-height:1;
-  display:inline-flex!important;align-items:center;justify-content:center;
+  background:linear-gradient(180deg,#fffaf3,#f0e0c4);color:#4a2c16;
+  box-shadow:0 1px 0 rgba(255,255,255,.65) inset,0 2px 3px rgba(90,59,42,.1);
+  font-size:14px;line-height:1;display:inline-flex!important;align-items:center;justify-content:center;
 }
 .homeui .topHud .chip.chip-ico#mus[aria-pressed="false"]{
-  opacity:.88;filter:none;
-  background:linear-gradient(180deg,#f3e8d8,#e6d4b8);
-  color:#6a4a30;
+  opacity:.88;filter:none;background:linear-gradient(180deg,#f3e8d8,#e6d4b8);color:#6a4a30;
 }
-/* Relationship: own strip only — not a wrapper for the tools above */
-.homeui .topMeta{
-  pointer-events:none;
-  margin:0!important;
-  padding:6px 10px 7px!important;
-  border-radius:12px;
-  border:1.5px solid rgba(170,130,80,.55)!important;
+.homeui .topHud .topMeta{
+  grid-column:1;grid-row:2;
+  pointer-events:none;margin:0!important;padding:6px 10px 7px!important;
+  border-radius:12px;border:1.5px solid rgba(170,130,80,.55)!important;
   background:linear-gradient(180deg,rgba(255,252,245,.98),rgba(255,246,232,.92) 55%,rgba(255,242,224,.88))!important;
-  box-shadow:0 2px 8px rgba(90,59,42,.12),inset 0 1px 0 rgba(255,255,255,.7)!important;
-  width:auto;max-width:100%;
-  align-self:stretch;
+  box-shadow:0 2px 4px rgba(90,59,42,.1),inset 0 1px 0 rgba(255,255,255,.7)!important;
+  width:auto;max-width:100%;justify-self:stretch;
 }
 .homeui .topMeta .bar{
   margin:4px 0 0;height:8px;background:#efe2d0;border:1px solid #d7c09a;
-  border-radius:999px;overflow:hidden;
-  box-shadow:inset 0 1px 2px rgba(90,59,42,.1);
+  border-radius:999px;overflow:hidden;box-shadow:inset 0 1px 2px rgba(90,59,42,.1);
 }
 .homeui .topAffRow{
   display:flex;justify-content:space-between;gap:8px;align-items:baseline;
@@ -992,16 +970,13 @@ html,body{color:var(--tx)}
 }
 .homeui .topAffRow .affVal{font-size:11.5px;color:#6e3518}
 .homeui .mbox{margin-top:6px!important;padding-top:5px;border-top:1px dashed rgba(140,100,55,.28)}
-
-/* Day + clock cluster — own shapes, no shared plate with left column */
-.homeui .topHud .dayClock,
-.homeui .hudRow > .dayClock{
+.homeui .topHud .dayClock{
+  grid-column:2;grid-row:1 / span 2;
   position:static!important;top:auto!important;right:auto!important;
-  flex:0 0 auto;align-self:flex-start;
-  display:flex;flex-direction:column;align-items:center;justify-content:flex-start;
-  gap:4px;pointer-events:none;z-index:auto;
-  filter:none;min-width:54px;padding:0;margin:0;
+  display:flex;flex-direction:column;align-items:center;gap:4px;
+  pointer-events:none;min-width:54px;padding:0;margin:0;justify-self:end;align-self:start;
   background:transparent!important;border:none!important;box-shadow:none!important;border-radius:0!important;
+  filter:none;
 }
 .homeui .topHud .dayClock-day{
   font-size:10px;font-weight:800;color:#3f2410;letter-spacing:.04em;line-height:1.2;
@@ -1009,50 +984,39 @@ html,body{color:var(--tx)}
   background:linear-gradient(180deg,#fffaf3,#f0e0c4);
   border:1px solid rgba(170,130,80,.55);
   box-shadow:0 1px 0 rgba(255,255,255,.65) inset,0 1px 3px rgba(90,59,42,.1);
-  white-space:nowrap;order:0;
+  white-space:nowrap;
 }
 .homeui .topHud .dayClock-dial{
-  width:46px;height:46px;order:1;
-  border:2.5px solid #6b4220;
+  width:46px;height:46px;border:2.5px solid #6b4220;
   box-shadow:inset 0 0 0 1.5px #c9a66e,inset 0 1px 2px rgba(255,255,255,.55),0 2px 0 #4a2a12;
 }
 .homeui .topHud .dayClock-part{
-  order:2;font-size:9px;font-weight:700;color:#5a3518;letter-spacing:.06em;
-  opacity:.95;text-shadow:none;margin-top:0;
+  font-size:9px;font-weight:700;color:#5a3518;letter-spacing:.06em;opacity:.95;text-shadow:none;
 }
 @media (max-width:420px){
-  .homeui .hudRow{gap:10px}
-  .homeui .hudMain{gap:14px}
+  .homeui .topHud{row-gap:22px;column-gap:10px}
   .homeui .topHud .dayClock-dial{width:42px;height:42px}
   .homeui .topHud .chip.chip-ico{width:30px;height:30px;min-width:30px;min-height:30px;font-size:13px}
   .homeui .topHud .chip.chip-sta{height:30px;font-size:10.5px}
-  .homeui .topMeta{margin-right:0!important}
 }
-.homeui .stick.outing .hudRow,
-.homeui.outing-shell .hudRow,
-.homeui .stick.outing .hudMain,
 .homeui .stick.outing .topHud{
   background:transparent!important;border:none!important;box-shadow:none!important;
 }
-.homeui .stick.outing .topMeta{margin-right:0!important;opacity:.92}
+.homeui .stick.outing .topMeta{margin-right:0!important;opacity:.92;max-width:none}
 .homeui .stick.outing .dayClock,
 .homeui .stick.outing .topHud .dayClock{
   position:static!important;top:auto!important;right:auto!important;
-  opacity:.9;filter:none;transform:none;
-  background:transparent!important;
+  opacity:.9;filter:none;transform:none;background:transparent!important;
 }
 .homeui .stick.outing .topHud{z-index:7}
-.homeui .stick.outing .topMeta{max-width:none}
 
 </style>
 </head>
 <body>
 <div class="w homeui">
   <div class="stick" id="homeStick"><div class="scene" id="scene">
-    <div class="topHud">
-      <div class="hudRow">
-        <div class="hudMain">
-          <div class="chips hudTools">
+        <div class="topHud">
+      <div class="chips hudTools">
             <span class="chip chip-sta">⚡ 體力 <span id="sta">5</span>/5</span>
             <div class="chipIcons" role="group" aria-label="音樂、事件、紀錄">
               <button type="button" class="chip chip-ico" id="mus" aria-label="切換背景音樂" title="音樂" aria-pressed="true">🎵</button>
@@ -1060,7 +1024,7 @@ html,body{color:var(--tx)}
               <button type="button" class="chip chip-ico hud-log" data-t="log" id="navLog" title="紀錄" aria-label="打開紀錄">📔</button>
             </div>
           </div>
-          <div class="topMeta">
+      <div class="topMeta">
             <div class="topAffRow"><span id="tier"></span><span class="affVal">🌸 <span id="affn">0</span></span></div>
             <div class="bar affBar" aria-hidden="true"><i id="affbar"></i><span class="affInk" id="affInk" aria-hidden="true"></span><span class="affSweep" id="affSweep" aria-hidden="true"></span></div>
             <div class="sm" id="afft"></div>
@@ -1070,8 +1034,7 @@ html,body{color:var(--tx)}
               <div class="bar m" id="mbarwrap"><i id="mbar"></i></div>
             </div>
           </div>
-        </div>
-        <div class="dayClock" id="dayClock" aria-label="當日時間">
+      <div class="dayClock" id="dayClock" aria-label="當日時間">
       <div class="dayClock-day" id="dayl"></div>
       <div class="dayClock-dial" aria-hidden="true">
         <div class="dayClock-marks"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div>
@@ -1081,9 +1044,8 @@ html,body{color:var(--tx)}
       </div>
       <div class="dayClock-part" id="dayPart"></div>
     </div>
-      </div>
     </div>
-    <nav class="sideNav left" aria-label="日記與回憶">
+<nav class="sideNav left" aria-label="日記與回憶">
       <button type="button" class="bubble" data-t="journal" id="navJournal">✍️ 日記</button>
       <button type="button" class="bubble" data-t="mem" id="navMem">🌸 回憶</button>
     </nav>
