@@ -885,13 +885,36 @@ html,body{color:var(--tx)}
 .homeui .topHud .chip.chip-ico#mus[aria-pressed="false"]{opacity:.72;filter:grayscale(.15)}
 .homeui .chips .hud-log{margin-left:0!important;opacity:1;font-weight:600;overflow:visible}
 
+/* 外出專用：速度與提前結束，成對排在空屋提示卡內 */
+.note-acts{display:none;margin-top:10px;gap:8px;flex-wrap:wrap;align-items:stretch}
+.stick.outing .note-acts:not([hidden]){display:flex!important}
+.note-acts .btn{
+  flex:1 1 auto;min-width:0;margin:0;padding:9px 10px;border-radius:12px;
+  font-size:12px;font-weight:800;line-height:1.25;letter-spacing:.02em;
+  touch-action:manipulation;-webkit-tap-highlight-color:transparent;cursor:pointer
+}
+.note-acts .note-sp{flex:0 0 auto;min-width:4.6em;max-width:6.5em}
+.note-acts .note-skip{flex:1 1 10em}
+.homeui.outing-shell .note-acts .btn,
+.homeui .stick.outing .note-acts .btn,
+.homeui.outing-shell #sp.btn,
+.homeui .stick.outing #sp.btn{
+  background:var(--empty-btn)!important;
+  border:1.5px solid var(--empty-btn-border)!important;
+  color:var(--empty-btn-ink)!important;
+  text-shadow:none!important;
+  box-shadow:0 2px 0 rgba(0,0,0,.25)
+}
+.homeui.outing-shell .note-acts .btn:active,
+.homeui .stick.outing .note-acts .btn:active{transform:translateY(1px);box-shadow:0 1px 0 rgba(0,0,0,.25)}
+
 </style>
 </head>
 <body>
 <div class="w homeui">
   <div class="stick" id="homeStick"><div class="scene" id="scene">
     <div class="topHud">
-      <div class="chips"><span class="chip">⚡ 體力 <span id="sta">5</span>/5</span><button type="button" class="chip" id="sp" aria-label="切換外出等待速度">⏩ 1x</button><div class="chipIcons" role="group" aria-label="音樂、事件、紀錄"><button type="button" class="chip chip-ico" id="mus" aria-label="切換背景音樂" title="音樂" aria-pressed="true">🎵</button><button type="button" class="chip chip-ico hud-log" data-t="story" id="navStory" title="事件" aria-label="打開事件">📖</button><button type="button" class="chip chip-ico hud-log" data-t="log" id="navLog" title="紀錄" aria-label="打開紀錄">📔</button></div></div>
+      <div class="chips"><span class="chip">⚡ 體力 <span id="sta">5</span>/5</span><div class="chipIcons" role="group" aria-label="音樂、事件、紀錄"><button type="button" class="chip chip-ico" id="mus" aria-label="切換背景音樂" title="音樂" aria-pressed="true">🎵</button><button type="button" class="chip chip-ico hud-log" data-t="story" id="navStory" title="事件" aria-label="打開事件">📖</button><button type="button" class="chip chip-ico hud-log" data-t="log" id="navLog" title="紀錄" aria-label="打開紀錄">📔</button></div></div>
       <div class="topMeta">
         <div class="topAffRow"><span id="tier"></span><span class="affVal">🌸 <span id="affn">0</span></span></div>
         <div class="bar affBar" aria-hidden="true"><i id="affbar"></i><span class="affInk" id="affInk" aria-hidden="true"></span><span class="affSweep" id="affSweep" aria-hidden="true"></span></div>
@@ -926,7 +949,10 @@ html,body{color:var(--tx)}
       <div class="note-eyebrow" id="ne">屋裡只剩你</div>
       <div class="note-title" id="nh">她還在外面</div>
       <div class="sm note-sub" id="nt"></div>
-      <button class="btn" id="skip" style="display:none" onclick="skipTrip()">⏭ 提前結束等待</button>
+      <div class="note-acts" id="noteActs" hidden>
+        <button type="button" class="btn note-sp" id="sp" aria-label="切換外出等待速度">⏩ 1x</button>
+        <button type="button" class="btn note-skip" id="skip" onclick="skipTrip()">⏭ 提前結束等待</button>
+      </div>
     </div>
 
     <div class="silLayer" id="silLayer" aria-hidden="true" aria-label="若隱若現的剪影">
@@ -1742,7 +1768,7 @@ $("pane").innerHTML=h;var pn=$("pane");if(pn)pn.classList.toggle("has-x",!!side)
 function status(){var stEl=$("sta");if(stEl)stEl.textContent=String(S.sta|0);$("affn").textContent=fmt(S.aff);var _expn=$("expn");if(_expn)_expn.textContent=fmt(S.exp);
 var away=!!S.trip||S.taken,skipOn=S.trip&&!S.taken,thOn=skipOn;
 var stEl=document.querySelector(".stick");if(stEl)stEl.classList.toggle("outing",!!skipOn);var hu=document.querySelector(".homeui");if(hu)hu.classList.toggle("outing-shell",!!skipOn);if(!skipOn)hidePhoneRipple();syncMoodDim();syncSilhouette();
-var sk=$("skip");if(sk&&sk.style.display!==(skipOn?"inline-block":"none"))sk.style.display=skipOn?"inline-block":"none";
+var acts=$("noteActs");if(acts){if(skipOn)acts.removeAttribute("hidden");else acts.setAttribute("hidden","")}var sk=$("skip");if(sk)sk.style.display=skipOn?"":"none";var spEl=$("sp");if(spEl)spEl.style.display=skipOn?"":"none";
 var th=$("thbox");if(th&&!skipOn){var want="none";if(th.style.display!==want)th.style.display=want}
 else if(th&&skipOn){if(th.style.display!=="flex")th.style.display="flex"}paintHeartFace(ex);
 var parts=["早上","下午","夜晚"],dayt="第 "+S.day+" 天",partLab=parts[part()];if($("dayl")&&$("dayl").textContent!==dayt)$("dayl").textContent=dayt;var dp=$("dayPart");if(dp&&dp.textContent!==partLab)dp.textContent=partLab;
