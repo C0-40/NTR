@@ -1561,9 +1561,9 @@ function checkMemories(){if(S.taken)return;if(!S.memSeen)S.memSeen=[];if(!S.memP
 MEMORIES.forEach(function(m){var id=m[0];if(S.aff<id)return;if(S.memSeen.indexOf(id)>=0)return;if(S.memPending.indexOf(id)>=0)return;S.memPending.push(id)});
 flushMemoryQueue()}
 function flushMemoryQueue(){if(S.taken||S.trip)return;var phone=$("momPhone");if(phone&&phone.classList.contains("on"))return;if(!S.memPending||!S.memPending.length)return;
-var wasDone=memoriesComplete(),pushed=0;while(S.memPending.length){var id=S.memPending.shift();if(S.memSeen.indexOf(id)>=0)continue;var m=memByAff(id);if(!m)continue;S.memSeen.push(id);mq.push(["小櫻",m[2]]);pushed++}
+var wasDone=memoriesComplete(),pushed=0;while(S.memPending.length){var id=S.memPending.shift();if(S.memSeen.indexOf(id)>=0)continue;var m=memByAff(id);if(!m)continue;S.memSeen.push(id);mq.push(["🌸 小櫻",m[2]]);pushed++}
 if(pushed){if(!wasDone&&memoriesComplete())maybeStartUncleRoute(true);try{save()}catch(e){}if(!maskOpen())nextPop()}}
-function replayMem(k){var m=MEMORIES[k];if(!m||S.memSeen.indexOf(m[0])<0)return;mq.push(["小櫻",m[2]]);nextPop()}
+function replayMem(k){var m=MEMORIES[k];if(!m||S.memSeen.indexOf(m[0])<0)return;mq.push(["🌸 小櫻",m[2]]);nextPop()}
 function afterAffTier(prev){if(tier()>(prev|0))flashAffTierFx();checkMemories()}
 var M_GAIN=1.75;
 function memoriesComplete(){if(!S.memSeen||!MEMORIES||!MEMORIES.length)return false;for(var i=0;i<MEMORIES.length;i++){if(S.memSeen.indexOf(MEMORIES[i][0])<0)return false}return true}
@@ -1831,7 +1831,7 @@ function popup(t,p){mq.push([t,p]);nextPop()}
 function isSecretCopy(tt){tt=String(tt||"");return /大叔|夜景|晚點回家|更懂我|一個人住|沒說出口|已讀|痕跡|窺|香水|門外|尻槍|翻找|來電|定位|收回|💔|🔍|⏳/.test(tt)}
 function isSecretSq(qi){var q=SQ[qi];if(!q)return false;if((q[3]|0)>0||!!q[4])return true;return isSecretCopy(q[1])}
 function isMoodChromeTitle(tt){tt=String(tt||"");if(moodPeekOn)return true;return /起疑|仔細觀察|發訊息|打電話|翻找|尻槍|沒說出口|沒有說的|心聲|當晚|空白|已讀|輸入中|來電|震動|貼圖|定位|背景聲|靜音|收回|窺|痕跡|大叔|夜景|晚點回家|更懂我|一個人住|⏳|🔍|🌙|💔/.test(tt)||/^⏳|^🔍|^🌙|^💔/.test(tt)}
-function paintMaskChrome(tt){var mask=$("mask");if(!mask)return;var soft=tt==="小櫻";mask.classList.toggle("mood-chrome",!soft&&isMoodChromeTitle(tt));mask.classList.toggle("mem-soft",!!soft);syncMaskFace(soft?"":tt)}
+function paintMaskChrome(tt){var mask=$("mask");if(!mask)return;var soft=tt==="小櫻"||tt==="🌸 小櫻";mask.classList.toggle("mood-chrome",!soft&&isMoodChromeTitle(tt));mask.classList.toggle("mem-soft",!!soft);syncMaskFace(soft?"":tt)}
 function nextPop(){if(maskOpen())return;if(!mq.length){dayLock=0;hideSqOpts();if(moodPeekOn)clearMoodPeek();return}var m=mq.shift();if(!m){releaseDayLock();hideSqOpts();if(moodPeekOn)clearMoodPeek();return}
 if(m.sq!=null){showSqMask(m.sq);return}
 hideSqOpts();$("mt").textContent=m[0];$("mp").textContent=m[1];paintMaskChrome(m[0]);$("mask").classList.add("on")}
