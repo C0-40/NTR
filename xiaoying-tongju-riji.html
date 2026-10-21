@@ -838,22 +838,64 @@ html,body{color:var(--tx)}
 }
 
 
-/* 開場：媽媽手機訊息（暖色，非外出隱蔽） */
-.momPhone{position:fixed;inset:0;z-index:22;display:none;align-items:center;justify-content:center;padding:18px;background:linear-gradient(160deg,rgba(255,220,190,.55),rgba(90,50,35,.4));backdrop-filter:blur(3px);-webkit-backdrop-filter:blur(3px)}
+/* 開場：媽媽來電（暖色紙質手機，同頂欄 HUD 調色） */
+.momPhone{position:fixed;inset:0;z-index:22;display:none;align-items:center;justify-content:center;padding:20px;cursor:pointer;
+  background:
+    radial-gradient(ellipse 80% 55% at 50% 18%,rgba(255,248,234,.72),transparent 62%),
+    linear-gradient(165deg,rgba(255,232,205,.62),rgba(90,55,38,.38));
+  backdrop-filter:blur(4px);-webkit-backdrop-filter:blur(4px)}
 .momPhone.on{display:flex}
-.momPhone .phone{width:min(340px,92vw);background:linear-gradient(180deg,#fffaf3 0%,#ffe9d4 100%);border:3px solid #3d2a22;border-radius:36px;padding:12px 12px 14px;box-shadow:0 18px 42px rgba(60,30,20,.32),inset 0 0 0 2px #e8c49a;position:relative}
-.momPhone .notch{width:108px;height:20px;background:#2a1c16;border-radius:0 0 14px 14px;margin:0 auto 8px}
-.momPhone .chatHead{display:flex;align-items:center;gap:10px;padding:4px 6px 10px;border-bottom:1px solid rgba(180,120,80,.28);margin-bottom:10px}
-.momPhone .chatHead .av{width:38px;height:38px;border-radius:50%;background:linear-gradient(145deg,#f2b498,#e07050);display:flex;align-items:center;justify-content:center;color:#fff;font-size:13px;font-weight:700;box-shadow:0 2px 6px rgba(180,80,40,.25);flex:none}
-.momPhone .chatHead b{display:block;font-size:14px;color:#5a3424;line-height:1.2}
-.momPhone .chatHead .sm{font-size:10px;color:#a07058;margin-top:2px}
-.momPhone .bubbles{display:flex;flex-direction:column;gap:9px;min-height:168px;padding:2px 2px 6px}
-.momPhone .bubble{align-self:flex-start;max-width:90%;background:#fff;border:1px solid #f0d2ba;border-radius:16px 16px 16px 5px;padding:9px 12px;font-size:13px;line-height:1.45;color:#4a3024;box-shadow:0 2px 7px rgba(120,60,30,.07)}
-.momPhone .bubble .who{display:block;font-size:10px;color:#c07050;margin-bottom:3px;font-weight:700;letter-spacing:.02em}
-.momPhone .bubble .time{display:block;font-size:9px;color:#b89880;margin-top:4px;text-align:right}
-.momPhone .momDone{display:block;width:100%;margin-top:8px;border:none;border-radius:14px;padding:11px 12px;font-size:14px;font-weight:700;color:#fff;background:linear-gradient(180deg,#e8885a,#d06038);box-shadow:0 3px 0 #a84828;cursor:pointer}
-.momPhone .momDone:active{transform:translateY(1px);box-shadow:0 2px 0 #a84828}
-.momPhone .hint{text-align:center;font-size:10px;color:#a07860;margin-top:8px}
+.momPhone .phone{
+  width:min(318px,90vw);pointer-events:none;position:relative;
+  background:linear-gradient(180deg,#fffdf8 0%,#f6e8cf 48%,#edd9b8 100%);
+  border:1.5px solid #b88955;border-radius:28px;padding:10px 10px 14px;
+  box-shadow:0 1px 0 rgba(255,255,255,.75) inset,0 14px 32px rgba(90,59,42,.22),0 2px 0 rgba(184,137,85,.35);
+}
+.momPhone .phone-top{display:flex;align-items:center;justify-content:center;gap:6px;padding:2px 4px 8px}
+.momPhone .ear{width:52px;height:5px;border-radius:999px;background:linear-gradient(180deg,#d8c09a,#c4a878);box-shadow:inset 0 1px 1px rgba(90,59,42,.18)}
+.momPhone .phone-screen{
+  border-radius:20px;padding:14px 12px 12px;
+  background:
+    linear-gradient(180deg,rgba(255,252,245,.98),rgba(255,244,228,.94) 55%,rgba(255,236,214,.9)),
+    repeating-linear-gradient(0deg,transparent 0 27px,rgba(217,192,147,.22) 27px 28px);
+  border:1.5px solid rgba(184,137,85,.45);
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.8),inset 0 -1px 0 rgba(184,137,85,.12);
+  min-height:280px;display:flex;flex-direction:column;
+}
+.momPhone .call-kicker{
+  align-self:center;font-size:10px;font-weight:800;letter-spacing:.14em;color:#a07050;
+  background:linear-gradient(180deg,#fff8ee,#f0e0c4);border:1px solid #c9a66e;
+  border-radius:999px;padding:3px 10px;margin-bottom:12px;
+  box-shadow:0 1px 0 rgba(255,255,255,.7) inset;
+}
+.momPhone .callHead{display:flex;flex-direction:column;align-items:center;text-align:center;gap:4px;margin-bottom:14px}
+.momPhone .callHead .av{
+  width:64px;height:64px;border-radius:50%;margin-bottom:4px;
+  background:linear-gradient(160deg,#f7c4b0,#e07858 55%,#c45a72);
+  display:flex;align-items:center;justify-content:center;color:#fff;font-size:20px;font-weight:800;
+  border:2px solid #fffaf2;box-shadow:0 3px 10px rgba(180,80,40,.22),0 0 0 1.5px #c9a66e;
+}
+.momPhone .callHead b{display:block;font-size:18px;color:#2c1a10;line-height:1.2;font-weight:800}
+.momPhone .callHead .sm{font-size:11px;color:#8a5a40;font-weight:650}
+.momPhone .call-pulse{display:flex;gap:5px;justify-content:center;margin:2px 0 4px}
+.momPhone .call-pulse i{width:6px;height:6px;border-radius:50%;background:#c45a72;opacity:.35;animation:momPulse 1.2s ease-in-out infinite}
+.momPhone .call-pulse i:nth-child(2){animation-delay:.2s;opacity:.55}
+.momPhone .call-pulse i:nth-child(3){animation-delay:.4s;opacity:.8}
+@keyframes momPulse{50%{transform:scale(1.35);opacity:1}}
+@media (prefers-reduced-motion:reduce){.momPhone .call-pulse i{animation:none;opacity:.7}}
+.momPhone .callLines{display:flex;flex-direction:column;gap:8px;flex:1;padding:2px 2px 4px}
+.momPhone .callLines .line{
+  margin:0;padding:9px 11px;font-size:13px;line-height:1.5;color:#3a2418;font-weight:600;
+  background:linear-gradient(180deg,rgba(255,255,255,.92),rgba(255,248,238,.88));
+  border:1px solid rgba(201,166,110,.55);border-radius:12px;
+  box-shadow:0 1px 0 rgba(255,255,255,.75) inset,0 2px 4px rgba(90,59,42,.06);
+}
+.momPhone .callLines .line .who{display:block;font-size:10px;color:#c45a72;margin-bottom:3px;font-weight:800;letter-spacing:.03em}
+.momPhone .hint{
+  text-align:center;font-size:11px;color:#8a6048;margin-top:12px;font-weight:700;
+  padding:8px 10px;border-radius:12px;
+  background:rgba(255,250,242,.65);border:1px dashed rgba(184,137,85,.45);
+}
 
 
 /* 回憶彈窗：溫和，非外出暗色、非媽媽手機 */
@@ -1103,17 +1145,24 @@ html,body{color:var(--tx)}
   <div class="pane" id="pane"></div>
   <div class="foot"><a href="#" id="rs" onclick="resetAll();return false">重置存檔</a></div>
 </div>
-<div class="momPhone" id="momPhone" aria-hidden="true" role="dialog" aria-modal="true" aria-label="媽媽的訊息">
+<div class="momPhone" id="momPhone" aria-hidden="true" role="dialog" aria-modal="true" aria-label="媽媽來電" tabindex="0">
   <div class="phone" role="document">
-    <div class="notch" aria-hidden="true"></div>
-    <div class="chatHead"><span class="av" aria-hidden="true">媽</span><div><b>媽媽</b><div class="sm">訊息・剛剛</div></div></div>
-    <div class="bubbles" id="momBubbles">
-      <div class="bubble"><span class="who">媽媽</span>阿祿，媽知道你腿傷還不能出門。<span class="time">剛剛</span></div>
-      <div class="bubble"><span class="who">媽媽</span>小櫻答應來照顧你了——就是那個青梅竹馬，好久沒見了吧。<span class="time">剛剛</span></div>
-      <div class="bubble"><span class="who">媽媽</span>這幾天她會搬去跟你住。乖乖休養，別逞強。<span class="time">剛剛</span></div>
+    <div class="phone-top" aria-hidden="true"><span class="ear"></span></div>
+    <div class="phone-screen">
+      <div class="call-kicker">來電中</div>
+      <div class="callHead">
+        <span class="av" aria-hidden="true">媽</span>
+        <div class="call-pulse" aria-hidden="true"><i></i><i></i><i></i></div>
+        <b>媽媽</b>
+        <div class="sm">語音通話・剛剛</div>
+      </div>
+      <div class="callLines" id="momBubbles">
+        <p class="line"><span class="who">媽媽</span>阿祿，媽知道你腿傷還不能出門。</p>
+        <p class="line"><span class="who">媽媽</span>小櫻答應來照顧你了——就是那個青梅竹馬，好久沒見了吧。</p>
+        <p class="line"><span class="who">媽媽</span>這幾天她會搬去跟你住。乖乖休養，別逞強。</p>
+      </div>
+      <div class="hint">輕觸任意處繼續</div>
     </div>
-    <button type="button" class="momDone" id="momDone">看完</button>
-    <div class="hint">點一下或按「看完」繼續</div>
   </div>
 </div>
 <div class="mask" id="mask"><div class="box"><div class="face"></div><h3 id="mt"></h3><p id="mp"></p><div class="sqopts" id="sqopts"></div><div class="tl"><button type="button" class="btn" id="mb">繼續</button></div></div></div>
@@ -1132,22 +1181,48 @@ var HOME_ACTS=[
 var PLACES=[
 ["🏪","便利店",12,0,4,12,["買了飯糰與牛奶","猶豫很久才選好布丁","順路帶了洗髮精"],["一盒布丁","一瓶麥茶"]],
 ["🏬","商場",28,0,8,40,["試穿了幾件衣服","在廣場看了一會兒表演","買了日用品回家"],["一條手帕","一盒餅乾"]],
-["☕","咖啡店",36,30,12,70,["點了熱可可坐很久","靠窗看人來人往","帶了一本小說沒怎麼翻"],["一張店名片","一塊起司蛋糕"]]
+["☕","咖啡店",36,30,12,70,["點了熱可可坐很久","靠窗看人來人往","帶了一本小說沒怎麼翻"],["一張店名片","一塊起司蛋糕"]],
+["🌳","公園",40,50,14,85,["在長椅上坐了一會兒","沿著步道慢慢走","拍了花壇的照片"],["一枚落葉書籤","一小袋烤地瓜"]],
+["📚","書店",48,100,16,95,["在文學區站很久","買了一本薄薄的散文","角落座位翻了幾章"],["一張書店書籤","一本二手詩集"]]
 ];
 var PLACE_META=[
 {meet:.32,mMul:.55,tag:"短途・低危"},
 {meet:.75,mMul:.95,tag:"人多・偶遇中"},
-{meet:1.2,mMul:1.3,tag:"易久坐・大叔溫床"}
+{meet:1.2,mMul:1.3,tag:"易久坐・大叔溫床"},
+{meet:.65,mMul:.85,tag:"戶外・透氣"},
+{meet:.8,mMul:1.0,tag:"安靜・久坐"}
 ];
 var PLACE_TH=[
 [["便利店的燈好白。買完就回家，阿祿大概還開著燈。","布丁要選他喜歡的口味……希望他會笑。","排隊的人不多。好想快點回去說『我回來了』。"],["結帳時有人多看我一眼。只是錯覺吧……為什麼心會跳。","袋裡的布丁沉甸甸的。可是腦裡卻有別人的聲音殘響。","快點回家。把剛那一幕，關在自動門外面。"],["夜班店員的玩笑讓我想起不該想起的人。我加快結帳。","牛奶罐壁上的水珠，像我沒擦乾的心虛。","阿祿的訊息亮了。我回『在買東西』——沒說和誰擦肩。"],["便利店也能變成秘密會合點。這想法一冒出來，我就怕自己。","買完東西還在門口站著。腳步不想朝家的方向走。","回家路上我把收據揉掉。像揉掉一段不該存在的對白。"]],
 [["商場好大。想找件衣服給自己，也想帶點零食給阿祿。","人潮把我推著走。忽然很想聽他在家的聲音。","試衣間的鏡子裡，我笑得還算正常。"],["手扶梯上有人靠太近。我側過身，卻沒說出口。","專櫃小姐說這件適合約會。我說『只是亂逛』，耳尖卻熱。","袋裡多了一張傳單。不是我拿的……還是我自己拿的？"],["中庭座位有人招手。我假裝沒看見，心跳卻先認了。","試衣間門縫外有脚步。我拉高拉鍊，像防備被看穿。","阿祿問我在哪。我回『商場』——少說了半句『和他擦肩』。"],["更衣室的香氣不對。我把它怪到香氛區，不敢想別的。","購物袋很滿，心卻空了一塊留給不該等的人。","散場音樂響起時，我竟希望他還在同一個樓層。"]],
-[["咖啡很香。靠窗坐下，突然很想傳照片給阿祿。","杯子溫熱。我想著回家要怎麼跟他形容這家店。","店員叫號。平凡得讓人安心。"],["隔壁桌的對話太近。我戴上耳機，卻仍聽見一個低沉的『小姐』。","杯子換過一次。他說请客——我說不用，卻沒有立刻走。","甜點叉停在半空。我想起阿祿，又把那想法按下去。"],["他坐在我對面。只是聊天，真的只是聊天……我反覆說服自己。","牛奶泡沫上的心形被攪散。像我對家的保證。","阿祿來電，我拒接後回訊息：『店裡吵。』手在發抖。"],["靠窗位變成默契。他不說，我也不說，腿在桌下幾乎相碰。","帳單被他按住。我說下次我請——『下次』兩個字像約定。","離開時他替我披外套。咖啡香裡混進他的味道，我沒拒絕。"]]
+[["咖啡很香。靠窗坐下，突然很想傳照片給阿祿。","杯子溫熱。我想著回家要怎麼跟他形容這家店。","店員叫號。平凡得讓人安心。"],["隔壁桌的對話太近。我戴上耳機，卻仍聽見一個低沉的『小姐』。","杯子換過一次。他說请客——我說不用，卻沒有立刻走。","甜點叉停在半空。我想起阿祿，又把那想法按下去。"],["他坐在我對面。只是聊天，真的只是聊天……我反覆說服自己。","牛奶泡沫上的心形被攪散。像我對家的保證。","阿祿來電，我拒接後回訊息：『店裡吵。』手在發抖。"],["靠窗位變成默契。他不說，我也不說，腿在桌下幾乎相碰。","帳單被他按住。我說下次我請——『下次』兩個字像約定。","離開時他替我披外套。咖啡香裡混進他的味道，我沒拒絕。"]],
+[
+["阿祿說去公園透氣也好。風很柔，我想著他腿還不能來。","長椅有點涼。我把外套拉緊，想像他在家開著燈。","步道不長。每走幾步就想：回去要跟他說今天的雲。"],
+["有人慢跑經過，我側身讓路。心卻飄回客廳那張沙發。","花壇的味道很乾淨。我想拍給他看，又覺得太黏。","風把瀏海吹亂。我笑了——像被他輕輕揉過一次頭。"],
+["坐太久，腿有點麻。忽然很想聽他問『回來了嗎』。","小孩在遠處笑。我數著時間，像數回家的路燈。","手機亮了是阿祿。回『還在公園』時嘴角自己揚起來。"],
+["天色開始偏晚。我起身拍掉裙上的草屑，準備回家。","透氣夠了。真正想呼吸的，還是玄關那一口熱氣。","袋裡的落葉書籤沙沙響。我想說：這是你提議的外出。"]
+],
+[
+["阿祿提議去書店看看。我帶了布袋，像赴一個溫柔的約。","文學區很靜。指尖滑過書脊，腦裡卻是他家裡的氣味。","角落座位空著。我坐下，先傳訊『到了』，才翻開第一頁。"],
+["散文寫得很慢。我讀兩行就想起他等我吃飯的樣子。","店員輕聲問找什麼，我說隨便看看——其實在想帶什麼回去。","二手區有一本薄詩集。我想：他腿傷的日子，適合一起讀。"],
+["翻到一半，忽然捨不得離開這片安靜。可是更捨不得他。","書頁香混著紙塵。我想把這味道帶進我們的客廳。","阿祿問我在哪。我回『書店』，又補『你說的地方真好』。"],
+["結帳時我選了書籤。小小的，卻像把『你的建議』折進口袋。","推門前我回頭看一眼書架——下次，想拉他一起來。","回家的路變短了。袋繩勒著手，心卻輕得像翻完一章。"]
 ]
 var PLACE_EV=[
 [["買了飯糰與牛奶，店員多找了她零錢。","冰箱前猶豫很久，最後選了你喜歡的口味。","袋口露出洗髮精，跟她說的日用品清單對得上。"],["結帳時被人多搭了兩句，她敷衍笑過就離開。","夜燈下她加快腳步，像把什麼留在自動門後。","收據時間普通，她卻把細部店名折起來。"],["她說只是買東西，鎖骨旁卻有風吹過的涼意。","袋裡多了一張不是她寫的便條角，字跡被揉掉。","她堅持先洗手再拆袋，像洗掉一段對白。"],["便利店也能被說成『剛好遇到』。她否認得太快。","布丁是你愛的口味，語氣卻像補償。","她把某個對話刪到回收匣，又說手機沒電。"]],
 [["試衣、購物、廣場表演——行程講得很滿。","她帶了手帕回來，笑說想到你。","購物袋塞得滿滿，像真的只是逛街。"],["專櫃說『適合約會』時她耳尖紅了，隨即否認。","手扶梯上有人靠太近，她側身，卻沒出聲。","袋裡多了一張傳單，來路說不清。"],["中庭有人招手，她裝作沒看見。","試衣間待得偏久，出來時呼吸不穩。","她回『在商場』，少說了半句同行。"],["更衣室殘香不對，她怪到香氛區。","購物袋很滿，眼神卻像還在等人。","散場音樂響起，她回頭看了一眼空座位。"]],
-[["靠窗位，熱可可，小說翻了兩頁。很日常。","她拍了杯子照片，說想傳給你。","店員叫號，過程平凡得安心。"],["有人想請客，她說不用，卻沒立刻走。","耳機沒擋掉一句低沉的『小姐』。","甜點叉停在半空，像想起又不想說。"],["她承認『聊了一下』，對象含糊。","來電被她拒接，回訊寫『店裡吵』。","杯墊多印了一個號碼，她很快撕掉。"],["靠窗位像默契座位。她不否認『又遇到了』。","帳單被對方按住，她說了『下次』。","外套上殘一點咖啡香以外的味道。"]]
+[["靠窗位，熱可可，小說翻了兩頁。很日常。","她拍了杯子照片，說想傳給你。","店員叫號，過程平凡得安心。"],["有人想請客，她說不用，卻沒立刻走。","耳機沒擋掉一句低沉的『小姐』。","甜點叉停在半空，像想起又不想說。"],["她承認『聊了一下』，對象含糊。","來電被她拒接，回訊寫『店裡吵』。","杯墊多印了一個號碼，她很快撕掉。"],["靠窗位像默契座位。她不否認『又遇到了』。","帳單被對方按住，她說了『下次』。","外套上殘一點咖啡香以外的味道。"]],
+[
+["她說你提議去公園。回來時鞋邊沾一點乾草。","她帶了落葉書籤，笑說風很大、雲很好看。","外套有陽光晒過的味道，很乾淨。"],
+["她在長椅坐得稍久，說腿有點麻。","花壇照片存在相簿，還沒傳給你。","回來得比預期晚一點，語氣卻很輕鬆。"],
+["她把草屑從裙邊拍掉，動作仔細。","說路上風大，其實頭髮整理得整齊。","提了烤地瓜，分你一半，像交差也像撒嬌。"],
+["她主動說『都是你提議的』，笑意真。","步數很多，呼吸卻穩。","玄關燈一開，她先喊你的名字。"]
+],
+[
+["她提著書店紙袋回來，書脊還貼著價簽。","散文翻到中段折了角，說想晚上讀給你聽。","袖口有淡淡紙墨香。"],
+["她在店裡待得偏久，說角落座位太舒服。","書籤夾在新書裡，圖案很素。","回訊『在書店』的時間戳對得上。"],
+["二手詩集頁邊有舊筆記，不是她的字。","她說挑了好久，想找適合你們一起看的。","布袋肩帶勒痕還在，像真的逛了很完整。"],
+["她把書放上茶几，邀你一起看目錄。","結帳收據折得很整齊。","『你建議得真好』——這句她說了兩次。"]
 ]
 
 var JOURNAL_POOL={
@@ -1190,7 +1265,33 @@ var JOURNAL_POOL={
 2:[[
 "咖啡店的廁所隔間窄得剛好容得下兩個人犯罪。他把我抱上水箱邊緣，掌心捂著我的嘴，下身一下下頂進來，外面還有沖水聲與腳步。我哭著高潮，眼淚跟涎水一起糊在他手上。完事後我整理裙子，走回座位把冷掉的可可喝完，像什麼都沒發生。帳單他按住，說「下次」。下次兩個字像項圈。回家我沖澡沖很久，阿祿問我是不是不舒服，我說咖啡因喝多了。躺在他旁邊時，體內還殘留被填滿的錯覺，我卻伸手回握住他——用忠誠的姿勢，完成不忠的夜晚。",
 "靠窗位是我們的默契。窗外人潮流動，窗內他的手在桌下探進我的裙擺，指節彎曲，精準地揉到我發軟。我咬住吸管，不敢叫。高潮來時我把臉偏向街景，假裝看風景。離開後腿還軟，還要裝成正常步伐走回家。門開的一刻阿祿笑著接過袋子，我主動親他頰側，親得虔誠，像用一個吻去蓋章另一個吻。我已經分不清自己比較需要被愛，還是比較需要被弄髒。"]],
+},
+3:{
+0:[[
+"阿祿說去公園透氣也好。我換了鞋，像赴一個他給的小小行程。步道不長，風卻把心吹得很開。長椅有點涼，我把外套拉緊，想像他在家把燈開著等。花壇的顏色普通得可愛，我拍了一張，想回去給他看。小孩在遠處笑，我忽然很想快點回家——不是因為無聊，是因為有人在。推門前我拍掉裙上的草屑，對自己說：先說我回來了，再把落葉書籤塞進他手心。",
+"公園的雲走得很慢。我沿著你說的那條路走，一步都像在執行『好好照顧自己』的囑咐。袋裡後來多了烤地瓜，熱呼呼的，想著要分你一半。這種外出不刺激，卻很踏實：理由是你給的，回家的方向也是你。"],[
+"有人慢跑經過，我側身讓路，心跳卻無端快了一拍。大概是風太涼。我低頭看手機，阿祿的對話框安安静静，我回『還在公園』，打完字才覺得自己像報備的小孩。可笑，又安心。"]],
+1:[[
+"坐在長椅上時，我想起你腿傷不能來。這句遺憾很輕，卻反復出現。風把瀏海吹亂，我伸手整理，忽然很想被你揉一下頭。回程我走得偏快，像要把透氣剩下的時間，全還給玄關。",
+"花壇照片我沒馬上傳。想當著面給你看，看你笑。這種小心思幼稚得不像話，我卻藏不住。"],[
+"天色偏晚時我起身，拍掉草屑，心裡只有一個聲音：回去。沒有別的邀約，沒有別的名字。只有你提議的公園，和我想念的那盞燈。"]],
+2:[[
+"公園的夜晚也只是夜晚。我把你的建議當成護身符——去透氣、去走走、然後回家。長椅空了，步道空了，我的口袋裡只有書籤和地瓜的餘溫。推門時我先喊你，聲音穩得很。",
+"若有人問我今天去哪，我會說公園，再說是你讓我去的。這句話裡沒有秘密，只有同居的溫度。"]],
+},
+4:{
+0:[[
+"你說去書店看看，我便帶了布袋出門。文學區安靜得能聽見紙頁翻動。我站了很久，指尖滑過書脊，腦裡卻是家裡沙發的凹陷——你常坐的那一邊。角落座位空著，我先傳訊『到了』，才敢坐下翻開第一頁。散文寫得很慢，我讀兩行就想起你等我吃飯的樣子。結帳時選了書籤，小小的，像把你的建議折進口袋。",
+"二手區有一本薄詩集。我想：你腿傷的日子，適合晚上一起讀。店員問找什麼，我說隨便看看，其實在想帶什麼回去給這個家。推門前我回頭看一眼書架，告訴自己下次想拉你來——就算你暫時走不遠，我也想把書的味道帶回去。"],[
+"店裡太靜，有一瞬我以為有人看我。抬頭只有書架與燈。我把耳機戴上，回你『在書店』，字打得很穩。"]],
+1:[[
+"翻到一半忽然捨不得離開，可是更捨不得你。書頁香混著紙塵，我想把這味道帶進客廳。阿祿問我在哪，我回書店，又補『你說的地方真好』。打完這句，耳尖有點熱。",
+"挑選的時間比預期長。不是迷路，是想挑一本配得上『你的提議』的書。"]],
+2:[[
+"結完帳我把書抱在胸前，像抱著一個被允許的午後。回家的路變短了。茶几空出來的位置，我已經想好要怎麼擺。沒有曖昧的角落，只有想和你分享的目錄頁。",
+"『你建議得真好』——這句話我回家後大概會再說一次。不是客套，是真的。"]],
 }
+
 };
 
 
@@ -1337,7 +1438,9 @@ var DEPART=[
 var DEPART_P=[
 ["便利店・補貨","她說缺牛奶。出門很輕鬆，像真的只是短途。"],
 ["商場・逛街","她說想看看衣服與日用品。袋是空的，笑容卻整齊。"],
-["咖啡店・坐坐","她說想換個地方看書。出門前多噴了一點香。"]
+["咖啡店・坐坐","她說想換個地方看書。出門前多噴了一點香。"],
+["公園・走走","她說你提議去公園透氣。換了輕便的鞋。"],
+["書店・翻書","她說你建議去書店看看。出門前帶了布袋。"]
 ];
 var BLANK_ACT=[
 ["msg","📱","發訊息","純敘事・可重複"],
@@ -1579,7 +1682,7 @@ if(band<=0)n=1;
 var used={};
 for(var i=0;i<n&&pool.length;i++){var ix=Math.floor(Math.random()*pool.length),it=pool.splice(ix,1)[0];if(used[it[0]]&&Math.random()<.55){i--;continue}used[it[0]]=1;out.push(it[1])}
 if(met&&st<=1)out.push("你說不上來哪裡不對。只是門關上的聲音，比想像中沉。");
-if(placeName&&band<=1&&Math.random()<.55){var pf={"便利店":"袋口露出便利店收據，時間普通。","商場":"購物袋邊角磨損，像真的逛過很久。","咖啡店":"袖口有淡淡咖啡香，說得通。"};if(pf[placeName])out.push(pf[placeName])}
+if(placeName&&band<=1&&Math.random()<.55){var pf={"便利店":"袋口露出便利店收據，時間普通。","商場":"購物袋邊角磨損，像真的逛過很久。","咖啡店":"袖口有淡淡咖啡香，說得通。","公園":"鞋邊沾一點乾草，說在長椅坐過。","書店":"袖口有淡淡紙墨香，說得通。"};if(pf[placeName])out.push(pf[placeName])}
 if(motif&&motif.tr){if(out.length)out[0]=motif.tr;else out.push(motif.tr)}
 return out}
 function tname(){return S.taken?"已搬走的青梅":effM()>=70?"漸漸疏遠的人":effM()>=45?"態度冷淡的人":TIERS[tier()][1]}
@@ -1915,7 +2018,7 @@ applySp();
 function showMomIntro(){var el=$("momPhone");if(!el)return;el.classList.add("on");el.setAttribute("aria-hidden","false")}
 function dismissMomIntro(){var el=$("momPhone");if(!el||!el.classList.contains("on"))return;el.classList.remove("on");el.setAttribute("aria-hidden","true");if(!S.momIntroSeen){S.momIntroSeen=true;try{save()}catch(e){}}checkMemories()}
 function maybeMomIntro(){if(S.momIntroSeen){var el=$("momPhone");if(el){el.classList.remove("on");el.setAttribute("aria-hidden","true")}return}showMomIntro()}
-function bindMomIntro(){var el=$("momPhone"),btn=$("momDone");if(!el)return;if(btn)btn.onclick=function(e){e.stopPropagation();dismissMomIntro()};el.addEventListener("click",function(e){if(e.target===el||(e.target&&e.target.closest&&e.target.closest(".phone")))dismissMomIntro()});el.addEventListener("keydown",function(e){if(e.key==="Enter"||e.key==="Escape"||e.key===" "){e.preventDefault();dismissMomIntro()}})}
+function bindMomIntro(){var el=$("momPhone");if(!el)return;el.addEventListener("click",function(){dismissMomIntro()});el.addEventListener("keydown",function(e){if(e.key==="Enter"||e.key==="Escape"||e.key===" "){e.preventDefault();dismissMomIntro()}})}
 bindMomIntro();
 load();
 if(S.trip&&Date.now()>=S.trip.end)back();
