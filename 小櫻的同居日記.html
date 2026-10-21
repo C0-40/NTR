@@ -891,7 +891,7 @@ html,body{color:var(--tx)}
 <div class="w homeui">
   <div class="stick" id="homeStick"><div class="scene" id="scene">
     <div class="topHud">
-      <div class="chips"><span class="chip">⚡ 體力 <span id="sta">5</span>/5</span><span class="chip">🧭 <span id="expn">0</span></span><button type="button" class="chip" id="sp" aria-label="切換外出等待速度">⏩ 1x</button><div class="chipIcons" role="group" aria-label="音樂、事件、紀錄"><button type="button" class="chip chip-ico" id="mus" aria-label="切換背景音樂" title="音樂" aria-pressed="true">🎵</button><button type="button" class="chip chip-ico hud-log" data-t="story" id="navStory" title="事件" aria-label="打開事件">📖</button><button type="button" class="chip chip-ico hud-log" data-t="log" id="navLog" title="紀錄" aria-label="打開紀錄">📔</button></div></div>
+      <div class="chips"><span class="chip">⚡ 體力 <span id="sta">5</span>/5</span><button type="button" class="chip" id="sp" aria-label="切換外出等待速度">⏩ 1x</button><div class="chipIcons" role="group" aria-label="音樂、事件、紀錄"><button type="button" class="chip chip-ico" id="mus" aria-label="切換背景音樂" title="音樂" aria-pressed="true">🎵</button><button type="button" class="chip chip-ico hud-log" data-t="story" id="navStory" title="事件" aria-label="打開事件">📖</button><button type="button" class="chip chip-ico hud-log" data-t="log" id="navLog" title="紀錄" aria-label="打開紀錄">📔</button></div></div>
       <div class="topMeta">
         <div class="topAffRow"><span id="tier"></span><span class="affVal">🌸 <span id="affn">0</span></span></div>
         <div class="bar affBar" aria-hidden="true"><i id="affbar"></i><span class="affInk" id="affInk" aria-hidden="true"></span><span class="affSweep" id="affSweep" aria-hidden="true"></span></div>
@@ -1739,7 +1739,7 @@ else{h='<div class="log">'+(S.log.length?S.log.map(function(l){return"<p class=\
 var side=(tab=="journal"||tab=="story"||tab=="log"||tab=="mem");
 if(side){h='<button type="button" class="pane-x" aria-label="關閉" onclick="closePane()">×</button>'+h}
 $("pane").innerHTML=h;var pn=$("pane");if(pn)pn.classList.toggle("has-x",!!side);requestAnimationFrame(function(){window.scrollTo(0,y)})}
-function status(){var stEl=$("sta");if(stEl)stEl.textContent=String(S.sta|0);$("affn").textContent=fmt(S.aff);$("expn").textContent=fmt(S.exp);
+function status(){var stEl=$("sta");if(stEl)stEl.textContent=String(S.sta|0);$("affn").textContent=fmt(S.aff);var _expn=$("expn");if(_expn)_expn.textContent=fmt(S.exp);
 var away=!!S.trip||S.taken,skipOn=S.trip&&!S.taken,thOn=skipOn;
 var stEl=document.querySelector(".stick");if(stEl)stEl.classList.toggle("outing",!!skipOn);var hu=document.querySelector(".homeui");if(hu)hu.classList.toggle("outing-shell",!!skipOn);if(!skipOn)hidePhoneRipple();syncMoodDim();syncSilhouette();
 var sk=$("skip");if(sk&&sk.style.display!==(skipOn?"inline-block":"none"))sk.style.display=skipOn?"inline-block":"none";
