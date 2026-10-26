@@ -1402,7 +1402,19 @@ var CHAT_POSTS=[
 {phase:1,who:"路人A",meta:"回覆",body:"兄弟別再賭了，先找份工作吧。"},
 {phase:1,who:"匿名",meta:"回覆",body:"說得容易。誰會看上我這種被丟下的人。"},
 {phase:2,who:"匿名",meta:"今天・看板",body:"現在的女人都現實。溫柔？那是裝的。誰真心陪你走到最後。"},
-{phase:2,who:"匿名",meta:"今天・看板",body:"又輸了一晚。算了。抱怨給空氣聽，總比誰都不理我好。"}
+{phase:2,who:"匿名",meta:"今天・看板",body:"又輸了一晚。算了。抱怨給空氣聽，總比誰都不理我好。"},
+{phase:3,who:"匿名",meta:"第三章・看板",body:"巷口那個戴花髮夾的小妹，心軟得要命。我哭兩聲說醫藥費，她真的衝上來替我擋拳頭。"},
+{phase:3,who:"匿名",meta:"第三章・看板",body:"母親的事我一講，她眼睛就紅了。這種好騙……打著燈籠都難找。現在連打掃煮飯都包了。"},
+{phase:3,who:"路人B",meta:"回覆",body:"兄弟你講的是真的？別害人家小姑娘。"},
+{phase:3,who:"匿名",meta:"回覆",body:"真的假的關你什麼事。她自己願意來的。"},
+{phase:4,who:"匿名",meta:"第四章・看板",body:"太孤單的時候伸手，她也只是愣住。後來為了我爽約別人——這種心軟，真的少見。"},
+{phase:4,who:"匿名",meta:"第四章・看板",body:"賭運開始回來了。本錢有了，局就能做大。她還以為我可憐。"},
+{phase:4,who:"匿名",meta:"第四章・看板",body:"攻略心得（半套）：裝可憐→讓她覺得只有她能幫你→剩下的，等她自己點頭。"},
+{phase:5,who:"匿名",meta:"第五章・看板",body:"今天手氣好，一把還清。債主那幫人演得不錯，病歷都做得像真的。"},
+{phase:5,who:"匿名",meta:"第五章・看板",body:"利息可以用『別的方式』抵——我當場哭著拒絕，她卻自己點頭。老天都幫我。"},
+{phase:5,who:"匿名",meta:"暴風雨・當晚",body:"風雨封路。她自己留下來的，我連開口求她都沒有。你們懂的。"},
+{phase:6,who:"匿名",meta:"康復日前夜",body:"只有她不會丟下我。髮夾、雨夜，細節你們自己對。"},
+{phase:6,who:"匿名",meta:"最後一則",body:"他腿好了又怎樣？她還是會來。因為——只有我需要她需要到這個份上。"}
 ];
 /* 同居事件（第二章可玩）：[id, aff, title, body, opts[[label,affGain]], unlockMemAff|null] */
 var COHAB=[
@@ -1424,6 +1436,21 @@ var COHAB=[
 ["pin150",150,"髮夾","燈光下你才看清：她還戴著當年那支小雛菊髮夾。她被你盯得不自在，伸手觸了觸它。\n\n「很適合你——你以前說過。」「……閉嘴啦。」",[["「還是很適合。」",6],["「謝謝你留著。」",7]],90],
 ["care200",200,"再一次，換你照顧我","下廚時油鍋竄起火苗，燙到她的手。她整個人僵住，像回到小時候那場火。你撐著拐杖衝過去關火，帶她沖冷水，笨手笨腳地擦藥，弄痛了又道歉。\n\n她沒有嘴硬，也沒有轉開視線：「謝謝你，阿祿。當年是你，現在也是你。」\n\n「等你好了，再把剩下的話告訴我，好不好？」",[["「我一直都很在意你。」",12],["緊緊握住她的手",10]],null]
 ];
+/* 強叔十一步驟：1–4 回憶未滿可推進（m≤29）；5+ 需 step5Open */
+var UNCLE_ARC=[
+{step:1,mGain:10,title:"步驟一・巷口的見義勇為",body:"她回來時指節擦破了一點皮，眼睛卻亮著。\n\n「今天救了一個很可憐的大叔！巷口有人打他，我衝上去喊要報警……他說是為了媽媽的醫藥費才欠債的。」\n\n她別過頭：「才不是愛出風頭。我只是看不下去。」",opts:[["「你做得對。我為你驕傲。」",8],["「下次小心，但也謝謝你告訴我。」",6]],th:["手好抖，但不能讓他再被打。……就像小時候的我。","他流血了，好可憐。一定要幫他。","回去阿祿會說我太衝動吧……但他一定會誇我。"],sil:1},
+{step:2,mGain:8,title:"步驟二・他自稱強叔",body:"她坐下才說完：那個男人滿臉是血，哭著講母親重病去世、醫藥費。他要人叫他——強叔。\n\n「他哭得好真。我不能假裝沒看見。」\n\n（債是賭博輸的，眼淚是演的。她不知道。）",opts:[["「你心軟，是因為你曾經也被救過。」",7],["「聽起來很辛苦……你累不累？」",5]],th:["他說是為了媽媽……母親還去世了。","阿祿當年也是這樣擋在我前面的。……所以我才停不下來。","這件事要講給阿祿聽。"],sil:1},
+{step:3,mGain:7,title:"步驟三・被需要的小事",body:"外出變勤了。她帶著得意回來：「我只是去幫強叔掃掃地、煮個簡單的飯。他房間好亂……被需要的感覺，好奇怪。」\n\n「晚了二十分鐘。今晚煮你愛吃的補償你。」",opts:[["「謝謝你還記得回家。」",6],["「你開心就好。別太累。」",5]],th:["掃掃地板、煮個飯，不算什麼吧。","被人需要的感覺，好奇怪，好溫暖。","回去要煮阿祿愛吃的。"],sil:2},
+{step:4,mGain:6,title:"步驟四・『我也被人幫過』",body:"她突然說：「強叔聽我講童年……他說他年輕時也被人幫過。原來真的有人懂我。」\n\n同一段你給她的溫柔，被複製成別人的假故事。她卻信了。\n\n「這件事……算了，你會擔心。」",opts:[["「我懂你。你願意說，我就聽。」",7],["「他懂你多少，我不知道。但我在。」",6]],th:["他聽我講童年的時候沒有笑得太假。","要不要跟阿祿說？算了，他會擔心。","終於有人懂我……這種想法好危險。"],sil:2},
+{step:5,mGain:8,needStep5:true,title:"步驟五・套用共鳴",body:"她回來先洗手，洗了很久。\n\n「他說太孤單了……然後就……」她說不下去，只重複：「他有道歉。不是故意的。我沒有怎樣。」\n\n界線被推過一次。她對你反而更溫柔，像在補償。（過程留在視線外。）",opts:[["「你安全最重要。先坐下。」",5],["「……我聽著。你不用逞強。」",6]],th:["他說太孤單……手卻伸過來了。心跳好快。","他馬上道歉。可是界線已經過了。","對不起，阿祿。我一直告訴自己：我沒有怎樣。"],sil:3},
+{step:6,mGain:7,needStep5:true,title:"步驟六・爽約的那一晚",body:"說好要一起看電影。電話響了——強叔說債主又來、他撐不住。\n\n她抓起外套：「我只去一下。」你回「沒關係」。片尾字幕亮起時，身邊是空的。\n\n她很晚才回來，把熱牛奶放在你手邊，不敢提電影。",opts:[["「……歡迎回來。」",4],["「下次，我們把燈留著就好。」",5]],th:["他說撐不住了。我不能不去。","說好要陪阿祿的……『沒關係』比罵我還難受。","我只去一下就回來。——我騙誰呢。"],sil:3},
+{step:7,mGain:8,needStep5:true,title:"步驟七・賭局翻身",body:"聊天室有人吹噓賭贏；她只說：「強叔最近比較常『不小心』。我好像習慣了。」\n\n被依賴的安全感扭曲地長著。你只聞得到她洗過又殘一點的味道。",opts:[["「習慣，不是應該發生的事。」",5],["「你回家，我就夠了。」",4]],th:["我好像習慣了。被依賴的感覺好危險。","他還是很可憐。我走了誰照顧他？","阿祿對我那麼溫柔……我更不能讓他知道。"],sil:3},
+{step:8,mGain:8,needStep5:true,title:"步驟八・債主與假病歷",body:"她聲音發顫：「債主又來了。還拿出病歷……說他沒多久了。」\n\n那份病歷是假的。她不知道。\n\n「阿祿不能知道。——不，是我不想讓你擔心。」",opts:[["「先喝水。我們慢慢想。」",5],["「你不是一個人。」",6]],th:["重病……怎麼會這樣。","他一直說不要連累我，可是他明明那麼痛。","阿祿不能知道。"],sil:3},
+{step:9,mGain:9,needStep5:true,title:"步驟九・以身抵息",body:"她回來先沖澡，水聲開得很滿。磨砂玻璃後只有模糊的影子。\n\n「利息可以用別的方式抵……他哭著說不能這樣對我。是我自己點頭的。」\n\n她以為在救人。手機翻面，香水被蓋過。（過程不直給。）",opts:[["「你活著回來，就好。」",4],["把毛巾遞過去，什麼都不問",5]],th:["只要能讓他們別再逼他……就這一次。","他在哭。可是是我自己想幫他。","對不起，阿祿。我是為了救人。——我一直這樣說服自己。"],sil:3},
+{step:10,mGain:12,needStep5:true,storm:true,title:"步驟十・暴風雨之夜",body:"暴雨夜。她出門前說很快回來；強叔傳訊：債主說今晚是最後期限。\n\n她來電：「風雨太大，今天回不去了，你自己早點睡。」\n\n窗上剪影晃動——有人倒下，又有人扶起。燈熄前，兩個影子重疊了一瞬。\n\n隔天她回家先洗澡，出來後格外溫柔地替你準備早餐。",opts:[["「……歡迎回來。早餐謝謝。」",5],["「雨停了就好。」",4]],th:["雨好大，回不去了。我不能把他一個人丟下。","他說『我不能害你』。我說我自己願意的。","阿祿，對不起……我好想你。可是我也沒辦法放手。","先去洗澡。不能讓他聞到。"],sil:3},
+{step:11,mGain:10,needStep5:true,title:"步驟十一・只有你不會丟下我",body:"拆石膏的日子近了。她仍出門，回來更黏你，卻也更閃躲。\n\n「他說你大概也有難處……又說只有我不會丟下他。」\n\n兩邊同時維持。最殘忍的溫柔。",opts:[["「你的位置，一直在這裡。」",6],["「等腿好了，我們把話說完。」",5]],th:["又要出門了。是期待，還是害怕？","手機亮了，是阿祿。……我怎麼可以一邊想他，一邊走向另一個人。","他的腿快好了。我該回去了嗎？"],sil:3}
+];
+var ENDING_CHAT="只有她不會丟下我。髮夾還在，雨夜也還在。你們自己對細節吧——我贏了。";
 var STORY=[
 [10,"重逢後的第一個早晨","小櫻抱著胸口站在廚房門口。「……早安。別誤會，我只是答應阿姨照顧你。」她別開視線，又補一句：「石膏還好嗎。別乱动。」"],
 [30,"共用的冰箱","冰箱上貼了一張小櫻的便條：「布丁是我的，但你可以吃一半。」你發現她正努力讓這個家熱鬧起來。"],
@@ -1724,12 +1751,14 @@ mq.push(["🌙 她沒說出口的事",F.join("\n\n")+"\n\n💭 "+pick(thPool())]
 addLog("📅 第"+dayNow+"天結束，外出 "+ev.length+" 次"+(n?"，遇見強叔 "+n+" 次":"")+(force?"・提早睡覺":""));
 S.day=dayNow+1;S.dsec=force?0:Math.max(0,S.dsec-DL);S.homeActToday=false;S.cohabToday=false;S.dEv=[];S.sqToday=[];S.sqDone=false;S.outToday=false;S.pendingObs=null;S.motif=null;S.journalGlow=0;S.pendingChat=null;setObsBtn(false);hidePhoneRipple();
 nextPop()}
-function sleepDay(){if(busy||S.taken||dayLock||maskOpen())return;if(S.trip){say("（她還在外面。等她回來，或先點「打瞌睡」再睡。）","pout");return}withBusy(function(){if(S.trip||dayLock||maskOpen()||S.taken)return;endDay(true);render()})}
+function sleepDay(){if(busy||S.taken||dayLock||maskOpen())return;if(S.trip){say("（她還在外面。等她回來，或先點「打瞌睡」再睡。）","pout");return}withBusy(function(){if(S.trip||dayLock||maskOpen()||S.taken)return;
+if(!S.endingDone&&(S.day|0)>=29&&(S.uncleStep|0)>=10&&step5Open()){if(!S.castOff)queueCastOff();else if(!S.endingDone)mq.push({endingPrep:1});endDay(true);render();return}
+endDay(true);render()})}
 function releaseDayLock(){if(!maskOpen()&&!mq.length){dayLock=0;try{flushCohabQueue()}catch(e){}}}
 var S,tab="",mq=[],thT=0,busy=0,backLock=0,mbLock=0,dayLock=0;
-function def(){return {homeActToday:false,aff:0,exp:0,trip:null,log:[],seen:[],t:Date.now(),m:0,trips:0,taken:false,day:1,dsec:0,dEv:[],qa:[],viewM:0,sq:[],sqToday:[],sqDone:false,outToday:false,pendingObs:null,optSeen:{blank:{},sq:{},ask:{}},journals:[],journalOpen:null,motif:null,journalGlow:0,metOut:false,momIntroSeen:false,memSeen:[],memPending:[],uncleStarted:false,cohabSeen:[],cohabPending:[],cohabToday:false,chatSeen:false}}
+function def(){return {homeActToday:false,aff:0,exp:0,trip:null,log:[],seen:[],t:Date.now(),m:0,trips:0,taken:false,day:1,dsec:0,dEv:[],qa:[],viewM:0,sq:[],sqToday:[],sqDone:false,outToday:false,pendingObs:null,optSeen:{blank:{},sq:{},ask:{}},journals:[],journalOpen:null,motif:null,journalGlow:0,metOut:false,momIntroSeen:false,memSeen:[],memPending:[],uncleStarted:false,uncleStep:0,uncleTh:[],endingDone:false,castOff:false,cohabSeen:[],cohabPending:[],cohabToday:false,chatSeen:false}}
 function load(){try{var r=localStorage.getItem("sakura_v1");S=r?JSON.parse(r):def()}catch(e){S=def()}if(!S)S=def();try{delete S.coin;delete S.sta}catch(e){}if(S.homeActToday==null)S.homeActToday=false;if(!S.cohabSeen)S.cohabSeen=[];if(!S.cohabPending)S.cohabPending=[];if(S.cohabToday==null)S.cohabToday=false;if(S.chatSeen==null)S.chatSeen=false;
-try{var _validMem={};MEMORIES.forEach(function(m){_validMem[m[0]]=1});S.memSeen=(S.memSeen||[]).filter(function(id){return _validMem[id]});S.memPending=(S.memPending||[]).filter(function(id){return _validMem[id]&&S.memSeen.indexOf(id)<0})}catch(e){}if(S.momIntroSeen==null)S.momIntroSeen=true;if(!S.memSeen)S.memSeen=[];if(!S.memPending)S.memPending=[];if(S.m==null)S.m=0;if(S.uncleStarted==null)S.uncleStarted=false;if(typeof step5Open==="function"&&!step5Open()&&(S.m|0)>29)S.m=29;if(S.trips==null)S.trips=0;if(!S.seen)S.seen=[];if(S.day==null){S.day=1;S.dsec=0}if(!S.dEv)S.dEv=[];if(!S.qa)S.qa=[];if(S.viewM==null)S.viewM=0;if(!S.sq)S.sq=[];if(!S.sqToday)S.sqToday=[];if(S.outToday==null)S.outToday=false;if(S.sqDone==null)S.sqDone=!!(S.sqToday&&S.sqToday.length);if(S.pendingObs===undefined)S.pendingObs=null;if(!S.optSeen||typeof S.optSeen!="object")S.optSeen={blank:{},sq:{},ask:{}};if(!S.optSeen.blank)S.optSeen.blank={};if(!S.optSeen.sq)S.optSeen.sq={};if(!S.optSeen.ask)S.optSeen.ask={};if(!S.journals)S.journals=[];if(S.journalOpen===undefined)S.journalOpen=null;scrubJournals();if(S.motif===undefined)S.motif=null;if(S.journalGlow==null)S.journalGlow=0;if(S.metOut==null){S.metOut=!!(S.m>0||(S.journals&&S.journals.some(function(j){return j&&j.met}))||(S.dEv&&S.dEv.some(function(e){return e&&e.met})))}try{delete S.blankHintSeen;delete S.sqHintSeen;delete S.anxiety;delete S.fantasy;delete S.evidence}catch(e){}}
+try{var _validMem={};MEMORIES.forEach(function(m){_validMem[m[0]]=1});S.memSeen=(S.memSeen||[]).filter(function(id){return _validMem[id]});S.memPending=(S.memPending||[]).filter(function(id){return _validMem[id]&&S.memSeen.indexOf(id)<0})}catch(e){}if(S.momIntroSeen==null)S.momIntroSeen=true;if(!S.memSeen)S.memSeen=[];if(!S.memPending)S.memPending=[];if(S.m==null)S.m=0;if(S.uncleStarted==null)S.uncleStarted=false;if(S.uncleStep==null)S.uncleStep=0;if(!S.uncleTh)S.uncleTh=[];if(S.endingDone==null)S.endingDone=false;if(S.castOff==null)S.castOff=false;if(typeof step5Open==="function"&&!step5Open()&&(S.m|0)>29)S.m=29;if(S.trips==null)S.trips=0;if(!S.seen)S.seen=[];if(S.day==null){S.day=1;S.dsec=0}if(!S.dEv)S.dEv=[];if(!S.qa)S.qa=[];if(S.viewM==null)S.viewM=0;if(!S.sq)S.sq=[];if(!S.sqToday)S.sqToday=[];if(S.outToday==null)S.outToday=false;if(S.sqDone==null)S.sqDone=!!(S.sqToday&&S.sqToday.length);if(S.pendingObs===undefined)S.pendingObs=null;if(!S.optSeen||typeof S.optSeen!="object")S.optSeen={blank:{},sq:{},ask:{}};if(!S.optSeen.blank)S.optSeen.blank={};if(!S.optSeen.sq)S.optSeen.sq={};if(!S.optSeen.ask)S.optSeen.ask={};if(!S.journals)S.journals=[];if(S.journalOpen===undefined)S.journalOpen=null;scrubJournals();if(S.motif===undefined)S.motif=null;if(S.journalGlow==null)S.journalGlow=0;if(S.metOut==null){S.metOut=!!(S.m>0||(S.journals&&S.journals.some(function(j){return j&&j.met}))||(S.dEv&&S.dEv.some(function(e){return e&&e.met})))}try{delete S.blankHintSeen;delete S.sqHintSeen;delete S.anxiety;delete S.fantasy;delete S.evidence}catch(e){}}
 function save(){try{localStorage.setItem("sakura_v1",JSON.stringify(S))}catch(e){}}
 function doReset(){S=def();mq=[];busy=0;backLock=0;mbLock=0;dayLock=0;$("mask").classList.remove("on");try{localStorage.removeItem("sakura_v1")}catch(e){}say("「……才不是為了你。我只是答應了阿姨。」","pout");render();maybeMomIntro()}
 var rc=0,rt;
@@ -1813,7 +1842,7 @@ if(placeName&&band<=1&&Math.random()<.55){var pf={"便利店":"袋口露出便�
 if(motif&&motif.tr){if(out.length)out[0]=motif.tr;else out.push(motif.tr)}
 return out}
 function tname(){return S.taken?"已搬走的青梅":effM()>=70?"漸漸疏遠的人":effM()>=45?"態度冷淡的人":TIERS[tier()][1]}
-function ntrOn(){return uncleOpen()&&(effM()>0||(S.aff>=100&&S.trips>=5))}
+function ntrOn(){return uncleOpen()&&((S.day|0)>=13)&&((S.uncleStep|0)>0||effM()>0||(S.aff>=100&&S.trips>=5)||canAdvanceUncle())}
 function rate(){return +(1+tier()*1.5+S.exp*0.02).toFixed(1)}
 function $(i){return document.getElementById(i)}
 function fmt(n){return Math.floor(n).toLocaleString()}
@@ -1904,6 +1933,7 @@ var pool=lines[a[0]]||["你們一起度過了一段安靜的時間。"];
 say(dissonanceOn()?pick(["「……嗯。」她點頭，很快又看向別處。","「好啊。」語氣平，像例行公事。","「知道了。」她已經分心。"]):pick(pool),dissonanceOn()?"calm":(effM()>=70?"cold":effM()>=45?"pout":pick(["joy","shy","wink","calm"])));
 addLog("🛋️ "+a[1]+"・親密 +"+gn);if(effM()<45)hearts(4);afterAffTier(b);if(tier()>b&&effM()<45)popup("親密度提升！","你和小櫻的關係變成了「"+TIERS[tier()][1]+"」。");closePane();render()}
 function outingThoughtPool(){var st=stage(),ti=tier(),pool=[],ab=st<=0?0:st<=2?1:2;
+if(S.uncleTh&&S.uncleTh.length)pool=pool.concat(S.uncleTh);
 var blank=BLANK_TH[Math.min(st,BLANK_TH.length-1)]||BLANK_TH[0];pool=pool.concat(blank);
 if(S.trip&&PLACE_TH[S.trip.id]){var rows=PLACE_TH[S.trip.id],row=rows[Math.min(st,rows.length-1)]||rows[0];pool=pool.concat(row)}
 var acts=(S.trip&&S.trip.acts)||[];
@@ -1951,11 +1981,11 @@ function syncMoodDim(){
   hu.classList.toggle("mood-peek",!!moodPeekOn&&!jOpen);
 }
 
-function hasMetOut(){return uncleOpen()&&!!S.metOut}
+function hasMetOut(){return uncleOpen()&&(!!S.metOut||(S.uncleStep|0)>0)}
 /* 3E 動作剪影擴充點：未來可依 blankAct／poseId 換 src（如 sil-hero-act-*.png）；本輪只用站姿圖 */
 function silPoseSrc(who){return who==="uncle"?"sil-uncle.png":"sil-hero.png"}
 function applySilPose(){var h=$("silHero"),u=$("silUncle");if(h&&h.getAttribute("src")!==silPoseSrc("hero"))h.src=silPoseSrc("hero");if(u&&u.getAttribute("src")!==silPoseSrc("uncle"))u.src=silPoseSrc("uncle")}
-function silApproach(){if(!hasMetOut()||!(effM()>0))return -1;var st=stage();if(st<=0)return 0;if(st===1)return 1;if(st===2)return 2;return 3}
+function silApproach(){if(!hasMetOut()||!(effM()>0||(S.uncleStep|0)>0))return -1;var a=uncleArcByStep(S.uncleStep|0);if(a&&a.sil!=null)return Math.max(0,Math.min(3,(a.sil|0)));var st=stage();if(st<=0)return 0;if(st===1)return 1;if(st===2)return 2;return 3}
 function silDist(){return silApproach()}
 function syncSilhouette(){
   var el=$("silLayer");if(!el)return;
@@ -1994,8 +2024,9 @@ if(!acts.length)acts=[];
 S.exp+=p[4];S.aff+=4;S.trips++;
 var metChance=Math.min(.92,(.28+p[2]/130+S.trips*.005+(acts.indexOf("call")>=0?0.05:0)+(S.viewM>0?S.viewM*0.02:S.viewM*0.012))*pm.meet);
 if(pid==0&&stage()<=0)metChance*=.45;
-var met=ntrOn()&&Math.random()<metChance,g=0,st;
-if(met){ev=pickPlaceEv(pid,true);g=Math.round(p[2]/12+S.trips*.15)+Math.floor(Math.random()*3);g=Math.max(0,Math.round(g*(1+S.viewM*0.12)*pm.mMul));g=addM(g);S.metOut=true}
+var forceStep=canAdvanceUncle();
+var met=(forceStep||(ntrOn()&&Math.random()<metChance)),g=0,st;
+if(met){ev=pickPlaceEv(pid,true);if(!forceStep){g=Math.round(p[2]/12+S.trips*.15)+Math.floor(Math.random()*3);g=Math.max(0,Math.round(g*(1+S.viewM*0.12)*pm.mMul));g=addM(g)}S.metOut=true}
 st=stage();
 var motif=pickTripMotif(pid,met,acts,st);
 var traces=buildTraces(met,acts,trip.place||p[1],motif);writeJournal(trip.place||p[1],pid,met,motif);S.motif=motif;S.trip=null;hidePhoneRipple();scheduleJournalGlow();
@@ -2010,6 +2041,7 @@ var trTxt=traces.join("\n\n");
 S.pendingObs={trTxt:trTxt,met:met,motif:motif?{id:motif.id,mode:motif.mode}:null};
 if(met&&st>=2&&Math.random()<(st>=3?.55:.38)){var band=NEAR_SAY[Math.min(st,NEAR_SAY.length-1)]||NEAR_SAY[0];S.pendingChat=pick(band);}
 setObsBtn(true);
+if(forceStep){queueUncleStep()}
 queueSqAsk();
 var nightTxt=(dissonanceOn()||(motif&&motif.mode==="clash"))?pick(FLAT_NIGHT):pick(NIGHT[Math.min(st,NIGHT.length-1)]);
 if(motif&&motif.th&&Math.random()<.55)nightTxt+="\n\n💭 "+motif.th;
@@ -2039,6 +2071,8 @@ function paintMaskChrome(tt){var mask=$("mask");if(!mask)return;var soft=tt==="�
 function nextPop(){if(maskOpen())return;if(!mq.length){dayLock=0;hideSqOpts();if(moodPeekOn)clearMoodPeek();return}var m=mq.shift();if(!m){releaseDayLock();hideSqOpts();if(moodPeekOn)clearMoodPeek();return}
 if(m.sq!=null){showSqMask(m.sq);return}
 if(m.cohab!=null){showCohabMask(m.cohab);return}
+if(m.uncle!=null){showUncleMask(m.uncle);return}
+if(m.endingPrep){showEndingPrep();return}
 hideSqOpts();$("mt").textContent=m[0];$("mp").textContent=m[1];paintMaskChrome(m[0]);$("mask").classList.add("on")}
 function dismissMask(ev){if(ev){try{ev.preventDefault();ev.stopPropagation()}catch(e){}}if(mbLock||sqOptsOn())return;mbLock=1;var mask=$("mask");if(mask){mask.classList.remove("on");if(!mq.length&&!moodPeekOn)mask.classList.remove("mood-chrome")}setTimeout(function(){try{nextPop()}catch(e){}releaseDayLock();mbLock=0},30)}
 (function(){var mb=$("mb");if(!mb)return;mb.onpointerup=null;mb.onclick=null;mb.addEventListener("click",dismissMask,false);mb.addEventListener("pointerup",function(e){if(e.pointerType==="mouse"&&e.button!==0)return;dismissMask(e)},false)})();
@@ -2046,7 +2080,7 @@ function replay(k){var s=STORY[k];mq.push(["📖 "+s[1],s[2]]);nextPop()}
 function replayN(k){var s=NSTORY[k];mq.push(["💔 "+s[1],s[2]]);nextPop()}
 
 function chatAvailable(){return !!(S&&!S.taken&&!S.trip&&!dayLock)}
-function chatPhase(){return (S.day|0)>=6||(S.aff|0)>=30?2:1}
+function chatPhase(){var us=S.uncleStep|0;if(us>=11)return 6;if(us>=7)return 5;if(us>=5)return 4;if(us>=1)return 3;if((S.day|0)>=6||(S.aff|0)>=30)return 2;return 1}
 function paintChatFeed(){var feed=$("chatFeed");if(!feed)return;var ph=chatPhase(),html="";
 CHAT_POSTS.forEach(function(p){if((p.phase|0)>ph)return;html+='<article class="cPost"><span class="who is-anon">'+p.who+'</span><div class="body">'+p.body+'</div><span class="meta">'+p.meta+'</span></article>'});
 if(!html)html='<p class="sm">還沒有貼文。</p>';feed.innerHTML=html;
@@ -2083,6 +2117,64 @@ addLog("🏠 "+c[2]+(opt?"→"+opt[0]:"")+(gain?"・親密 +"+gain:""));
 say(opt&&/謝謝你，阿祿|在意你/.test(c[3])?"「……嗯。」她握著你的手，沒有抽開。":"「……哼。」她別開臉，耳尖卻紅了。",gain>=6?"shy":"pout");
 var mask=$("mask");if(mask)mask.classList.remove("on");hideSqOpts();if($("mb"))$("mb").style.display="";
 setTimeout(function(){mbLock=0;checkMemories();nextPop();releaseDayLock();render()},40)}
+
+function uncleArcByStep(n){for(var i=0;i<UNCLE_ARC.length;i++)if(UNCLE_ARC[i].step===n)return UNCLE_ARC[i];return null}
+function canAdvanceUncle(){var next=(S.uncleStep|0)+1;if(next>11)return false;if((S.day|0)<13)return false;var a=uncleArcByStep(next);if(!a)return false;if(a.needStep5&&!step5Open())return false;return true}
+function queueUncleStep(){if(!canAdvanceUncle())return false;var next=(S.uncleStep|0)+1;var a=uncleArcByStep(next);if(!a)return false;
+S.uncleStep=next;S.uncleStarted=true;S.metOut=true;S.uncleTh=(a.th||[]).slice();
+var gained=addM(a.mGain|0);
+mq.push({uncle:next});
+addLog("😈 強叔步驟 "+next+"・"+a.title+(gained?"・強叔親密 +"+gained:""));
+return true}
+function showUncleMask(step){var a=uncleArcByStep(step);if(!a){nextPop();return}hideSqOpts();
+$("mt").textContent="😈 "+a.title;$("mp").textContent=a.body;paintMaskChrome("強叔");
+var box=$("sqopts"),mb=$("mb");if(!box){nextPop();return}box.innerHTML="";
+(a.opts||[]).forEach(function(o,oi){var b=document.createElement("button");b.type="button";b.className="btn";b.style.width="100%";b.style.whiteSpace="normal";b.style.textAlign="left";b.style.margin="6px 0";b.textContent=o[0];
+b.onclick=function(){pickUncle(step,oi)};box.appendChild(b)});
+box.style.display="block";if(mb)mb.style.display="none";$("mask").classList.add("on");
+if(a.storm){try{var hu=document.querySelector(".homeui");if(hu)hu.classList.add("outing-shell");syncSilhouette()}catch(e){}}}
+function pickUncle(step,oi){if(mbLock)return;mbLock=1;var a=uncleArcByStep(step);if(!a){mbLock=0;return}
+var opt=(a.opts&&a.opts[oi])?a.opts[oi]:null;var gain=opt?opt[1]|0:0;var b=tier();
+if(gain){S.aff+=gain;afterAffTier(b)}
+say(step>=5?"「……我回來了。」她的聲音很輕。":"「哼。……我有說完了。」",step>=5?"shy":"pout");
+addLog("💬 "+a.title+(opt?"→"+opt[0]:"")+(gain?"・親密 +"+gain:""));
+var mask=$("mask");if(mask)mask.classList.remove("on");hideSqOpts();if($("mb"))$("mb").style.display="";
+setTimeout(function(){mbLock=0;if(step>=11&&(S.day|0)>=29)queueCastOff();nextPop();releaseDayLock();render()},40)}
+function queueCastOff(){if(S.castOff)return;S.castOff=true;
+mq.push(["🩺 石膏拆了","上門的醫護人員拆掉石膏，宣布你可以自己走路了。\n\n媽媽來電：「小櫻可以回去了吧？」\n\n房間忽然變得很寬。你本來想問她——可以繼續住下去嗎？"]);
+mq.push({endingPrep:1})}
+function showEndingPrep(){hideSqOpts();
+$("mt").textContent="💬 聊天室・最後一則";$("mp").textContent=ENDING_CHAT+"\n\n細節對上了：髮夾、暴風雨、只有她不會丟下我。\n\n你要怎麼面對？";
+paintMaskChrome("強叔");
+var box=$("sqopts"),mb=$("mb");box.innerHTML="";
+[["不相信——那不是她",0],["面對真相——那就是她",1]].forEach(function(o){
+  var b=document.createElement("button");b.type="button";b.className="btn";b.style.width="100%";b.style.whiteSpace="normal";b.style.textAlign="left";b.style.margin="6px 0";b.textContent=o[0];
+  b.onclick=function(){pickEndingBelieve(o[1])};box.appendChild(b)});
+box.style.display="block";if(mb)mb.style.display="none";$("mask").classList.add("on")}
+function pickEndingBelieve(believeTruth){if(mbLock)return;mbLock=1;S._endTruth=!!believeTruth;
+var mask=$("mask");if(mask)mask.classList.remove("on");hideSqOpts();
+setTimeout(function(){mbLock=0;showEndingChoice()},40)}
+function showEndingChoice(){hideSqOpts();
+var truth=!!S._endTruth;
+$("mt").textContent=truth?"結局・面對之後":"結局・你選擇相信她";
+$("mp").textContent=truth?"你把聊天室攤在她面前。對照雨夜與髮夾。她崩潰了。\n\n你只能揭發——沒有別的路。":"你決定不當真。那麼，今晚你還要不要向她告白？";
+paintMaskChrome("小櫻");
+var box=$("sqopts"),mb=$("mb");box.innerHTML="";
+var opts=truth?[["揭發真相（結局三）",3]]:[["告白：可以繼續住下去嗎？（結局一）",1],["不告白，讓媽媽接她回去（結局二）",2]];
+opts.forEach(function(o){var b=document.createElement("button");b.type="button";b.className="btn";b.style.width="100%";b.style.whiteSpace="normal";b.style.textAlign="left";b.style.margin="6px 0";b.textContent=o[0];
+b.onclick=function(){finishEnding(o[1])};box.appendChild(b)});
+box.style.display="block";if(mb)mb.style.display="none";$("mask").classList.add("on")}
+function finishEnding(n){if(mbLock||S.endingDone)return;mbLock=1;S.endingDone=true;
+var titles={1:"結局一・偷偷在一起",2:"結局二・報恩的終點",3:"結局三・回不去的地方"};
+var bodies={
+1:"你不相信聊天室，向她告白。她答應繼續住下，也答應「偷偷在一起」。\n\n她沒有切斷和強叔的關係。你每天都在懷疑，卻選擇不問。\n\n結尾：他選擇相信，於是她的每一次晚歸，都有了合理的解釋。",
+2:"你不相信聊天室，也沒有告白。媽媽問：「小櫻可以回去了吧？」\n\n她說：「我不回去了……他比你更需要我。」她留在強叔身邊，直到最後都沒發現自己被利用。\n\n結尾：她把當年被給予的溫柔，原封不動地交給了不該給的人。",
+3:"你把真相攤開。她哭著刪掉聊天室，卻再也分不清哪些善意是真的。你們成為戀人，但有些地方永遠回不去了。\n\n她不再說「才不是為了你」，常問：「我是不是……很蠢？」"
+};
+hideSqOpts();$("mt").textContent=titles[n];$("mp").textContent=bodies[n];paintMaskChrome(n===3?"小櫻":"強叔");
+if($("mb"))$("mb").style.display="";$("mask").classList.add("on");
+addLog("📜 "+titles[n]);say(n===3?"「我是不是……很蠢？」":n===1?"「……好。我們偷偷的。」":"（房間裡只剩石膏拆下的粉塵味。）",n===3?"sad":n===1?"shy":"cold");
+setTimeout(function(){mbLock=0},40)}
 
 function isOutingPhase(){return !!(S&&S.trip&&!S.taken)}
 function paintDock(){
