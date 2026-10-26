@@ -1105,7 +1105,6 @@ html,body{color:var(--tx)}
   <div class="stick" id="homeStick"><div class="scene" id="scene">
         <div class="topHud">
       <div class="chips hudTools">
-            <span class="chip chip-sta">⚡ 體力 <span id="sta">5</span>/5</span>
             <div class="chipIcons" role="group" aria-label="音樂、事件、紀錄">
               <button type="button" class="chip chip-ico" id="mus" aria-label="關閉背景音樂" title="音樂開" aria-pressed="true">🔊</button>
               <button type="button" class="chip chip-ico hud-log" data-t="story" id="navStory" title="事件" aria-label="打開事件">📖</button>
@@ -1148,7 +1147,7 @@ html,body{color:var(--tx)}
       <div class="sm note-sub" id="nt"></div>
       <div class="note-acts" id="noteActs" hidden>
         <button type="button" class="btn note-sp" id="sp" aria-label="切換外出等待速度">⏩ 1x</button>
-        <button type="button" class="btn note-skip" id="skip" onclick="skipTrip()">⏭ 提前結束等待</button>
+        <button type="button" class="btn note-skip" id="skip" onclick="skipTrip()" hidden>⏭ 提前結束等待</button>
       </div>
     </div>
 
@@ -1206,14 +1205,13 @@ html,body{color:var(--tx)}
 <script>
 
 var TIERS=[[0,"重逢的青梅竹馬"],[30,"漸漸熟稔"],[100,"無話不談的夥伴"],[250,"值得信賴的人"],[500,"特別的人"],[1000,"一輩子的家人"]];
-var STA_MAX=5;
 var HOME_TIME=12;
-/* [id, label, icon, staCost, affGain, tip] */
+/* [id, label, icon, _unused, affGain, tip] — 無體力；每天室內互動一次 */
 var HOME_ACTS=[
-["care","關心她","💗",1,5,"陪她聊聊近況，讓她覺得被放在心上。"],
-["tv","看電視","📺",1,5,"窩在沙發上看一點無關緊要的節目。"],
-["cook","煮飯","🍲",1,10,"一起張羅一頓家常飯，餐桌會暖一些。"],
-["game","玩桌遊","🎲",1,10,"用一局小遊戲把時間變得輕一點。"]
+["care","關心她","💗",0,5,"陪她聊聊近況，讓她覺得被放在心上。"],
+["tv","看電視","📺",0,5,"窩在沙發上看一點無關緊要的節目。"],
+["cook","煮飯","🍲",0,10,"一起張羅一頓家常飯，餐桌會暖一些。"],
+["game","玩桌遊","🎲",0,10,"用一局小遊戲把時間變得輕一點。"]
 ];
 var PLACES=[
 ["🏪","便利店",12,0,4,12,["買了飯糰與牛奶","猶豫很久才選好布丁","順路帶了洗髮精"],["一盒布丁","一瓶麥茶"]],
@@ -1484,7 +1482,7 @@ var DEPART_P=[
 var BLANK_ACT=[
 ["msg","📱","發訊息","純敘事・可重複"],
 ["call","📞","打電話","純敘事・可重複"],
-["search","🔎","翻找對方房間","純敘事・可重複・助細痕跡"],
+["nap","😴","打瞌睡","跳過外出等待"],
 ["jack","💦","尻槍","純敘事・可重複"]
 ];
 var BLANK_TXT={"msg": [[["你傳：「在哪？還好嗎？」已讀。過了很久，回一個「嗯」。像應付同事。", "訊息出去後安靜得發慌。她回：「還在忙。」沒有貼圖，也沒有「想你」。", "你打了又刪，最後只送「注意安全」。顯示已讀，沒有下文。"], ["你問她到了沒。她回得很快，卻只有「到了～」——像背好的公式。", "「誰跟你一起？」你傳完又後悔。她已讀，過三分鐘回「自己啦」。", "你傳了定位請求。她拒絕了，附一句「訊號不好」。"], ["你傳：「回來吃晚餐嗎？」已讀不回。螢幕亮了又暗，像被另一個人佔走。", "訊息氣泡跳了兩下「對方正在輸入」，然後什麼都沒送來。", "你傳了語音。她沒聽，只回文字：「等下再說。」冷得像隔了一堵牆。"]], [["你傳：「想你了。」她回一個臉紅貼圖，又補「別鬧」。語氣還算軟。", "「多久回來？」她回：「快了快了。」你盯著那句，卻聽出心不在焉。", "你傳了家裡的照片。她已讀，回「好溫暖」——溫暖得太客氣。"], ["她回得慢了一點。你問怎麼了，她說「剛在跟人說話」。沒說是誰。", "「今天好想聽你聲音。」她回：「回來再講。」像把親密延後。", "你傳了日常碎唸。她回得很短，卻多了一個「乖」——說完又刪成「嗯」。"], ["你傳：「他是不是也在？」已讀。很久以後她回：「你想太多。」", "訊息裡她說「再一下下」。你數著分鐘，想像她把手機扣在另一個人胸口旁。", "她回了一串省略號，然後：「別一直傳，人家在忙。」忙什麼，她不說。"]], [["你傳：「想牽你的手。」她回：「……我也是。」間隔很長，像經過掙扎。", "「我在等你。」她回：「燈先開著。」這句讓你心軟，又讓你更怕失去。", "你傳了很長的一段。她回：「看到了。別擔心我。」擔心與否，你自己最清楚。"], ["她回訊時語氣溫柔，卻總像在趕時間。「親親，晚點聊。」錯字都沒改。", "你問「想不想我」。她回「想啊」——後面卻多了一句「但現在不方便講」。", "訊息已讀很快。內容卻敷衍。你覺得她在對你溫柔，心思卻不在對話框裡。"], ["你傳：「別丟下我。」她久久才回：「……我沒有。」語音轉文字，背景有男人笑聲。", "她回：「今晚可能晚。」你盯著那句，腦內自動補完她把衣服掛在別人椅背上的畫面。", "「我愛你。」你傳完手抖。她回「我也是」——短得像贖罪，也像敷衍。"]]], "call": [[["撥過去，響了七聲才被拒接。你盯著未接來電，耳朵發熱。", "接通一瞬，嘈雜風聲。她說「等下打給你」就掛了。全程不到兩秒。", "語音信箱。你沒留言。掛斷後更安靜。"], ["接通了。她聲音有點喘：「怎麼了？」背景像有人走動。你問不出口。", "她說訊號不好，請你改簡訊。電話那頭隱約有低沉男聲。", "通話中。她把音量調很小，像怕被旁邊的人聽見你的名字。"], ["剛接通就被靜音。幾秒後她用氣音說：「別打過來。」然後忙線。", "你打第二次。直接進語音信箱。像被放進另一個世界的門外。", "接通時她笑了一下——不是對你。隨即壓低聲音：「我在外面，晚點。」"]], [["她接了，語氣軟：「想聽我聲音喔？」卻很快說要掛，像有人在催。", "通話裡她喊你名字還親暱，背景卻忽然安靜得不自然。", "你說想她。她「嗯」了一聲，又補「我也是」——太快，像背稿。"], ["電話那頭有杯碰撞聲。她說在咖啡店。你記得她出門時沒提咖啡。", "她一邊講一邊走，呼吸亂。你問是不是在跑，她笑著否認。", "訊號裡混進一句聽不清的話。她說是電視。家裡沒開電視。"], ["她接起來就先「噓」。然後小聲：「別鬧，我在忙。」忙的對象不是你。", "通話被另一隻手拿走又還來。她說「朋友鬧我」。朋友是誰。", "你聽見布料摩擦與壓抑的喘息。她說「風太大」。掛斷得乾脆。"]], [["她接聽時聲音軟軟的，說「想回家」。背景只有風聲。", "電話裡她叫你「阿祿」的尾音有點喘，說剛走完一段路。", "長通話。她一直安撫你，卻說訊號不穩、不方便開視訊。"], ["你求她報平安。她用氣音說「我很好」。很好得像在別人臂彎裡。", "接通瞬間是男人呼吸。她搶過手機：「是室友啦。」笑得勉強。", "她讓你別擔心，卻把通話切成免持。你聽見遠方一句含糊的暱稱。"], ["她幾乎是哭腔接的：「別打了……我會回去。」你聽出恐懼，也聽出沉溺。", "通話結束前，她脫口「喜歡」——對象含糊。你問是誰，她裝沒聽見。", "你罵了她。她沉默，然後輕輕說「對不起」。對不起的內容，她不願展開。"]]], "search": [[["抽屜裡只有收據與髮圈。平凡得讓你覺得自己多心。", "枕頭下沒有東西。你把房間復原，像什麼都沒發生。", "衣架上多了一件你沒看過的外套——也可能是新買的。你說服自己。"], ["垃圾桶有揉皺的便利貼，字跡被水暈開，只剩一個「等」。", "梳妝台多了一支不是家裡常用的香水試管。味道偏濃。", "床邊地毯壓出一個陌生鞋印大小的凹痕。也許是你自己的。"], ["抽屜深處有一張折起來的名片，頭銜你看不懂，電話號碼被塗黑。", "枕頭套內側沾到一點不易察覺的痕跡，乾了，顏色偏濁。你不敢深想。", "她的充電線旁掉了一枚不屬於這個家的袖扣。金屬冷光。"]], [["你找到她換下的內衣，洗過了，卻還殘一點體香與別的味道混在一起。", "筆記本夾層有半張撕掉的便條，殘字像「今晚」。", "衣櫃深處多了一條男士手帕，熨得平整，不是你的。"], ["垃圾桶裡有保險套包裝的尖角——也可能是別的塑膠。你盯了很久。", "鏡子上有擦過的手印，高度不像她一個人能碰到的角度。", "枕頭旁掉了一根短於她髮長的黑髮，髮質更粗。"], ["你翻到手機備用機的收據。開通日是上個月。她沒跟你提過。", "床頭櫃深處有潤滑液，瓶口有使用過的痕跡。家裡從未一起用過。", "抽屜裡有一串你沒送過的鑰匙圈，掛著小小的姓氏飾片。"]], [["抽屜與枕頭都整齊得過分。你什麼都沒找到，卻仍覺得自己多心。", "衣櫃裡只有她的衣服。高好感讓你更怕錯過什麼——但眼前確實乾淨。", "你把房間復原，像什麼都沒發生。懷疑來自心裡，不是物證。"], ["錄音筆誤開，殘留幾秒喘息與男人低語「別回家那麼早」。隨即靜音。", "鏡子邊緣貼著半片保險套包裝，撕口新鮮。", "床墊縫裡有一顆鈕扣，款式像西裝，不是她的衣服。"], ["你翻到對話截圖的列印稿，收件人備註「大叔」。內容被撕到只剩「想要」。", "枕頭套反面寫著日期與「第三次」。字跡不是她平時的圓潤。", "抽屜最底有一條男士皮帶，扣環還帶彎痕。你把它放回去，手在抖。"]]], "jack": [[["你靠在她空著的床沿，隔著褲子摩擦。想的只是她笑著說晚安。射完只覺得空。", "廁所門反鎖。你想像她在外面買東西，平凡得可笑。高潮來時沒有別人的臉。", "你把臉埋進她枕頭，只為一點洗髮精味。弄髒後自己換洗，像偷偷贖罪。"], ["你擼的時候腦內開始跑偏：她被誰靠近、誰碰她的腰。射在掌心，嫌惡與快感並行。", "你盯著她出門前的背影，幻想衣服被別的手掀起。膝蓋發軟。", "高潮前你罵自己變態。高潮後你更清楚：你還想看更糟的畫面。"], ["你想像她跪在大叔兩腿間，嘴角發亮。你跟著節奏套弄，射精時咬住她的名字。", "腦內是她被從後面進入，同時回你「再一下下」。你射在內褲裡，黏膩發熱。", "你握著她的內衣打手槍。射在布料上的瞬間，腦內是她被內射後若無其事地回家。"]], [["你一邊想她溫柔喊你的樣子，一邊因患得患失而更硬。射精時只有她的臉。", "射精時你喊她的名字。腦內沒有別人，只有她遲遲不回的訊息氣泡。", "你用她送的圍巾捂住口鼻擼到眼前發白。事後塞回原位，像偷偷贖罪。"], ["幻想更細：旅館床、她咬著枕頭、手機亮著你的未接來電。你射得又急又多。", "你想像她被抱到洗手台邊進入，還抽空回你「訊號不好」。你氣得更硬。", "高潮邊緣你故意停住，逼自己看清那具交疊的身體——然後才釋放。"], ["你承認：你在意的不只是她安不安全，還有她爽不爽。擼動變得又重又恨。", "腦內大叔讓她叫床。她忍著不叫你的名字。你射在地板上，喘得像哭。", "你邊看她出門前換下的絲襪邊打手槍。射精時幻想絲襪被撕開，掛在別人小腿上。"]], [["你愛她愛到想哭，卻仍只能靠幻想她的體溫自慰。射精時喉嚨發緊。", "你把臉埋進她的枕頭打手槍，想的是她回家抱你。射完你說對不起，無人聽見。", "高潮時你想像她在門外推門進來撞見。精液涼在小腹上，愧疚比快感更重。"], ["你幻想她被內射到合不攏，還對你說「我很好」。你射得發疼，掌心全是白濁。", "腦內鏡頭殘忍：她跪趴著，腰上有指印，手機震著你的來電。你跟著抽插節奏套弄到射。", "你一邊哭一邊擼。哭的是失去，硬的是她被別人使用。射精時兩者疊在一起。"], ["你想像把精液射在她被使用過的地方外面，像蓋章。理智罵你，手卻更快。", "腦內她被中出後走路姿勢不對，回家還親你。你射在她換下的內褲裡，熱熱地黏著。", "射精那幾秒你甚至希望她晚點回來——好讓幻想停在最髒的一幕。射完你又只想她立刻推門進來。"]]]};
@@ -1639,13 +1637,13 @@ if(!ev.length)F.push(pick(HOME[stage()>=2?1:0]));
 var dayNow=S.day;
 mq.push(["🌙 她沒說出口的事",F.join("\n\n")+"\n\n💭 "+pick(thPool())]);
 addLog("📅 第"+dayNow+"天結束，外出 "+ev.length+" 次"+(n?"，遇見大叔 "+n+" 次":"")+(force?"・提早睡覺":""));
-S.day=dayNow+1;S.dsec=force?0:Math.max(0,S.dsec-DL);S.sta=STA_MAX;S.dEv=[];S.sqToday=[];S.sqDone=false;S.outToday=false;S.pendingObs=null;S.motif=null;S.journalGlow=0;S.pendingChat=null;setObsBtn(false);hidePhoneRipple();
+S.day=dayNow+1;S.dsec=force?0:Math.max(0,S.dsec-DL);S.homeActToday=false;S.dEv=[];S.sqToday=[];S.sqDone=false;S.outToday=false;S.pendingObs=null;S.motif=null;S.journalGlow=0;S.pendingChat=null;setObsBtn(false);hidePhoneRipple();
 nextPop()}
-function sleepDay(){if(busy||S.taken||dayLock||maskOpen())return;if(S.trip){say("（她還在外面。等她回來，或先點「提前結束等待」再睡。）","pout");return}withBusy(function(){if(S.trip||dayLock||maskOpen()||S.taken)return;endDay(true);render()})}
+function sleepDay(){if(busy||S.taken||dayLock||maskOpen())return;if(S.trip){say("（她還在外面。等她回來，或先點「打瞌睡」再睡。）","pout");return}withBusy(function(){if(S.trip||dayLock||maskOpen()||S.taken)return;endDay(true);render()})}
 function releaseDayLock(){if(!maskOpen()&&!mq.length)dayLock=0}
 var S,tab="",mq=[],thT=0,busy=0,backLock=0,mbLock=0,dayLock=0;
-function def(){return {sta:STA_MAX,aff:0,exp:0,trip:null,log:[],seen:[],t:Date.now(),m:0,trips:0,taken:false,day:1,dsec:0,dEv:[],qa:[],viewM:0,sq:[],sqToday:[],sqDone:false,outToday:false,pendingObs:null,optSeen:{blank:{},sq:{},ask:{}},journals:[],journalOpen:null,motif:null,journalGlow:0,metOut:false,momIntroSeen:false,memSeen:[],memPending:[],uncleStarted:false}}
-function load(){try{var r=localStorage.getItem("sakura_v1");S=r?JSON.parse(r):def()}catch(e){S=def()}if(!S)S=def();if(typeof S.sta!="number"){S.sta=STA_MAX;}try{delete S.coin}catch(e){}S.sta=Math.max(0,Math.min(STA_MAX,S.sta|0));if(S.momIntroSeen==null)S.momIntroSeen=true;if(!S.memSeen)S.memSeen=[];if(!S.memPending)S.memPending=[];if(S.m==null)S.m=0;if(S.uncleStarted==null)S.uncleStarted=!!memoriesComplete();if(!memoriesComplete())S.uncleStarted=false;if(S.trips==null)S.trips=0;if(!S.seen)S.seen=[];if(S.day==null){S.day=1;S.dsec=0}if(!S.dEv)S.dEv=[];if(!S.qa)S.qa=[];if(S.viewM==null)S.viewM=0;if(!S.sq)S.sq=[];if(!S.sqToday)S.sqToday=[];if(S.outToday==null)S.outToday=false;if(S.sqDone==null)S.sqDone=!!(S.sqToday&&S.sqToday.length);if(S.pendingObs===undefined)S.pendingObs=null;if(!S.optSeen||typeof S.optSeen!="object")S.optSeen={blank:{},sq:{},ask:{}};if(!S.optSeen.blank)S.optSeen.blank={};if(!S.optSeen.sq)S.optSeen.sq={};if(!S.optSeen.ask)S.optSeen.ask={};if(!S.journals)S.journals=[];if(S.journalOpen===undefined)S.journalOpen=null;scrubJournals();if(S.motif===undefined)S.motif=null;if(S.journalGlow==null)S.journalGlow=0;if(S.metOut==null){S.metOut=!!(S.m>0||(S.journals&&S.journals.some(function(j){return j&&j.met}))||(S.dEv&&S.dEv.some(function(e){return e&&e.met})))}try{delete S.blankHintSeen;delete S.sqHintSeen;delete S.anxiety;delete S.fantasy;delete S.evidence}catch(e){}}
+function def(){return {homeActToday:false,aff:0,exp:0,trip:null,log:[],seen:[],t:Date.now(),m:0,trips:0,taken:false,day:1,dsec:0,dEv:[],qa:[],viewM:0,sq:[],sqToday:[],sqDone:false,outToday:false,pendingObs:null,optSeen:{blank:{},sq:{},ask:{}},journals:[],journalOpen:null,motif:null,journalGlow:0,metOut:false,momIntroSeen:false,memSeen:[],memPending:[],uncleStarted:false}}
+function load(){try{var r=localStorage.getItem("sakura_v1");S=r?JSON.parse(r):def()}catch(e){S=def()}if(!S)S=def();try{delete S.coin;delete S.sta}catch(e){}if(S.homeActToday==null)S.homeActToday=false;if(S.momIntroSeen==null)S.momIntroSeen=true;if(!S.memSeen)S.memSeen=[];if(!S.memPending)S.memPending=[];if(S.m==null)S.m=0;if(S.uncleStarted==null)S.uncleStarted=!!memoriesComplete();if(!memoriesComplete())S.uncleStarted=false;if(S.trips==null)S.trips=0;if(!S.seen)S.seen=[];if(S.day==null){S.day=1;S.dsec=0}if(!S.dEv)S.dEv=[];if(!S.qa)S.qa=[];if(S.viewM==null)S.viewM=0;if(!S.sq)S.sq=[];if(!S.sqToday)S.sqToday=[];if(S.outToday==null)S.outToday=false;if(S.sqDone==null)S.sqDone=!!(S.sqToday&&S.sqToday.length);if(S.pendingObs===undefined)S.pendingObs=null;if(!S.optSeen||typeof S.optSeen!="object")S.optSeen={blank:{},sq:{},ask:{}};if(!S.optSeen.blank)S.optSeen.blank={};if(!S.optSeen.sq)S.optSeen.sq={};if(!S.optSeen.ask)S.optSeen.ask={};if(!S.journals)S.journals=[];if(S.journalOpen===undefined)S.journalOpen=null;scrubJournals();if(S.motif===undefined)S.motif=null;if(S.journalGlow==null)S.journalGlow=0;if(S.metOut==null){S.metOut=!!(S.m>0||(S.journals&&S.journals.some(function(j){return j&&j.met}))||(S.dEv&&S.dEv.some(function(e){return e&&e.met})))}try{delete S.blankHintSeen;delete S.sqHintSeen;delete S.anxiety;delete S.fantasy;delete S.evidence}catch(e){}}
 function save(){try{localStorage.setItem("sakura_v1",JSON.stringify(S))}catch(e){}}
 function doReset(){S=def();mq=[];busy=0;backLock=0;mbLock=0;dayLock=0;$("mask").classList.remove("on");try{localStorage.removeItem("sakura_v1")}catch(e){}say("阿祿……今天也要一起吃晚餐喔。");render();maybeMomIntro()}
 var rc=0,rt;
@@ -1757,7 +1755,7 @@ function paintSideBadges(){var j=$("navJournal");if(!j)return;var on=journalOn()
 
 
 function blankAct(id){if(busy||!S.trip||S.taken)return;if(maskOpen()){if(sqOptsOn())return;var mask=$("mask");if(mask)mask.classList.remove("on");if(!moodPeekOn){try{mask&&mask.classList.remove("mood-chrome")}catch(e){}}}withBusy(function(){blankActNow(id)});}
-function blankActNow(id){if(!S.trip||S.taken)return;if(!BLANK_TXT[id])return;var msg=pickBlank(id);if(!msg)return;var titles={msg:"發訊息",call:"打電話",search:"翻找對方房間",jack:"尻槍"};var title=titles[id]||id;if(!S.trip.acts)S.trip.acts=[];if(S.trip.acts.indexOf(id)<0)S.trip.acts.push(id);markBlankOptSeen(id);var face=id=="jack"?"shy":id=="search"?"pout":"sad";setEx(face);addLog("⏳ "+title+"｜"+msg);var thb=$("thb");if(thb)thb.textContent=msg;var tb=$("thbox")&&$("thbox").querySelector("b");if(tb)tb.textContent="⏳ "+title;faceTf(face);thT=Date.now();if(tab==="go")closePane();render(false)}
+function blankActNow(id){if(!S.trip||S.taken)return;if(id==="nap"){skipTrip();return}if(!BLANK_TXT[id])return;var msg=pickBlank(id);if(!msg)return;var titles={msg:"發訊息",call:"打電話",jack:"尻槍"};var title=titles[id]||id;if(!S.trip.acts)S.trip.acts=[];if(S.trip.acts.indexOf(id)<0)S.trip.acts.push(id);markBlankOptSeen(id);var face=id=="jack"?"shy":"sad";setEx(face);addLog("⏳ "+title+"｜"+msg);var thb=$("thb");if(thb)thb.textContent=msg;var tb=$("thbox")&&$("thbox").querySelector("b");if(tb)tb.textContent="⏳ "+title;faceTf(face);thT=Date.now();if(tab==="go")closePane();render(false)}
 function ansFromMask(qi,oi){if(mbLock||S.sqDone)return;mbLock=1;markSqOptSeen(qi,oi);ansNow(qi,oi);$("mask").classList.remove("on");hideSqOpts();setTimeout(function(){mbLock=0;nextPop();releaseDayLock();render()},40)}
 function ans(qi,oi){if(busy||S.sqDone)return;ansFromMask(qi,oi)}
 function ansNow(qi,oi){var q=SQ[qi];if(S.taken||!sqOpen(qi)||S.sqDone)return;
@@ -1803,18 +1801,18 @@ dlg.addEventListener("pointercancel",function(){clearLp();pt=0},false);
 dlg.addEventListener("keydown",function(e){if(e.key=="Enter"||e.key==" "){e.preventDefault();talk()}},false);
 })();
 function homeAct(i){if(busy||S.taken)return;if(S.trip){say("（她出門了，現在做不了室內互動。）","pout");return}
-var a=HOME_ACTS[i];if(!a)return;if((S.sta|0)<a[3]){say("（體力不夠了。）","pout");return}
+var a=HOME_ACTS[i];if(!a)return;if(S.homeActToday){say("（今天的室內互動用過了。睡一覺，明天再陪她。）","pout");return}
 withBusy(function(){homeActNow(i)});}
-function homeActNow(i){var a=HOME_ACTS[i];if(!a||S.taken||S.trip||(S.sta|0)<a[3])return;
+function homeActNow(i){var a=HOME_ACTS[i];if(!a||S.taken||S.trip||S.homeActToday)return;
 var b=tier(),gn=Math.max(1,Math.round(a[4]*Math.max(.2,1-effM()/110)));
-S.sta=Math.max(0,(S.sta|0)-a[3]);S.aff+=gn;S.dsec=Math.min(DL,(S.dsec|0)+HOME_TIME);
+S.homeActToday=true;S.aff+=gn;S.dsec=Math.min(DL,(S.dsec|0)+HOME_TIME);
 var lines={care:["「嗯……謝謝你還記得問。」她笑了一下。","「你這樣關心我，我會害羞啦。」","「有你在，心就穩一點。」"],
 tv:["「那就看這個吧。」她把遙控器塞給你。","「好無聊的綜藝……可是和好笑。」","電視亮著，她靠過來一點點。"],
 cook:["「今天換我掌勺！」她捲起袖子。","「失敗的話我們就叫外送——開玩笑的。」","熱氣與碗盤聲裡，家忽然變得很近。"],
 game:["「來一局！」她把桌遊盒子攤開。","「贏了不准驕傲喔。」她眼睛亮亮的。","棋子碰撞聲裡，時間過得又快又軟。"]};
 var pool=lines[a[0]]||["你們一起度過了一段安靜的時間。"];
 say(dissonanceOn()?pick(["「……嗯。」她點頭，很快又看向別處。","「好啊。」語氣平，像例行公事。","「知道了。」她已經分心。"]):pick(pool),dissonanceOn()?"calm":(effM()>=70?"cold":effM()>=45?"pout":pick(["joy","shy","wink","calm"])));
-addLog("🛋️ "+a[1]+"（體力 -"+a[3]+"）・親密 +"+gn);if(effM()<45)hearts(4);afterAffTier(b);if(tier()>b&&effM()<45)popup("親密度提升！","你和小櫻的關係變成了「"+TIERS[tier()][1]+"」。");closePane();render()}
+addLog("🛋️ "+a[1]+"・親密 +"+gn);if(effM()<45)hearts(4);afterAffTier(b);if(tier()>b&&effM()<45)popup("親密度提升！","你和小櫻的關係變成了「"+TIERS[tier()][1]+"」。");closePane();render()}
 function outingThoughtPool(){var st=stage(),ti=tier(),pool=[],ab=st<=0?0:st<=2?1:2;
 var blank=BLANK_TH[Math.min(st,BLANK_TH.length-1)]||BLANK_TH[0];pool=pool.concat(blank);
 if(S.trip&&PLACE_TH[S.trip.id]){var rows=PLACE_TH[S.trip.id],row=rows[Math.min(st,rows.length-1)]||rows[0];pool=pool.concat(row)}
@@ -1889,7 +1887,7 @@ function scheduleJournalGlow(){clearTimeout(journalGlowT);if(!journalOn()){S.jou
 function openJournal(i){if(!journalOn()){say("（她還沒開始寫日記。）","pout");return}if(i<0||!S.journals||!S.journals[i])return;S.journalOpen=i;if(S.journalGlow){S.journalGlow=0;paintSideBadges()}if(tab==="journal"){pane();var pn=$("pane");if(pn){pn.classList.remove("is-empty");pn.classList.add("is-open")}}else setTab("journal")}
 function closeJournal(){S.journalOpen=null;render();syncMoodDim()}
 function go(i){if(busy||S.trip||S.taken||S.outToday)return;withBusy(function(){goNow(i)});}
-function goNow(i){if(S.trip||S.taken||S.outToday)return;var p=PLACES[i],dep=pickDepart(i);S.trip={id:i,place:p[1],end:Date.now()+p[2]*1000,acts:[],depart:dep,skipped:false,staFilled:1};S.outToday=true;S.sta=STA_MAX;hidePhoneRipple();phoneRippleT=Date.now();
+function goNow(i){if(S.trip||S.taken||S.outToday)return;var p=PLACES[i],dep=pickDepart(i);S.trip={id:i,place:p[1],end:Date.now()+p[2]*1000,acts:[],depart:dep,skipped:false};S.outToday=true;hidePhoneRipple();phoneRippleT=Date.now();
 closePane();
 mq.push(["🚪 她出門了",dep]);
 say("「那我出門囉！去"+p[1]+"～別等太晚喔。」","wink");addLog("🚪 外出："+p[1]+"｜"+dep.replace(/\n/g," "));thought();nextPop();render()}
@@ -1971,7 +1969,7 @@ function paintDock(){
     });
     dock.innerHTML=h;
     dock.querySelectorAll("button.dockBlank").forEach(function(btn){
-      btn.onclick=function(){blankAct(btn.getAttribute("data-blank"))};
+      btn.onclick=function(){var id=btn.getAttribute("data-blank");if(id==="nap")skipTrip();else blankAct(id)};
     });
     return;
   }
@@ -1991,16 +1989,16 @@ document.querySelectorAll(".bubble[data-t],.footnav [data-t],.chip[data-t]").for
 function pane(){var y=window.scrollY||document.documentElement.scrollTop||0,h="";
 if(S.taken&&(tab=="home"||tab=="go"||tab=="ask"||tab=="herq")){h='<div class="row"><span class="i">🗝️</span><div class="m"><b>她已經離開了</b><div class="sm">房間裡只剩下她留下的素描本。</div></div><button class="btn" onclick="doReset()">重新開始</button></div>'}
 else if(tab=="home"){if(S.trip&&!S.taken){h+='<div class="row"><span class="i">🛋️</span><div class="m"><b>她出門了</b><div class="sm">小櫻在外面時不能做室內互動。你留在家等她回來。</div></div></div>'}
-else{h+='<div class="sm" style="margin-bottom:8px">體力 <b>'+(S.sta|0)+'</b>/'+STA_MAX+'　・各花 1 點　・煮飯／桌遊親密越一點</div>';
-HOME_ACTS.forEach(function(a,i){var cost=a[3],gn=Math.max(1,Math.round(a[4]*Math.max(.2,1-effM()/110))),no=(S.sta|0)<cost;
-h+='<div class="row'+(no?" lock":"")+'"><span class="i">'+a[2]+'</span><div class="m"><b>'+a[1]+'</b><div class="sm">'+a[5]+'・親密 +'+gn+'・體力 -'+cost+'</div></div><button class="btn" '+(no||S.taken?"disabled":"")+' onclick="homeAct('+i+')">'+(no?"體力不足":"互動")+'</button></div>'})}}
+else{h+='<div class="sm" style="margin-bottom:8px">每天室內互動一次　・煮飯／桌遊親密多一點'+(S.homeActToday?'　・今天已互動':'')+'</div>';
+HOME_ACTS.forEach(function(a,i){var gn=Math.max(1,Math.round(a[4]*Math.max(.2,1-effM()/110))),used=!!S.homeActToday;
+h+='<div class="row'+(used?" lock":"")+'"><span class="i">'+a[2]+'</span><div class="m"><b>'+a[1]+'</b><div class="sm">'+a[5]+'・親密 +'+gn+'</div></div><button class="btn" '+(used||S.taken?"disabled":"")+' onclick="homeAct('+i+')">'+(used?"今天已互動":"互動")+'</button></div>'})}}
 else if(tab=="go"){
-if(S.trip&&!S.taken){h+='<div class="blankbox"><div class="beat">她去了'+(S.trip.place||PLACES[S.trip.id][1])+'・<span id="tripCd">倒數 -- 秒</span></div><div class="sm" style="margin-top:6px">外出行動已在底欄：發訊息／打電話／翻找／尻槍。</div></div>'}
+if(S.trip&&!S.taken){h+='<div class="blankbox"><div class="beat">她去了'+(S.trip.place||PLACES[S.trip.id][1])+'・<span id="tripCd">倒數 -- 秒</span></div><div class="sm" style="margin-top:6px">外出行動已在底欄：發訊息／打電話／打瞌睡／尻槍。</div></div>'}
 PLACES.forEach(function(p,i){var lk=S.aff<p[3],bz=!!S.trip,used=!!S.outToday,ing=bz&&S.trip.id==i,left=ing?Math.max(0,Math.ceil((S.trip.end-Date.now())/1000)):0;
 h+='<div class="row '+(lk||(used&&!ing)?"lock":"")+'"><span class="i">'+p[0]+'</span><div class="m"><b>'+p[1]+'</b><div class="sm">'+(lk?"需要親密 "+p[3]:used&&!ing?"今天已外出・明天再外出":(placeMeta(i).tag?placeMeta(i).tag+"・":"")+p[2]+" 秒・探索 +"+p[4])+'</div></div><button class="btn" '+(lk||bz||(used&&!ing)?"disabled":"")+' onclick="go('+i+')">'+(ing?"外出中":used?"今日已外出":"外出")+'</button></div>'});
 if(S.trip)h+='<div class="sm" style="margin-top:6px">她出門中。底欄可直接行動；上方可調速度或提前結束等待。</div>';
 else if(S.outToday)h+='<div class="sm" style="margin-top:6px">今天已經外出過一次。只有睡覺日結後，明天才能再外出；時鐘走完只會停住，不會自動跨日。</div>';
-else h+='<div class="blank-slot sm" style="padding:8px;border:2px dashed transparent;border-radius:12px">一天只能外出一次；按下「外出」時體力回滿。她在外面時，室內互動暫時不能做。時鐘走完只會停住，要睡覺才會日結。</div>'}
+else h+='<div class="blank-slot sm" style="padding:8px;border:2px dashed transparent;border-radius:12px">一天只能外出一次。她在外面時，室內互動暫時不能做。時鐘走完只會停住，要睡覺才會日結。</div>'}
 else if(tab=="ask"){QA.forEach(function(q,i){var lk=S.aff<q[2],dn=S.qa.indexOf(i)>=0,isNew=!lk&&askOptNew(i);h+='<div class="row '+(lk?"lock":"")+'"><span class="i">'+q[0]+'</span><div class="m"><b>'+(lk?"？？？":q[1])+(isNew?optNewBadge():"")+'</b><div class="sm">'+(lk?"需要親密 "+q[2]:dn?"已問過・再問一次也可以":"第一次提問有親密獎勵")+'</div></div><button class="btn" '+(lk||S.trip?"disabled":"")+' onclick="ask('+i+')">提問</button></div>'});if(S.trip)h+='<div class="sm" style="margin-top:6px">小櫻外出中，回來後再問她吧。</div>'}
 else if(tab=="herq"){h='<div class="sm">她的提問會在外出回家後以彈窗出現，每天一次。</div>'}
 else if(tab=="journal"){h+='<div class="sm mood-chrome-kicker" style="margin-bottom:8px"><span class="j-sil-ico" aria-hidden="true"></span>她沒說出口的事<br>以為不會有人翻的筆記本——外出回來後，真心話會留在這裡。</div>';
@@ -2016,10 +2014,10 @@ else{h='<div class="log">'+(S.log.length?S.log.map(function(l){return"<p class=\
 var side=(tab=="journal"||tab=="story"||tab=="log"||tab=="mem");
 if(side){h='<button type="button" class="pane-x" aria-label="關閉" onclick="closePane()">×</button>'+h}
 $("pane").innerHTML=h;var pn=$("pane");if(pn)pn.classList.toggle("has-x",!!side);requestAnimationFrame(function(){window.scrollTo(0,y)})}
-function status(){var stEl=$("sta");if(stEl)stEl.textContent=String(S.sta|0);$("affn").textContent=fmt(S.aff);var _expn=$("expn");if(_expn)_expn.textContent=fmt(S.exp);
+function status(){$("affn").textContent=fmt(S.aff);var _expn=$("expn");if(_expn)_expn.textContent=fmt(S.exp);
 var away=!!S.trip||S.taken,skipOn=S.trip&&!S.taken,thOn=skipOn;
 var stEl=document.querySelector(".stick");if(stEl)stEl.classList.toggle("outing",!!skipOn);var hu=document.querySelector(".homeui");if(hu)hu.classList.toggle("outing-shell",!!skipOn);if(!skipOn)hidePhoneRipple();syncMoodDim();syncSilhouette();
-var acts=$("noteActs");if(acts){if(skipOn)acts.removeAttribute("hidden");else acts.setAttribute("hidden","")}var sk=$("skip");if(sk)sk.style.display=skipOn?"":"none";var spEl=$("sp");if(spEl)spEl.style.display=skipOn?"":"none";
+var acts=$("noteActs");if(acts){if(skipOn)acts.removeAttribute("hidden");else acts.setAttribute("hidden","")}var sk=$("skip");if(sk){sk.style.display="none";sk.setAttribute("hidden","")}var spEl=$("sp");if(spEl)spEl.style.display=skipOn?"":"none";
 var th=$("thbox");if(th&&!skipOn){var want="none";if(th.style.display!==want)th.style.display=want}
 else if(th&&skipOn){if(th.style.display!=="flex")th.style.display="flex"}paintHeartFace(ex);
 var parts=["早上","下午","夜晚"],dayt="第 "+S.day+" 天",partLab=parts[part()];if($("dayl")&&$("dayl").textContent!==dayt)$("dayl").textContent=dayt;var dp=$("dayPart");if(dp&&dp.textContent!==partLab)dp.textContent=partLab;
@@ -2036,7 +2034,7 @@ var tb=$("thbox")&&$("thbox").querySelector("b");if(tb){var cur=tb.textContent||
 if(S.taken){if($("nh").textContent!=="小櫻已經搬走了"){$("nh").textContent="小櫻已經搬走了";$("nt").textContent=""}}
 else if(S.trip){var left=Math.max(0,Math.ceil((S.trip.end-Date.now())/1000));if($("ne"))$("ne").textContent="屋裡只剩你";$("nh").textContent="她還在外面";$("nt").textContent="還有 "+left+" 秒。速度與提前結束在上方；底欄可直接行動。";var cd=$("tripCd");if(cd)cd.textContent="倒數 "+left+" 秒"}else{if(!S.trip)hidePhoneRipple()}}
 function paintStats(){var t=tier(),a=TIERS[t][0],n=TIERS[t+1];
-$("inc").textContent="體力最多 "+STA_MAX+" 點・睡覺日結或外出時回滿・室內互動各花 1 點";
+$("inc").textContent="每天室內互動一次・外出一次・只有睡覺才會日結";
 $("tier").textContent="與小櫻的關係：「"+tname()+"」";
 $("affbar").style.width=(n?Math.min(100,(S.aff-a)/(n[0]-a)*100):100)+"%";
 var showM=uncleOpen()&&effM()>0,box=$("mbox");if(box)box.classList.toggle("off",!showM);
