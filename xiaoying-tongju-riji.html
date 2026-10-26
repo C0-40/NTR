@@ -249,6 +249,22 @@ button:focus-visible{outline:3px solid var(--sky);outline-offset:2px}
 .dock button.on{background:var(--pk);border-color:#c8607a;box-shadow:0 4px 0 #c8607a}
 .dock button .opt-new{margin-left:4px;padding:0 5px;font-size:9px;background:#5f3c1f;border:1px solid rgba(255,248,234,.35)}
 .dock button:active{transform:translateY(2px);box-shadow:0 2px 0 var(--wood2)}
+
+/* 外出選地：底欄暫時換成五個地點（便利店／商場／咖啡店／公園／書店） */
+.dock.is-places{gap:5px;flex-wrap:nowrap}
+.dock.is-places button{
+  flex:1 1 0;min-width:0;min-height:52px;padding:6px 2px 5px;font-size:10px;line-height:1.15;
+  display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px
+}
+.dock.is-places button .dockIco{font-size:16px;line-height:1;display:block}
+.dock.is-places button .dockLab{display:block;font-size:9.5px;font-weight:800;letter-spacing:-.02em;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:100%}
+.dock.is-places button:disabled{opacity:.42;filter:grayscale(.35);cursor:not-allowed;transform:none}
+@media (max-width:420px){
+  .dock.is-places button{min-height:48px;padding:5px 1px;font-size:9.5px}
+  .dock.is-places button .dockIco{font-size:15px}
+  .dock.is-places button .dockLab{font-size:9px}
+}
+
 .homeui .pane{
   display:none;position:fixed;left:50%;bottom:calc(72px + env(safe-area-inset-bottom,0px));
   transform:translateX(-50%);width:min(480px,calc(100% - 16px));
@@ -760,15 +776,30 @@ html,body{color:var(--tx)}
 }
 .stick.outing .silLayer{
   top:auto!important;bottom:0!important;left:50%!important;transform:translateX(-50%)!important;
-  width:min(100%,440px)!important;z-index:2!important;gap:0!important;overflow:visible!important;
-  justify-content:flex-end!important;align-items:center!important
+  width:min(100%,440px)!important;z-index:2!important;gap:0!important;overflow:hidden!important;
+  justify-content:flex-end!important;align-items:stretch!important;margin:0!important;padding:0!important;
+  pointer-events:none!important
 }
 .stick.outing .silStage{
-  height:min(34vh,210px)!important;overflow:visible!important;
-  display:flex!important;align-items:flex-end!important;justify-content:center!important
+  height:min(38vh,240px)!important;width:100%!important;margin:0!important;padding:0!important;
+  overflow:hidden!important;position:relative!important;display:block!important;
+  pointer-events:none!important
 }
-.stick.outing .silPair{align-self:stretch;height:100%}
-.stick.outing .silFig{bottom:0!important;object-position:center bottom!important}
+.stick.outing .silPair{position:absolute!important;left:0;right:0;bottom:0;top:0;width:100%;height:100%;margin:0;padding:0;pointer-events:none!important}
+.stick.outing .silFig{
+  position:absolute!important;left:50%!important;bottom:0!important;top:auto!important;
+  height:100%!important;max-height:100%!important;width:auto!important;max-width:70%!important;
+  object-fit:contain!important;object-position:center bottom!important;
+  transform:translateX(-50%)!important;margin:0!important;padding:0!important;
+  pointer-events:none!important
+}
+.stick.outing .silFig.silUncle{
+  left:var(--sil-ux,-28%)!important;transform:scaleX(.9)!important;transform-origin:bottom center!important;
+  max-width:55%!important
+}
+.stick.outing .silLayer.is-solo .silFig.silHero{
+  left:50%!important;transform:translateX(-50%)!important;max-width:72%!important;height:100%!important
+}
 /* 外出心聲列：頭像＝文字框同高；左右邊距對齊底欄 dock（日常 dlg 無頭像） */
 .heartRow{display:none;flex:0 0 auto;width:100%;box-sizing:border-box;pointer-events:none}
 .homeui .stick.outing .scene{min-height:0!important;flex:1 1 auto}
@@ -826,14 +857,14 @@ html,body{color:var(--tx)}
   .stick.outing .note{top:126px!important;width:min(90%,290px)!important;max-width:min(90%,290px)!important;padding:9px 10px!important}
   .stick.outing .note .note-title,.stick.outing .note #nh{font-size:13px!important}
   .stick.outing .silLayer{top:auto!important;bottom:0!important;transform:translateX(-50%)!important}
-  .stick.outing .silStage{height:min(32vh,180px)!important}
+  .stick.outing .silStage{height:min(36vh,200px)!important}
   .stick.outing .heartRow{--heart-size:88px}
   .stick.outing .heartFace.is-on{border-radius:14px}
   .stick.outing .phoneRipple{bottom:8px!important;left:10px!important}
 }
 @media (max-height:700px){
   .stick.outing .note{top:118px!important;padding:8px 10px!important}
-  .stick.outing .silStage{height:min(28vh,150px)!important}
+  .stick.outing .silStage{height:min(32vh,170px)!important}
   .stick.outing .heartRow{--heart-size:80px;padding:4px 2px 6px}
   .stick.outing .heartFace.is-on{border-radius:14px}
 }
@@ -1924,9 +1955,36 @@ function dismissMask(ev){if(ev){try{ev.preventDefault();ev.stopPropagation()}cat
 (function(){var mb=$("mb");if(!mb)return;mb.onpointerup=null;mb.onclick=null;mb.addEventListener("click",dismissMask,false);mb.addEventListener("pointerup",function(e){if(e.pointerType==="mouse"&&e.button!==0)return;dismissMask(e)},false)})();
 function replay(k){var s=STORY[k];mq.push(["📖 "+s[1],s[2]]);nextPop()}
 function replayN(k){var s=NSTORY[k];mq.push(["💔 "+s[1],s[2]]);nextPop()}
+
+function canPickOuting(){return !!(S&&!S.taken&&!S.trip&&!S.outToday)}
+function paintDock(){
+  var dock=document.querySelector(".dock.tabs")||document.querySelector(".dock");
+  if(!dock||!S)return;
+  if(canPickOuting()){
+    dock.classList.add("is-places");
+    dock.setAttribute("aria-label","選擇外出地點");
+    var h="";
+    PLACES.forEach(function(p,i){
+      var lk=S.aff<p[3];
+      h+='<button type="button" class="dockPlace" data-place="'+i+'" '+(lk?"disabled ":"")+'aria-label="'+(lk?("需要好感 "+p[3]+"："+p[1]):("外出："+p[1]))+'"><span class="dockIco" aria-hidden="true">'+p[0]+'</span><span class="dockLab">'+p[1]+(lk?"🔒":"")+'</span></button>';
+    });
+    dock.innerHTML=h;
+    dock.querySelectorAll("button.dockPlace").forEach(function(b){
+      b.onclick=function(){if(b.disabled)return;go(+b.getAttribute("data-place"))};
+    });
+    return;
+  }
+  dock.classList.remove("is-places");
+  dock.setAttribute("aria-label","主要行動");
+  dock.innerHTML='<button type="button" data-t="home">🛋️ 互動</button><button type="button" data-t="go">🎒 外出</button><button type="button" data-t="ask">💬 提問</button><button type="button" data-t="herq" style="display:none" aria-hidden="true">❓ 被問</button>';
+  dock.querySelectorAll("button[data-t]").forEach(function(b){
+    b.onclick=function(){setTab(b.dataset.t)};
+    b.classList.toggle("on",!!tab&&b.dataset.t===tab);
+  });
+  paintAskTab();
+}
 function closePane(){S.journalOpen=null;if(tab)setTab(tab);else syncMoodDim()}
-function setTab(t){if(!t)return;if(t==="journal"&&!journalOn()){say(uncleOpen()?"（她還沒開始寫日記。）":"（四則回憶都聽完後，她才會開始寫那種日記。）","pout");return}if(tab===t){tab="";document.querySelectorAll(".dock button,.tabs button,.bubble[data-t],.footnav [data-t],.chip[data-t]").forEach(function(x){x.classList.remove("on")});var pn0=$("pane");if(pn0){pn0.innerHTML="";pn0.classList.add("is-empty");pn0.classList.remove("is-open")}syncMoodDim();return}tab=t;document.querySelectorAll(".dock button,.tabs button").forEach(function(x){x.classList.toggle("on",x.dataset.t===t)});document.querySelectorAll(".bubble[data-t],.footnav [data-t],.chip[data-t]").forEach(function(x){x.classList.toggle("on",x.dataset.t===t)});pane();var pn=$("pane");if(pn){var empty=!(pn.innerHTML&&pn.innerHTML.trim());pn.classList.toggle("is-empty",empty);pn.classList.toggle("is-open",!empty&&!!tab);syncMoodDim()}}
-document.querySelectorAll(".dock button,.tabs button").forEach(function(b){b.onclick=function(){setTab(b.dataset.t)}});
+function setTab(t){if(!t)return;if(t==="go"&&canPickOuting()){say("（直接點底欄的地點，讓她出門吧。）","wink");return}if(t==="journal"&&!journalOn()){say(uncleOpen()?"（她還沒開始寫日記。）":"（四則回憶都聽完後，她才會開始寫那種日記。）","pout");return}if(tab===t){tab="";document.querySelectorAll(".dock button,.tabs button,.bubble[data-t],.footnav [data-t],.chip[data-t]").forEach(function(x){x.classList.remove("on")});var pn0=$("pane");if(pn0){pn0.innerHTML="";pn0.classList.add("is-empty");pn0.classList.remove("is-open")}syncMoodDim();return}tab=t;document.querySelectorAll(".dock button,.tabs button").forEach(function(x){x.classList.toggle("on",x.dataset.t===t)});document.querySelectorAll(".bubble[data-t],.footnav [data-t],.chip[data-t]").forEach(function(x){x.classList.toggle("on",x.dataset.t===t)});pane();var pn=$("pane");if(pn){var empty=!(pn.innerHTML&&pn.innerHTML.trim());pn.classList.toggle("is-empty",empty);pn.classList.toggle("is-open",!empty&&!!tab);syncMoodDim()}}
 document.querySelectorAll(".bubble[data-t],.footnav [data-t],.chip[data-t]").forEach(function(a){a.onclick=function(e){e.preventDefault();setTab(a.dataset.t)}});
 function pane(){var y=window.scrollY||document.documentElement.scrollTop||0,h="";
 if(S.taken&&(tab=="home"||tab=="go"||tab=="ask"||tab=="herq")){h='<div class="row"><span class="i">🗝️</span><div class="m"><b>她已經離開了</b><div class="sm">房間裡只剩下她留下的素描本。</div></div><button class="btn" onclick="doReset()">重新開始</button></div>'}
@@ -1977,7 +2035,7 @@ var av=$("av");if(av.classList.contains("away")!==away)av.classList.toggle("away
 var note=$("note");if(note.classList.contains("on")!==away)note.classList.toggle("on",away);
 var tb=$("thbox")&&$("thbox").querySelector("b");if(tb){var cur=tb.textContent||"";if(cur.indexOf("⏳")!==0){var wantLab="💭 心聲";if(cur!==wantLab)tb.textContent=wantLab}}
 if(S.taken){if($("nh").textContent!=="小櫻已經搬走了"){$("nh").textContent="小櫻已經搬走了";$("nt").textContent=""}}
-else if(S.trip){var left=Math.max(0,Math.ceil((S.trip.end-Date.now())/1000));if($("ne"))$("ne").textContent="屋裡只剩你";$("nh").textContent="她還在外面";$("nt").textContent="還有 "+left+" 秒。想做點什麼，點底欄「外出」。";var cd=$("tripCd");if(cd)cd.textContent="倒數 "+left+" 秒"}else{if(!S.trip)hidePhoneRipple()}}
+else if(S.trip){var left=Math.max(0,Math.ceil((S.trip.end-Date.now())/1000));if($("ne"))$("ne").textContent="屋裡只剩你";$("nh").textContent="她還在外面";$("nt").textContent="還有 "+left+" 秒。速度與提前結束在上方；空白行動可開底欄「外出」。";var cd=$("tripCd");if(cd)cd.textContent="倒數 "+left+" 秒"}else{if(!S.trip)hidePhoneRipple()}}
 function paintStats(){var t=tier(),a=TIERS[t][0],n=TIERS[t+1];
 $("inc").textContent="體力最多 "+STA_MAX+" 點・睡覺日結或外出時回滿・室內互動各花 1 點";
 $("tier").textContent="與小櫻的關係：「"+tname()+"」";
@@ -1986,7 +2044,7 @@ var showM=uncleOpen()&&effM()>0,box=$("mbox");if(box)box.classList.toggle("off",
 $("mbar").style.width=(effM()|0)+"%";var mb=$("mbarwrap")||($("mbar")&&$("mbar").parentElement);if(mb)mb.style.display=showM?"block":"none";
 var mv=$("mlab");if(mv)mv.textContent="😈 大叔的好感 "+(effM()|0)+"%";
 status()}
-function render(doPane){paintStats();if(doPane!==false)pane();paintAskTab();paintSideBadges();var pn=$("pane");if(pn){var empty=!(pn.innerHTML&&pn.innerHTML.trim());pn.classList.toggle("is-empty",empty);pn.classList.toggle("is-open",!empty&&!!tab)}syncMoodDim();syncSilhouette();save()}
+function render(doPane){paintStats();paintDock();if(doPane!==false)pane();paintAskTab();paintSideBadges();var pn=$("pane");if(pn){var empty=!(pn.innerHTML&&pn.innerHTML.trim());pn.classList.toggle("is-empty",empty);pn.classList.toggle("is-open",!empty&&!!tab)}syncMoodDim();syncSilhouette();save()}
 
 var last=Date.now();
 setInterval(function(){var now=Date.now(),dt=(now-last)/1000;last=now;var paused=dayLock||maskOpen();
