@@ -1729,7 +1729,7 @@ function releaseDayLock(){if(!maskOpen()&&!mq.length){dayLock=0;try{flushCohabQu
 var S,tab="",mq=[],thT=0,busy=0,backLock=0,mbLock=0,dayLock=0;
 function def(){return {homeActToday:false,aff:0,exp:0,trip:null,log:[],seen:[],t:Date.now(),m:0,trips:0,taken:false,day:1,dsec:0,dEv:[],qa:[],viewM:0,sq:[],sqToday:[],sqDone:false,outToday:false,pendingObs:null,optSeen:{blank:{},sq:{},ask:{}},journals:[],journalOpen:null,motif:null,journalGlow:0,metOut:false,momIntroSeen:false,memSeen:[],memPending:[],uncleStarted:false,cohabSeen:[],cohabPending:[],cohabToday:false,chatSeen:false}}
 function load(){try{var r=localStorage.getItem("sakura_v1");S=r?JSON.parse(r):def()}catch(e){S=def()}if(!S)S=def();try{delete S.coin;delete S.sta}catch(e){}if(S.homeActToday==null)S.homeActToday=false;if(!S.cohabSeen)S.cohabSeen=[];if(!S.cohabPending)S.cohabPending=[];if(S.cohabToday==null)S.cohabToday=false;if(S.chatSeen==null)S.chatSeen=false;
-try{var _validMem={};MEMORIES.forEach(function(m){_validMem[m[0]]=1});S.memSeen=(S.memSeen||[]).filter(function(id){return _validMem[id]});S.memPending=(S.memPending||[]).filter(function(id){return _validMem[id]&&S.memSeen.indexOf(id)<0})}catch(e){}if(S.momIntroSeen==null)S.momIntroSeen=true;if(!S.memSeen)S.memSeen=[];if(!S.memPending)S.memPending=[];if(S.m==null)S.m=0;if(S.uncleStarted==null)S.uncleStarted=!!memoriesComplete();if(!memoriesComplete())S.uncleStarted=false;if(S.trips==null)S.trips=0;if(!S.seen)S.seen=[];if(S.day==null){S.day=1;S.dsec=0}if(!S.dEv)S.dEv=[];if(!S.qa)S.qa=[];if(S.viewM==null)S.viewM=0;if(!S.sq)S.sq=[];if(!S.sqToday)S.sqToday=[];if(S.outToday==null)S.outToday=false;if(S.sqDone==null)S.sqDone=!!(S.sqToday&&S.sqToday.length);if(S.pendingObs===undefined)S.pendingObs=null;if(!S.optSeen||typeof S.optSeen!="object")S.optSeen={blank:{},sq:{},ask:{}};if(!S.optSeen.blank)S.optSeen.blank={};if(!S.optSeen.sq)S.optSeen.sq={};if(!S.optSeen.ask)S.optSeen.ask={};if(!S.journals)S.journals=[];if(S.journalOpen===undefined)S.journalOpen=null;scrubJournals();if(S.motif===undefined)S.motif=null;if(S.journalGlow==null)S.journalGlow=0;if(S.metOut==null){S.metOut=!!(S.m>0||(S.journals&&S.journals.some(function(j){return j&&j.met}))||(S.dEv&&S.dEv.some(function(e){return e&&e.met})))}try{delete S.blankHintSeen;delete S.sqHintSeen;delete S.anxiety;delete S.fantasy;delete S.evidence}catch(e){}}
+try{var _validMem={};MEMORIES.forEach(function(m){_validMem[m[0]]=1});S.memSeen=(S.memSeen||[]).filter(function(id){return _validMem[id]});S.memPending=(S.memPending||[]).filter(function(id){return _validMem[id]&&S.memSeen.indexOf(id)<0})}catch(e){}if(S.momIntroSeen==null)S.momIntroSeen=true;if(!S.memSeen)S.memSeen=[];if(!S.memPending)S.memPending=[];if(S.m==null)S.m=0;if(S.uncleStarted==null)S.uncleStarted=false;if(typeof step5Open==="function"&&!step5Open()&&(S.m|0)>29)S.m=29;if(S.trips==null)S.trips=0;if(!S.seen)S.seen=[];if(S.day==null){S.day=1;S.dsec=0}if(!S.dEv)S.dEv=[];if(!S.qa)S.qa=[];if(S.viewM==null)S.viewM=0;if(!S.sq)S.sq=[];if(!S.sqToday)S.sqToday=[];if(S.outToday==null)S.outToday=false;if(S.sqDone==null)S.sqDone=!!(S.sqToday&&S.sqToday.length);if(S.pendingObs===undefined)S.pendingObs=null;if(!S.optSeen||typeof S.optSeen!="object")S.optSeen={blank:{},sq:{},ask:{}};if(!S.optSeen.blank)S.optSeen.blank={};if(!S.optSeen.sq)S.optSeen.sq={};if(!S.optSeen.ask)S.optSeen.ask={};if(!S.journals)S.journals=[];if(S.journalOpen===undefined)S.journalOpen=null;scrubJournals();if(S.motif===undefined)S.motif=null;if(S.journalGlow==null)S.journalGlow=0;if(S.metOut==null){S.metOut=!!(S.m>0||(S.journals&&S.journals.some(function(j){return j&&j.met}))||(S.dEv&&S.dEv.some(function(e){return e&&e.met})))}try{delete S.blankHintSeen;delete S.sqHintSeen;delete S.anxiety;delete S.fantasy;delete S.evidence}catch(e){}}
 function save(){try{localStorage.setItem("sakura_v1",JSON.stringify(S))}catch(e){}}
 function doReset(){S=def();mq=[];busy=0;backLock=0;mbLock=0;dayLock=0;$("mask").classList.remove("on");try{localStorage.removeItem("sakura_v1")}catch(e){}say("「……才不是為了你。我只是答應了阿姨。」","pout");render();maybeMomIntro()}
 var rc=0,rt;
@@ -1769,11 +1769,13 @@ function replayMem(k){var m=MEMORIES[k];if(!m||S.memSeen.indexOf(m[0])<0)return;
 function afterAffTier(prev){if(tier()>(prev|0))flashAffTierFx();checkMemories();checkCohab()}
 var M_GAIN=1.75;
 function memoriesComplete(){if(!S.memSeen||!MEMORIES||!MEMORIES.length)return false;for(var i=0;i<MEMORIES.length;i++){if(S.memSeen.indexOf(MEMORIES[i][0])<0)return false}return true}
-function uncleOpen(){return memoriesComplete()}
-function effM(){return uncleOpen()?(S.m|0):0}
-function maybeStartUncleRoute(fromUnlock){if(!memoriesComplete()){S.uncleStarted=false;return}if(S.uncleStarted)return;if(fromUnlock){S.m=0;S.metOut=false;S.viewM=0;scrubJournals()}S.uncleStarted=true;try{save()}catch(e){}}
-function addM(d){if(!uncleOpen()||!d)return 0;var x=d>0?Math.max(1,Math.round(d*M_GAIN)):Math.min(-1,Math.round(d*M_GAIN));S.m=Math.max(0,Math.min(100,S.m+x));return x}
-function stage(){var m=effM();return m>=60?3:m>=38?2:m>=15?1:0}
+/* 強叔路線可先開（步驟一～四）；步驟五／性騷擾等 9 則回憶看完 */
+function step5Open(){return memoriesComplete()}
+function uncleOpen(){return true}
+function effM(){return S.m|0}
+function maybeStartUncleRoute(fromUnlock){if(S.uncleStarted)return;if(fromUnlock){/* 回憶集滿：允許踏入步驟五親密度帶，不重置已有進度 */}S.uncleStarted=true;try{save()}catch(e){}}
+function addM(d){if(!d)return 0;var x=d>0?Math.max(1,Math.round(d*M_GAIN)):Math.min(-1,Math.round(d*M_GAIN));var next=(S.m|0)+x;if(!step5Open()&&next>29)next=29;S.m=Math.max(0,Math.min(100,next));return x}
+function stage(){var m=effM(),st=m>=60?3:m>=38?2:m>=15?1:0;if(!step5Open()&&st>1)st=1;return st}
 function clampView(){S.viewM=Math.max(-5,Math.min(5,S.viewM|0))}
 function sqOpen(i){var q=SQ[i];if(S.taken||S.aff<q[2])return false;if(q[4]&&effM()<q[3])return false;if(!q[4]&&q[3]>0&&effM()<q[3])return false;return true}
 function sqAvail(){var a=[];for(var i=0;i<SQ.length;i++)if(sqOpen(i)&&S.sqToday.indexOf(i)<0)a.push(i);return a}
@@ -1839,7 +1841,7 @@ function markAskOptSeen(i){ensureOptSeen();S.optSeen.ask[i]=askReplyKey(i);save(
 function askTabHasNew(){for(var i=0;i<QA.length;i++){if(S.aff<QA[i][2])continue;if(askOptNew(i))return true}return false}
 function paintAskTab(){var btn=document.querySelector('.dock button[data-t="ask"],.tabs button[data-t="ask"]');if(!btn)return;btn.innerHTML=askTabHasNew()?("💬 提問"+optNewBadge()):"💬 提問"}
 function optNewBadge(){return '<span class="opt-new" title="有新內容">✦ 新</span>'}
-function paintSideBadges(){var j=$("navJournal");if(!j)return;var on=journalOn();var hasToday=on&&!!(S.journals&&S.journals.length&&S.journals.some(function(x){return x.day===S.day}));var neu=hasToday&&!!S.journalGlow;var base="✍️ 日記";j.innerHTML=neu?(base+optNewBadge()):base;j.classList.toggle("is-lock",!on);j.classList.toggle("journal-glow",!!neu);j.setAttribute("aria-disabled",on?"false":"true");j.title=on?(neu?"有新的日記":""):(uncleOpen()?"強叔出現後才會開始寫":"四則回憶解鎖後，故事才會往外走")}
+function paintSideBadges(){var j=$("navJournal");if(!j)return;var on=journalOn();var hasToday=on&&!!(S.journals&&S.journals.length&&S.journals.some(function(x){return x.day===S.day}));var neu=hasToday&&!!S.journalGlow;var base="✍️ 日記";j.innerHTML=neu?(base+optNewBadge()):base;j.classList.toggle("is-lock",!on);j.classList.toggle("journal-glow",!!neu);j.setAttribute("aria-disabled",on?"false":"true");j.title=on?(neu?"有新的日記":""):(effM()>0?"強叔出現後才會開始寫":"強叔尚未進入日常時，日記還不會寫那種話")}
 
 
 function blankAct(id){if(busy||!S.trip||S.taken)return;if(maskOpen()){if(sqOptsOn())return;var mask=$("mask");if(mask)mask.classList.remove("on");if(!moodPeekOn){try{mask&&mask.classList.remove("mood-chrome")}catch(e){}}}withBusy(function(){blankActNow(id)});}
@@ -1853,8 +1855,8 @@ say("「"+o[4]+"」",o[5]);addLog("❓ "+q[1]+"→"+o[0]+"（"+o[6]+"・"+dualTi
 if(o[1]>0&&effM()<45)hearts(Math.min(5,2+Math.floor(o[1]/3)));
 afterAffTier(b);
 if(tier()>b&&effM()<45)mq.push(["親密度提升！","你和小櫻的關係變成了「"+TIERS[tier()][1]+"」。"]);
-if(effM()>=100){S.taken=true;say("（房間裡很安靜。）","sad")}
-NSTORY.filter(function(s){return effM()>=s[0]&&S.seen.indexOf("n"+s[0])<0}).forEach(function(s){S.seen.push("n"+s[0]);mq.push(["💔 "+s[1],s[2]])});
+if(step5Open()&&effM()>=100){S.taken=true;say("（房間裡很安靜。）","sad")}
+NSTORY.filter(function(s){return step5Open()&&effM()>=s[0]&&S.seen.indexOf("n"+s[0])<0}).forEach(function(s){S.seen.push("n"+s[0]);mq.push(["💔 "+s[1],s[2]])});
 }
 function talk(){if(busy)return;if(S.taken){say("（房間裡很安靜。她已經搬走了。）","sad");return}if(S.trip){say("（她還在外面。等她回來再聊吧。）","pout");return}if(maskOpen()||dayLock)return;
 var t=tier(),st=stage();
@@ -1866,7 +1868,7 @@ if(st>=1&&effM()>0&&Math.random()<[0,.35,.7,1][st])p=NT[st];var x=pick(p),k=dete
 
 function idle(){var st=stage();say("「"+pick(NT[st])+"」",["calm","shy","pout","cold"][st])}
 function lightAff(){var t=tier(),a=TIERS[t][0],n=TIERS[t+1];$("affn").textContent=fmt(S.aff);$("affbar").style.width=(n?Math.min(100,(S.aff-a)/(n[0]-a)*100):100)+"%";try{localStorage.setItem("sakura_v1",JSON.stringify(S))}catch(e){}}
-function pat(){if(busy||S.trip||S.taken)return;if(dissonanceOn()){say(pick(FLAT_PAT),"pout");return}if(effM()>=45){say(effM()>=70?"「……別碰我。手還留著別人的溫度。」":"「……別亂碰我。剛、剛被牽過。」",effM()>=70?"cold":"pout");return}var j=Math.floor(Math.random()*3);say(["「呀！突然戳我……」","「嘿嘿，癢癢的。」","「阿祿在看我嗎？」"][j],["surprise","wink","shy"][j]);var bPat=tier();S.aff+=0.2;hearts(3);lightAff();afterAffTier(bPat)}
+function pat(){if(busy||S.trip||S.taken)return;if(dissonanceOn()){say(pick(FLAT_PAT),"pout");return}if(step5Open()&&effM()>=45){say(effM()>=70?"「……別碰我。手還留著別人的溫度。」":"「……別亂碰我。剛、剛被牽過。」",effM()>=70?"cold":"pout");return}var j=Math.floor(Math.random()*3);say(["「呀！突然戳我……」","「嘿嘿，癢癢的。」","「阿祿在看我嗎？」"][j],["surprise","wink","shy"][j]);var bPat=tier();S.aff+=0.2;hearts(3);lightAff();afterAffTier(bPat)}
 (function(){var av=$("av"),pt=0,lp=0,moved=0;
 if(!av)return;
 function clearLp(){if(lp){clearTimeout(lp);lp=0}}
@@ -2016,8 +2018,8 @@ mq.push(["🌙 當晚",nightTxt]);
 S.dEv.push({id:pid,pt:part(),met:met,fr:met?"（尚未起疑）":("她去了"+p[1]+"，"+ev+"，"+pick(SOFT))});
 STORY.filter(function(s){return S.exp>=s[0]&&S.seen.indexOf(s[0])<0}).forEach(function(s){S.seen.push(s[0]);mq.push(["📌 解鎖事件："+s[1],s[2]])});
 afterAffTier(b);if(tier()>b&&effM()<45)mq.push(["親密度提升！","你和小櫻的關係變成了「"+TIERS[tier()][1]+"」。"]);
-NSTORY.filter(function(s){return effM()>=s[0]&&S.seen.indexOf("n"+s[0])<0}).forEach(function(s){S.seen.push("n"+s[0]);mq.push(["💔 "+s[1],s[2]])});
-if(effM()>=100){S.taken=true;say("（房間裡很安靜。）","sad")}
+NSTORY.filter(function(s){return step5Open()&&effM()>=s[0]&&S.seen.indexOf("n"+s[0])<0}).forEach(function(s){S.seen.push("n"+s[0]);mq.push(["💔 "+s[1],s[2]])});
+if(step5Open()&&effM()>=100){S.taken=true;say("（房間裡很安靜。）","sad")}
 nextPop()}finally{backLock=0}}
 function queueSqAsk(){if(S.sqDone||S.taken)return;var a=sqAvail();if(!a.length)return;var qi=a[Math.floor(Math.random()*a.length)];mq.push({sq:qi})}
 function hideSqOpts(){var el=$("sqopts");if(el){el.style.display="none";el.innerHTML=""}var mb=$("mb");if(mb)mb.style.display=""}
@@ -2116,7 +2118,7 @@ function paintDock(){
   paintAskTab();
 }
 function closePane(){S.journalOpen=null;if(tab)setTab(tab);else syncMoodDim()}
-function setTab(t){if(!t)return;if(t==="journal"&&!journalOn()){say(uncleOpen()?"（她還沒開始寫日記。）":"（四則回憶都聽完後，她才會開始寫那種日記。）","pout");return}if(tab===t){tab="";document.querySelectorAll(".dock button,.tabs button,.bubble[data-t],.footnav [data-t],.chip[data-t]").forEach(function(x){x.classList.remove("on")});var pn0=$("pane");if(pn0){pn0.innerHTML="";pn0.classList.add("is-empty");pn0.classList.remove("is-open")}syncMoodDim();return}tab=t;document.querySelectorAll(".dock button,.tabs button").forEach(function(x){x.classList.toggle("on",x.dataset.t===t)});document.querySelectorAll(".bubble[data-t],.footnav [data-t],.chip[data-t]").forEach(function(x){x.classList.toggle("on",x.dataset.t===t)});pane();var pn=$("pane");if(pn){var empty=!(pn.innerHTML&&pn.innerHTML.trim());pn.classList.toggle("is-empty",empty);pn.classList.toggle("is-open",!empty&&!!tab);syncMoodDim()}}
+function setTab(t){if(!t)return;if(t==="journal"&&!journalOn()){say(effM()>0?"（她還沒開始寫日記。）":"（等外面的事開始牽動她之後，她才會寫那種日記。）","pout");return}if(tab===t){tab="";document.querySelectorAll(".dock button,.tabs button,.bubble[data-t],.footnav [data-t],.chip[data-t]").forEach(function(x){x.classList.remove("on")});var pn0=$("pane");if(pn0){pn0.innerHTML="";pn0.classList.add("is-empty");pn0.classList.remove("is-open")}syncMoodDim();return}tab=t;document.querySelectorAll(".dock button,.tabs button").forEach(function(x){x.classList.toggle("on",x.dataset.t===t)});document.querySelectorAll(".bubble[data-t],.footnav [data-t],.chip[data-t]").forEach(function(x){x.classList.toggle("on",x.dataset.t===t)});pane();var pn=$("pane");if(pn){var empty=!(pn.innerHTML&&pn.innerHTML.trim());pn.classList.toggle("is-empty",empty);pn.classList.toggle("is-open",!empty&&!!tab);syncMoodDim()}}
 document.querySelectorAll(".bubble[data-t],.footnav [data-t],.chip[data-t]").forEach(function(a){a.onclick=function(e){e.preventDefault();setTab(a.dataset.t)}});
 function pane(){var y=window.scrollY||document.documentElement.scrollTop||0,h="";
 if(S.taken&&(tab=="home"||tab=="go"||tab=="ask"||tab=="herq")){h='<div class="row"><span class="i">🗝️</span><div class="m"><b>她已經離開了</b><div class="sm">房間裡只剩下她留下的素描本。</div></div><button class="btn" onclick="doReset()">重新開始</button></div>'}
