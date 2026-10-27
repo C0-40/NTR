@@ -170,8 +170,7 @@ button:focus-visible{outline:3px solid var(--sky);outline-offset:2px}
   .affInk.is-on{animation:none;opacity:.75;transform:scale(1.2)}
   .affSweep.is-on{animation:none;opacity:.7;left:40%}
 }
-.homeui .topAffRow{display:flex;justify-content:space-between;gap:8px;align-items:baseline;font-weight:750;font-size:10.5px;color:#2c1a10;margin:0;line-height:1.25}
-.homeui .topAffRow #tier{font-weight:650;font-size:10px;color:#5a3c28;max-width:72%;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;letter-spacing:.01em}
+.homeui .topAffRow{display:flex;justify-content:flex-start;gap:8px;align-items:baseline;font-weight:750;font-size:10.5px;color:#2c1a10;margin:0;line-height:1.25}
 .homeui .topAffRow .affVal{flex:none;font-variant-numeric:tabular-nums;font-weight:800;color:#6e3518;font-size:11px}
 .homeui .mbox{margin-top:5px!important;padding-top:4px;border-top:1px dashed rgba(140,100,55,.32)}
 .homeui .mbox .metaMlab,#mlab{font-size:9.5px;font-weight:700;color:#5a3518;letter-spacing:.02em;margin:0 0 2px;line-height:1.2}
@@ -344,7 +343,6 @@ html,body{color:var(--tx)}
 .bubble .opt-new{color:#fffef8!important;background:#5a3518!important}
 .homeui .topMeta{border-color:rgba(170,130,80,.55)!important}
 .homeui .topAffRow,.homeui .topAffRow span{color:#2c1a10!important}
-.homeui .topAffRow #tier{color:#5a3c28!important}
 .homeui .topAffRow .affVal{color:#6e3518!important}
 .homeui .dayClock-day,#dayl{color:#3f2410!important}
 .homeui .bubble.actObs.on,.homeui .bubble.actObs.on .actLab{color:#fff6df!important}
@@ -1088,20 +1086,16 @@ html,body{color:var(--tx)}
   border-radius:999px;overflow:hidden;box-shadow:inset 0 1px 2px rgba(90,59,42,.1);
 }
 .homeui .topAffRow{
-  display:flex;justify-content:space-between;gap:8px;align-items:baseline;
+  display:flex;justify-content:flex-start;gap:8px;align-items:baseline;
   font-weight:750;font-size:11px;color:#2c1a10;margin:0;line-height:1.3;
 }
-.homeui .topAffRow #tier{
-  font-weight:650;font-size:10.5px;color:#5a3c28;
-  max-width:78%;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;
-}
-.homeui .topAffRow .affVal{font-size:11.5px;color:#6e3518}
+.homeui .topAffRow .affVal{font-size:11.5px;color:#6e3518;font-variant-numeric:tabular-nums;font-weight:800}
 .homeui .mbox{margin-top:6px!important;padding-top:5px;border-top:1px dashed rgba(140,100,55,.28)}
 .homeui .topHud .dayClock{
-  grid-column:2;grid-row:1 / span 2;
+  grid-column:2;grid-row:1;
   position:static!important;top:auto!important;right:auto!important;
-  display:flex;flex-direction:column;align-items:center;gap:4px;
-  pointer-events:none;min-width:54px;padding:0;margin:0;justify-self:end;align-self:start;
+  display:flex;flex-direction:column;align-items:flex-end;gap:0;
+  pointer-events:none;min-width:0;padding:0;margin:0;justify-self:end;align-self:start;
   background:transparent!important;border:none!important;box-shadow:none!important;border-radius:0!important;
   filter:none;
 }
@@ -1122,7 +1116,6 @@ html,body{color:var(--tx)}
 }
 @media (max-width:420px){
   .homeui .topHud{row-gap:8px;column-gap:10px}
-  .homeui .topHud .dayClock-dial{width:42px;height:42px}
   .homeui .topHud .chip.chip-ico{width:30px;height:30px;min-width:30px;min-height:30px;font-size:13px}
   .homeui .topHud .chip.chip-sta{height:30px;font-size:10.5px}
 }
@@ -1165,7 +1158,7 @@ html,body{color:var(--tx)}
             </div>
           </div>
       <div class="topMeta">
-            <div class="topAffRow"><span id="tier"></span><span class="affVal">🌸 <span id="affn">0</span></span></div>
+            <div class="topAffRow"><span class="affVal" title="小櫻親密度">🌸 <span id="affn">0</span></span></div>
             <div class="bar affBar" aria-hidden="true"><i id="affbar"></i><span class="affInk" id="affInk" aria-hidden="true"></span><span class="affSweep" id="affSweep" aria-hidden="true"></span></div>
             <div class="sm" id="afft"></div>
             <div class="sm" id="inc"></div>
@@ -1174,19 +1167,11 @@ html,body{color:var(--tx)}
               <div class="bar m" id="mbarwrap"><i id="mbar"></i></div>
             </div>
           </div>
-      <div class="dayClock" id="dayClock" aria-label="當日時間">
+      <div class="dayClock" id="dayClock" aria-label="天數">
       <div class="dayClock-day" id="dayl"></div>
-      <div class="dayClock-dial" aria-hidden="true">
-        <div class="dayClock-marks"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div>
-        <span class="dayClock-hand hour" id="clockHour"></span>
-        <span class="dayClock-hand min" id="clockMin"></span>
-        <span class="dayClock-pin"></span>
-      </div>
-      <div class="dayClock-part" id="dayPart"></div>
     </div>
     </div>
-<nav class="sideNav left" aria-label="日記、回憶與聊天室">
-      <button type="button" class="bubble" data-t="journal" id="navJournal">✍️ 日記</button>
+<nav class="sideNav left" aria-label="回憶與聊天室">
       <button type="button" class="bubble" data-t="mem" id="navMem">🌸 回憶</button>
       <button type="button" class="bubble actChat" id="navChat" aria-label="打開匿名聊天室" onclick="openChatRoom()">💬 聊天室</button>
     </nav>
@@ -1500,9 +1485,9 @@ var CHAT_THREADS=[
 {who:"匿名",meta:"最後一則",body:"他腿好了又怎樣？她還是會來。因為——只有我需要她需要到這個份上。"}
 ]}
 ,
-{step:99,ending:1,title:"匿名・偷偷留下之後",sub:"結局一・強叔的炫耀串",posts:[
-{who:"匿名",meta:"新串・結局後",body:"她跟那個腿傷的阿祿還住同一屋簷下——還「偷偷在一起」。可笑。晚上過來的人是我。"},
-{who:"匿名",meta:"續",body:"他選擇相信。我選擇繼續。髮夾還在她頭上，味道還在我房間。"},
+{step:99,ending:1,title:"匿名・她出軌之後",sub:"結局一・強叔的炫耀串",posts:[
+{who:"匿名",meta:"新串・結局後",body:"他們正式在一起了，還住同一屋簷下。可笑——晚上過來的人還是我。她說因為我需要她。"},
+{who:"匿名",meta:"續",body:"她一邊愧疚一邊來。髮夾還在她頭上，味道還在我房間。阿祿若問晚歸，她大概又會心虛地笑。"},
 {who:"路人D",meta:"回覆",body:"……你這樣寫不太好吧。"},
 {who:"匿名",meta:"回覆",body:"關你什麼事。她自己沒切斷。"}
 ]},
@@ -1529,7 +1514,7 @@ var UNCLE_ARC=[
 ];
 
 var END_TALK={
-1:["……燈開著就好。別問我晚歸。……我會回來的。","阿祿，我們不是說好了嗎——偷偷的。我不是不在乎你。","他傳訊來了。……我去一下下就回。別用那種眼神，我會心虛。","你相信我就夠了。……其他的，我自己會難受。","有時候我會對不起你。可是我還是會出門。……討厭這樣的自己。"],
+1:["……燈開著就好。我愛你，這是真的。……晚歸的事，別問太細。","我們在一起了。可是他還需要我。……我知道自己很過分。","他傳訊來了。我出去一下就回。……對不起，阿祿。","你那麼溫柔，我更羞愧。……可是我還是會去。","有時候我會對不起你。可是我放不下那個需要我的人。……討厭這樣的自己。"],
 3:["我是不是……很蠢？","那些善意，哪些是真的？我分不清了。","阿祿，你還願意牽我的手嗎。","對不起。對不起。我不知道自己在救誰。","以後有人求助，我會先停一秒。……然後怕自己又點頭。"]
 };
 var END_GONE="（女主已搬走。房間裡只剩她留下的素描本，與空掉的位置。）";
@@ -1567,7 +1552,7 @@ var NSTORY=[
 [20,"陌生的聯絡人","她的手機多了一個沒存姓的聯絡人。「別誤會，阿祿。只是強叔說有店想介紹給我。」她把螢幕微微偏向自己，回訊息時嘴角彎起的弧度，是你很少見到的那種。"],
 [45,"漸漸變冷的餐桌","晚餐時她把手機壓在桌緣下，螢光一明一滅。你剛開口，她抬眼：「阿祿，我又不是小孩子……不是每則訊息都要給你看。」菜涼了，她卻仍在等下一則回覆。"],
 [70,"沒有回來的夜晚","那晚她很晚才推門進來，領口有一點不自然的皺褶，空氣裡混著陌生的菸草與低沉的古龍水。「……我晚了。」她小聲說完，終於不敢看你的眼睛。"],
-[100,"空掉的房間","（此段不再由親密度滿值自動觸發搬走；僅結局路線會走到離開或偷偷留下。）"]];
+[100,"空掉的房間","（此段不再由親密度滿值自動觸發搬走；僅結局路線會走到離開或出軌同居。）"]];
 var MEET=[
 ["回來的路上，素描本掉了。一位強叔蹲下來替我撿起，指尖不小心擦過我的手背……他說抱歉時，靠得有點近。","有位強叔問路，後來請我喝咖啡。杯子遞過來時他看著我笑，我居然忘了說自己不是一個人住。"],
 ["又遇到強叔了。他低聲說我笑起來很好看，靠得很近……我心跳得好大聲，卻沒有後退。","強叔請我吃甜點，眼神一直停在我嘴角。他問我是一個人住，還是……有誰在等。我支吾了很久。"],
@@ -1951,7 +1936,7 @@ if(met&&st<=1)out.push("你說不上來哪裡不對。只是門關上的聲音�
 if(placeName&&band<=1&&Math.random()<.55){var pf={"便利店":"袋口露出便利店收據，時間普通。","商場":"購物袋邊角磨損，像真的逛過很久。","咖啡店":"袖口有淡淡咖啡香，說得通。","公園":"鞋邊沾一點乾草，說在長椅坐過。","書店":"袖口有淡淡紙墨香，說得通。"};if(pf[placeName])out.push(pf[placeName])}
 if(motif&&motif.tr){if(out.length)out[0]=motif.tr;else out.push(motif.tr)}
 return out}
-function tname(){if(S.endingDone&&(S.ending|0)===2||S.taken)return"女主已搬走";if(S.endingDone&&(S.ending|0)===1)return"偷偷在一起的人";if(S.endingDone&&(S.ending|0)===3)return"回不去的戀人";return effM()>=70?"對你愧疚的人":effM()>=45?"嘴硬心虛的人":TIERS[tier()][1]}
+function tname(){if(S.endingDone&&(S.ending|0)===2||S.taken)return"女主已搬走";if(S.endingDone&&(S.ending|0)===1)return"出軌之後";if(S.endingDone&&(S.ending|0)===3)return"回不去的戀人";return effM()>=70?"對你愧疚的人":effM()>=45?"嘴硬心虛的人":TIERS[tier()][1]}
 function ntrOn(){return uncleOpen()&&((S.day|0)>=13)&&((S.uncleStep|0)>0||effM()>0||(S.aff>=100&&S.trips>=5)||canAdvanceUncle())}
 function rate(){return +(1+tier()*1.5+S.exp*0.02).toFixed(1)}
 function $(i){return document.getElementById(i)}
@@ -1980,7 +1965,7 @@ function markAskOptSeen(i){ensureOptSeen();S.optSeen.ask[i]=askReplyKey(i);save(
 function askTabHasNew(){for(var i=0;i<QA.length;i++){if(S.aff<QA[i][2])continue;if(askOptNew(i))return true}return false}
 function paintAskTab(){var btn=document.querySelector('.dock button[data-t="ask"],.tabs button[data-t="ask"]');if(!btn)return;btn.innerHTML=askTabHasNew()?("💬 提問"+optNewBadge()):"💬 提問"}
 function optNewBadge(){return '<span class="opt-new" title="有新內容">✦ 新</span>'}
-function paintSideBadges(){var j=$("navJournal");if(!j)return;var on=journalOn();var hasToday=on&&!!(S.journals&&S.journals.length&&S.journals.some(function(x){return x.day===S.day}));var neu=hasToday&&!!S.journalGlow;var base="✍️ 日記";j.innerHTML=neu?(base+optNewBadge()):base;j.classList.toggle("is-lock",!on);j.classList.toggle("journal-glow",!!neu);j.setAttribute("aria-disabled",on?"false":"true");j.title=on?(neu?"有新的日記":""):(effM()>0?"強叔出現後才會開始寫":"強叔尚未進入日常時，日記還不會寫那種話")}
+function paintSideBadges(){/* 日記已移除 */}
 
 
 function blankAct(id){if(busy||!S.trip||S.taken)return;if(maskOpen()){if(sqOptsOn())return;var mask=$("mask");if(mask)mask.classList.remove("on");if(!moodPeekOn){try{mask&&mask.classList.remove("mood-chrome")}catch(e){}}}withBusy(function(){blankActNow(id)});}
@@ -2064,9 +2049,9 @@ thT=Date.now()}
 
 function journalBand(){var st=stage();return st<=0?0:st<=2?1:2}
 function ensureJournalLen(s){var n=0,out=s;while(out.length<200&&n<4){out+="\n\n我把今天的事又在心裡走了一遍，生怕漏掉什麼細節，也生怕記得太清楚。";n++}return out}
-function journalOn(){return effM()>0}
+function journalOn(){return false}
 function scrubJournals(){if(!S.journals)S.journals=[];if(!journalOn()){S.journals=[];S.journalOpen=null;return} }
-function writeJournal(place,pid,met,motif){if(!journalOn())return;if(!S.journals)S.journals=[];var band=journalBand(),placeId=pid|0,metI=met?1:0;
+function writeJournal(place,pid,met,motif){return;if(!journalOn())return;if(!S.journals)S.journals=[];var band=journalBand(),placeId=pid|0,metI=met?1:0;
 var pack=JOURNAL_POOL[placeId];if(!pack)pack=JOURNAL_POOL[0];
 var rows=pack[band]||pack[0];var list=(rows&&rows[metI]&&rows[metI].length)?rows[metI]:(rows&&rows[0])||["今天出門了一趟，回來後心裡有事，卻說不清。"];
 var body,clash=motif&&motif.mode==="clash"&&motif.j;
@@ -2114,7 +2099,7 @@ function hidePhoneRipple(){var el=$("phoneRipple");if(el)el.classList.remove("is
 function showPhoneRipple(){if(!S.trip||S.taken||maskOpen())return;var st=stage(),pool=PHONE_RIPPLE[Math.min(st,PHONE_RIPPLE.length-1)]||PHONE_RIPPLE[0];if(!pool||!pool.length)return;var it=pick(pool);phoneRippleCur=it;var el=$("phoneRipple"),btn=$("phoneRippleBtn"),ico=$("phoneRippleIco"),tx=$("phoneRippleTxt");if(!el||!btn)return;if(ico){ico.textContent="";ico.style.display="none"}if(tx)tx.textContent=it.t;btn.classList.toggle("is-dirty",st>=2);btn.classList.remove("is-buzz");el.classList.add("is-on");clearTimeout(phoneRippleHideT);phoneRippleHideT=setTimeout(function(){hidePhoneRipple()},st>=2?5200:3800);phoneRippleT=Date.now()}
 function openPhoneRipple(){if(!phoneRippleCur)return;var it=phoneRippleCur;hidePhoneRipple();var soft=tier()>=3||S.aff>=100;popup(it.t,(soft&&it.soft)?it.soft:it.body)}
 function scheduleJournalGlow(){clearTimeout(journalGlowT);if(!journalOn()){S.journalGlow=0;return}S.journalGlow=0;paintSideBadges();journalGlowT=setTimeout(function(){if(S.trip||S.taken||!journalOn())return;var has=S.journals&&S.journals.some(function(x){return x.day===S.day});if(!has)return;S.journalGlow=1;paintSideBadges();try{save()}catch(e){}},3200)}
-function openJournal(i){if(!journalOn()){say("（她還沒開始寫日記。）","pout");return}if(i<0||!S.journals||!S.journals[i])return;S.journalOpen=i;if(S.journalGlow){S.journalGlow=0;paintSideBadges()}if(tab==="journal"){pane();var pn=$("pane");if(pn){pn.classList.remove("is-empty");pn.classList.add("is-open")}}else setTab("journal")}
+function openJournal(i){return;if(!journalOn()){say("（她還沒開始寫日記。）","pout");return}if(i<0||!S.journals||!S.journals[i])return;S.journalOpen=i;if(S.journalGlow){S.journalGlow=0;paintSideBadges()}if(tab==="journal"){pane();var pn=$("pane");if(pn){pn.classList.remove("is-empty");pn.classList.add("is-open")}}else setTab("journal")}
 function closeJournal(){S.journalOpen=null;render();syncMoodDim()}
 function go(i){if(busy||S.trip||S.taken||S.endingDone||S.outToday)return;withBusy(function(){goNow(i)});}
 function goNow(i){if(S.trip||S.taken||S.outToday)return;var p=PLACES[i],dep=pickDepart(i);S.trip={id:i,place:p[1],end:Date.now()+p[2]*1000,acts:[],depart:dep,skipped:false};S.outToday=true;hidePhoneRipple();phoneRippleT=Date.now();
@@ -2248,16 +2233,16 @@ $("mt").textContent=truth?"結局・面對之後":"結局・你選擇相信她";
 $("mp").textContent=truth?"你把聊天室攤在她面前。對照雨夜與髮夾。她崩潰了。\n\n你只能揭發——沒有別的路。":"你決定不當真。那麼，今晚你還要不要向她告白？";
 paintMaskChrome("小櫻");
 var box=$("sqopts"),mb=$("mb");box.innerHTML="";
-var opts=truth?[["揭發真相（結局三）",3]]:[["告白：可以繼續住下去嗎？（結局一）",1],["不告白，讓媽媽接她回去（結局二）",2]];
+var opts=truth?[["揭發真相（結局三）",3]]:[["告白：在一起，繼續同居（結局一・出軌）",1],["不告白，讓媽媽接她回去（結局二）",2]];
 opts.forEach(function(o){var b=document.createElement("button");b.type="button";b.className="btn";b.style.width="100%";b.style.whiteSpace="normal";b.style.textAlign="left";b.style.margin="6px 0";b.textContent=o[0];
 b.onclick=function(){finishEnding(o[1])};box.appendChild(b)});
 box.style.display="block";if(mb)mb.style.display="none";$("mask").classList.add("on")}
 function finishEnding(n){if(S.endingDone)return;mbLock=1;S.endingDone=true;S.ending=n|0;
 if(n===1||n===2){S.m=100}
 if(n===2){S.taken=true}else{S.taken=false}
-var titles={1:"結局一・偷偷在一起",2:"結局二・報恩的終點",3:"結局三・回不去的地方"};
+var titles={1:"結局一・出軌",2:"結局二・報恩的終點",3:"結局三・回不去的地方"};
 var bodies={
-1:"你不相信聊天室，向她告白。她答應繼續住下，也答應「偷偷在一起」。\n\n她沒有切斷和強叔的關係。你每天都在懷疑，卻選擇不問。\n\n結尾：他選擇相信，於是她的每一次晚歸，都有了合理的解釋。",
+1:"你不相信聊天室，向她告白。她答應了——你們成為戀人，繼續住在一起。\n\n可是她沒有切斷和強叔的來往。她覺得他需要自己，每次出門都帶著對你的羞愧，卻仍舊去。你每天都在懷疑，卻選擇不問。\n\n結尾：你們在一起了；她的每一次晚歸，都是一次出軌。",
 2:"你不相信聊天室，也沒有告白。媽媽問：「小櫻可以回去了吧？」\n\n她說：「我不回去了……他比你更需要我。」她留在強叔身邊，直到最後都沒發現自己被利用。\n\n結尾：她把當年被給予的溫柔，原封不動地交給了不該給的人。",
 3:"你把真相攤開。她哭著刪掉聊天室，卻再也分不清哪些善意是真的。你們成為戀人，但有些地方永遠回不去了。\n\n她不再說「才不是為了你」，常問：「我是不是……很蠢？」"
 };
@@ -2265,7 +2250,7 @@ hideSqOpts();$("mt").textContent=titles[n];$("mp").textContent=bodies[n];paintMa
 if($("mb"))$("mb").style.display="";$("mask").classList.add("on");
 addLog("📜 "+titles[n]+((n===1||n===2)?"・強叔親密 → 100":""));
 if(n===2){say(END_GONE,"sad")}
-else if(n===1){say("「……好。我們偷偷的。」","shy")}
+else if(n===1){say("「……好。我們在一起。……其他的，你別問。」","shy")}
 else{say("「我是不是……很蠢？」","sad")}
 try{save()}catch(e){}
 setTimeout(function(){mbLock=0;render()},40)}
@@ -2305,7 +2290,7 @@ function paintDock(){
   paintAskTab();
 }
 function closePane(){S.journalOpen=null;if(tab)setTab(tab);else syncMoodDim()}
-function setTab(t){if(!t)return;if(S.endingDone&&(t==="home"||t==="go"||t==="ask"||t==="herq")){say((S.ending|0)===2?END_GONE:"（故事已經走到結局了。）","sad");return}if(t==="journal"&&!journalOn()){say(effM()>0?"（她還沒開始寫日記。）":"（等外面的事開始牽動她之後，她才會寫那種日記。）","pout");return}if(tab===t){tab="";document.querySelectorAll(".dock button,.tabs button,.bubble[data-t],.footnav [data-t],.chip[data-t]").forEach(function(x){x.classList.remove("on")});var pn0=$("pane");if(pn0){pn0.innerHTML="";pn0.classList.add("is-empty");pn0.classList.remove("is-open")}syncMoodDim();return}tab=t;document.querySelectorAll(".dock button,.tabs button").forEach(function(x){x.classList.toggle("on",x.dataset.t===t)});document.querySelectorAll(".bubble[data-t],.footnav [data-t],.chip[data-t]").forEach(function(x){x.classList.toggle("on",x.dataset.t===t)});pane();var pn=$("pane");if(pn){var empty=!(pn.innerHTML&&pn.innerHTML.trim());pn.classList.toggle("is-empty",empty);pn.classList.toggle("is-open",!empty&&!!tab);syncMoodDim()}}
+function setTab(t){if(!t)return;if(S.endingDone&&(t==="home"||t==="go"||t==="ask"||t==="herq")){say((S.ending|0)===2?END_GONE:"（故事已經走到結局了。）","sad");return}if(t==="journal"){return}if(tab===t){tab="";document.querySelectorAll(".dock button,.tabs button,.bubble[data-t],.footnav [data-t],.chip[data-t]").forEach(function(x){x.classList.remove("on")});var pn0=$("pane");if(pn0){pn0.innerHTML="";pn0.classList.add("is-empty");pn0.classList.remove("is-open")}syncMoodDim();return}tab=t;document.querySelectorAll(".dock button,.tabs button").forEach(function(x){x.classList.toggle("on",x.dataset.t===t)});document.querySelectorAll(".bubble[data-t],.footnav [data-t],.chip[data-t]").forEach(function(x){x.classList.toggle("on",x.dataset.t===t)});pane();var pn=$("pane");if(pn){var empty=!(pn.innerHTML&&pn.innerHTML.trim());pn.classList.toggle("is-empty",empty);pn.classList.toggle("is-open",!empty&&!!tab);syncMoodDim()}}
 document.querySelectorAll(".bubble[data-t],.footnav [data-t],.chip[data-t]").forEach(function(a){a.onclick=function(e){e.preventDefault();setTab(a.dataset.t)}});
 function pane(){var y=window.scrollY||document.documentElement.scrollTop||0,h="";
 if((S.taken||(S.endingDone&&(S.ending|0)===2))&&(tab=="home"||tab=="go"||tab=="ask"||tab=="herq")){h='<div class="row"><span class="i">🗝️</span><div class="m"><b>女主已搬走</b><div class="sm">小櫻搬去強叔那裡了。房間裡只剩下她留下的素描本。</div></div><button class="btn" onclick="doReset()">重新開始</button></div>'}
@@ -2319,14 +2304,11 @@ if(S.trip&&!S.taken){h+='<div class="blankbox"><div class="beat">她去了'+(S.t
 PLACES.forEach(function(p,i){var lk=S.aff<p[3],bz=!!S.trip,used=!!S.outToday,ing=bz&&S.trip.id==i,left=ing?Math.max(0,Math.ceil((S.trip.end-Date.now())/1000)):0;
 h+='<div class="row '+(lk||(used&&!ing)?"lock":"")+'"><span class="i">'+p[0]+'</span><div class="m"><b>'+p[1]+'</b><div class="sm">'+(lk?"需要親密 "+p[3]:used&&!ing?"今天已外出・明天再外出":(placeMeta(i).tag?placeMeta(i).tag+"・":"")+p[2]+" 秒・探索 +"+p[4])+'</div></div><button class="btn" '+(lk||bz||(used&&!ing)?"disabled":"")+' onclick="go('+i+')">'+(ing?"外出中":used?"今日已外出":"外出")+'</button></div>'});
 if(S.trip)h+='<div class="sm" style="margin-top:6px">她出門中。底欄可直接行動；上方可調速度或提前結束等待。</div>';
-else if(S.outToday)h+='<div class="sm" style="margin-top:6px">今天已經外出過一次。只有睡覺日結後，明天才能再外出；時鐘走完只會停住，不會自動跨日。</div>';
-else h+='<div class="blank-slot sm" style="padding:8px;border:2px dashed transparent;border-radius:12px">一天只能外出一次。她在外面時，室內互動暫時不能做。時鐘走完只會停住，要睡覺才會日結。</div>'}
+else if(S.outToday)h+='<div class="sm" style="margin-top:6px">今天已經外出過一次。只有睡覺日結後，明天才能再外出；當日進度走完只會停住，不會自動跨日。</div>';
+else h+='<div class="blank-slot sm" style="padding:8px;border:2px dashed transparent;border-radius:12px">一天只能外出一次。她在外面時，室內互動暫時不能做。當日進度走完只會停住，要睡覺才會日結。</div>'}
 else if(tab=="ask"){QA.forEach(function(q,i){var lk=S.aff<q[2]||!qaGateOk(q),dn=S.qa.indexOf(i)>=0,isNew=!lk&&askOptNew(i);var why=S.aff<q[2]?("需要親密 "+q[2]):(!qaGateOk(q)?(q[4]==="uncle"?"巷口事件後解鎖":q[4]==="trip"?"外出一次後解鎖":"未解鎖"):(dn?"已問過・答案可能變了・可再問":"第一次提問有親密獎勵"));h+='<div class="row '+(lk?"lock":"")+'"><span class="i">'+q[0]+'</span><div class="m"><b>'+(lk?"？？？":q[1])+(isNew?optNewBadge():"")+'</b><div class="sm">'+why+'</div></div><button class="btn" '+(lk||S.trip||S.endingDone?"disabled":"")+' onclick="ask('+i+')">提問</button></div>'});if(S.trip)h+='<div class="sm" style="margin-top:6px">小櫻外出中，回來後再問她吧。</div>'}
 else if(tab=="herq"){h='<div class="sm">她有問題時，主畫面會出現「問題」按鈕；點了才打開提問窗。</div>'}
-else if(tab=="journal"){h+='<div class="sm mood-chrome-kicker" style="margin-bottom:8px"><span class="j-sil-ico" aria-hidden="true"></span>她沒說出口的事<br>以為不會有人翻的筆記本——外出回來後，真心話會留在這裡。</div>';
-if(S.journalOpen!=null&&S.journals[S.journalOpen]){var j=S.journals[S.journalOpen];h+='<button type="button" class="btn" onclick="closeJournal()">← 合上</button><div class="jhead"><b><span class="j-sil-ico" aria-hidden="true"></span>'+j.title+'</b><div class="sm">'+j.place+(j.met?"・字裡行間有波瀾":"・寫得像無事")+'</div></div><div class="sm" style="margin:4px 0 8px;opacity:.85">—— 以下是她的筆跡 ——</div><div class="jbody">'+j.body+'</div>'}
-else if(!S.journals||!S.journals.length){h+='<p class="sm">本子還是空的。<br>等她外出回來，才會寫下那些不說出口的話。</p>'}
-else{h+='<div class="jlist">';S.journals.forEach(function(j,i){h+='<div class="row" onclick="openJournal('+i+')"><span class="i j-sil-dot" aria-hidden="true"></span><div class="m"><b>'+j.title+'</b><div class="sm">'+j.place+(j.met?"・有未說出口的事":"")+'・'+j.body.length+' 字</div></div><button type="button" class="btn" onclick="event.stopPropagation();openJournal('+i+')">翻開</button></div>'});h+='</div>'}}
+else if(tab=="journal"){h=""}
 else if(tab=="mem"){h+='<div class="sm mood-chrome-kicker" style="margin-bottom:8px">她親口說起的從前<br>親密度到了，她會想起和你共度過的小事。</div>';
 if(!S.memSeen||!S.memSeen.length){h+='<p class="sm">還沒有共同回憶。<br>在家多陪陪她，她會慢慢說出口。</p>'}
 else{MEMORIES.forEach(function(m,k){if(S.memSeen.indexOf(m[0])<0)return;h+='<div class="row"><span class="i">🌸</span><div class="m"><b>'+m[1]+'</b><div class="sm">'+(memType(m)?memType(m)+"・":"")+'親密 '+m[0]+'</div></div><button type="button" class="btn" onclick="replayMem('+k+')">重聽</button></div>'})}}
@@ -2342,15 +2324,11 @@ var stEl=document.querySelector(".stick");if(stEl)stEl.classList.toggle("outing"
 var acts=$("noteActs");if(acts){if(skipOn)acts.removeAttribute("hidden");else acts.setAttribute("hidden","")}var sk=$("skip");if(sk){sk.style.display="none";sk.setAttribute("hidden","")}var spEl=$("sp");if(spEl)spEl.style.display=skipOn?"":"none";
 var th=$("thbox");if(th&&!skipOn){var want="none";if(th.style.display!==want)th.style.display=want}
 else if(th&&skipOn){if(th.style.display!=="flex")th.style.display="flex"}paintHeartFace(ex);
-var parts=["早上","下午","夜晚"],dayt="第 "+S.day+" 天",partLab=parts[part()];if($("dayl")&&$("dayl").textContent!==dayt)$("dayl").textContent=dayt;var dp=$("dayPart");if(dp&&dp.textContent!==partLab)dp.textContent=partLab;
+var dayt="第 "+S.day+" 天";if($("dayl")&&$("dayl").textContent!==dayt)$("dayl").textContent=dayt;
 var sb=$("sleepBtn");if(sb){var canSleep=!S.taken&&!S.endingDone&&!S.trip&&!dayLock&&!maskOpen();sb.disabled=!canSleep;sb.classList.toggle("is-off",!canSleep);sb.style.display=S.trip?"none":"";if(S.endingDone){sb.style.display="";sb.disabled=true;sb.classList.add("is-off")}}
 var ch=$("navChat");if(ch){var canChat=chatAvailable()||!!(S.endingDone&&((S.ending|0)===1||(S.ending|0)===2));ch.classList.toggle("is-off",!canChat);ch.style.display="";ch.setAttribute("aria-disabled",canChat?"false":"true")}
 setObsBtn(!!(S.pendingObs&&!S.taken&&!S.trip));
-var pDay=Math.min(1,Math.max(0,S.dsec/DL)),hrs=6+pDay*18,h12=hrs%12,mins=(hrs%1)*60;
-var hDeg=h12*30+mins*.5,mDeg=mins*6;
-var ch=$("clockHour"),cm=$("clockMin");
-if(ch)ch.style.transform="rotate("+hDeg+"deg)";
-if(cm)cm.style.transform="rotate("+mDeg+"deg)";
+/* clock face removed — day label only; sleep still ends the day */
 var av=$("av");if(av.classList.contains("away")!==away)av.classList.toggle("away",away);
 var note=$("note");if(note.classList.contains("on")!==away)note.classList.toggle("on",away);
 if(away){var ne=$("ne"),nh=$("nh"),nt=$("nt");if(S.taken||(S.endingDone&&(S.ending|0)===2)){if(ne)ne.textContent="空屋";if(nh)nh.textContent="女主已搬走";if(nt)nt.textContent="小櫻搬去強叔那裡了。互動／外出／提問／睡覺都已關閉。"}else if(S.trip){/* outing note kept by other path */}}
@@ -2359,7 +2337,7 @@ if(S.taken||(S.endingDone&&(S.ending|0)===2)){if($("nh").textContent!=="女主�
 else if(S.trip){var left=Math.max(0,Math.ceil((S.trip.end-Date.now())/1000));if($("ne"))$("ne").textContent="屋裡只剩你";$("nh").textContent="她還在外面";$("nt").textContent="還有 "+left+" 秒。速度與提前結束在上方；底欄可直接行動。";var cd=$("tripCd");if(cd)cd.textContent="倒數 "+left+" 秒"}else{if(!S.trip)hidePhoneRipple()}}
 function paintStats(){var t=tier(),a=TIERS[t][0],n=TIERS[t+1];
 $("inc").textContent="每天室內互動一次・外出一次・只有睡覺才會日結";
-$("tier").textContent="與小櫻的關係：「"+tname()+"」";
+/* relationship title removed from HUD */
 $("affbar").style.width=(n?Math.min(100,(S.aff-a)/(n[0]-a)*100):100)+"%";
 var showM=uncleOpen()&&effM()>0,box=$("mbox");if(box)box.classList.toggle("off",!showM);
 $("mbar").style.width=(effM()|0)+"%";var mb=$("mbarwrap")||($("mbar")&&$("mbar").parentElement);if(mb)mb.style.display=showM?"block":"none";
