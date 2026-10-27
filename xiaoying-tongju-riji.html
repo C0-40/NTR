@@ -42,7 +42,7 @@ button.chip{font:inherit;font-size:10px;cursor:pointer;line-height:1.3;touch-act
 .actSleep:disabled{opacity:.4;filter:grayscale(.45) brightness(.85);cursor:not-allowed;transform:none;box-shadow:0 1px 4px rgba(0,0,0,.25)}
 @media (prefers-reduced-motion:reduce){.actBtn{transition:none}.actObs:hover,.actSleep:hover:not(:disabled){transform:none}}
 #mus.chip,#sp.chip{touch-action:manipulation;-webkit-user-select:none;user-select:none;-webkit-touch-callout:none}#sp.chip{min-width:3.8em}
-.girl{position:absolute;left:50%;bottom:0;height:100%;aspect-ratio:299/442;background:var(--atlas) 0 0/400% 200% no-repeat;transform:translateX(-50%);transform-origin:50% 100%;animation:br 4s ease-in-out infinite;cursor:pointer;filter:drop-shadow(0 4px 5px rgba(90,59,42,.3));transition:opacity .4s}
+.girl{position:absolute;left:50%;bottom:0;height:100%;aspect-ratio:1/1;width:auto;max-width:min(92%,420px);background:url(sakura-portrait.png) center bottom/contain no-repeat;transform:translateX(-50%);transform-origin:50% 100%;animation:br 4s ease-in-out infinite;cursor:pointer;filter:drop-shadow(0 4px 5px rgba(90,59,42,.3));transition:opacity .4s;image-rendering:auto}
 @keyframes br{50%{transform:translateX(-50%) scaleY(1.012)}}
 @media (prefers-reduced-motion:reduce){.girl{animation:none}}
 .girl.away{opacity:0;pointer-events:none}
@@ -211,7 +211,7 @@ button:focus-visible{outline:3px solid var(--sky);outline-offset:2px}
   .homeui .dayClock-day{font-size:9.5px;padding:1px 6px}
 }
 .homeui #inc,.homeui #afft{display:none!important}
-.homeui .girl{-webkit-backface-visibility:hidden;backface-visibility:hidden;image-rendering:auto;height:92%;top:16%;bottom:auto;transform:translate(-50%,0);transform-origin:50% 0;filter:drop-shadow(0 6px 10px rgba(90,59,42,.35));animation:brHome 4s ease-in-out infinite}
+.homeui .girl{-webkit-backface-visibility:hidden;backface-visibility:hidden;image-rendering:auto;height:88%;width:auto;max-width:min(96%,460px);aspect-ratio:1/1;top:10%;bottom:auto;transform:translate(-50%,0);transform-origin:50% 0;background:url(sakura-portrait.png) center bottom/contain no-repeat;filter:drop-shadow(0 6px 10px rgba(90,59,42,.35));animation:brHome 4s ease-in-out infinite}
 @keyframes brHome{50%{transform:translate(-50%,0) scaleY(1.01)}}
 @media (prefers-reduced-motion:reduce){.homeui .girl{animation:none}}
 .homeui .dlg{left:12px;right:12px;bottom:10px;max-height:26%;background:rgba(255,248,234,.95);cursor:pointer;-webkit-tap-highlight-color:transparent;flex-direction:row;align-items:flex-start}
@@ -1144,6 +1144,168 @@ html,body{color:var(--tx)}
 .chatRoom .chatBack{display:none;margin:0 0 8px;align-self:flex-start}
 .chatRoom .chatBack.on{display:inline-flex}
 
+
+
+/* ===== Phone chrome polish: shared window + docks + meters + transitions ===== */
+:root{
+  --chrome-paper:#fffaf2;
+  --chrome-wood:#7a4e24;
+  --chrome-title:#6e3518;
+  --chrome-body:#2c1a10;
+  --chrome-radius:22px;
+  --chrome-pad:18px 16px 16px;
+  --dock-gap:8px;
+  --dock-tap:44px;
+  --meter-h:8px;
+}
+.mask .box,
+.momPhone .chromeWin,
+.chatRoom .chatPanel{
+  background:var(--chrome-paper)!important;
+  border:4px solid var(--chrome-wood)!important;
+  border-radius:var(--chrome-radius)!important;
+  box-shadow:0 14px 36px rgba(30,16,8,.4)!important;
+  max-width:min(420px,100%);
+  width:100%;
+  box-sizing:border-box;
+}
+.mask .box{padding:56px 16px 16px!important;position:relative}
+.mask .box h3,#mt{
+  color:var(--chrome-title)!important;font-size:17px!important;font-weight:800!important;
+  letter-spacing:.02em;text-align:center;margin:0 0 10px;line-height:1.35;
+}
+.mask .box p,#mp,
+.momPhone .chromeBody,
+.momPhone .msgBubble,
+.chatRoom .cPost .body{
+  color:var(--chrome-body)!important;font-size:16px!important;line-height:1.65!important;font-weight:600;
+}
+.mask .box p,#mp{
+  margin:0 0 14px;min-height:3em;max-height:min(52vh,440px);overflow:auto;
+  -webkit-overflow-scrolling:touch;white-space:pre-line;max-width:36em;
+}
+.mask #mb.btn,
+.momPhone .chromePrimary,
+.chatRoom .chatHead .btn,
+.mask .sqopts .btn{
+  min-height:var(--dock-tap)!important;padding:10px 16px!important;border-radius:14px!important;
+  font-size:15px!important;font-weight:800!important;
+}
+.mask #mb.btn,.momPhone .chromePrimary,.chatRoom .chatHead .btn{
+  background:#c45a72!important;border:2px solid #9a3f58!important;color:#fff!important;
+}
+.mask .sqopts .btn{display:block;width:100%;margin:8px 0;text-align:left}
+
+/* Mom shared chrome window */
+.momPhone{
+  background:rgba(42,24,14,.58)!important;
+  backdrop-filter:blur(2px);-webkit-backdrop-filter:blur(2px);
+  padding:18px!important;
+}
+.momPhone .chromeWin{
+  padding:var(--chrome-pad)!important;margin:auto;max-height:min(88vh,720px);
+  overflow:auto;display:flex;flex-direction:column;gap:12px;cursor:default;
+}
+.momPhone .chromeTitle{display:flex;align-items:center;justify-content:center;gap:10px;padding-bottom:4px}
+.momPhone .chromeTitle h3{margin:0;font-size:17px;font-weight:800;color:var(--chrome-title);letter-spacing:.02em}
+.momPhone .chromeFace.av{
+  width:44px;height:44px;border-radius:50%;flex:0 0 auto;
+  background:linear-gradient(160deg,#f7c4b0,#e07858 55%,#c45a72);
+  display:flex;align-items:center;justify-content:center;color:#fff;font-size:15px;font-weight:800;
+  border:2px solid #fffaf2;box-shadow:0 2px 6px rgba(180,80,40,.18);
+}
+.momPhone .chromeBody{display:flex;flex-direction:column;gap:10px;flex:1}
+.momPhone .msgBubble{
+  align-self:flex-start;max-width:92%;margin:0;padding:10px 12px;
+  background:linear-gradient(180deg,#fff,#fff8ee);
+  border:1px solid rgba(201,166,110,.45);border-radius:4px 16px 16px 16px;
+}
+.momPhone .msgBubble .who{display:block;font-size:11px;color:#c45a72;margin-bottom:4px;font-weight:800}
+.momPhone .chromeActions{margin-top:4px;text-align:right}
+
+/* Chat same chrome */
+.chatRoom{background:rgba(42,24,14,.58)!important}
+.chatRoom .chatPanel{padding:0;overflow:hidden}
+.chatRoom .chatHead{padding:14px 16px 12px;border-bottom:1px solid rgba(122,78,36,.2);display:flex;align-items:center;justify-content:space-between;gap:8px}
+.chatRoom .chatHead b{font-size:17px!important;color:var(--chrome-title)!important;font-weight:800}
+.chatRoom .chatFeed{padding:14px 16px;gap:12px}
+.chatRoom .chatFoot{padding:10px 16px 14px}
+
+/* Modal fade/scale open */
+.mask,.momPhone,.chatRoom{opacity:0;pointer-events:none;transition:opacity .22s ease}
+.mask.on,.momPhone.on,.chatRoom.on{display:flex!important;opacity:1;pointer-events:auto}
+.mask .box,.momPhone .chromeWin,.chatRoom .chatPanel{
+  transform:scale(.96);opacity:.88;
+  transition:transform .24s cubic-bezier(.2,.8,.2,1),opacity .24s ease;
+}
+.mask.on .box,.momPhone.on .chromeWin,.chatRoom.on .chatPanel{transform:scale(1);opacity:1}
+
+/* Docks */
+.dock,.dock.is-places,.dock.is-blank-acts{
+  display:flex;gap:var(--dock-gap)!important;align-items:stretch;
+  margin:8px 0 0;padding:8px 2px calc(10px + env(safe-area-inset-bottom,0px));
+}
+.dock button,.dock.is-places button,.dock.is-blank-acts button{
+  flex:1 1 0;min-width:0;min-height:var(--dock-tap)!important;padding:8px 4px!important;
+  border-radius:14px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;
+  font-size:12px;font-weight:800;line-height:1.2;
+}
+.dock.is-blank-acts button.dockBlank-nap{
+  flex:1.15 1 0;border-radius:999px;
+  background:linear-gradient(165deg,#5a6b78,#3d4a55)!important;
+  border-color:#2a343c!important;box-shadow:0 3px 0 #2a343c;color:#eef3f6!important;
+}
+.dock.is-blank-acts button.dockBlank-nap .dockSub{display:block;font-size:9px;font-weight:650;opacity:.9;color:#c5d2da}
+
+/* Meters: same thickness; chips stay separate over wallpaper */
+.homeui .topMeta{
+  background:transparent!important;border:none!important;box-shadow:none!important;padding:0!important;
+}
+.homeui .topHud .chips{gap:6px;margin:0 0 8px}
+.homeui .topAffRow,.homeui #mlab{
+  display:flex!important;align-items:baseline;justify-content:flex-start;gap:8px;
+  font-size:11px!important;font-weight:750!important;color:#2c1a10!important;
+  letter-spacing:.01em;line-height:1.25;margin:0 0 2px!important;
+}
+.homeui .topAffRow .affVal,.homeui #mlab .affVal{
+  flex:none;font-variant-numeric:tabular-nums;font-weight:800;color:#6e3518;font-size:12px!important;
+}
+.homeui .topMeta .bar,.homeui .topMeta .bar.affBar,.homeui .topMeta .bar.m{
+  height:var(--meter-h)!important;margin:2px 0 0!important;
+  background:#f0e0cc!important;border:1px solid #dfc7a0!important;border-radius:999px!important;
+  overflow:hidden;box-shadow:inset 0 1px 2px rgba(90,59,42,.1);
+}
+.homeui .mbox{margin-top:8px!important;padding-top:0!important;border-top:none!important}
+
+/* Outing spacing */
+.stick.outing .silLayer{
+  top:auto!important;bottom:0!important;left:50%!important;
+  transform:translateX(-50%)!important;width:min(100%,460px);
+}
+.stick.outing .silStage{height:min(38vh,220px)!important}
+
+/* Scene transitions */
+.homeui.fx-leave .scene,
+.homeui.fx-return .scene,
+.homeui.fx-sleep .scene{transition:opacity .45s ease,filter .45s ease,transform .45s ease}
+.homeui.fx-leave .scene{opacity:.35;filter:blur(1.5px) brightness(.92);transform:scale(.985)}
+.homeui.fx-return .scene{animation:fxReturn .55s ease}
+.homeui.fx-sleep .scene{opacity:.2;filter:brightness(.55);transform:scale(1.02)}
+@keyframes fxReturn{0%{opacity:.45;filter:brightness(1.08)}100%{opacity:1;filter:none}}
+
+@media (prefers-reduced-motion:reduce){
+  .mask,.momPhone,.chatRoom,
+  .mask .box,.momPhone .chromeWin,.chatRoom .chatPanel,
+  .homeui.fx-leave .scene,.homeui.fx-return .scene,.homeui.fx-sleep .scene,
+  .homeui .girl{transition:none!important;animation:none!important}
+  .mask.on .box,.momPhone.on .chromeWin,.chatRoom.on .chatPanel{transform:none;opacity:1}
+  .homeui.fx-leave .scene,.homeui.fx-sleep .scene{opacity:.55;filter:none;transform:none}
+}
+
+/* Standing portrait: never mood-tint */
+.homeui .girl:not(.away){filter:drop-shadow(0 6px 10px rgba(90,59,42,.35))!important}
+.homeui .dlg #say{font-size:14px;line-height:1.5}
+
 </style>
 </head>
 <body>
@@ -1233,24 +1395,14 @@ html,body{color:var(--tx)}
   </div>
 </div>
 <div class="momPhone" id="momPhone" aria-hidden="true" role="dialog" aria-modal="true" aria-label="媽媽的訊息" tabindex="0">
-  <div class="phone" role="document">
-    <div class="phone-top" aria-hidden="true"><span class="ear"></span></div>
-    <div class="phone-screen msg-screen">
-      <div class="msgHead">
-        <span class="av" aria-hidden="true">媽</span>
-        <div class="msgHeadText">
-          <b>媽媽</b>
-          <div class="sm">訊息・剛剛</div>
-        </div>
-      </div>
-      <div class="msgThread" id="momBubbles">
-        <div class="msgDay">今天</div>
-        <div class="msgBubble"><span class="who">媽媽</span>阿祿，媽知道你腿骨折了，還不能出門、也不能復健。</div>
-        <div class="msgBubble"><span class="who">媽媽</span>小櫻答應過去照顧你——就是那個青梅竹馬，多年沒見了吧。</div>
-        <div class="msgBubble"><span class="who">媽媽</span>她會搬去跟你住一陣子。乖乖靜養，別逞強；起床、洗澡都讓她幫忙。</div>
-      </div>
-      <div class="hint">輕觸任意處繼續</div>
+  <div class="chromeWin phone" role="document">
+    <div class="chromeTitle"><span class="chromeFace av" aria-hidden="true">媽</span><h3>媽媽的訊息</h3></div>
+    <div class="chromeBody msgThread" id="momBubbles">
+      <div class="msgBubble"><span class="who">媽媽</span>阿祿，媽知道你腿骨折了，還不能出門、也不能復健。</div>
+      <div class="msgBubble"><span class="who">媽媽</span>小櫻答應過去照顧你——就是那個青梅竹馬，多年沒見了吧。</div>
+      <div class="msgBubble"><span class="who">媽媽</span>她會搬去跟你住一陣子。乖乖靜養，別逞強；起床、洗澡都讓她幫忙。</div>
     </div>
+    <div class="chromeActions tl"><button type="button" class="btn chromePrimary" id="momContinue">繼續</button></div>
   </div>
 </div>
 <div class="mask" id="mask"><div class="box"><div class="face"></div><h3 id="mt"></h3><p id="mp"></p><div class="sqopts" id="sqopts"></div><div class="tl"><button type="button" class="btn" id="mb">繼續</button></div></div></div>
@@ -1787,8 +1939,8 @@ var NIGHT=[
 ];
 var EXI={calm:[0,0],joy:[1,0],sad:[2,0],surprise:[3,0],shy:[0,1],pout:[1,1],cold:[2,1],wink:[3,1]},AR=442/299,ex="calm",exT;
 function base(){return S.taken?"sad":effM()>=70?"cold":effM()>=45?"pout":"calm"}
-/* 主立繪固定 atlas 第一格（calm），避免換格造成色調／濾鏡感；表情邏輯仍走 setEx／ex */
-function applyEx(){var av=$("av");if(av)av.style.backgroundPosition="0% 0%"}
+/* 主立繪：單一 sakura-portrait.png，不隨心情換格／上色；表情邏輯仍走 setEx／ex（心聲等） */
+function applyEx(){var av=$("av");if(!av)return;av.style.backgroundImage="";av.style.backgroundSize="";av.style.backgroundPosition="";av.style.filter=""}
 function setEx(k){ex=k||base();applyEx();clearTimeout(exT);exT=setTimeout(function(){ex=base();applyEx()},9000)}
 function uncleishLine(tt){tt=String(tt||"");return /強叔|大叔|陳叔|他的手|他靠|一個人住|更懂我|夜景|晚點回家|門外的他|那個男人/.test(tt)}
 function setSilFace(el,who){if(!el)return;el.classList.remove("is-sil","is-sil-hero","is-sil-uncle");if(!who){el.style.backgroundImage="";el.style.backgroundSize="";el.style.backgroundPosition="";el.style.backgroundColor="";return}el.classList.add("is-sil",who==="uncle"?"is-sil-uncle":"is-sil-hero")}
@@ -1830,7 +1982,7 @@ if(!skipHerUnsaid)mq.push(["🌙 她沒說出口的事","💭 "+pick(thPool())])
 addLog("📅 第"+dayNow+"天結束，外出 "+ev.length+" 次"+(n?"，遇見強叔 "+n+" 次":"")+(force?"・提早睡覺":""));
 S.day=dayNow+1;S.dsec=force?0:Math.max(0,S.dsec-DL);S.homeActToday=false;S.cohabToday=false;S.dEv=[];S.sqToday=[];S.sqDone=false;S.pendingSq=null;S.outToday=false;S.pendingObs=null;S.motif=null;S.journalGlow=0;S.pendingChat=null;setObsBtn(false);hidePhoneRipple();
 nextPop()}
-function sleepDay(){if(busy||S.taken||S.endingDone||dayLock||maskOpen())return;if(S.trip){say("（她還在外面。等她回來，或先點「打瞌睡」再睡。）","pout");return}withBusy(function(){if(S.trip||dayLock||maskOpen()||S.taken)return;
+function sleepDay(){if(busy||S.taken||S.endingDone||dayLock||maskOpen())return;runSceneFx("fx-sleep",600);if(S.trip){say("（她還在外面。等她回來，或先點「打瞌睡」再睡。）","pout");return}withBusy(function(){if(S.trip||dayLock||maskOpen()||S.taken)return;
 if(!S.endingDone&&(effM()|0)>=99&&(S.day|0)<30){mq.push({endingPrep:1});endDay(true,true);render();return}
 if(!S.endingDone&&(S.day|0)>=29&&(S.uncleStep|0)>=10&&step5Open()){if(!S.castOff)queueCastOff();else if(!S.endingDone)mq.push({endingPrep:1});endDay(true,true);render();return}
 endDay(true);render()})}
@@ -2090,7 +2242,8 @@ function openPhoneRipple(){if(!phoneRippleCur)return;var it=phoneRippleCur;hideP
 function scheduleJournalGlow(){clearTimeout(journalGlowT);if(!journalOn()){S.journalGlow=0;return}S.journalGlow=0;paintSideBadges();journalGlowT=setTimeout(function(){if(S.trip||S.taken||!journalOn())return;var has=S.journals&&S.journals.some(function(x){return x.day===S.day});if(!has)return;S.journalGlow=1;paintSideBadges();try{save()}catch(e){}},3200)}
 function openJournal(i){return;if(!journalOn()){say("（她還沒開始寫日記。）","pout");return}if(i<0||!S.journals||!S.journals[i])return;S.journalOpen=i;if(S.journalGlow){S.journalGlow=0;paintSideBadges()}if(tab==="journal"){pane();var pn=$("pane");if(pn){pn.classList.remove("is-empty");pn.classList.add("is-open")}}else setTab("journal")}
 function closeJournal(){S.journalOpen=null;render();syncMoodDim()}
-function go(i){if(busy||S.trip||S.taken||S.endingDone||S.outToday)return;withBusy(function(){goNow(i)});}
+function runSceneFx(name,ms){var hu=document.querySelector(".homeui");if(!hu)return;hu.classList.remove("fx-leave","fx-return","fx-sleep");if(!name)return;hu.classList.add(name);clearTimeout(runSceneFx._t);runSceneFx._t=setTimeout(function(){hu.classList.remove("fx-leave","fx-return","fx-sleep")},ms||520)}
+function go(i){if(busy||S.trip||S.taken||S.endingDone||S.outToday)return;runSceneFx("fx-leave",480);withBusy(function(){goNow(i)});}
 function goNow(i){if(S.trip||S.taken||S.outToday)return;var p=PLACES[i],dep=pickDepart(i);S.trip={id:i,place:p[1],end:Date.now()+p[2]*1000,acts:[],depart:dep,skipped:false};S.outToday=true;hidePhoneRipple();phoneRippleT=Date.now();
 closePane();
 mq.push(["🚪 她出門了",dep]);
@@ -2103,7 +2256,7 @@ if(S.dEv.length&&p.met)S.dEv[S.dEv.length-1].fr=p.trTxt;
 addLog("🔍 起疑｜"+(p.trTxt||"").slice(0,48));
 moodPeekOn=1;syncMoodDim();
 nextPop();render()})}
-function back(){if(!S.trip||backLock)return;backLock=1;try{var trip=S.trip,pid=trip.id,p=PLACES[pid],pm=placeMeta(pid),ev=pickPlaceEv(pid,false),it=pick(p[7]),c=p[5]+Math.floor(Math.random()*p[5]*0.4),b=tier(),acts=(trip.acts||[]).slice();
+function back(){if(!S.trip||backLock)return;backLock=1;runSceneFx("fx-return",560);try{var trip=S.trip,pid=trip.id,p=PLACES[pid],pm=placeMeta(pid),ev=pickPlaceEv(pid,false),it=pick(p[7]),c=p[5]+Math.floor(Math.random()*p[5]*0.4),b=tier(),acts=(trip.acts||[]).slice();
 if(!acts.length)acts=[];
 S.exp+=p[4];/* outing return +0 親密度 */clampAff();S.trips++;
 var metChance=Math.min(.92,(.28+p[2]/130+S.trips*.005+(acts.indexOf("call")>=0?0.05:0)+(S.viewM>0?S.viewM*0.02:S.viewM*0.012))*pm.meet);
@@ -2335,7 +2488,7 @@ $("affbar").style.width=Math.min(100,Math.max(0,S.aff))+"%";
 var showM=!!(typeof isOutingPhase==="function"&&isOutingPhase()&&uncleOpen()&&((effM()|0)>0||(S.uncleStep|0)>0||(S.day|0)>=6));
 var box=$("mbox");if(box)box.classList.toggle("off",!showM);
 $("mbar").style.width=(effM()|0)+"%";var mb=$("mbarwrap")||($("mbar")&&$("mbar").parentElement);if(mb)mb.style.display=showM?"block":"none";
-var mv=$("mlab");if(mv)mv.textContent="❤️ 大叔親密度 "+(effM()|0);
+var mv=$("mlab");if(mv)mv.innerHTML="❤️ 大叔親密度 <span class=\"affVal\">"+(effM()|0)+"</span>";
 status()}
 function render(doPane){paintStats();paintDock();if(doPane!==false)pane();paintAskTab();paintQBtn();paintSideBadges();markChatThreadsNotice();paintChatNotice();try{queueCohabUnlock()}catch(e){}var pn=$("pane");if(pn){var empty=!(pn.innerHTML&&pn.innerHTML.trim());pn.classList.toggle("is-empty",empty);pn.classList.toggle("is-open",!empty&&!!tab)}syncMoodDim();syncSilhouette();save()}
 
@@ -2381,7 +2534,7 @@ say("「別亂動，石膏會裂開。」她別開視線，耳朵卻有點紅。
 addLog("🚪 第一章：小櫻拎著行李搬進來・「只是答應了阿姨」");
 nextPop()}checkMemories()}
 function maybeMomIntro(){if(S.momIntroSeen){var el=$("momPhone");if(el){el.classList.remove("on");el.setAttribute("aria-hidden","true")}return}showMomIntro()}
-function bindMomIntro(){var el=$("momPhone");if(!el)return;el.addEventListener("click",function(){dismissMomIntro()});el.addEventListener("keydown",function(e){if(e.key==="Enter"||e.key==="Escape"||e.key===" "){e.preventDefault();dismissMomIntro()}})}
+function bindMomIntro(){var el=$("momPhone");if(!el)return;el.addEventListener("click",function(){dismissMomIntro()});var btn=$("momContinue");if(btn)btn.addEventListener("click",function(e){e.stopPropagation();dismissMomIntro()});el.addEventListener("keydown",function(e){if(e.key==="Enter"||e.key==="Escape"||e.key===" "){e.preventDefault();dismissMomIntro()}})}
 bindMomIntro();
 load();
 if(S.trip&&Date.now()>=S.trip.end)back();
