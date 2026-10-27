@@ -1951,7 +1951,7 @@ if(met&&st<=1)out.push("你說不上來哪裡不對。只是門關上的聲音�
 if(placeName&&band<=1&&Math.random()<.55){var pf={"便利店":"袋口露出便利店收據，時間普通。","商場":"購物袋邊角磨損，像真的逛過很久。","咖啡店":"袖口有淡淡咖啡香，說得通。","公園":"鞋邊沾一點乾草，說在長椅坐過。","書店":"袖口有淡淡紙墨香，說得通。"};if(pf[placeName])out.push(pf[placeName])}
 if(motif&&motif.tr){if(out.length)out[0]=motif.tr;else out.push(motif.tr)}
 return out}
-function tname(){if(S.endingDone&&(S.ending|0)===2||S.taken)return"女主已搬走";if(S.endingDone&&(S.ending|0)===1)return"偷偷在一起的人";if(S.endingDone&&(S.ending|0)===3)return"回不去的戀人";return effM()>=70?"漸漸疏遠的人":effM()>=45?"態度冷淡的人":TIERS[tier()][1]}
+function tname(){if(S.endingDone&&(S.ending|0)===2||S.taken)return"女主已搬走";if(S.endingDone&&(S.ending|0)===1)return"偷偷在一起的人";if(S.endingDone&&(S.ending|0)===3)return"回不去的戀人";return effM()>=70?"對你愧疚的人":effM()>=45?"嘴硬心虛的人":TIERS[tier()][1]}
 function ntrOn(){return uncleOpen()&&((S.day|0)>=13)&&((S.uncleStep|0)>0||effM()>0||(S.aff>=100&&S.trips>=5)||canAdvanceUncle())}
 function rate(){return +(1+tier()*1.5+S.exp*0.02).toFixed(1)}
 function $(i){return document.getElementById(i)}
