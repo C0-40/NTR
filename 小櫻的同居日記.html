@@ -1089,6 +1089,8 @@ html,body{color:var(--tx)}
   display:flex;justify-content:flex-start;gap:8px;align-items:baseline;
   font-weight:750;font-size:11px;color:#2c1a10;margin:0;line-height:1.3;
 }
+.homeui .topAffRow{justify-content:space-between}
+.homeui .topAffRow .affLab{font-size:10.5px;font-weight:700;color:#5a3c28;letter-spacing:.02em}
 .homeui .topAffRow .affVal{font-size:11.5px;color:#6e3518;font-variant-numeric:tabular-nums;font-weight:800}
 .homeui .mbox{margin-top:6px!important;padding-top:5px;border-top:1px dashed rgba(140,100,55,.28)}
 .homeui .topHud .dayClock{
@@ -1158,12 +1160,12 @@ html,body{color:var(--tx)}
             </div>
           </div>
       <div class="topMeta">
-            <div class="topAffRow"><span class="affVal" title="小櫻親密度">🌸 <span id="affn">0</span></span></div>
+            <div class="topAffRow"><span class="affLab">阿祿親密度</span><span class="affVal">🌸 <span id="affn">0</span></span></div>
             <div class="bar affBar" aria-hidden="true"><i id="affbar"></i><span class="affInk" id="affInk" aria-hidden="true"></span><span class="affSweep" id="affSweep" aria-hidden="true"></span></div>
             <div class="sm" id="afft"></div>
             <div class="sm" id="inc"></div>
             <div id="mbox" class="mbox off">
-              <div class="sm metaMlab" id="mlab">😈 強叔的親密度</div>
+              <div class="sm metaMlab" id="mlab">😈 大叔親密度</div>
               <div class="bar m" id="mbarwrap"><i id="mbar"></i></div>
             </div>
           </div>
@@ -1259,12 +1261,12 @@ var TIERS=[[0,"重逢的青梅竹馬"],[30,"漸漸熟稔"],[100,"無話不談的
 var HOME_TIME=12;
 /* [id, label, icon, _unused, affGain, tip] — 無體力；每天室內互動一次 */
 var HOME_ACTS=[
-/* [id, label, icon, unlockAff, affGain, tip] — 大綱 5.2 */
+/* [id, label, icon, unlockAff, affGain, tip] — 室內互動一律 +5 */
 ["care","關心她","💗",0,5,"聊聊今天，聽她說外出的見聞"],
 ["tv","一起看電視","📺",10,5,"並肩坐在沙發上選一部片，邊看邊聊"],
 ["game","玩桌遊","🎲",30,5,"輸的人要答應對方一個小要求"],
 ["stars","窗邊看星星","✨",70,5,"熄燈後並肩坐在窗邊"],
-["sweets","一起做點心","🍪",90,7,"他口述步驟，她動手，做一份甜點"]
+["sweets","一起做點心","🍪",90,5,"他口述步驟，她動手，做一份甜點"]
 ];
 var HOME_LINES={
 care:[
@@ -1522,22 +1524,19 @@ var ENDING_CHAT="只有她不會丟下我。髮夾還在，雨夜也還在。你
 /* 同居事件：沿用解鎖事件彈窗／重看流程；門檻改為小櫻親密度；一天最多一件 */
 var STORY=[
 [0,"第一次吵架","你逞強撐著拐杖去倒水，腿一軟，杯沿撞上桌緣。小櫻衝過來扶你，嘴上卻不饒人：「笨蛋！石膏裂了怎麼辦——叫我啊。」\n\n她別過頭，耳朵微紅。"],
-[5,"扶他起床","打著石膏的腿使不上力。她扶你從床上坐起，兩人的臉靠得很近，呼吸交會的一瞬，同時別開視線。\n\n「別亂動。石膏會裂開。」聲音很硬，指尖卻停了一下。"],
-[10,"冰箱旁的便利貼","你每天偷偷在冰箱旁貼一張手寫便利貼——今日的笑話、一聲謝謝。她嘴上嫌幼稚，卻把每一張收進素描本。\n\n「……收著好玩而已。才不是珍藏。」"],
-[15,"陽台的下午茶","她扶你到陽台的椅子坐下曬太陽，兩人各捧一杯熱飲。她把自己的外套披在你肩上。\n\n「怕你感冒會麻煩到我。……別誤會。」"],
-[25,"一起玩桌遊","輸的人要答應對方一個小要求。她輸了，被你要求「說一句真心話」。她紅著臉憋了半天：\n\n「……你是笨蛋。」"],
-[30,"停電夜","燈光突然全滅。手電筒下，你們分著一碗泡麵，聊起童年的停電。她的聲音變得很輕。\n\n「那時候……樓梯間好黑。還好有人在。」"],
-[35,"包住石膏洗澡","她用保鮮膜把石膏纏好，在浴室門外守著，隔著門板喊：「熱水別太燙——我才沒有在聽！」\n\n門外傳來腳步挪動，又很快停住。"],
-[40,"翻舊相簿","兩人翻出小時候的合照。她指著照片裡滿身尖刺的自己，第一次笑著說：「那時候真的很凶。」\n\n「你還敢坐在我家門口，瘋子。」"],
-[45,"雨夜窗邊","下大雨。她買菜回來淋得全身濕，你用拐杖挪到門口遞毛巾。兩人並肩坐在窗邊聽雨。\n\n她第一次主動提起小時候那把傘：「……你那時候，傘都偏向我。」"],
-[55,"燒焦的鍋子","她第一次做飯，鍋底燒焦。油煙裡她對火苗僵了一瞬，隨即嘴硬：「是你太挑剔——吃完。」\n\n最後兩人還是把焦味飯扒光了。"],
-[60,"她睡著的沙發","她累到在沙發上睡著。你用拐杖勾來毯子輕輕蓋上，看著她的睡臉，忘了時間。\n\n她夢裡嘟嚷：「……才不是為了你。」"],
-[65,"一起拼拼圖","茶几上一千片拼圖。爭著放最後一塊時，手背碰在一起，又同時縮回去。\n\n「……你放。我才不稀罕。」耳尖卻紅了。"],
-[75,"一起煮媽媽的菜","你在一旁口述，她手忙腳亂照做，端出一道長得很奇怪、但很好吃的菜。\n\n「別告訴阿姨我做成這樣。……你笑什麼啦！」"],
-[95,"在家看電影","筆電放在茶几上，兩人並肩看完一場電影。手靠得很近，誰都沒有動。\n\n片尾字幕亮起時，她輕輕吸了一口氣，像有話要說——又吞回去。"],
-[130,"午夜廚房","Day 12 的夜晚。冰箱燈照著兩張想說話的臉。你開口，她也開口，最後卻同時說：\n\n「……早點睡吧。」\n\n這是差一步的頂點。話卡在喉嚨裡，像還能再靠近一寸。"],
-[150,"髮夾","燈光下你才看清：她還戴著當年那支小雛菊髮夾。她被你盯得不自在，伸手觸了觸它。\n\n「很適合你——你以前說過。」「……閉嘴啦。」"],
-[200,"再一次，換你照顧我","下廚時油鍋竄起火苗，燙到她的手。她整個人僵住，像回到小時候那場火。你撐著拐杖衝過去關火，帶她沖冷水，笨手笨腳地擦藥，弄痛了又道歉。\n\n她沒有嘴硬，也沒有轉開視線：「謝謝你，阿祿。當年是你，現在也是你。」\n\n「等你好了，再把剩下的話告訴我，好不好？」"]
+[8,"扶他起床","打著石膏的腿使不上力。她扶你從床上坐起，兩人的臉靠得很近，呼吸交會的一瞬，同時別開視線。\n\n「別亂動。石膏會裂開。」聲音很硬，指尖卻停了一下。"],
+[15,"一起玩桌遊","輸的人要答應對方一個小要求。她輸了，被你要求「說一句真心話」。她紅著臉憋了半天：\n\n「……你是笨蛋。」"],
+[23,"停電夜","燈光突然全滅。手電筒下，你們分著一碗泡麵，聊起童年的停電。她的聲音變得很輕。\n\n「那時候……樓梯間好黑。還好有人在。」"],
+[31,"包住石膏洗澡","她用保鮮膜把石膏纏好，在浴室門外守著，隔著門板喊：「熱水別太燙——我才沒有在聽！」\n\n門外傳來腳步挪動，又很快停住。"],
+[38,"翻舊相簿","兩人翻出小時候的合照。她指著照片裡滿身尖刺的自己，第一次笑著說：「那時候真的很凶。」\n\n「你還敢坐在我家門口，瘋子。」"],
+[46,"雨夜窗邊","下大雨。她買菜回來淋得全身濕，你用拐杖挪到門口遞毛巾。兩人並肩坐在窗邊聽雨。\n\n她第一次主動提起小時候那把傘：「……你那時候，傘都偏向我。」"],
+[54,"燒焦的鍋子","她第一次做飯，鍋底燒焦。油煙裡她對火苗僵了一瞬，隨即嘴硬：「是你太挑剔——吃完。」\n\n最後兩人還是把焦味飯扒光了。"],
+[62,"她睡著的沙發","她累到在沙發上睡著。你用拐杖勾來毯子輕輕蓋上，看著她的睡臉，忘了時間。\n\n她夢裡嘟嚷：「……才不是為了你。」"],
+[69,"一起拼拼圖","茶几上一千片拼圖。爭著放最後一塊時，手背碰在一起，又同時縮回去。\n\n「……你放。我才不稀罕。」耳尖卻紅了。"],
+[77,"在家看電影","筆電放在茶几上，兩人並肩看完一場電影。手靠得很近，誰都沒有動。\n\n片尾字幕亮起時，她輕輕吸了一口氣，像有話要說——又吞回去。"],
+[85,"午夜廚房","Day 12 的夜晚。冰箱燈照著兩張想說話的臉。你開口，她也開口，最後卻同時說：\n\n「……早點睡吧。」\n\n這是差一步的頂點。話卡在喉嚨裡，像還能再靠近一寸。"],
+[92,"髮夾","燈光下你才看清：她還戴著當年那支小雛菊髮夾。她被你盯得不自在，伸手觸了觸它。\n\n「很適合你——你以前說過。」「……閉嘴啦。」"],
+[100,"再一次，換你照顧我","下廚時油鍋竄起火苗，燙到她的手。她整個人僵住，像回到小時候那場火。你撐著拐杖衝過去關火，帶她沖冷水，笨手笨腳地擦藥，弄痛了又道歉。\n\n她沒有嘴硬，也沒有轉開視線：「謝謝你，阿祿。當年是你，現在也是你。」\n\n「等你好了，再把剩下的話告訴我，好不好？」"]
 ];
 var TALK=[
 ["……才不是為了你。我只是答應阿姨而已。","別那樣盯著我看啦。","石膏別亂蹭，會裂開的。","……要起身就說一聲。我又不是不會扶。"],
@@ -1833,7 +1832,7 @@ function part(){return S.dsec<60?0:S.dsec<120?1:2}
 function ask(i){if(busy||S.endingDone)return;var q=QA[i];if(!q||S.taken||S.trip||S.aff<q[2]||!qaGateOk(q))return;
 var x=qaAnswer(q),st=effM()|0;
 markAskOptSeen(i);say("「"+x+"」",st>=70?"shy":st>=30?"pout":["joy","wink","shy","calm","joy","shy","calm","wink","joy","sad"][i%10]);
-addLog("💬 "+q[1]+"→「"+x+"」");if(S.qa.indexOf(i)<0){S.qa.push(i);var bAsk=tier();S.aff+=6;S.exp+=1;hearts(3);afterAffTier(bAsk)}closePane();render()}
+addLog("💬 "+q[1]+"→「"+x+"」");if(S.qa.indexOf(i)<0){S.qa.push(i);S.exp+=1;/* 首次提問不加親密度 */try{save()}catch(e){}}closePane();render()}
 function maskOpen(){var m=$("mask");return !!(m&&m.classList.contains("on"))}
 function endDay(force){if(dayLock||S.taken||S.trip||maskOpen())return;if(!force&&S.dsec<DL)return;dayLock=1;
 var ev=S.dEv||[],F=[],n=0,tn=["早上","下午","夜晚"];
@@ -1898,7 +1897,7 @@ function effM(){return S.m|0}
 function maybeStartUncleRoute(fromUnlock){if(S.uncleStarted)return;if(fromUnlock){/* 回憶集滿：允許踏入步驟五親密度帶，不重置已有進度 */}S.uncleStarted=true;try{save()}catch(e){}}
 function mCapForStep(st){st=st|0;if(st<=0)return 0;if(st<=2)return 14;if(st<=4)return 29;if(st<=6)return 49;if(st<=9)return 69;if(st===10)return 84;return 99}
 function uncleMCap(){var st=S.uncleStep|0;var a=typeof uncleArcByStep==="function"?uncleArcByStep(st):null;var cap=a&&a.mCap!=null?a.mCap|0:mCapForStep(st);if(!step5Open())cap=Math.min(cap,29);return Math.max(0,Math.min(99,cap))}
-function addM(d){if(!d)return 0;var x=d>0?Math.max(1,Math.round(d*M_GAIN)):Math.min(-1,Math.round(d*M_GAIN));var next=(S.m|0)+x;var cap=uncleMCap();if(next>cap)next=cap;S.m=Math.max(0,Math.min(100,next));return x}
+function addM(d){if(!d)return 0;if((S.day|0)<6)return 0;var x=d>0?Math.max(1,Math.round(d*M_GAIN)):Math.min(-1,Math.round(d*M_GAIN));var next=(S.m|0)+x;var cap=uncleMCap();if(next>cap)next=cap;S.m=Math.max(0,Math.min(100,next));return x}
 function stage(){var m=effM(),st=m>=60?3:m>=38?2:m>=15?1:0;if(!step5Open()&&st>1)st=1;return st}
 function clampView(){S.viewM=Math.max(-5,Math.min(5,S.viewM|0))}
 function sqOpen(i){var q=SQ[i];if(S.taken||S.aff<q[2])return false;if(q[4]&&effM()<q[3])return false;if(!q[4]&&q[3]>0&&effM()<q[3])return false;return true}
@@ -1937,7 +1936,7 @@ if(placeName&&band<=1&&Math.random()<.55){var pf={"便利店":"袋口露出便�
 if(motif&&motif.tr){if(out.length)out[0]=motif.tr;else out.push(motif.tr)}
 return out}
 function tname(){if(S.endingDone&&(S.ending|0)===2||S.taken)return"女主已搬走";if(S.endingDone&&(S.ending|0)===1)return"出軌之後";if(S.endingDone&&(S.ending|0)===3)return"回不去的戀人";return effM()>=70?"對你愧疚的人":effM()>=45?"嘴硬心虛的人":TIERS[tier()][1]}
-function ntrOn(){return uncleOpen()&&((S.day|0)>=13)&&((S.uncleStep|0)>0||effM()>0||(S.aff>=100&&S.trips>=5)||canAdvanceUncle())}
+function ntrOn(){return uncleOpen()&&((S.day|0)>=6)&&((S.uncleStep|0)>0||effM()>0||(S.aff>=100&&S.trips>=5)||canAdvanceUncle())}
 function rate(){return +(1+tier()*1.5+S.exp*0.02).toFixed(1)}
 function $(i){return document.getElementById(i)}
 function fmt(n){return Math.floor(n).toLocaleString()}
@@ -1988,11 +1987,11 @@ if(S.pendingChat){var slip=S.pendingChat;S.pendingChat=null;say("「"+slip+"」"
 if(dissonanceOn()&&Math.random()<.72){var fx=pick(FLAT_TALK);say("「"+fx+"」",pick(["calm","pout","cold"]));try{localStorage.setItem("sakura_v1",JSON.stringify(S))}catch(e){}return}
 if(st>=2&&effM()>0&&Math.random()<(st>=3?.42:.22)){var near=NEAR_SAY[Math.min(st,NEAR_SAY.length-1)]||NEAR_SAY[0];var nx=pick(near);say("「"+nx+"」",["pout","cold","cold"][Math.min(st-1,2)]);addLog("💬 "+nx);try{localStorage.setItem("sakura_v1",JSON.stringify(S))}catch(e){}return}
 var p=TALK[t].slice();if(S.exp>=30&&t>=1&&!effM())p.push("今天去外面發生了好多事，我慢慢跟你說。");
-if(st>=1&&effM()>0&&Math.random()<[0,.35,.7,1][st])p=NT[st];var x=pick(p),k=detect(x);if(p===NT[st])k=["calm","shy","pout","cold"][st];else if(!k&&effM()<45&&t>=4)k="wink";say("「"+x+"」",k);if(effM()<45){var bTalk=tier();S.aff+=.4;hearts(2);lightAff();afterAffTier(bTalk)}else{try{localStorage.setItem("sakura_v1",JSON.stringify(S))}catch(e){}}}
+if(st>=1&&effM()>0&&Math.random()<[0,.35,.7,1][st])p=NT[st];var x=pick(p),k=detect(x);if(p===NT[st])k=["calm","shy","pout","cold"][st];else if(!k&&effM()<45&&t>=4)k="wink";say("「"+x+"」",k);try{localStorage.setItem("sakura_v1",JSON.stringify(S))}catch(e){}}
 
 function idle(){var st=stage();say("「"+pick(NT[st])+"」",["calm","shy","pout","cold"][st])}
 function lightAff(){var t=tier(),a=TIERS[t][0],n=TIERS[t+1];$("affn").textContent=fmt(S.aff);$("affbar").style.width=(n?Math.min(100,(S.aff-a)/(n[0]-a)*100):100)+"%";try{localStorage.setItem("sakura_v1",JSON.stringify(S))}catch(e){}}
-function pat(){if(busy||S.trip||S.taken)return;if(dissonanceOn()){say(pick(FLAT_PAT),"pout");return}if(step5Open()&&effM()>=45){say(effM()>=70?"「……先別碰。我手還……有點亂。對不起。」":"「……別突然碰我。我剛、剛有點心虛。」",effM()>=70?"shy":"pout");return}var j=Math.floor(Math.random()*3);say(["「呀！突然戳我……」","「嘿嘿，癢癢的。」","「阿祿在看我嗎？」"][j],["surprise","wink","shy"][j]);var bPat=tier();S.aff+=0.2;hearts(3);lightAff();afterAffTier(bPat)}
+function pat(){if(busy||S.trip||S.taken)return;if(dissonanceOn()){say(pick(FLAT_PAT),"pout");return}if(step5Open()&&effM()>=45){say(effM()>=70?"「……先別碰。我手還……有點亂。對不起。」":"「……別突然碰我。我剛、剛有點心虛。」",effM()>=70?"shy":"pout");return}var j=Math.floor(Math.random()*3);say(["「呀！突然戳我……」","「嘿嘿，癢癢的。」","「阿祿在看我嗎？」"][j],["surprise","wink","shy"][j]);hearts(2);try{localStorage.setItem("sakura_v1",JSON.stringify(S))}catch(e){}}
 (function(){var av=$("av"),pt=0,lp=0,moved=0;
 if(!av)return;
 function clearLp(){if(lp){clearTimeout(lp);lp=0}}
@@ -2202,7 +2201,7 @@ var due=[];STORY.forEach(function(s){if((S.aff|0)<s[0])return;if(S.seen.indexOf(
 if(!due.length)return;due.sort(function(a,b){return a[0]-b[0]});var s=due[0];S.seen.push(s[0]);S.cohabToday=true;
 mq.push(["📌 同居事件："+s[1],s[2]]);addLog("📌 同居事件・"+s[1]);if(!maskOpen())nextPop()}
 function uncleArcByStep(n){for(var i=0;i<UNCLE_ARC.length;i++)if(UNCLE_ARC[i].step===n)return UNCLE_ARC[i];return null}
-function canAdvanceUncle(){var next=(S.uncleStep|0)+1;if(next>11)return false;if((S.day|0)<13)return false;var a=uncleArcByStep(next);if(!a)return false;if(a.needStep5&&!step5Open())return false;return true}
+function canAdvanceUncle(){var next=(S.uncleStep|0)+1;if(next>11)return false;if((S.day|0)<6)return false;var a=uncleArcByStep(next);if(!a)return false;if(a.needStep5&&!step5Open())return false;return true}
 function queueUncleStep(){if(!canAdvanceUncle())return false;var next=(S.uncleStep|0)+1;var a=uncleArcByStep(next);if(!a)return false;
 S.uncleStep=next;S.uncleStarted=true;S.metOut=true;S.uncleTh=(a.th||[]).slice();
 var gained=addM(a.mGain|0);
@@ -2339,9 +2338,10 @@ function paintStats(){var t=tier(),a=TIERS[t][0],n=TIERS[t+1];
 $("inc").textContent="每天室內互動一次・外出一次・只有睡覺才會日結";
 /* relationship title removed from HUD */
 $("affbar").style.width=(n?Math.min(100,(S.aff-a)/(n[0]-a)*100):100)+"%";
-var showM=uncleOpen()&&effM()>0,box=$("mbox");if(box)box.classList.toggle("off",!showM);
+var showM=!!(typeof isOutingPhase==="function"&&isOutingPhase()&&uncleOpen()&&((effM()|0)>0||(S.uncleStep|0)>0||(S.day|0)>=6));
+var box=$("mbox");if(box)box.classList.toggle("off",!showM);
 $("mbar").style.width=(effM()|0)+"%";var mb=$("mbarwrap")||($("mbar")&&$("mbar").parentElement);if(mb)mb.style.display=showM?"block":"none";
-var mv=$("mlab");if(mv)mv.textContent="😈 強叔的親密度 "+(effM()|0)+"%";
+var mv=$("mlab");if(mv)mv.textContent="😈 大叔親密度 "+(effM()|0)+"%";
 status()}
 function render(doPane){paintStats();paintDock();if(doPane!==false)pane();paintAskTab();paintQBtn();paintSideBadges();try{queueCohabUnlock()}catch(e){}var pn=$("pane");if(pn){var empty=!(pn.innerHTML&&pn.innerHTML.trim());pn.classList.toggle("is-empty",empty);pn.classList.toggle("is-open",!empty&&!!tab)}syncMoodDim();syncSilhouette();save()}
 
