@@ -211,7 +211,7 @@ button:focus-visible{outline:3px solid var(--sky);outline-offset:2px}
   .homeui .dayClock-day{font-size:9.5px;padding:1px 6px}
 }
 .homeui #inc,.homeui #afft{display:none!important}
-.homeui .girl{-webkit-backface-visibility:hidden;backface-visibility:hidden;image-rendering:auto;height:88%;width:auto;max-width:min(96%,460px);aspect-ratio:1/1;top:10%;bottom:auto;transform:translate(-50%,0) scale(2);transform-origin:50% 0;background:url(sakura-portrait.png) center bottom/contain no-repeat;filter:drop-shadow(0 6px 10px rgba(90,59,42,.35));animation:brHome 4s ease-in-out infinite}
+.homeui .girl{-webkit-backface-visibility:hidden;backface-visibility:hidden;image-rendering:auto;height:58%;width:auto;max-width:min(90%,400px);aspect-ratio:1/1;top:0;bottom:auto;left:50%;transform:translate(-50%,0) scale(2);transform-origin:50% 12%;background:url(sakura-portrait.png) center 8%/contain no-repeat;filter:drop-shadow(0 6px 10px rgba(90,59,42,.35));animation:brHome 4s ease-in-out infinite}
 @keyframes brHome{50%{transform:translate(-50%,0) scale(2.02)}}
 @media (prefers-reduced-motion:reduce){.homeui .girl{animation:none}}
 .homeui .dlg{left:12px;right:12px;bottom:10px;max-height:26%;background:rgba(255,248,234,.95);cursor:pointer;-webkit-tap-highlight-color:transparent;flex-direction:row;align-items:flex-start}
@@ -304,7 +304,7 @@ button:focus-visible{outline:3px solid var(--sky);outline-offset:2px}
 .homeui .sceneActs-legacy{display:none!important}
 @media (max-width:420px){
   .homeui .scene{min-height:min(68dvh,520px);border-width:5px}
-  .homeui .girl{height:90%;top:17%;bottom:auto}
+  .homeui .girl{height:58%;top:0;bottom:auto}
   .bubble{min-height:42px;padding:7px 9px;font-size:10.5px}
   .dock button{min-height:50px;font-size:12px}
   .sideNav{top:24%}
@@ -1305,6 +1305,65 @@ html,body{color:var(--tx)}
 /* Standing portrait: never mood-tint */
 .homeui .girl:not(.away){filter:drop-shadow(0 6px 10px rgba(90,59,42,.35))!important}
 .homeui .dlg #say{font-size:14px;line-height:1.5}
+
+/* Hide header tools: volume / 同居事件 / 紀錄 (features kept in DOM/JS) */
+.homeui .topHud .chips.hudTools,
+.homeui .hudTools,
+.homeui .topHud .chipIcons{
+  display:none!important;
+}
+
+/* Reflow 阿祿親密度 + day on phone: no paper panel, wallpaper in gaps */
+.homeui .topHud{
+  display:flex!important;
+  flex-direction:row!important;
+  flex-wrap:nowrap!important;
+  align-items:flex-start!important;
+  justify-content:space-between!important;
+  gap:10px!important;
+  padding:10px 12px 0!important;
+  background:transparent!important;border:none!important;box-shadow:none!important;border-radius:0!important;
+  grid-template-columns:none!important;grid-template-rows:none!important;
+}
+.homeui .topHud .topMeta,
+.homeui .topMeta{
+  flex:1 1 auto;min-width:0;max-width:calc(100% - 4.8em);
+  grid-column:auto!important;grid-row:auto!important;justify-self:auto!important;
+  margin:0!important;padding:0!important;border-radius:0!important;
+  background:transparent!important;border:none!important;box-shadow:none!important;
+  pointer-events:none;
+}
+.homeui .topHud .dayClock,
+.homeui .dayClock{
+  flex:0 0 auto;grid-column:auto!important;grid-row:auto!important;
+  position:static!important;align-self:flex-start;justify-self:auto!important;
+  margin:0!important;padding:0!important;
+  background:transparent!important;border:none!important;box-shadow:none!important;
+}
+.homeui .topAffRow{justify-content:flex-start!important;gap:8px;margin:0 0 2px}
+.homeui .mbox{margin-top:8px!important;padding-top:0!important;border-top:none!important}
+.homeui .topMeta .bar,
+.homeui .topMeta .bar.affBar,
+.homeui .topMeta .bar.m{
+  height:8px!important;margin:2px 0 0!important;
+  background:#f0e0cc!important;border:1px solid #dfc7a0!important;
+  border-radius:999px!important;box-shadow:inset 0 1px 2px rgba(90,59,42,.1);
+}
+
+/* Portrait face upper-center, keep 2x */
+.homeui .girl:not(.away){
+  top:0!important;left:50%!important;bottom:auto!important;
+  height:58%!important;max-width:min(90%,400px)!important;
+  transform:translate(-50%,0) scale(2)!important;
+  transform-origin:50% 12%!important;
+  background-image:url(sakura-portrait.png)!important;
+  background-position:center 8%!important;
+  background-size:contain!important;
+  background-repeat:no-repeat!important;
+}
+@media (max-width:420px){
+  .homeui .girl:not(.away){height:56%!important;top:0!important}
+}
 
 </style>
 </head>
