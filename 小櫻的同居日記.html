@@ -178,7 +178,7 @@ button:focus-visible{outline:3px solid var(--sky);outline-offset:2px}
 .homeui .topMeta .bar.m i{background:linear-gradient(90deg,#a0674a,#6b3a28);box-shadow:inset 0 1px 0 rgba(255,230,200,.25)}
 /* 立繪右上：日子＋指針圓鐘（當日進度） */
 .homeui .dayClock{position:static;display:flex;flex-direction:column;align-items:center;gap:2px;pointer-events:none}
-.homeui .dayClock-day{font-size:clamp(18px,4.6vw,22px);font-weight:700;color:#2c1608;letter-spacing:.18em;line-height:1;padding:0 2px 4px;border-radius:0;background:transparent;border:none;border-bottom:2px solid rgba(122,78,36,.55);box-shadow:none;white-space:nowrap}
+.homeui .dayClock-day{font-family:"PingFang TC","Noto Sans TC","Hiragino Sans GB","Segoe UI",system-ui,sans-serif;font-size:clamp(15px,3.8vw,17px);font-weight:800;color:#4a2c14;letter-spacing:.02em;line-height:1;padding:0;border-radius:0;background:transparent;border:none;box-shadow:none;text-shadow:0 0 10px rgba(255,250,240,.95),0 0 3px rgba(255,252,245,.98);white-space:nowrap}
 .homeui .dayClock-dial{width:48px;height:48px;border-radius:50%;background:
   radial-gradient(circle at 42% 36%,#fffdf8 0%,#f6ead4 62%,#e8d4b0 100%);
   border:2.5px solid #6b4220;box-shadow:inset 0 0 0 1.5px #c9a66e,inset 0 1px 2px rgba(255,255,255,.55),0 2px 0 #4a2a12;position:relative}
@@ -1100,10 +1100,11 @@ html,body{color:var(--tx)}
   filter:none;
 }
 .homeui .topHud .dayClock-day{
-  /* day mark: ink on wallpaper, no paper chip */
-  font-size:clamp(18px,4.6vw,22px);font-weight:700;color:#2c1608;letter-spacing:.18em;line-height:1;
-  padding:0 2px 4px;border-radius:0;background:transparent;border:none;
-  border-bottom:2px solid rgba(122,78,36,.55);box-shadow:none;white-space:nowrap;
+  /* wood-ink stamp; wallpaper shows through; not a paper chip */
+  font-family:"PingFang TC","Noto Sans TC","Hiragino Sans GB","Segoe UI",system-ui,sans-serif;
+  font-size:clamp(15px,3.8vw,17px);font-weight:800;color:#4a2c14;letter-spacing:.02em;line-height:1;
+  padding:0;border-radius:0;background:transparent;border:none;box-shadow:none;
+  text-shadow:0 0 10px rgba(255,250,240,.95),0 0 3px rgba(255,252,245,.98);white-space:nowrap;
 }
 .homeui .topHud .dayClock-dial{
   width:46px;height:46px;border:2.5px solid #6b4220;
@@ -1374,24 +1375,38 @@ html,body{color:var(--tx)}
 .homeui .dayClock{
   flex:0 0 auto;grid-column:auto!important;grid-row:auto!important;
   position:static!important;align-self:center!important;justify-self:auto!important;
-  margin:0!important;padding:0 2px!important;
+  margin:0!important;padding:0 4px 0 8px!important;
   background:transparent!important;border:none!important;box-shadow:none!important;
-  display:flex!important;align-items:center!important;min-height:32px!important;
+  display:flex!important;align-items:center!important;min-height:36px!important;
 }
 .homeui .topHud .dayClock-day,
 .homeui .dayClock-day,#dayl{
-  font-family:"Iowan Old Style","Palatino Linotype","Songti TC","Noto Serif TC",Georgia,serif!important;
-  font-size:clamp(18px,4.6vw,22px)!important;font-weight:700!important;
-  letter-spacing:.18em!important;line-height:1!important;
-  padding:0 2px 2px!important;border-radius:0!important;
+  /* wood-ink day stamp on wallpaper — distinct from intimacy chip, no paper panel */
+  font-family:"PingFang TC","Noto Sans TC","Hiragino Sans GB","Segoe UI",system-ui,sans-serif!important;
+  font-size:clamp(15px,3.8vw,17px)!important;font-weight:800!important;
+  letter-spacing:.02em!important;line-height:1!important;
+  padding:0!important;margin:0!important;border-radius:0!important;
   min-height:0!important;box-sizing:border-box;
-  display:inline-flex!important;align-items:baseline;justify-content:flex-end;
-  color:#2c1608!important;
+  display:inline-flex!important;align-items:center;justify-content:flex-end;gap:0;
+  color:#4a2c14!important;
   background:transparent!important;border:none!important;box-shadow:none!important;
-  text-shadow:0 1px 0 rgba(255,248,234,.55);
-  white-space:nowrap!important;
-  border-bottom:2px solid rgba(122,78,36,.55)!important;
-  padding-bottom:4px!important
+  text-shadow:0 0 10px rgba(255,250,240,.95),0 0 3px rgba(255,252,245,.98),0 1px 0 rgba(255,248,234,.75);
+  white-space:nowrap!important
+}
+.homeui #dayl .dayMark-tick{
+  display:inline-block;width:3px;height:1.15em;margin-right:8px;flex:0 0 auto;
+  border-radius:1px;
+  background:linear-gradient(180deg,#b8894a 0%,#7a4e24 55%,#5a3518 100%);
+  box-shadow:0 0 6px rgba(255,248,234,.55);
+}
+.homeui #dayl .dayMark-k{
+  font-size:.78em;font-weight:700;letter-spacing:.12em;opacity:.82;
+  transform:translateY(.04em)
+}
+.homeui #dayl .dayMark-n{
+  font-size:1.35em;font-weight:900;letter-spacing:.04em;
+  margin:0 .06em;font-variant-numeric:tabular-nums;
+  color:#3a210e
 }
 .homeui .topAffRow{justify-content:flex-start!important;gap:8px;margin:0}
 .homeui .mbox{margin-top:6px!important;padding-top:5px!important;border-top:1px dashed rgba(140,100,55,.28)!important}
@@ -2712,7 +2727,11 @@ var stEl=document.querySelector(".stick");if(stEl)stEl.classList.toggle("outing"
 var acts=$("noteActs");if(acts){if(skipOn)acts.removeAttribute("hidden");else acts.setAttribute("hidden","")}var sk=$("skip");if(sk){sk.style.display="none";sk.setAttribute("hidden","")}var spEl=$("sp");if(spEl)spEl.style.display=skipOn?"":"none";
 var th=$("thbox");if(th&&!skipOn){var want="none";if(th.style.display!==want)th.style.display=want}
 else if(th&&skipOn){if(th.style.display!=="flex")th.style.display="flex"}paintHeartFace(ex);
-var dayt="第 "+S.day+" 天";if($("dayl")&&$("dayl").textContent!==dayt)$("dayl").textContent=dayt;
+var dayN=S.day|0,daylEl=$("dayl");
+if(daylEl&&(daylEl.getAttribute("data-day")|0)!==dayN){
+  daylEl.setAttribute("data-day",String(dayN));
+  daylEl.innerHTML='<span class="dayMark-tick" aria-hidden="true"></span><span class="dayMark-k">第</span><span class="dayMark-n">'+dayN+'</span><span class="dayMark-k">天</span>';
+}
 if(typeof paintSideStoryMem==="function")paintSideStoryMem();
 var sb=$("sleepBtn");if(sb){var canSleep=!S.taken&&!S.endingDone&&!S.trip&&!dayLock&&!maskOpen();sb.disabled=!canSleep;sb.classList.toggle("is-off",!canSleep);if(S.endingDone){sb.disabled=true;sb.classList.add("is-off")}}
 var ch=$("navChat");if(ch){var canChat=chatAvailable()||!!(S.endingDone&&((S.ending|0)===1||(S.ending|0)===2));ch.classList.toggle("is-off",!canChat);ch.style.display="";ch.setAttribute("aria-disabled",canChat?"false":"true")}
