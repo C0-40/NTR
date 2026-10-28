@@ -2164,6 +2164,18 @@ function ensureJournalLen(s){var n=0,out=s;while(out.length<200&&n<4){out+="\n\n
 function journalOn(){return false}
 function scrubJournals(){if(!S.journals)S.journals=[];if(!journalOn()){S.journals=[];S.journalOpen=null;return} }
 function writeJournal(place,pid,met,motif){return}
+var journalGlowT=0,phoneRippleT=0,phoneRippleHideT=0,phoneRippleCur=null;
+var moodPeekOn=0;
+function clearMoodPeek(){moodPeekOn=0;syncMoodDim()}
+function syncMoodDim(){
+  var hu=document.querySelector(".homeui");if(!hu)return;
+  var outing=hu.classList.contains("outing-shell")||!!(document.querySelector(".stick.outing"));
+  if(outing){hu.classList.remove("mood-peek","mood-journal");return}
+  var journal=tab==="journal"&&journalOn();
+  var pn=$("pane");var jOpen=journal&&pn&&pn.classList.contains("is-open")&&!(pn.classList.contains("is-empty"));
+  hu.classList.toggle("mood-journal",!!jOpen);
+  hu.classList.toggle("mood-peek",!!moodPeekOn&&!jOpen);
+}
 
 function hasMetOut(){return uncleOpen()&&(!!S.metOut||(S.uncleStep|0)>0)}
 /* 3E 動作剪影擴充點：未來可依 blankAct／poseId 換 src（如 sil-hero-act-*.png）；本輪只用站姿圖 */
@@ -2189,6 +2201,59 @@ function showPhoneRipple(){if(!S.trip||S.taken||maskOpen())return;var st=stage()
 function openPhoneRipple(){if(!phoneRippleCur)return;var it=phoneRippleCur;hidePhoneRipple();var soft=tier()>=3||S.aff>=100;popup(it.t,(soft&&it.soft)?it.soft:it.body)}
 function scheduleJournalGlow(){clearTimeout(journalGlowT);if(!journalOn()){S.journalGlow=0;return}S.journalGlow=0;paintSideBadges();journalGlowT=setTimeout(function(){if(S.trip||S.taken||!journalOn())return;var has=S.journals&&S.journals.some(function(x){return x.day===S.day});if(!has)return;S.journalGlow=1;paintSideBadges();try{save()}catch(e){}},3200)}
 function openJournal(i){return}
+function closeJournal(){S.journalOpen=null;render();syncMoodDim()}
+function runSceneFx(name,ms){var hu=document.querySelector(".homeui");if(!hu)return;hu.classList.remove("fx-leave","fx-return","fx-sleep");if(!name)return;hu.classList.add(name);clearTimeout(runSceneFx._t);runSceneFx._t=setTimeout(function(){hu.classList.remove("fx-leave","fx-return","fx-sleep")},ms||520)}
+function go(i){if(busy||S.trip||S.taken||S.endingDone||S.outToday)return;runSceneFx("fx-leave",480);withBusy(function(){goNow(i)});}
+function goNow(i){if(S.trip||S.taken||S.outToday)return;var p=PLACES[i],dep=pickDepart(i);S.trip={id:i,place:p[1],end:Date.now()+p[2]*1000,acts:[],depart:dep,skipped:false};S.outToday=true;hidePhoneRipple();phoneRippleT=Date.now();
+closePane();
+mq.push(["🚪 她出門了",dep]);
+say("「那我出門囉！去"+p[1]+"～別等太晚喔。」","wink");addLog("🚪 外出："+p[1]+"｜"+dep.replace(/\n/g," "));thought();nextPop();render()}
+function setObsBtn(on){var b=$("obsBtn");if(!b)return;var was=b.classList.contains("on");b.classList.toggle("on",!!on);if(on&&!was){b.classList.remove("obs-appear");void b.offsetWidth;b.classList.add("obs-appear")}if(!on){b.classList.remove("obs-appear");b.blur()}}
+function observeTraces(){if(busy||!S.pendingObs||S.taken)return;if(maskOpen()||dayLock){say("（先看完眼前的事，再起疑。）","pout");return}
+withBusy(function(){var p=S.pendingObs;if(!p)return;S.pendingObs=null;setObsBtn(false);
+mq.push(["🔍 起疑",p.trTxt||""]);
+if(S.dEv.length&&p.met)S.dEv[S.dEv.length-1].fr=p.trTxt;
+addLog("🔍 起疑｜"+(p.trTxt||"").slice(0,48));
+moodPeekOn=1;syncMoodDim();
+nextPop();render()})}
+function back(){if(!S.trip||backLock)return;backLock=1;runSceneFx("fx-return",560);try{var trip=S.trip,pid=trip.id,p=PLACES[pid],pm=placeMeta(pid),ev=pickPlaceEv(pid,false),it=pick(p[7]),c=p[5]+Math.floor(Math.random()*p[5]*0.4),b=tier(),acts=(trip.acts||[]).slice();
+if(!acts.length)acts=[];
+/* outing: no 探索, +0 親密度 */clampAff();S.trips++;
+var metChance=Math.min(.92,(.28+p[2]/130+S.trips*.005+(acts.indexOf("call")>=0?0.05:0)+(S.viewM>0?S.viewM*0.02:S.viewM*0.012))*pm.meet);
+if(pid==0&&stage()<=0)metChance*=.45;
+var forceStep=canAdvanceUncle();
+var met=(forceStep||(ntrOn()&&Math.random()<metChance)),g=0,st;
+if(met){ev=pickPlaceEv(pid,true);if(!forceStep){g=Math.round(p[2]/12+S.trips*.15)+Math.floor(Math.random()*3);g=Math.max(0,Math.round(g*(1+S.viewM*0.12)*pm.mMul));g=addM(g)}S.metOut=true}
+st=stage();
+var motif=pickTripMotif(pid,met,acts,st);
+var traces=buildTraces(met,acts,trip.place||p[1],motif);S.motif=null;S.trip=null;hidePhoneRipple();
+var t;
+if(met&&dissonanceOn())t="「我回來了。」她把"+it+"放在桌上，語氣平常得像只是去買菜。";
+else if(met)t="「……我回來了。」她把"+it+"放在桌上，語氣平得像練習過。";
+else t="「阿祿，我回來了！我去了"+p[1]+"，"+ev+"。這個"+it+"送給你！」";
+say(t,met?(dissonanceOn()?"calm":["shy","shy","pout","cold"][st]):"joy");
+addLog((met?"🚪 ":p[0]+" ")+t+"｜"+dualTip());
+if(effM()<45&&!met)hearts(4);
+var trTxt=traces.join("\n\n");
+S.pendingObs={trTxt:trTxt,met:met,motif:motif?{id:motif.id,mode:motif.mode}:null};
+if(met&&st>=2&&Math.random()<(st>=3?.55:.38)){var band=NEAR_SAY[Math.min(st,NEAR_SAY.length-1)]||NEAR_SAY[0];S.pendingChat=pick(band);}
+setObsBtn(true);
+if(forceStep){queueUncleStep()}
+if(!S.endingDone&&(effM()|0)>=99&&(S.day|0)<30){var hasPrep=false;for(var _ei=0;_ei<mq.length;_ei++){if(mq[_ei]&&mq[_ei].endingPrep)hasPrep=true}if(!hasPrep)mq.push({endingPrep:1})}
+queueSqAsk();
+var nightTxt=(dissonanceOn()||(motif&&motif.mode==="clash"))?pick(FLAT_NIGHT):pick(NIGHT[Math.min(st,NIGHT.length-1)]);
+if(st>=2&&!dissonanceOn()&&!(motif&&motif.th))nightTxt+="\n\n你沒睡好。懷疑比她的呼吸聲更響。";
+mq.push(["🌙 當晚",nightTxt]);
+S.dEv.push({id:pid,pt:part(),met:met,fr:met?"（尚未起疑）":("她去了"+p[1]+"，"+ev+"，"+pick(SOFT))});
+queueCohabUnlock();
+afterAffTier(b);/* no rank popup */
+NSTORY.filter(function(s){var th=s[0]|0;var open=(th<=20)?((S.uncleStep|0)>=1&&effM()>=th):(step5Open()&&effM()>=th);return open&&S.seen.indexOf("n"+s[0])<0}).forEach(function(s){S.seen.push("n"+s[0]);mq.push(["💔 "+s[1],s[2]])});
+/* full bar does not force early move-out */
+nextPop()}finally{backLock=0}}
+function queueSqAsk(){if(S.sqDone||S.taken||S.pendingSq!=null)return;var a=sqAvail();if(!a.length)return;S.pendingSq=a[Math.floor(Math.random()*a.length)];try{save()}catch(e){}paintQBtn()}
+function paintSideStoryMem(){var outing=!!(S&&S.trip&&!S.taken)||(typeof isOutingPhase==="function"&&isOutingPhase());["navStory","navMem"].forEach(function(id){var el=$(id);if(!el)return;el.style.display=outing?"none":"";el.setAttribute("aria-hidden",outing?"true":"false")});var ask=$("navAsk");if(ask){var hideAsk=outing||!!(S&&S.endingDone);ask.style.display=hideAsk?"none":"";ask.setAttribute("aria-hidden",hideAsk?"true":"false")}}
+function paintAskHome(){paintSideStoryMem();var ob=$("obsBtn");if(ob){var q=$("qHomeBtn");var qOn=q&&q.classList.contains("on");ob.style.visibility=qOn?"hidden":"";ob.style.pointerEvents=qOn?"none":(ob.disabled?"none":"")}
+}
 function paintQBtn(){var b=$("qHomeBtn");if(!b)return;var show=S&&S.pendingSq!=null&&!S.taken&&!S.trip&&!dayLock&&!maskOpen();b.classList.toggle("on",!!show);b.setAttribute("aria-hidden",show?"false":"true");if(typeof paintAskHome==="function")paintAskHome()}
 function openPendingSq(){if(busy||S.pendingSq==null||S.taken||S.trip)return;if(maskOpen()){say("（先看完眼前的事。）","pout");return}var qi=S.pendingSq;S.pendingSq=null;paintQBtn();mq.push({sq:qi});if(!maskOpen())nextPop();try{save()}catch(e){}render(false)}
 
