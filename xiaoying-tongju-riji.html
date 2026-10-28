@@ -178,7 +178,7 @@ button:focus-visible{outline:3px solid var(--sky);outline-offset:2px}
 .homeui .topMeta .bar.m i{background:linear-gradient(90deg,#a0674a,#6b3a28);box-shadow:inset 0 1px 0 rgba(255,230,200,.25)}
 /* 立繪右上：日子＋指針圓鐘（當日進度） */
 .homeui .dayClock{position:static;display:flex;flex-direction:column;align-items:center;gap:2px;pointer-events:none}
-.homeui .dayClock-day{font-size:10px;font-weight:800;color:#3f2410;letter-spacing:.04em;line-height:1.2;padding:2px 7px;border-radius:999px;background:rgba(255,250,242,.92);border:1px solid rgba(170,130,80,.5);box-shadow:0 1px 0 rgba(255,255,255,.65),0 1px 3px rgba(90,59,42,.1);white-space:nowrap}
+.homeui .dayClock-day{font-size:clamp(18px,4.6vw,22px);font-weight:700;color:#2c1608;letter-spacing:.18em;line-height:1;padding:0 2px 4px;border-radius:0;background:transparent;border:none;border-bottom:2px solid rgba(122,78,36,.55);box-shadow:none;white-space:nowrap}
 .homeui .dayClock-dial{width:48px;height:48px;border-radius:50%;background:
   radial-gradient(circle at 42% 36%,#fffdf8 0%,#f6ead4 62%,#e8d4b0 100%);
   border:2.5px solid #6b4220;box-shadow:inset 0 0 0 1.5px #c9a66e,inset 0 1px 2px rgba(255,255,255,.55),0 2px 0 #4a2a12;position:relative}
@@ -211,8 +211,8 @@ button:focus-visible{outline:3px solid var(--sky);outline-offset:2px}
   .homeui .dayClock-day{font-size:9.5px;padding:1px 6px}
 }
 .homeui #inc,.homeui #afft{display:none!important}
-.homeui .girl{-webkit-backface-visibility:hidden;backface-visibility:hidden;image-rendering:auto;height:72%;width:auto;max-width:min(92%,420px);aspect-ratio:1/1;top:auto;bottom:0;left:50%;transform:translateX(-50%) scale(1.5);transform-origin:50% 100%;background:url(sakura-portrait.png) center bottom/contain no-repeat;filter:drop-shadow(0 6px 10px rgba(90,59,42,.35));animation:brHome 4s ease-in-out infinite}
-@keyframes brHome{50%{transform:translateX(-50%) scale(1.52)}}
+.homeui .girl{-webkit-backface-visibility:hidden;backface-visibility:hidden;image-rendering:auto;height:72%;width:auto;max-width:min(92%,420px);aspect-ratio:1/1;top:auto;bottom:0;left:50%;transform:translateX(-50%) scale(1.875);transform-origin:50% 100%;background:url(sakura-portrait.png) center bottom/contain no-repeat;filter:drop-shadow(0 6px 10px rgba(90,59,42,.35));animation:brHome 4s ease-in-out infinite}
+@keyframes brHome{50%{transform:translateX(-50%) scale(1.92)}}
 @media (prefers-reduced-motion:reduce){.homeui .girl{animation:none}}
 .homeui .dlg{left:12px;right:12px;bottom:10px;max-height:26%;background:rgba(255,248,234,.95);cursor:pointer;-webkit-tap-highlight-color:transparent;flex-direction:row;align-items:flex-start}
 .homeui .dlg #say{cursor:pointer}
@@ -1100,12 +1100,10 @@ html,body{color:var(--tx)}
   filter:none;
 }
 .homeui .topHud .dayClock-day{
-  font-size:10px;font-weight:800;color:#3f2410;letter-spacing:.04em;line-height:1.2;
-  padding:2px 8px;border-radius:999px;
-  background:linear-gradient(180deg,#fffaf3,#f0e0c4);
-  border:1px solid rgba(170,130,80,.55);
-  box-shadow:0 1px 0 rgba(255,255,255,.65) inset,0 1px 3px rgba(90,59,42,.1);
-  white-space:nowrap;
+  /* day mark: ink on wallpaper, no paper chip */
+  font-size:clamp(18px,4.6vw,22px);font-weight:700;color:#2c1608;letter-spacing:.18em;line-height:1;
+  padding:0 2px 4px;border-radius:0;background:transparent;border:none;
+  border-bottom:2px solid rgba(122,78,36,.55);box-shadow:none;white-space:nowrap;
 }
 .homeui .topHud .dayClock-dial{
   width:46px;height:46px;border:2.5px solid #6b4220;
@@ -1149,16 +1147,25 @@ html,body{color:var(--tx)}
 .obsHomeBtn .actLab{font-size:13px}
 .obsHomeBtn .actSub{font-size:9.5px;opacity:.75;font-weight:600}
 
-.homeui .sideNav.right{top:22%;gap:7px}
-.homeui .sideNav .bubble{min-width:0;max-width:7.2em;padding:7px 9px;font-size:10.5px;min-height:40px;line-height:1.15;text-align:center;white-space:normal}
+.homeui .sideNav{
+  top:auto!important;bottom:calc(26% + 36px)!important;gap:10px!important;z-index:6!important
+}
+.homeui .sideNav.left{left:10px!important}
+.homeui .sideNav.right{right:10px!important}
+.homeui .sideNav .bubble{
+  min-width:0;max-width:9em;padding:11px 14px;font-size:13.5px;min-height:48px;
+  line-height:1.2;text-align:center;white-space:normal;font-weight:800;
+  border-width:2.5px;box-shadow:0 4px 10px rgba(90,59,42,.18)
+}
 .homeui .sideNav .bubble .actTxt{display:flex;flex-direction:column;align-items:flex-start;gap:1px}
-.homeui .sideNav .bubble .actLab{font-size:11px}
-.homeui .sideNav .bubble .actSub{font-size:9px;opacity:.75;font-weight:600}
+.homeui .sideNav .bubble .actLab{font-size:13.5px}
+.homeui .sideNav .bubble .actSub{font-size:10px;opacity:.75;font-weight:600}
 .homeui .dock button.dockSleep{letter-spacing:.02em}
 @media (max-width:420px){
-  .homeui .sideNav.left{left:4px}
-  .homeui .sideNav.right{right:4px;top:20%;gap:6px}
-  .homeui .sideNav .bubble{max-width:6.6em;padding:6px 7px;font-size:10px;min-height:38px}
+  .homeui .sideNav{bottom:calc(28% + 30px)!important;gap:8px!important}
+  .homeui .sideNav.left{left:6px!important}
+  .homeui .sideNav.right{right:6px!important}
+  .homeui .sideNav .bubble{max-width:8.2em;padding:10px 12px;font-size:12.5px;min-height:44px}
   .obsHomeBtn,.qHomeBtn{bottom:108px;padding:9px 14px;font-size:13px}
   .homeui .dock button{font-size:12px;padding:9px 2px;min-height:50px}
 }
@@ -1367,20 +1374,24 @@ html,body{color:var(--tx)}
 .homeui .dayClock{
   flex:0 0 auto;grid-column:auto!important;grid-row:auto!important;
   position:static!important;align-self:center!important;justify-self:auto!important;
-  margin:0!important;padding:0!important;
+  margin:0!important;padding:0 2px!important;
   background:transparent!important;border:none!important;box-shadow:none!important;
-  display:flex!important;align-items:center!important;
+  display:flex!important;align-items:center!important;min-height:32px!important;
 }
 .homeui .topHud .dayClock-day,
 .homeui .dayClock-day,#dayl{
-  font-size:13px!important;font-weight:800!important;letter-spacing:.04em;line-height:1.2;
-  padding:7px 12px!important;border-radius:999px!important;
-  min-height:32px;box-sizing:border-box;
-  display:inline-flex!important;align-items:center;justify-content:center;
-  background:linear-gradient(180deg,#fffaf3,#f0e0c4)!important;
-  border:1.5px solid rgba(170,130,80,.55)!important;
-  box-shadow:0 1px 0 rgba(255,255,255,.65) inset,0 1px 3px rgba(90,59,42,.1)!important;
-  white-space:nowrap;color:#3f2410!important;
+  font-family:"Iowan Old Style","Palatino Linotype","Songti TC","Noto Serif TC",Georgia,serif!important;
+  font-size:clamp(18px,4.6vw,22px)!important;font-weight:700!important;
+  letter-spacing:.18em!important;line-height:1!important;
+  padding:0 2px 2px!important;border-radius:0!important;
+  min-height:0!important;box-sizing:border-box;
+  display:inline-flex!important;align-items:baseline;justify-content:flex-end;
+  color:#2c1608!important;
+  background:transparent!important;border:none!important;box-shadow:none!important;
+  text-shadow:0 1px 0 rgba(255,248,234,.55);
+  white-space:nowrap!important;
+  border-bottom:2px solid rgba(122,78,36,.55)!important;
+  padding-bottom:4px!important
 }
 .homeui .topAffRow{justify-content:flex-start!important;gap:8px;margin:0}
 .homeui .mbox{margin-top:6px!important;padding-top:5px!important;border-top:1px dashed rgba(140,100,55,.28)!important}
@@ -1392,11 +1403,11 @@ html,body{color:var(--tx)}
   border-radius:999px!important;box-shadow:inset 0 1px 2px rgba(90,59,42,.1);
 }
 
-/* Portrait 1.5x, feet on brown page frame bottom (not dlg) */
+/* Portrait 1.875x (1.5×1.25), feet on brown page frame bottom (not dlg) */
 .homeui .girl:not(.away){
   top:auto!important;left:50%!important;bottom:0!important;
   height:72%!important;max-width:min(92%,420px)!important;
-  transform:translateX(-50%) scale(1.5)!important;
+  transform:translateX(-50%) scale(1.875)!important;
   transform-origin:50% 100%!important;
   background-image:url(sakura-portrait.png)!important;
   background-position:center bottom!important;
@@ -1433,6 +1444,18 @@ html,body{color:var(--tx)}
   .homeui .dock button.dockSleep .dockSleep-lab{font-size:12.5px}
   .homeui .dock button.dockSleep .dockSleep-sub{font-size:9px}
   .homeui .sideNav.left{gap:6px}
+}
+
+
+/* 起疑 appear (window chrome unchanged) */
+.obsHomeBtn.obs-appear{animation:obsAppear .55s ease 1}
+@keyframes obsAppear{
+  0%{opacity:0;transform:translateX(-50%) translateY(10px) scale(.9)}
+  70%{opacity:1;transform:translateX(-50%) translateY(-2px) scale(1.03)}
+  100%{opacity:1;transform:translateX(-50%) translateY(0) scale(1)}
+}
+@media (prefers-reduced-motion:reduce){
+  .obsHomeBtn.obs-appear{animation:none!important}
 }
 
 /* --- batch 1-12 + day fade --- */
@@ -2455,7 +2478,7 @@ function goNow(i){if(S.trip||S.taken||S.outToday)return;var p=PLACES[i],dep=pick
 closePane();
 mq.push(["🚪 她出門了",dep]);
 say("「那我出門囉！去"+p[1]+"～別等太晚喔。」","wink");addLog("🚪 外出："+p[1]+"｜"+dep.replace(/\n/g," "));thought();nextPop();render()}
-function setObsBtn(on){var b=$("obsBtn");if(!b)return;b.classList.toggle("on",!!on);if(!on)b.blur()}
+function setObsBtn(on){var b=$("obsBtn");if(!b)return;var was=b.classList.contains("on");b.classList.toggle("on",!!on);if(on&&!was){b.classList.remove("obs-appear");void b.offsetWidth;b.classList.add("obs-appear")}if(!on){b.classList.remove("obs-appear");b.blur()}}
 function observeTraces(){if(busy||!S.pendingObs||S.taken)return;if(maskOpen()||dayLock){say("（先看完眼前的事，再起疑。）","pout");return}
 withBusy(function(){var p=S.pendingObs;if(!p)return;S.pendingObs=null;setObsBtn(false);
 mq.push(["🔍 起疑",p.trTxt||""]);
@@ -2535,12 +2558,12 @@ function paintChatFeed(){var feed=$("chatFeed"),back=$("chatBack");if(!feed)retu
 if(open==null||open===""){feed.classList.add("is-list");if(back)back.classList.remove("on");
 var html="";list.forEach(function(x){var t=x.t;html+='<button type="button" class="cThread" onclick="chatOpenThread('+x.i+')"><b>'+t.title+'</b><span class="sm">'+(t.sub||"討論串")+'・'+(t.posts?t.posts.length:0)+' 則</span></button>'});
 if(!html)html='<p class="sm">還沒有討論串。</p>';feed.innerHTML=html;
-var sub=$("chatSub");if(sub)sub.textContent="只讀・每個強叔步驟會開新討論串";return}
+var sub=$("chatSub");if(sub)sub.textContent="偶然滑到的討論串，不知為何忍不住看下去";return}
 feed.classList.remove("is-list");if(back)back.classList.add("on");
 var t=(CHAT_THREADS||[])[open|0];var html="";
 if(t&&t.posts){t.posts.forEach(function(p){html+='<article class="cPost"><span class="who is-anon">'+p.who+'</span><div class="body">'+p.body+'</div><span class="meta">'+p.meta+'</span></article>'})}
 if(!html)html='<p class="sm">這個討論串還沒有貼文。</p>';feed.innerHTML=html;
-var sub=$("chatSub");if(sub)sub.textContent=(t&&t.sub)||"只讀・討論串"}
+var sub=$("chatSub");if(sub)sub.textContent=(t&&t.sub)||"偶然滑到的討論串，不知為何忍不住看下去"}
 function chatShowList(){S.chatOpenStep=null;paintChatFeed();try{save()}catch(e){}}
 function chatOpenThread(i){S.chatOpenStep=i|0;paintChatFeed();try{save()}catch(e){}}
 function paintChatNotice(){var b=$("navChat");if(!b)return;var on=!!(S&&S.chatNotice);b.innerHTML=on?('💬 聊天室<span class="opt-new" title="有新討論串">✦</span>'):"💬 聊天室";b.classList.toggle("chat-notice",on)}
