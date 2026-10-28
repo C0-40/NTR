@@ -1506,15 +1506,27 @@ html,body{color:var(--tx)}
 .opt-new{display:inline-block;margin-left:4px;color:#c45a72;font-weight:900;font-size:1.05em;line-height:1;vertical-align:middle}
 .opt-new::after{content:none!important}
 .outingActLine{
-  position:absolute;left:12px;bottom:118px;z-index:9;max-width:min(78%,280px);
-  padding:10px 12px;border-radius:12px;cursor:pointer;
-  background:rgba(40,28,20,.88);color:#f6ecdc;border:1px solid rgba(200,160,100,.45);
-  box-shadow:0 8px 20px rgba(0,0,0,.35);font-size:12.5px;line-height:1.45;
-  display:flex;flex-direction:column;gap:4px
+  /* outing 發訊息／打電話／尻槍 — bottom of brown game frame, never 心聲 */
+  position:absolute;left:50%;right:auto;bottom:8px;top:auto;
+  transform:translateX(-50%);
+  z-index:7;width:min(92%,340px);max-width:340px;
+  padding:10px 12px;border-radius:12px;cursor:pointer;box-sizing:border-box;
+  background:rgba(28,20,14,.92);color:#f6ecdc;border:1px solid rgba(200,160,100,.5);
+  box-shadow:0 8px 20px rgba(0,0,0,.4);font-size:12.5px;line-height:1.45;
+  display:flex;flex-direction:column;gap:4px;text-align:left;
+  pointer-events:auto
+}
+.homeui .stick.outing .outingActLine{
+  bottom:8px!important;left:50%!important;transform:translateX(-50%)!important;
+  z-index:7!important; /* above silhouette, inside scene; heartRow/心聲 is outside scene */
+  width:min(92%,340px)!important;max-width:340px!important
 }
 .outingActLine[hidden]{display:none!important}
 .outingActLine b{font-size:12px;letter-spacing:.04em;color:#f0d9a8}
 .outingActLine i{opacity:.65;font-style:normal;font-size:10.5px;margin-top:2px}
+@media (max-width:420px){
+  .homeui .stick.outing .outingActLine{bottom:6px!important;width:min(94%,320px)!important;padding:9px 10px!important;font-size:12px}
+}
 .homeui .stick.outing .note .note-acts{display:flex;flex-direction:column;gap:6px;margin-top:6px}
 .homeui .stick.outing .note .btn{width:100%;min-height:30px!important;font-size:10.5px!important;padding:5px 8px!important;margin-top:0!important}
 .dayFade{
