@@ -1633,7 +1633,7 @@ html,body{color:var(--tx)}
       <button type="button" class="bubble sideStory" data-t="story" id="navStory">📖 日常</button>
       <button type="button" class="bubble sideMem" data-t="mem" id="navMem">🌸 回憶</button>
     </nav>
-    <div class="girl" id="av" role="button" aria-label="和她聊天（長按可戳一下）" tabindex="0"></div>
+    <div class="girl" id="av" role="button" aria-label="和她聊天" tabindex="0"></div>
     <div class="outingActLine" id="outingActLine" hidden role="button" tabindex="0" aria-label="外出行動結果，點一下關閉"></div>
     <div class="note" id="note" aria-live="polite">
       <div class="note-eyebrow" id="ne">屋裡只剩你</div>
@@ -1662,7 +1662,7 @@ html,body{color:var(--tx)}
     </div>
     <button type="button" class="obsHomeBtn actObs" id="obsBtn" aria-label="起疑" onclick="observeTraces()"><span class="actIco" aria-hidden="true">👁</span><span class="actTxt"><span class="actLab">起疑</span><span class="actSub">窺探痕跡</span></span></button>
     <button type="button" class="qHomeBtn" id="qHomeBtn" aria-label="小櫻有問題要問你" onclick="openPendingSq()">❓ 問題</button>
-    <div class="dlg" id="dlg" role="button" tabindex="0" aria-label="和她聊天（點一下對話）"><span class="dlgAv" id="dlgAv" aria-hidden="true"></span><div class="dlgBody"><b id="nm">小櫻</b><span id="say">……才不是為了你。我只是答應了阿姨。</span></div></div>
+    <div class="dlg" id="dlg" role="button" tabindex="0" aria-label="和她聊天（點一下對話）"><span class="dlgAv" id="dlgAv" aria-hidden="true"></span><div class="dlgBody"><b id="nm">小櫻</b><span id="say">哼！才不是為了你，我只是為了報答阿姨而已。</span></div></div>
   </div>
   <div class="heartRow" id="heartRow" aria-label="外出心聲">
     <div class="heartFace" id="heartFace" aria-hidden="true" data-face="calm"></div>
@@ -1692,9 +1692,9 @@ html,body{color:var(--tx)}
   <div class="chromeWin phone" role="document">
     <div class="chromeTitle"><span class="chromeFace av" aria-hidden="true">媽</span><h3>媽媽的訊息</h3></div>
     <div class="chromeBody msgThread" id="momBubbles">
-      <div class="msgBubble"><span class="who">媽媽</span>阿祿，媽知道你腿骨折了，還不能出門、也不能復健。</div>
-      <div class="msgBubble"><span class="who">媽媽</span>小櫻答應過去照顧你——就是那個青梅竹馬，多年沒見了吧。</div>
-      <div class="msgBubble"><span class="who">媽媽</span>她會搬去跟你住一陣子。乖乖靜養，別逞強；起床、洗澡都讓她幫忙。</div>
+      <div class="msgBubble"><span class="who">媽媽</span>阿祿，媽知道你腿骨折要在家靜養一個月，可惜現在旅行不能照顧你</div>
+      <div class="msgBubble"><span class="who">媽媽</span>你記得小櫻嗎？就是那個青梅竹馬，多年沒見了吧。她最近從國外回來了，正在找地方住</div>
+      <div class="msgBubble"><span class="who">媽媽</span>一聽到你要在家靜養，就說不介意暫住你家照顧你，直到找到地方住為止</div>
     </div>
     <div class="chromeActions tl"><button type="button" class="btn chromePrimary" id="momContinue">繼續</button></div>
   </div>
@@ -1871,7 +1871,6 @@ var MOTIF_PACK={};
 var FLAT_TALK=["回來啦……今天也還好。","嗯，路上人有點多……我先喝口水。","我先坐一下。不是不想理你，腿有點酸。","我洗個澡就過來。沒什麼事……真的。","電視隨便轉，我都可以，我坐旁邊就好。","今天好普通喔。真的……別盯著我。","有點睏，先讓我緩緩……你在就好。"];
 var FLAT_GIFT=["「喔……謝謝。放桌上就好。」","「嗯，我收下了。」她點頭，像收一件日用品。","「你人還是一樣好。」語氣平，沒有眼睛的笑。","「知道了，謝啦。」她已經看向別處。"];
 var FLAT_NIGHT=["晚上同坐沙發，她偶爾應一聲，像任何一個普通同居夜晚。電視亮著，誰也沒把今天攤開。","她洗完澡，問熱不熱牛奶。語氣平，平得像請假。","關燈後各自道晚安。她的呼吸不穩，你假裝沒聽見。","明天的計畫她沒說。空白本身就是計畫。","你伸手，她讓你握一下，又輕輕抽走。"];
-var FLAT_PAT=["「別鬧啦，我在滑手機……才不是不理你。」","「手、手拿開啦，有點熱。」","「……嗯？怎麼了。」她看你一眼，耳尖卻紅了。","「先讓我坐一下。……你靠著也行。」"];
 
 var NIGHT=[["晚上同坐沙發，電視播著無關緊要的節目。她偶爾笑一下，很平常。","她洗完澡出來，問要不要熱牛奶。你點頭，氣氛鬆快。","關燈後各自道晚安。她的呼吸很快平穩。","她把明天的計畫隨口說了兩句，像任何一個普通夜晚。"],["晚上同坐沙發，距離近到能聽見彼此呼吸。電視亮著，誰也沒怎麼看進去。","她洗完澡出來，髮尾滴水。你想多問一句今天，最後只問了要不要熱牛奶。","關燈後房間很安靜。她的手機在枕頭邊亮了一下，又暗掉。","她說晚安的方式和平常一樣，卻像故意把話題截斷。"],["晚上同坐沙發，她靠得近，心卻像在別處。","她洗得很久。出來後頭髮還在滴水，不讓你靠太近。","關燈後手機又亮了一次。她翻過身，假裝睡著。","你躺著數她的呼吸。懷疑像潮水，卻被「別想太多」擋回去。"],["同屋卻像隔了一層膜。她的晚安短得像逃。","手機在暗裡亮了又暗。你沒問是誰。","她背對你睡，肩膀緊繃到半夜。","你數著呼吸，越數越清醒——空白比黑暗更響。"]];
 var EXI={calm:[0,0],joy:[1,0],sad:[2,0],surprise:[3,0],shy:[0,1],pout:[1,1],cold:[2,1],wink:[3,1]},AR=442/299,ex="calm",exT;
@@ -2092,26 +2091,13 @@ x=pick(p);k=detect(x);if(!k&&effM()<45&&t>=4)k="wink";say("「"+x+"」",k);try{l
 
 function idle(){var us=S.uncleStep|0;if(us>=1){var nti=Math.min(Math.max(us,1),NT.length-1);var bag=NT[nti]&&NT[nti].length?NT[nti]:NT[1];say("「"+pick(bag)+"」",us>=9?"cold":us>=5?"pout":us>=3?"shy":"calm");return}var st=voiceBand();var bag0=TALK[Math.min(tier(),TALK.length-1)]||TALK[0];say("「"+pick(bag0)+"」",["calm","shy","pout","cold"][Math.min(st,3)])}
 function lightAff(){clampAff();var el=$("affn");if(el)el.textContent=fmt(S.aff);var b=$("affbar");if(b)b.style.width=Math.min(100,Math.max(0,S.aff))+"%";try{localStorage.setItem("sakura_v1",JSON.stringify(S))}catch(e){}}
-function pat(){if(busy||S.trip||S.taken)return;if(dissonanceOn()){say(pick(FLAT_PAT),"pout");return}if(step5Open()&&effM()>=45){say(effM()>=70?"「……先別碰。我手還……有點亂。對不起。」":"「……別突然碰我。我剛、剛有點心虛。」",effM()>=70?"shy":"pout");return}var j=Math.floor(Math.random()*3);say(["「呀！突然戳我……」","「嘿嘿，癢癢的。」","「阿祿在看我嗎？」"][j],["surprise","wink","shy"][j]);hearts(2);try{localStorage.setItem("sakura_v1",JSON.stringify(S))}catch(e){}}
-(function(){var av=$("av"),pt=0,lp=0,moved=0;
+(function(){var av=$("av");
 if(!av)return;
-function clearLp(){if(lp){clearTimeout(lp);lp=0}}
-av.addEventListener("pointerdown",function(e){if(e.button!=null&&e.button!==0)return;pt=Date.now();moved=0;clearLp();try{av.setPointerCapture(e.pointerId)}catch(err){}
-lp=setTimeout(function(){lp=0;if(moved)return;pat();pt=0},480)},false);
-av.addEventListener("pointermove",function(e){if(pt&&(Math.abs(e.movementX)+Math.abs(e.movementY)>10)){moved=1;clearLp()}},false);
-av.addEventListener("pointerup",function(e){clearLp();if(!pt)return;var hold=Date.now()-pt;pt=0;if(moved||hold>=450)return;talk()},false);
-av.addEventListener("pointercancel",function(){clearLp();pt=0},false);
+av.addEventListener("click",function(){talk()},false);
 av.addEventListener("keydown",function(e){if(e.key=="Enter"||e.key==" "){e.preventDefault();talk()}},false);
 })();
 (function(){var dlg=$("dlg")||document.querySelector(".dlg");if(!dlg)return;
-var pt=0,lp=0,moved=0,sx=0,sy=0,syScroll=0;
-function clearLp(){if(lp){clearTimeout(lp);lp=0}}
-dlg.addEventListener("pointerdown",function(e){if(e.button!=null&&e.button!==0)return;pt=Date.now();moved=0;sx=e.clientX;sy=e.clientY;var say=$("say");syScroll=say?say.scrollTop:0;clearLp();
-lp=setTimeout(function(){lp=0;if(moved)return;pat();pt=0},480)},false);
-dlg.addEventListener("pointermove",function(e){if(!pt)return;var say=$("say");if(Math.abs(e.clientX-sx)>10||Math.abs(e.clientY-sy)>10){moved=1;clearLp()}
-else if(say&&Math.abs(say.scrollTop-syScroll)>2){moved=1;clearLp()}},false);
-dlg.addEventListener("pointerup",function(e){clearLp();if(!pt)return;var hold=Date.now()-pt;pt=0;if(moved||hold>=450)return;talk()},false);
-dlg.addEventListener("pointercancel",function(){clearLp();pt=0},false);
+dlg.addEventListener("click",function(){talk()},false);
 dlg.addEventListener("keydown",function(e){if(e.key=="Enter"||e.key==" "){e.preventDefault();talk()}},false);
 })();
 function homeAct(i){if(busy||S.taken||S.endingDone)return;if(S.trip){say("（她出門了，現在做不了室內互動。）","pout");return}
@@ -2494,7 +2480,7 @@ applySp();
 
 function showMomIntro(){var el=$("momPhone");if(!el)return;el.classList.add("on");el.setAttribute("aria-hidden","false")}
 function dismissMomIntro(){var el=$("momPhone");if(!el||!el.classList.contains("on"))return;el.classList.remove("on");el.setAttribute("aria-hidden","true");if(!S.momIntroSeen){S.momIntroSeen=true;try{save()}catch(e){}
-mq.push(["🚪 不請自來的同居","玄關傳來拖行李箱的輪聲。多年沒見的青梅竹馬站在門口，渾身帶刺，不太好好說話。\n\n「……才不是為了你。我只是答應了阿姨。」"]);
+mq.push(["🚪 不請自來的同居","玄關傳來拖行李箱的輪聲。多年沒見的青梅竹馬站在門口，給人一種不好相處的感覺。\n\n「哼！才不是為了你，我只是為了報答阿姨而已。」"]);
 addLog("🚪 第一章：小櫻拎著行李搬進來・「只是答應了阿姨」");
 nextPop()}checkMemories()}
 function maybeMomIntro(){if(S.momIntroSeen){var el=$("momPhone");if(el){el.classList.remove("on");el.setAttribute("aria-hidden","true")}return}showMomIntro()}
