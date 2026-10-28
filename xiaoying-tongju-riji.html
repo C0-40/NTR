@@ -211,8 +211,8 @@ button:focus-visible{outline:3px solid var(--sky);outline-offset:2px}
   .homeui .dayClock-day{font-size:9.5px;padding:1px 6px}
 }
 .homeui #inc,.homeui #afft{display:none!important}
-.homeui .girl{-webkit-backface-visibility:hidden;backface-visibility:hidden;image-rendering:auto;height:62%;width:auto;max-width:min(92%,420px);aspect-ratio:1/1;top:50%;bottom:auto;left:50%;transform:translate(-50%,-58%) scale(1.5);transform-origin:50% 50%;background:url(sakura-portrait.png) center 12%/contain no-repeat;filter:drop-shadow(0 6px 10px rgba(90,59,42,.35));animation:brHome 4s ease-in-out infinite}
-@keyframes brHome{50%{transform:translate(-50%,-58%) scale(1.52)}}
+.homeui .girl{-webkit-backface-visibility:hidden;backface-visibility:hidden;image-rendering:auto;height:72%;width:auto;max-width:min(92%,420px);aspect-ratio:1/1;top:auto;bottom:0;left:50%;transform:translateX(-50%) scale(1.5);transform-origin:50% 100%;background:url(sakura-portrait.png) center bottom/contain no-repeat;filter:drop-shadow(0 6px 10px rgba(90,59,42,.35));animation:brHome 4s ease-in-out infinite}
+@keyframes brHome{50%{transform:translateX(-50%) scale(1.52)}}
 @media (prefers-reduced-motion:reduce){.homeui .girl{animation:none}}
 .homeui .dlg{left:12px;right:12px;bottom:10px;max-height:26%;background:rgba(255,248,234,.95);cursor:pointer;-webkit-tap-highlight-color:transparent;flex-direction:row;align-items:flex-start}
 .homeui .dlg #say{cursor:pointer}
@@ -1136,6 +1136,26 @@ html,body{color:var(--tx)}
   font-weight:800;font-size:14px;box-shadow:0 4px 14px rgba(90,59,42,.22);cursor:pointer;letter-spacing:.04em}
 .qHomeBtn.on{display:inline-flex}
 .qHomeBtn:active{transform:translateX(-50%) scale(.98)}
+
+/* ask in lower middle; compact side bubbles for phone */
+.askHomeBtn{position:absolute;left:50%;bottom:118px;transform:translateX(-50%);z-index:7;display:none;align-items:center;gap:6px;
+  padding:10px 18px;border-radius:999px;border:2px solid var(--wood);background:rgba(255,248,242,.96);color:#6e3518;
+  font-weight:800;font-size:14px;box-shadow:0 4px 14px rgba(90,59,42,.22);cursor:pointer;letter-spacing:.04em}
+.askHomeBtn.on{display:inline-flex}
+.askHomeBtn:active{transform:translateX(-50%) scale(.98)}
+.homeui .sideNav.right{top:22%;gap:7px}
+.homeui .sideNav .bubble{min-width:0;max-width:7.2em;padding:7px 9px;font-size:10.5px;min-height:40px;line-height:1.15;text-align:center;white-space:normal}
+.homeui .sideNav .bubble .actTxt{display:flex;flex-direction:column;align-items:flex-start;gap:1px}
+.homeui .sideNav .bubble .actLab{font-size:11px}
+.homeui .sideNav .bubble .actSub{font-size:9px;opacity:.75;font-weight:600}
+.homeui .dock button.dockSleep{letter-spacing:.02em}
+@media (max-width:420px){
+  .homeui .sideNav.left{left:4px}
+  .homeui .sideNav.right{right:4px;top:20%;gap:6px}
+  .homeui .sideNav .bubble{max-width:6.6em;padding:6px 7px;font-size:10px;min-height:38px}
+  .askHomeBtn,.qHomeBtn{bottom:108px;padding:9px 14px;font-size:13px}
+  .homeui .dock button{font-size:12px;padding:9px 2px;min-height:50px}
+}
 .chatRoom .chatFeed.is-list .cThread{display:block;width:100%;text-align:left;border-radius:14px;padding:12px 14px;margin:0;
   background:rgba(255,255,255,.78);border:1.5px solid rgba(120,80,40,.16);cursor:pointer;font:inherit;color:inherit}
 .chatRoom .chatFeed.is-list .cThread:hover{border-color:#c45a72;background:#fff}
@@ -1366,20 +1386,22 @@ html,body{color:var(--tx)}
   border-radius:999px!important;box-shadow:inset 0 1px 2px rgba(90,59,42,.1);
 }
 
-/* Portrait 1.5x, feet on frame bottom */
+/* Portrait 1.5x, feet on brown page frame bottom (not dlg) */
 .homeui .girl:not(.away){
   top:auto!important;left:50%!important;bottom:0!important;
-  height:70%!important;max-width:min(92%,420px)!important;
+  height:72%!important;max-width:min(92%,420px)!important;
   transform:translateX(-50%) scale(1.5)!important;
   transform-origin:50% 100%!important;
   background-image:url(sakura-portrait.png)!important;
-  background-position:center top!important;
+  background-position:center bottom!important;
   background-size:contain!important;
   background-repeat:no-repeat!important;
   filter:drop-shadow(0 6px 10px rgba(90,59,42,.35))!important;
+  z-index:2!important;
 }
+.homeui .dlg{z-index:6!important}
 @media (max-width:420px){
-  .homeui .girl:not(.away){height:60%!important}
+  .homeui .girl:not(.away){height:64%!important}
 }
 .homeui .dlg #say{font-size:14px;line-height:1.5}
 
@@ -1390,19 +1412,8 @@ html,body{color:var(--tx)}
   opacity:.45;filter:grayscale(.55);cursor:not-allowed;color:#7a6a5c!important;
   background:rgba(180,160,140,.35)!important;border-color:rgba(120,100,80,.25)!important
 }
-.opt-new,.chat-star{display:inline-block;margin-left:4px;color:#c45a72;font-weight:900;font-size:1.05em;line-height:1;vertical-align:middle}
+.opt-new{display:inline-block;margin-left:4px;color:#c45a72;font-weight:900;font-size:1.05em;line-height:1;vertical-align:middle}
 .opt-new::after{content:none!important}
-.qHomeBtn{border-radius:14px!important;border-width:2.5px!important;box-shadow:0 6px 18px rgba(196,90,114,.35)!important}
-.qHomeBtn.q-pulse{animation:qPulseOnce .9s ease 1}
-@keyframes qPulseOnce{
-  0%{transform:translateX(-50%) scale(.86);box-shadow:0 0 0 0 rgba(196,90,114,.55)}
-  55%{transform:translateX(-50%) scale(1.06);box-shadow:0 0 0 12px rgba(196,90,114,0)}
-  100%{transform:translateX(-50%) scale(1);box-shadow:0 4px 14px rgba(90,59,42,.22)}
-}
-.end-card{display:flex!important;flex-direction:column;gap:4px;align-items:flex-start!important;
-  padding:12px 14px!important;border-radius:14px!important;background:rgba(255,248,242,.96)!important}
-.end-card b{font-size:15px}
-.end-card .end-card-sub,.end-card-sub{display:block;opacity:.78;font-weight:600;margin-top:2px}
 .outingActLine{
   position:absolute;left:12px;bottom:118px;z-index:9;max-width:min(78%,280px);
   padding:10px 12px;border-radius:12px;cursor:pointer;
@@ -1431,7 +1442,6 @@ html,body{color:var(--tx)}
 .dayFade.reduced .dayFade-label{opacity:1;transform:none;transition:none}
 @media (prefers-reduced-motion:reduce){
   .dayFade,.dayFade.on,.dayFade.out,.dayFade .dayFade-label,.dayFade.hold .dayFade-label{transition:none!important}
-  .qHomeBtn.q-pulse{animation:none!important}
   .homeui.fx-sleep .scene{transition:none!important}
 }
 
@@ -1444,7 +1454,7 @@ html,body{color:var(--tx)}
       <div class="chips hudTools">
             <div class="chipIcons" role="group" aria-label="音樂、事件、紀錄">
               <button type="button" class="chip chip-ico" id="mus" aria-label="關閉背景音樂" title="音樂開" aria-pressed="true">🔊</button>
-              <button type="button" class="chip chip-ico hud-log" data-t="story" id="navStory" title="事件" aria-label="打開事件">📖</button>
+              <button type="button" class="chip chip-ico hud-log" data-t="story" title="事件" aria-label="打開事件">📖</button>
               <button type="button" class="chip chip-ico hud-log" data-t="log" id="navLog" title="紀錄" aria-label="打開紀錄">📔</button>
             </div>
           </div>
@@ -1462,12 +1472,12 @@ html,body{color:var(--tx)}
       <div class="dayClock-day" id="dayl"></div>
     </div>
     </div>
-<nav class="sideNav left" aria-label="回憶與聊天室">
-      <button type="button" class="bubble" data-t="mem" id="navMem">🌸 回憶</button>
+<nav class="sideNav left" aria-label="聊天室">
       <button type="button" class="bubble actChat" id="navChat" aria-label="打開匿名聊天室" onclick="openChatRoom()">💬 聊天室</button>
     </nav>
-    <nav class="sideNav right" aria-label="起疑與休息">
-      <button type="button" class="bubble actSleep" id="sleepBtn" aria-label="睡覺，結束今天" onclick="sleepDay()"><span class="actIco" aria-hidden="true">☾</span><span class="actTxt"><span class="actLab">睡覺</span><span class="actSub">結束今天</span></span></button>
+    <nav class="sideNav right" aria-label="回憶、同居事件與起疑">
+      <button type="button" class="bubble" data-t="mem" id="navMem">🌸 回憶</button>
+      <button type="button" class="bubble" data-t="story" id="navStory">📖 同居事件</button>
       <button type="button" class="bubble actObs" id="obsBtn" aria-label="起疑" onclick="observeTraces()"><span class="actIco" aria-hidden="true">👁</span><span class="actTxt"><span class="actLab">起疑</span><span class="actSub">窺探痕跡</span></span></button>
     </nav>
     <div class="girl" id="av" role="button" aria-label="和她聊天（長按可戳一下）" tabindex="0"></div>
@@ -1497,6 +1507,7 @@ html,body{color:var(--tx)}
         <span class="pr-txt" id="phoneRippleTxt"></span>
       </button>
     </div>
+    <button type="button" class="askHomeBtn" id="askHomeBtn" aria-label="提問" onclick="setTab('ask')">💬 提問</button>
     <button type="button" class="qHomeBtn" id="qHomeBtn" aria-label="小櫻有問題要問你" onclick="openPendingSq()">❓ 問題</button>
     <div class="dlg" id="dlg" role="button" tabindex="0" aria-label="和她聊天（點一下對話）"><span class="dlgAv" id="dlgAv" aria-hidden="true"></span><div class="dlgBody"><b id="nm">小櫻</b><span id="say">……才不是為了你。我只是答應了阿姨。</span></div></div>
   </div>
@@ -1507,7 +1518,7 @@ html,body{color:var(--tx)}
   <div class="dock tabs" role="tablist" aria-label="主要行動">
     <button type="button" data-t="home">🛋️ 互動</button>
     <button type="button" data-t="go">🎒 外出</button>
-    <button type="button" data-t="ask">💬 提問</button>
+    <button type="button" id="sleepBtn" class="dockSleep" aria-label="睡覺，結束今天" onclick="sleepDay()">☾ 睡覺</button>
     <button type="button" data-t="herq" style="display:none" aria-hidden="true">❓ 被問</button>
   </div>
   <div class="pane" id="pane"></div>
@@ -2268,7 +2279,7 @@ function askOptNew(i){ensureOptSeen();var s=S.optSeen.ask[i];return s!=null&&s!=
 function markAskOptSeen(i){ensureOptSeen();S.optSeen.ask[i]=askReplyKey(i);save()}
 function askTabHasNew(){for(var i=0;i<QA.length;i++){if(S.aff<QA[i][2])continue;if(askOptNew(i))return true}return false}
 function paintAskTab(){var btn=document.querySelector('.dock button[data-t="ask"],.tabs button[data-t="ask"]');if(!btn)return;btn.innerHTML=askTabHasNew()?("💬 提問"+optNewBadge()):"💬 提問"}
-function optNewBadge(){return '<span class="opt-new" title="有新內容">★</span>'}
+function optNewBadge(){return '<span class="opt-new" title="有新內容">✦</span>'}
 function paintSideBadges(){/* 日記已移除 */}
 
 
@@ -2455,14 +2466,15 @@ NSTORY.filter(function(s){var th=s[0]|0;var open=(th<=20)?((S.uncleStep|0)>=1&&e
 /* full bar does not force early move-out */
 nextPop()}finally{backLock=0}}
 function queueSqAsk(){if(S.sqDone||S.taken||S.pendingSq!=null)return;var a=sqAvail();if(!a.length)return;S.pendingSq=a[Math.floor(Math.random()*a.length)];try{save()}catch(e){}paintQBtn()}
-function paintQBtn(){var b=$("qHomeBtn");if(!b)return;var show=S&&S.pendingSq!=null&&!S.taken&&!S.trip&&!dayLock&&!maskOpen();var was=b.classList.contains("on");b.classList.toggle("on",!!show);b.setAttribute("aria-hidden",show?"false":"true");if(show&&!was){b.classList.remove("q-pulse");void b.offsetWidth;b.classList.add("q-pulse")}}
+function paintAskHome(){var b=$("askHomeBtn");if(!b)return;var show=S&&!S.taken&&!S.trip&&!S.endingDone&&!isOutingPhase();var q=$("qHomeBtn");var qOn=q&&q.classList.contains("on");b.classList.toggle("on",!!show);b.setAttribute("aria-hidden",show?"false":"true");b.style.visibility=qOn?"hidden":"";b.style.pointerEvents=qOn?"none":""}
+function paintQBtn(){var b=$("qHomeBtn");if(!b)return;var show=S&&S.pendingSq!=null&&!S.taken&&!S.trip&&!dayLock&&!maskOpen();b.classList.toggle("on",!!show);b.setAttribute("aria-hidden",show?"false":"true");if(typeof paintAskHome==="function")paintAskHome()}
 function openPendingSq(){if(busy||S.pendingSq==null||S.taken||S.trip)return;if(maskOpen()){say("（先看完眼前的事。）","pout");return}var qi=S.pendingSq;S.pendingSq=null;paintQBtn();mq.push({sq:qi});if(!maskOpen())nextPop();try{save()}catch(e){}render(false)}
 
 function hideSqOpts(){var el=$("sqopts");if(el){el.style.display="none";el.innerHTML=""}var mb=$("mb");if(mb)mb.style.display=""}
 function sqOptsOn(){var el=$("sqopts");return !!(el&&el.style.display==="block")}
 function showSqMask(qi){var q=SQ[qi];if(!q){nextPop();return}hideSqOpts();$("mt").textContent="❓ 小櫻問你";$("mp").textContent=q[0]+" "+q[1];
 var box=$("sqopts");if(!box){nextPop();return}box.innerHTML="";
-var hint=document.createElement("div");hint.className="sq-hint";hint.textContent="✦ 新＝此答案內容相對上次有變化";box.appendChild(hint);
+var hint=document.createElement("div");hint.className="sq-hint";hint.textContent="✦＝此答案內容相對上次有變化";box.appendChild(hint);
 q[5].forEach(function(o,oi){var b=document.createElement("button");b.type="button";b.className="btn";b.style.width="100%";b.style.whiteSpace="normal";b.style.textAlign="left";b.style.margin="6px 0";
 var lab=o[0];if(sqOptNew(qi,oi)){b.innerHTML=lab+optNewBadge()}else{b.textContent=lab}
 b.onclick=function(){ansFromMask(qi,oi)};box.appendChild(b)});
@@ -2497,7 +2509,7 @@ if(!html)html='<p class="sm">這個討論串還沒有貼文。</p>';feed.innerHT
 var sub=$("chatSub");if(sub)sub.textContent=(t&&t.sub)||"只讀・討論串"}
 function chatShowList(){S.chatOpenStep=null;paintChatFeed();try{save()}catch(e){}}
 function chatOpenThread(i){S.chatOpenStep=i|0;paintChatFeed();try{save()}catch(e){}}
-function paintChatNotice(){var b=$("navChat");if(!b)return;var on=!!(S&&S.chatNotice);b.innerHTML=on?('💬 聊天室<span class="opt-new chat-star" title="有新討論串">★</span>'):"💬 聊天室";b.classList.toggle("chat-notice",on)}
+function paintChatNotice(){var b=$("navChat");if(!b)return;var on=!!(S&&S.chatNotice);b.innerHTML=on?('💬 聊天室<span class="opt-new" title="有新討論串">✦</span>'):"💬 聊天室";b.classList.toggle("chat-notice",on)}
 function markChatThreadsNotice(){if(!S||typeof chatThreadList!=="function")return;var n=chatThreadList().length;if(S._chatThreadCount==null){S._chatThreadCount=n;return}if(n>(S._chatThreadCount|0))S.chatNotice=true;S._chatThreadCount=n}
 function openChatRoom(){if(!chatAvailable()){say(S.trip?"（她出門了。等她回來再滑手機吧。）":"（現在不方便看聊天室。）","pout");return}
 if(maskOpen()||($("momPhone")&&$("momPhone").classList.contains("on"))){say("（先看完眼前的事。）","pout");return}
@@ -2539,16 +2551,14 @@ function pickEndingBelieve(believeTruth){if(mbLock)return;mbLock=1;S._endTruth=!
 var mask=$("mask");if(mask)mask.classList.remove("on");hideSqOpts();
 setTimeout(function(){mbLock=0;showEndingChoice()},40)}
 function showEndingChoice(){hideSqOpts();
-$("mt").textContent="結局・三條路";
-$("mp").textContent="只能選一條。選完就不能回頭。";
+var truth=!!S._endTruth;
+$("mt").textContent=truth?"結局・面對之後":"結局・你選擇相信她";
+$("mp").textContent=truth?"你把聊天室攤在她面前。對照雨夜與髮夾。她崩潰了。\n\n你只能揭發——沒有別的路。":"你決定不當真。那麼，今晚你還要不要向她告白？";
 paintMaskChrome("小櫻");
 var box=$("sqopts"),mb=$("mb");box.innerHTML="";
-[["出軌","交往同居，但仍私下見強叔",1],["她搬走","她離開這個家，去他那裡",2],["事情曝光","真相攤開，回不去了",3]].forEach(function(o){
-  var b=document.createElement("button");b.type="button";b.className="btn end-card";
-  b.style.width="100%";b.style.whiteSpace="normal";b.style.textAlign="left";b.style.margin="8px 0";
-  b.innerHTML="<b>"+o[0]+"</b><span class=\"sm end-card-sub\">"+o[1]+"</span>";
-  b.onclick=function(){finishEnding(o[2])};box.appendChild(b);
-});
+var opts=truth?[["揭發真相（結局三）",3]]:[["告白：在一起，繼續同居（結局一・出軌）",1],["不告白，讓媽媽接她回去（結局二）",2]];
+opts.forEach(function(o){var b=document.createElement("button");b.type="button";b.className="btn";b.style.width="100%";b.style.whiteSpace="normal";b.style.textAlign="left";b.style.margin="6px 0";b.textContent=o[0];
+b.onclick=function(){finishEnding(o[1])};box.appendChild(b)});
 box.style.display="block";if(mb)mb.style.display="none";$("mask").classList.add("on")}
 function finishEnding(n){if(S.endingDone)return;mbLock=1;S.endingDone=true;S.ending=n|0;
 if(n===1||n===2){S.m=100;S.chatNotice=true}
@@ -2600,7 +2610,9 @@ function paintDock(){
     var label=used?(ico+" 今天已做過"):(ico+" "+lab);
     return '<button type="button" data-t="'+t+'"'+(used?' class="dock-used"':'')+(dead?' disabled aria-disabled="true"':'')+'>'+label+'</button>';
   }
-  dock.innerHTML=mkDock("home","🛋️","互動",homeUsed&&!ended)+mkDock("go","🎒","外出",outUsed&&!ended)+'<button type="button" data-t="ask"'+(ended?' disabled aria-disabled="true"':'')+'>💬 提問</button><button type="button" data-t="herq" style="display:none" aria-hidden="true">❓ 被問</button>';
+  var canSleep=!ended&&!S.trip&&!dayLock&&!S.taken;
+  dock.innerHTML=mkDock("home","🛋️","互動",homeUsed&&!ended)+mkDock("go","🎒","外出",outUsed&&!ended)+'<button type="button" id="sleepBtn" class="dockSleep'+(canSleep?'':' is-off')+'"'+(canSleep?'':' disabled aria-disabled="true"')+' aria-label="睡覺，結束今天">☾ 睡覺</button><button type="button" data-t="herq" style="display:none" aria-hidden="true">❓ 被問</button>';
+  var sbDock=dock.querySelector("#sleepBtn");if(sbDock)sbDock.onclick=function(){if(!sbDock.disabled)sleepDay()};
   dock.querySelectorAll("button[data-t]").forEach(function(b){
     if(ended){b.onclick=function(){say((S.ending|0)===2?END_GONE:"（故事已經走到結局了。）","sad")};b.classList.add("is-off")}
     else{b.onclick=function(){setTab(b.dataset.t)};b.classList.toggle("on",!!tab&&b.dataset.t===tab)}
@@ -2643,7 +2655,7 @@ var acts=$("noteActs");if(acts){if(skipOn)acts.removeAttribute("hidden");else ac
 var th=$("thbox");if(th&&!skipOn){var want="none";if(th.style.display!==want)th.style.display=want}
 else if(th&&skipOn){if(th.style.display!=="flex")th.style.display="flex"}paintHeartFace(ex);
 var dayt="第 "+S.day+" 天";if($("dayl")&&$("dayl").textContent!==dayt)$("dayl").textContent=dayt;
-var sb=$("sleepBtn");if(sb){var canSleep=!S.taken&&!S.endingDone&&!S.trip&&!dayLock&&!maskOpen();sb.disabled=!canSleep;sb.classList.toggle("is-off",!canSleep);sb.style.display=S.trip?"none":"";if(S.endingDone){sb.style.display="";sb.disabled=true;sb.classList.add("is-off")}}
+var sb=$("sleepBtn");if(sb){var canSleep=!S.taken&&!S.endingDone&&!S.trip&&!dayLock&&!maskOpen();sb.disabled=!canSleep;sb.classList.toggle("is-off",!canSleep);if(S.endingDone){sb.disabled=true;sb.classList.add("is-off")}}
 var ch=$("navChat");if(ch){var canChat=chatAvailable()||!!(S.endingDone&&((S.ending|0)===1||(S.ending|0)===2));ch.classList.toggle("is-off",!canChat);ch.style.display="";ch.setAttribute("aria-disabled",canChat?"false":"true")}
 setObsBtn(!!(S.pendingObs&&!S.taken&&!S.trip));
 /* clock face removed — day label only; sleep still ends the day */
