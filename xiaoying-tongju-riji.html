@@ -1959,9 +1959,11 @@ try{var _validMem={};MEMORIES.forEach(function(m){_validMem[m[0]]=1});S.memSeen=
 function save(){try{localStorage.setItem("sakura_v1",JSON.stringify(S))}catch(e){}}
 function doReset(){S=def();mq=[];busy=0;backLock=0;mbLock=0;dayLock=0;$("mask").classList.remove("on");try{localStorage.removeItem("sakura_v1")}catch(e){}say("「……才不是為了你。我只是答應了阿姨。」","pout");render();maybeMomIntro()}
 var rc=0,rt;
-function debugJumpEnding(){if(!S)return;if(!confirm("跳到第30天、阿祿親密度100、大叔親密度99，進入結局選擇？"))return;
+function debugJumpEnding(){if(!S)return;if(!confirm("跳到第30天、阿祿親密度100、大叔親密度99，解鎖全部日常／回憶，進入結局選擇？"))return;
 S.day=30;S.aff=100;S.m=99;clampAff();S.taken=false;S.endingDone=false;S.ending=0;S.trip=null;S.homeActToday=false;S.outToday=false;
 S.uncleStep=Math.max(S.uncleStep|0,10);S.uncleStarted=true;S.castOff=true;S.chatNotice=true;
+if(!S.seen)S.seen=[];STORY.forEach(function(s){if(S.seen.indexOf(s[0])<0)S.seen.push(s[0])});
+if(!S.memSeen)S.memSeen=[];MEMORIES.forEach(function(m){if(S.memSeen.indexOf(m[0])<0)S.memSeen.push(m[0])});S.memPending=[];
 try{save()}catch(e){}render();showEndingPrep()}
 function resetAll(){var el=$("rs");if(!rc){rc=1;el.textContent="再按一次確認，清除全部進度";rt=setTimeout(function(){rc=0;el.textContent="重置存檔"},4000);return}clearTimeout(rt);rc=0;el.textContent="重置存檔";doReset()}
 function pick(a){return a[Math.floor(Math.random()*a.length)]}
