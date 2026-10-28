@@ -211,7 +211,7 @@ button:focus-visible{outline:3px solid var(--sky);outline-offset:2px}
   .homeui .dayClock-day{font-size:9.5px;padding:1px 6px}
 }
 .homeui #inc,.homeui #afft{display:none!important}
-.homeui .girl{-webkit-backface-visibility:hidden;backface-visibility:hidden;image-rendering:auto;position:absolute;height:78%;width:auto;max-width:min(96%,460px);aspect-ratio:1/1;top:auto;bottom:0;left:50%;transform:translateX(-50%) scale(1.875);transform-origin:50% 100%;background:url(sakura-portrait.png) center bottom/contain no-repeat;filter:drop-shadow(0 6px 10px rgba(90,59,42,.35));animation:brHome 4s ease-in-out infinite;z-index:3}
+.homeui .girl{-webkit-backface-visibility:hidden;backface-visibility:hidden;image-rendering:auto;position:absolute;height:88%;width:auto;max-width:min(98%,520px);aspect-ratio:1/1;top:auto;bottom:0;left:50%;transform:translateX(-50%) scale(1.875);transform-origin:50% 100%;background:url(sakura-portrait.png) center bottom/contain no-repeat;filter:drop-shadow(0 6px 10px rgba(90,59,42,.35));animation:brHome 4s ease-in-out infinite;z-index:3}
 @keyframes brHome{50%{transform:translateX(-50%) scale(1.92)}}
 @media (prefers-reduced-motion:reduce){.homeui .girl{animation:none}}
 .homeui .dlg{left:12px;right:12px;bottom:10px;max-height:26%;background:rgba(255,248,234,.95);cursor:pointer;-webkit-tap-highlight-color:transparent;flex-direction:row;align-items:flex-start}
@@ -344,7 +344,7 @@ html,body{color:var(--tx)}
 .homeui .topMeta{border-color:rgba(170,130,80,.55)!important}
 .homeui .topAffRow,.homeui .topAffRow span{color:#2c1a10!important}
 .homeui .topAffRow .affVal{color:#6e3518!important}
-.homeui .dayClock-day,#dayl{color:#1a0c04!important}
+.homeui .dayClock-day,#dayl{color:#fff8ee!important}
 .homeui .bubble.actObs.on,.homeui .bubble.actObs.on .actLab{color:#fff6df!important}
 .homeui .bubble.actObs.on .actSub{color:#d8c49a!important}
 .homeui .bubble.actSleep,.homeui .bubble.actSleep .actLab{color:#fff8ea!important}
@@ -792,30 +792,31 @@ html,body{color:var(--tx)}
 }
 .stick.outing .silLayer{
   top:auto!important;bottom:0!important;left:50%!important;transform:translateX(-50%)!important;
-  width:min(100%,520px)!important;z-index:5!important;gap:0!important;overflow:hidden!important;
+  width:min(100%,560px)!important;z-index:5!important;gap:0!important;overflow:visible!important;
   justify-content:flex-end!important;align-items:stretch!important;margin:0!important;padding:0!important;
   pointer-events:none!important
 }
 .stick.outing .silStage{
-  height:min(54vh,360px)!important;width:100%!important;margin:0!important;padding:0!important;
-  overflow:hidden!important;position:relative!important;display:block!important;
+  height:min(72vh,480px)!important;width:100%!important;margin:0!important;padding:0!important;
+  overflow:visible!important;position:relative!important;display:block!important;
   pointer-events:none!important
 }
 .stick.outing .silPair{position:absolute!important;left:0;right:0;bottom:0;top:0;width:100%;height:100%;margin:0;padding:0;pointer-events:none!important}
 .stick.outing .silFig{
   position:absolute!important;left:50%!important;bottom:0!important;top:auto!important;
-  height:100%!important;max-height:100%!important;width:auto!important;max-width:88%!important;
+  height:100%!important;max-height:none!important;width:auto!important;max-width:110%!important;
   object-fit:contain!important;object-position:center bottom!important;
-  transform:translateX(-50%) scale(1.28)!important;transform-origin:50% 100%!important;
+  transform:translateX(-50%) scale(1.65)!important;transform-origin:50% 100%!important;
   margin:0!important;padding:0!important;
   pointer-events:none!important
 }
 .stick.outing .silFig.silUncle{
-  left:var(--sil-ux,-28%)!important;transform:scaleX(.92) scale(1.22)!important;transform-origin:50% 100%!important;
-  max-width:70%!important
+  left:var(--sil-ux,-30%)!important;transform:scaleX(.92) scale(1.55)!important;transform-origin:50% 100%!important;
+  max-width:95%!important
 }
 .stick.outing .silLayer.is-solo .silFig.silHero{
-  left:50%!important;transform:translateX(-50%)!important;max-width:72%!important;height:100%!important
+  left:50%!important;transform:translateX(-50%) scale(1.65)!important;transform-origin:50% 100%!important;
+  max-width:110%!important;height:100%!important
 }
 /* 外出心聲列：頭像＝文字框同高；左右邊距對齊底欄 dock（日常 dlg 無頭像） */
 .heartRow{display:none;flex:0 0 auto;width:100%;box-sizing:border-box;pointer-events:none}
@@ -874,14 +875,14 @@ html,body{color:var(--tx)}
   .stick.outing .note{top:68px!important;left:50%!important;transform:translateX(-50%)!important;width:min(86%,250px)!important;max-width:250px!important;padding:9px 10px!important;text-align:center!important;z-index:1!important}
   .stick.outing .note .note-title,.stick.outing .note #nh{font-size:13px!important}
   .stick.outing .silLayer{top:auto!important;bottom:0!important;transform:translateX(-50%)!important}
-  .stick.outing .silStage{height:min(36vh,200px)!important}
+  .stick.outing .silStage{height:min(64vh,420px)!important}
   .stick.outing .heartRow{--heart-size:88px}
   .stick.outing .heartFace.is-on{border-radius:14px}
   .stick.outing .phoneRipple{bottom:8px!important;left:10px!important}
 }
 @media (max-height:700px){
   .stick.outing .note{top:64px!important;left:50%!important;transform:translateX(-50%)!important;padding:8px 10px!important;z-index:1!important}
-  .stick.outing .silStage{height:min(32vh,170px)!important}
+  .stick.outing .silStage{height:min(60vh,400px)!important}
   .stick.outing .heartRow{--heart-size:80px;padding:4px 2px 6px}
   .stick.outing .heartFace.is-on{border-radius:14px}
 }
@@ -1317,7 +1318,7 @@ html,body{color:var(--tx)}
   top:auto!important;bottom:0!important;left:50%!important;
   transform:translateX(-50%)!important;width:min(100%,460px);
 }
-.stick.outing .silStage{height:min(38vh,220px)!important}
+.stick.outing .silStage{height:min(66vh,440px)!important}
 
 /* Scene transitions */
 .homeui.fx-leave .scene,
@@ -1382,45 +1383,42 @@ html,body{color:var(--tx)}
 }
 .homeui .topHud .dayClock-day,
 .homeui .dayClock-day,#dayl{
-  /* wood-ink stamp — high contrast on wallpaper; still no paper panel */
+  /* high-contrast stamp on wallpaper — still no paper panel */
   font-family:"PingFang TC","Noto Sans TC","Hiragino Sans GB","Segoe UI",system-ui,sans-serif!important;
-  font-size:clamp(16px,4vw,18px)!important;font-weight:900!important;
+  font-size:clamp(17px,4.2vw,20px)!important;font-weight:900!important;
   letter-spacing:.02em!important;line-height:1!important;
   padding:0!important;margin:0!important;border-radius:0!important;
   min-height:0!important;box-sizing:border-box;
   display:inline-flex!important;align-items:center;justify-content:flex-end;gap:0;
-  color:#1a0c04!important;
+  color:#fff8ee!important;
   background:transparent!important;border:none!important;box-shadow:none!important;
-  text-shadow:
-    0 0 12px rgba(255,252,245,1),
-    0 0 6px rgba(255,250,240,1),
-    0 1px 0 #fff8ee,
-    0 -1px 0 rgba(255,252,245,.9),
-    1px 0 0 rgba(255,252,245,.75),
-    -1px 0 0 rgba(255,252,245,.75)!important;
+  text-shadow:0 1px 0 rgba(20,10,4,.85),0 0 2px rgba(20,10,4,.9)!important;
   white-space:nowrap!important;
-  -webkit-text-stroke:.35px rgba(255,250,240,.35)
+  -webkit-text-stroke:.6px rgba(26,12,4,.55)
 }
 .homeui #dayl .dayMark-tick{
-  display:inline-block;width:3px;height:1.2em;margin-right:8px;flex:0 0 auto;
+  display:inline-block;width:3px;height:1.25em;margin-right:8px;flex:0 0 auto;
   border-radius:1px;
-  background:linear-gradient(180deg,#c49a55 0%,#6b3d16 55%,#2a1608 100%);
-  box-shadow:0 0 8px rgba(255,252,245,.85),0 0 2px #fff8ee
+  background:linear-gradient(180deg,#f0d9a8,#8a5a28 55%,#3a210e);
+  box-shadow:0 0 0 1px rgba(20,10,4,.35),0 0 6px rgba(255,248,234,.5)
 }
 .homeui #dayl .dayMark-k{
-  font-size:.78em;font-weight:800;letter-spacing:.12em;opacity:.92;
-  transform:translateY(.04em);color:#1a0c04
+  font-size:.72em;font-weight:800;letter-spacing:.14em;opacity:.95;
+  transform:translateY(.05em);color:#fff6e8!important;
+  -webkit-text-stroke:.5px rgba(20,10,4,.65);
+  text-shadow:0 1px 0 rgba(20,10,4,.8),0 0 3px rgba(20,10,4,.7)
 }
 .homeui #dayl .dayMark-n{
-  font-size:1.4em;font-weight:900;letter-spacing:.04em;
-  margin:0 .06em;font-variant-numeric:tabular-nums;
-  color:#100802;
+  font-size:1.7em;font-weight:900;letter-spacing:.02em;
+  margin:0 .08em;font-variant-numeric:tabular-nums;
+  color:#fffaf2!important;
+  -webkit-text-stroke:1.1px #1a0c04;
+  paint-order:stroke fill;
   text-shadow:
-    0 0 14px rgba(255,252,245,1),
-    0 0 7px rgba(255,248,234,1),
-    0 1px 0 #fffaf2,
-    1px 0 0 rgba(255,252,245,.85),
-    -1px 0 0 rgba(255,252,245,.85)
+    0 0 0 #1a0c04,
+    0 2px 0 rgba(16,8,2,.55),
+    0 0 8px rgba(16,8,2,.45),
+    0 0 2px #1a0c04
 }
 .homeui .topAffRow{justify-content:flex-start!important;gap:8px;margin:0}
 .homeui .mbox{margin-top:6px!important;padding-top:5px!important;border-top:1px dashed rgba(140,100,55,.28)!important}
@@ -1432,13 +1430,14 @@ html,body{color:var(--tx)}
   border-radius:999px!important;box-shadow:inset 0 1px 2px rgba(90,59,42,.1);
 }
 
-/* Portrait 1.875x, feet on brown game-frame bottom; dlg may cover lower portrait */
+/* Portrait 1.875x — feet flush to brown outer frame; dialogue covers lower half */
 .homeui .scene > .girl:not(.away),
 .homeui .girl:not(.away){
   position:absolute!important;
   top:auto!important;left:50%!important;right:auto!important;
-  bottom:0!important; /* scene content bottom = inner edge of brown border */
-  height:78%!important;max-width:min(96%,460px)!important;
+  bottom:0!important;
+  height:88%!important;max-width:min(98%,520px)!important;
+  width:auto!important;
   transform:translateX(-50%) scale(1.875)!important;
   transform-origin:50% 100%!important;
   background-image:url(sakura-portrait.png)!important;
@@ -1446,15 +1445,17 @@ html,body{color:var(--tx)}
   background-size:contain!important;
   background-repeat:no-repeat!important;
   filter:drop-shadow(0 6px 10px rgba(90,59,42,.35))!important;
-  z-index:3!important; /* below dialogue */
+  z-index:3!important;
   margin:0!important;padding:0!important;
+  pointer-events:auto!important;
 }
 .homeui .dlg{
-  z-index:8!important; /* covers lower portrait */
+  z-index:8!important;
   position:absolute!important;
+  bottom:10px!important;
 }
 @media (max-width:420px){
-  .homeui .girl:not(.away){height:72%!important;bottom:0!important;top:auto!important}
+  .homeui .girl:not(.away){height:82%!important;bottom:0!important;top:auto!important;max-width:min(98%,480px)!important}
 }
 .homeui .dlg #say{font-size:14px;line-height:1.5}
 
@@ -1482,6 +1483,34 @@ html,body{color:var(--tx)}
   .homeui .sideNav.left{gap:6px}
 }
 
+
+
+/* 起疑: older dark square window (not thin strip, not light paper) */
+#mask.obs-dark.mood-chrome .box,
+.mask.obs-dark.mood-chrome .box{
+  background:linear-gradient(165deg,rgba(72,54,40,.94),rgba(40,28,20,.94))!important;
+  background-color:#3d2a1c!important;
+  color:#e6d8c4!important;
+  border:2px solid rgba(200,165,110,.6)!important;
+  border-radius:14px!important; /* squarer than light door window */
+  padding:48px 16px 14px!important;
+  max-width:min(92%,380px)!important;
+  box-shadow:0 10px 28px rgba(0,0,0,.5),inset 0 1px 0 rgba(255,255,255,.06)!important
+}
+#mask.obs-dark .box h3,#mask.obs-dark #mt{color:#fffaf0!important}
+#mask.obs-dark .box p,#mask.obs-dark #mp{color:#e6d8c4!important}
+#mask.obs-dark #mb.btn{
+  background:#6e5642!important;border:1.5px solid rgba(220,190,150,.5)!important;color:#fff8ec!important
+}
+.mask.obs-dark .box.obs-win-appear{animation:obsWinAppear .48s ease 1}
+@keyframes obsWinAppear{
+  0%{opacity:0;transform:translateY(10px) scale(.96)}
+  100%{opacity:1;transform:none}
+}
+@media (prefers-reduced-motion:reduce){
+  .mask.obs-dark .box.obs-win-appear{animation:none!important}
+  .obsHomeBtn.obs-appear{animation:none!important}
+}
 
 /* 起疑 appear (window chrome unchanged) */
 .obsHomeBtn.obs-appear{animation:obsAppear .55s ease 1}
@@ -2588,12 +2617,19 @@ function popup(t,p){mq.push([t,p]);nextPop()}
 function isSecretCopy(tt){tt=String(tt||"");return /強叔|大叔|夜景|晚點回家|更懂我|一個人住|沒說出口|已讀|痕跡|窺|香水|門外|尻槍|翻找|來電|定位|收回|💔|🔍|⏳/.test(tt)}
 function isSecretSq(qi){var q=SQ[qi];if(!q)return false;if((q[3]|0)>0||!!q[4])return true;return isSecretCopy(q[1])}
 function isMoodChromeTitle(tt){tt=String(tt||"");if(/^🌙\s*當晚/.test(tt)||tt.indexOf("🚪 她出門了")===0)return false;if(moodPeekOn)return true;return /起疑|仔細觀察|發訊息|打電話|翻找|尻槍|沒說出口|沒有說的|心聲|空白|已讀|輸入中|來電|震動|貼圖|定位|背景聲|靜音|收回|窺|痕跡|強叔|大叔|夜景|晚點回家|更懂我|一個人住|⏳|🔍|💔/.test(tt)||/^⏳|^🔍|^💔/.test(tt)}
-function paintMaskChrome(tt){var mask=$("mask");if(!mask)return;var soft=tt==="小櫻"||tt==="🌸 小櫻"||tt==="浮現一段塵封的回憶"||tt==="🌸 浮現一段塵封的回憶"||tt==="📱 發訊息"||tt==="📞 打電話"||tt==="💦 尻槍";mask.classList.toggle("mood-chrome",!soft&&isMoodChromeTitle(tt));mask.classList.toggle("mem-soft",!!soft);syncMaskFace(soft?"":tt)}
+function isObsMaskTitle(tt){tt=String(tt||"");return /^🔍/.test(tt)||/起疑/.test(tt)}
+function paintMaskChrome(tt){var mask=$("mask");if(!mask)return;var obs=isObsMaskTitle(tt);var soft=!obs&&(tt==="小櫻"||tt==="🌸 小櫻"||tt==="浮現一段塵封的回憶"||tt==="🌸 浮現一段塵封的回憶"||tt==="📱 發訊息"||tt==="📞 打電話"||tt==="💦 尻槍");
+/* 起疑: older dark square window (mood-chrome), never thin strip / never light paper box */
+mask.classList.toggle("obs-dark",!!obs);mask.classList.toggle("mood-chrome",!!obs||(!soft&&isMoodChromeTitle(tt)));mask.classList.toggle("mem-soft",!obs&&!!soft);mask.classList.remove("obs-strip");
+var face=mask.querySelector(".face");if(face)face.style.display="";
+syncMaskFace(obs||soft?"":tt);
+if(obs){var box=mask.querySelector(".box");if(box){box.classList.remove("obs-win-appear");void box.offsetWidth;box.classList.add("obs-win-appear")}}
+}
 function nextPop(){if(maskOpen())return;if(!mq.length){dayLock=0;hideSqOpts();if(moodPeekOn)clearMoodPeek();return}var m=mq.shift();if(!m){releaseDayLock();hideSqOpts();if(moodPeekOn)clearMoodPeek();return}
 if(m.sq!=null){showSqMask(m.sq);return}
 if(m.endingPrep){showEndingPrep();return}
 hideSqOpts();$("mt").textContent=m[0];$("mp").textContent=m[1];paintMaskChrome(m[0]);$("mask").classList.add("on")}
-function dismissMask(ev){if(ev){try{ev.preventDefault();ev.stopPropagation()}catch(e){}}if(mbLock)return;mbLock=1;var mask=$("mask");if(mask){mask.classList.remove("on");if(!mq.length&&!moodPeekOn)mask.classList.remove("mood-chrome")}setTimeout(function(){try{nextPop()}catch(e){}if(S&&S.sleepAwaitClose&&!maskOpen()&&!(mq&&mq.length)){advanceAfterSleep(!!S.sleepForce)}else{releaseDayLock()}mbLock=0},30)}
+function dismissMask(ev){if(ev){try{ev.preventDefault();ev.stopPropagation()}catch(e){}}if(mbLock)return;mbLock=1;var mask=$("mask");if(mask){mask.classList.remove("on");mask.classList.remove("obs-dark");var _box=mask.querySelector(".box");if(_box)_box.classList.remove("obs-win-appear");if(!mq.length&&!moodPeekOn)mask.classList.remove("mood-chrome")}setTimeout(function(){try{nextPop()}catch(e){}if(S&&S.sleepAwaitClose&&!maskOpen()&&!(mq&&mq.length)){advanceAfterSleep(!!S.sleepForce)}else{releaseDayLock()}mbLock=0},30)}
 (function(){var mb=$("mb");if(!mb)return;mb.onpointerup=null;mb.onclick=null;mb.addEventListener("click",dismissMask,false);mb.addEventListener("pointerup",function(e){if(e.pointerType==="mouse"&&e.button!==0)return;dismissMask(e)},false);
 var mask=$("mask");if(mask&&!mask._outsideBound){mask._outsideBound=1;mask.addEventListener("click",function(e){if(e.target===mask)dismissMask(e)},false);var box=mask.querySelector(".box");if(box&&!mask._boxStop){mask._boxStop=1;box.addEventListener("click",function(e){e.stopPropagation()},false)}}})();
 function replay(k){var s=STORY[k];mq.push(["📌 同居事件："+s[1],s[2]]);nextPop()}
