@@ -766,12 +766,12 @@ html,body{color:var(--tx)}
 .stick.outing .topMeta{max-width:calc(100% - 84px);pointer-events:none}
 .stick.outing .dayClock{position:static!important;top:auto!important;right:auto!important;opacity:.9;filter:none;transform:none}
 .stick.outing .note{
-  top:12px!important;left:10px!important;right:auto!important;bottom:auto!important;
-  transform:none!important;
-  width:min(46%,168px)!important;max-width:168px!important;
-  padding:8px 9px!important;border-radius:12px!important;
-  z-index:4!important;font-size:10.5px!important;text-align:left!important;
-  box-sizing:border-box;margin:0!important
+  top:72px!important;left:50%!important;right:auto!important;bottom:auto!important;
+  transform:translateX(-50%)!important;
+  width:min(78%,250px)!important;max-width:250px!important;
+  padding:8px 10px!important;border-radius:12px!important;
+  z-index:1!important;font-size:10.5px!important;text-align:center!important;
+  box-sizing:border-box;margin:0!important;pointer-events:auto!important
 }
 .stick.outing .note .note-eyebrow{
   font-size:9.5px!important;margin:0 0 4px!important;letter-spacing:.12em!important;
@@ -792,7 +792,7 @@ html,body{color:var(--tx)}
 }
 .stick.outing .silLayer{
   top:auto!important;bottom:0!important;left:50%!important;transform:translateX(-50%)!important;
-  width:min(100%,520px)!important;z-index:2!important;gap:0!important;overflow:hidden!important;
+  width:min(100%,520px)!important;z-index:5!important;gap:0!important;overflow:hidden!important;
   justify-content:flex-end!important;align-items:stretch!important;margin:0!important;padding:0!important;
   pointer-events:none!important
 }
@@ -871,7 +871,7 @@ html,body{color:var(--tx)}
 @media (max-width:420px){
   .silLayer{width:min(94%,340px)}
   .stick.outing .dayClock{position:static!important;top:auto!important;right:auto!important;opacity:.9;filter:none;transform:none}
-  .stick.outing .note{top:126px!important;width:min(90%,290px)!important;max-width:min(90%,290px)!important;padding:9px 10px!important}
+  .stick.outing .note{top:68px!important;left:50%!important;transform:translateX(-50%)!important;width:min(86%,250px)!important;max-width:250px!important;padding:9px 10px!important;text-align:center!important;z-index:1!important}
   .stick.outing .note .note-title,.stick.outing .note #nh{font-size:13px!important}
   .stick.outing .silLayer{top:auto!important;bottom:0!important;transform:translateX(-50%)!important}
   .stick.outing .silStage{height:min(36vh,200px)!important}
@@ -880,15 +880,15 @@ html,body{color:var(--tx)}
   .stick.outing .phoneRipple{bottom:8px!important;left:10px!important}
 }
 @media (max-height:700px){
-  .stick.outing .note{top:118px!important;padding:8px 10px!important}
+  .stick.outing .note{top:64px!important;left:50%!important;transform:translateX(-50%)!important;padding:8px 10px!important;z-index:1!important}
   .stick.outing .silStage{height:min(32vh,170px)!important}
   .stick.outing .heartRow{--heart-size:80px;padding:4px 2px 6px}
   .stick.outing .heartFace.is-on{border-radius:14px}
 }
 /* 強叔條出現時 topMeta 更高：再把 note 往下推 */
-.stick.outing:has(#mbox:not(.off)) .note{top:148px!important}
+.stick.outing:has(#mbox:not(.off)) .note{top:108px!important;left:50%!important;transform:translateX(-50%)!important;z-index:1!important}
 @media (max-width:420px){
-  .stick.outing:has(#mbox:not(.off)) .note{top:142px!important}
+  .stick.outing:has(#mbox:not(.off)) .note{top:100px!important;left:50%!important;transform:translateX(-50%)!important;z-index:1!important}
 }
 
 
