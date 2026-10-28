@@ -211,8 +211,8 @@ button:focus-visible{outline:3px solid var(--sky);outline-offset:2px}
   .homeui .dayClock-day{font-size:9.5px;padding:1px 6px}
 }
 .homeui #inc,.homeui #afft{display:none!important}
-.homeui .girl{-webkit-backface-visibility:hidden;backface-visibility:hidden;image-rendering:auto;position:absolute;height:88%;width:auto;max-width:min(98%,520px);aspect-ratio:1/1;top:auto;bottom:0;left:50%;transform:translateX(-50%) scale(1.875);transform-origin:50% 100%;background:url(sakura-portrait.png) center bottom/contain no-repeat;filter:drop-shadow(0 6px 10px rgba(90,59,42,.35));animation:brHome 4s ease-in-out infinite;z-index:3}
-@keyframes brHome{50%{transform:translateX(-50%) scale(1.92)}}
+.homeui .girl{-webkit-backface-visibility:hidden;backface-visibility:hidden;image-rendering:auto;position:absolute;height:88%;width:auto;max-width:min(98%,520px);aspect-ratio:1/1;top:auto;bottom:0;left:50%;transform:translateX(-50%) translateY(190px) scale(1.875);transform-origin:50% 100%;background:url(sakura-portrait.png) center bottom/contain no-repeat;filter:drop-shadow(0 6px 10px rgba(90,59,42,.35));animation:brHome 4s ease-in-out infinite;z-index:3}
+@keyframes brHome{50%{transform:translateX(-50%) translateY(190px) scale(1.92)}}
 @media (prefers-reduced-motion:reduce){.homeui .girl{animation:none}}
 .homeui .dlg{left:12px;right:12px;bottom:10px;max-height:26%;background:rgba(255,248,234,.95);cursor:pointer;-webkit-tap-highlight-color:transparent;flex-direction:row;align-items:flex-start}
 .homeui .dlg #say{cursor:pointer}
@@ -792,31 +792,32 @@ html,body{color:var(--tx)}
 }
 .stick.outing .silLayer{
   top:auto!important;bottom:0!important;left:50%!important;transform:translateX(-50%)!important;
-  width:min(100%,560px)!important;z-index:5!important;gap:0!important;overflow:visible!important;
+  width:min(100%,480px)!important;z-index:5!important;gap:0!important;overflow:hidden!important;
   justify-content:flex-end!important;align-items:stretch!important;margin:0!important;padding:0!important;
   pointer-events:none!important
 }
 .stick.outing .silStage{
-  height:min(72vh,480px)!important;width:100%!important;margin:0!important;padding:0!important;
-  overflow:visible!important;position:relative!important;display:block!important;
+  /* 1.25× older outing sil (was min(38vh,240px)) */
+  height:min(47.5vh,300px)!important;width:100%!important;margin:0!important;padding:0!important;
+  overflow:hidden!important;position:relative!important;display:block!important;
   pointer-events:none!important
 }
 .stick.outing .silPair{position:absolute!important;left:0;right:0;bottom:0;top:0;width:100%;height:100%;margin:0;padding:0;pointer-events:none!important}
 .stick.outing .silFig{
   position:absolute!important;left:50%!important;bottom:0!important;top:auto!important;
-  height:100%!important;max-height:none!important;width:auto!important;max-width:110%!important;
+  height:100%!important;max-height:100%!important;width:auto!important;max-width:88%!important;
   object-fit:contain!important;object-position:center bottom!important;
-  transform:translateX(-50%) scale(1.65)!important;transform-origin:50% 100%!important;
+  transform:translateX(-50%) scale(1.25)!important;transform-origin:50% 100%!important;
   margin:0!important;padding:0!important;
   pointer-events:none!important
 }
 .stick.outing .silFig.silUncle{
-  left:var(--sil-ux,-30%)!important;transform:scaleX(.92) scale(1.55)!important;transform-origin:50% 100%!important;
-  max-width:95%!important
+  left:var(--sil-ux,-28%)!important;transform:scaleX(.92) scale(1.2)!important;transform-origin:50% 100%!important;
+  max-width:72%!important
 }
 .stick.outing .silLayer.is-solo .silFig.silHero{
-  left:50%!important;transform:translateX(-50%) scale(1.65)!important;transform-origin:50% 100%!important;
-  max-width:110%!important;height:100%!important
+  left:50%!important;transform:translateX(-50%) scale(1.25)!important;transform-origin:50% 100%!important;
+  max-width:88%!important;height:100%!important
 }
 /* 外出心聲列：頭像＝文字框同高；左右邊距對齊底欄 dock（日常 dlg 無頭像） */
 .heartRow{display:none;flex:0 0 auto;width:100%;box-sizing:border-box;pointer-events:none}
@@ -875,14 +876,14 @@ html,body{color:var(--tx)}
   .stick.outing .note{top:68px!important;left:50%!important;transform:translateX(-50%)!important;width:min(86%,250px)!important;max-width:250px!important;padding:9px 10px!important;text-align:center!important;z-index:1!important}
   .stick.outing .note .note-title,.stick.outing .note #nh{font-size:13px!important}
   .stick.outing .silLayer{top:auto!important;bottom:0!important;transform:translateX(-50%)!important}
-  .stick.outing .silStage{height:min(64vh,420px)!important}
+  .stick.outing .silStage{height:min(45vh,250px)!important}
   .stick.outing .heartRow{--heart-size:88px}
   .stick.outing .heartFace.is-on{border-radius:14px}
   .stick.outing .phoneRipple{bottom:8px!important;left:10px!important}
 }
 @media (max-height:700px){
   .stick.outing .note{top:64px!important;left:50%!important;transform:translateX(-50%)!important;padding:8px 10px!important;z-index:1!important}
-  .stick.outing .silStage{height:min(60vh,400px)!important}
+  .stick.outing .silStage{height:min(40vh,212px)!important}
   .stick.outing .heartRow{--heart-size:80px;padding:4px 2px 6px}
   .stick.outing .heartFace.is-on{border-radius:14px}
 }
@@ -1318,7 +1319,7 @@ html,body{color:var(--tx)}
   top:auto!important;bottom:0!important;left:50%!important;
   transform:translateX(-50%)!important;width:min(100%,460px);
 }
-.stick.outing .silStage{height:min(66vh,440px)!important}
+.stick.outing .silStage{height:min(45vh,250px)!important}
 
 /* Scene transitions */
 .homeui.fx-leave .scene,
@@ -1430,15 +1431,16 @@ html,body{color:var(--tx)}
   border-radius:999px!important;box-shadow:inset 0 1px 2px rgba(90,59,42,.1);
 }
 
-/* Portrait 1.875x — feet flush to brown outer frame; dialogue covers lower half */
+/* Portrait 1.875x — shifted down ~190px onto brown outer frame; dlg covers lower part */
 .homeui .scene > .girl:not(.away),
 .homeui .girl:not(.away){
   position:absolute!important;
   top:auto!important;left:50%!important;right:auto!important;
-  bottom:0!important;
+  bottom:0!important; /* brown frame floor — NOT the dialogue box */
   height:88%!important;max-width:min(98%,520px)!important;
   width:auto!important;
-  transform:translateX(-50%) scale(1.875)!important;
+  /* ~5cm / ~190px phone-scale shift down so feet meet outer wood border */
+  transform:translateX(-50%) translateY(190px) scale(1.875)!important;
   transform-origin:50% 100%!important;
   background-image:url(sakura-portrait.png)!important;
   background-position:center bottom!important;
@@ -1455,7 +1457,10 @@ html,body{color:var(--tx)}
   bottom:10px!important;
 }
 @media (max-width:420px){
-  .homeui .girl:not(.away){height:82%!important;bottom:0!important;top:auto!important;max-width:min(98%,480px)!important}
+  .homeui .girl:not(.away){
+    height:82%!important;bottom:0!important;top:auto!important;max-width:min(98%,480px)!important;
+    transform:translateX(-50%) translateY(160px) scale(1.875)!important;transform-origin:50% 100%!important
+  }
 }
 .homeui .dlg #say{font-size:14px;line-height:1.5}
 
@@ -1485,26 +1490,38 @@ html,body{color:var(--tx)}
 
 
 
-/* 起疑: older dark square window (not thin strip, not light paper) */
+/* 起疑: older DARK SQUARE window — class #mask.obs-dark (with .mood-chrome) */
+/* Diff vs light door card (.mask .box): cream #fffaf2 + radius 22px → dark #2a1c12 + radius 10px */
+#mask.obs-dark,
+.mask.obs-dark{
+  background:rgba(12,8,6,.72)!important
+}
 #mask.obs-dark.mood-chrome .box,
-.mask.obs-dark.mood-chrome .box{
-  background:linear-gradient(165deg,rgba(72,54,40,.94),rgba(40,28,20,.94))!important;
-  background-color:#3d2a1c!important;
+.mask.obs-dark.mood-chrome .box,
+#mask.obs-dark .box,
+.mask.obs-dark .box{
+  background:linear-gradient(165deg,#4a3828 0%,#2a1c12 100%)!important;
+  background-color:#2a1c12!important;
   color:#e6d8c4!important;
-  border:2px solid rgba(200,165,110,.6)!important;
-  border-radius:14px!important; /* squarer than light door window */
+  border:2px solid rgba(200,165,110,.65)!important;
+  border-radius:10px!important; /* square-ish; light card uses ~22px */
   padding:48px 16px 14px!important;
-  max-width:min(92%,380px)!important;
-  box-shadow:0 10px 28px rgba(0,0,0,.5),inset 0 1px 0 rgba(255,255,255,.06)!important
+  max-width:min(92%,360px)!important;
+  width:min(92%,360px)!important;
+  box-shadow:0 12px 32px rgba(0,0,0,.55),inset 0 1px 0 rgba(255,255,255,.07)!important
 }
-#mask.obs-dark .box h3,#mask.obs-dark #mt{color:#fffaf0!important}
-#mask.obs-dark .box p,#mask.obs-dark #mp{color:#e6d8c4!important}
+#mask.obs-dark .box h3,#mask.obs-dark #mt{color:#fffaf0!important;font-weight:800!important}
+#mask.obs-dark .box p,#mask.obs-dark #mp{color:#e6d8c4!important;font-weight:600!important}
 #mask.obs-dark #mb.btn{
-  background:#6e5642!important;border:1.5px solid rgba(220,190,150,.5)!important;color:#fff8ec!important
+  background:#6e5642!important;border:1.5px solid rgba(220,190,150,.55)!important;color:#fff8ec!important
 }
-.mask.obs-dark .box.obs-win-appear{animation:obsWinAppear .48s ease 1}
+#mask.obs-dark .face{
+  border:3px solid rgba(200,165,110,.65)!important;
+  box-shadow:0 4px 12px rgba(0,0,0,.45)!important
+}
+.mask.obs-dark .box.obs-win-appear{animation:obsWinAppear .5s ease 1}
 @keyframes obsWinAppear{
-  0%{opacity:0;transform:translateY(10px) scale(.96)}
+  0%{opacity:0;transform:translateY(12px) scale(.94)}
   100%{opacity:1;transform:none}
 }
 @media (prefers-reduced-motion:reduce){
