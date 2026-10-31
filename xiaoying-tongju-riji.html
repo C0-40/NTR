@@ -1725,7 +1725,7 @@ html,body{color:var(--tx)}
 .opt-new{display:inline-block;margin-left:4px;color:#c45a72;font-weight:900;font-size:1.05em;line-height:1;vertical-align:middle}
 .opt-new::after{content:none!important}
 .outingActLine{
-  /* outing 發訊息／打電話／尻槍 — bottom of brown game frame, never 心聲 */
+  /* outing 發訊息／打電話／去廁所 — bottom of brown game frame, never 心聲 */
   position:absolute;left:50%;right:auto;bottom:8px;top:auto;
   transform:translateX(-50%);
   z-index:7;width:min(92%,340px);max-width:340px;
@@ -1907,6 +1907,7 @@ var PLACE_META=[
 ];
 var HOME_TH=[[],[],["他說太孤單了……手卻伸過來。心跳好快。我告訴自己：他可憐，不是故意的。","阿祿的訊息亮了。我回「還在外面」，刪掉「在他家」。手心全是汗。","債又追到門口時，他虛弱地說「我不知道還能找誰」。我沒有走。——阿祿，對不起。"],["抵息那兩個字卡在喉嚨。他哭著說不能這樣對我；點頭的卻是我。","水聲開得很滿。我把「你是不是在利用我」按熄，換成「他沒有多少時間了」。","「只有你不會丟下我。」這句話假得發光。我抱緊它——拆開就不知道自己還能當誰。……阿祿，我還是會回去。"]];
 var PLACE_TH=[[["便利店的燈好白。買完就回家，阿祿大概還開著燈。","袋繩勒手心，卻踏實。想聽他說辛苦了。","結完帳就走。別想別的，快點回家。"],["冷凍櫃前忽然心口緊。……他求助的時間，總是剛好。","回訊只打「在便利店」。想打的「想你」被我刪掉。","疑了一秒，又覺得他可憐。門把轉開前，先把表情練好。"]],[["商場人多。買完就回去。","試衣間出來，想跟你說今天見到的小事。","手帕選你會用的顏色。……才不是特意挑的。"],["休息區有人「剛好」坐過來。……我疑了一秒，又覺得他好孤單。","袋是空的，笑容要整齊。「你不懂啦」這句，先在心裡練過。","回你家的方向時，腳步慢了半拍。"]],[["咖啡香很好。想把這味道講給你聽。","靠窗坐著，想像你在家的樣子。","第二杯……算了，帶一塊蛋糕回去。才不是特意點的。"],["他「剛好路過」。發病時間總是剛好。……我還是點了兩杯。","杯墊浸濕時我想過抽身。想完仍把杯子推過去——他好可憐。","回家路上數路燈，數到對阿祿的愧疚。"]],[["公園風舒服。想拉你一起來。","長椅晒過，暖的。","花拍給你看。……才不是想炫耀。你腿好了再來。"],["長椅像集合點。……我不是不知道，還是坐下了。","草屑沾鞋，藉口現成。他看起來好孤單，我就多聊了兩句。","你若問，我就說走走。"]],[["海風把瀏海吹亂。我拍了一張浪花的照片，想回家給阿祿看。","沙灘好寬。想著他腿好了，一定要帶他來走一次。","貝殼撿了兩枚。一枚給他，一枚放客廳的窗台。"],["防波堤那頭有人招手。我假裝沒看見，腳步卻慢了半拍。","海風裡有種熟悉的古龍水味。……不會這麼巧吧。疑完，又覺得他可憐。","阿祿傳訊問我在哪。我回「海邊」，刪掉了後半句「一個人」。"]]];
+var EARLY_MEET_TH=[["我說去便利店。其實拐去他家幫忙——他不能走，屋子亂成一團，我只是坐一會兒。回訊時刪掉「在他家」，只留「在便利店」。", "袋是後來才買的。在他家門口站了很久，怕阿祿擔心。……「在他家」三個字，按掉了。", "他腿不方便，請我幫忙收拾。我告訴自己：只坐一下。阿祿問在哪，我回便利店。"], ["藉口是商場。人在他家——不能走、地板堆著髒衣服，我坐著陪一會兒。回訊只打「在商場」，刪掉「在他家」。", "紙袋空的也沒關係。重點是別讓阿祿知道我去了他家。……刪掉那行，才敢按傳送。", "他說只是想有人坐一下。我答應了。報給阿祿的，仍是商場。"], ["我說去咖啡店。其實在他家：屋子好亂，他站不起來，我只是坐著。……回「在咖啡店」，刪掉「在他家」。", "杯套是回來路上才拿的。阿祿若問細節，我只能練過的那套。", "他虛弱地說「坐一下就好」。我留下了。傳訊時手抖，還是只報咖啡店。"], ["對外是公園。人在他家幫忙——不能走、東西堆著，我坐一會兒。回訊刪「在他家」，只留「在公園」。", "草屑是後來沾上的。真正待著的地方，不能寫給阿祿看。", "他說屋子太亂，想有人陪一下。我點頭。報平安時，地點仍是公園。"], ["我說來海邊。其實先去他家：他走不動，房間亂，我只坐著。……回「在海邊」，刪掉「在他家」。", "沙是後來踩的。阿祿問在哪，我不敢把「他家」留下來。", "幫忙收拾、坐一會兒就走——我是這麼跟自己說的。傳訊上，只有海邊。"]];
 
 /* 聊天室：只讀骨架。身份未揭穿前顯示「匿名」；不寫多日完整日誌 */
 var CHAT_THREADS=[
@@ -2029,15 +2030,16 @@ var SQ=[["🍮","我最喜歡吃什麼？你還記得嗎？",0,0,0,[["布丁啊�
 var DEPART=["我去一下就回。……燈先開著。","缺東西，我去補。……你別下床亂走。","很快回來。鞋帶我自己繫。","透透氣。……才不是去見誰。你別想歪。","手機帶著。……有事會回你。大概。","出門前對鏡子撥一下。……習慣而已。"];
 var DEPART_P=[["便利店・補貨","缺牛奶。……真的只是短途。"],["商場・逛一下","想看看日用品。……袋是空的也沒關係吧。"],["咖啡店・坐坐","換個地方坐一下。……多噴一點香是怕油煙味。"],["公園・走走","你說透氣就透氣。……鞋換輕的。"],["海邊・散心","她說想去聽聽海浪。出門前換了輕薄的裙子，防曬乳的味道比平常濃。"]];
 var BLANK_ACT=[
-["msg","📱","發訊息","純敘事・可重複"],
-["call","📞","打電話","純敘事・可重複"],
-["jack","💦","尻槍","純敘事・可重複"],
+["msg","📱","發訊息","本次外出一句"],
+["call","📞","打電話","本次外出一句"],
+["jack","🚽","去廁所","本次外出一句"],
 ["nap","😴","打瞌睡","跳過等待"]
 ];
-var BLANK_TXT={"msg":[[["你傳：「在哪？還好嗎？」她回得很快：「排隊。想你。」","已讀。過了一會兒才回「嗯」。像在整理語氣。","你傳晚安。她回一個表情，沒有下文。"],["你傳：「在哪？還好嗎？」她回得很快：「排隊。想你。」","已讀。過了一會兒才回「嗯」。像在整理語氣。","你傳晚安。她回一個表情，沒有下文。"],["你傳：「在哪？還好嗎？」她回得很快：「排隊。想你。」","已讀。過了一會兒才回「嗯」。像在整理語氣。","你傳晚安。她回一個表情，沒有下文。"]],[["你傳：「還好嗎？」已讀很久。回：「還好。別擔心。」","她回：「今晚可能晚。」刪掉了本來想打的撒嬌。","你連傳兩則。第二則才得到「在忙，回家說」。"],["你傳：「還好嗎？」已讀很久。回：「還好。別擔心。」","她回：「今晚可能晚。」刪掉了本來想打的撒嬌。","你連傳兩則。第二則才得到「在忙，回家說」。"],["你傳：「還好嗎？」已讀很久。回：「還好。別擔心。」","她回：「今晚可能晚。」刪掉了本來想打的撒嬌。","你連傳兩則。第二則才得到「在忙，回家說」。"]],[["你傳：「在哪？」已讀。很久，回一個「嗯」。像應付。","她回得很短。短到你開始自己腦補。","「別等。」兩個字。你盯著看了很久。"],["你傳：「在哪？」已讀。很久，回一個「嗯」。像應付。","她回得很短。短到你開始自己腦補。","「別等。」兩個字。你盯著看了很久。"],["你傳：「在哪？」已讀。很久，回一個「嗯」。像應付。","她回得很短。短到你開始自己腦補。","「別等。」兩個字。你盯著看了很久。"]]],"call":[[["接通。她聲音輕快，背景是店內廣播。","通話很短。她說馬上回來，像真的。","你聽見她笑了一下，說「笨蛋，掛了」。"],["接通。她聲音輕快，背景是店內廣播。","通話很短。她說馬上回來，像真的。","你聽見她笑了一下，說「笨蛋，掛了」。"],["接通。她聲音輕快，背景是店內廣播。","通話很短。她說馬上回來，像真的。","你聽見她笑了一下，說「笨蛋，掛了」。"]],[["接通有點喘。她說走快了。……也像剛躲過什麼。","背景人聲很近，她把話筒偏開一下。","她說「別擔心」，重複了兩次。"],["接通有點喘。她說走快了。……也像剛躲過什麼。","背景人聲很近，她把話筒偏開一下。","她說「別擔心」，重複了兩次。"],["接通有點喘。她說走快了。……也像剛躲過什麼。","背景人聲很近，她把話筒偏開一下。","她說「別擔心」，重複了兩次。"]],[["響很久才接。聲音壓得很低。","她說訊號不好。……隨即有門關上的聲音。","你聽見另一個男聲的氣音，她很快掛斷。"],["響很久才接。聲音壓得很低。","她說訊號不好。……隨即有門關上的聲音。","你聽見另一個男聲的氣音，她很快掛斷。"],["響很久才接。聲音壓得很低。","她說訊號不好。……隨即有門關上的聲音。","你聽見另一個男聲的氣音，她很快掛斷。"]]],"jack":[[["你幻想她在家門等你，耳尖發熱，隨即覺得自己荒唐。","射精後只剩空虛，與「她還會回來」的安心。","你把紙巾揉掉，告訴自己明天要更溫柔。"],["你幻想她在家門等你，耳尖發熱，隨即覺得自己荒唐。","射精後只剩空虛，與「她還會回來」的安心。","你把紙巾揉掉，告訴自己明天要更溫柔。"],["你幻想她在家門等你，耳尖發熱，隨即覺得自己荒唐。","射精後只剩空虛，與「她還會回來」的安心。","你把紙巾揉掉，告訴自己明天要更溫柔。"]],[["幻想裡她回來得晚，卻仍先親你。……你罵自己變態。","結束後更想傳訊，又不敢。","你清楚自己在吃醋，也清楚自己硬著。"],["幻想裡她回來得晚，卻仍先親你。……你罵自己變態。","結束後更想傳訊，又不敢。","你清楚自己在吃醋，也清楚自己硬著。"],["幻想裡她回來得晚，卻仍先親你。……你罵自己變態。","結束後更想傳訊，又不敢。","你清楚自己在吃醋，也清楚自己硬著。"]],[["幻想裡她從別人家門出來。……你射精時幾乎想哭。","高潮後你更清楚：你還想知道更糟的細節。","你洗了手，還是覺得髒的是心。"],["幻想裡她從別人家門出來。……你射精時幾乎想哭。","高潮後你更清楚：你還想知道更糟的細節。","你洗了手，還是覺得髒的是心。"],["幻想裡她從別人家門出來。……你射精時幾乎想哭。","高潮後你更清楚：你還想知道更糟的細節。","你洗了手，還是覺得髒的是心。"]]]};
+var BLANK_TXT={"msg": [[["你傳：「在哪？」已讀很久。她才回：「在{place}。」中間刪過一行，沒提別處。"], ["你傳：「在哪？」已讀很久。她才回：「在{place}。」中間刪過一行，沒提別處。"], ["你傳：「在哪？」已讀很久。她才回：「在{place}。」中間刪過一行，沒提別處。"]], [["已讀很久。她回得晚，刪掉一句後只留下：「還在{place}。別擔心。」"], ["已讀很久。她回得晚，刪掉一句後只留下：「還在{place}。別擔心。」"], ["已讀很久。她回得晚，刪掉一句後只留下：「還在{place}。別擔心。」"]], [["你傳：「在哪？」很久才回。你只看見地點「{place}」——她沒說自己在哪裡坐著。"], ["你傳：「在哪？」很久才回。你只看見地點「{place}」——她沒說自己在哪裡坐著。"], ["你傳：「在哪？」很久才回。你只看見地點「{place}」——她沒說自己在哪裡坐著。"]]], "call": [[["接通。她聲音壓得很低。背景不像店裡。她輕輕說「馬上回來……對不起」，不像在生氣。"], ["接通。她聲音壓得很低。背景不像店裡。她輕輕說「馬上回來……對不起」，不像在生氣。"], ["接通。她聲音壓得很低。背景不像店裡。她輕輕說「馬上回來……對不起」，不像在生氣。"]], [["接通。聲音很輕，沒有店內廣播。她重複「別擔心」，比較像內疚。"], ["接通。聲音很輕，沒有店內廣播。她重複「別擔心」，比較像內疚。"], ["接通。聲音很輕，沒有店內廣播。她重複「別擔心」，比較像內疚。"]], [["響很久才接。幾乎耳語。背景不是店。她說「對不起……還在外面」，很快掛斷。"], ["響很久才接。幾乎耳語。背景不是店。她說「對不起……還在外面」，很快掛斷。"], ["響很久才接。幾乎耳語。背景不是店。她說「對不起……還在外面」，很快掛斷。"]]], "jack": [[["你躲進廁所。就算她平常在家，你也常要靠這樣撐過——她不知道。這與她出不出門無關。"], ["你躲進廁所。就算她平常在家，你也常要靠這樣撐過——她不知道。這與她出不出門無關。"], ["你躲進廁所。就算她平常在家，你也常要靠這樣撐過——她不知道。這與她出不出門無關。"]], [["廁所門扣上。你清楚自己難熬，也清楚她從不曉得。結束後外出仍在繼續。"], ["廁所門扣上。你清楚自己難熬，也清楚她從不曉得。結束後外出仍在繼續。"], ["廁所門扣上。你清楚自己難熬，也清楚她從不曉得。結束後外出仍在繼續。"]], [["你躲進廁所忍耐。不是氣她出門，是你自己撐不住。秘密只屬於你。"], ["你躲進廁所忍耐。不是氣她出門，是你自己撐不住。秘密只屬於你。"], ["你躲進廁所忍耐。不是氣她出門，是你自己撐不住。秘密只屬於你。"]]]};
 /* 外出氣泡：小紅心情（詞＋點開短句）；依強叔 stage，高玩家好感用 soft 略軟 */
 var PHONE_RIPPLE=[[{"t":"想家","body":"好想快點回去。阿祿大概還開著燈吧。","soft":"想回家了……希望客廳的燈還亮著。"},{"t":"安心","body":"外面走走也好，心卻穩穩朝家的方向。","soft":"一想到他在等，肩膀就鬆下來。"},{"t":"軟","body":"袋繩勒著手心，卻覺得踏實。想聽他說辛苦了。","soft":"腳步自己加快——因為有人在家。"},{"t":"惦記","body":"走著走著就在想：他現在坐哪裡、有沒有餓。","soft":"袋裡的東西不重要，想聽他喊我一聲。"}],[{"t":"動搖","body":"多聊兩句應該沒關係吧……可是又怕被問細節。","soft":"心有點晃。還是想著阿祿會不會擔心。"},{"t":"竊喜","body":"被多看一眼，心口居然甜了一下。不該的。","soft":"偷偷高興了一秒，隨即又想逃回家。"},{"t":"亂","body":"回訊打了又刪。到底要裝得多平常才好。","soft":"腦袋好亂。阿祿的名字一閃，又被別的蓋過。"},{"t":"猶豫","body":"想靠近一點，又想立刻拔腿回家。","soft":"停在路口。一邊是新鮮的，一邊是燈。"}],[{"t":"心虛","body":"阿祿的訊息亮了。我不敢先點開。","soft":"心虛得發燙。他若問，我該用什麼語氣。"},{"t":"發熱","body":"味道還掛在袖口，心跳卻不肯停。","soft":"臉好熱。想沖掉，又怕沖不掉。"},{"t":"躲","body":"找個角落站一下。別讓任何人讀我的臉。","soft":"躲一躲再回訊……阿祿，對不起。"},{"t":"慌","body":"解釋的台詞在嘴裡轉，一句都說不出口。","soft":"慌歸慌，還是想起家裡那盞燈。"}],[{"t":"逃避","body":"家裡那盞燈好亮。我還沒準備好用坦然的臉推門。","soft":"想逃一下下……不是因為討厭燈，是因為愧疚。"},{"t":"心虛","body":"他一傳訊，心就縮一下。不是煩他，是怕被聽穿。","soft":"心虛得發熱。還是會想起阿祿在等。"},{"t":"沉","body":"心沉在另一個人那邊，拖也拖不回來。……可是家的方向仍在。","soft":"沉得好深。回家的路短，我卻隔得好遠。"},{"t":"慢","body":"腳步不想加快。不是冷掉，是我還在練習「我回來了」。","soft":"燈在前面。我走得很慢，因為愧疚走不快。"}]];
 var PLACE_TRACE={"便利店":{"time":["提袋印著便利店標，她把你愛的布丁往前推：「順便買的，才不是專門給你。」"],"body":["收據時間晚了一截，她說路上遇到個可憐的大叔多幫了一點忙，語氣裡透著被需要的微甜。"],"item":["收據角被她死死摺起，她沖了很久的手才肯靠近你，聲音軟得發虛：「先吃飯……路上停過哪，你別問。」"]},"商場":{"time":["紙袋邊角微磨，停車單時間對得上，她塞給你一條手帕：「顏色隨便挑的，才不是特意選的。」"],"body":["紙袋不重她卻抱得緊，提到休息區「剛好」有人搭話，她愣了一秒，輕聲說那人好孤單：「你不懂啦。」"],"item":["吊牌線頭被她反覆扯掉，她不讓話題落到遇見誰，只是回家後格外黏你，像在用溫柔贖罪。"]},"咖啡店":{"time":["杯套時間戳還在，她帶回一塊蛋糕：「你那份……才不是特意點的，只是剛好有折扣。」"],"body":["袖口沾著淡淡咖啡香，她說店裡碰到個可憐的大叔就多點了一杯，語氣帶著被依賴的得意，眼神卻閃躲了一下。"],"item":["兩杯金額的收據被她揉皺塞進袋底，她沖了很久的手才肯坐下，絕口不提對面那張空椅子。"]},"公園":{"time":["鞋邊沾著乾草，她把手機裡的花壇照片遞過來：「才不是炫耀……你腿好了我們再一起去。」"],"body":["髮絲沾著陽光與草屑，她說長椅上有人看起來好孤單就多聊了兩句，說完別過臉，耳尖卻微紅。"],"item":["背包比出門時輕，她把落葉書籤塞給你像賠罪，只說「風有點大」，沖完手才肯讓你碰她的指尖。"]},"海邊":{"time":["裙襬沾著細沙，她邊拍邊笑：「才不是特意去海邊……只是剛好走到那邊。」"],"body":["鎖骨有一道形狀奇怪的曬痕，她說「圍巾沒圍好」，沖了很久的腳才肯坐到你身邊。"],"item":["髮尾微濕、裙襬有被揉過又撫平的褶皺，她把一枚不屬於你的貝殼塞進你手心：「下次……我們一起去。」"]}};
+var PLACE_TRACE_OFF={"便利店": {"time": ["提袋印著便利店標，可鞋底的土不像剛從磁磚地出來；她把布丁往前推，眼神閃了一下。"], "body": ["收據時間對得上，袖口卻有一股不像店裡的乾燥灰塵味。她說「路上順路」，說完就去洗手。"], "item": ["便利店提袋是新的，鞋跟卻磨得不像只走了短途。她沖了很久的手，才肯把布丁放到你面前。"]}, "商場": {"time": ["紙袋邊角幾乎沒磨損，像剛裝的；鞋帶卻鬆著，不像逛了那麼久。她塞給你手帕：「隨便挑的。」"], "body": ["紙袋不重，呼吸卻偏沉。她提到商場，細節卻跳來跳去，像在背別人的行程。"], "item": ["吊牌還在，時間卻對不太上。她不讓話題停在「去了哪裡」，只是回家後格外黏你。"]}, "咖啡店": {"time": ["杯套是熱的，可唇上沒有可可印；她帶回蛋糕，說「店裡坐了一下」，視線卻飄向門口。"], "body": ["袖口有淡淡咖啡香，腳踝卻像剛在地板灰塵裡待過。她說「店裡人不多」，聲音偏小。"], "item": ["兩杯的收據被揉皺，椅子痕跡卻對不上她描述的靠窗座位。她沖了很久的手才坐下。"]}, "公園": {"time": ["鞋邊有乾草，髮絲卻不像剛被戶外風吹過；她把花壇照片遞過來，檔案時間晚了一截。"], "body": ["她說長椅坐一會兒，膝上卻沒有陽光的熱度。話題一碰到「有沒有遇見誰」就滑開。"], "item": ["落葉書籤是乾的，鞋底泥色卻與公園步道不太一樣。她沖完手，才讓你碰指尖。"]}, "海邊": {"time": ["裙襬有細沙，鎖骨卻沒被海風吹紅；她笑說「剛好走到」，停頓長得不像真話。"], "body": ["她說防波堤坐了很久，髮尾卻乾著。報給你的是海邊，細節卻少得奇怪。"], "item": ["貝殼冰涼，鞋裡的沙卻細得不像那片灘。她把貝殼塞進你手心，沒再看你的眼睛。"]}};
 
 
 var FLAT_TALK=["回來啦……今天也還好。","嗯，路上人有點多……我先喝口水。","我先坐一下。不是不想理你，腿有點酸。","我洗個澡就過來。沒什麼事……真的。","電視隨便轉，我都可以，我坐旁邊就好。","今天好普通喔。真的……別盯著我。","有點睏，先讓我緩緩……你在就好。"];
@@ -2205,7 +2207,11 @@ function dualTip(){return uncleOpen()?("親密 "+Math.floor(S.aff)+"・強叔 "+
 function traceBand(met){var st=stage();if(st<=0)return met?1:0;if(st==1)return met?2:1;if(st==2)return 2;return 3}
 function dissonanceOn(){return stage()>=2&&effM()>=38}
 function pickTripMotif(pid,met,acts,st){return null}
-function buildTraces(met,acts,placeName,motif){var placeBag=PLACE_TRACE&&placeName?PLACE_TRACE[placeName]:null;if(!placeBag)return[];
+function buildTraces(met,acts,placeName,motif){var d=S.day|0,placeBag=null;
+if(met&&d>=6&&d<=15&&PLACE_TRACE_OFF&&placeName&&PLACE_TRACE_OFF[placeName])placeBag=PLACE_TRACE_OFF[placeName];
+else placeBag=PLACE_TRACE&&placeName?PLACE_TRACE[placeName]:null;
+if(!placeBag)return[];
+if(!met){var match=placeBag.time||placeBag.body||placeBag.item||[];return match.length?[match[0]]:[];}
 var us=S.uncleStep|0,key=us<=0?"time":(us<=4?"body":"item"),arr=placeBag[key];
 if(!arr||!arr.length){arr=placeBag.time||placeBag.body||placeBag.item||[];}
 return arr.length?[arr[0]]:[];
@@ -2221,12 +2227,9 @@ function hearts(n){var sc=$("scene");if(!sc)return;for(var i=0;i<n;i++){var h=do
 function blankBandT(){var t=tier();return t<=1?0:t<=3?1:2}
 function blankBandS(){var st=stage();return st<=0?0:st<=2?1:2}
 function pickBlank(id){var pool=BLANK_TXT[id];if(!pool)return"";var cell=pool[blankBandT()][blankBandS()];if(!cell||!cell.length)return"";
-if(!S.trip)return pick(cell);
-if(!S.trip.blankUsed)S.trip.blankUsed={};
-var used=S.trip.blankUsed[id];if(!used)used=S.trip.blankUsed[id]=[];
-var avail=cell.filter(function(x){return used.indexOf(x)<0});
-if(!avail.length){used.length=0;avail=cell.slice()}
-var msg=pick(avail);used.push(msg);return msg}
+function fillPlace(s){var pl=(S.trip&&(S.trip.place||(PLACES[S.trip.id]&&PLACES[S.trip.id][1])))||"外面";return String(s||"").split("{place}").join(pl)}
+var raw=typeof cell==="string"?cell:(cell[0]||pick(cell));
+return fillPlace(raw)}
 function blankBandKey(){return blankBandT()+","+blankBandS()}
 function ensureOptSeen(){if(!S.optSeen||typeof S.optSeen!="object")S.optSeen={blank:{},sq:{},ask:{}};if(!S.optSeen.blank)S.optSeen.blank={};if(!S.optSeen.sq)S.optSeen.sq={};if(!S.optSeen.ask)S.optSeen.ask={}}
 function blankOptNew(id){ensureOptSeen();var s=S.optSeen.blank[id];return s!=null&&s!==""&&s!==blankBandKey()}
@@ -2244,7 +2247,7 @@ function paintSideBadges(){}
 
 function blankAct(id){if(busy||!S.trip||S.taken)return;if(maskOpen()){if(sqOptsOn())return;var mask=$("mask");if(mask)mask.classList.remove("on");if(!moodPeekOn){try{mask&&mask.classList.remove("mood-chrome")}catch(e){}}}withBusy(function(){blankActNow(id)});}
 function showOutingActLine(title,msg){var el=$("outingActLine");if(!el)return;el.hidden=false;el.innerHTML="<b>"+title+"</b><span>"+msg+"</span><i class=\"sm\">輕觸關閉</i>";el.onclick=function(){el.hidden=true;el.innerHTML=""};}
-function blankActNow(id){if(!S.trip||S.taken)return;if(id==="nap"){skipTrip();return}if(!BLANK_TXT[id])return;var msg=pickBlank(id);if(!msg)return;var titles={msg:"📱 發訊息",call:"📞 打電話",jack:"💦 尻槍"};var title=titles[id]||id;if(!S.trip.acts)S.trip.acts=[];if(S.trip.acts.indexOf(id)<0)S.trip.acts.push(id);markBlankOptSeen(id);var face=id=="jack"?"shy":"sad";setEx(face);faceTf(face);addLog("⏳ "+title+"｜"+msg);showOutingActLine(title,msg);if(tab==="go")closePane();render(false)}
+function blankActNow(id){if(!S.trip||S.taken)return;if(id==="nap"){skipTrip();return}if(!BLANK_TXT[id])return;var titles={msg:"📱 發訊息",call:"📞 打電話",jack:"🚽 去廁所"};var title=titles[id]||id;if(!S.trip.blankOnce)S.trip.blankOnce={};if(S.trip.blankOnce[id]){showOutingActLine(title,S.trip.blankOnce[id]);if(tab==="go")closePane();render(false);return}var msg=pickBlank(id);if(!msg)return;S.trip.blankOnce[id]=msg;if(!S.trip.acts)S.trip.acts=[];if(S.trip.acts.indexOf(id)<0)S.trip.acts.push(id);markBlankOptSeen(id);var face=id=="jack"?"shy":"sad";setEx(face);faceTf(face);addLog("⏳ "+title+"｜"+msg);showOutingActLine(title,msg);if(tab==="go")closePane();render(false)}
 function ansFromMask(qi,oi){if(mbLock||S.sqDone)return;mbLock=1;markSqOptSeen(qi,oi);ansNow(qi,oi);S.pendingSq=null;paintQBtn();$("mask").classList.remove("on");hideSqOpts();setTimeout(function(){mbLock=0;nextPop();releaseDayLock();render()},40)}
 function ans(qi,oi){if(busy||S.sqDone)return;ansFromMask(qi,oi)}
 function ansNow(qi,oi){var q=SQ[qi];if(S.taken||!sqOpen(qi)||S.sqDone)return;
@@ -2292,10 +2295,11 @@ var line=pick(bag);
 if(line.charAt(0)!=="「")line="「"+line+"」";
 say(line,effM()>=70?"shy":effM()>=30?"pout":pick(["joy","shy","wink","calm"]));
 addLog("🛋️ "+a[1]+"・親密 +"+gn);if(effM()<45)hearts(4);afterAffTier(b);/* no rank popup */closePane();render()}
-function outingThoughtPool(){var st=voiceBand(),pool=[];
+function outingThoughtPool(){var st=voiceBand(),pool=[],d=S.day|0,met=!!(S.trip&&S.trip.metUncle);
 if(S.uncleTh&&S.uncleTh.length)pool=pool.concat(S.uncleTh);
-if(st>=2){var bag=HOME_TH[Math.min(st,HOME_TH.length-1)]||HOME_TH[2];if(bag&&bag.length)pool=pool.concat(bag)}
-else if(S.trip&&PLACE_TH[S.trip.id]){var rows=PLACE_TH[S.trip.id],row=rows[Math.min(st,rows.length-1)]||rows[0];if(row&&row.length)pool=pool.concat(row)}
+if(met&&d>=6&&d<=15){var early=EARLY_MEET_TH&&EARLY_MEET_TH[S.trip.id];if(early&&early.length)pool=pool.concat(early)}
+else if(met&&st>=2){var bag=HOME_TH[Math.min(st,HOME_TH.length-1)]||HOME_TH[2];if(bag&&bag.length)pool=pool.concat(bag)}
+else if(S.trip&&PLACE_TH[S.trip.id]){var rows=PLACE_TH[S.trip.id],row=(!met?rows[0]:(rows[Math.min(st,rows.length-1)]||rows[0]));if(row&&row.length)pool=pool.concat(row)}
 return pool.length?pool:["……"]}
 function thought(){var st=stage(),i=st,pool=thPool();
 if(S.trip){var poolO=outingThoughtPool();$("thb").textContent=pick(poolO);var tbA=$("thbox")&&$("thbox").querySelector("b");if(tbA)tbA.textContent="💭 心聲";faceTf(pick(i>=2?["shy","sad","pout","cold"]:["shy","calm","wink","sad"]));thT=Date.now();paintVoiceFog();return}
@@ -2367,13 +2371,14 @@ nextPop();render()})}
 function back(){if(!S.trip||backLock)return;backLock=1;runSceneFx("fx-return",560);try{var trip=S.trip,pid=trip.id,p=PLACES[pid],pm=placeMeta(pid),ev=pickPlaceEv(pid,false),it=pick(p[7]),c=p[5]+Math.floor(Math.random()*p[5]*0.4),b=tier(),acts=(trip.acts||[]).slice();
 if(!acts.length)acts=[];
 /* outing: +0 親密度 */clampAff();S.trips++;
-var met=!!(trip&&trip.metUncle),g=0,st;
-if(met){ev=pickPlaceEv(pid,true);S.metOut=true}
+var met=!!(trip&&trip.metUncle),g=0,st,dNow=S.day|0;
+if(met){S.metOut=true;ev=(dNow>=6&&dNow<=15)?pickPlaceEv(pid,false):pickPlaceEv(pid,true)}
 st=stage();
 var motif=pickTripMotif(pid,met,acts,st);
 var traces=buildTraces(met,acts,trip.place||p[1],motif);S.motif=null;S.trip=null;hidePhoneRipple();
 var t;
-if(met&&dissonanceOn())t="「我回來了。」她把"+it+"放在桌上，語氣平常得像只是去買菜。";
+if(met&&dNow>=6&&dNow<=15)t="「阿祿，我回來了。我去了"+p[1]+"，"+ev+"。」她把"+it+"放在桌上，沒提別處。";
+else if(met&&dissonanceOn())t="「我回來了。」她把"+it+"放在桌上，語氣平常得像只是去買菜。";
 else if(met)t="「……我回來了。」她把"+it+"放在桌上，語氣平得像練習過。";
 else t="「阿祿，我回來了！我去了"+p[1]+"，"+ev+"。這個"+it+"送給你！」";
 say(t,met?(dissonanceOn()?"calm":["shy","shy","pout","cold"][st]):"joy");
@@ -2383,7 +2388,7 @@ var trTxt=traces.join("\n\n");
 S.pendingObs={trTxt:trTxt,met:met,motif:motif?{id:motif.id,mode:motif.mode}:null};
 if(met&&st>=2&&Math.random()<(st>=3?.55:.38)){var band=NEAR_SAY[Math.min(st,NEAR_SAY.length-1)]||NEAR_SAY[0];S.pendingChat=pick(band);}
 setObsBtn(true);
-if(met&&canAdvanceUncle()){queueUncleStep()}
+if(met&&canAdvanceUncle()){var callHit=acts.indexOf("call")>=0;if(!callHit||Math.random()<0.4)queueUncleStep()}
 if(met){addM(appearMAmt())}
 if((S.day|0)===6){S.m=0}
 if(!S.endingDone&&(effM()|0)>=99&&(S.day|0)<30){var hasPrep=false;for(var _ei=0;_ei<mq.length;_ei++){if(mq[_ei]&&mq[_ei].endingPrep)hasPrep=true}if(!hasPrep)mq.push({endingPrep:1})}
@@ -2422,11 +2427,11 @@ var lab=o[0];if(sqOptNew(qi,oi)){b.innerHTML=lab+optNewBadge()}else{b.textConten
 b.onclick=function(){ansFromMask(qi,oi)};box.appendChild(b)});
 box.style.display="block";var mb=$("mb");if(mb)mb.style.display="none";var mask=$("mask");if(mask){mask.classList.toggle("mood-chrome",isSecretSq(qi));mask.classList.add("on")}}
 function popup(t,p){mq.push([t,p]);nextPop()}
-function isSecretCopy(tt){tt=String(tt||"");return /強叔|大叔|夜景|晚點回家|更懂我|一個人住|沒說出口|已讀|痕跡|窺|香水|門外|尻槍|翻找|來電|定位|收回|💔|🔍|⏳/.test(tt)}
+function isSecretCopy(tt){tt=String(tt||"");return /強叔|大叔|夜景|晚點回家|更懂我|一個人住|沒說出口|已讀|痕跡|窺|香水|門外|尻槍|去廁所|翻找|來電|定位|收回|💔|🔍|⏳/.test(tt)}
 function isSecretSq(qi){var q=SQ[qi];if(!q)return false;if((q[3]|0)>0||!!q[4])return true;return isSecretCopy(q[1])}
-function isMoodChromeTitle(tt){tt=String(tt||"");if(/^🌙\s*當晚/.test(tt)||tt.indexOf("🚪 她出門了")===0)return false;if(moodPeekOn)return true;return /起疑|仔細觀察|發訊息|打電話|翻找|尻槍|沒說出口|沒有說的|心聲|空白|已讀|輸入中|來電|震動|貼圖|定位|背景聲|靜音|收回|窺|痕跡|強叔|大叔|夜景|晚點回家|更懂我|一個人住|⏳|🔍|💔/.test(tt)||/^⏳|^🔍|^💔/.test(tt)}
+function isMoodChromeTitle(tt){tt=String(tt||"");if(/^🌙\s*當晚/.test(tt)||tt.indexOf("🚪 她出門了")===0)return false;if(moodPeekOn)return true;return /起疑|仔細觀察|發訊息|打電話|翻找|尻槍|去廁所|沒說出口|沒有說的|心聲|空白|已讀|輸入中|來電|震動|貼圖|定位|背景聲|靜音|收回|窺|痕跡|強叔|大叔|夜景|晚點回家|更懂我|一個人住|⏳|🔍|💔/.test(tt)||/^⏳|^🔍|^💔/.test(tt)}
 function isObsMaskTitle(tt){tt=String(tt||"");return /^🔍/.test(tt)||/起疑/.test(tt)}
-function paintMaskChrome(tt){var mask=$("mask");if(!mask)return;var obs=isObsMaskTitle(tt);var soft=!obs&&(tt==="小紅"||tt==="🌸 小紅"||tt==="浮現一段塵封的回憶"||tt==="🌸 浮現一段塵封的回憶"||tt==="📱 發訊息"||tt==="📞 打電話"||tt==="💦 尻槍");
+function paintMaskChrome(tt){var mask=$("mask");if(!mask)return;var obs=isObsMaskTitle(tt);var soft=!obs&&(tt==="小紅"||tt==="🌸 小紅"||tt==="浮現一段塵封的回憶"||tt==="🌸 浮現一段塵封的回憶"||tt==="📱 發訊息"||tt==="📞 打電話"||tt==="🚽 去廁所"||tt==="💦 尻槍");
 /* 起疑: older dark square window (mood-chrome), never thin strip / never light paper box */
 mask.classList.toggle("obs-dark",!!obs);mask.classList.toggle("mood-chrome",!!obs||(!soft&&isMoodChromeTitle(tt)));mask.classList.toggle("mem-soft",!obs&&!!soft);mask.classList.remove("obs-strip");
 var face=mask.querySelector(".face");if(face)face.style.display="";
@@ -2580,7 +2585,7 @@ else{h+='<div class="sm" style="margin-bottom:8px">每天互動一次，增加�
 HOME_ACTS.forEach(function(a,i){var gn=a[4]|0,used=!!S.homeActToday,lk=(S.aff|0)<(a[3]|0);
 h+='<div class="row'+(used||lk?" lock":"")+'"><span class="i">'+a[2]+'</span><div class="m"><b>'+a[1]+'</b><div class="sm">'+(lk?"需要阿祿親密度 "+a[3]:a[5])+'</div></div><button class="btn" '+(used||lk||S.taken||S.endingDone?"disabled":"")+' onclick="homeAct('+i+')">'+(used?"今天已做過":lk?"未解鎖":"互動")+'</button></div>'})}}
 else if(tab=="go"){
-if(S.trip&&!S.taken){h+='<div class="blankbox"><div class="beat">她去了'+(S.trip.place||PLACES[S.trip.id][1])+'・<span id="tripCd">倒數 -- 秒</span></div><div class="sm" style="margin-top:6px">外出行動已在底欄：發訊息／打電話／尻槍／打瞌睡。</div></div>'}
+if(S.trip&&!S.taken){h+='<div class="blankbox"><div class="beat">她去了'+(S.trip.place||PLACES[S.trip.id][1])+'・<span id="tripCd">倒數 -- 秒</span></div><div class="sm" style="margin-top:6px">外出行動已在底欄：發訊息／打電話／去廁所／打瞌睡。</div></div>'}
 else if(S.outToday){h+='<div class="sm" style="margin-bottom:8px">今天已經外出過一次。只有睡覺日結後，明天才能再外出。</div>'}
 else if(!S.trip){h+='<div class="sm" style="margin-bottom:8px">一天只能外出一次，而等待總是漫長。</div>'}
 PLACES.forEach(function(p,i){var lk=S.aff<p[3],bz=!!S.trip,used=!!S.outToday,ing=bz&&S.trip.id==i,left=ing?Math.max(0,Math.ceil((S.trip.end-Date.now())/1000)):0;
