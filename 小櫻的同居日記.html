@@ -1594,9 +1594,31 @@ html,body{color:var(--tx)}
 
 
 
+
+/* 側欄未解鎖：可看見但不可用 */
+.homeui .sideNav .bubble.is-off,
+.homeui .sideNav .bubble:disabled{
+  opacity:.4;filter:grayscale(.4);cursor:not-allowed;pointer-events:none;
+  background:rgba(232,220,200,.82)!important;color:#6a5644!important;
+  box-shadow:0 1px 0 rgba(90,59,42,.18)!important;border-color:rgba(140,110,80,.35)!important
+}
+.homeui .sideNav .bubble.is-off .actSub{opacity:.7}
+/* 聊天室關閉：× */
+.chatRoom .chatHead .btn.chatCloseX{
+  width:36px;min-width:36px;height:36px;min-height:36px;padding:0!important;margin:0;
+  border-radius:999px!important;font-size:22px;font-weight:700;line-height:1;
+  display:inline-flex;align-items:center;justify-content:center;
+  background:rgba(255,248,234,.95)!important;color:#5a3518!important;
+  border:1.5px solid rgba(122,78,36,.35)!important;box-shadow:none!important;text-shadow:none!important
+}
+.chatRoom .chatHead .btn.chatCloseX:active{transform:scale(.94)}
+.momPhone .chromeFoot{
+  margin-top:8px;padding:4px 4px 0;font-size:11px;color:#8a5a40;text-align:center;font-weight:650
+}
 /* 睡覺: light scheme */
 .homeui .dock button.dockSleep{
   flex:1.15;display:flex;flex-direction:row;align-items:center;justify-content:center;gap:8px;
+  border-radius:999px!important;
   background:linear-gradient(165deg,#fffaf2,#f3e6d4)!important;
   border-color:#d2b48c!important;color:#4a3420!important;
   box-shadow:0 4px 0 #c4a57a!important;letter-spacing:.02em;
@@ -1818,7 +1840,7 @@ html,body{color:var(--tx)}
   <div class="chatPanel" role="document" onclick="event.stopPropagation()">
     <div class="chatHead">
       <div><b>匿名聊天室</b><div class="sm" id="chatSub">偶然滑到的討論串，不知為何忍不住看下去</div></div>
-      <button type="button" class="btn" id="chatClose" onclick="closeChatRoom()">關閉</button>
+      <button type="button" class="btn chatCloseX" id="chatClose" onclick="closeChatRoom()" aria-label="關閉">×</button>
     </div>
     <button type="button" class="btn chatBack" id="chatBack" onclick="chatShowList()">← 討論串</button>
     <div class="chatFeed" id="chatFeed"></div>
@@ -1826,7 +1848,7 @@ html,body{color:var(--tx)}
   </div>
 </div>
 <div class="momPhone" id="momPhone" aria-hidden="true" role="dialog" aria-modal="true" aria-label="媽媽的訊息" tabindex="0">
-  <div class="chromeWin phone" role="document">
+  <div class="chromeWin phone" role="document" onclick="event.stopPropagation()">
     <div class="chromeTitle"><span class="chromeFace av" aria-hidden="true">媽</span><h3>媽媽的訊息</h3></div>
     <div class="chromeBody msgThread" id="momBubbles">
       <div class="msgBubble"><span class="who">媽媽</span>阿祿，媽知道你腿骨折要在家靜養一個月，可惜現在旅行不能照顧你</div>
@@ -1834,6 +1856,7 @@ html,body{color:var(--tx)}
       <div class="msgBubble"><span class="who">媽媽</span>一聽到你要在家靜養，就說不介意暫住你家照顧你，直到找到地方住為止</div>
     </div>
     <div class="chromeActions tl"><button type="button" class="btn chromePrimary" id="momContinue">繼續</button></div>
+    <div class="chromeFoot">輕觸外側關閉</div>
   </div>
 </div>
 <div class="mask" id="mask"><div class="box"><div class="face"></div><h3 id="mt"></h3><p id="mp"></p><div class="sqopts" id="sqopts"></div><div class="tl"><button type="button" class="btn" id="mb">繼續</button></div></div></div>
@@ -2126,7 +2149,7 @@ var pushed=0;while(S.memPending.length){var id=S.memPending.shift();if(S.memSeen
 if(pushed){try{save()}catch(e){}if(!maskOpen())nextPop()}}
 function replayMem(k){var m=MEMORIES[k];if(!m||S.memSeen.indexOf(m[0])<0)return;mq.push(["🌸 浮現一段塵封的回憶",memBody(m)]);nextPop()}
 function afterAffTier(prev){if(tier()>(prev|0))flashAffTierFx();checkMemories();queueCohabUnlock()}
-var M_GAIN=1.75;var M_DRIP=0.35;/* non-event 大叔親密度：約事件倍率的 1/5 */
+var OUTING_M=3;var UNCLE_STEP_M=3;/* 外出固定 +3；步驟事件再 +3 */
 function memoriesComplete(){if(!S.memSeen||!MEMORIES||!MEMORIES.length)return false;for(var i=0;i<MEMORIES.length;i++){if(S.memSeen.indexOf(MEMORIES[i][0])<0)return false}return true}
 /* 強叔步驟一～四：第6天起；步驟五：全部同居事件解鎖。回憶不再閘路線 */
 function step5Open(){return typeof storyComplete==="function"?storyComplete():false}
@@ -2136,7 +2159,7 @@ function effM(){return S.m|0}
 function maybeStartUncleRoute(fromUnlock){if(S.uncleStarted)return;if(fromUnlock){/* 回憶集滿：允許踏入步驟五親密度帶，不重置已有進度 */}S.uncleStarted=true;try{save()}catch(e){}}
 function mCapForStep(st){st=st|0;if(st<=0)return 0;if(st<=2)return 14;if(st<=4)return 29;if(st<=6)return 49;if(st<=9)return 69;if(st===10)return 84;return 99}
 function uncleMCap(){var st=S.uncleStep|0;var a=typeof uncleArcByStep==="function"?uncleArcByStep(st):null;var cap=a&&a.mCap!=null?a.mCap|0:mCapForStep(st);if(!step5Open())cap=Math.min(cap,29);return Math.max(0,Math.min(99,cap))}
-function addM(d,isEvent){if(!d)return 0;if((S.day|0)<6)return 0;var mul=(isEvent||d<0)?M_GAIN:M_DRIP;var x=d>0?(isEvent?Math.max(1,Math.round(d*mul)):Math.max(0,Math.round(d*mul))):Math.min(-1,Math.round(d*M_GAIN));if(!x)return 0;var next=(S.m|0)+x;var cap=uncleMCap();if(next>cap)next=cap;S.m=Math.max(0,Math.min(100,next));return x}
+function addM(d,isEvent){if(!d)return 0;if((S.day|0)<6)return 0;var x=d|0;if(!x)return 0;var next=(S.m|0)+x;var cap=uncleMCap();if(next>cap)next=cap;S.m=Math.max(0,Math.min(100,next));return x}
 function stage(){var m=effM(),st=m>=60?3:m>=38?2:m>=15?1:0;if(!step5Open()&&st>1)st=1;return st}
 function clampView(){S.viewM=Math.max(-5,Math.min(5,S.viewM|0))}
 function sqOpen(i){var q=SQ[i];if(S.taken||S.aff<q[2])return false;if(q[4]&&effM()<q[3])return false;if(!q[4]&&q[3]>0&&effM()<q[3])return false;return true}
@@ -2317,7 +2340,7 @@ var metChance=Math.min(.92,(.28+p[2]/130+S.trips*.005+(acts.indexOf("call")>=0?0
 if(pid==0&&stage()<=0)metChance*=.45;
 var forceStep=canAdvanceUncle();
 var met=(forceStep||(ntrOn()&&Math.random()<metChance)),g=0,st;
-if(met){ev=pickPlaceEv(pid,true);if(!forceStep){g=Math.round(p[2]/12+S.trips*.15)+Math.floor(Math.random()*3);g=Math.max(0,Math.round(g*(1+S.viewM*0.12)*pm.mMul));g=addM(g)}S.metOut=true}
+if(met){ev=pickPlaceEv(pid,true);S.metOut=true}
 st=stage();
 var motif=pickTripMotif(pid,met,acts,st);
 var traces=buildTraces(met,acts,trip.place||p[1],motif);S.motif=null;S.trip=null;hidePhoneRipple();
@@ -2332,7 +2355,7 @@ var trTxt=traces.join("\n\n");
 S.pendingObs={trTxt:trTxt,met:met,motif:motif?{id:motif.id,mode:motif.mode}:null};
 if(met&&st>=2&&Math.random()<(st>=3?.55:.38)){var band=NEAR_SAY[Math.min(st,NEAR_SAY.length-1)]||NEAR_SAY[0];S.pendingChat=pick(band);}
 setObsBtn(true);
-if(forceStep){queueUncleStep()}
+if(forceStep){queueUncleStep()}addM(typeof OUTING_M==="number"?OUTING_M:3);
 if(!S.endingDone&&(effM()|0)>=99&&(S.day|0)<30){var hasPrep=false;for(var _ei=0;_ei<mq.length;_ei++){if(mq[_ei]&&mq[_ei].endingPrep)hasPrep=true}if(!hasPrep)mq.push({endingPrep:1})}
 queueSqAsk();
 var nightTxt=(dissonanceOn()||(motif&&motif.mode==="clash"))?pick(FLAT_NIGHT):pick(NIGHT[Math.min(st,NIGHT.length-1)]);
@@ -2345,7 +2368,15 @@ NSTORY.filter(function(s){var th=s[0]|0;var open=(th<=20)?((S.uncleStep|0)>=1&&e
 /* full bar does not force early move-out */
 nextPop()}finally{backLock=0}}
 function queueSqAsk(){if(S.sqDone||S.taken||S.pendingSq!=null)return;var a=sqAvail();if(!a.length)return;S.pendingSq=a[Math.floor(Math.random()*a.length)];try{save()}catch(e){}paintQBtn()}
-function paintSideStoryMem(){var outing=!!(S&&S.trip&&!S.taken)||(typeof isOutingPhase==="function"&&isOutingPhase());["navStory","navMem"].forEach(function(id){var el=$(id);if(!el)return;el.style.display=outing?"none":"";el.setAttribute("aria-hidden",outing?"true":"false")});var ask=$("navAsk");if(ask){var hideAsk=outing||!!(S&&S.endingDone);ask.style.display=hideAsk?"none":"";ask.setAttribute("aria-hidden",hideAsk?"true":"false")}}
+function askNavUnlocked(){return !!S&&(S.aff|0)>=15&&!S.endingDone}
+function storyNavUnlocked(){if(!S||!STORY||!STORY.length||S.endingDone)return false;return (S.aff|0)>=(STORY[0][0]|0)}
+function memNavUnlocked(){if(!S||!MEMORIES||!MEMORIES.length)return false;if(S.memSeen&&S.memSeen.length)return true;if(S.memPending&&S.memPending.length)return true;return ((S.aff|0)+(effM()|0))>=(MEMORIES[0][0]|0)}
+function chatNavUnlocked(){if(!S)return false;if(S.endingDone&&((S.ending|0)===1||(S.ending|0)===2))return true;if(S.taken)return false;return (S.day|0)>=1}
+function setNavLock(el,open,lockHint){if(!el)return;el.classList.toggle("is-off",!open);el.disabled=!open;el.setAttribute("aria-disabled",open?"false":"true");if(lockHint){if(open){if(el.getAttribute("data-lock-title")){el.setAttribute("title","");el.removeAttribute("data-lock-title")}}else{el.setAttribute("data-lock-title","1");el.setAttribute("title",lockHint)}}}
+function paintSideStoryMem(){var outing=!!(S&&S.trip&&!S.taken)||(typeof isOutingPhase==="function"&&isOutingPhase());
+var ask=$("navAsk");if(ask){var hideAsk=outing||!!(S&&S.endingDone);ask.style.display=hideAsk?"none":"";ask.setAttribute("aria-hidden",hideAsk?"true":"false");if(!hideAsk)setNavLock(ask,askNavUnlocked(),"阿祿親密度 15 後解鎖提問")}
+["navStory","navMem"].forEach(function(id){var el=$(id);if(!el)return;el.style.display=outing?"none":"";el.setAttribute("aria-hidden",outing?"true":"false");if(outing)return;if(id==="navStory")setNavLock(el,storyNavUnlocked(),"第一則日常可解鎖時開放");else setNavLock(el,memNavUnlocked(),"第一則回憶可解鎖時開放")});
+var ch=$("navChat");if(ch){var can=chatNavUnlocked()&&!outing&&!dayLock;ch.style.display="";ch.setAttribute("aria-hidden","false");setNavLock(ch,can,(S&&S.trip)?"外出中無法開啟":"聊天室尚未開放");if(typeof paintChatNotice==="function"&&can)paintChatNotice()}}
 function paintAskHome(){paintSideStoryMem();var ob=$("obsBtn");if(ob){var q=$("qHomeBtn");var qOn=q&&q.classList.contains("on");ob.style.visibility=qOn?"hidden":"";ob.style.pointerEvents=qOn?"none":(ob.disabled?"none":"")}
 }
 function paintQBtn(){var b=$("qHomeBtn");if(!b)return;var show=S&&S.pendingSq!=null&&!S.taken&&!S.trip&&!dayLock&&!maskOpen();b.classList.toggle("on",!!show);b.setAttribute("aria-hidden",show?"false":"true");if(typeof paintAskHome==="function")paintAskHome()}
@@ -2382,7 +2413,7 @@ var mask=$("mask");if(mask&&!mask._outsideBound){mask._outsideBound=1;mask.addEv
 function replay(k){var s=STORY[k];mq.push(["📌 同居事件："+s[1],s[2]]);nextPop()}
 function replayN(k){var s=NSTORY[k];mq.push(["💔 "+s[1],s[2]]);nextPop()}
 
-function chatAvailable(){if(!S||S.trip||dayLock)return false;if(S.endingDone&&((S.ending|0)===1||(S.ending|0)===2))return true;return !S.taken}
+function chatAvailable(){if(!S||S.trip||dayLock)return false;if(S.endingDone&&((S.ending|0)===1||(S.ending|0)===2))return true;if(S.taken)return false;return chatNavUnlocked()}
 function chatThreadUnlocked(t){if(!t)return false;if(t.ending){return !!(S.endingDone&&(S.ending|0)===(t.ending|0))}if((t.step|0)<=0){if(t.needAff&&(S.aff|0)<(t.needAff|0)&&((S.day|0)<6))return false;return true}return (S.uncleStep|0)>=(t.step|0)}
 function chatThreadList(){var list=[];(CHAT_THREADS||[]).forEach(function(t,i){if(chatThreadUnlocked(t))list.push({t:t,i:i})});return list}
 function paintChatFeed(){var feed=$("chatFeed"),back=$("chatBack");if(!feed)return;var open=S.chatOpenStep;var list=chatThreadList();
@@ -2399,7 +2430,7 @@ function chatShowList(){S.chatOpenStep=null;paintChatFeed();try{save()}catch(e){
 function chatOpenThread(i){S.chatOpenStep=i|0;paintChatFeed();try{save()}catch(e){}}
 function paintChatNotice(){var b=$("navChat");if(!b)return;var on=!!(S&&S.chatNotice);b.innerHTML=on?('💬 聊天室<span class="opt-new" title="有新討論串">✦</span>'):"💬 聊天室";b.classList.toggle("chat-notice",on)}
 function markChatThreadsNotice(){if(!S||typeof chatThreadList!=="function")return;var n=chatThreadList().length;if(S._chatThreadCount==null){S._chatThreadCount=n;return}if(n>(S._chatThreadCount|0))S.chatNotice=true;S._chatThreadCount=n}
-function openChatRoom(){if(!chatAvailable()){say(S.trip?"（她出門了。等她回來再滑手機吧。）":"（現在不方便看聊天室。）","pout");return}
+function openChatRoom(){if(!chatAvailable()){say(S.trip?"（她出門了。等她回來再滑手機吧。）":(chatNavUnlocked()?"（現在不方便看聊天室。）":"（聊天室還沒開放。）"),"pout");return}
 if(maskOpen()||($("momPhone")&&$("momPhone").classList.contains("on"))){say("（先看完眼前的事。）","pout");return}
 S.chatOpenStep=null;S.chatNotice=false;paintChatNotice();paintChatFeed();var el=$("chatRoom");if(!el)return;el.classList.add("on");el.setAttribute("aria-hidden","false");
 if(!S.chatSeen){S.chatSeen=true;addLog("💬 打開匿名聊天室・看見一個愛抱怨的匿名路人");try{save()}catch(e){}}}
@@ -2414,7 +2445,7 @@ function uncleArcByStep(n){for(var i=0;i<UNCLE_ARC.length;i++)if(UNCLE_ARC[i].st
 function canAdvanceUncle(){var next=(S.uncleStep|0)+1;if(next>11)return false;if((S.day|0)<6)return false;var a=uncleArcByStep(next);if(!a)return false;if(a.needStep5&&!step5Open())return false;var need=(a.mNeed!=null)?(a.mNeed|0):(UNCLE_STEP_MNEED&&UNCLE_STEP_MNEED[next]!=null?UNCLE_STEP_MNEED[next]|0:0);if((effM()|0)<need)return false;return true}
 function queueUncleStep(){if(!canAdvanceUncle())return false;var next=(S.uncleStep|0)+1;var a=uncleArcByStep(next);if(!a)return false;
 S.uncleStep=next;S.uncleStarted=true;S.metOut=true;S.uncleTh=(a.th||[]).slice();
-var gained=addM(a.mGain|0,true);
+var gained=addM(typeof UNCLE_STEP_M==="number"?UNCLE_STEP_M:3);
 if(!S.chatUnlocked)S.chatUnlocked=[];if(S.chatUnlocked.indexOf(next)<0){S.chatUnlocked.push(next);S.chatNotice=true;}
 if(next===1&&S.seen.indexOf("n1")<0){S.seen.push("n1");var ns=NSTORY[0];if(ns)mq.push(["💔 "+ns[1],ns[2]])}
 if(a.home){say(a.home,next>=5?"shy":"pout");addLog("💬 "+a.home)}
@@ -2509,8 +2540,8 @@ function paintDock(){
   paintAskTab();
 }
 function closePane(){S.journalOpen=null;if(tab)setTab(tab);else syncMoodDim()}
-function setTab(t){if(!t)return;if(S.endingDone&&(t==="home"||t==="go"||t==="ask"||t==="herq")){say((S.ending|0)===2?END_GONE:"（故事已經走到結局了。）","sad");return}if(t==="journal"){return}if(tab===t){tab="";document.querySelectorAll(".dock button,.tabs button,.bubble[data-t],.footnav [data-t],.chip[data-t]").forEach(function(x){x.classList.remove("on")});var pn0=$("pane");if(pn0){pn0.innerHTML="";pn0.classList.add("is-empty");pn0.classList.remove("is-open")}syncMoodDim();return}tab=t;document.querySelectorAll(".dock button,.tabs button").forEach(function(x){x.classList.toggle("on",x.dataset.t===t)});document.querySelectorAll(".bubble[data-t],.footnav [data-t],.chip[data-t]").forEach(function(x){x.classList.toggle("on",x.dataset.t===t)});pane();var pn=$("pane");if(pn){var empty=!(pn.innerHTML&&pn.innerHTML.trim());pn.classList.toggle("is-empty",empty);pn.classList.toggle("is-open",!empty&&!!tab);syncMoodDim()}}
-document.querySelectorAll(".bubble[data-t],.footnav [data-t],.chip[data-t]").forEach(function(a){a.onclick=function(e){e.preventDefault();setTab(a.dataset.t)}});
+function setTab(t){if(!t)return;if(S.endingDone&&(t==="home"||t==="go"||t==="ask"||t==="herq")){say((S.ending|0)===2?END_GONE:"（故事已經走到結局了。）","sad");return}if(t==="ask"&&!askNavUnlocked()){say("（阿祿親密度到 15 以後，才能提問。）","pout");return}if(t==="story"&&!storyNavUnlocked()){say("（還沒有日常可以看。親密再高一點吧。）","pout");return}if(t==="mem"&&!memNavUnlocked()){say("（回憶還沒浮現。再相處一會兒吧。）","pout");return}if(t==="journal"){return}if(tab===t){tab="";document.querySelectorAll(".dock button,.tabs button,.bubble[data-t],.footnav [data-t],.chip[data-t]").forEach(function(x){x.classList.remove("on")});var pn0=$("pane");if(pn0){pn0.innerHTML="";pn0.classList.add("is-empty");pn0.classList.remove("is-open")}syncMoodDim();return}tab=t;document.querySelectorAll(".dock button,.tabs button").forEach(function(x){x.classList.toggle("on",x.dataset.t===t)});document.querySelectorAll(".bubble[data-t],.footnav [data-t],.chip[data-t]").forEach(function(x){x.classList.toggle("on",x.dataset.t===t)});pane();var pn=$("pane");if(pn){var empty=!(pn.innerHTML&&pn.innerHTML.trim());pn.classList.toggle("is-empty",empty);pn.classList.toggle("is-open",!empty&&!!tab);syncMoodDim()}}
+document.querySelectorAll(".bubble[data-t],.footnav [data-t],.chip[data-t]").forEach(function(a){a.onclick=function(e){e.preventDefault();if(a.disabled||a.classList.contains("is-off"))return;setTab(a.dataset.t)}});
 function pane(){var y=window.scrollY||document.documentElement.scrollTop||0,h="";
 if((S.taken||(S.endingDone&&(S.ending|0)===2))&&(tab=="home"||tab=="go"||tab=="ask"||tab=="herq")){h='<div class="row"><span class="i">🗝️</span><div class="m"><b>女主已搬走</b><div class="sm">小紅搬去強叔那裡了。房間裡只剩下她搬走後空掉的位置。</div></div><button class="btn" onclick="doReset()">重新開始</button></div>'}
 else if(S.endingDone&&(tab=="home"||tab=="go"||tab=="ask"||tab=="herq")){h='<div class="row"><span class="i">📜</span><div class="m"><b>結局已定</b><div class="sm">互動／外出／提問已關閉。聊天室仍可回看。</div></div><button class="btn" onclick="doReset()">重新開始</button></div>'}
@@ -2550,7 +2581,7 @@ if(daylEl&&(daylEl.getAttribute("data-day")|0)!==dayN){
 }
 if(typeof paintSideStoryMem==="function")paintSideStoryMem();
 var sb=$("sleepBtn");if(sb){var canSleep=!S.taken&&!S.endingDone&&!S.trip&&!dayLock&&!maskOpen();sb.disabled=!canSleep;sb.classList.toggle("is-off",!canSleep);if(S.endingDone){sb.disabled=true;sb.classList.add("is-off")}}
-var ch=$("navChat");if(ch){var canChat=chatAvailable()||!!(S.endingDone&&((S.ending|0)===1||(S.ending|0)===2));ch.classList.toggle("is-off",!canChat);ch.style.display="";ch.setAttribute("aria-disabled",canChat?"false":"true")}
+/* nav locks via paintSideStoryMem */
 setObsBtn(!!(S.pendingObs&&!S.taken&&!S.trip));
 /* clock face removed — day label only; sleep still ends the day */
 var av=$("av");if(av.classList.contains("away")!==away)av.classList.toggle("away",away);
