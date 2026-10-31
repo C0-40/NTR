@@ -1344,81 +1344,131 @@ html,body{color:var(--tx)}
 }
 
 
-/* 外出頂部便條：暖室紙箋，兩行文案 + 可點速度 */
+/* 外出頂部：窗框下的紙箋便條（暖室木框語彙） */
 .stick.outing .topMeta{display:none!important}
 .stick.outing .dayClock,.stick.outing #dayClock{display:none!important}
 .stick.outing .note{display:none!important}
 .homeui .outingTop{
-  --ot-ink:#3a2416;
-  --ot-soft:#6b4e38;
-  --ot-paper:#fff7eb;
-  --ot-paper2:#f6e6d0;
-  --ot-wood:#7a4e2c;
-  --ot-wood2:#5a3418;
-  position:absolute;left:10px;right:10px;top:10px;z-index:6;
+  --ot-ink:var(--tx);
+  --ot-soft:var(--sub);
+  --ot-paper:#fff9ee;
+  --ot-wash:#f0dcc8;
+  --ot-edge:var(--wood);
+  --ot-edge2:var(--wood2);
+  --ot-seal:#ffe9c4;
+  --ot-on:#fff8ea;
+  position:absolute;left:10px;right:10px;top:8px;z-index:6;
   display:flex;flex-direction:column;gap:10px;
   width:auto;max-width:none;margin:0;transform:none;
-  padding:12px 12px 11px;
-  border-radius:16px;
-  border:1.5px solid rgba(122,78,44,.42);
+  padding:14px 12px 12px;
+  border-radius:4px 4px 14px 14px;
+  border:2.5px solid var(--ot-edge);
+  border-top-width:5px;
   background:
-    linear-gradient(180deg,rgba(255,255,255,.35),transparent 28%),
-    linear-gradient(165deg,var(--ot-paper),var(--ot-paper2));
+    linear-gradient(90deg,transparent 6px,rgba(122,78,36,.12) 6px,rgba(122,78,36,.12) 7px,transparent 7px) 0 0/100% 100%,
+    repeating-linear-gradient(0deg,transparent,transparent 27px,rgba(217,192,147,.35) 27px,rgba(217,192,147,.35) 28px),
+    linear-gradient(165deg,var(--ot-paper),#f6e7cf 72%,#edd9b8);
   box-shadow:
-    0 1px 0 rgba(255,255,255,.65) inset,
-    0 6px 16px rgba(70,40,18,.2),
-    0 1px 0 rgba(90,59,42,.08);
+    0 0 0 1px var(--ot-edge2),
+    0 8px 18px rgba(70,40,18,.22),
+    inset 0 1px 0 rgba(255,255,255,.55);
   pointer-events:auto;
+  animation:outingTopIn .38s cubic-bezier(.2,.8,.2,1) both;
 }
-.homeui .outingTop.off{display:none!important}
-.homeui .outingTop-copy{display:flex;flex-direction:column;gap:4px;min-width:0}
+.homeui .outingTop::before{
+  content:"";position:absolute;left:18%;right:18%;top:-7px;height:11px;
+  border-radius:3px;background:linear-gradient(180deg,#c9955a,#9a6230);
+  box-shadow:0 2px 0 rgba(60,30,10,.25),inset 0 1px 0 rgba(255,230,190,.45);
+  pointer-events:none;
+}
+.homeui .outingTop.off{display:none!important;animation:none}
+.homeui .outingTop-main{
+  display:flex;align-items:flex-start;justify-content:space-between;gap:10px;min-width:0
+}
+.homeui .outingTop-copy{display:flex;flex-direction:column;gap:5px;min-width:0;flex:1 1 auto}
 .homeui .outingTop-lead,
 .homeui .outingTop-ask{
   margin:0;padding:0;border:0;background:none;box-shadow:none;
-  font-family:"PingFang TC","Noto Sans TC","Hiragino Sans GB","Segoe UI",system-ui,sans-serif;
+  font-family:"Zen Maru Gothic","PingFang TC","Noto Sans TC","Microsoft JhengHei",sans-serif;
   white-space:normal;overflow-wrap:anywhere;word-break:break-word
 }
 .homeui .outingTop-lead{
-  font-size:15px;font-weight:800;letter-spacing:.02em;line-height:1.35;color:var(--ot-ink)
+  font-size:16px;font-weight:700;letter-spacing:.04em;line-height:1.35;color:var(--ot-ink)
 }
 .homeui .outingTop-ask{
-  font-size:12.5px;font-weight:650;letter-spacing:.01em;line-height:1.45;color:var(--ot-soft)
+  font-size:13px;font-weight:500;letter-spacing:.01em;line-height:1.5;color:var(--ot-soft)
 }
 .homeui .outingTop-cd{
-  margin:2px 0 0;padding:0;border:0;background:none;
-  font-size:12px;font-weight:750;letter-spacing:.04em;line-height:1.3;
-  color:var(--ot-wood);font-variant-numeric:tabular-nums
+  flex:0 0 auto;align-self:flex-start;margin:0;min-width:4.8em;
+  padding:8px 10px;border-radius:12px;
+  border:2px solid var(--ot-edge2);
+  background:
+    radial-gradient(120% 80% at 50% 0%,rgba(255,255,255,.45),transparent 55%),
+    linear-gradient(180deg,var(--ot-seal),#f0c98a);
+  box-shadow:0 2px 0 var(--ot-edge2),inset 0 1px 0 rgba(255,255,255,.5);
+  font-family:"Zen Maru Gothic","PingFang TC","Noto Sans TC",sans-serif;
+  font-size:12px;font-weight:700;letter-spacing:.02em;line-height:1.25;
+  color:var(--ot-edge2);text-align:center;font-variant-numeric:tabular-nums;
+  animation:outingCdPulse 2.4s ease-in-out infinite;
 }
 .homeui .outingTop-acts{
   display:flex!important;flex-direction:row;flex-wrap:nowrap;gap:8px;margin:0;align-items:stretch
 }
 .homeui .outingTop-acts[hidden]{display:none!important}
-.homeui .outingTop-acts .btn{
+.homeui .outingTop-acts .btn,
+.homeui.outing-shell .outingTop-acts .btn,
+.homeui .stick.outing .outingTop-acts .btn,
+.homeui.outing-shell .outingTop-acts #sp.btn,
+.homeui .stick.outing .outingTop-acts #sp.btn{
   flex:1 1 0;min-height:44px!important;height:44px;margin:0!important;
-  padding:0 12px!important;border-radius:12px!important;
-  font-size:13px!important;font-weight:800!important;letter-spacing:.02em;
+  padding:0 12px!important;border-radius:14px!important;
+  font-family:"Zen Maru Gothic","PingFang TC","Noto Sans TC",sans-serif!important;
+  font-size:13px!important;font-weight:700!important;letter-spacing:.02em;line-height:1.2!important;
   display:inline-flex!important;align-items:center;justify-content:center;gap:6px;
-  background:linear-gradient(180deg,#8a5a34,var(--ot-wood))!important;
-  border:1.5px solid var(--ot-wood2)!important;color:#fff8ee!important;
-  box-shadow:0 3px 0 var(--ot-wood2),0 1px 0 rgba(255,255,255,.2) inset!important;
-  text-shadow:0 1px 0 rgba(0,0,0,.25)!important;touch-action:manipulation;cursor:pointer
+  background:linear-gradient(180deg,#8d5a2e,var(--ot-edge))!important;
+  border:2px solid var(--ot-edge2)!important;color:var(--ot-on)!important;
+  box-shadow:0 3px 0 var(--ot-edge2),inset 0 1px 0 rgba(255,255,255,.22)!important;
+  text-shadow:none!important;touch-action:manipulation;cursor:pointer;
+  transition:transform .12s ease,box-shadow .12s ease,filter .12s ease
 }
-.homeui .outingTop-acts .btn:active{
-  transform:translateY(2px);box-shadow:0 1px 0 var(--ot-wood2)!important
+.homeui .outingTop-acts .btn:hover,
+.homeui.outing-shell .outingTop-acts .btn:hover{filter:brightness(1.05)}
+.homeui .outingTop-acts .btn:focus-visible,
+.homeui.outing-shell .outingTop-acts .btn:focus-visible{
+  outline:3px solid var(--sky);outline-offset:2px
 }
-.homeui .outingTop-acts .note-sp{flex:1 1 0;min-width:0}
-.homeui .outingTop-acts .note-skip{flex:1.15 1 0}
+.homeui .outingTop-acts .btn:active,
+.homeui.outing-shell .outingTop-acts .btn:active,
+.homeui .stick.outing .outingTop-acts .btn:active{
+  transform:translateY(2px);box-shadow:0 1px 0 var(--ot-edge2)!important;filter:none
+}
+.homeui .outingTop-acts .note-sp{flex:0 0 auto;min-width:5.2em;max-width:6.5em}
+.homeui .outingTop-acts .note-skip{flex:1 1 auto}
 .stick.outing .silLayer,.stick.outing .silLayer.is-on{z-index:4!important}
 .stick.outing .dlg{z-index:8!important}
 .stick.outing .sideNav{z-index:5!important}
+@keyframes outingTopIn{
+  from{opacity:0;transform:translateY(-8px)}
+  to{opacity:1;transform:translateY(0)}
+}
+@keyframes outingCdPulse{
+  0%,100%{filter:saturate(1)}
+  50%{filter:saturate(1.15) brightness(1.03)}
+}
 @media (max-width:420px){
-  .homeui .outingTop{left:8px;right:8px;top:8px;padding:11px 11px 10px;border-radius:14px}
-  .homeui .outingTop-lead{font-size:14px}
-  .homeui .outingTop-ask{font-size:12px}
+  .homeui .outingTop{left:8px;right:8px;top:6px;padding:13px 10px 11px;gap:9px}
+  .homeui .outingTop-lead{font-size:15px}
+  .homeui .outingTop-ask{font-size:12.5px}
+  .homeui .outingTop-cd{padding:7px 8px;font-size:11.5px;min-width:4.4em}
   .homeui .outingTop-acts .btn{min-height:44px!important;height:44px;font-size:12.5px!important}
 }
 @media (prefers-reduced-motion:reduce){
-  .homeui .outingTop-acts .btn:active{transform:none}
+  .homeui .outingTop{animation:none}
+  .homeui .outingTop-cd{animation:none}
+  .homeui .outingTop-acts .btn,
+  .homeui.outing-shell .outingTop-acts .btn{transition:none}
+  .homeui .outingTop-acts .btn:active,
+  .homeui.outing-shell .outingTop-acts .btn:active{transform:none}
 }
 /* 在家：大叔條回到阿祿條正下方 */
 .homeui .mbox{margin-top:6px!important;padding-top:5px!important;border-top:1px dashed rgba(140,100,55,.28)!important}
@@ -1709,9 +1759,11 @@ html,body{color:var(--tx)}
     </div>
     </div>
     <div id="outingTop" class="outingTop off" role="status" aria-live="polite" aria-label="外出狀態">
-      <div class="outingTop-copy">
-        <p class="outingTop-lead" id="outChip">小紅外出中……</p>
-        <p class="outingTop-ask" id="aloneChip">屋裡只剩你，打算做甚麼？</p>
+      <div class="outingTop-main">
+        <div class="outingTop-copy">
+          <p class="outingTop-lead" id="outChip">小紅外出中……</p>
+          <p class="outingTop-ask" id="aloneChip">屋裡只剩你，打算做甚麼？</p>
+        </div>
         <p class="outingTop-cd" id="outingCd">還有 -- 秒</p>
       </div>
       <div class="outingTop-acts note-acts" id="noteActs" hidden>
