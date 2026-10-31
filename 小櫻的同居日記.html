@@ -1340,17 +1340,23 @@ html,body{color:var(--tx)}
 }
 
 
-/* 外出狀態 chip：佔大叔親密度位置（阿祿條下方、置中），疊在剪影後方 */
+/* 外出：隱藏親密度條；小紅外出中改到遊戲框左上角（較小） */
+.stick.outing .topMeta{display:none!important}
 .homeui .outChip{
-  display:block;margin-top:6px;padding:6px 8px 2px;border-top:1px dashed rgba(140,100,55,.28);
-  text-align:center;font-size:10.5px;font-weight:750;letter-spacing:.06em;color:#5a3518;
-  line-height:1.3;
+  position:absolute;left:10px;top:10px;z-index:1;
+  display:inline-flex;align-items:center;justify-content:center;
+  max-width:42%;padding:3px 8px;margin:0;
+  border-radius:999px;border:1px solid rgba(160,120,70,.45);
+  background:rgba(255,248,236,.88);
+  box-shadow:0 1px 3px rgba(90,59,42,.12);
+  font-size:9px;font-weight:700;letter-spacing:.04em;color:#5a3518;
+  line-height:1.2;white-space:nowrap;pointer-events:none;
 }
 .homeui .outChip.off{display:none!important}
-.stick.outing .topHud{z-index:1!important}
 .stick.outing .silLayer,.stick.outing .silLayer.is-on{z-index:4!important}
 .stick.outing .dlg{z-index:8!important}
 .stick.outing .sideNav{z-index:5!important}
+.stick.outing .dayClock{z-index:6!important}
 /* 在家：大叔條回到阿祿條正下方 */
 .homeui .mbox{margin-top:6px!important;padding-top:5px!important;border-top:1px dashed rgba(140,100,55,.28)!important}
 
@@ -1630,12 +1636,12 @@ html,body{color:var(--tx)}
               <div class="sm metaMlab" id="mlab">❤️ 大叔親密度</div>
               <div class="bar m" id="mbarwrap"><i id="mbar"></i></div>
             </div>
-            <div id="outChip" class="outChip off" aria-live="polite">小紅外出中</div>
           </div>
       <div class="dayClock" id="dayClock" aria-label="天數">
       <div class="dayClock-day" id="dayl"></div>
     </div>
     </div>
+    <div id="outChip" class="outChip off" aria-live="polite">小紅外出中</div>
 <nav class="sideNav left" aria-label="提問與聊天室">
       <button type="button" class="bubble" data-t="ask" id="navAsk">💬 提問</button>
       <button type="button" class="bubble actChat" id="navChat" aria-label="打開匿名聊天室" onclick="openChatRoom()">💬 聊天室</button>
@@ -2000,7 +2006,7 @@ var pushed=0;while(S.memPending.length){var id=S.memPending.shift();if(S.memSeen
 if(pushed){try{save()}catch(e){}if(!maskOpen())nextPop()}}
 function replayMem(k){var m=MEMORIES[k];if(!m||S.memSeen.indexOf(m[0])<0)return;mq.push(["🌸 浮現一段塵封的回憶",memBody(m)]);nextPop()}
 function afterAffTier(prev){if(tier()>(prev|0))flashAffTierFx();checkMemories();queueCohabUnlock()}
-var M_GAIN=1.75;
+var M_GAIN=1.75;var M_DRIP=0.35;/* non-event 大叔親密度：約事件倍率的 1/5 */
 function memoriesComplete(){if(!S.memSeen||!MEMORIES||!MEMORIES.length)return false;for(var i=0;i<MEMORIES.length;i++){if(S.memSeen.indexOf(MEMORIES[i][0])<0)return false}return true}
 /* 強叔步驟一～四：第6天起；步驟五：全部同居事件解鎖。回憶不再閘路線 */
 function step5Open(){return typeof storyComplete==="function"?storyComplete():false}
@@ -2010,7 +2016,7 @@ function effM(){return S.m|0}
 function maybeStartUncleRoute(fromUnlock){if(S.uncleStarted)return;if(fromUnlock){/* 回憶集滿：允許踏入步驟五親密度帶，不重置已有進度 */}S.uncleStarted=true;try{save()}catch(e){}}
 function mCapForStep(st){st=st|0;if(st<=0)return 0;if(st<=2)return 14;if(st<=4)return 29;if(st<=6)return 49;if(st<=9)return 69;if(st===10)return 84;return 99}
 function uncleMCap(){var st=S.uncleStep|0;var a=typeof uncleArcByStep==="function"?uncleArcByStep(st):null;var cap=a&&a.mCap!=null?a.mCap|0:mCapForStep(st);if(!step5Open())cap=Math.min(cap,29);return Math.max(0,Math.min(99,cap))}
-function addM(d){if(!d)return 0;if((S.day|0)<6)return 0;var x=d>0?Math.max(1,Math.round(d*M_GAIN)):Math.min(-1,Math.round(d*M_GAIN));var next=(S.m|0)+x;var cap=uncleMCap();if(next>cap)next=cap;S.m=Math.max(0,Math.min(100,next));return x}
+function addM(d,isEvent){if(!d)return 0;if((S.day|0)<6)return 0;var mul=(isEvent||d<0)?M_GAIN:M_DRIP;var x=d>0?(isEvent?Math.max(1,Math.round(d*mul)):Math.max(0,Math.round(d*mul))):Math.min(-1,Math.round(d*M_GAIN));if(!x)return 0;var next=(S.m|0)+x;var cap=uncleMCap();if(next>cap)next=cap;S.m=Math.max(0,Math.min(100,next));return x}
 function stage(){var m=effM(),st=m>=60?3:m>=38?2:m>=15?1:0;if(!step5Open()&&st>1)st=1;return st}
 function clampView(){S.viewM=Math.max(-5,Math.min(5,S.viewM|0))}
 function sqOpen(i){var q=SQ[i];if(S.taken||S.aff<q[2])return false;if(q[4]&&effM()<q[3])return false;if(!q[4]&&q[3]>0&&effM()<q[3])return false;return true}
@@ -2288,7 +2294,7 @@ function uncleArcByStep(n){for(var i=0;i<UNCLE_ARC.length;i++)if(UNCLE_ARC[i].st
 function canAdvanceUncle(){var next=(S.uncleStep|0)+1;if(next>11)return false;if((S.day|0)<6)return false;var a=uncleArcByStep(next);if(!a)return false;if(a.needStep5&&!step5Open())return false;return true}
 function queueUncleStep(){if(!canAdvanceUncle())return false;var next=(S.uncleStep|0)+1;var a=uncleArcByStep(next);if(!a)return false;
 S.uncleStep=next;S.uncleStarted=true;S.metOut=true;S.uncleTh=(a.th||[]).slice();
-var gained=addM(a.mGain|0);
+var gained=addM(a.mGain|0,true);
 if(!S.chatUnlocked)S.chatUnlocked=[];if(S.chatUnlocked.indexOf(next)<0){S.chatUnlocked.push(next);S.chatNotice=true;}
 if(next===1&&S.seen.indexOf("n1")<0){S.seen.push("n1");var ns=NSTORY[0];if(ns)mq.push(["💔 "+ns[1],ns[2]])}
 if(a.home){say(a.home,next>=5?"shy":"pout");addLog("💬 "+a.home)}
