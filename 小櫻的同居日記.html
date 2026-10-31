@@ -1702,7 +1702,7 @@ html,body{color:var(--tx)}
   pointer-events:none!important
 }
 
-/* 心聲未解鎖（阿祿親密度 < 50）：霧化不可讀 */
+/* 外出心聲未解鎖（阿祿親密度 < 50）：霧化不可讀；睡覺「她沒說出口的事」不霧 */
 #thb.is-fogged,
 #mp.is-fogged{
   filter:blur(8px)!important;
@@ -2218,7 +2218,7 @@ function doubtThoughts(){return[]}
 function thPool(){var i=voiceBand(),bag=TH[Math.min(i,TH.length-1)]||TH[0];return bag&&bag.length?bag.slice():[]}
 function voiceReadable(){return !!S&&(S.aff|0)>=50}
 function setFogged(el,on){if(!el)return;el.classList.toggle("is-fogged",!!on)}
-function paintVoiceFog(){var readable=voiceReadable();setFogged($("thb"),!readable);var mt=$("mt"),mp=$("mp");if(mp){var fog=!!(mt&&/她沒說出口的事/.test(mt.textContent||"")&&!readable);setFogged(mp,fog)}var hf=$("heartFace");if(hf)setFogged(hf,!!(S&&S.trip&&!S.taken&&(S.aff|0)<25))}
+function paintVoiceFog(){var readable=voiceReadable();setFogged($("thb"),!readable);var mp=$("mp");if(mp)setFogged(mp,false);var hf=$("heartFace");if(hf)setFogged(hf,!!(S&&S.trip&&!S.taken&&(S.aff|0)<25))}
 
 function pickPlaceEv(pid,met){var st=voiceBand(),rows=PLACE_EV[pid];if(!rows)return pick(PLACES[pid][6]);var band=st;if(st<=0&&!met)band=0;else if(met)band=Math.max(1,st);band=Math.max(band,voiceFloor());return pick(rows[Math.min(band,rows.length-1)])}
 function placeMeta(pid){return PLACE_META[pid]||{meet:1,mMul:1,tag:""}}
