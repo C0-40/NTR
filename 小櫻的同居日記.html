@@ -1147,7 +1147,10 @@ html,body{color:var(--tx)}
 }
 .obsHomeBtn.on{display:inline-flex}
 .obsHomeBtn:hover,.obsHomeBtn:focus-visible{background:#454545;color:#f2ebe2;outline:none}
-.obsHomeBtn:active{transform:translateX(-50%) scale(.98);background:#333}
+.obsHomeBtn:hover,.obsHomeBtn:focus-visible{transform:translateX(-50%)!important}
+.obsHomeBtn:active{transform:translateX(-50%) scale(.98)!important;background:#333}
+.homeui .obsHomeBtn.actObs:hover,.homeui .obsHomeBtn.actObs:focus-visible{transform:translateX(-50%)!important;filter:brightness(1.08)}
+.homeui .obsHomeBtn.actObs:active{transform:translateX(-50%) scale(.98)!important;filter:brightness(1.05)}
 .obsHomeBtn.is-off,.obsHomeBtn:disabled{opacity:.4;pointer-events:none}
 .obsHomeBtn .actIco{opacity:.9;font-size:13px;filter:none;transform:none}
 .obsHomeBtn .actTxt{display:flex;flex-direction:column;align-items:flex-start;gap:1px;line-height:1.15}
@@ -1679,6 +1682,24 @@ html,body{color:var(--tx)}
   .obsHomeBtn.obs-appear{animation:none!important}
 }
 
+
+/* 心聲未解鎖（阿祿親密度 < 50）：霧化不可讀 */
+#thb.is-fogged,
+#mp.is-fogged{
+  filter:blur(8px)!important;
+  color:transparent!important;
+  text-shadow:0 0 10px rgba(44,26,16,.55)!important;
+  user-select:none!important;
+  -webkit-user-select:none!important;
+  pointer-events:none!important;
+  cursor:default
+}
+.stick.outing #thb.is-fogged{
+  text-shadow:0 0 12px rgba(248,236,218,.5)!important
+}
+.mask #mp.is-fogged{
+  text-shadow:0 0 12px rgba(44,26,16,.6)!important
+}
 /* 起疑 appear (window chrome unchanged) */
 .obsHomeBtn.obs-appear{animation:obsAppear .7s ease 1}
 @keyframes obsAppear{
@@ -1998,7 +2019,7 @@ var NT=[[],["……巷口有人被圍著打。我手比腦子快，才不是想�
 var TH=[["阿祿現在在做什麼呢……會不會還開著燈等我。","今天要帶什麼回去給他好呢。","和他一起住，真的很安心。……才不是依賴。"],["他不舒服的時間總是剛好。……一懷疑，就像抽走他唯一的依靠。","如果他在演，識破了，他就不需要我了吧。這念頭一冒出來，我更對不起阿祿。","我只是想被需要。……可阿祿也在等我。兩邊我都放不下。"],["先沖了手才敢靠近你。袖口那點溫度還在，我卻說只是外面熱。","你問我去哪。腦海裡的地名卡了一下。……我還是選擇說他可憐。","關燈後我更黏你一點。不是坦然，是補償。……阿祿，我回來了，卻沒把真相帶回來。"],["水聲散了，愧疚沒散。你越溫柔，我越像在騙你——可我還是想被你溫柔。","「他沒有多少時間了」這句，我在心裡又說一遍，好讓自己明天還敢出門。","枕頭邊的手機亮了又暗。我沒看。……我還是會去。去完，再回來黏你。"]];
 var SOFT=["陽光落在肩上，想快點回家跟你說。","我笑了。……想讓你也看見。","拍了張照片，想回去給你看。","停下腳步時，想到的是你。"];
 var HOME=[["她窩在沙發上滑手機，偶爾抬頭看一眼門口。","她煮了一壺茶，把你的杯子也一起洗乾淨了。","她在窗邊澆花，哼著不成調的歌。"],["她整天盯著手機，一聽到你的腳步就把螢幕扣上——訊息預覽裡，隱約閃過「強叔」兩個字。","她坐在窗邊發呆，什麼也沒幹。領口的香水味，和家裡的皂香不太一樣。"]];
-var QA=[["🍮","你平常喜歡做什麼？",0,["吃布丁，還有遲到的人——才不是因為你煮得好吃！","幫忙跑腿啊。被需要的感覺還不錯。","……最近有人很會聽我說話。我一說出口就後悔了。"]],["🤍","你怎麼看我？",20,["你很笨，又很溫柔。……是我最不想失去的人。","你是我最信任的人，這句話我說得出口。","你是我最不想失去的人。這是真的。"]],["😈","你覺得強叔是什麼樣的人？",40,["很可憐的大叔，但人不壞吧。","他有他的苦衷……你不要用那種眼神看我。","他是……需要我的人。你別這樣看我——我一說就覺得對不起你。"],"uncle"],["🛍️","今天外出遇到什麼人嗎？",60,["沒有啊，就買了點東西。","遇到一個很可憐的大叔，我幫了他一點小忙。","沒什麼，就買了東西。……真的。別用那種眼神，我會心虛。"],"trip"],["🌧️","你有後悔過什麼事嗎？",80,["搬家那天沒回你的信。我到現在還在後悔。","有一件小事……我還在想要不要告訴你。","後悔？現在說還太早。"]],["🦵","如果我的腿好了，你想做什麼？",100,["第一件事，你自己去倒水！……然後陪你去海邊走走。","到時候……我們再說吧。","到時候我……還想陪你。可是我現在有點亂，你別追問。"]],["🔍","你有沒有想過，強叔會不會……在利用你的好心？",40,["利用？你想太多了。……可是你一說，我心口緊了一下。","……我想過一秒。然後覺得自己很過分。他那麼需要我。","想過。想完還是會去。因為一懷疑，他就不需要我了——阿祿，我知道這很自私。"],"uncle"],["🏠","今晚別出門了，好不好？留在家。",50,["……好。我今晚不下樓。……你這樣問，我會心虛。","我想答應你。可是他若又說不舒服……我還是會去。對不起。","你越這樣挽留，我越覺得自己髒。……我還是會去。去完再回來愧疚。"],"uncle"]];
+var QA=[["🍮","你平常喜歡做什麼？",0,["吃布丁，還有遲到的人——才不是因為你煮得好吃！","幫忙跑腿啊。被需要的感覺還不錯。","……最近有人很會聽我說話。我一說出口就後悔了。"]],["🤍","你怎麼看我？",20,["你很笨，又很溫柔。……是我最不想失去的人。","你是我最信任的人，這句話我說得出口。","你是我最不想失去的人。這是真的。"]],["🛍️","今天外出遇到什麼人嗎？",60,["沒有啊，就買了點東西。","遇到一個很可憐的大叔，我幫了他一點小忙。","沒什麼，就買了東西。……真的。別用那種眼神，我會心虛。"],"trip"],["🌧️","你有後悔過什麼事嗎？",80,["搬家那天沒回你的信。我到現在還在後悔。","有一件小事……我還在想要不要告訴你。","後悔？現在說還太早。"]],["🦵","如果我的腿好了，你想做什麼？",100,["第一件事，你自己去倒水！……然後陪你去海邊走走。","到時候……我們再說吧。","到時候我……還想陪你。可是我現在有點亂，你別追問。"]],["😈","你覺得強叔是什麼樣的人？",40,["很可憐的大叔，但人不壞吧。","他有他的苦衷……你不要用那種眼神看我。","他是……需要我的人。你別這樣看我——我一說就覺得對不起你。"],"uncle"]];
 function qaLoveAnswer(){var xl=S.aff|0,um=effM()|0;if(xl<100)return "……問這個幹嘛。";
 if(xl>=200){if(um>=70)return "有。一直都是你，這是真的。……你別這樣看我。";if(um>=30)return "有。一直都是你。……最近我常常覺得對不起你，你別問為什麼。";return "有。你知道是誰。……我只是還沒準備好說出來。"}
 if(um>=70)return "有。……你別再問了。";if(um>=30)return "有。可是我最近有點亂，好像……有兩個影子。";return "……有。你不要笑。是個很笨、很溫柔的人。"}
@@ -2173,6 +2194,9 @@ function voiceFloor(){var us=S.uncleStep|0;if(us>=9)return 3;if(us>=5)return 2;i
 function voiceBand(){return Math.max(stage(),voiceFloor())}
 function doubtThoughts(){return[]}
 function thPool(){var i=voiceBand(),bag=TH[Math.min(i,TH.length-1)]||TH[0];return bag&&bag.length?bag.slice():[]}
+function voiceReadable(){return !!S&&(S.aff|0)>=50}
+function setFogged(el,on){if(!el)return;el.classList.toggle("is-fogged",!!on)}
+function paintVoiceFog(){var readable=voiceReadable();setFogged($("thb"),!readable);var mt=$("mt"),mp=$("mp");if(mp){var fog=!!(mt&&/她沒說出口的事/.test(mt.textContent||"")&&!readable);setFogged(mp,fog)}}
 
 function pickPlaceEv(pid,met){var st=voiceBand(),rows=PLACE_EV[pid];if(!rows)return pick(PLACES[pid][6]);var band=st;if(st<=0&&!met)band=0;else if(met)band=Math.max(1,st);band=Math.max(band,voiceFloor());return pick(rows[Math.min(band,rows.length-1)])}
 function placeMeta(pid){return PLACE_META[pid]||{meet:1,mMul:1,tag:""}}
@@ -2191,7 +2215,7 @@ function ntrOn(){return uncleOpen()&&((S.day|0)>=6)&&((S.uncleStep|0)>0||effM()>
 function rate(){return +(1+tier()*1.5).toFixed(1)}
 function $(i){return document.getElementById(i)}
 function fmt(n){return Math.floor(n).toLocaleString()}
-function say(t,k){if(S.trip){var thb=$("thb");if(thb)thb.textContent=t;var tb=$("thbox")&&$("thbox").querySelector("b");if(tb)tb.textContent="💭 心聲";faceTf(k||"shy")}else{var sy=$("say");if(sy)sy.textContent=t;syncDlgAv(t)}setEx(k||detect(t))}
+function say(t,k){if(S.trip){var thb=$("thb");if(thb)thb.textContent=t;var tb=$("thbox")&&$("thbox").querySelector("b");if(tb)tb.textContent="💭 心聲";faceTf(k||"shy");paintVoiceFog()}else{var sy=$("say");if(sy)sy.textContent=t;syncDlgAv(t)}setEx(k||detect(t))}
 function addLog(t){S.log.unshift(t);if(S.log.length>40)S.log.pop()}
 function hearts(n){var sc=$("scene");if(!sc)return;for(var i=0;i<n;i++){var h=document.createElement("span");h.className="heart";h.textContent=["💗","🌸","✨"][i%3];h.style.cssText="position:absolute;left:"+(35+Math.random()*30)+"%;top:"+(35+Math.random()*20)+"%;margin:0;pointer-events:none";sc.appendChild(h);setTimeout(function(x){if(x&&x.parentNode)x.parentNode.removeChild(x)}.bind(null,h),1100)}}
 function blankBandT(){var t=tier();return t<=1?0:t<=3?1:2}
@@ -2274,11 +2298,11 @@ if(st>=2){var bag=HOME_TH[Math.min(st,HOME_TH.length-1)]||HOME_TH[2];if(bag&&bag
 else if(S.trip&&PLACE_TH[S.trip.id]){var rows=PLACE_TH[S.trip.id],row=rows[Math.min(st,rows.length-1)]||rows[0];if(row&&row.length)pool=pool.concat(row)}
 return pool.length?pool:["……"]}
 function thought(){var st=stage(),i=st,pool=thPool();
-if(S.trip){var poolO=outingThoughtPool();$("thb").textContent=pick(poolO);var tbA=$("thbox")&&$("thbox").querySelector("b");if(tbA)tbA.textContent="💭 心聲";faceTf(pick(i>=2?["shy","sad","pout","cold"]:["shy","calm","wink","sad"]));thT=Date.now();return}
+if(S.trip){var poolO=outingThoughtPool();$("thb").textContent=pick(poolO);var tbA=$("thbox")&&$("thbox").querySelector("b");if(tbA)tbA.textContent="💭 心聲";faceTf(pick(i>=2?["shy","sad","pout","cold"]:["shy","calm","wink","sad"]));thT=Date.now();paintVoiceFog();return}
 $("thb").textContent=pick(pool);
 faceTf(pick(S.trip?["shy","sad","pout","cold"]:[["calm","wink","joy"],["shy","sad","shy"],["shy","sad","pout"],["pout","cold","cold"]][i]));
 var tb=$("thbox")&&$("thbox").querySelector("b");if(tb)tb.textContent="💭 心聲";
-thT=Date.now()}
+thT=Date.now();paintVoiceFog()}
 
 function journalBand(){var st=stage();return st<=0?0:st<=2?1:2}
 function ensureJournalLen(s){var n=0,out=s;while(out.length<200&&n<4){out+="\n\n我把今天的事又在心裡走了一遍，生怕漏掉什麼細節，也生怕記得太清楚。";n++}return out}
@@ -2311,9 +2335,12 @@ function syncSilhouette(){
   el.classList.remove("is-solo","is-pair","sil-far","sil-edge","sil-mid","sil-close","sil-near","sil-lv0","sil-lv1","sil-lv2","sil-lv3");
   if(!on)return;
   applySilPose();
-  var ap=silApproach(),pair=$("silPair");
+  var pair=$("silPair");
   if(pair){pair.style.removeProperty("--sil-gap");pair.style.removeProperty("--sil-ux")}
-  if(ap<0){el.classList.add("is-solo");return}
+  /* 本次外出未遇見強叔：不顯示大叔剪影 */
+  if(!(S.trip&&S.trip.metUncle)){el.classList.add("is-solo");return}
+  var ap=silApproach();
+  if(ap<0)ap=0;
   el.classList.add("is-pair");
   el.classList.add(["sil-edge","sil-mid","sil-close","sil-near"][ap]);
 }
@@ -2325,7 +2352,7 @@ function openJournal(i){return}
 function closeJournal(){S.journalOpen=null;render();syncMoodDim()}
 function runSceneFx(name,ms){var hu=document.querySelector(".homeui");if(!hu)return;hu.classList.remove("fx-leave","fx-return","fx-sleep");if(!name)return;hu.classList.add(name);clearTimeout(runSceneFx._t);runSceneFx._t=setTimeout(function(){hu.classList.remove("fx-leave","fx-return","fx-sleep")},ms||520)}
 function go(i){if(busy||S.trip||S.taken||S.endingDone||S.outToday)return;runSceneFx("fx-leave",480);withBusy(function(){goNow(i)});}
-function goNow(i){if(S.trip||S.taken||S.outToday)return;var p=PLACES[i],dep=pickDepart(i);S.trip={id:i,place:p[1],end:Date.now()+p[2]*1000,acts:[],depart:dep,skipped:false};S.outToday=true;hidePhoneRipple();phoneRippleT=Date.now();
+function goNow(i){if(S.trip||S.taken||S.outToday)return;var p=PLACES[i],dep=pickDepart(i);S.trip={id:i,place:p[1],end:Date.now()+p[2]*1000,acts:[],depart:dep,skipped:false,metUncle:uncleAppearRoll()};S.outToday=true;hidePhoneRipple();phoneRippleT=Date.now();
 closePane();
 mq.push(["🚪 她出門了",dep]);
 say("「那我出門囉！去"+p[1]+"～別等太晚喔。」","wink");addLog("🚪 外出："+p[1]+"｜"+dep.replace(/\n/g," "));thought();nextPop();render()}
@@ -2340,7 +2367,7 @@ nextPop();render()})}
 function back(){if(!S.trip||backLock)return;backLock=1;runSceneFx("fx-return",560);try{var trip=S.trip,pid=trip.id,p=PLACES[pid],pm=placeMeta(pid),ev=pickPlaceEv(pid,false),it=pick(p[7]),c=p[5]+Math.floor(Math.random()*p[5]*0.4),b=tier(),acts=(trip.acts||[]).slice();
 if(!acts.length)acts=[];
 /* outing: +0 親密度 */clampAff();S.trips++;
-var met=uncleAppearRoll(),g=0,st;
+var met=!!(trip&&trip.metUncle),g=0,st;
 if(met){ev=pickPlaceEv(pid,true);S.metOut=true}
 st=stage();
 var motif=pickTripMotif(pid,met,acts,st);
@@ -2409,7 +2436,7 @@ if(obs){var box=mask.querySelector(".box");if(box){box.classList.remove("obs-win
 function nextPop(){if(maskOpen())return;if(!mq.length){dayLock=0;hideSqOpts();if(moodPeekOn)clearMoodPeek();return}var m=mq.shift();if(!m){releaseDayLock();hideSqOpts();if(moodPeekOn)clearMoodPeek();return}
 if(m.sq!=null){showSqMask(m.sq);return}
 if(m.endingPrep){showEndingPrep();return}
-hideSqOpts();$("mt").textContent=m[0];$("mp").textContent=m[1];paintMaskChrome(m[0]);$("mask").classList.add("on")}
+hideSqOpts();$("mt").textContent=m[0];$("mp").textContent=m[1];paintMaskChrome(m[0]);paintVoiceFog();$("mask").classList.add("on")}
 function dismissMask(ev){if(ev){try{ev.preventDefault();ev.stopPropagation()}catch(e){}}if(mbLock)return;mbLock=1;var mask=$("mask");if(mask){mask.classList.remove("on");mask.classList.remove("obs-dark");var _box=mask.querySelector(".box");if(_box)_box.classList.remove("obs-win-appear");if(!mq.length&&!moodPeekOn)mask.classList.remove("mood-chrome")}setTimeout(function(){try{nextPop()}catch(e){}if(S&&S.sleepAwaitClose&&!maskOpen()&&!(mq&&mq.length)){advanceAfterSleep(!!S.sleepForce)}else{releaseDayLock()}mbLock=0},30)}
 (function(){var mb=$("mb");if(!mb)return;mb.onpointerup=null;mb.onclick=null;mb.addEventListener("click",dismissMask,false);mb.addEventListener("pointerup",function(e){if(e.pointerType==="mouse"&&e.button!==0)return;dismissMask(e)},false);
 var mask=$("mask");if(mask&&!mask._outsideBound){mask._outsideBound=1;mask.addEventListener("click",function(e){if(e.target===mask)dismissMask(e)},false);var box=mask.querySelector(".box");if(box&&!mask._boxStop){mask._boxStop=1;box.addEventListener("click",function(e){e.stopPropagation()},false)}}})();
@@ -2582,7 +2609,7 @@ if(daylEl&&(daylEl.getAttribute("data-day")|0)!==dayN){
   daylEl.setAttribute("data-day",String(dayN));
   daylEl.innerHTML='<span class="dayMark-tick" aria-hidden="true"></span><span class="dayMark-k">第</span><span class="dayMark-n">'+dayN+'</span><span class="dayMark-k">天</span>';
 }
-if(typeof paintSideStoryMem==="function")paintSideStoryMem();
+if(typeof paintSideStoryMem==="function")paintSideStoryMem();if(typeof paintVoiceFog==="function")paintVoiceFog();
 var sb=$("sleepBtn");if(sb){var canSleep=!S.taken&&!S.endingDone&&!S.trip&&!dayLock&&!maskOpen();sb.disabled=!canSleep;sb.classList.toggle("is-off",!canSleep);if(S.endingDone){sb.disabled=true;sb.classList.add("is-off")}}
 /* nav locks via paintSideStoryMem */
 setObsBtn(!!(S.pendingObs&&!S.taken&&!S.trip));
