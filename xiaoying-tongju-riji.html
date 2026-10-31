@@ -1702,7 +1702,7 @@ html,body{color:var(--tx)}
   pointer-events:none!important
 }
 
-/* 外出心聲未解鎖（阿祿親密度 < 50）：霧化不可讀；睡覺「她沒說出口的事」不霧 */
+/* 外出心聲未解鎖（阿祿親密度 < 50）：霧化不可讀 */
 #thb.is-fogged,
 #mp.is-fogged{
   filter:blur(8px)!important;
@@ -2036,7 +2036,6 @@ var NSTORY=[
 [100,"空掉的房間","（此段不再由親密度滿值自動觸發搬走；僅結局路線會走到離開或出軌同居。）"]];
 var NEAR_SAY=[["……外面有點亂。其他的，別問了。","有些話到嘴邊，又吞回去了。","我很好。真的。……別用那種眼神看我。"],["別問了，好不好。說了你會擔心。……也會失望。","我有把該記得的人放在心上。……你別追問細節。","今天差點跟你坦白一件事。算了，當我沒提。"],["算了。……差點說出來。","你想聽真話嗎？我怕聽完，你會更溫柔——然後我更愧疚。","門關上前我停了兩秒——不是整理鞋，是整理謊。"],["我差點告訴你今天……算了。不是你不該聽，是我沒臉說。","口罩下我差點叫錯名字。你聽見了嗎？……對不起。","他說比你更懂我。我沒回答。……我不敢看你。"]];
 var NT=[[],["……巷口有人被圍著打。我手比腦子快，才不是想當英雄。","他流血了。……你別盯著我的指節看，擦破一點而已。","回去路上我一直在想，你會不會罵我太衝動。……罵也沒關係，反正我已經那樣做了。"],["他要人叫他強叔。……講母親的時候，眼睛紅得不像假的。","醫藥費那些話我聽得悶。……我知道不該全信陌生人，可他看起來好孤單。","阿祿，你別問細節。我不是不想說，是說了你會擔心，我又心虛。"],["晚了二十分鐘。……我去幫人掃掃地、煮個飯，又不是什麼大事。","被人需要的感覺好奇怪。……不是說你不需要我！你別曲解。","今晚煮你愛吃的。……補償而已，少得意。"],["有人懂我。——我剛說完就後悔了。你會擔心的吧。","不是說你不懂。……我只是，忽然有人願意聽我講小時候那些事。","算了。你別追問。……我怕講完，自己更對不起你。"],["我沒有怎樣。……真的。你別用那種眼神。","他說太孤單。……手伸過來的時候我該退的。我知道。","對不起，阿祿。我一直告訴自己沒事。……嘴巴好硬，心卻在抖。"],["……電影，算了。今晚先這樣。","他那邊有人上門討債。我不能不去。……你等我的事，我知道很過分。","熱牛奶放你手邊了。……別問我去哪，問了我更說不出口。"],["最近……比較常不小心。你別多想。","收據什麼的，我自己會收。……你一靠近，我反而更想逃開話題。","病歷那些紙，我看過。……看完還是覺得他可憐。阿祿，我知道這很矛盾。"],["阿祿不能——不想讓你擔心。講快了。","他病得……看起來很重。我若不去，會整夜睡不著。","你那麼溫柔，我更羞。……可我還是會去看他。討厭這樣的自己。"],["……我活著回來就好。其他的，別問。","水開很大，是因為我想清醒一下。……不是躲你。也是躲你。","你別碰我袖口。……對不起。我不是討厭你，是我沒臉被你碰。"],["早餐我來。……你腿還不方便，少逞強。","暴風雨那晚的事，別問。……我回來了，這句先夠不夠？","越對你好，我越像在騙你。……可我還是想對你好。嘴巴好笨。"],["他說只有我不會丟下他。……你別皺眉，我聽了也不好受。","我黏你，是真的。……躲你，也是真的。兩樣一起發生，我自己都煩。","阿祿，謝謝你還肯看我。……講完當我沒說。才不是要你原諒。"]];
-var TH=[["才不是想一直待著……燈一關，又在聽你呼吸。", "你記得我愛吃什麼……心口軟了。才不會跟你說。", "你一謝我，我就想逃。逃完又想——還好有人需要我。"], ["才不是去找他……屋子亂、他走不動，我坐一下。你知道會擔心。所以——只報地名。", "他好可憐。一懷疑自己……手又縮不回去。", "你問還好嗎。想說對不起。……出口只剩地名。"], ["袖口？……外面熱。你信了。我更說不出口。", "地名在嘴裡轉。挑你不會多問的那個。", "關燈後想黏近一點。不是坦然……是愧疚。這句也不能說。"], ["「他沒多少時間了」——我拿這句騙自己。對你，一句都不提。", "你越溫柔，我越像在騙你。想說的……變成「明天吃什麼」。", "手機亮了。想看又不敢。……我還是會去。這句，對你更不能說。"]];
 var SOFT=["陽光落在肩上，想快點回家跟你說。","我笑了。……想讓你也看見。","拍了張照片，想回去給你看。","停下腳步時，想到的是你。"];
 var HOME=[["她窩在沙發上滑手機，偶爾抬頭看一眼門口。","她煮了一壺茶，把你的杯子也一起洗乾淨了。","她在窗邊澆花，哼著不成調的歌。"],["她整天盯著手機，一聽到你的腳步就把螢幕扣上——訊息預覽裡，隱約閃過「強叔」兩個字。","她坐在窗邊發呆，什麼也沒幹。領口的香水味，和家裡的皂香不太一樣。"]];
 var QA=[["🍮","你平常喜歡做什麼？",0,["吃布丁，還有遲到的人——才不是因為你煮得好吃！","幫忙跑腿啊。被需要的感覺還不錯。","……最近有人很會聽我說話。我一說出口就後悔了。"]],["🤍","你怎麼看我？",20,["你很笨，又很溫柔。……是我最不想失去的人。","你是我最信任的人，這句話我說得出口。","你是我最不想失去的人。這是真的。"]],["🛍️","今天外出遇到什麼人嗎？",60,["沒有啊，就買了點東西。","遇到一個很可憐的大叔，我幫了他一點小忙。","沒什麼，就買了東西。……真的。別用那種眼神，我會心虛。"],"trip"],["🌧️","你有後悔過什麼事嗎？",80,["搬家那天沒回你的信。我到現在還在後悔。","有一件小事……我還在想要不要告訴你。","後悔？現在說還太早。"]],["🦵","如果我的腿好了，你想做什麼？",100,["第一件事，你自己去倒水！……然後陪你去海邊走走。","到時候……我們再說吧。","到時候我……還想陪你。可是我現在有點亂，你別追問。"]],["😈","你覺得強叔是什麼樣的人？",40,["很可憐的大叔，但人不壞吧。","他有他的苦衷……你不要用那種眼神看我。","他是……需要我的人。你別這樣看我——我一說就覺得對不起你。"],"uncle"]];
@@ -2133,16 +2132,14 @@ function applyDay(){
 }
 function unlock(){dayLock=0;S._dayAdvancing=false;try{flushCohabQueue()}catch(e){}try{render()}catch(e){}}
 playDayAdvance(newDay,applyDay,unlock)}
-function endDay(force,skipHerUnsaid){if(dayLock||S.taken||S.trip||maskOpen())return;if(!force&&S.dsec<DL)return;dayLock=1;
+function endDay(force){if(dayLock||S.taken||S.trip||maskOpen())return;if(!force&&S.dsec<DL)return;dayLock=1;
 var ev=S.dEv||[],n=0;ev.forEach(function(e){if(e.met)n++});
 var dayNow=S.day;
 addLog("📅 第"+dayNow+"天結束，外出 "+ev.length+" 次"+(n?"，遇見強叔 "+n+" 次":"")+(force?"・提早睡覺":""));
-var thought=(!skipHerUnsaid&&typeof thPool==="function")?pick(thPool()):"";
-if(!skipHerUnsaid&&thought){S.sleepAwaitClose=true;S.sleepForce=!!force;mq.push(["她沒說出口的事","💭 "+thought]);nextPop();return}
 advanceAfterSleep(!!force)}
 function sleepDay(){if(busy||S.taken||S.endingDone||dayLock||maskOpen())return;if(S.trip){say("（她還在外面。等她回來，或先點「打瞌睡」再睡。）","pout");return}withBusy(function(){if(S.trip||dayLock||maskOpen()||S.taken)return;
-if(!S.endingDone&&(effM()|0)>=99&&(S.day|0)<30){mq.push({endingPrep:1});endDay(true,true);render();return}
-if(!S.endingDone&&(S.day|0)>=29&&(S.uncleStep|0)>=10&&step5Open()){if(!S.castOff)queueCastOff();else if(!S.endingDone)mq.push({endingPrep:1});endDay(true,true);render();return}
+if(!S.endingDone&&(effM()|0)>=99&&(S.day|0)<30){mq.push({endingPrep:1});endDay(true);render();return}
+if(!S.endingDone&&(S.day|0)>=29&&(S.uncleStep|0)>=10&&step5Open()){if(!S.castOff)queueCastOff();else if(!S.endingDone)mq.push({endingPrep:1});endDay(true);render();return}
 endDay(true);render()})}
 function releaseDayLock(){if(!maskOpen()&&!mq.length){dayLock=0;try{flushCohabQueue()}catch(e){}}}
 var S,tab="",mq=[],thT=0,busy=0,backLock=0,mbLock=0,dayLock=0;
@@ -2215,7 +2212,7 @@ function sqAvail(){var a=[];for(var i=0;i<SQ.length;i++)if(sqOpen(i)&&S.sqToday.
 function voiceFloor(){var us=S.uncleStep|0;if(us>=9)return 3;if(us>=5)return 2;if(us>=3)return 2;if(us>=1)return 1;return 0}
 function voiceBand(){return Math.max(stage(),voiceFloor())}
 function doubtThoughts(){return[]}
-function thPool(){var i=voiceBand(),bag=TH[Math.min(i,TH.length-1)]||TH[0];return bag&&bag.length?bag.slice():[]}
+function thPool(){return[]}
 function voiceReadable(){return !!S&&(S.aff|0)>=50}
 function setFogged(el,on){if(!el)return;el.classList.toggle("is-fogged",!!on)}
 function paintVoiceFog(){var readable=voiceReadable();setFogged($("thb"),!readable);var mp=$("mp");if(mp)setFogged(mp,false);var hf=$("heartFace");if(hf)setFogged(hf,!!(S&&S.trip&&!S.taken&&(S.aff|0)<25))}
@@ -2323,12 +2320,9 @@ if(met&&d>=6&&d<=15){var early=EARLY_MEET_TH&&EARLY_MEET_TH[S.trip.id];if(early&
 else if(met&&st>=2){var bag=HOME_TH[Math.min(st,HOME_TH.length-1)]||HOME_TH[2];if(bag&&bag.length)pool=pool.concat(bag)}
 else if(S.trip&&PLACE_TH[S.trip.id]){var rows=PLACE_TH[S.trip.id],row=(!met?rows[0]:(rows[Math.min(st,rows.length-1)]||rows[0]));if(row&&row.length)pool=pool.concat(row)}
 return pool.length?pool:["……"]}
-function thought(){var st=stage(),i=st,pool=thPool();
-if(S.trip){var poolO=outingThoughtPool();$("thb").textContent=pick(poolO);var tbA=$("thbox")&&$("thbox").querySelector("b");if(tbA)tbA.textContent="💭 心聲";faceTf(pick(i>=2?["shy","sad","pout","cold"]:["shy","calm","wink","sad"]));thT=Date.now();paintVoiceFog();return}
-$("thb").textContent=pick(pool);
-faceTf(pick(S.trip?["shy","sad","pout","cold"]:[["calm","wink","joy"],["shy","sad","shy"],["shy","sad","pout"],["pout","cold","cold"]][i]));
-var tb=$("thbox")&&$("thbox").querySelector("b");if(tb)tb.textContent="💭 心聲";
-thT=Date.now();paintVoiceFog()}
+function thought(){var st=stage(),i=st;
+if(!S.trip)return;
+var poolO=outingThoughtPool();$("thb").textContent=pick(poolO);var tbA=$("thbox")&&$("thbox").querySelector("b");if(tbA)tbA.textContent="💭 心聲";faceTf(pick(i>=2?["shy","sad","pout","cold"]:["shy","calm","wink","sad"]));thT=Date.now();paintVoiceFog()}
 
 function journalBand(){var st=stage();return st<=0?0:st<=2?1:2}
 function ensureJournalLen(s){var n=0,out=s;while(out.length<200&&n<4){out+="\n\n我把今天的事又在心裡走了一遍，生怕漏掉什麼細節，也生怕記得太清楚。";n++}return out}
