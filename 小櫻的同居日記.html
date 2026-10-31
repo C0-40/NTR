@@ -1530,10 +1530,10 @@ html,body{color:var(--tx)}
   box-shadow:0 0 0 1px rgba(20,10,4,.35),0 0 6px rgba(255,248,234,.5)
 }
 .homeui #dayl .dayMark-k{
-  font-size:.72em;font-weight:800;letter-spacing:.14em;opacity:.95;
-  transform:translateY(.05em);color:#fff6e8!important;
-  -webkit-text-stroke:.5px rgba(20,10,4,.65);
-  text-shadow:0 1px 0 rgba(20,10,4,.8),0 0 3px rgba(20,10,4,.7)
+  font-size:.72em;font-weight:800;letter-spacing:.14em;opacity:1;
+  transform:translateY(.05em);color:#ffffff!important;
+  -webkit-text-stroke:0;
+  text-shadow:0 1px 2px rgba(20,10,4,.75),0 0 4px rgba(20,10,4,.45)
 }
 .homeui #dayl .dayMark-n{
   font-size:1.7em;font-weight:900;letter-spacing:.02em;
@@ -1595,25 +1595,26 @@ html,body{color:var(--tx)}
 
 
 
-/* 側欄未解鎖：可看見但不可用 */
+/* 側欄未解鎖：仍清楚可見，不淡出，僅呈未使用感 */
 .homeui .sideNav .bubble.is-off,
 .homeui .sideNav .bubble:disabled{
-  opacity:.4;filter:grayscale(.4);cursor:not-allowed;pointer-events:none;
-  background:rgba(232,220,200,.82)!important;color:#6a5644!important;
-  box-shadow:0 1px 0 rgba(90,59,42,.18)!important;border-color:rgba(140,110,80,.35)!important
+  opacity:1!important;filter:none!important;cursor:not-allowed;pointer-events:none;
+  background:repeating-linear-gradient(-45deg,rgba(255,248,234,.92),rgba(255,248,234,.92) 6px,rgba(236,224,206,.92) 6px,rgba(236,224,206,.92) 12px)!important;
+  color:#7a634c!important;
+  border:2px dashed rgba(122,90,55,.45)!important;
+  box-shadow:none!important;
+  text-shadow:none!important
 }
-.homeui .sideNav .bubble.is-off .actSub{opacity:.7}
-/* 聊天室關閉：× */
-.chatRoom .chatHead .btn.chatCloseX{
-  width:36px;min-width:36px;height:36px;min-height:36px;padding:0!important;margin:0;
-  border-radius:999px!important;font-size:22px;font-weight:700;line-height:1;
-  display:inline-flex;align-items:center;justify-content:center;
-  background:rgba(255,248,234,.95)!important;color:#5a3518!important;
-  border:1.5px solid rgba(122,78,36,.35)!important;box-shadow:none!important;text-shadow:none!important
-}
-.chatRoom .chatHead .btn.chatCloseX:active{transform:scale(.94)}
+.homeui .sideNav .bubble.is-off .actSub{opacity:.85;color:#8a735c}
+.homeui .bubble.actChat.is-off{opacity:1!important;filter:none!important}
+/* 聊天室／媽媽：與回憶相同的 pane-x 關閉鈕 */
+.chatRoom .chatPanel{position:relative}
+.chatRoom .chatHead{position:relative;padding-right:44px}
+.chatRoom .chatHead .pane-x{position:absolute;top:10px;right:12px;z-index:3}
+.momPhone .chromeWin.phone{position:relative}
+.momPhone .chromeWin .pane-x{position:absolute;top:10px;right:10px;z-index:3}
 .momPhone .chromeFoot{
-  margin-top:8px;padding:4px 4px 0;font-size:11px;color:#8a5a40;text-align:center;font-weight:650
+  margin-top:10px;padding:4px 4px 0;font-size:11px;color:#8a5a40;text-align:center;font-weight:650
 }
 /* 睡覺: light scheme */
 .homeui .dock button.dockSleep{
@@ -1840,7 +1841,7 @@ html,body{color:var(--tx)}
   <div class="chatPanel" role="document" onclick="event.stopPropagation()">
     <div class="chatHead">
       <div><b>匿名聊天室</b><div class="sm" id="chatSub">偶然滑到的討論串，不知為何忍不住看下去</div></div>
-      <button type="button" class="btn chatCloseX" id="chatClose" onclick="closeChatRoom()" aria-label="關閉">×</button>
+      <button type="button" class="pane-x" id="chatClose" onclick="closeChatRoom()" aria-label="關閉">×</button>
     </div>
     <button type="button" class="btn chatBack" id="chatBack" onclick="chatShowList()">← 討論串</button>
     <div class="chatFeed" id="chatFeed"></div>
@@ -1849,13 +1850,13 @@ html,body{color:var(--tx)}
 </div>
 <div class="momPhone" id="momPhone" aria-hidden="true" role="dialog" aria-modal="true" aria-label="媽媽的訊息" tabindex="0">
   <div class="chromeWin phone" role="document" onclick="event.stopPropagation()">
+    <button type="button" class="pane-x" id="momClose" aria-label="關閉">×</button>
     <div class="chromeTitle"><span class="chromeFace av" aria-hidden="true">媽</span><h3>媽媽的訊息</h3></div>
     <div class="chromeBody msgThread" id="momBubbles">
       <div class="msgBubble"><span class="who">媽媽</span>阿祿，媽知道你腿骨折要在家靜養一個月，可惜現在旅行不能照顧你</div>
       <div class="msgBubble"><span class="who">媽媽</span>你記得小紅嗎？就是那個青梅竹馬，多年沒見了吧。她最近從國外回來了，正在找地方住</div>
       <div class="msgBubble"><span class="who">媽媽</span>一聽到你要在家靜養，就說不介意暫住你家照顧你，直到找到地方住為止</div>
     </div>
-    <div class="chromeActions tl"><button type="button" class="btn chromePrimary" id="momContinue">繼續</button></div>
     <div class="chromeFoot">輕觸外側關閉</div>
   </div>
 </div>
@@ -2149,7 +2150,9 @@ var pushed=0;while(S.memPending.length){var id=S.memPending.shift();if(S.memSeen
 if(pushed){try{save()}catch(e){}if(!maskOpen())nextPop()}}
 function replayMem(k){var m=MEMORIES[k];if(!m||S.memSeen.indexOf(m[0])<0)return;mq.push(["🌸 浮現一段塵封的回憶",memBody(m)]);nextPop()}
 function afterAffTier(prev){if(tier()>(prev|0))flashAffTierFx();checkMemories();queueCohabUnlock()}
-var OUTING_M=3;var UNCLE_STEP_M=3;/* 外出固定 +3；步驟事件再 +3 */
+var OUTING_M=3;var UNCLE_STEP_M=3;/* 外出固定 +3；步驟事件再 +3；第6天兩者皆 0，儀表強制從 0 起 */
+function outingMAmt(){return ((S.day|0)===6)?0:(typeof OUTING_M==="number"?OUTING_M:3)}
+function uncleStepMAmt(){return ((S.day|0)===6)?0:(typeof UNCLE_STEP_M==="number"?UNCLE_STEP_M:3)}
 function memoriesComplete(){if(!S.memSeen||!MEMORIES||!MEMORIES.length)return false;for(var i=0;i<MEMORIES.length;i++){if(S.memSeen.indexOf(MEMORIES[i][0])<0)return false}return true}
 /* 強叔步驟一～四：第6天起；步驟五：全部同居事件解鎖。回憶不再閘路線 */
 function step5Open(){return typeof storyComplete==="function"?storyComplete():false}
@@ -2355,7 +2358,7 @@ var trTxt=traces.join("\n\n");
 S.pendingObs={trTxt:trTxt,met:met,motif:motif?{id:motif.id,mode:motif.mode}:null};
 if(met&&st>=2&&Math.random()<(st>=3?.55:.38)){var band=NEAR_SAY[Math.min(st,NEAR_SAY.length-1)]||NEAR_SAY[0];S.pendingChat=pick(band);}
 setObsBtn(true);
-if(forceStep){queueUncleStep()}addM(typeof OUTING_M==="number"?OUTING_M:3);
+if(forceStep){queueUncleStep()}addM(outingMAmt());if((S.day|0)===6){S.m=0}
 if(!S.endingDone&&(effM()|0)>=99&&(S.day|0)<30){var hasPrep=false;for(var _ei=0;_ei<mq.length;_ei++){if(mq[_ei]&&mq[_ei].endingPrep)hasPrep=true}if(!hasPrep)mq.push({endingPrep:1})}
 queueSqAsk();
 var nightTxt=(dissonanceOn()||(motif&&motif.mode==="clash"))?pick(FLAT_NIGHT):pick(NIGHT[Math.min(st,NIGHT.length-1)]);
@@ -2445,7 +2448,7 @@ function uncleArcByStep(n){for(var i=0;i<UNCLE_ARC.length;i++)if(UNCLE_ARC[i].st
 function canAdvanceUncle(){var next=(S.uncleStep|0)+1;if(next>11)return false;if((S.day|0)<6)return false;var a=uncleArcByStep(next);if(!a)return false;if(a.needStep5&&!step5Open())return false;var need=(a.mNeed!=null)?(a.mNeed|0):(UNCLE_STEP_MNEED&&UNCLE_STEP_MNEED[next]!=null?UNCLE_STEP_MNEED[next]|0:0);if((effM()|0)<need)return false;return true}
 function queueUncleStep(){if(!canAdvanceUncle())return false;var next=(S.uncleStep|0)+1;var a=uncleArcByStep(next);if(!a)return false;
 S.uncleStep=next;S.uncleStarted=true;S.metOut=true;S.uncleTh=(a.th||[]).slice();
-var gained=addM(typeof UNCLE_STEP_M==="number"?UNCLE_STEP_M:3);
+var gained=addM(uncleStepMAmt());
 if(!S.chatUnlocked)S.chatUnlocked=[];if(S.chatUnlocked.indexOf(next)<0){S.chatUnlocked.push(next);S.chatNotice=true;}
 if(next===1&&S.seen.indexOf("n1")<0){S.seen.push("n1");var ns=NSTORY[0];if(ns)mq.push(["💔 "+ns[1],ns[2]])}
 if(a.home){say(a.home,next>=5?"shy":"pout");addLog("💬 "+a.home)}
@@ -2647,7 +2650,7 @@ mq.push(["🚪 不請自來的同居","玄關傳來拖行李箱的輪聲。多�
 addLog("🚪 第一章：小紅拎著行李搬進來・「哼！才不是為了你，我只是為了報答阿姨而已。」");
 nextPop()}checkMemories()}
 function maybeMomIntro(){if(S.momIntroSeen){var el=$("momPhone");if(el){el.classList.remove("on");el.setAttribute("aria-hidden","true")}return}showMomIntro()}
-function bindMomIntro(){var el=$("momPhone");if(!el)return;el.addEventListener("click",function(){dismissMomIntro()});var btn=$("momContinue");if(btn)btn.addEventListener("click",function(e){e.stopPropagation();dismissMomIntro()});el.addEventListener("keydown",function(e){if(e.key==="Enter"||e.key==="Escape"||e.key===" "){e.preventDefault();dismissMomIntro()}})}
+function bindMomIntro(){var el=$("momPhone");if(!el)return;el.addEventListener("click",function(){dismissMomIntro()});var btn=$("momClose");if(btn)btn.addEventListener("click",function(e){e.stopPropagation();dismissMomIntro()});el.addEventListener("keydown",function(e){if(e.key==="Enter"||e.key==="Escape"||e.key===" "){e.preventDefault();dismissMomIntro()}})}
 bindMomIntro();
 load();
 if(S.trip&&Date.now()>=S.trip.end)back();
