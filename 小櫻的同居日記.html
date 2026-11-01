@@ -332,7 +332,7 @@ html,body{color:var(--tx)}
 .btn:disabled{color:rgba(255,255,255,.85)!important}
 .tabs button,.dock button{color:#ffffff!important;background:#6b3f1a!important;border-color:#4a2a12!important;text-shadow:0 1px 0 rgba(0,0,0,.35);font-weight:800}
 /* sleep stays light even under dock wood rule */
-.homeui .dock button.dockSleep{color:#4a3420!important;background:linear-gradient(165deg,#fffaf2,#f3e6d4)!important;border-color:#d2b48c!important;text-shadow:none!important}
+.homeui .dock button.dockSleep{color:#ffffff!important;background:#c45a72!important;border-color:#9a3f58!important;text-shadow:0 1px 0 rgba(60,20,30,.28)!important}
 .homeui .dock button.dock-used{color:#f2eee8!important;background:#4a4a4e!important;border-color:#2e2e32!important;text-shadow:none!important}
 
 .tabs button.on,.dock button.on{color:#ffffff!important;background:#c45a72!important;border-color:#9a3f58!important;text-shadow:0 1px 0 rgba(60,20,30,.3)}
@@ -1619,21 +1619,21 @@ html,body{color:var(--tx)}
 .momPhone .chromeFoot{
   margin-top:10px;padding:4px 4px 0;font-size:11px;color:#8a5a40;text-align:center;font-weight:650
 }
-/* 睡覺: light scheme */
+/* 睡覺: 與彈窗「繼續」(#mb) 同粉 */
 .homeui .dock button.dockSleep{
   flex:1.15;display:flex;flex-direction:row;align-items:center;justify-content:center;gap:8px;
   border-radius:999px!important;
-  background:linear-gradient(165deg,#fffaf2,#f3e6d4)!important;
-  border-color:#d2b48c!important;color:#4a3420!important;
-  box-shadow:0 4px 0 #c4a57a!important;letter-spacing:.02em;
-  text-shadow:none!important
+  background:#c45a72!important;
+  border-color:#9a3f58!important;color:#ffffff!important;
+  box-shadow:0 4px 0 #9a3f58!important;letter-spacing:.02em;
+  text-shadow:0 1px 0 rgba(60,20,30,.28)!important
 }
 .homeui .dock button.dockSleep .dockSleep-txt{display:flex;flex-direction:column;align-items:flex-start;line-height:1.15;gap:2px}
-.homeui .dock button.dockSleep .dockSleep-lab{font-size:14px;font-weight:800;color:#3d2a18!important}
-.homeui .dock button.dockSleep .dockSleep-sub{font-size:10px;font-weight:600;opacity:.78;letter-spacing:.04em;color:#6a5238!important}
-.homeui .dock button.dockSleep .dockSleep-ico{font-size:18px;line-height:1;color:#5a4530!important}
+.homeui .dock button.dockSleep .dockSleep-lab{font-size:14px;font-weight:800;color:#ffffff!important}
+.homeui .dock button.dockSleep .dockSleep-sub{font-size:10px;font-weight:600;opacity:.92;letter-spacing:.04em;color:#ffe8ef!important}
+.homeui .dock button.dockSleep .dockSleep-ico{font-size:18px;line-height:1;color:#ffffff!important}
 .homeui .dock button.dockSleep.is-off,.homeui .dock button.dockSleep:disabled{
-  opacity:.55;filter:grayscale(.15);color:#8a7a68!important;background:#f0e8dc!important;border-color:#d8c8b0!important;box-shadow:0 3px 0 #cbb89a!important
+  opacity:.55;filter:grayscale(.12);color:#ffe8ef!important;background:#d090a0!important;border-color:#b07080!important;box-shadow:0 3px 0 #b07080!important;text-shadow:none!important
 }
 @media (max-width:420px){
   .homeui .dock button.dockSleep .dockSleep-lab{font-size:12.5px}
@@ -2127,7 +2127,10 @@ function playDayAdvance(newDay,onDark,done){
 function advanceAfterSleep(force){if(!S)return;if(S._dayAdvancing)return;S._dayAdvancing=true;S.sleepAwaitClose=false;S.pendingYesterdayUnsaid=null;
 var newDay=(S.day|0)+1;
 function applyDay(){
+  var hadOuting=!!(S.dEv&&S.dEv.length);
   S.day=newDay;S.dsec=force?0:Math.max(0,(S.dsec|0)-DL);S.homeActToday=false;S.cohabToday=false;S.dEv=[];S.sqToday=[];S.sqDone=false;S.pendingSq=null;S.outToday=false;S.pendingObs=null;S.motif=null;S.journalGlow=0;S.pendingChat=null;setObsBtn(false);hidePhoneRipple();
+  /* 前一日有外出：進新天後才掛 ❓ 問題（一天一題；未答則再睡時清掉） */
+  if(hadOuting)queueSqAsk();
   try{save()}catch(e){}try{render()}catch(e){}
 }
 function unlock(){dayLock=0;S._dayAdvancing=false;try{flushCohabQueue()}catch(e){}try{render()}catch(e){}}
@@ -2408,7 +2411,7 @@ if(met&&canAdvanceUncle()){var callHit=acts.indexOf("call")>=0;if(!callHit||Math
 if(met){addM(appearMAmt())}
 if((S.day|0)===6){S.m=0}
 if(!S.endingDone&&(effM()|0)>=99&&(S.day|0)<30){var hasPrep=false;for(var _ei=0;_ei<mq.length;_ei++){if(mq[_ei]&&mq[_ei].endingPrep)hasPrep=true}if(!hasPrep)mq.push({endingPrep:1})}
-queueSqAsk();
+/* ❓ 問題改到隔日進天再 queueSqAsk，回家不掛按鈕 */
 var nightTxt=(dissonanceOn()||(motif&&motif.mode==="clash"))?pick(FLAT_NIGHT):pick(NIGHT[Math.min(st,NIGHT.length-1)]);
 if(st>=2&&!dissonanceOn()&&!(motif&&motif.th))nightTxt+="\n\n你沒睡好。懷疑比她的呼吸聲更響。";
 mq.push(["🌙 當晚",nightTxt]);
@@ -2418,7 +2421,7 @@ afterAffTier(b);/* no rank popup */
 NSTORY.filter(function(s){var th=s[0]|0;var open=(th<=20)?((S.uncleStep|0)>=1&&effM()>=th):(step5Open()&&effM()>=th);return open&&S.seen.indexOf("n"+s[0])<0}).forEach(function(s){S.seen.push("n"+s[0]);mq.push(["💔 "+s[1],s[2]])});
 /* full bar does not force early move-out */
 nextPop()}finally{backLock=0}}
-function queueSqAsk(){if(S.sqDone||S.taken||S.pendingSq!=null)return;var a=sqAvail();if(!a.length)return;S.pendingSq=a[Math.floor(Math.random()*a.length)];try{save()}catch(e){}paintQBtn()}
+function queueSqAsk(){/* 進新天後呼叫：掛 ❓；一天一題 */if(S.sqDone||S.taken||S.pendingSq!=null)return;var a=sqAvail();if(!a.length)return;S.pendingSq=a[Math.floor(Math.random()*a.length)];try{save()}catch(e){}paintQBtn()}
 function askNavUnlocked(){return !!S&&(S.aff|0)>=15&&!S.endingDone}
 function storyNavUnlocked(){if(!S||!STORY||!STORY.length||S.endingDone)return false;return (S.aff|0)>=(STORY[0][0]|0)}
 function memNavUnlocked(){if(!S||!MEMORIES||!MEMORIES.length)return false;if(S.memSeen&&S.memSeen.length)return true;if(S.memPending&&S.memPending.length)return true;return ((S.aff|0)+(effM()|0))>=(MEMORIES[0][0]|0)}
