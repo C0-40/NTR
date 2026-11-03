@@ -29,7 +29,7 @@ jobs:
           cmp '小櫻的同居日記.html' xiaoying-tongju-riji.html
           mkdir -p _site
           cp xiaoying-tongju-riji.html _site/index.html
-          cp '小櫻的同居日記.html' xiaoying-tongju-riji.html sil-*.png _site/
+          cp '小櫻的同居日記.html' xiaoying-tongju-riji.html sakura-portrait.png sil-*.png _site/
 
       - uses: actions/configure-pages@v5
 
