@@ -1832,24 +1832,61 @@ html,body{color:var(--tx)}
   display:block;height:100%;width:0;border-radius:999px;
   background:#7E5BAA!important;box-shadow:none!important;
 }
-/* Home wood frame continues under 互動 / 外出 / 睡覺 */
+/* Wallpaper fills the wood frame, including behind the home action buttons. */
 .homeui:not(.outing-shell) .scene{
-  border-bottom-width:0!important;
-  border-radius:22px 22px 0 0!important;
-  box-shadow:inset 0 0 28px rgba(90,59,42,.28),-2px 0 0 0 var(--wood2),2px 0 0 0 var(--wood2),0 -2px 0 0 var(--wood2)!important;
+  border-bottom-width:6px!important;
+  border-radius:22px!important;
+  box-shadow:0 0 0 2px var(--wood2),0 10px 22px var(--sh),inset 0 0 28px rgba(90,59,42,.28)!important;
+  background:var(--room) 56% center/cover!important;
 }
 .homeui:not(.outing-shell) .dock{
-  margin:0!important;
-  padding:8px 10px calc(14px + env(safe-area-inset-bottom,0px))!important;
-  border-style:solid!important;border-color:var(--wood)!important;
-  border-width:0 6px 6px!important;
-  border-radius:0 0 22px 22px!important;
-  background:linear-gradient(180deg,rgba(247,233,207,.35),var(--bg) 42%)!important;
-  box-shadow:-2px 0 0 0 var(--wood2),2px 0 0 0 var(--wood2),0 2px 0 0 var(--wood2),0 10px 22px var(--sh)!important;
-  position:relative;z-index:7;
+  margin:-78px 0 0!important;
+  height:78px!important;min-height:78px!important;max-height:78px!important;
+  box-sizing:border-box!important;
+  padding:0 16px 8px!important;
+  align-items:flex-end!important;
+  background:transparent!important;
+  border:none!important;
+  box-shadow:none!important;
+  border-radius:0!important;
+  position:relative;z-index:8;
+}
+.homeui .mbox.off,.homeui .meterUncle.off{display:none!important}
+/* Day badge: cream wood chip, large rose numeral, no tick and no period. */
+.homeui .topHud .dayClock,
+.homeui .dayClock{
+  flex:0 0 auto!important;align-self:flex-start!important;
+  width:max-content!important;max-width:none!important;
+  margin:0!important;padding:0!important;min-height:0!important;
+  background:transparent!important;border:none!important;box-shadow:none!important;
+}
+.homeui .topHud .dayClock-day,
+.homeui .dayClock-day,#dayl{
+  display:inline-flex!important;align-items:baseline!important;justify-content:center!important;gap:1px!important;
+  padding:5px 10px 6px!important;margin:0!important;
+  border-radius:12px!important;
+  background:#FFF6EA!important;
+  border:1.5px solid rgba(122,74,42,.28)!important;
+  box-shadow:0 1px 3px rgba(90,59,42,.12)!important;
+  color:#7A4A2A!important;
+  font-size:12px!important;font-weight:800!important;line-height:1!important;letter-spacing:.04em!important;
+  text-shadow:none!important;-webkit-text-stroke:0!important;
+  white-space:nowrap!important;
+}
+.homeui #dayl .dayMark-tick{display:none!important}
+.homeui #dayl .dayMark-k{
+  font-size:12px!important;font-weight:800!important;letter-spacing:.08em!important;
+  color:#7A4A2A!important;opacity:1!important;transform:none!important;
+  text-shadow:none!important;-webkit-text-stroke:0!important;
+}
+.homeui #dayl .dayMark-n{
+  font-size:22px!important;font-weight:900!important;line-height:1!important;
+  margin:0 2px!important;letter-spacing:0!important;
+  color:#C85A76!important;
+  text-shadow:none!important;-webkit-text-stroke:0!important;
 }
 .homeui .dlg{
-  bottom:2px!important;background:#FFF6EA!important;border:1.5px solid rgba(122,74,42,.35)!important;
+  bottom:86px!important;background:#FFF6EA!important;border:1.5px solid rgba(122,74,42,.35)!important;
   border-radius:16px!important;padding:16px 12px 18px!important;overflow:visible!important;
   box-shadow:0 2px 8px rgba(90,59,42,.16)!important;
 }
@@ -1861,8 +1898,8 @@ html,body{color:var(--tx)}
   box-shadow:0 1px 3px rgba(90,40,50,.25);
 }
 .homeui .dlg #say{
-  font-size:16px!important;line-height:1.7!important;color:#7A4A2A!important;font-weight:650!important;
-  max-height:5.2em!important;min-height:1.7em!important;padding:2px 4px 2px 0!important;
+  font-size:14px!important;line-height:1.55!important;color:#7A4A2A!important;font-weight:650!important;
+  max-height:4.8em!important;min-height:1.55em!important;padding:2px 4px 2px 0!important;
   word-break:normal!important;overflow-wrap:break-word!important;
 }
 .homeui .dlgNext{
@@ -1893,7 +1930,7 @@ html,body{color:var(--tx)}
               </div>
               <div class="bar affBar" aria-hidden="true"><i id="affbar"></i><span class="affInk" id="affInk" aria-hidden="true"></span><span class="affSweep" id="affSweep" aria-hidden="true"></span></div>
             </div>
-            <div class="meterCard meterUncle" id="mbox">
+            <div class="meterCard meterUncle off" id="mbox">
               <div class="meterHead">
                 <span class="meterHeart" aria-hidden="true">♥</span>
                 <span class="meterName" id="mlab">強叔</span>
@@ -1905,7 +1942,7 @@ html,body{color:var(--tx)}
             <div class="sm" id="inc"></div>
           </div>
       <div class="dayClock" id="dayClock" aria-label="天數">
-      <div class="dayClock-day" id="dayl" data-day="1"><span class="dayMark-tick" aria-hidden="true"></span><span class="dayMark-k">第</span><span class="dayMark-n">1</span><span class="dayMark-k">天</span></div>
+      <div class="dayClock-day" id="dayl" data-day="1"><span class="dayMark-k">第</span><span class="dayMark-n">1</span><span class="dayMark-k">天</span></div>
     </div>
     </div>
     <div id="outingTop" class="outingTop off" role="status" aria-live="polite" aria-label="外出狀態">
@@ -2727,7 +2764,7 @@ var acts=$("noteActs");if(acts){if(skipOn)acts.removeAttribute("hidden");else ac
 var th=$("thbox");if(th&&!skipOn){var want="none";if(th.style.display!==want)th.style.display=want}
 else if(th&&skipOn){if(th.style.display!=="flex")th.style.display="flex"}paintHeartFace(ex);
 var dayN=S.day|0,daylEl=$("dayl");
-if(daylEl&&(daylEl.getAttribute("data-day")|0)!==dayN){daylEl.setAttribute("data-day",String(dayN));daylEl.innerHTML='<span class="dayMark-tick" aria-hidden="true"></span><span class="dayMark-k">第</span><span class="dayMark-n">'+dayN+'</span><span class="dayMark-k">天</span>'}
+if(daylEl&&(daylEl.getAttribute("data-day")|0)!==dayN){daylEl.setAttribute("data-day",String(dayN));daylEl.innerHTML='<span class="dayMark-k">第</span><span class="dayMark-n">'+dayN+'</span><span class="dayMark-k">天</span>'}
 var dlgEl=$("dlg");if(dlgEl){var canNext=!!(S&&!busy&&!S.trip&&!S.taken&&!dayLock&&!maskOpen()&&!(S.endingDone&&(S.ending|0)===2));dlgEl.classList.toggle("can-next",canNext)}
 if(typeof paintSideStoryMem==="function")paintSideStoryMem();if(typeof paintVoiceFog==="function")paintVoiceFog();
 var sb=$("sleepBtn");if(sb){var canSleep=!S.taken&&!S.endingDone&&!S.trip&&!dayLock&&!maskOpen();sb.disabled=!canSleep;sb.classList.toggle("is-off",!canSleep);if(S.endingDone){sb.disabled=true;sb.classList.add("is-off")}}
@@ -2747,9 +2784,9 @@ $("inc").textContent="每天互動一次，增加親密度・外出一次・只�
 $("affn").textContent=fmt(S.aff);
 $("affbar").style.width=Math.min(100,Math.max(0,S.aff))+"%";
 var outing=!!(typeof isOutingPhase==="function"?isOutingPhase():(S&&S.trip&&!S.taken));
-/* 在家：強叔路線已啟動才顯示大叔親密度；外出中隱藏 */
-/* 強叔卡片常駐：未進線時顯示 0，不改親密度計算 */
-var box=$("mbox");if(box)box.classList.remove("off");
+/* 強叔卡片：路線開始（第6天遇見、uncleStarted）才顯示，不改數值 */
+var showM=!!(S&&S.uncleStarted);
+var box=$("mbox");if(box)box.classList.toggle("off",!showM);
 $("mbar").style.width=(effM()|0)+"%";
 var mn=$("mnum");if(mn)mn.textContent=String(effM()|0);
 var ot=$("outingTop");if(ot)ot.classList.toggle("off",!outing);var oc=$("outChip");if(oc)oc.textContent="小紅外出中……";var ac=$("aloneChip");if(ac)ac.textContent="屋裡只剩你，打算做甚麼？";if(outing&&S.trip){var left=Math.max(0,Math.ceil((S.trip.end-Date.now())/1000));var ocn=$("outingCdNum");if(ocn)ocn.textContent=String(left);else{var ocd=$("outingCd");if(ocd)ocd.textContent="還有 "+left+" 秒"}}
