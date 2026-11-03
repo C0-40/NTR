@@ -1852,7 +1852,7 @@ html,body{color:var(--tx)}
   position:relative;z-index:8;
 }
 .homeui .mbox.off,.homeui .meterUncle.off{display:none!important}
-/* Day badge: cream wood chip, large rose numeral, no tick and no period. */
+/* Day badge: a compact paper calendar in the room's cream and rose palette. */
 .homeui .topHud .dayClock,
 .homeui .dayClock{
   flex:0 0 auto!important;align-self:flex-start!important;
@@ -1862,27 +1862,39 @@ html,body{color:var(--tx)}
 }
 .homeui .topHud .dayClock-day,
 .homeui .dayClock-day,#dayl{
-  display:inline-flex!important;align-items:baseline!important;justify-content:center!important;gap:1px!important;
-  padding:5px 10px 6px!important;margin:0!important;
-  border-radius:12px!important;
-  background:#FFF6EA!important;
-  border:1.5px solid rgba(122,74,42,.28)!important;
-  box-shadow:0 1px 3px rgba(90,59,42,.12)!important;
+  position:relative!important;isolation:isolate;
+  display:inline-flex!important;align-items:baseline!important;justify-content:center!important;gap:3px!important;
+  min-width:82px!important;min-height:52px!important;box-sizing:border-box!important;
+  padding:18px 12px 10px!important;margin:0!important;
+  border-radius:10px!important;
+  background:linear-gradient(180deg,#fffdf7,#fff2df)!important;
+  border:1px solid #d8b999!important;
+  box-shadow:0 3px 0 #ddc5ab,0 6px 12px rgba(90,59,42,.16),inset 0 0 0 3px rgba(255,255,255,.65)!important;
   color:#7A4A2A!important;
-  font-size:12px!important;font-weight:800!important;line-height:1!important;letter-spacing:.04em!important;
+  font-size:11px!important;font-weight:800!important;line-height:1!important;letter-spacing:.04em!important;
   text-shadow:none!important;-webkit-text-stroke:0!important;
   white-space:nowrap!important;
 }
+.homeui #dayl::before{
+  content:"";position:absolute;inset:-1px -1px auto;height:11px;
+  border-radius:10px 10px 0 0;background:linear-gradient(180deg,#cc8090,#b85c73);
+  border-bottom:1px solid rgba(111,48,64,.2);pointer-events:none;
+}
+.homeui #dayl::after{
+  content:"";position:absolute;top:-4px;left:17px;width:4px;height:10px;
+  border-radius:3px;background:#795948;box-shadow:38px 0 0 #795948;
+  pointer-events:none;
+}
 .homeui #dayl .dayMark-tick{display:none!important}
 .homeui #dayl .dayMark-k{
-  font-size:12px!important;font-weight:800!important;letter-spacing:.08em!important;
-  color:#7A4A2A!important;opacity:1!important;transform:none!important;
+  font-size:11px!important;font-weight:700!important;letter-spacing:.06em!important;
+  color:#8b6b56!important;opacity:1!important;transform:none!important;
   text-shadow:none!important;-webkit-text-stroke:0!important;
 }
 .homeui #dayl .dayMark-n{
-  font-size:22px!important;font-weight:900!important;line-height:1!important;
-  margin:0 2px!important;letter-spacing:0!important;
-  color:#C85A76!important;
+  font-size:26px!important;font-weight:900!important;line-height:1!important;
+  margin:0 1px!important;letter-spacing:-.03em!important;
+  font-variant-numeric:tabular-nums;color:#b4516b!important;
   text-shadow:none!important;-webkit-text-stroke:0!important;
 }
 .homeui .dlg{
