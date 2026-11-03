@@ -1908,6 +1908,142 @@ html,body{color:var(--tx)}
 }
 .homeui .dlg.can-next .dlgNext{display:block}
 
+
+/* Outing screen v2: dark bar, silhouette card, heart row, three acts + skip. */
+.homeui.outing-shell,.homeui:has(.stick.outing){
+  filter:none!important;
+  background:#1a120e!important;
+  border:6px solid #7a4e24;
+  border-radius:22px;
+  box-shadow:0 0 0 2px #5a3518,0 10px 22px rgba(40,20,8,.28);
+  padding:8px 10px 12px!important;
+  box-sizing:border-box;
+}
+.homeui .stick.outing .scene{
+  filter:none!important;
+  background:#1a120e!important;
+  border:none!important;
+  box-shadow:none!important;
+  border-radius:0!important;
+  min-height:0!important;
+}
+.homeui .stick.outing .scene::before{display:none!important}
+.homeui .stick.outing .outingTop,
+.homeui.outing-shell .outingTop{
+  position:absolute!important;left:4px!important;right:4px!important;top:2px!important;
+  z-index:8!important;
+  display:flex!important;flex-direction:row!important;align-items:center!important;gap:8px!important;
+  padding:0!important;margin:0!important;
+  background:transparent!important;border:none!important;box-shadow:none!important;border-radius:0!important;
+  animation:none!important;
+}
+.homeui .stick.outing .outingTop-copy{flex:1 1 auto;min-width:0;gap:2px!important}
+.homeui .stick.outing .outingTop-lead{
+  display:flex;align-items:center;gap:6px;
+  color:#fff8f2!important;font-size:16px!important;font-weight:800!important;letter-spacing:.02em!important;line-height:1.2!important;
+}
+.homeui .stick.outing .outingTop-lead::before{
+  content:"";width:8px;height:8px;border-radius:50%;background:#C85A76;flex:0 0 auto;
+  box-shadow:0 0 0 3px rgba(200,90,118,.22);
+}
+.homeui .stick.outing .outingTop-ask{
+  color:rgba(255,236,220,.78)!important;font-size:12px!important;font-weight:650!important;line-height:1.35!important;
+}
+.homeui .stick.outing .outingTop-foot{flex:0 0 auto;display:flex!important;align-items:center!important;gap:8px!important}
+.homeui .stick.outing .outingTop-acts{order:1}
+.homeui .stick.outing .outingTop-cd{order:2}
+.homeui .stick.outing .outingTop-cdLab{display:none!important}
+.homeui .stick.outing .outingTop-cd{
+  width:58px;height:58px;flex:0 0 58px;padding:0!important;margin:0!important;
+  border-radius:50%!important;border:none!important;
+  display:flex!important;flex-direction:column;align-items:center;justify-content:center;gap:0!important;
+  background:
+    radial-gradient(circle at center,#2a211c 0 58%,transparent 60%),
+    conic-gradient(#e8a56a calc(var(--p,1) * 1turn), rgba(255,236,220,.2) 0)!important;
+  box-shadow:none!important;
+}
+.homeui .stick.outing .outingTop-cdNum{
+  font-size:16px!important;font-weight:800!important;color:#fff8f2!important;line-height:1!important;min-width:0!important;
+}
+.homeui .stick.outing .outingTop-cdUnit{
+  font-size:10px!important;font-weight:700!important;color:#f0d2b4!important;letter-spacing:.04em!important;
+}
+.homeui .stick.outing .outingTop-acts .btn,
+.homeui.outing-shell .outingTop-acts .btn,
+.homeui .stick.outing .outingTop-acts #sp.btn{
+  min-width:0!important;min-height:32px!important;height:32px!important;padding:0 10px!important;
+  border-radius:999px!important;
+  background:#3a2a22!important;border:1.5px solid rgba(232,196,150,.35)!important;color:#fff6ea!important;
+  box-shadow:none!important;font-size:12px!important;font-weight:800!important;
+}
+.stick.outing .silLayer,.stick.outing .silLayer.is-on{
+  top:74px!important;bottom:8px!important;left:2px!important;right:2px!important;
+  width:auto!important;transform:none!important;
+  border-radius:18px!important;overflow:hidden!important;
+  background:linear-gradient(180deg,#3a3158 0%,#6a4558 52%,#e4c0ae 100%)!important;
+  border:1px solid rgba(255,220,190,.16)!important;
+  justify-content:flex-end!important;
+}
+.stick.outing .silStage{height:100%!important;max-height:none!important}
+.homeui .stick.outing .heartRow{
+  --heart-size:132px;
+  align-items:stretch!important;gap:10px!important;
+  padding:8px 2px 4px!important;
+}
+.homeui .stick.outing .heartFace.is-on{
+  width:108px!important;height:auto!important;min-height:var(--heart-size)!important;
+  flex:0 0 108px!important;align-self:stretch!important;
+  border-radius:18px!important;border:3px solid #7E5BAA!important;
+  box-shadow:0 4px 12px rgba(0,0,0,.35)!important;
+}
+.homeui .stick.outing .thbox,
+.homeui.outing-shell .thbox{
+  height:auto!important;min-height:var(--heart-size)!important;max-height:none!important;
+  align-self:stretch!important;
+  background:#FFF6EA!important;color:#2c1a10!important;
+  border:1.5px solid rgba(122,74,42,.28)!important;border-radius:18px!important;
+  box-shadow:0 2px 8px rgba(0,0,0,.18)!important;
+  padding:12px 14px!important;
+}
+.homeui .stick.outing .thbox .thText{justify-content:center!important;align-items:flex-start!important;gap:6px!important}
+.homeui .stick.outing .thbox b{
+  display:block!important;margin:0!important;
+  color:#7E5BAA!important;font-size:13px!important;font-weight:800!important;letter-spacing:.04em!important;
+}
+.homeui .stick.outing #thb:not(.is-fogged){
+  color:#2c1a10!important;font-size:16px!important;font-weight:650!important;line-height:1.55!important;
+  text-shadow:none!important;filter:none!important;-webkit-line-clamp:4!important;
+}
+.homeui .stick.outing #thb.is-fogged{
+  color:transparent!important;filter:blur(8px)!important;
+  text-shadow:0 0 12px rgba(44,26,16,.55)!important;
+}
+.homeui.outing-shell .dock.is-blank-acts{
+  flex-wrap:wrap!important;gap:8px!important;
+  margin:6px 0 0!important;height:auto!important;max-height:none!important;min-height:0!important;
+  padding:4px 2px 0!important;
+  background:transparent!important;border:none!important;box-shadow:none!important;
+}
+.homeui.outing-shell .dock.is-blank-acts button.dockBlank:not(.dockBlank-nap):not(.is-off){
+  flex:1 1 0!important;min-height:76px!important;border-radius:16px!important;
+  background:linear-gradient(180deg,#8d5a32,#5c3818)!important;
+  border:2px solid #3f2410!important;color:#fff8ea!important;
+  box-shadow:0 3px 0 #3a2412!important;
+}
+.homeui.outing-shell .dock.is-blank-acts .dockIco{font-size:18px;line-height:1}
+.homeui.outing-shell .dock.is-blank-acts .dockLab{font-size:14px!important;font-weight:800!important}
+.homeui.outing-shell .dock.is-blank-acts .dockSub{display:block;font-size:11px!important;font-weight:650!important;opacity:.88;color:#f0d7c0!important}
+.homeui.outing-shell .dock.is-blank-acts button.dockBlank-nap{
+  flex:1 1 100%!important;order:2;min-height:62px!important;border-radius:16px!important;
+  background:#241910!important;color:#fff6ea!important;
+  border:2px dashed rgba(210,180,140,.55)!important;
+  box-shadow:none!important;
+}
+.homeui.outing-shell .dock.is-blank-acts button.dockBlank-nap .dockLab{font-size:15px!important;letter-spacing:.02em!important}
+.homeui.outing-shell .dock.is-blank-acts button.dockBlank-nap .dockSub{color:#d9c4a6!important;font-size:11px!important}
+.homeui.outing-shell .foot{color:#cbb89a}
+.homeui.outing-shell .foot a,.homeui.outing-shell .foot #rs{color:#cbb89a!important}
+
 </style>
 </head>
 <body>
@@ -2699,9 +2835,11 @@ function paintDock(){
       var open=nap||blankActUnlocked(b[0]);
       var need=blankActNeedAff(b[0]);
       var cls="dockBlank"+(nap?" dockBlank-nap":"")+(open?"":" is-off");
-      var sub=nap?'<span class="dockSub">跳過等待</span>':(!open?'<span class="dockSub">親密 '+need+'</span>':"");
-      var aria=nap?(b[2]+"（跳過等待）"):(open?b[2]:(b[2]+"（阿祿親密度 "+need+" 解鎖）"));
-      h+='<button type="button" class="'+cls+'" data-blank="'+b[0]+'"'+(open?"":" disabled aria-disabled=\"true\"")+(open?"":(' title="阿祿親密度 '+need+' 後解鎖"'))+' aria-label="'+aria+'"><span class="dockIco" aria-hidden="true">'+b[1]+'</span><span class="dockLab">'+b[2]+(isNew&&open?"✦":"")+'</span>'+sub+'</button>';
+      var flavor={msg:"她會回嗎？",call:"聽聽背景聲",jack:"暫時離開"};
+      var lab=nap?"打瞌睡・跳過等待":b[2];
+      var sub=nap?'<span class="dockSub">跳過會錯過這一段的心聲與剪影</span>':(!open?'<span class="dockSub">親密 '+need+'</span>':'<span class="dockSub">'+(flavor[b[0]]||"")+'</span>');
+      var aria=nap?(lab+"（跳過等待）"):(open?b[2]:(b[2]+"（阿祿親密度 "+need+" 解鎖）"));
+      h+='<button type="button" class="'+cls+'" data-blank="'+b[0]+'"'+(open?"":" disabled aria-disabled=\"true\"")+(open?"":(' title="阿祿親密度 '+need+' 後解鎖"'))+' aria-label="'+aria+'"><span class="dockIco" aria-hidden="true">'+b[1]+'</span><span class="dockLab">'+lab+(isNew&&open?"✦":"")+'</span>'+sub+'</button>';
     });
     dock.innerHTML=h;
     dock.querySelectorAll("button.dockBlank").forEach(function(btn){
@@ -2758,6 +2896,7 @@ else{h='<div class="log">'+(S.log.length?S.log.map(function(l){return"<p class=\
 var side=(tab=="journal"||tab=="story"||tab=="log"||tab=="mem");
 if(side){h='<button type="button" class="pane-x" aria-label="關閉" onclick="closePane()">×</button>'+h}
 $("pane").innerHTML=h;var pn=$("pane");if(pn)pn.classList.toggle("has-x",!!side);requestAnimationFrame(function(){window.scrollTo(0,y)})}
+function paintOutingHud(){if(!(S&&S.trip))return;var oc=$("outChip");if(oc)oc.textContent="小紅外出中";var place=S.trip.place||(PLACES[S.trip.id]&&PLACES[S.trip.id][1])||"";var ac=$("aloneChip");if(ac)ac.textContent=place?("她說："+place+"（你看不到她）"):"";var left=Math.max(0,Math.ceil((S.trip.end-Date.now())/1000));var ocn=$("outingCdNum");if(ocn)ocn.textContent=String(left);var total=PLACES[S.trip.id]?(PLACES[S.trip.id][2]|0):0;var ring=$("outingCd");if(ring&&total>0)ring.style.setProperty("--p",String(Math.max(0,Math.min(1,left/total))));var cd=$("tripCd");if(cd)cd.textContent="倒數 "+left+" 秒"}
 function status(){$("affn").textContent=fmt(S.aff);var away=!!S.trip||S.taken,skipOn=S.trip&&!S.taken,thOn=skipOn;
 var stEl=document.querySelector(".stick");if(stEl)stEl.classList.toggle("outing",!!skipOn);var hu=document.querySelector(".homeui");if(hu)hu.classList.toggle("outing-shell",!!skipOn);if(!skipOn){hidePhoneRipple();var _oal=$("outingActLine");if(_oal){_oal.hidden=true;_oal.innerHTML=""}}syncMoodDim();syncSilhouette();
 var acts=$("noteActs");if(acts){if(skipOn)acts.removeAttribute("hidden");else acts.setAttribute("hidden","")}var spEl=$("sp");if(spEl)spEl.style.display=skipOn?"":"none";
@@ -2778,7 +2917,7 @@ else{if(ot)ot.classList.add("off");if(note){var showNote=!!(S.taken||(S.endingDo
 if(away){var ne=$("ne"),nh=$("nh"),nt=$("nt");if(S.taken||(S.endingDone&&(S.ending|0)===2)){if(ne)ne.textContent="空屋";if(nh)nh.textContent="女主已搬走";if(nt)nt.textContent="小紅搬去強叔那裡了。互動／外出／提問／睡覺都已關閉。"}}
 var tb=$("thbox")&&$("thbox").querySelector("b");if(tb){var cur=tb.textContent||"";if(cur.indexOf("⏳")!==0){var wantLab="💭 心聲";if(cur!==wantLab)tb.textContent=wantLab}}
 if(S.taken||(S.endingDone&&(S.ending|0)===2)){if($("nh").textContent!=="女主已搬走"){$("nh").textContent="女主已搬走";$("nt").textContent="小紅搬去強叔那裡了。互動／外出／提問／睡覺都已關閉。"}}
-else if(S.trip){var left=Math.max(0,Math.ceil((S.trip.end-Date.now())/1000));var ac=$("aloneChip");if(ac)ac.textContent="屋裡只剩你，打算做甚麼？";var oc=$("outChip");if(oc)oc.textContent="小紅外出中……";var ocn=$("outingCdNum");if(ocn)ocn.textContent=String(left);else{var ocd=$("outingCd");if(ocd)ocd.textContent="還有 "+left+" 秒"}var cd=$("tripCd");if(cd)cd.textContent="倒數 "+left+" 秒"}else{if(!S.trip)hidePhoneRipple()}}
+else if(S.trip){paintOutingHud()}else{if(!S.trip)hidePhoneRipple()}}
 function paintStats(){clampAff();
 $("inc").textContent="每天互動一次，增加親密度・外出一次・只有睡覺才會日結";
 $("affn").textContent=fmt(S.aff);
@@ -2789,7 +2928,7 @@ var showM=!!(S&&S.uncleStarted);
 var box=$("mbox");if(box)box.classList.toggle("off",!showM);
 $("mbar").style.width=(effM()|0)+"%";
 var mn=$("mnum");if(mn)mn.textContent=String(effM()|0);
-var ot=$("outingTop");if(ot)ot.classList.toggle("off",!outing);var oc=$("outChip");if(oc)oc.textContent="小紅外出中……";var ac=$("aloneChip");if(ac)ac.textContent="屋裡只剩你，打算做甚麼？";if(outing&&S.trip){var left=Math.max(0,Math.ceil((S.trip.end-Date.now())/1000));var ocn=$("outingCdNum");if(ocn)ocn.textContent=String(left);else{var ocd=$("outingCd");if(ocd)ocd.textContent="還有 "+left+" 秒"}}
+var ot=$("outingTop");if(ot)ot.classList.toggle("off",!outing);if(outing)paintOutingHud();
 status()}
 function render(doPane){paintStats();paintDock();if(doPane!==false)pane();paintAskTab();paintQBtn();paintSideBadges();markChatThreadsNotice();paintChatNotice();try{queueCohabUnlock()}catch(e){}var pn=$("pane");if(pn){var empty=!(pn.innerHTML&&pn.innerHTML.trim());pn.classList.toggle("is-empty",empty);pn.classList.toggle("is-open",!empty&&!!tab)}syncMoodDim();syncSilhouette();save()}
 
