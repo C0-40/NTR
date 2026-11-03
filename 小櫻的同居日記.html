@@ -1787,51 +1787,66 @@ html,body{color:var(--tx)}
 }
 
 
-/* Home cards: 阿祿 / 強叔, day chip, dialogue. Side rail and dock unchanged. */
+/* Two stacked meter cards (heart, name, number, bar). Day stamp stays the earlier 第N天 mark. */
 .homeui .topHud{align-items:flex-start!important;justify-content:space-between!important}
 .homeui .topMeta.meterStack,
 .homeui .topHud .topMeta{
-  display:flex!important;flex:0 0 auto!important;flex-direction:column;align-items:flex-start;gap:6px;
-  width:max-content!important;max-width:none!important;
+  display:flex!important;flex:0 1 auto!important;flex-direction:column!important;align-items:stretch!important;
+  gap:6px!important;width:min(168px,46vw)!important;max-width:168px!important;min-width:128px!important;
   background:transparent!important;border:none!important;box-shadow:none!important;
   padding:0!important;margin:0!important;border-radius:0!important;
 }
+.homeui .stick.outing .topMeta,.stick.outing .topMeta{display:none!important}
 .homeui .meterCard{
-  display:inline-flex;align-items:center;gap:6px;box-sizing:border-box;
-  height:32px;min-height:32px;padding:0 12px;border-radius:999px;
-  background:#FFF6EA;color:#7A4A2A;border:1.5px solid rgba(122,74,42,.28);
+  display:flex;flex-direction:column;gap:4px;box-sizing:border-box;
+  width:100%;padding:6px 8px 7px;border-radius:12px;
+  background:#FFF6EA;color:#7A4A2A;
+  border:1.5px solid rgba(122,74,42,.22);
   box-shadow:0 1px 3px rgba(90,59,42,.12);
-  font-size:13px;font-weight:800;line-height:1;letter-spacing:.02em;white-space:nowrap;
 }
-.homeui .meterHeart{font-size:14px;line-height:1}
-.homeui .meterAlu{border-color:#C85A76}
+.homeui .meterHead{display:flex;align-items:center;gap:4px;min-width:0;line-height:1}
+.homeui .meterHeart{font-size:13px;line-height:1;flex:0 0 auto}
+.homeui .meterName{font-size:12px;font-weight:800;color:#7A4A2A;letter-spacing:.02em;line-height:1}
+.homeui .meterNum{margin-left:auto;font-size:13px;font-weight:800;font-variant-numeric:tabular-nums;line-height:1}
+.homeui .meterAlu{border-color:rgba(200,90,118,.5)}
 .homeui .meterAlu .meterHeart,.homeui .meterAlu .meterNum{color:#C85A76}
-.homeui .meterUncle{border-color:#7E5BAA}
+.homeui .meterUncle,.homeui .mbox.meterCard{
+  margin:0!important;padding:6px 8px 7px!important;
+  border:1.5px solid rgba(126,91,170,.5)!important;border-top:1.5px solid rgba(126,91,170,.5)!important;
+  background:#FFF6EA!important;border-radius:12px!important;
+}
 .homeui .meterUncle .meterHeart,.homeui .meterUncle .meterNum{color:#7E5BAA}
-.homeui .meterName{color:#7A4A2A}
-.homeui .meterNum{font-variant-numeric:tabular-nums;min-width:1.2em;text-align:right}
-.homeui .topMeta .bar,.homeui #mbarwrap,.homeui .affBar{display:none!important}
-.homeui .mbox{margin:0!important;padding:0!important;border:1.5px solid #7E5BAA!important;background:#FFF6EA!important}
-.homeui .dayClock,.homeui .topHud .dayClock{
-  align-self:flex-start!important;flex:0 0 auto!important;width:max-content!important;max-width:none!important;
-  height:32px!important;min-height:32px!important;overflow:visible!important;
-  padding:0 12px!important;margin:0!important;border-radius:999px!important;
-  background:#FFF6EA!important;border:1.5px solid rgba(122,74,42,.28)!important;
-  box-shadow:0 1px 3px rgba(90,59,42,.12)!important;
-  display:inline-flex!important;align-items:center!important;justify-content:center!important;
-  white-space:nowrap!important;
+.homeui .meterCard .bar,
+.homeui .meterCard .affBar,
+.homeui .meterCard #mbarwrap,
+.homeui .topMeta .meterCard .bar{
+  display:block!important;position:relative;height:7px!important;margin:0!important;
+  background:#f3e4d0!important;border:none!important;border-radius:999px!important;
+  overflow:hidden!important;box-shadow:inset 0 1px 2px rgba(90,59,42,.12)!important;
 }
-.homeui .dayClock-day,.homeui #dayl{
-  color:#7A4A2A!important;background:transparent!important;border:none!important;box-shadow:none!important;
-  font-size:13px!important;font-weight:800!important;line-height:1!important;letter-spacing:.02em!important;
-  text-shadow:none!important;-webkit-text-stroke:0!important;padding:0!important;min-height:0!important;
-  width:max-content!important;white-space:nowrap!important;overflow:visible!important;
-  display:inline-flex!important;align-items:center!important;gap:0!important;
+.homeui .meterAlu .bar i,.homeui #affbar{
+  display:block;height:100%;width:0;border-radius:999px;
+  background:#C85A76!important;box-shadow:none!important;
 }
-.homeui #dayl .dayMark-k,.homeui #dayl .dayMark-n,.homeui #dayl .dayMark-p{
-  color:#7A4A2A!important;font-size:13px!important;font-weight:800!important;line-height:1!important;
-  letter-spacing:.02em!important;margin:0!important;text-shadow:none!important;-webkit-text-stroke:0!important;
-  transform:none!important;
+.homeui .meterUncle .bar i,.homeui #mbar{
+  display:block;height:100%;width:0;border-radius:999px;
+  background:#7E5BAA!important;box-shadow:none!important;
+}
+/* Home wood frame continues under 互動 / 外出 / 睡覺 */
+.homeui:not(.outing-shell) .scene{
+  border-bottom-width:0!important;
+  border-radius:22px 22px 0 0!important;
+  box-shadow:inset 0 0 28px rgba(90,59,42,.28),-2px 0 0 0 var(--wood2),2px 0 0 0 var(--wood2),0 -2px 0 0 var(--wood2)!important;
+}
+.homeui:not(.outing-shell) .dock{
+  margin:0!important;
+  padding:8px 10px calc(14px + env(safe-area-inset-bottom,0px))!important;
+  border-style:solid!important;border-color:var(--wood)!important;
+  border-width:0 6px 6px!important;
+  border-radius:0 0 22px 22px!important;
+  background:linear-gradient(180deg,rgba(247,233,207,.35),var(--bg) 42%)!important;
+  box-shadow:-2px 0 0 0 var(--wood2),2px 0 0 0 var(--wood2),0 2px 0 0 var(--wood2),0 10px 22px var(--sh)!important;
+  position:relative;z-index:7;
 }
 .homeui .dlg{
   bottom:2px!important;background:#FFF6EA!important;border:1.5px solid rgba(122,74,42,.35)!important;
@@ -1871,22 +1886,26 @@ html,body{color:var(--tx)}
           </div>
       <div class="topMeta meterStack">
             <div class="meterCard meterAlu">
-              <span class="meterHeart" aria-hidden="true">♥</span>
-              <span class="meterName">阿祿</span>
-              <span class="meterNum" id="affn">0</span>
+              <div class="meterHead">
+                <span class="meterHeart" aria-hidden="true">♥</span>
+                <span class="meterName">阿祿</span>
+                <span class="meterNum" id="affn">0</span>
+              </div>
+              <div class="bar affBar" aria-hidden="true"><i id="affbar"></i><span class="affInk" id="affInk" aria-hidden="true"></span><span class="affSweep" id="affSweep" aria-hidden="true"></span></div>
             </div>
             <div class="meterCard meterUncle" id="mbox">
-              <span class="meterHeart" aria-hidden="true">♥</span>
-              <span class="meterName" id="mlab">強叔</span>
-              <span class="meterNum" id="mnum">0</span>
+              <div class="meterHead">
+                <span class="meterHeart" aria-hidden="true">♥</span>
+                <span class="meterName" id="mlab">強叔</span>
+                <span class="meterNum" id="mnum">0</span>
+              </div>
+              <div class="bar m" id="mbarwrap"><i id="mbar"></i></div>
             </div>
-            <div class="bar affBar" hidden aria-hidden="true"><i id="affbar"></i><span class="affInk" id="affInk" aria-hidden="true"></span><span class="affSweep" id="affSweep" aria-hidden="true"></span></div>
             <div class="sm" id="afft"></div>
             <div class="sm" id="inc"></div>
-            <div class="bar m" id="mbarwrap" hidden aria-hidden="true"><i id="mbar"></i></div>
           </div>
       <div class="dayClock" id="dayClock" aria-label="天數">
-      <div class="dayClock-day" id="dayl"><span class="dayMark-k">第 </span><span class="dayMark-n">1</span><span class="dayMark-k"> 天 </span><span class="dayMark-p" id="dayp">早上</span></div>
+      <div class="dayClock-day" id="dayl" data-day="1"><span class="dayMark-tick" aria-hidden="true"></span><span class="dayMark-k">第</span><span class="dayMark-n">1</span><span class="dayMark-k">天</span></div>
     </div>
     </div>
     <div id="outingTop" class="outingTop off" role="status" aria-live="polite" aria-label="外出狀態">
@@ -2707,8 +2726,8 @@ var stEl=document.querySelector(".stick");if(stEl)stEl.classList.toggle("outing"
 var acts=$("noteActs");if(acts){if(skipOn)acts.removeAttribute("hidden");else acts.setAttribute("hidden","")}var spEl=$("sp");if(spEl)spEl.style.display=skipOn?"":"none";
 var th=$("thbox");if(th&&!skipOn){var want="none";if(th.style.display!==want)th.style.display=want}
 else if(th&&skipOn){if(th.style.display!=="flex")th.style.display="flex"}paintHeartFace(ex);
-var dayN=S.day|0,daylEl=$("dayl"),per=["早上","下午","夜晚"][part()]||"早上";
-if(daylEl){var key=dayN+"|"+per;if(daylEl.getAttribute("data-day")!==key){daylEl.setAttribute("data-day",key);var nEl=daylEl.querySelector(".dayMark-n"),pEl=daylEl.querySelector(".dayMark-p");if(nEl)nEl.textContent=String(dayN);if(pEl)pEl.textContent=per}}
+var dayN=S.day|0,daylEl=$("dayl");
+if(daylEl&&(daylEl.getAttribute("data-day")|0)!==dayN){daylEl.setAttribute("data-day",String(dayN));daylEl.innerHTML='<span class="dayMark-tick" aria-hidden="true"></span><span class="dayMark-k">第</span><span class="dayMark-n">'+dayN+'</span><span class="dayMark-k">天</span>'}
 var dlgEl=$("dlg");if(dlgEl){var canNext=!!(S&&!busy&&!S.trip&&!S.taken&&!dayLock&&!maskOpen()&&!(S.endingDone&&(S.ending|0)===2));dlgEl.classList.toggle("can-next",canNext)}
 if(typeof paintSideStoryMem==="function")paintSideStoryMem();if(typeof paintVoiceFog==="function")paintVoiceFog();
 var sb=$("sleepBtn");if(sb){var canSleep=!S.taken&&!S.endingDone&&!S.trip&&!dayLock&&!maskOpen();sb.disabled=!canSleep;sb.classList.toggle("is-off",!canSleep);if(S.endingDone){sb.disabled=true;sb.classList.add("is-off")}}
