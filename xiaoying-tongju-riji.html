@@ -2823,6 +2823,19 @@ body:has(#gameUI.outing-shell) .settingsAction,body:has(#gameUI.outing-shell) .s
 #gameUI.homeui.outing-shell .thbox #thb.typeTarget{position:relative;display:block!important;-webkit-line-clamp:unset!important;max-height:6em;overflow:hidden}
 #gameUI.homeui.outing-shell .thbox:focus-visible{outline:3px solid #d3a979;outline-offset:3px}
 
+
+/* Compact status controls: speed left, circular countdown right. */
+#gameUI.homeui.outing-shell .outingTop-foot{flex-direction:row!important;gap:8px!important;min-width:0}
+#gameUI.homeui.outing-shell .outingTop-acts{order:0!important}
+#gameUI.homeui.outing-shell .outingTop-cd{order:1!important}
+#gameUI.homeui.outing-shell .silLayer{top:112px!important}
+/* Notifications belong to the whole action, not the clipped label. */
+#gameUI.homeui.outing-shell .dock.is-blank-acts button.dockBlank{position:relative!important}
+#gameUI.homeui.outing-shell .dock.is-blank-acts button.dockBlank>.notice-dot{
+ position:absolute!important;top:8px!important;right:8px!important;left:auto!important;bottom:auto!important;
+ margin:0!important;width:6px!important;height:6px!important;z-index:2;pointer-events:none;
+}
+
 </style>
 </head>
 <body>
@@ -3616,11 +3629,10 @@ function paintDock(){
       var open=nap||blankActUnlocked(b[0]);
       var need=blankActNeedAff(b[0]);
       var cls="dockBlank"+(nap?" dockBlank-nap":"")+(open?"":" is-off");
-      var flavor={msg:"她會回嗎？",call:"聽聽背景聲",jack:"暫時離開"};
       var lab=nap?"打瞌睡・跳過等待":b[2];
-      var sub=nap?'<span class="dockSub">跳過會錯過這一段的心聲與剪影</span>':(!open?'<span class="dockSub">親密 '+need+'</span>':'<span class="dockSub">'+(flavor[b[0]]||"")+'</span>');
+      var sub=nap?'<span class="dockSub">跳過會錯過這一段的心聲與剪影</span>':(!open?'<span class="dockSub">親密 '+need+'</span>':"");
       var aria=nap?(lab+"（跳過等待）"):(open?b[2]:(b[2]+"（阿祿親密度 "+need+" 解鎖）"));
-      h+='<button type="button" class="'+cls+'" data-blank="'+b[0]+'"'+(open?"":" disabled aria-disabled=\"true\"")+(open?"":(' title="阿祿親密度 '+need+' 後解鎖"'))+' aria-label="'+aria+'"><span class="dockIco" aria-hidden="true">'+homeUiIcon(b[0])+'</span><span class="dockLab">'+lab+(isNew&&open?optNewBadge():"")+'</span>'+sub+'</button>';
+      h+='<button type="button" class="'+cls+'" data-blank="'+b[0]+'"'+(open?"":" disabled aria-disabled=\"true\"")+(open?"":(' title="阿祿親密度 '+need+' 後解鎖"'))+' aria-label="'+aria+'"><span class="dockIco" aria-hidden="true">'+homeUiIcon(b[0])+'</span><span class="dockLab">'+lab+'</span>'+sub+(isNew&&open?optNewBadge():"")+'</button>';
     });
     dock.innerHTML=h;
     dock.querySelectorAll("button.dockBlank").forEach(function(btn){
