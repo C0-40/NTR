@@ -2662,6 +2662,40 @@ body:has(#gameUI.outing-shell) .settingsAction,body:has(#gameUI.outing-shell) .s
 #gameUI.homeui.outing-shell #outingActLine{background:linear-gradient(#79563f,#422b1e)!important;border:2px solid #bd9771!important;border-radius:19px!important;box-shadow:inset 0 1px 0 #dfc29b33,0 5px 14px #20130955!important;color:#f7e5cc!important}
 @media(max-width:360px){#mask.mask .box{padding:19px 15px 15px!important}#mask.mask #mp{font-size:14px!important}#gameUI.homeui #pane .row{gap:7px!important;padding:11px 8px!important}#gameUI.homeui #pane .row .i{width:26px!important}#gameUI.homeui #pane .btn{padding:8px!important}}
 
+
+/* Adaptive panel heights: short content stays compact, long catalogues can expand. */
+#gameUI.homeui #pane.is-open{height:auto!important;min-height:0!important;max-height:min(74svh,620px)!important}
+#gameUI.homeui #pane.is-open[data-panel-size="compact"]{max-height:54svh!important}
+/* A stable reading viewport keeps choices and continue controls out of the scroll area. */
+#mask.mask .box{
+ display:grid!important;grid-template-rows:minmax(0,1fr) 20px auto 54px!important;
+ height:min(64svh,490px)!important;max-height:85svh!important;min-height:0!important;
+ overflow:hidden!important;padding:20px 18px 16px!important;
+}
+#mask.mask .modalReading{grid-row:1;overflow-y:auto;overflow-x:hidden;min-height:0;overscroll-behavior:contain;padding:2px 5px 10px 2px;scrollbar-width:thin;scrollbar-color:#b18c6e transparent}
+#mask.mask .modalReading .face{width:64px!important;height:64px!important;margin:0 auto 12px!important}
+#mask.mask .readingHint{grid-row:2;height:20px;box-sizing:border-box;visibility:hidden;text-align:center;font-size:10px;color:var(--win-muted);line-height:20px;letter-spacing:.04em}
+#mask.mask .readingHint.is-visible{visibility:visible}
+#mask.mask .sqopts{grid-row:3;min-height:0;max-height:32svh;overflow:auto;overscroll-behavior:contain;margin:0!important;padding:0 2px}
+#mask.mask .sqopts .btn{margin:7px 0!important}
+#mask.mask .tl{grid-row:4;height:54px;min-height:54px;box-sizing:border-box;margin:0!important;padding-top:8px;align-items:stretch}
+#mask.mask #mb{min-width:100px;min-height:44px!important}
+/* Daily interactions read like conversation cards; story catalogues like a notebook. */
+#gameUI.homeui #pane[data-panel-kind="home"] .paneHead,#gameUI.homeui #pane[data-panel-kind="ask"] .paneHead{background:linear-gradient(#fff7ebf5,#efdbc8f5)}
+#gameUI.homeui #pane[data-panel-kind="ask"] .row{border-radius:21px 21px 21px 7px!important;background:#fffaf0!important}
+#gameUI.homeui #pane[data-panel-kind="home"] .row{border-left:3px solid #c8a381!important}
+#gameUI.homeui #pane[data-panel-kind="story"],#gameUI.homeui #pane[data-panel-kind="mem"]{background:repeating-linear-gradient(0deg,#c8ad8c15 0 1px,transparent 1px 28px),linear-gradient(#fff9ed,#efe1cf)!important;counter-reset:catalogue}
+#gameUI.homeui #pane[data-panel-kind="story"] .row,#gameUI.homeui #pane[data-panel-kind="mem"] .row{counter-increment:catalogue;border-radius:12px!important;border-left:3px solid #b48a68!important;background:#fffaf0b8!important}
+#gameUI.homeui #pane[data-panel-kind="mem"] .paneHead{background:#f3e2cdf5}
+#gameUI.homeui #pane[data-panel-kind="go"] .row{border-radius:16px!important;background:linear-gradient(135deg,#fffaf1,#f2e2cf)!important}
+.chatRoom .cThread{border-left:3px solid #b98b69!important}.chatRoom .cThread b{display:block;margin-bottom:5px;font-size:14px;line-height:1.5}
+.chatRoom .cPost{border-radius:16px 16px 16px 5px!important}.chatRoom .cPost .who{font-size:11px!important;font-weight:700}
+/* Private windows remain cocoa, with restrained header and clearer text hierarchy. */
+#mask.mask.mood-chrome #mt,#mask.mask.obs-dark #mt{border-left:3px solid #c0976b!important;padding-left:10px!important;letter-spacing:.04em}
+#mask.mask.mood-chrome #mp,#mask.mask.obs-dark #mp{font-size:14px!important;line-height:1.9!important}
+#mask.mask.mem-soft:not(.mood-chrome) .modalReading{background:repeating-linear-gradient(0deg,#c8ad8c12 0 1px,transparent 1px 29px);border-radius:8px}
+@media(max-width:360px){#mask.mask .box{padding:16px 13px 13px!important;height:74svh!important}#mask.mask #mt.uiIconLabel::after{font-size:16px}#mask.mask .modalReading .face{width:56px!important;height:56px!important}}
+
 </style>
 </head>
 <body>
@@ -2790,7 +2824,7 @@ body:has(#gameUI.outing-shell) .settingsAction,body:has(#gameUI.outing-shell) .s
     <div class="chromeFoot">輕觸外側關閉</div>
   </div>
 </div>
-<div class="mask" id="mask" role="dialog" aria-modal="true" aria-labelledby="mt" aria-describedby="mp"><div class="box"><div class="face"></div><h3 id="mt"></h3><p id="mp"></p><div class="sqopts" id="sqopts"></div><div class="tl"><button type="button" class="btn" id="mb">繼續</button></div></div></div>
+<div class="mask" id="mask" role="dialog" aria-modal="true" aria-labelledby="mt" aria-describedby="mp"><div class="box"><div class="modalReading" id="modalReading"><div class="face"></div><h3 id="mt"></h3><p id="mp"></p></div><div class="readingHint" id="readingHint" aria-hidden="true">向下捲動閱讀 ↓</div><div class="sqopts" id="sqopts"></div><div class="tl"><button type="button" class="btn" id="mb">繼續</button></div></div></div>
 <script>
 function homeUiIcon(name){var paths={"home": "<path d=\"M8 13V5a2 2 0 0 1 4 0v6-3a2 2 0 0 1 4 0v3-1a2 2 0 0 1 4 0v5c0 4-2 6-6 6h-2c-2 0-3-1-4-3l-4-5a2 2 0 0 1 3-2l3 3\"/>", "go": "<path d=\"M4 21V3l11-1v20L4 21ZM15 4h5v16h-5\"/><circle cx=\"11.5\" cy=\"12\" r=\".8\" fill=\"currentColor\" stroke=\"none\"/>", "sleep": "<path d=\"M20.5 14A9 9 0 0 1 10 3a9 9 0 1 0 10.5 11Z\"/><path d=\"M17 3v4m-2-2h4\"/>", "chat": "<path d=\"M15 16H8l-4 3v-4a7 7 0 0 1 3-13h7a7 7 0 0 1 1 14Z\"/><path d=\"M19 8a6 6 0 0 1 1 10v3l-4-2h-4\"/><path d=\"M7 9h.01M11 9h.01M15 9h.01\"/>", "ask": "<path d=\"M19 16a8 8 0 1 0-5 3l6 2-1-5Z\"/><path d=\"M9 8a3 3 0 0 1 6 0c0 2-3 2-3 4\"/><path d=\"M12 15h.01\"/>", "daily": "<path d=\"M7 2v4m10-4v4\"/><rect x=\"3\" y=\"4\" width=\"18\" height=\"17\" rx=\"3\"/><path d=\"M3 9h18M7 13h3m4 0h3m-10 4h3\"/>", "memory": "<rect x=\"3\" y=\"3\" width=\"18\" height=\"18\" rx=\"3\"/><circle cx=\"8\" cy=\"8\" r=\"1.5\"/><path d=\"m4 17 5-5 4 4 3-3 5 5\"/>", "msg": "<rect x=\"5\" y=\"2\" width=\"14\" height=\"20\" rx=\"3\"/><path d=\"M9 5h6m-4 14h2\"/>", "call": "<path d=\"m7 3 3 5-2 2c2 3 3 4 6 6l2-2 5 3c-1 4-3 5-6 3C8 17 4 13 2 7 1 4 3 2 7 3Z\"/>", "jack": "<path d=\"M5 3h14v18H5zM8 3v4h8V3M9 11h6m-6 4h6m-6 3h6\"/>", "nap": "<path d=\"M20.5 14A9 9 0 0 1 10 3a9 9 0 1 0 10.5 11Z\"/>", "speed": "<path d=\"m3 5 8 7-8 7V5Zm10 0 8 7-8 7V5Z\"/>", "thought": "<path d=\"M7 16a7 7 0 1 1 11-2 6 6 0 0 1-11 2Z\"/><circle cx=\"5\" cy=\"19\" r=\"2\"/><path d=\"M2 23h.01\"/>", "lock": "<rect x=\"5\" y=\"10\" width=\"14\" height=\"11\" rx=\"2\"/><path d=\"M8 10V6a4 4 0 0 1 8 0v4m-4 5v2\"/>", "eye": "<path d=\"M2 12s3.5-7 10-7 10 7 10 7-3.5 7-10 7S2 12 2 12Z\"/><circle cx=\"12\" cy=\"12\" r=\"3\"/>"};return '<svg class="uiIcon" viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false">'+(paths[name]||paths.home)+'</svg>';}
 
@@ -3514,7 +3548,7 @@ NSTORY.forEach(function(s,k){if(S.seen.indexOf("n"+s[0])<0)return;h+='<div class
 else{h=""}
 var panelNames={home:"互動",go:"外出",ask:"提問",mem:"回憶",story:"日常",journal:"日記",herq:"她想問你"};var side=!!panelNames[tab];
 if(side){h='<div class="paneHead"><h2 class="collectionTitle">'+panelNames[tab]+'</h2><button type="button" class="pane-x" aria-label="關閉" onclick="closePane()">×</button></div>'+h}
-$("pane").innerHTML=h;var pn=$("pane");if(pn)pn.classList.toggle("has-x",!!side);requestAnimationFrame(function(){window.scrollTo(0,y)})}
+$("pane").innerHTML=h;var pn=$("pane");if(pn){pn.classList.toggle("has-x",!!side);pn.dataset.panelKind=tab;pn.dataset.panelSize=pn.querySelectorAll(".row").length<=3?"compact":"long";}requestAnimationFrame(function(){window.scrollTo(0,y)})}
 function paintOutingHud(){if(!(S&&S.trip))return;var oc=$("outChip");if(oc)oc.textContent="小紅外出中";var place=S.trip.place||(PLACES[S.trip.id]&&PLACES[S.trip.id][1])||"";var ac=$("aloneChip");if(ac)ac.textContent=place?("她說："+place+"（你看不到她）"):"";var left=Math.max(0,Math.ceil((S.trip.end-Date.now())/1000));var ocn=$("outingCdNum");if(ocn)ocn.textContent=String(left);var total=PLACES[S.trip.id]?(PLACES[S.trip.id][2]|0):0;var ring=$("outingCd");if(ring&&total>0)ring.style.setProperty("--p",String(Math.max(0,Math.min(1,left/total))));var cd=$("tripCd");if(cd)cd.textContent="倒數 "+left+" 秒"}
 function status(){$("affn").textContent=fmt(S.aff);var away=!!S.trip||S.taken,skipOn=S.trip&&!S.taken,thOn=skipOn;
 var stEl=document.querySelector(".stick");if(stEl)stEl.classList.toggle("outing",!!skipOn);var hu=document.querySelector(".homeui");if(hu)hu.classList.toggle("outing-shell",!!skipOn);if(!skipOn){var _oal=$("outingActLine");if(_oal){_oal.hidden=true;_oal.innerHTML=""}}syncMoodDim();syncSilhouette();
@@ -3601,6 +3635,10 @@ bindMomIntro();
 
 function skinUiLabel(el,key){if(!el)return;var raw=el.textContent||"",label=raw.replace(/^[\s\p{Extended_Pictographic}\uFE0F\u200D\u23F3\u23E9]+/u,"");el.dataset.uiLabel=label;el.classList.add("uiIconLabel");el.style.setProperty("--label-icon",'url("data:image/svg+xml,'+encodeURIComponent(homeUiIcon(key).replace("<svg ", '<svg xmlns="http://www.w3.org/2000/svg" '))+'")')}
 function skinWindowUi(){var title=$("mt"),text=title?title.textContent:"",key=/起疑|觀察/.test(text)?"eye":/發訊息/.test(text)?"msg":/電話/.test(text)?"call":/廁所/.test(text)?"jack":/問/.test(text)?"ask":/回憶/.test(text)?"memory":"daily";skinUiLabel(title,key);skinUiLabel($("thbox")&&$("thbox").querySelector("b"),"thought");skinUiLabel($("outingActLine")&&$("outingActLine").querySelector("b"),"msg");var pane=$("pane");if(pane)pane.querySelectorAll(".row>.i").forEach(function(el){if(el.classList.contains("j-sil-dot"))return;var key=el.closest(".row").classList.contains("lock")?"lock":({home:"home",go:"go",ask:"ask",story:"daily",mem:"memory"}[tab]||"daily");if(el.dataset.uiIcon===key)return;el.dataset.uiIcon=key;el.setAttribute("aria-hidden","true");el.innerHTML=homeUiIcon(key)})}
+
+function updateReadingHint(){var area=$("modalReading"),hint=$("readingHint");if(!area||!hint)return;hint.classList.toggle("is-visible",area.scrollHeight>area.clientHeight+3&&area.scrollTop+area.clientHeight<area.scrollHeight-3)}
+var readingArea=$("modalReading");readingArea.addEventListener("scroll",updateReadingHint,{passive:true});new ResizeObserver(updateReadingHint).observe(readingArea);new MutationObserver(function(){requestAnimationFrame(updateReadingHint)}).observe(readingArea,{childList:true,subtree:true,characterData:true});new MutationObserver(function(){readingArea.scrollTop=0;requestAnimationFrame(updateReadingHint)}).observe($("mp"),{childList:true,subtree:true,characterData:true});window.addEventListener("resize",updateReadingHint);
+
 var windowSkinObserver=new MutationObserver(skinWindowUi);["mt","thbox","outingActLine","pane"].forEach(function(id){var el=$(id);if(el)windowSkinObserver.observe(el,{childList:true,subtree:true,characterData:true})});skinWindowUi();
 
 load();
