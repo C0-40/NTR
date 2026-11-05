@@ -1185,8 +1185,6 @@ html,body{color:var(--tx)}
 .chatRoom .chatFeed.is-list .cThread:hover{border-color:#c45a72;background:#fff}
 .chatRoom .chatFeed.is-list .cThread b{display:block;font-size:13.5px;color:#2c1a10;margin-bottom:4px}
 .chatRoom .chatFeed.is-list .cThread .sm{font-size:11px;color:#8a5a40}
-.chatRoom .chatBack{display:none;margin:0 0 8px;align-self:flex-start}
-.chatRoom .chatBack.on{display:inline-flex}
 
 
 
@@ -2647,7 +2645,6 @@ body:has(#gameUI.outing-shell) .settingsAction,body:has(#gameUI.outing-shell) .s
 .chatRoom .cThread{width:100%;box-sizing:border-box;padding:14px!important;margin-bottom:10px;border:1px solid #d1b291!important;border-radius:16px!important;background:linear-gradient(#fffaf2,#f1e0cb)!important;box-shadow:inset 0 1px 0 #fff,0 2px 0 #c5a586!important;color:#72503a!important;text-align:left;min-height:58px}
 .chatRoom .cPost{border:1px solid #d5baa0!important;border-radius:17px!important;padding:12px!important;background:#fff8ee!important;margin-bottom:12px}
 .chatRoom .cPost .body{font-size:14px!important;line-height:1.8!important;color:#654636!important}.chatRoom .cPost .who,.chatRoom .cPost .sm{color:#98785b!important}
-.chatRoom .chatBack{margin:12px 14px 0!important;border:1px solid #c7a98a!important;border-radius:12px!important;min-height:44px;background:#fff7eb!important;color:#77543d!important}
 .chatRoom .chatFoot{font-size:10px!important;color:#a0856b!important;padding:10px!important;border-top:1px solid #d6bda2}
 .momPhone .chromeWin.phone{padding:18px!important}.momPhone .chromeTitle{padding:0 50px 12px 0!important;border-bottom:1px solid #cbb091}.momPhone .chromeTitle h3{color:#72503a!important;font-size:18px!important}
 .momPhone .msgBubble{background:linear-gradient(#fffaf2,#f3e2cc)!important;border:1px solid #d2b491!important;border-radius:16px!important;color:#705039!important;font-size:14px!important;line-height:1.75!important}
@@ -2695,6 +2692,33 @@ body:has(#gameUI.outing-shell) .settingsAction,body:has(#gameUI.outing-shell) .s
 #mask.mask.mood-chrome #mp,#mask.mask.obs-dark #mp{font-size:14px!important;line-height:1.9!important}
 #mask.mask.mem-soft:not(.mood-chrome) .modalReading{background:repeating-linear-gradient(0deg,#c8ad8c12 0 1px,transparent 1px 29px);border-radius:8px}
 @media(max-width:360px){#mask.mask .box{padding:16px 13px 13px!important;height:74svh!important}#mask.mask #mt.uiIconLabel::after{font-size:16px}#mask.mask .modalReading .face{width:56px!important;height:56px!important}}
+
+
+/* States communicate availability without changing any disabled/gate rules. */
+#gameUI.homeui #pane .row .m::after{
+ content:attr(data-action-hint);display:table;margin-top:6px;padding:2px 7px;
+ border-radius:7px;font-size:9px;font-weight:700;line-height:1.5;letter-spacing:.02em;
+ background:#f1dfc9;color:#98734e;
+}
+#gameUI.homeui #pane .row[data-action-state="ready"]{border-color:#c9a27c!important;background:linear-gradient(145deg,#fffaf1,#f4e4d0)!important}
+#gameUI.homeui #pane .row[data-action-state="ready"] .m::after{background:#eddbc2;color:#88613b}
+#gameUI.homeui #pane .row[data-action-state="locked"]{border-style:dashed!important;border-color:#c9b6a0!important;background:#eee5db!important}
+#gameUI.homeui #pane .row[data-action-state="locked"] .i{background:#e4d6c5!important;color:#a18d77!important;position:relative}
+#gameUI.homeui #pane .row[data-action-state="locked"] .i::after{content:"";position:absolute;right:-2px;bottom:-2px;width:9px;height:11px;border-radius:3px;background:#eee5db url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 12 14' fill='none' stroke='%239b816c' stroke-width='1.4'%3E%3Crect x='2' y='6' width='8' height='7' rx='1.5'/%3E%3Cpath d='M3.5 6V4a2.5 2.5 0 0 1 5 0v2'/%3E%3C/svg%3E") center/contain no-repeat}
+#gameUI.homeui #pane .row[data-action-state="locked"] .m::after{background:#e2d4c4;color:#98816b}
+#gameUI.homeui #pane .row[data-action-state="used"]{border-color:#a5ae91!important;border-style:solid!important;background:#e8eadd!important}
+#gameUI.homeui #pane .row[data-action-state="used"] .i{background:#dce1cc!important;color:#7f8b68!important}
+#gameUI.homeui #pane .row[data-action-state="used"] .m::after{background:#d8dfc8;color:#6b7a56}
+#gameUI.homeui #pane .row[data-action-state="used"] .btn:disabled{border-color:#a5ae91!important;background:#dde2ce!important;color:#75815e!important}
+#gameUI.homeui #pane .row[data-action-state="revisit"]{border-color:#c39a91!important;background:#f4e3df!important}
+#gameUI.homeui #pane .row[data-action-state="revisit"] .m::after{background:#e9d0ca;color:#a06d63}
+#gameUI.homeui #pane .row[data-action-state="unavailable"] .m::after{background:#e0d8d1;color:#978477}
+#gameUI.homeui:not(.outing-shell) .dock button.dock-used,#gameUI.homeui:not(.outing-shell) .dock button.dock-used:disabled{
+ background:linear-gradient(#edf0e2,#d7dfc8)!important;border-color:#a1ac8d!important;color:#6a7856!important;
+ box-shadow:inset 0 1px 0 #fffaf0,0 2px 0 #9ba585!important;filter:none!important;opacity:1!important;
+}
+#gameUI.homeui:not(.outing-shell) .dock button.dock-used .uiIcon{color:#7e8d64!important}
+#gameUI.homeui #pane .row .i .uiIcon{width:21px;height:21px}
 
 </style>
 </head>
@@ -2807,7 +2831,6 @@ body:has(#gameUI.outing-shell) .settingsAction,body:has(#gameUI.outing-shell) .s
       <div><b>匿名聊天室</b><div class="sm" id="chatSub">偶然滑到的討論串，不知為何忍不住看下去</div></div>
       <button type="button" class="pane-x" id="chatClose" onclick="closeChatRoom()" aria-label="關閉">×</button>
     </div>
-    <button type="button" class="btn chatBack" id="chatBack" onclick="chatShowList()">← 討論串</button>
     <div class="chatFeed" id="chatFeed"></div>
     <div class="chatFoot">輕觸外側關閉</div>
   </div>
@@ -2826,7 +2849,7 @@ body:has(#gameUI.outing-shell) .settingsAction,body:has(#gameUI.outing-shell) .s
 </div>
 <div class="mask" id="mask" role="dialog" aria-modal="true" aria-labelledby="mt" aria-describedby="mp"><div class="box"><div class="modalReading" id="modalReading"><div class="face"></div><h3 id="mt"></h3><p id="mp"></p></div><div class="readingHint" id="readingHint" aria-hidden="true">向下捲動閱讀 ↓</div><div class="sqopts" id="sqopts"></div><div class="tl"><button type="button" class="btn" id="mb">繼續</button></div></div></div>
 <script>
-function homeUiIcon(name){var paths={"home": "<path d=\"M8 13V5a2 2 0 0 1 4 0v6-3a2 2 0 0 1 4 0v3-1a2 2 0 0 1 4 0v5c0 4-2 6-6 6h-2c-2 0-3-1-4-3l-4-5a2 2 0 0 1 3-2l3 3\"/>", "go": "<path d=\"M4 21V3l11-1v20L4 21ZM15 4h5v16h-5\"/><circle cx=\"11.5\" cy=\"12\" r=\".8\" fill=\"currentColor\" stroke=\"none\"/>", "sleep": "<path d=\"M20.5 14A9 9 0 0 1 10 3a9 9 0 1 0 10.5 11Z\"/><path d=\"M17 3v4m-2-2h4\"/>", "chat": "<path d=\"M15 16H8l-4 3v-4a7 7 0 0 1 3-13h7a7 7 0 0 1 1 14Z\"/><path d=\"M19 8a6 6 0 0 1 1 10v3l-4-2h-4\"/><path d=\"M7 9h.01M11 9h.01M15 9h.01\"/>", "ask": "<path d=\"M19 16a8 8 0 1 0-5 3l6 2-1-5Z\"/><path d=\"M9 8a3 3 0 0 1 6 0c0 2-3 2-3 4\"/><path d=\"M12 15h.01\"/>", "daily": "<path d=\"M7 2v4m10-4v4\"/><rect x=\"3\" y=\"4\" width=\"18\" height=\"17\" rx=\"3\"/><path d=\"M3 9h18M7 13h3m4 0h3m-10 4h3\"/>", "memory": "<rect x=\"3\" y=\"3\" width=\"18\" height=\"18\" rx=\"3\"/><circle cx=\"8\" cy=\"8\" r=\"1.5\"/><path d=\"m4 17 5-5 4 4 3-3 5 5\"/>", "msg": "<rect x=\"5\" y=\"2\" width=\"14\" height=\"20\" rx=\"3\"/><path d=\"M9 5h6m-4 14h2\"/>", "call": "<path d=\"m7 3 3 5-2 2c2 3 3 4 6 6l2-2 5 3c-1 4-3 5-6 3C8 17 4 13 2 7 1 4 3 2 7 3Z\"/>", "jack": "<path d=\"M5 3h14v18H5zM8 3v4h8V3M9 11h6m-6 4h6m-6 3h6\"/>", "nap": "<path d=\"M20.5 14A9 9 0 0 1 10 3a9 9 0 1 0 10.5 11Z\"/>", "speed": "<path d=\"m3 5 8 7-8 7V5Zm10 0 8 7-8 7V5Z\"/>", "thought": "<path d=\"M7 16a7 7 0 1 1 11-2 6 6 0 0 1-11 2Z\"/><circle cx=\"5\" cy=\"19\" r=\"2\"/><path d=\"M2 23h.01\"/>", "lock": "<rect x=\"5\" y=\"10\" width=\"14\" height=\"11\" rx=\"2\"/><path d=\"M8 10V6a4 4 0 0 1 8 0v4m-4 5v2\"/>", "eye": "<path d=\"M2 12s3.5-7 10-7 10 7 10 7-3.5 7-10 7S2 12 2 12Z\"/><circle cx=\"12\" cy=\"12\" r=\"3\"/>"};return '<svg class="uiIcon" viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false">'+(paths[name]||paths.home)+'</svg>';}
+function homeUiIcon(name){var paths={"home": "<path d=\"M8 13V5a2 2 0 0 1 4 0v6-3a2 2 0 0 1 4 0v3-1a2 2 0 0 1 4 0v5c0 4-2 6-6 6h-2c-2 0-3-1-4-3l-4-5a2 2 0 0 1 3-2l3 3\"/>", "go": "<path d=\"M4 21V3l11-1v20L4 21ZM15 4h5v16h-5\"/><circle cx=\"11.5\" cy=\"12\" r=\".8\" fill=\"currentColor\" stroke=\"none\"/>", "sleep": "<path d=\"M20.5 14A9 9 0 0 1 10 3a9 9 0 1 0 10.5 11Z\"/><path d=\"M17 3v4m-2-2h4\"/>", "chat": "<path d=\"M15 16H8l-4 3v-4a7 7 0 0 1 3-13h7a7 7 0 0 1 1 14Z\"/><path d=\"M19 8a6 6 0 0 1 1 10v3l-4-2h-4\"/><path d=\"M7 9h.01M11 9h.01M15 9h.01\"/>", "ask": "<path d=\"M19 16a8 8 0 1 0-5 3l6 2-1-5Z\"/><path d=\"M9 8a3 3 0 0 1 6 0c0 2-3 2-3 4\"/><path d=\"M12 15h.01\"/>", "daily": "<path d=\"M7 2v4m10-4v4\"/><rect x=\"3\" y=\"4\" width=\"18\" height=\"17\" rx=\"3\"/><path d=\"M3 9h18M7 13h3m4 0h3m-10 4h3\"/>", "memory": "<rect x=\"3\" y=\"3\" width=\"18\" height=\"18\" rx=\"3\"/><circle cx=\"8\" cy=\"8\" r=\"1.5\"/><path d=\"m4 17 5-5 4 4 3-3 5 5\"/>", "msg": "<rect x=\"5\" y=\"2\" width=\"14\" height=\"20\" rx=\"3\"/><path d=\"M9 5h6m-4 14h2\"/>", "call": "<path d=\"m7 3 3 5-2 2c2 3 3 4 6 6l2-2 5 3c-1 4-3 5-6 3C8 17 4 13 2 7 1 4 3 2 7 3Z\"/>", "jack": "<path d=\"M5 3h14v18H5zM8 3v4h8V3M9 11h6m-6 4h6m-6 3h6\"/>", "nap": "<path d=\"M20.5 14A9 9 0 0 1 10 3a9 9 0 1 0 10.5 11Z\"/>", "speed": "<path d=\"m3 5 8 7-8 7V5Zm10 0 8 7-8 7V5Z\"/>", "thought": "<path d=\"M7 16a7 7 0 1 1 11-2 6 6 0 0 1-11 2Z\"/><circle cx=\"5\" cy=\"19\" r=\"2\"/><path d=\"M2 23h.01\"/>", "lock": "<rect x=\"5\" y=\"10\" width=\"14\" height=\"11\" rx=\"2\"/><path d=\"M8 10V6a4 4 0 0 1 8 0v4m-4 5v2\"/>", "eye": "<path d=\"M2 12s3.5-7 10-7 10 7 10 7-3.5 7-10 7S2 12 2 12Z\"/><circle cx=\"12\" cy=\"12\" r=\"3\"/>", "care": "<path d=\"M20 5a5 5 0 0 0-8 1 5 5 0 0 0-8-1c-4 5 2 10 8 14 6-4 12-9 8-14Z\"/>", "tv": "<rect x=\"3\" y=\"6\" width=\"18\" height=\"13\" rx=\"3\"/><path d=\"m8 2 4 4 4-4M8 22h8\"/>", "game": "<rect x=\"4\" y=\"4\" width=\"16\" height=\"16\" rx=\"3\"/><circle cx=\"8\" cy=\"8\" r=\"1\"/><circle cx=\"16\" cy=\"8\" r=\"1\"/><circle cx=\"12\" cy=\"12\" r=\"1\"/><circle cx=\"8\" cy=\"16\" r=\"1\"/><circle cx=\"16\" cy=\"16\" r=\"1\"/>", "stars": "<path d=\"m12 2 2.8 6 6.7.8-4.9 4.6 1.3 6.6-5.9-3.2L6.1 20l1.3-6.6L2.5 8.8l6.7-.8L12 2Z\"/>", "sweets": "<path d=\"M20 10a5 5 0 0 1-5-7A9 9 0 1 0 21 12a5 5 0 0 1-1-2Z\"/><circle cx=\"8\" cy=\"9\" r=\"1\"/><circle cx=\"7\" cy=\"15\" r=\"1\"/><circle cx=\"13\" cy=\"16\" r=\"1\"/>", "hobby": "<path d=\"M8 5h12v12a3 3 0 1 1-3-3V3M8 8v11a3 3 0 1 1-3-3V5h3\"/>", "bond": "<circle cx=\"8\" cy=\"7\" r=\"3\"/><path d=\"M2 20v-2a6 6 0 0 1 12 0v2M17 5a3 3 0 0 1 0 6m1 4c3 0 4 2 4 5\"/>", "encounter": "<path d=\"M12 22s8-7 8-13a8 8 0 1 0-16 0c0 6 8 13 8 13Z\"/><circle cx=\"12\" cy=\"9\" r=\"3\"/>", "regret": "<path d=\"M4 4v6h6M4 10a9 9 0 1 1 0 7M12 6v6l4 2\"/>", "future": "<path d=\"M3 18h18M5 18V9m14 9V9M9 14l3-3 3 3m-3-3v10M3 5h6m-3-3v6m13-6v4m-2-2h4\"/>", "uncle": "<circle cx=\"12\" cy=\"7\" r=\"4\"/><path d=\"M4 22v-3a8 8 0 0 1 16 0v3M9 16l3 5 3-5\"/>"};return '<svg class="uiIcon" viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false">'+(paths[name]||paths.home)+'</svg>';}
 
 
 var TIERS=[[0,"重逢的青梅竹馬"],[30,"漸漸熟稔"],[100,"無話不談的夥伴"],[250,"值得信賴的人"],[500,"特別的人"],[1000,"一輩子的家人"]];
@@ -3392,17 +3415,16 @@ function replayN(k){var s=NSTORY[k];mq.push(["💔 "+s[1],s[2]]);nextPop()}
 function chatAvailable(){if(!S||S.trip||dayLock)return false;if(S.endingDone&&((S.ending|0)===1||(S.ending|0)===2))return true;if(S.taken)return false;return chatNavUnlocked()}
 function chatThreadUnlocked(t){if(!t)return false;if(t.ending){return !!(S.endingDone&&(S.ending|0)===(t.ending|0))}if((t.step|0)<=0){if(t.needAff&&(S.aff|0)<(t.needAff|0)&&((S.day|0)<6))return false;return true}return (S.uncleStep|0)>=(t.step|0)}
 function chatThreadList(){var list=[];(CHAT_THREADS||[]).forEach(function(t,i){if(chatThreadUnlocked(t))list.push({t:t,i:i})});return list}
-function paintChatFeed(){var feed=$("chatFeed"),back=$("chatBack");if(!feed)return;var open=S.chatOpenStep;var list=chatThreadList();
-if(open==null||open===""){feed.classList.add("is-list");if(back)back.classList.remove("on");
+function paintChatFeed(){var feed=$("chatFeed");if(!feed)return;var open=S.chatOpenStep;var list=chatThreadList();
+if(open==null||open===""){feed.classList.add("is-list");
 var html="";list.forEach(function(x){var t=x.t;html+='<button type="button" class="cThread" onclick="chatOpenThread('+x.i+')"><b>'+t.title+'</b><span class="sm">'+(t.sub||"討論串")+'・'+(t.posts?t.posts.length:0)+' 則</span></button>'});
 if(!html)html='<p class="sm">還沒有討論串。</p>';feed.innerHTML=html;
 var sub=$("chatSub");if(sub)sub.textContent="偶然滑到的討論串，不知為何忍不住看下去";return}
-feed.classList.remove("is-list");if(back)back.classList.add("on");
+feed.classList.remove("is-list");
 var t=(CHAT_THREADS||[])[open|0];var html="";
 if(t&&t.posts){t.posts.forEach(function(p){html+='<article class="cPost"><span class="who is-anon">'+p.who+'</span><div class="body">'+p.body+'</div><span class="meta">'+p.meta+'</span></article>'})}
 if(!html)html='<p class="sm">這個討論串還沒有貼文。</p>';feed.innerHTML=html;
 var sub=$("chatSub");if(sub)sub.textContent=(t&&t.sub)||"偶然滑到的討論串，不知為何忍不住看下去"}
-function chatShowList(){S.chatOpenStep=null;paintChatFeed();try{save()}catch(e){}}
 function chatOpenThread(i){S.chatOpenStep=i|0;paintChatFeed();try{save()}catch(e){}}
 function paintChatNotice(){var b=$("navChat");if(!b)return;var on=!!(S&&S.chatNotice);b.innerHTML=homeUiIcon("chat")+'<span>聊天室</span>'+(on?'<span class="opt-new" title="有新討論串">✦</span>':"");b.classList.toggle("chat-notice",on)}
 function markChatThreadsNotice(){if(!S||typeof chatThreadList!=="function")return;var n=chatThreadList().length;if(S._chatThreadCount==null){S._chatThreadCount=n;return}if(n>(S._chatThreadCount|0))S.chatNotice=true;S._chatThreadCount=n}
@@ -3634,7 +3656,7 @@ function bindMomIntro(){var el=$("momPhone");if(!el)return;el.addEventListener("
 bindMomIntro();
 
 function skinUiLabel(el,key){if(!el)return;var raw=el.textContent||"",label=raw.replace(/^[\s\p{Extended_Pictographic}\uFE0F\u200D\u23F3\u23E9]+/u,"");el.dataset.uiLabel=label;el.classList.add("uiIconLabel");el.style.setProperty("--label-icon",'url("data:image/svg+xml,'+encodeURIComponent(homeUiIcon(key).replace("<svg ", '<svg xmlns="http://www.w3.org/2000/svg" '))+'")')}
-function skinWindowUi(){var title=$("mt"),text=title?title.textContent:"",key=/起疑|觀察/.test(text)?"eye":/發訊息/.test(text)?"msg":/電話/.test(text)?"call":/廁所/.test(text)?"jack":/問/.test(text)?"ask":/回憶/.test(text)?"memory":"daily";skinUiLabel(title,key);skinUiLabel($("thbox")&&$("thbox").querySelector("b"),"thought");skinUiLabel($("outingActLine")&&$("outingActLine").querySelector("b"),"msg");var pane=$("pane");if(pane)pane.querySelectorAll(".row>.i").forEach(function(el){if(el.classList.contains("j-sil-dot"))return;var key=el.closest(".row").classList.contains("lock")?"lock":({home:"home",go:"go",ask:"ask",story:"daily",mem:"memory"}[tab]||"daily");if(el.dataset.uiIcon===key)return;el.dataset.uiIcon=key;el.setAttribute("aria-hidden","true");el.innerHTML=homeUiIcon(key)})}
+function skinWindowUi(){var title=$("mt"),text=title?title.textContent:"",key=/起疑|觀察/.test(text)?"eye":/發訊息/.test(text)?"msg":/電話/.test(text)?"call":/廁所/.test(text)?"jack":/問/.test(text)?"ask":/回憶/.test(text)?"memory":"daily";skinUiLabel(title,key);skinUiLabel($("thbox")&&$("thbox").querySelector("b"),"thought");skinUiLabel($("outingActLine")&&$("outingActLine").querySelector("b"),"msg");var pane=$("pane");if(pane)pane.querySelectorAll(".row>.i").forEach(function(el){if(el.classList.contains("j-sil-dot"))return;var row=el.closest(".row"),button=row.querySelector("button"),handler=button?(button.getAttribute("onclick")||""):"",match=handler.match(/(?:homeAct|ask)\((\d+)\)/),index=match?Number(match[1]):-1;var key=tab==="home"&&index>=0?(HOME_ACTS[index]&&HOME_ACTS[index][0]||"home"):tab==="ask"&&index>=0?(["hobby","bond","encounter","regret","future","uncle"][index]||"ask"):(row.classList.contains("lock")?"lock":({go:"go",story:"daily",mem:"memory"}[tab]||"daily"));var disabled=!button||button.disabled,state=disabled?"locked":"ready";if(tab==="home"&&S.homeActToday)state="used";else if(tab==="go"&&S.outToday&&!S.trip)state="used";else if(tab==="ask"&&!disabled&&S.qa.indexOf(index)>=0)state="revisit";else if(disabled&&((S&&S.endingDone)||(S&&S.taken)))state="unavailable";row.dataset.actionState=state;var info=row.querySelector(".m");if(info)info.dataset.actionHint=({locked:"尚未解鎖",used:"今日已完成",revisit:"可再次提問",unavailable:"目前無法使用",ready:tab==="ask"?"可提問":tab==="home"?"可互動":"可開啟"}[state]);if(el.dataset.uiIcon===key)return;el.dataset.uiIcon=key;el.setAttribute("aria-hidden","true");el.innerHTML=homeUiIcon(key)})}
 
 function updateReadingHint(){var area=$("modalReading"),hint=$("readingHint");if(!area||!hint)return;hint.classList.toggle("is-visible",area.scrollHeight>area.clientHeight+3&&area.scrollTop+area.clientHeight<area.scrollHeight-3)}
 var readingArea=$("modalReading");readingArea.addEventListener("scroll",updateReadingHint,{passive:true});new ResizeObserver(updateReadingHint).observe(readingArea);new MutationObserver(function(){requestAnimationFrame(updateReadingHint)}).observe(readingArea,{childList:true,subtree:true,characterData:true});new MutationObserver(function(){readingArea.scrollTop=0;requestAnimationFrame(updateReadingHint)}).observe($("mp"),{childList:true,subtree:true,characterData:true});window.addEventListener("resize",updateReadingHint);
