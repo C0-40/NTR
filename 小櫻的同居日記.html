@@ -2200,9 +2200,13 @@ body:has(.outing-shell) .settingsAction,body:has(.outing-shell) .settingsClose{b
 #gameUI.homeui.outing-shell .silLayer{border:0!important;border-radius:18px!important}
 
 
-/* Reference-matched rose accents, with no changes to navigation layout. */
+/* Primary actions: cream interaction/outing, rose sleep. */
 #gameUI.homeui:not(.outing-shell) .dock button[data-t="home"],
 #gameUI.homeui:not(.outing-shell) .dock button[data-t="go"]{
+ background:var(--ui-face)!important;border-color:var(--ui-edge)!important;
+ color:var(--ui-ink)!important;box-shadow:var(--ui-shadow)!important;
+}
+#gameUI.homeui:not(.outing-shell) .dock button.dockSleep{
  background:linear-gradient(180deg,#f3cbc0,#dfa7a4 75%,#cc9291)!important;
  border-color:#bb8786!important;color:#65413d!important;
  box-shadow:inset 0 1px 0 #ffe4d6,0 2px 0 #b88680,0 3px 7px #69433318!important;
@@ -2215,10 +2219,55 @@ body:has(.outing-shell) .settingsAction,body:has(.outing-shell) .settingsClose{b
 .settingsAction{border-color:#c6a291;border-radius:15px;background:linear-gradient(#fff9ef,#f0dccc);box-shadow:inset 0 1px 0 #fff,0 2px 0 #bf9885}
 body:has(.outing-shell) .gameSettings{background:linear-gradient(#8a6879,#604b61);border-color:#bd9eaa}
 body:has(.outing-shell) .settingsAction,body:has(.outing-shell) .settingsClose{background:linear-gradient(#a17e8b,#7c5d71);border-color:#c0a0ac;box-shadow:inset 0 1px 0 #e0bdc755,0 2px 0 #634651}
+
+/* Shared frame encloses scene, thought row and bottom actions; panes stay outside. */
+#gameUI.homeui .gameFrame{
+ display:flex;flex-direction:column;min-width:0;padding:8px 8px 6px;
+ border:1px solid #c7a595;border-radius:26px;
+ background:linear-gradient(160deg,#fff7eb,#f1ded0);
+ box-shadow:inset 0 1px 0 #fffaf4,0 3px 10px #62412d20;
+}
+#gameUI.homeui .scene,#gameUI.homeui:not(.outing-shell) .scene{
+ border:0!important;border-radius:18px!important;box-shadow:none!important;
+ height:calc(100svh - 145px)!important;
+}
+#gameUI.homeui .dock{margin-top:12px!important;padding:0 2px 8px!important}
+#gameUI.homeui.outing-shell{
+ --ui-face:linear-gradient(180deg,#806171,#644b60 75%,#543b51);
+ --ui-ink:#fff0e5;--ui-edge:#aa8297;--ui-base:#3c2a3d;
+ --ui-shadow:inset 0 1px 0 #c9a3b555,0 2px 0 #3c2a3d,0 4px 8px #160e202b;
+ background:transparent!important;border:0!important;box-shadow:none!important;
+}
+#gameUI.homeui.outing-shell .gameFrame{
+ background:linear-gradient(155deg,#574052,#2e2537 85%);
+ border-color:#94728b;box-shadow:inset 0 1px 0 #b997ab55,0 4px 14px #1d132b35;
+}
+#gameUI.homeui.outing-shell .scene{
+ height:calc(100svh - 340px)!important;min-height:330px!important;
+ border:0!important;border-radius:18px!important;box-shadow:none!important;
+ background:linear-gradient(155deg,#31253fa6,#281d3ac4),var(--room) 56% center/cover!important;
+}
+#gameUI.homeui.outing-shell .outingTop{
+ background:linear-gradient(150deg,#604354ed,#3f2b46f0)!important;
+ border-color:#956e8955!important;box-shadow:inset 0 1px 0 #c29bab33,0 2px 7px #1b102d40!important;
+}
+#gameUI.homeui.outing-shell .topHud .meterCard{background:var(--ui-face)!important}
+#gameUI.homeui.outing-shell .thbox{
+ background:linear-gradient(140deg,#765262f5,#4b354ff5)!important;
+ border-color:#a17d94!important;box-shadow:inset 0 1px 0 #cda3b333,0 2px 0 #33253a,0 4px 9px #170e2540!important;
+}
+#gameUI.homeui.outing-shell .heartFace.is-on{border-color:#b48ca3!important;box-shadow:0 2px 7px #170e2540!important}
+#gameUI.homeui.outing-shell .phoneRipple-chip{background:linear-gradient(#8e5b75,#633e5b)!important;border-color:#a77c95!important}
+#gameUI.homeui.outing-shell .dock.is-blank-acts button.dockBlank:not(.dockBlank-nap){background:var(--ui-face)!important;border-color:var(--ui-edge)!important;box-shadow:var(--ui-shadow)!important}
+#gameUI.homeui.outing-shell .dock.is-blank-acts button.dockBlank-nap{background:linear-gradient(#654659,#453047)!important;border-color:#8e6c86!important;box-shadow:inset 0 1px 0 #bd95a633,0 2px 0 #2e2134!important}
+body:has(#gameUI.outing-shell){background:#302737;background-image:radial-gradient(ellipse at top,#5b4356,transparent 80%)}
+@media(max-width:360px){#gameUI.homeui .gameFrame{padding:6px 6px 5px}}
+
 </style>
 </head>
 <body>
 <div class="w homeui" id="gameUI">
+  <div class="gameFrame">
   <div class="stick" id="homeStick"><div class="scene" id="scene">
         <div class="topHud">
       <div class="chips hudTools">
@@ -2308,6 +2357,7 @@ body:has(.outing-shell) .settingsAction,body:has(.outing-shell) .settingsClose{b
     <button type="button" data-t="go">🎒 外出</button>
     <button type="button" id="sleepBtn" class="dockSleep" aria-label="睡覺，進入下一天" onclick="sleepDay()"><span class="dockSleep-ico" aria-hidden="true">☾</span><span class="dockSleep-txt"><span class="dockSleep-lab">睡覺</span><span class="dockSleep-sub">進入下一天</span></span></button>
     <button type="button" data-t="herq" style="display:none" aria-hidden="true">❓ 被問</button>
+  </div>
   </div>
   <div class="pane" id="pane"></div>
 
