@@ -2057,24 +2057,24 @@ html,body{color:var(--tx)}
 .homeui.outing-shell .foot a,.homeui.outing-shell .foot #rs{color:#cbb89a!important}
 
 
-/* Approved cream / smoked-plum tactile interface. Existing story and gate rules stay intact. */
-body{background:#f5e5d7;background-image:radial-gradient(ellipse at 30% 0%,#fff7ea,transparent 65%);color:#664333}
+/* Cream / dusty-rose skin: fine borders and shallow relief; layout and behavior preserved. */
+body{background:#f5e9e2;background-image:radial-gradient(ellipse at 30% 0%,#fff9f0,transparent 65%);color:#664333}
 #gameUI.homeui{
- --ui-face:linear-gradient(180deg,#fffaf0 0%,#ffe9c9 75%,#f7d7b0 100%);
- --ui-ink:#694333;--ui-edge:#c89572;--ui-base:#b77f5e;
- --ui-shadow:inset 0 2px 1px #fffaf0,inset 0 -2px 2px #e9bd92,0 4px 0 #b77f5e,0 7px 12px #59322324;
+ --ui-face:linear-gradient(180deg,#fff9ef 0%,#f8e9da 75%,#efd7c5 100%);
+ --ui-ink:#69483e;--ui-edge:#c6a291;--ui-base:#bf9885;
+ --ui-shadow:inset 0 1px 0 #fffaf5,inset 0 -1px 1px #e2bfa855,0 2px 0 #bf9885,0 3px 6px #69433318;
  max-width:500px!important;padding:10px 10px 16px!important;gap:0;
 }
 #gameUI.homeui.outing-shell{
- --ui-face:linear-gradient(180deg,#81616f,#654754 75%,#563b48);
- --ui-ink:#fff0df;--ui-edge:#a17b88;--ui-base:#392731;
- --ui-shadow:inset 0 2px 1px #b48f9b88,inset 0 -2px 2px #422936,0 4px 0 #392731,0 7px 12px #180f2044;
+ --ui-face:linear-gradient(180deg,#9a7a82,#80616f 75%,#705261);
+ --ui-ink:#fff2e5;--ui-edge:#bc98a1;--ui-base:#634651;
+ --ui-shadow:inset 0 1px 0 #e1bbc655,inset 0 -1px 1px #4e344655,0 2px 0 #634651,0 3px 7px #281a3025;
  background:radial-gradient(ellipse at top,#483540,#281f2b);border-radius:28px;
  --empty-ink:#f0dfd4;--empty-ink-strong:#fff0df;--empty-muted:#cfb6c3;
 }
 #gameUI.homeui .scene,#gameUI.homeui:not(.outing-shell) .scene{
- border:4px solid #f9dfc2!important;border-radius:28px!important;
- box-shadow:0 0 0 1px #c59b7e,0 7px 18px #62412d30,inset 0 2px 3px #fff5e6!important;
+ border:1px solid #c7a595!important;border-radius:24px!important;
+ box-shadow:0 3px 10px #62412d20,inset 0 1px 1px #fff5e6!important;
  min-height:560px!important;height:calc(100svh - 120px)!important;max-height:790px!important;flex:none!important;
 }
 #gameUI.homeui .scene::after{pointer-events:none}
@@ -2111,11 +2111,11 @@ body{background:#f5e5d7;background-image:radial-gradient(ellipse at 30% 0%,#fff7
 #gameUI.homeui .girl:not(.away){height:84%!important;max-width:96%!important;bottom:26px!important;transform:translateX(-50%) translateY(70px) scale(1.52)!important}
 #gameUI.homeui .dlg{
  left:12px!important;right:12px!important;bottom:18px!important;border:1px solid var(--ui-edge)!important;
- border-radius:23px!important;background:linear-gradient(165deg,#fffaf0f5,#ffe9d2f5)!important;
- box-shadow:inset 0 2px 0 #fff,0 4px 0 #bb8c6d,0 8px 15px #53332630!important;
+ border-radius:23px!important;background:linear-gradient(165deg,#fffaf1f5,#f5e2d7f5)!important;
+ box-shadow:inset 0 1px 0 #fff,0 2px 0 #c5a392,0 4px 9px #53332620!important;
  padding:22px 15px 17px!important;min-height:90px!important;
 }
-#gameUI.homeui .dlg #nm{border-radius:14px!important;background:linear-gradient(#f5ae92,#dc8b78)!important;color:#fffaf3!important;border:1px solid #cb7b65!important;box-shadow:inset 0 1px 0 #ffd9bc,0 2px 2px #7a40322b!important;font-size:14px!important}
+#gameUI.homeui .dlg #nm{border-radius:14px!important;background:linear-gradient(#bb817e,#9b6366)!important;color:#fffaf3!important;border:1px solid #aa7775!important;box-shadow:inset 0 1px 0 #e7b9ad,0 1px 2px #7a403220!important;font-size:14px!important}
 #gameUI.homeui .dlg #say{color:#694333!important;font-size:14px!important;line-height:1.7!important;max-height:5.1em!important}
 #gameUI.homeui .dlgNext{color:#ca7f6a!important}
 #gameUI.homeui:not(.outing-shell) .dock,#gameUI.homeui .dock{
@@ -2124,7 +2124,7 @@ body{background:#f5e5d7;background-image:radial-gradient(ellipse at 30% 0%,#fff7
 }
 #gameUI.homeui .dock button:not([hidden]){
  flex:1 1 0!important;min-width:0!important;min-height:65px!important;max-height:none!important;
- padding:10px 5px!important;border-radius:23px!important;border:1px solid var(--ui-edge)!important;
+ padding:10px 5px!important;border-radius:17px!important;border:1px solid var(--ui-edge)!important;
  background:var(--ui-face)!important;color:var(--ui-ink)!important;box-shadow:var(--ui-shadow)!important;
  font-size:15px!important;font-weight:800!important;line-height:1.3!important;text-shadow:none!important;
 }
@@ -2138,8 +2138,8 @@ body{background:#f5e5d7;background-image:radial-gradient(ellipse at 30% 0%,#fff7
 #gameUI.homeui .pane{border-radius:22px!important;border-color:#c89e80!important;background:linear-gradient(150deg,#fff9ee,#fcebd9)!important;box-shadow:0 6px 18px #69433320!important;color:#694333!important}
 #gameUI.homeui .pane.is-empty{padding:0!important;border:0!important;box-shadow:none!important}
 #gameUI.homeui.outing-shell .scene{
- border-color:#987887!important;background:linear-gradient(155deg,#3d263c80,#201925a3),var(--room) 56% center/cover!important;
- box-shadow:0 0 0 1px #392830,0 8px 22px #160f2544,inset 0 0 50px #2c182360!important;
+ border-color:#af909b!important;background:linear-gradient(155deg,#3d263c80,#201925a3),var(--room) 56% center/cover!important;
+ box-shadow:0 3px 10px #21172525,inset 0 0 40px #2c182345!important;
  min-height:330px!important;height:calc(100svh - 315px)!important;max-height:620px!important;filter:none!important;
 }
 #gameUI.homeui.outing-shell #dayl .dayMark-n{color:#ffd4bf!important}
@@ -2159,8 +2159,8 @@ body{background:#f5e5d7;background-image:radial-gradient(ellipse at 30% 0%,#fff7
 #gameUI.homeui.outing-shell .silFig{opacity:.75;/* Existing stage and fog filters are deliberately preserved. */}
 #gameUI.homeui.outing-shell .silLayer::before,#gameUI.homeui.outing-shell .silLayer::after{display:none!important}
 #gameUI.homeui.outing-shell .heartRow{--heart-size:104px;gap:8px!important;padding:12px 4px 6px!important;align-items:center!important}
-#gameUI.homeui.outing-shell .heartFace.is-on{border-radius:50%!important;border:3px solid #cba0ac!important;box-shadow:inset 0 2px 0 #eed6d2,0 4px 0 #3c2837,0 6px 16px #21152e66!important;align-self:center!important}
-#gameUI.homeui.outing-shell .thbox{border:1px solid #a57e8e!important;border-radius:24px!important;background:linear-gradient(145deg,#72505feF,#4d3548)!important;box-shadow:inset 0 2px 0 #bb95a244,0 4px 0 #33232f,0 7px 12px #1f162744!important;color:#fbe9dc!important}
+#gameUI.homeui.outing-shell .heartFace.is-on{border-radius:50%!important;border:1px solid #cba0ac!important;box-shadow:inset 0 1px 0 #eed6d2,0 2px 7px #21152e40!important;align-self:center!important}
+#gameUI.homeui.outing-shell .thbox{border:1px solid #a57e8e!important;border-radius:24px!important;background:linear-gradient(145deg,#886573f0,#62495d)!important;box-shadow:inset 0 1px 0 #d1adb944,0 2px 0 #594052,0 4px 8px #1f162725!important;color:#fbe9dc!important}
 #gameUI.homeui.outing-shell .thbox b{color:#f9dccd!important;font-size:12px!important}
 #gameUI.homeui.outing-shell .thbox #thb{color:#f2dfd8!important;font-size:12px!important;line-height:1.6!important}
 #gameUI.homeui.outing-shell .phoneRipple-chip{background:linear-gradient(#9c697d,#714457)!important;color:#ffe9de!important;border:1px solid #bd8d9a!important;border-radius:16px!important;box-shadow:inset 0 1px 0 #ddb1b455,0 3px 0 #442e39!important}
@@ -2195,10 +2195,26 @@ body:has(.outing-shell) .settingsAction,body:has(.outing-shell) .settingsClose{b
 #gameUI.homeui.outing-shell .outingTop-cd::before,#gameUI.homeui.outing-shell .outingTop-cd::after{display:none!important}
 
 
-#gameUI.homeui.outing-shell{background:radial-gradient(ellipse at top,#483540,#281f2b)!important;border:1px solid #967583!important;box-shadow:inset 0 2px 1px #c0a2ad66,0 7px 20px #281e2930!important}
-#gameUI.homeui.outing-shell .scene{background:linear-gradient(155deg,#3d263cb3,#201925bf),var(--room) 56% center/cover!important}
+#gameUI.homeui.outing-shell{background:radial-gradient(ellipse at top,#6b5161,#433647)!important;border:1px solid #b39aa6!important;box-shadow:inset 0 1px 0 #d7bdc444,0 3px 10px #281e2920!important}
+#gameUI.homeui.outing-shell .scene{background:linear-gradient(155deg,#5e405c80,#312943a0),var(--room) 56% center/cover!important}
 #gameUI.homeui.outing-shell .silLayer{border:0!important;border-radius:18px!important}
 
+
+/* Reference-matched rose accents, with no changes to navigation layout. */
+#gameUI.homeui:not(.outing-shell) .dock button[data-t="home"],
+#gameUI.homeui:not(.outing-shell) .dock button[data-t="go"]{
+ background:linear-gradient(180deg,#f3cbc0,#dfa7a4 75%,#cc9291)!important;
+ border-color:#bb8786!important;color:#65413d!important;
+ box-shadow:inset 0 1px 0 #ffe4d6,0 2px 0 #b88680,0 3px 7px #69433318!important;
+}
+#gameUI.homeui .topHud #settingsBtn{border-radius:13px!important}
+#gameUI.homeui #dayl::before{background:linear-gradient(#d6a09a,#bb827f)}
+#gameUI.homeui #dayl::after{background:#927468;box-shadow:32px 0 0 #927468}
+#gameUI.homeui .pane{box-shadow:0 3px 10px #69433318!important}
+.gameSettings{border-width:1px;border-color:#bd9b8c;border-radius:22px;background:linear-gradient(150deg,#fff9ef,#f2e0d3);box-shadow:inset 0 1px 0 #fff,0 3px 0 #bc9685,0 12px 35px #24172540}
+.settingsAction{border-color:#c6a291;border-radius:15px;background:linear-gradient(#fff9ef,#f0dccc);box-shadow:inset 0 1px 0 #fff,0 2px 0 #bf9885}
+body:has(.outing-shell) .gameSettings{background:linear-gradient(#8a6879,#604b61);border-color:#bd9eaa}
+body:has(.outing-shell) .settingsAction,body:has(.outing-shell) .settingsClose{background:linear-gradient(#a17e8b,#7c5d71);border-color:#c0a0ac;box-shadow:inset 0 1px 0 #e0bdc755,0 2px 0 #634651}
 </style>
 </head>
 <body>
