@@ -2263,6 +2263,72 @@ body:has(.outing-shell) .settingsAction,body:has(.outing-shell) .settingsClose{b
 body:has(#gameUI.outing-shell){background:#302737;background-image:radial-gradient(ellipse at top,#5b4356,transparent 80%)}
 @media(max-width:360px){#gameUI.homeui .gameFrame{padding:6px 6px 5px}}
 
+
+/* Extend the actual home scene behind the action dock, not only its frame. */
+#gameUI.homeui:not(.outing-shell) .scene{
+ height:calc(100svh - 57px)!important;min-height:648px!important;max-height:878px!important;
+}
+#gameUI.homeui:not(.outing-shell) .girl:not(.away){bottom:-24px!important}
+#gameUI.homeui:not(.outing-shell) .dlg{bottom:106px!important}
+#gameUI.homeui:not(.outing-shell) .dock{
+ margin-top:-82px!important;padding:0 6px 12px!important;z-index:9!important;
+}
+/* Dark cocoa / cream outing palette, matching the reference rather than plum. */
+#gameUI.homeui.outing-shell{
+ --ui-face:linear-gradient(180deg,#806250,#654837 75%,#513728);
+ --ui-ink:#fff0dd;--ui-edge:#b18c6f;--ui-base:#3e291e;
+ --ui-shadow:inset 0 1px 0 #d6b79a55,0 2px 0 #3e291e,0 4px 8px #24160f30;
+ --empty-ink:#f2e0cb;--empty-ink-strong:#fff0dd;--empty-muted:#ceb29a;
+}
+#gameUI.homeui.outing-shell .gameFrame{
+ background:linear-gradient(155deg,#604735,#302219 85%);border-color:#a17e62;
+ box-shadow:inset 0 1px 0 #d6b99b55,0 4px 14px #28190f35;
+}
+#gameUI.homeui.outing-shell .scene{background:linear-gradient(155deg,#503823a6,#281b12c4),var(--room) 56% center/cover!important}
+#gameUI.homeui.outing-shell .outingTop{
+ background:linear-gradient(150deg,#71503ced,#432d20f0)!important;border-color:#ad896c88!important;
+ box-shadow:inset 0 1px 0 #dec1a233,0 2px 7px #24160f40!important;
+ --ot-ink:#fff0dd;--ot-mute:#d6b99e;--ot-on:#fff0dd;
+}
+#gameUI.homeui.outing-shell .outingTop-lead,#gameUI.homeui.outing-shell .outingTop-ask{color:#f3e1cd!important}
+#gameUI.homeui.outing-shell #dayl::before{background:linear-gradient(#af8870,#805940)}
+#gameUI.homeui.outing-shell .thbox{
+ background:linear-gradient(140deg,#785441f5,#483024f5)!important;border-color:#b48d70!important;
+ box-shadow:inset 0 1px 0 #dec0a333,0 2px 0 #352218,0 4px 9px #24160f40!important;
+ color:#f8e6d2!important;
+}
+#gameUI.homeui.outing-shell .thbox b,#gameUI.homeui.outing-shell .thbox #thb{color:#f8e6d2!important}
+#gameUI.homeui.outing-shell .heartFace.is-on{border-color:#c4a17e!important;box-shadow:0 2px 7px #24160f40!important}
+#gameUI.homeui.outing-shell .phoneRipple-chip{background:linear-gradient(#92664b,#63402d)!important;border-color:#bb9775!important;color:#fff0dd!important}
+#gameUI.homeui.outing-shell .dock.is-blank-acts button.dockBlank-nap{background:linear-gradient(#6b4c37,#432d21)!important;border-color:#a18061!important;box-shadow:inset 0 1px 0 #d5b59933,0 2px 0 #2f1e15!important}
+#gameUI.homeui.outing-shell .dock.is-blank-acts button.dockBlank .dockSub{color:#e5cfb9!important}
+#gameUI.homeui.outing-shell .pane{background:#4a3325!important;border-color:#a78568!important;color:#f6e4cf!important}
+body:has(#gameUI.outing-shell){background:#33251c;background-image:radial-gradient(ellipse at top,#654b36,transparent 80%)}
+body:has(#gameUI.outing-shell) .gameSettings{background:linear-gradient(#826049,#4a3224);border-color:#b99b79;color:#fff0dd}
+body:has(#gameUI.outing-shell) .settingsAction,body:has(#gameUI.outing-shell) .settingsClose{background:linear-gradient(#997559,#634530);border-color:#b99b79;color:#fff0dd;box-shadow:inset 0 1px 0 #dfc1a355,0 2px 0 #3e291e}
+/* Slightly stronger outlines; retain all existing control sizes and functions. */
+#gameUI.homeui .dock button:not([hidden]),
+#gameUI.homeui .sideNav .bubble,
+#gameUI.homeui .topHud #settingsBtn,
+#gameUI.homeui .outingTop-acts #sp.btn,
+#gameUI.homeui .phoneRipple-chip,
+#gameUI.homeui .dlg,
+#gameUI.homeui .thbox,
+#gameUI.homeui .pane .btn{border-width:2px!important}
+#gameUI.homeui.outing-shell .dock.is-blank-acts button.dockBlank,
+#gameUI.homeui.outing-shell .dock.is-blank-acts button.dockBlank-nap{border-width:2px!important}
+.gameSettings .settingsAction,.gameSettings .settingsClose{border-width:2px}
+
+
+#gameUI.homeui:not(.outing-shell) .girl:not(.away){
+ width:100%!important;height:auto!important;aspect-ratio:1/1!important;max-width:96%!important;
+ bottom:0!important;transform:translateX(-50%) scale(1.8)!important;transform-origin:50% 100%!important;
+}
+#gameUI.homeui.outing-shell .stick.outing .outingTop{
+ background:linear-gradient(150deg,#71503ced,#432d20f0)!important;border-color:#ad896c88!important;
+ box-shadow:inset 0 1px 0 #dec1a233,0 2px 7px #24160f40!important;
+}
+
 </style>
 </head>
 <body>
