@@ -2362,6 +2362,25 @@ body:has(#gameUI.outing-shell) .settingsAction,body:has(#gameUI.outing-shell) .s
  #gameUI.homeui #obsBtn,#gameUI.homeui #qHomeBtn{bottom:220px!important;min-height:42px!important}
 }
 
+
+/* The home frame uses the same cocoa finish as the outing frame. */
+#gameUI.homeui:not(.outing-shell) .gameFrame{
+ background:linear-gradient(155deg,#604735,#302219 85%);border-color:#a17e62;
+ box-shadow:inset 0 1px 0 #d6b99b55,0 4px 14px #28190f35;
+}
+.contextActions{position:absolute;left:50%;top:55%;transform:translate(-50%,-50%);z-index:12;display:flex;flex-direction:column;align-items:center;gap:10px;max-width:58%;pointer-events:none}
+#gameUI.homeui .contextActions #obsBtn,#gameUI.homeui .contextActions #qHomeBtn{
+ position:relative!important;top:auto!important;bottom:auto!important;left:auto!important;right:auto!important;
+ margin:0!important;transform:none!important;max-width:100%;pointer-events:auto;
+}
+#gameUI.homeui .contextActions #obsBtn:hover,#gameUI.homeui .contextActions #obsBtn:focus-visible,#gameUI.homeui .contextActions #obsBtn:active,#gameUI.homeui .contextActions #qHomeBtn:active{transform:none!important}
+/* Restore the existing countdown ratio as a warm circular progress ring. */
+#gameUI.homeui.outing-shell .stick.outing .outingTop-cd{
+ width:58px;height:58px;flex:0 0 58px;border-radius:50%!important;
+ background:radial-gradient(closest-side,#443023 78%,transparent 80%),conic-gradient(from -90deg,#edbb7c calc(var(--p,1) * 1turn),#b48a6533 0)!important;
+ box-shadow:inset 0 0 0 1px #d2ae7a33,0 2px 5px #26180f33!important;
+}
+
 </style>
 </head>
 <body>
@@ -2443,8 +2462,10 @@ body:has(#gameUI.outing-shell) .settingsAction,body:has(#gameUI.outing-shell) .s
         <span class="pr-txt" id="phoneRippleTxt"></span>
       </button>
     </div>
+    <div class="contextActions" aria-label="情境互動">
     <button type="button" class="obsHomeBtn actObs" id="obsBtn" aria-label="起疑" onclick="observeTraces()"><span class="actIco" aria-hidden="true">👁</span><span class="actTxt"><span class="actLab">起疑</span><span class="actSub">窺探痕跡</span></span></button>
     <button type="button" class="qHomeBtn" id="qHomeBtn" aria-label="小紅有問題要問你" onclick="openPendingSq()">❓ 問題</button>
+    </div>
     <div class="dlg" id="dlg" role="button" tabindex="0" aria-label="和她聊天（點一下對話）"><span class="dlgAv" id="dlgAv" aria-hidden="true"></span><div class="dlgBody"><b id="nm">小紅</b><span id="say">哼！才不是為了你，我只是為了報答阿姨而已。</span></div><span class="dlgNext" id="dlgNext" aria-hidden="true">▼</span></div>
   </div>
   <div class="heartRow" id="heartRow" aria-label="外出心聲">
