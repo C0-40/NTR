@@ -2720,6 +2720,38 @@ body:has(#gameUI.outing-shell) .settingsAction,body:has(#gameUI.outing-shell) .s
 #gameUI.homeui:not(.outing-shell) .dock button.dock-used .uiIcon{color:#7e8d64!important}
 #gameUI.homeui #pane .row .i .uiIcon{width:21px;height:21px}
 
+
+/* Home interaction: dusty rose accents; questions: quiet sage accents. */
+#gameUI.homeui #pane[data-panel-kind="home"]{
+ --panel-accent:#a86e72;--panel-edge:#b48a80;--panel-icon:#efd3ca;--panel-ink:#895359;
+ --panel-button:linear-gradient(#d6aaa1,#b77f80);--panel-button-base:#986766;
+ background:linear-gradient(150deg,#efddcc,#e6ccbd)!important;border-color:#b48a80!important;
+}
+#gameUI.homeui #pane[data-panel-kind="ask"]{
+ --panel-accent:#6f8064;--panel-edge:#9aa58b;--panel-icon:#e0e5d1;--panel-ink:#64744f;
+ --panel-button:linear-gradient(#a9b798,#839571);--panel-button-base:#697b57;
+ background:linear-gradient(150deg,#eee3d1,#e2d7c5)!important;border-color:#9aa58b!important;
+}
+#gameUI.homeui #pane[data-panel-kind="home"] .paneHead{background:linear-gradient(145deg,#b98884,#996166)!important;border-color:#9f6b68!important}
+#gameUI.homeui #pane[data-panel-kind="ask"] .paneHead{background:linear-gradient(145deg,#7f8e72,#606f57)!important;border-color:#66795b!important}
+#gameUI.homeui #pane[data-panel-kind="home"] .paneHead .collectionTitle,
+#gameUI.homeui #pane[data-panel-kind="ask"] .paneHead .collectionTitle{color:#fff9ee!important;text-shadow:0 1px 0 #39231922}
+#gameUI.homeui #pane[data-panel-kind="home"] .paneHead .pane-x{border-color:#e4bdb0!important;background:linear-gradient(#fff8ec,#f0d5c7)!important;color:#966064!important;box-shadow:inset 0 1px 0 #fff,0 2px 0 #8e605a!important}
+#gameUI.homeui #pane[data-panel-kind="ask"] .paneHead .pane-x{border-color:#bdc9aa!important;background:linear-gradient(#fff9ed,#dfe6cf)!important;color:#6b7c58!important;box-shadow:inset 0 1px 0 #fff,0 2px 0 #556449!important}
+#gameUI.homeui #pane[data-panel-kind="home"] .row[data-action-state="ready"],
+#gameUI.homeui #pane[data-panel-kind="ask"] .row[data-action-state="ready"],
+#gameUI.homeui #pane[data-panel-kind="ask"] .row[data-action-state="revisit"]{background:#fff9ed!important;border-color:var(--panel-edge)!important;box-shadow:inset 0 1px 0 #fffaf5!important}
+#gameUI.homeui #pane[data-panel-kind="home"] .row[data-action-state="ready"] .i,
+#gameUI.homeui #pane[data-panel-kind="ask"] .row[data-action-state="ready"] .i,
+#gameUI.homeui #pane[data-panel-kind="ask"] .row[data-action-state="revisit"] .i{background:var(--panel-icon)!important;color:var(--panel-ink)!important}
+#gameUI.homeui #pane[data-panel-kind="home"] .row[data-action-state="ready"] .btn,
+#gameUI.homeui #pane[data-panel-kind="ask"] .row[data-action-state="ready"] .btn,
+#gameUI.homeui #pane[data-panel-kind="ask"] .row[data-action-state="revisit"] .btn{background:var(--panel-button)!important;border-color:var(--panel-button-base)!important;color:#30291f!important;box-shadow:inset 0 1px 0 #fff6dc66,0 2px 0 var(--panel-button-base)!important}
+#gameUI.homeui #pane[data-panel-kind="home"] .row[data-action-state="ready"] .m::after{background:#f1dcd4;color:#986c66}
+#gameUI.homeui #pane[data-panel-kind="ask"] .row[data-action-state="ready"] .m::after{background:#e4e9d8;color:#758460}
+#gameUI.homeui #pane[data-panel-kind="ask"] .row[data-action-state="revisit"]{border-color:#bc9991!important}
+#gameUI.homeui #pane[data-panel-kind="ask"] .row[data-action-state="revisit"] .m::after{background:#efd9d1;color:#9a6a60}
+
 </style>
 </head>
 <body>
