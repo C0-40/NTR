@@ -2598,6 +2598,70 @@ body:has(#gameUI.outing-shell) .settingsAction,body:has(#gameUI.outing-shell) .s
 #gameUI.homeui.outing-shell .dock.is-blank-acts button.dockBlank-nap .dockSub{font-size:8px!important;line-height:1.3!important;color:#cdb69a!important}
 @media(max-width:360px){#gameUI.homeui.outing-shell .heartRow{--heart-size:80px;gap:8px!important;padding:8px!important}#gameUI.homeui.outing-shell .thbox #thb{font-size:11px!important}#gameUI.homeui.outing-shell .outingTop-foot{gap:5px!important}}
 
+
+/* Shared window materials: ivory for daily life; cocoa for private/outing content. */
+#mask.mask,.chatRoom,.momPhone{--win-bg:linear-gradient(155deg,#fff9ef,#efdfce);--win-ink:#654636;--win-muted:#92745d;--win-edge:#b7997d;--win-btn:linear-gradient(#fff9ed,#efd7bf);--win-base:#ad8969}
+#mask.mask.mood-chrome,#mask.mask.obs-dark,body:has(.outing-shell) #mask.mask{--win-bg:linear-gradient(145deg,#78563f,#3c291d);--win-ink:#f8e7d1;--win-muted:#d5b99a;--win-edge:#ae8b69;--win-btn:linear-gradient(#997453,#65462f);--win-base:#2c1c12}
+#mask.mask{z-index:90;padding:max(12px,env(safe-area-inset-top)) 12px max(12px,env(safe-area-inset-bottom))!important;background:#23180fb3!important;backdrop-filter:blur(5px)!important}
+.chatRoom{z-index:100}.momPhone{z-index:110}
+#mask.mask .box,.chatRoom .chatPanel,.momPhone .chromeWin.phone{
+ width:min(100%,440px)!important;box-sizing:border-box;max-height:85svh!important;overflow:auto!important;
+ border:2px solid var(--win-edge)!important;border-radius:24px!important;background:var(--win-bg)!important;color:var(--win-ink)!important;
+ box-shadow:inset 0 1px 0 #fff4dd44,0 4px 0 var(--win-base),0 18px 45px #1d100c55!important;
+}
+#mask.mask .box{padding:24px 20px 18px!important;overscroll-behavior:contain}
+#mask.mask .box .face{position:relative!important;top:auto!important;left:auto!important;margin:0 auto 14px!important;transform:none!important;border:2px solid var(--win-edge)!important;box-shadow:0 3px 8px #24160f22!important}
+#mask.mask #mt{position:static!important;font-size:18px!important;color:var(--win-ink)!important;margin:0 0 14px!important;padding:0 0 12px!important;border-bottom:1px solid var(--win-edge)!important;line-height:1.5!important;letter-spacing:.025em}
+#mask.mask #mp{color:var(--win-ink)!important;font-size:15px!important;line-height:1.85!important;margin:0!important;padding:0!important;max-height:none!important;overflow:visible!important;white-space:pre-wrap;word-break:normal;overflow-wrap:anywhere;text-shadow:none!important}
+#mask.mask .tl{margin-top:18px!important;display:flex;justify-content:flex-end}
+#mask.mask .btn,#mask.mask .sqopts .btn{
+ min-height:46px!important;box-sizing:border-box;border:2px solid var(--win-edge)!important;border-radius:15px!important;
+ background:var(--win-btn)!important;color:var(--win-ink)!important;box-shadow:inset 0 1px 0 #fff5dc55,0 2px 0 var(--win-base)!important;
+ padding:11px 15px!important;font-size:14px!important;font-weight:700!important;line-height:1.5!important;text-shadow:none!important;
+}
+#mask.mask .sqopts{margin-top:16px!important}#mask.mask .sqopts .btn{width:100%;text-align:left;margin:10px 0!important}
+#mask.mask .btn:focus-visible,.chatRoom button:focus-visible,.momPhone button:focus-visible{outline:3px solid #d89c75!important;outline-offset:3px!important}
+/* Bottom action panels share a sticky header, readable cards and a clear close target. */
+#gameUI.homeui #pane.is-open{
+ position:fixed!important;left:50%!important;bottom:max(12px,env(safe-area-inset-bottom))!important;transform:translateX(-50%);z-index:40;
+ box-sizing:border-box;width:min(calc(100vw - 24px),460px)!important;max-height:min(74svh,620px);overflow:auto!important;overscroll-behavior:contain;
+ margin:0!important;padding:0 14px 14px!important;border:2px solid #b9997d!important;border-radius:24px!important;
+ background:linear-gradient(155deg,#fff9ef,#efdfce)!important;color:#654636!important;box-shadow:inset 0 1px 0 #fff,0 4px 0 #a8886c,0 14px 40px #25160e55!important;
+}
+#gameUI.homeui #pane .paneHead{position:sticky;top:0;z-index:2;display:flex;align-items:center;justify-content:space-between;gap:12px;margin:0 -14px 12px;padding:12px 14px;background:#f8ecddf5;border-bottom:1px solid #c6a98b;backdrop-filter:blur(8px)}
+#gameUI.homeui #pane .collectionTitle{margin:0!important;font-size:18px;line-height:1.5;color:#6c4937}
+#gameUI.homeui #pane .pane-x,.chatRoom .chatHead .pane-x,.momPhone .chromeWin .pane-x{width:44px!important;height:44px!important;min-width:44px;box-sizing:border-box;border:1.5px solid #b9997d!important;border-radius:14px!important;background:linear-gradient(#fff9ef,#ecd4bc)!important;color:#76523d!important;font-size:25px!important;box-shadow:inset 0 1px 0 #fff,0 2px 0 #b18d6c!important}
+#gameUI.homeui #pane .pane-x{position:static!important;margin:0!important;transform:none!important}
+#gameUI.homeui #pane .row{align-items:center!important;gap:10px!important;margin:9px 0!important;padding:13px 10px!important;border:1px solid #d5bca1!important;border-radius:17px;background:#fff9ef88!important;box-shadow:inset 0 1px 0 #fff9f0}
+#gameUI.homeui #pane .row .i{flex:none;width:30px!important;height:30px;display:flex;align-items:center;justify-content:center;border-radius:10px;background:#ebd8c1!important;color:#96714e!important}
+#gameUI.homeui #pane .row .i .uiIcon{width:20px;height:20px}
+#gameUI.homeui #pane .row .m{min-width:0;flex:1}#gameUI.homeui #pane .row b{color:#694936!important;font-size:13px!important;line-height:1.5}
+#gameUI.homeui #pane .row .sm,#gameUI.homeui #pane>.sm{color:#92745d!important;font-size:11px!important;line-height:1.6!important}
+#gameUI.homeui #pane .btn{min-height:44px!important;max-width:42%;padding:9px 12px!important;border:2px solid #bc9978!important;border-radius:13px!important;background:linear-gradient(#fff7e9,#ecd0b3)!important;color:#77503a!important;box-shadow:inset 0 1px 0 #fff,0 2px 0 #b28d69!important;font-size:12px!important;line-height:1.4!important;white-space:normal}
+#gameUI.homeui #pane .btn:disabled{background:#e7dccc!important;color:#9a836c!important;border-color:#c8b59e!important;box-shadow:inset 0 1px 0 #f6eee2!important}
+/* Chat and opening messages use the same window edges and header language. */
+.chatRoom .chatPanel{display:flex;flex-direction:column;padding:0!important;overflow:hidden!important}
+.chatRoom .chatHead{padding:16px 68px 14px 16px!important;border-bottom:1px solid #ceb193;background:#f6e7d6}
+.chatRoom .chatHead b{font-size:18px!important;color:#6d4935!important}.chatRoom .chatHead .sm{font-size:11px!important;line-height:1.6;color:#98785b}
+.chatRoom .chatFeed{overflow:auto!important;overscroll-behavior:contain;padding:14px!important;min-height:0}
+.chatRoom .cThread{width:100%;box-sizing:border-box;padding:14px!important;margin-bottom:10px;border:1px solid #d1b291!important;border-radius:16px!important;background:linear-gradient(#fffaf2,#f1e0cb)!important;box-shadow:inset 0 1px 0 #fff,0 2px 0 #c5a586!important;color:#72503a!important;text-align:left;min-height:58px}
+.chatRoom .cPost{border:1px solid #d5baa0!important;border-radius:17px!important;padding:12px!important;background:#fff8ee!important;margin-bottom:12px}
+.chatRoom .cPost .body{font-size:14px!important;line-height:1.8!important;color:#654636!important}.chatRoom .cPost .who,.chatRoom .cPost .sm{color:#98785b!important}
+.chatRoom .chatBack{margin:12px 14px 0!important;border:1px solid #c7a98a!important;border-radius:12px!important;min-height:44px;background:#fff7eb!important;color:#77543d!important}
+.chatRoom .chatFoot{font-size:10px!important;color:#a0856b!important;padding:10px!important;border-top:1px solid #d6bda2}
+.momPhone .chromeWin.phone{padding:18px!important}.momPhone .chromeTitle{padding:0 50px 12px 0!important;border-bottom:1px solid #cbb091}.momPhone .chromeTitle h3{color:#72503a!important;font-size:18px!important}
+.momPhone .msgBubble{background:linear-gradient(#fffaf2,#f3e2cc)!important;border:1px solid #d2b491!important;border-radius:16px!important;color:#705039!important;font-size:14px!important;line-height:1.75!important}
+/* Line icons replace decorative emoji without changing labels used by game logic. */
+#gameUI.homeui .dockIco .uiIcon{width:23px;height:23px;display:block}
+#gameUI.homeui.outing-shell #sp{display:inline-flex;align-items:center;gap:4px}#gameUI.homeui.outing-shell #sp .uiIcon{width:16px;height:16px}
+.uiIconLabel{--label-icon:none}
+#mask.mask #mt.uiIconLabel,#gameUI.homeui.outing-shell .thbox b.uiIconLabel,#gameUI.homeui #outingActLine b.uiIconLabel{display:flex!important;align-items:center;gap:7px;font-size:0!important}
+.uiIconLabel::before{content:"";display:block;flex:none;width:19px;height:19px;background:currentColor;-webkit-mask:var(--label-icon) center/contain no-repeat;mask:var(--label-icon) center/contain no-repeat}
+.uiIconLabel::after{content:attr(data-ui-label);font-size:12px;line-height:1.5}
+#mask.mask #mt.uiIconLabel::after{font-size:17px;font-weight:800;line-height:1.5}
+#gameUI.homeui.outing-shell #outingActLine{background:linear-gradient(#79563f,#422b1e)!important;border:2px solid #bd9771!important;border-radius:19px!important;box-shadow:inset 0 1px 0 #dfc29b33,0 5px 14px #20130955!important;color:#f7e5cc!important}
+@media(max-width:360px){#mask.mask .box{padding:19px 15px 15px!important}#mask.mask #mp{font-size:14px!important}#gameUI.homeui #pane .row{gap:7px!important;padding:11px 8px!important}#gameUI.homeui #pane .row .i{width:26px!important}#gameUI.homeui #pane .btn{padding:8px!important}}
+
 </style>
 </head>
 <body>
@@ -2692,7 +2756,7 @@ body:has(#gameUI.outing-shell) .settingsAction,body:has(#gameUI.outing-shell) .s
     <button type="button" data-t="herq" style="display:none" aria-hidden="true">❓ 被問</button>
   </div>
   </div>
-  <div class="pane" id="pane"></div>
+  <section class="pane" id="pane" role="region" aria-label="功能面板"></section>
 
 </div>
 <dialog class="gameSettings" id="gameSettings" aria-labelledby="settingsTitle">
@@ -2726,9 +2790,9 @@ body:has(#gameUI.outing-shell) .settingsAction,body:has(#gameUI.outing-shell) .s
     <div class="chromeFoot">輕觸外側關閉</div>
   </div>
 </div>
-<div class="mask" id="mask"><div class="box"><div class="face"></div><h3 id="mt"></h3><p id="mp"></p><div class="sqopts" id="sqopts"></div><div class="tl"><button type="button" class="btn" id="mb">繼續</button></div></div></div>
+<div class="mask" id="mask" role="dialog" aria-modal="true" aria-labelledby="mt" aria-describedby="mp"><div class="box"><div class="face"></div><h3 id="mt"></h3><p id="mp"></p><div class="sqopts" id="sqopts"></div><div class="tl"><button type="button" class="btn" id="mb">繼續</button></div></div></div>
 <script>
-function homeUiIcon(name){var paths={"home": "<path d=\"M8 13V5a2 2 0 0 1 4 0v6-3a2 2 0 0 1 4 0v3-1a2 2 0 0 1 4 0v5c0 4-2 6-6 6h-2c-2 0-3-1-4-3l-4-5a2 2 0 0 1 3-2l3 3\"/>", "go": "<path d=\"M4 21V3l11-1v20L4 21ZM15 4h5v16h-5\"/><circle cx=\"11.5\" cy=\"12\" r=\".8\" fill=\"currentColor\" stroke=\"none\"/>", "sleep": "<path d=\"M20.5 14A9 9 0 0 1 10 3a9 9 0 1 0 10.5 11Z\"/><path d=\"M17 3v4m-2-2h4\"/>", "chat": "<path d=\"M15 16H8l-4 3v-4a7 7 0 0 1 3-13h7a7 7 0 0 1 1 14Z\"/><path d=\"M19 8a6 6 0 0 1 1 10v3l-4-2h-4\"/><path d=\"M7 9h.01M11 9h.01M15 9h.01\"/>", "ask": "<path d=\"M19 16a8 8 0 1 0-5 3l6 2-1-5Z\"/><path d=\"M9 8a3 3 0 0 1 6 0c0 2-3 2-3 4\"/><path d=\"M12 15h.01\"/>", "daily": "<path d=\"M4 9h13v6a5 5 0 0 1-5 5H9a5 5 0 0 1-5-5V9ZM17 10h2a3 3 0 0 1 0 6h-2M3 22h16M8 3v3m5-4v4\"/>", "memory": "<rect x=\"3\" y=\"3\" width=\"18\" height=\"18\" rx=\"3\"/><circle cx=\"8\" cy=\"8\" r=\"1.5\"/><path d=\"m4 17 5-5 4 4 3-3 5 5\"/>"};return '<svg class="uiIcon" viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false">'+(paths[name]||paths.home)+'</svg>';}
+function homeUiIcon(name){var paths={"home": "<path d=\"M8 13V5a2 2 0 0 1 4 0v6-3a2 2 0 0 1 4 0v3-1a2 2 0 0 1 4 0v5c0 4-2 6-6 6h-2c-2 0-3-1-4-3l-4-5a2 2 0 0 1 3-2l3 3\"/>", "go": "<path d=\"M4 21V3l11-1v20L4 21ZM15 4h5v16h-5\"/><circle cx=\"11.5\" cy=\"12\" r=\".8\" fill=\"currentColor\" stroke=\"none\"/>", "sleep": "<path d=\"M20.5 14A9 9 0 0 1 10 3a9 9 0 1 0 10.5 11Z\"/><path d=\"M17 3v4m-2-2h4\"/>", "chat": "<path d=\"M15 16H8l-4 3v-4a7 7 0 0 1 3-13h7a7 7 0 0 1 1 14Z\"/><path d=\"M19 8a6 6 0 0 1 1 10v3l-4-2h-4\"/><path d=\"M7 9h.01M11 9h.01M15 9h.01\"/>", "ask": "<path d=\"M19 16a8 8 0 1 0-5 3l6 2-1-5Z\"/><path d=\"M9 8a3 3 0 0 1 6 0c0 2-3 2-3 4\"/><path d=\"M12 15h.01\"/>", "daily": "<path d=\"M7 2v4m10-4v4\"/><rect x=\"3\" y=\"4\" width=\"18\" height=\"17\" rx=\"3\"/><path d=\"M3 9h18M7 13h3m4 0h3m-10 4h3\"/>", "memory": "<rect x=\"3\" y=\"3\" width=\"18\" height=\"18\" rx=\"3\"/><circle cx=\"8\" cy=\"8\" r=\"1.5\"/><path d=\"m4 17 5-5 4 4 3-3 5 5\"/>", "msg": "<rect x=\"5\" y=\"2\" width=\"14\" height=\"20\" rx=\"3\"/><path d=\"M9 5h6m-4 14h2\"/>", "call": "<path d=\"m7 3 3 5-2 2c2 3 3 4 6 6l2-2 5 3c-1 4-3 5-6 3C8 17 4 13 2 7 1 4 3 2 7 3Z\"/>", "jack": "<path d=\"M5 3h14v18H5zM8 3v4h8V3M9 11h6m-6 4h6m-6 3h6\"/>", "nap": "<path d=\"M20.5 14A9 9 0 0 1 10 3a9 9 0 1 0 10.5 11Z\"/>", "speed": "<path d=\"m3 5 8 7-8 7V5Zm10 0 8 7-8 7V5Z\"/>", "thought": "<path d=\"M7 16a7 7 0 1 1 11-2 6 6 0 0 1-11 2Z\"/><circle cx=\"5\" cy=\"19\" r=\"2\"/><path d=\"M2 23h.01\"/>", "lock": "<rect x=\"5\" y=\"10\" width=\"14\" height=\"11\" rx=\"2\"/><path d=\"M8 10V6a4 4 0 0 1 8 0v4m-4 5v2\"/>", "eye": "<path d=\"M2 12s3.5-7 10-7 10 7 10 7-3.5 7-10 7S2 12 2 12Z\"/><circle cx=\"12\" cy=\"12\" r=\"3\"/>"};return '<svg class="uiIcon" viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false">'+(paths[name]||paths.home)+'</svg>';}
 
 
 var TIERS=[[0,"重逢的青梅竹馬"],[30,"漸漸熟稔"],[100,"無話不談的夥伴"],[250,"值得信賴的人"],[500,"特別的人"],[1000,"一輩子的家人"]];
@@ -3394,7 +3458,7 @@ function paintDock(){
       var lab=nap?"打瞌睡・跳過等待":b[2];
       var sub=nap?'<span class="dockSub">跳過會錯過這一段的心聲與剪影</span>':(!open?'<span class="dockSub">親密 '+need+'</span>':'<span class="dockSub">'+(flavor[b[0]]||"")+'</span>');
       var aria=nap?(lab+"（跳過等待）"):(open?b[2]:(b[2]+"（阿祿親密度 "+need+" 解鎖）"));
-      h+='<button type="button" class="'+cls+'" data-blank="'+b[0]+'"'+(open?"":" disabled aria-disabled=\"true\"")+(open?"":(' title="阿祿親密度 '+need+' 後解鎖"'))+' aria-label="'+aria+'"><span class="dockIco" aria-hidden="true">'+b[1]+'</span><span class="dockLab">'+lab+(isNew&&open?"✦":"")+'</span>'+sub+'</button>';
+      h+='<button type="button" class="'+cls+'" data-blank="'+b[0]+'"'+(open?"":" disabled aria-disabled=\"true\"")+(open?"":(' title="阿祿親密度 '+need+' 後解鎖"'))+' aria-label="'+aria+'"><span class="dockIco" aria-hidden="true">'+homeUiIcon(b[0])+'</span><span class="dockLab">'+lab+(isNew&&open?"✦":"")+'</span>'+sub+'</button>';
     });
     dock.innerHTML=h;
     dock.querySelectorAll("button.dockBlank").forEach(function(btn){
@@ -3442,14 +3506,14 @@ if(S.trip)h+='<div class="sm" style="margin-top:6px">她出門中。底欄可直
 else if(tab=="ask"){QA.forEach(function(q,i){var lk=S.aff<q[2]||!qaGateOk(q),dn=S.qa.indexOf(i)>=0,isNew=!lk&&askOptNew(i);var why=S.aff<q[2]?("需要阿祿親密度 "+q[2]):(!qaGateOk(q)?(q[4]==="uncle"?"巷口事件後解鎖":q[4]==="trip"?"外出一次後解鎖":"未解鎖"):(dn?"答案好像出現變化":""));h+='<div class="row '+(lk?"lock":"")+'"><span class="i">'+q[0]+'</span><div class="m"><b>'+(lk?"？？？":q[1])+(isNew?optNewBadge():"")+'</b>'+(why?'<div class="sm">'+why+'</div>':'')+'</div><button class="btn" '+(lk||S.trip||S.endingDone?"disabled":"")+' onclick="ask('+i+')">提問</button></div>'});if(S.trip)h+='<div class="sm" style="margin-top:6px">小紅外出中，回來後再問她吧。</div>'}
 else if(tab=="herq"){h='<div class="sm">她有問題時，主畫面會出現「問題」按鈕；點了才打開提問窗。</div>'}
 else if(tab=="journal"){h=""}
-else if(tab=="mem"){h='<h2 class="collectionTitle">回憶</h2>';var memIntro=(S.memSeen&&S.memSeen.length)?"隨著跟小紅的相處愈多，塵封的回憶逐漸浮現":"對於這位青梅竹馬，暫時只有零碎的記憶。";h+='<div class="sm mood-chrome-kicker" style="margin-bottom:8px">'+memIntro+'</div>';
+else if(tab=="mem"){h="";var memIntro=(S.memSeen&&S.memSeen.length)?"隨著跟小紅的相處愈多，塵封的回憶逐漸浮現":"對於這位青梅竹馬，暫時只有零碎的記憶。";h+='<div class="sm mood-chrome-kicker" style="margin-bottom:8px">'+memIntro+'</div>';
 if(!S.memSeen||!S.memSeen.length){h+='<p class="sm">對於這位青梅竹馬，暫時只有零碎的記憶。</p>'}
 else{MEMORIES.forEach(function(m,k){if(S.memSeen.indexOf(m[0])<0)return;h+='<div class="row"><span class="i">🌸</span><div class="m"><b>'+m[1]+'</b><div class="sm">'+(memType(m)?memType(m)+"・":"")+'親密 '+m[0]+'</div></div><button type="button" class="btn" onclick="replayMem('+k+')">回憶</button></div>'})}}
-else if(tab=="story"){h='<h2 class="collectionTitle">日常</h2>';h+='<div class="sm" style="margin-bottom:8px;opacity:.75">同居事件紀錄（親密度解鎖）</div>';STORY.forEach(function(s,k){var ok=S.seen.indexOf(s[0])>=0;h+='<div class="row '+(ok?"":"lock")+'"><span class="i">'+(ok?"🏠":"🔒")+'</span><div class="m"><b>'+(ok?s[1]:"？？？")+'</b><div class="sm">親密度 '+s[0]+' 解鎖</div></div>'+(ok?'<button class="btn" onclick="replay('+k+')">重看</button>':"")+'</div>'});
+else if(tab=="story"){h="";h+='<div class="sm" style="margin-bottom:8px;opacity:.75">同居事件紀錄（親密度解鎖）</div>';STORY.forEach(function(s,k){var ok=S.seen.indexOf(s[0])>=0;h+='<div class="row '+(ok?"":"lock")+'"><span class="i">'+(ok?"🏠":"🔒")+'</span><div class="m"><b>'+(ok?s[1]:"？？？")+'</b><div class="sm">親密度 '+s[0]+' 解鎖</div></div>'+(ok?'<button class="btn" onclick="replay('+k+')">重看</button>':"")+'</div>'});
 NSTORY.forEach(function(s,k){if(S.seen.indexOf("n"+s[0])<0)return;h+='<div class="row is-secret"><span class="i">💔</span><div class="m"><b>'+s[1]+'</b><div class="sm">強叔親密度 '+s[0]+'</div></div><button class="btn" onclick="replayN('+k+')">重看</button></div>'})}
 else{h=""}
-var side=(tab=="journal"||tab=="story"||tab=="mem");
-if(side){h='<button type="button" class="pane-x" aria-label="關閉" onclick="closePane()">×</button>'+h}
+var panelNames={home:"互動",go:"外出",ask:"提問",mem:"回憶",story:"日常",journal:"日記",herq:"她想問你"};var side=!!panelNames[tab];
+if(side){h='<div class="paneHead"><h2 class="collectionTitle">'+panelNames[tab]+'</h2><button type="button" class="pane-x" aria-label="關閉" onclick="closePane()">×</button></div>'+h}
 $("pane").innerHTML=h;var pn=$("pane");if(pn)pn.classList.toggle("has-x",!!side);requestAnimationFrame(function(){window.scrollTo(0,y)})}
 function paintOutingHud(){if(!(S&&S.trip))return;var oc=$("outChip");if(oc)oc.textContent="小紅外出中";var place=S.trip.place||(PLACES[S.trip.id]&&PLACES[S.trip.id][1])||"";var ac=$("aloneChip");if(ac)ac.textContent=place?("她說："+place+"（你看不到她）"):"";var left=Math.max(0,Math.ceil((S.trip.end-Date.now())/1000));var ocn=$("outingCdNum");if(ocn)ocn.textContent=String(left);var total=PLACES[S.trip.id]?(PLACES[S.trip.id][2]|0):0;var ring=$("outingCd");if(ring&&total>0)ring.style.setProperty("--p",String(Math.max(0,Math.min(1,left/total))));var cd=$("tripCd");if(cd)cd.textContent="倒數 "+left+" 秒"}
 function status(){$("affn").textContent=fmt(S.aff);var away=!!S.trip||S.taken,skipOn=S.trip&&!S.taken,thOn=skipOn;
@@ -3518,7 +3582,7 @@ musLabel();
 var SPD=[1,2,5,10],si=0,spd=1;
 try{var q2=parseInt(localStorage.getItem("sakura_spd"));if(q2>=0&&q2<4)si=q2}catch(e){}
 spd=SPD[si];
-function applySp(){var el=$("sp");if(el)el.textContent="⏩ "+spd+"x"}
+function applySp(){var el=$("sp");if(el)el.innerHTML=homeUiIcon("speed")+'<span>'+spd+'x</span>'}
 
 bindChip("sp",function(){si=(si+1)%SPD.length;spd=SPD[si];try{localStorage.setItem("sakura_spd",si)}catch(e){}applySp()});
 applySp();
@@ -3534,6 +3598,11 @@ nextPop()}checkMemories()}
 function maybeMomIntro(){if(S.momIntroSeen){var el=$("momPhone");if(el){el.classList.remove("on");el.setAttribute("aria-hidden","true")}return}showMomIntro()}
 function bindMomIntro(){var el=$("momPhone");if(!el)return;el.addEventListener("click",function(){dismissMomIntro()});var btn=$("momClose");if(btn)btn.addEventListener("click",function(e){e.stopPropagation();dismissMomIntro()});el.addEventListener("keydown",function(e){if(e.key==="Enter"||e.key==="Escape"||e.key===" "){e.preventDefault();dismissMomIntro()}})}
 bindMomIntro();
+
+function skinUiLabel(el,key){if(!el)return;var raw=el.textContent||"",label=raw.replace(/^[\s\p{Extended_Pictographic}\uFE0F\u200D\u23F3\u23E9]+/u,"");el.dataset.uiLabel=label;el.classList.add("uiIconLabel");el.style.setProperty("--label-icon",'url("data:image/svg+xml,'+encodeURIComponent(homeUiIcon(key).replace("<svg ", '<svg xmlns="http://www.w3.org/2000/svg" '))+'")')}
+function skinWindowUi(){var title=$("mt"),text=title?title.textContent:"",key=/起疑|觀察/.test(text)?"eye":/發訊息/.test(text)?"msg":/電話/.test(text)?"call":/廁所/.test(text)?"jack":/問/.test(text)?"ask":/回憶/.test(text)?"memory":"daily";skinUiLabel(title,key);skinUiLabel($("thbox")&&$("thbox").querySelector("b"),"thought");skinUiLabel($("outingActLine")&&$("outingActLine").querySelector("b"),"msg");var pane=$("pane");if(pane)pane.querySelectorAll(".row>.i").forEach(function(el){if(el.classList.contains("j-sil-dot"))return;var key=el.closest(".row").classList.contains("lock")?"lock":({home:"home",go:"go",ask:"ask",story:"daily",mem:"memory"}[tab]||"daily");if(el.dataset.uiIcon===key)return;el.dataset.uiIcon=key;el.setAttribute("aria-hidden","true");el.innerHTML=homeUiIcon(key)})}
+var windowSkinObserver=new MutationObserver(skinWindowUi);["mt","thbox","outingActLine","pane"].forEach(function(id){var el=$(id);if(el)windowSkinObserver.observe(el,{childList:true,subtree:true,characterData:true})});skinWindowUi();
+
 load();
 if(S.trip&&Date.now()>=S.trip.end)back();
 render();
