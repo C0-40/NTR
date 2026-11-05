@@ -2403,6 +2403,34 @@ body:has(#gameUI.outing-shell) .settingsAction,body:has(#gameUI.outing-shell) .s
 #gameUI.homeui .contextActions #qHomeBtn span{font-size:14px}
 #gameUI.homeui .contextActions #obsBtn:focus-visible,#gameUI.homeui .contextActions #qHomeBtn:focus-visible{outline:3px solid #e6aa85!important;outline-offset:4px!important}
 
+
+/* Home polish: one icon language and quieter secondary surfaces. */
+.uiIcon{display:inline-block;vertical-align:middle;flex-shrink:0;pointer-events:none}
+#gameUI.homeui:not(.outing-shell) .topHud .meterCard{
+ background:linear-gradient(160deg,#fff9f0ee,#f5e4d5e8)!important;
+ border-color:#c4a794!important;box-shadow:inset 0 1px 0 #fffaf0,0 1px 3px #5131241a!important;
+}
+#gameUI.homeui:not(.outing-shell) .topHud .meterName{font-weight:700!important;letter-spacing:.03em}
+#gameUI.homeui:not(.outing-shell) .topHud .meterHeart{color:#bb8075!important}
+#gameUI.homeui:not(.outing-shell) .sideNav .bubble{
+ background:linear-gradient(160deg,#fffaf0ed,#f0e0d1e8)!important;
+ border-color:#c0a28e!important;box-shadow:inset 0 1px 0 #fffcf7,0 2px 0 #c6aa9666,0 3px 5px #69433312!important;
+ gap:6px!important;font-weight:700!important;
+}
+#gameUI.homeui:not(.outing-shell) .sideNav .bubble .uiIcon{width:18px;height:18px;color:#9c6d55}
+#gameUI.homeui:not(.outing-shell) .sideNav .bubble.is-off,#gameUI.homeui:not(.outing-shell) .sideNav .bubble:disabled{
+ background:linear-gradient(#f0e7dfed,#e8dbd0e8)!important;border-color:#c8b7a9!important;
+ box-shadow:inset 0 1px 0 #faf3eb,0 1px 2px #6943330d!important;color:#998372!important;
+}
+#gameUI.homeui:not(.outing-shell) .sideNav .bubble:disabled .uiIcon{color:#ae9987}
+#gameUI.homeui:not(.outing-shell) .sideNav .bubble.on{background:linear-gradient(#f5ded2,#e9c6bb)!important;border-color:#b28675!important}
+#gameUI.homeui:not(.outing-shell) .dock button[data-t="home"],#gameUI.homeui:not(.outing-shell) .dock button[data-t="go"]{display:flex;flex-direction:row!important;align-items:center;justify-content:center;gap:8px}
+#gameUI.homeui:not(.outing-shell) .dock .uiIcon{width:22px;height:22px;color:#87553f}
+#gameUI.homeui:not(.outing-shell) .dock .homeActionLabel{font-size:15px;line-height:1.3}
+#gameUI.homeui:not(.outing-shell) .dock button:disabled .homeActionLabel{font-size:11px}
+#gameUI.homeui:not(.outing-shell) .dlg{background:linear-gradient(150deg,#fffaf1f5,#f4e2d5f2)!important;box-shadow:inset 0 1px 0 #fffaf5,0 2px 0 #c5a39299,0 4px 8px #53332618!important}
+#gameUI.homeui:not(.outing-shell) .dlg #say{letter-spacing:.015em}
+
 </style>
 </head>
 <body>
@@ -2456,10 +2484,10 @@ body:has(#gameUI.outing-shell) .settingsAction,body:has(#gameUI.outing-shell) .s
       </div>
     </div>
 <nav class="sideNav right" aria-label="其他功能">
-      <button type="button" class="bubble actChat" id="navChat" aria-label="打開匿名聊天室" onclick="openChatRoom()">💬 聊天室</button>
-      <button type="button" class="bubble" data-t="ask" id="navAsk">💬 提問</button>
-      <button type="button" class="bubble sideStory" data-t="story" id="navStory">📖 日常</button>
-      <button type="button" class="bubble sideMem" data-t="mem" id="navMem">🌸 回憶</button>
+      <button type="button" class="bubble actChat" id="navChat" aria-label="打開匿名聊天室" onclick="openChatRoom()"><svg class="uiIcon" viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M15 16H8l-4 3v-4a7 7 0 0 1 3-13h7a7 7 0 0 1 1 14Z"/><path d="M19 8a6 6 0 0 1 1 10v3l-4-2h-4"/><path d="M7 9h.01M11 9h.01M15 9h.01"/></svg><span>聊天室</span></button>
+      <button type="button" class="bubble" data-t="ask" id="navAsk"><svg class="uiIcon" viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M19 16a8 8 0 1 0-5 3l6 2-1-5Z"/><path d="M9 8a3 3 0 0 1 6 0c0 2-3 2-3 4"/><path d="M12 15h.01"/></svg><span>提問</span></button>
+      <button type="button" class="bubble sideStory" data-t="story" id="navStory"><svg class="uiIcon" viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M4 9h13v6a5 5 0 0 1-5 5H9a5 5 0 0 1-5-5V9ZM17 10h2a3 3 0 0 1 0 6h-2M3 22h16M8 3v3m5-4v4"/></svg><span>日常</span></button>
+      <button type="button" class="bubble sideMem" data-t="mem" id="navMem"><svg class="uiIcon" viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><rect x="3" y="3" width="18" height="18" rx="3"/><circle cx="8" cy="8" r="1.5"/><path d="m4 17 5-5 4 4 3-3 5 5"/></svg><span>回憶</span></button>
     </nav>
     <div class="girl" id="av" role="button" aria-label="和她聊天" tabindex="0"></div>
     <div class="outingActLine" id="outingActLine" hidden role="button" tabindex="0" aria-label="外出行動結果，點一下關閉"></div>
@@ -2497,7 +2525,7 @@ body:has(#gameUI.outing-shell) .settingsAction,body:has(#gameUI.outing-shell) .s
   <div class="dock tabs" role="tablist" aria-label="主要行動">
     <button type="button" data-t="home">🛋️ 互動</button>
     <button type="button" data-t="go">🎒 外出</button>
-    <button type="button" id="sleepBtn" class="dockSleep" aria-label="睡覺，進入下一天" onclick="sleepDay()"><span class="dockSleep-ico" aria-hidden="true">☾</span><span class="dockSleep-txt"><span class="dockSleep-lab">睡覺</span><span class="dockSleep-sub">進入下一天</span></span></button>
+    <button type="button" id="sleepBtn" class="dockSleep" aria-label="睡覺，進入下一天" onclick="sleepDay()"><span class="dockSleep-ico" aria-hidden="true"><svg class="uiIcon" viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M20.5 14A9 9 0 0 1 10 3a9 9 0 1 0 10.5 11Z"/><path d="M17 3v4m-2-2h4"/></svg></span><span class="dockSleep-txt"><span class="dockSleep-lab">睡覺</span><span class="dockSleep-sub">進入下一天</span></span></button>
     <button type="button" data-t="herq" style="display:none" aria-hidden="true">❓ 被問</button>
   </div>
   </div>
@@ -2537,6 +2565,8 @@ body:has(#gameUI.outing-shell) .settingsAction,body:has(#gameUI.outing-shell) .s
 </div>
 <div class="mask" id="mask"><div class="box"><div class="face"></div><h3 id="mt"></h3><p id="mp"></p><div class="sqopts" id="sqopts"></div><div class="tl"><button type="button" class="btn" id="mb">繼續</button></div></div></div>
 <script>
+function homeUiIcon(name){var paths={"home": "<path d=\"M8 13V5a2 2 0 0 1 4 0v6-3a2 2 0 0 1 4 0v3-1a2 2 0 0 1 4 0v5c0 4-2 6-6 6h-2c-2 0-3-1-4-3l-4-5a2 2 0 0 1 3-2l3 3\"/>", "go": "<path d=\"M4 21V3l11-1v20L4 21ZM15 4h5v16h-5\"/><circle cx=\"11.5\" cy=\"12\" r=\".8\" fill=\"currentColor\" stroke=\"none\"/>", "sleep": "<path d=\"M20.5 14A9 9 0 0 1 10 3a9 9 0 1 0 10.5 11Z\"/><path d=\"M17 3v4m-2-2h4\"/>", "chat": "<path d=\"M15 16H8l-4 3v-4a7 7 0 0 1 3-13h7a7 7 0 0 1 1 14Z\"/><path d=\"M19 8a6 6 0 0 1 1 10v3l-4-2h-4\"/><path d=\"M7 9h.01M11 9h.01M15 9h.01\"/>", "ask": "<path d=\"M19 16a8 8 0 1 0-5 3l6 2-1-5Z\"/><path d=\"M9 8a3 3 0 0 1 6 0c0 2-3 2-3 4\"/><path d=\"M12 15h.01\"/>", "daily": "<path d=\"M4 9h13v6a5 5 0 0 1-5 5H9a5 5 0 0 1-5-5V9ZM17 10h2a3 3 0 0 1 0 6h-2M3 22h16M8 3v3m5-4v4\"/>", "memory": "<rect x=\"3\" y=\"3\" width=\"18\" height=\"18\" rx=\"3\"/><circle cx=\"8\" cy=\"8\" r=\"1.5\"/><path d=\"m4 17 5-5 4 4 3-3 5 5\"/>"};return '<svg class="uiIcon" viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false">'+(paths[name]||paths.home)+'</svg>';}
+
 
 var TIERS=[[0,"重逢的青梅竹馬"],[30,"漸漸熟稔"],[100,"無話不談的夥伴"],[250,"值得信賴的人"],[500,"特別的人"],[1000,"一輩子的家人"]];
 var HOME_TIME=12;
@@ -3117,7 +3147,7 @@ if(!html)html='<p class="sm">這個討論串還沒有貼文。</p>';feed.innerHT
 var sub=$("chatSub");if(sub)sub.textContent=(t&&t.sub)||"偶然滑到的討論串，不知為何忍不住看下去"}
 function chatShowList(){S.chatOpenStep=null;paintChatFeed();try{save()}catch(e){}}
 function chatOpenThread(i){S.chatOpenStep=i|0;paintChatFeed();try{save()}catch(e){}}
-function paintChatNotice(){var b=$("navChat");if(!b)return;var on=!!(S&&S.chatNotice);b.innerHTML=on?('💬 聊天室<span class="opt-new" title="有新討論串">✦</span>'):"💬 聊天室";b.classList.toggle("chat-notice",on)}
+function paintChatNotice(){var b=$("navChat");if(!b)return;var on=!!(S&&S.chatNotice);b.innerHTML=homeUiIcon("chat")+'<span>聊天室</span>'+(on?'<span class="opt-new" title="有新討論串">✦</span>':"");b.classList.toggle("chat-notice",on)}
 function markChatThreadsNotice(){if(!S||typeof chatThreadList!=="function")return;var n=chatThreadList().length;if(S._chatThreadCount==null){S._chatThreadCount=n;return}if(n>(S._chatThreadCount|0))S.chatNotice=true;S._chatThreadCount=n}
 function openChatRoom(){if(!chatAvailable()){say(S.trip?"（她出門了。等她回來再滑手機吧。）":(chatNavUnlocked()?"（現在不方便看聊天室。）":"（聊天室還沒開放。）"),"pout");return}
 if(maskOpen()||($("momPhone")&&$("momPhone").classList.contains("on"))){say("（先看完眼前的事。）","pout");return}
@@ -3219,11 +3249,11 @@ function paintDock(){
   var ended=!!(S.endingDone), homeUsed=!!S.homeActToday, outUsed=!!S.outToday;
   function mkDock(t,ico,lab,used){
     var dead=ended||used;
-    var label=used?(ico+" 今天已做過"):(ico+" "+lab);
+    var label=homeUiIcon(t)+'<span class="homeActionLabel">'+(used?"今天已做過":lab)+'</span>';
     return '<button type="button" data-t="'+t+'"'+(used?' class="dock-used"':'')+(dead?' disabled aria-disabled="true"':'')+'>'+label+'</button>';
   }
   var canSleep=!ended&&!S.trip&&!dayLock&&!S.taken;
-  dock.innerHTML=mkDock("home","🛋️","互動",homeUsed&&!ended)+mkDock("go","🎒","外出",outUsed&&!ended)+'<button type="button" id="sleepBtn" class="dockSleep'+(canSleep?'':' is-off')+'"'+(canSleep?'':' disabled aria-disabled="true"')+' aria-label="睡覺，進入下一天"><span class="dockSleep-ico" aria-hidden="true">☾</span><span class="dockSleep-txt"><span class="dockSleep-lab">睡覺</span><span class="dockSleep-sub">進入下一天</span></span></button><button type="button" data-t="herq" style="display:none" aria-hidden="true">❓ 被問</button>';
+  dock.innerHTML=mkDock("home","🛋️","互動",homeUsed&&!ended)+mkDock("go","🎒","外出",outUsed&&!ended)+'<button type="button" id="sleepBtn" class="dockSleep'+(canSleep?'':' is-off')+'"'+(canSleep?'':' disabled aria-disabled="true"')+' aria-label="睡覺，進入下一天"><span class="dockSleep-ico" aria-hidden="true"><svg class="uiIcon" viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M20.5 14A9 9 0 0 1 10 3a9 9 0 1 0 10.5 11Z"/><path d="M17 3v4m-2-2h4"/></svg></span><span class="dockSleep-txt"><span class="dockSleep-lab">睡覺</span><span class="dockSleep-sub">進入下一天</span></span></button><button type="button" data-t="herq" style="display:none" aria-hidden="true">❓ 被問</button>';
   var sbDock=dock.querySelector("#sleepBtn");if(sbDock)sbDock.onclick=function(){if(!sbDock.disabled)sleepDay()};
   paintSideStoryMem();
   dock.querySelectorAll("button[data-t]").forEach(function(b){
