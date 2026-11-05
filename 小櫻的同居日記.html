@@ -2665,17 +2665,17 @@ body:has(#gameUI.outing-shell) .settingsAction,body:has(#gameUI.outing-shell) .s
 #gameUI.homeui #pane.is-open[data-panel-size="compact"]{max-height:54svh!important}
 /* A stable reading viewport keeps choices and continue controls out of the scroll area. */
 #mask.mask .box{
- display:grid!important;grid-template-rows:minmax(0,1fr) 20px auto 54px!important;
- height:min(64svh,490px)!important;max-height:85svh!important;min-height:0!important;
+ display:grid!important;grid-template-rows:minmax(0,1fr) 16px auto 50px!important;
+ height:min(56svh,420px)!important;max-height:85svh!important;min-height:0!important;
  overflow:hidden!important;padding:20px 18px 16px!important;
 }
 #mask.mask .modalReading{grid-row:1;overflow-y:auto;overflow-x:hidden;min-height:0;overscroll-behavior:contain;padding:2px 5px 10px 2px;scrollbar-width:thin;scrollbar-color:#b18c6e transparent}
 #mask.mask .modalReading .face{width:64px!important;height:64px!important;margin:0 auto 12px!important}
-#mask.mask .readingHint{grid-row:2;height:20px;box-sizing:border-box;visibility:hidden;text-align:center;font-size:10px;color:var(--win-muted);line-height:20px;letter-spacing:.04em}
+#mask.mask .readingHint{grid-row:2;height:16px;box-sizing:border-box;visibility:hidden;text-align:center;font-size:10px;color:var(--win-muted);line-height:16px;letter-spacing:.04em}
 #mask.mask .readingHint.is-visible{visibility:visible}
 #mask.mask .sqopts{grid-row:3;min-height:0;max-height:32svh;overflow:auto;overscroll-behavior:contain;margin:0!important;padding:0 2px}
 #mask.mask .sqopts .btn{margin:7px 0!important}
-#mask.mask .tl{grid-row:4;height:54px;min-height:54px;box-sizing:border-box;margin:0!important;padding-top:8px;align-items:stretch}
+#mask.mask .tl{grid-row:4;height:50px;min-height:50px;box-sizing:border-box;margin:0!important;padding-top:6px;align-items:stretch}
 #mask.mask #mb{min-width:100px;min-height:44px!important}
 /* Daily interactions read like conversation cards; story catalogues like a notebook. */
 #gameUI.homeui #pane[data-panel-kind="home"] .paneHead,#gameUI.homeui #pane[data-panel-kind="ask"] .paneHead{background:linear-gradient(#fff7ebf5,#efdbc8f5)}
@@ -2691,7 +2691,7 @@ body:has(#gameUI.outing-shell) .settingsAction,body:has(#gameUI.outing-shell) .s
 #mask.mask.mood-chrome #mt,#mask.mask.obs-dark #mt{border-left:3px solid #c0976b!important;padding-left:10px!important;letter-spacing:.04em}
 #mask.mask.mood-chrome #mp,#mask.mask.obs-dark #mp{font-size:14px!important;line-height:1.9!important}
 #mask.mask.mem-soft:not(.mood-chrome) .modalReading{background:repeating-linear-gradient(0deg,#c8ad8c12 0 1px,transparent 1px 29px);border-radius:8px}
-@media(max-width:360px){#mask.mask .box{padding:16px 13px 13px!important;height:74svh!important}#mask.mask #mt.uiIconLabel::after{font-size:16px}#mask.mask .modalReading .face{width:56px!important;height:56px!important}}
+@media(max-width:360px){#mask.mask .box{padding:16px 13px 13px!important;height:min(66svh,420px)!important}#mask.mask #mt.uiIconLabel::after{font-size:16px}#mask.mask .modalReading .face{width:56px!important;height:56px!important}}
 
 
 /* States communicate availability without changing any disabled/gate rules. */
