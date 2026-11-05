@@ -2058,7 +2058,7 @@ html,body{color:var(--tx)}
 
 
 /* Cream / dusty-rose skin: fine borders and shallow relief; layout and behavior preserved. */
-body{background:#f5e9e2;background-image:radial-gradient(ellipse at 30% 0%,#fff9f0,transparent 65%);color:#664333}
+body{background:#33251c;background-image:radial-gradient(ellipse at top,#654b36,transparent 80%);color:#664333}
 #gameUI.homeui{
  --ui-face:linear-gradient(180deg,#fff9ef 0%,#f8e9da 75%,#efd7c5 100%);
  --ui-ink:#69483e;--ui-edge:#c6a291;--ui-base:#bf9885;
@@ -2363,11 +2363,6 @@ body:has(#gameUI.outing-shell) .settingsAction,body:has(#gameUI.outing-shell) .s
 }
 
 
-/* The home frame uses the same cocoa finish as the outing frame. */
-#gameUI.homeui:not(.outing-shell) .gameFrame{
- background:linear-gradient(155deg,#604735,#302219 85%);border-color:#a17e62;
- box-shadow:inset 0 1px 0 #d6b99b55,0 4px 14px #28190f35;
-}
 .contextActions{position:absolute;left:50%;top:55%;transform:translate(-50%,-50%);z-index:12;display:flex;flex-direction:column;align-items:center;gap:10px;max-width:58%;pointer-events:none}
 #gameUI.homeui .contextActions #obsBtn,#gameUI.homeui .contextActions #qHomeBtn{
  position:relative!important;top:auto!important;bottom:auto!important;left:auto!important;right:auto!important;
@@ -2380,6 +2375,33 @@ body:has(#gameUI.outing-shell) .settingsAction,body:has(#gameUI.outing-shell) .s
  background:radial-gradient(closest-side,#443023 78%,transparent 80%),conic-gradient(from -90deg,#edbb7c calc(var(--p,1) * 1turn),#b48a6533 0)!important;
  box-shadow:inset 0 0 0 1px #d2ae7a33,0 2px 5px #26180f33!important;
 }
+
+
+/* Context speech bubbles: dark suspicion, cream question; behavior is unchanged. */
+#gameUI.homeui .contextActions{gap:18px}
+#gameUI.homeui .contextActions #obsBtn,#gameUI.homeui .contextActions #qHomeBtn{
+ --bubble-edge:#b38b6b;--bubble-tail:#523728;
+ border-radius:22px!important;border:2px solid var(--bubble-edge)!important;
+ min-height:52px!important;padding:10px 17px!important;gap:9px;
+ background:linear-gradient(150deg,#79543d,#523728)!important;color:#fff1dc!important;
+ box-shadow:inset 0 1px 0 #c6a28655,0 4px 10px #30201540!important;
+}
+#gameUI.homeui .contextActions #qHomeBtn{
+ --bubble-edge:#ba9380;--bubble-tail:#f3dfc9;
+ background:linear-gradient(150deg,#fff9ed,#f3dfc9)!important;color:#7a503d!important;
+ box-shadow:inset 0 1px 0 #fff,0 4px 10px #30201530!important;
+}
+#gameUI.homeui .contextActions #obsBtn::after,#gameUI.homeui .contextActions #qHomeBtn::after{
+ content:"";position:absolute;bottom:-7px;left:calc(50% - 6px);width:11px;height:11px;
+ background:var(--bubble-tail);border-right:2px solid var(--bubble-edge);border-bottom:2px solid var(--bubble-edge);
+ transform:rotate(45deg);border-radius:0 0 3px 0;pointer-events:none;
+}
+#gameUI.homeui .contextActions #obsBtn .actIco{display:flex;align-items:center;color:#f7d2a2;font-size:0}
+#gameUI.homeui .contextActions #obsBtn .actLab{font-size:14px}
+#gameUI.homeui .contextActions #obsBtn .actSub{color:#e7cdb7}
+#gameUI.homeui .contextActions #qHomeBtn svg{color:#b97965;flex:none}
+#gameUI.homeui .contextActions #qHomeBtn span{font-size:14px}
+#gameUI.homeui .contextActions #obsBtn:focus-visible,#gameUI.homeui .contextActions #qHomeBtn:focus-visible{outline:3px solid #e6aa85!important;outline-offset:4px!important}
 
 </style>
 </head>
@@ -2463,8 +2485,8 @@ body:has(#gameUI.outing-shell) .settingsAction,body:has(#gameUI.outing-shell) .s
       </button>
     </div>
     <div class="contextActions" aria-label="情境互動">
-    <button type="button" class="obsHomeBtn actObs" id="obsBtn" aria-label="起疑" onclick="observeTraces()"><span class="actIco" aria-hidden="true">👁</span><span class="actTxt"><span class="actLab">起疑</span><span class="actSub">窺探痕跡</span></span></button>
-    <button type="button" class="qHomeBtn" id="qHomeBtn" aria-label="小紅有問題要問你" onclick="openPendingSq()">❓ 問題</button>
+    <button type="button" class="obsHomeBtn actObs" id="obsBtn" aria-label="起疑" onclick="observeTraces()"><span class="actIco" aria-hidden="true"><svg viewBox="0 0 24 24" width="25" height="25" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M2 12s3.5-7 10-7 10 7 10 7-3.5 7-10 7S2 12 2 12Z"/><circle cx="12" cy="12" r="3"/></svg></span><span class="actTxt"><span class="actLab">起疑</span><span class="actSub">窺探痕跡</span></span></button>
+    <button type="button" class="qHomeBtn" id="qHomeBtn" aria-label="小紅有問題要問你" onclick="openPendingSq()"><svg aria-hidden="true" viewBox="0 0 24 24" width="25" height="25" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M8 8a4 4 0 1 1 6.6 3c-1.6 1.2-2.6 1.5-2.6 4"/><circle cx="12" cy="19" r="1" fill="currentColor" stroke="none"/></svg><span>問題</span></button>
     </div>
     <div class="dlg" id="dlg" role="button" tabindex="0" aria-label="和她聊天（點一下對話）"><span class="dlgAv" id="dlgAv" aria-hidden="true"></span><div class="dlgBody"><b id="nm">小紅</b><span id="say">哼！才不是為了你，我只是為了報答阿姨而已。</span></div><span class="dlgNext" id="dlgNext" aria-hidden="true">▼</span></div>
   </div>
