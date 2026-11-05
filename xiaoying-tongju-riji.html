@@ -2319,8 +2319,10 @@ body:has(#gameUI.outing-shell) .settingsAction,body:has(#gameUI.outing-shell) .s
 
 
 #gameUI.homeui:not(.outing-shell) .girl:not(.away){
- width:100%!important;height:auto!important;aspect-ratio:1/1!important;max-width:96%!important;
- bottom:0!important;transform:translateX(-50%) scale(1.8)!important;transform-origin:50% 100%!important;
+ /* Transparent source includes generous margins; size the canvas to frame the actual character. */
+ width:min(202vw,calc(100svh - 70px),880px)!important;height:auto!important;aspect-ratio:1/1!important;max-width:none!important;
+ bottom:-12px!important;transform:translateX(-50%)!important;transform-origin:50% 100%!important;
+ background-image:url("sakura-portrait.png")!important;background-size:contain!important;background-position:center bottom!important;
 }
 #gameUI.homeui.outing-shell .stick.outing .outingTop{
  background:linear-gradient(150deg,#71503ced,#432d20f0)!important;border-color:#ad896c88!important;
