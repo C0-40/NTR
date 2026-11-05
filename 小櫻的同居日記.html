@@ -2431,6 +2431,35 @@ body:has(#gameUI.outing-shell) .settingsAction,body:has(#gameUI.outing-shell) .s
 #gameUI.homeui:not(.outing-shell) .dlg{background:linear-gradient(150deg,#fffaf1f5,#f4e2d5f2)!important;box-shadow:inset 0 1px 0 #fffaf5,0 2px 0 #c5a39299,0 4px 8px #53332618!important}
 #gameUI.homeui:not(.outing-shell) .dlg #say{letter-spacing:.015em}
 
+
+/* Two secondary navigation groups leave the portrait and center reactions clear. */
+#gameUI.homeui:not(.outing-shell) .sideNav.right{top:29%!important;right:10px!important;gap:8px!important}
+#gameUI.homeui:not(.outing-shell) .sideNav.left{top:49%!important;left:10px!important;right:auto!important;gap:8px!important;z-index:7!important}
+#gameUI.homeui:not(.outing-shell) .sideNav .bubble{
+ min-width:70px!important;max-width:92px!important;min-height:44px!important;padding:9px 10px!important;
+ border-radius:14px!important;font-size:11px!important;gap:5px!important;
+}
+#gameUI.homeui:not(.outing-shell) .sideNav.right .bubble{border-radius:15px 10px 10px 15px!important}
+#gameUI.homeui:not(.outing-shell) .sideNav.left .bubble{border-radius:10px 15px 15px 10px!important}
+#gameUI.homeui:not(.outing-shell) .sideNav .bubble .uiIcon{width:17px;height:17px}
+#gameUI.homeui:not(.outing-shell) .sideNav .bubble.on{box-shadow:inset 0 2px 3px #75473524,0 1px 0 #d8b7a7!important;border-color:#a87b68!important}
+/* Availability and updates use quiet dots instead of oversized stars. */
+#gameUI.homeui:not(.outing-shell) .sideNav .actChat .opt-new{
+ position:absolute;top:4px;right:4px;width:6px;height:6px;min-width:0;box-sizing:border-box;
+ margin:0;padding:0;border:0;border-radius:50%;background:#c47e67!important;color:transparent!important;font-size:0!important;box-shadow:0 0 0 2px #fff3e7;
+}
+#gameUI.homeui:not(.outing-shell) .sideNav .sideStory:not(.is-off)::after,
+#gameUI.homeui:not(.outing-shell) .sideNav .sideMem:not(.is-off)::after{
+ display:block!important;content:"";position:absolute;top:4px;right:4px;width:5px;height:5px;
+ background:#b48662;border-radius:50%;box-shadow:0 0 0 2px #fff3e7;pointer-events:none;
+}
+#gameUI.homeui:not(.outing-shell) .sideNav .bubble:disabled{padding-right:19px!important;color:#8b7562!important}
+#gameUI.homeui:not(.outing-shell) .sideNav .bubble:disabled::before{
+ display:block!important;content:"";position:absolute;right:5px;bottom:6px;width:9px;height:11px;pointer-events:none;
+ background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 12 14' fill='none' stroke='%239b816c' stroke-width='1.4'%3E%3Crect x='2' y='6' width='8' height='7' rx='1.5'/%3E%3Cpath d='M3.5 6V4a2.5 2.5 0 0 1 5 0v2'/%3E%3C/svg%3E") center/contain no-repeat;
+}
+@media(max-width:360px){#gameUI.homeui:not(.outing-shell) .sideNav.right{right:8px!important}#gameUI.homeui:not(.outing-shell) .sideNav.left{left:8px!important}#gameUI.homeui:not(.outing-shell) .sideNav .bubble{min-width:66px!important;padding-left:8px!important;padding-right:8px!important;font-size:10.5px!important}}
+
 </style>
 </head>
 <body>
@@ -2483,9 +2512,11 @@ body:has(#gameUI.outing-shell) .settingsAction,body:has(#gameUI.outing-shell) .s
         </div>
       </div>
     </div>
-<nav class="sideNav right" aria-label="其他功能">
+<nav class="sideNav right" aria-label="聊天與提問">
       <button type="button" class="bubble actChat" id="navChat" aria-label="打開匿名聊天室" onclick="openChatRoom()"><svg class="uiIcon" viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M15 16H8l-4 3v-4a7 7 0 0 1 3-13h7a7 7 0 0 1 1 14Z"/><path d="M19 8a6 6 0 0 1 1 10v3l-4-2h-4"/><path d="M7 9h.01M11 9h.01M15 9h.01"/></svg><span>聊天室</span></button>
       <button type="button" class="bubble" data-t="ask" id="navAsk"><svg class="uiIcon" viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M19 16a8 8 0 1 0-5 3l6 2-1-5Z"/><path d="M9 8a3 3 0 0 1 6 0c0 2-3 2-3 4"/><path d="M12 15h.01"/></svg><span>提問</span></button>
+    </nav>
+    <nav class="sideNav left" aria-label="日常與回憶">
       <button type="button" class="bubble sideStory" data-t="story" id="navStory"><svg class="uiIcon" viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M4 9h13v6a5 5 0 0 1-5 5H9a5 5 0 0 1-5-5V9ZM17 10h2a3 3 0 0 1 0 6h-2M3 22h16M8 3v3m5-4v4"/></svg><span>日常</span></button>
       <button type="button" class="bubble sideMem" data-t="mem" id="navMem"><svg class="uiIcon" viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><rect x="3" y="3" width="18" height="18" rx="3"/><circle cx="8" cy="8" r="1.5"/><path d="m4 17 5-5 4 4 3-3 5 5"/></svg><span>回憶</span></button>
     </nav>
@@ -2514,7 +2545,7 @@ body:has(#gameUI.outing-shell) .settingsAction,body:has(#gameUI.outing-shell) .s
     </div>
     <div class="contextActions" aria-label="情境互動">
     <button type="button" class="obsHomeBtn actObs" id="obsBtn" aria-label="起疑" onclick="observeTraces()"><span class="actIco" aria-hidden="true"><svg viewBox="0 0 24 24" width="25" height="25" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M2 12s3.5-7 10-7 10 7 10 7-3.5 7-10 7S2 12 2 12Z"/><circle cx="12" cy="12" r="3"/></svg></span><span class="actTxt"><span class="actLab">起疑</span><span class="actSub">窺探痕跡</span></span></button>
-    <button type="button" class="qHomeBtn" id="qHomeBtn" aria-label="小紅有問題要問你" onclick="openPendingSq()"><svg aria-hidden="true" viewBox="0 0 24 24" width="25" height="25" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M8 8a4 4 0 1 1 6.6 3c-1.6 1.2-2.6 1.5-2.6 4"/><circle cx="12" cy="19" r="1" fill="currentColor" stroke="none"/></svg><span>問題</span></button>
+    <button type="button" class="qHomeBtn" id="qHomeBtn" aria-label="小紅有問題要問你" onclick="openPendingSq()"><svg aria-hidden="true" viewBox="0 0 24 24" width="25" height="25" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M8 8a4 4 0 1 1 6.6 3c-1.6 1.2-2.6 1.5-2.6 4"/><circle cx="12" cy="19" r="1" fill="currentColor" stroke="none"/></svg><span>她想問你</span></button>
     </div>
     <div class="dlg" id="dlg" role="button" tabindex="0" aria-label="和她聊天（點一下對話）"><span class="dlgAv" id="dlgAv" aria-hidden="true"></span><div class="dlgBody"><b id="nm">小紅</b><span id="say">哼！才不是為了你，我只是為了報答阿姨而已。</span></div><span class="dlgNext" id="dlgNext" aria-hidden="true">▼</span></div>
   </div>
