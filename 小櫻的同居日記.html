@@ -2836,6 +2836,47 @@ body:has(#gameUI.outing-shell) .settingsAction,body:has(#gameUI.outing-shell) .s
  margin:0!important;width:6px!important;height:6px!important;z-index:2;pointer-events:none;
 }
 
+
+/* Outing destination catalogue shares the rose interaction window material. */
+#gameUI.homeui #pane[data-panel-kind="go"]{--panel-accent:#a86e72;--panel-edge:#b48a80;--panel-icon:#efd3ca;--panel-ink:#895359;--panel-button:linear-gradient(#d6aaa1,#b77f80);--panel-button-base:#986766;background:linear-gradient(150deg,#efddcc,#e6ccbd)!important;border-color:#b48a80!important}
+#gameUI.homeui #pane[data-panel-kind="go"] .paneHead{background:linear-gradient(145deg,#b98884,#996166)!important;border-color:#9f6b68!important}
+#gameUI.homeui #pane[data-panel-kind="go"] .paneHead .collectionTitle{color:#fff9ee!important;text-shadow:0 1px 0 #39231922}
+#gameUI.homeui #pane[data-panel-kind="go"] .paneHead .pane-x{border-color:#e4bdb0!important;background:linear-gradient(#fff8ec,#f0d5c7)!important;color:#966064!important;box-shadow:inset 0 1px 0 #fff,0 2px 0 #8e605a!important}
+#gameUI.homeui #pane[data-panel-kind="go"] .row[data-action-state="ready"]{background:#fff9ed!important;border-color:#b48a80!important}
+#gameUI.homeui #pane[data-panel-kind="go"] .row[data-action-state="ready"] .i{background:#efd3ca!important;color:#895359!important}
+#gameUI.homeui #pane[data-panel-kind="go"] .row[data-action-state="ready"] .btn{background:linear-gradient(#d6aaa1,#b77f80)!important;border-color:#986766!important;color:#30291f!important;box-shadow:inset 0 1px 0 #fff6dc66,0 2px 0 #986766!important}
+#gameUI.homeui #pane[data-panel-kind="home"] .row[data-action-state="ready"] .m::after,#gameUI.homeui #pane[data-panel-kind="go"] .row[data-action-state="ready"] .m::after{display:none!important}
+#gameUI.homeui.outing-shell .dock.is-blank-acts button.dockBlank-nap .dockLab{font-size:13px!important;line-height:1.5!important}
+#gameUI.homeui.outing-shell .dock.is-blank-acts button.dockBlank-nap{padding:9px 8px!important;min-height:44px!important}
+/* A 1.32-second warm fade, paper calendar flip, and morning light. */
+.dayFade{transition:opacity .3s ease,background .3s ease!important;background:transparent;perspective:900px}
+.dayFade.on{background:#38271deb!important}
+.dayFade.out{opacity:0;background:#fff1d6cc!important;transition:opacity .42s ease,background .42s ease!important}
+.dayCalendar{position:relative;width:180px;height:140px;border:2px solid #b49076;border-radius:20px;background:linear-gradient(#fff9ee,#f0deca);box-shadow:inset 0 1px 0 #fff,0 5px 0 #a58269,0 12px 30px #1d120d44;transform:translateY(8px) scale(.96);opacity:0;transition:transform .3s ease,opacity .3s ease;overflow:visible}
+.dayFade.on .dayCalendar{transform:translateY(0) scale(1);opacity:1}
+.dayCalendar::before{content:"";position:absolute;inset:0 0 auto;height:27px;border-radius:17px 17px 0 0;background:linear-gradient(#ca9990,#ab7875);border-bottom:1px solid #9a706444}
+.dayCalendar-bind{position:absolute;left:33px;top:-7px;width:6px;height:20px;background:#937461;border-radius:4px;box-shadow:104px 0 0 #937461;z-index:2}
+.dayCalendar-old,.dayCalendar-new{position:absolute;inset:28px 0 0;display:flex;align-items:center;justify-content:center;gap:10px;color:#875e4e;font-size:17px;font-weight:700;backface-visibility:hidden;transform-origin:50% 0;transition:transform .5s ease,opacity .4s ease}
+.dayCalendar strong{font-size:45px;color:#ae7275;font-weight:800;font-variant-numeric:tabular-nums}
+.dayCalendar-new{transform:rotateX(85deg);opacity:0}
+.dayFade.hold .dayCalendar-old{transform:rotateX(-85deg);opacity:0}
+.dayFade.hold .dayCalendar-new{transform:rotateX(0);opacity:1}
+.dayAdvanceAnnouncement{position:absolute;width:1px;height:1px;overflow:hidden;clip-path:inset(50%)}
+.dayFade.reduced,.dayFade.reduced .dayCalendar,.dayFade.reduced .dayCalendar-old,.dayFade.reduced .dayCalendar-new{transition:none!important}
+@media(prefers-reduced-motion:reduce){.dayFade,.dayCalendar,.dayCalendar-old,.dayCalendar-new{transition:none!important}}
+
+
+/* Tight departure card: copy left, speed and ring right, without surplus padding. */
+#gameUI.homeui.outing-shell .stick.outing .outingTop{padding:8px 10px 8px 12px!important;gap:8px!important;border-radius:17px!important}
+#gameUI.homeui.outing-shell .outingTop-copy{margin:0!important;padding:0!important}
+#gameUI.homeui.outing-shell .outingTop-lead{margin:0!important;font-size:13px!important;line-height:1.4!important}
+#gameUI.homeui.outing-shell .outingTop-ask{margin:4px 0 0!important;font-size:11px!important;line-height:1.4!important}
+#gameUI.homeui.outing-shell .outingTop-foot{gap:6px!important;padding:0!important}
+#gameUI.homeui.outing-shell .silLayer{top:104px!important}
+
+
+.dayCalendar-old{transition:transform .18s ease-in,opacity .12s ease-in}
+.dayCalendar-new{transition:transform .26s ease-out .12s,opacity .12s ease-out .12s}
 </style>
 </head>
 <body>
@@ -2867,8 +2908,8 @@ body:has(#gameUI.outing-shell) .settingsAction,body:has(#gameUI.outing-shell) .s
       <div class="dayClock-day" id="dayl" data-day="1"><span class="dayMark-k">第</span><span class="dayMark-n">1</span><span class="dayMark-k">天</span></div>
     </div>
     <nav class="collectionNav" aria-label="日常、回憶與設定">
-      <button type="button" class="bubble sideStory" data-t="story" id="navStory" aria-label="日常" title="日常"><svg class="uiIcon" viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M7 2v4m10-4v4"/><rect x="3" y="4" width="18" height="17" rx="3"/><path d="M3 9h18M7 13h3m4 0h3m-10 4h3"/></svg><span>日常</span></button>
-      <button type="button" class="bubble sideMem" data-t="mem" id="navMem" aria-label="回憶" title="回憶"><svg class="uiIcon" viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><rect x="3" y="3" width="18" height="18" rx="3"/><circle cx="8" cy="8" r="1.5"/><path d="m4 17 5-5 4 4 3-3 5 5"/></svg><span>回憶</span></button>
+      <button type="button" class="bubble sideStory" data-t="story" id="navStory" aria-label="日常" title="日常"><svg class="uiIcon" viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="m2 11 10-9 10 9M5 9v12h14V9M9 21v-7h6v7"/></svg><span>日常</span></button>
+      <button type="button" class="bubble sideMem" data-t="mem" id="navMem" aria-label="回憶" title="回憶"><svg class="uiIcon" viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M7 16a7 7 0 1 1 11-2 6 6 0 0 1-11 2Z"/><circle cx="5" cy="19" r="2"/><path d="M2 23h.01"/></svg><span>回憶</span></button>
     <button type="button" class="chip chip-ico" id="settingsBtn" aria-label="開啟設定" aria-haspopup="dialog" aria-controls="gameSettings" onclick="openSettings()"><svg viewBox="0 0 24 24" width="25" height="25" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m9 3-.6 2-2 .9-2-.4-2 3.5 1.4 1.5v2.8L2.4 15l2 3.5 2-.4 2 .9.6 2h4l.6-2 2-.9 2 .4 2-3.5-1.4-1.7v-2.8L19.6 9l-2-3.5-2 .4-2-.9L13 3Z"/><circle cx="11" cy="12" r="3"/></svg></button>
     </nav>
     </div>
@@ -2965,7 +3006,7 @@ body:has(#gameUI.outing-shell) .settingsAction,body:has(#gameUI.outing-shell) .s
 </div>
 <div class="mask" id="mask" role="dialog" aria-modal="true" aria-labelledby="mt" aria-describedby="mp"><div class="box"><div class="modalReading" id="modalReading"><div class="face"></div><h3 id="mt"></h3><p id="mp"></p></div><div class="readingHint" id="readingHint" aria-hidden="true">向下捲動閱讀 ↓</div><div class="sqopts" id="sqopts"></div><div class="tl"><button type="button" class="btn" id="mb">繼續</button></div></div></div>
 <script>
-function homeUiIcon(name){var paths={"home": "<path d=\"M8 13V5a2 2 0 0 1 4 0v6-3a2 2 0 0 1 4 0v3-1a2 2 0 0 1 4 0v5c0 4-2 6-6 6h-2c-2 0-3-1-4-3l-4-5a2 2 0 0 1 3-2l3 3\"/>", "go": "<path d=\"M4 21V3l11-1v20L4 21ZM15 4h5v16h-5\"/><circle cx=\"11.5\" cy=\"12\" r=\".8\" fill=\"currentColor\" stroke=\"none\"/>", "sleep": "<path d=\"M20.5 14A9 9 0 0 1 10 3a9 9 0 1 0 10.5 11Z\"/><path d=\"M17 3v4m-2-2h4\"/>", "chat": "<path d=\"M15 16H8l-4 3v-4a7 7 0 0 1 3-13h7a7 7 0 0 1 1 14Z\"/><path d=\"M19 8a6 6 0 0 1 1 10v3l-4-2h-4\"/><path d=\"M7 9h.01M11 9h.01M15 9h.01\"/>", "ask": "<path d=\"M19 16a8 8 0 1 0-5 3l6 2-1-5Z\"/><path d=\"M9 8a3 3 0 0 1 6 0c0 2-3 2-3 4\"/><path d=\"M12 15h.01\"/>", "daily": "<path d=\"M7 2v4m10-4v4\"/><rect x=\"3\" y=\"4\" width=\"18\" height=\"17\" rx=\"3\"/><path d=\"M3 9h18M7 13h3m4 0h3m-10 4h3\"/>", "memory": "<rect x=\"3\" y=\"3\" width=\"18\" height=\"18\" rx=\"3\"/><circle cx=\"8\" cy=\"8\" r=\"1.5\"/><path d=\"m4 17 5-5 4 4 3-3 5 5\"/>", "msg": "<rect x=\"5\" y=\"2\" width=\"14\" height=\"20\" rx=\"3\"/><path d=\"M9 5h6m-4 14h2\"/>", "call": "<path d=\"m7 3 3 5-2 2c2 3 3 4 6 6l2-2 5 3c-1 4-3 5-6 3C8 17 4 13 2 7 1 4 3 2 7 3Z\"/>", "jack": "<path d=\"M5 3h14v18H5zM8 3v4h8V3M9 11h6m-6 4h6m-6 3h6\"/>", "nap": "<path d=\"M20.5 14A9 9 0 0 1 10 3a9 9 0 1 0 10.5 11Z\"/>", "speed": "<path d=\"m3 5 8 7-8 7V5Zm10 0 8 7-8 7V5Z\"/>", "thought": "<path d=\"M7 16a7 7 0 1 1 11-2 6 6 0 0 1-11 2Z\"/><circle cx=\"5\" cy=\"19\" r=\"2\"/><path d=\"M2 23h.01\"/>", "lock": "<rect x=\"5\" y=\"10\" width=\"14\" height=\"11\" rx=\"2\"/><path d=\"M8 10V6a4 4 0 0 1 8 0v4m-4 5v2\"/>", "eye": "<path d=\"M2 12s3.5-7 10-7 10 7 10 7-3.5 7-10 7S2 12 2 12Z\"/><circle cx=\"12\" cy=\"12\" r=\"3\"/>", "care": "<path d=\"M20 5a5 5 0 0 0-8 1 5 5 0 0 0-8-1c-4 5 2 10 8 14 6-4 12-9 8-14Z\"/>", "tv": "<rect x=\"3\" y=\"6\" width=\"18\" height=\"13\" rx=\"3\"/><path d=\"m8 2 4 4 4-4M8 22h8\"/>", "game": "<rect x=\"4\" y=\"4\" width=\"16\" height=\"16\" rx=\"3\"/><circle cx=\"8\" cy=\"8\" r=\"1\"/><circle cx=\"16\" cy=\"8\" r=\"1\"/><circle cx=\"12\" cy=\"12\" r=\"1\"/><circle cx=\"8\" cy=\"16\" r=\"1\"/><circle cx=\"16\" cy=\"16\" r=\"1\"/>", "stars": "<path d=\"m12 2 2.8 6 6.7.8-4.9 4.6 1.3 6.6-5.9-3.2L6.1 20l1.3-6.6L2.5 8.8l6.7-.8L12 2Z\"/>", "sweets": "<path d=\"M20 10a5 5 0 0 1-5-7A9 9 0 1 0 21 12a5 5 0 0 1-1-2Z\"/><circle cx=\"8\" cy=\"9\" r=\"1\"/><circle cx=\"7\" cy=\"15\" r=\"1\"/><circle cx=\"13\" cy=\"16\" r=\"1\"/>", "hobby": "<path d=\"M8 5h12v12a3 3 0 1 1-3-3V3M8 8v11a3 3 0 1 1-3-3V5h3\"/>", "bond": "<circle cx=\"8\" cy=\"7\" r=\"3\"/><path d=\"M2 20v-2a6 6 0 0 1 12 0v2M17 5a3 3 0 0 1 0 6m1 4c3 0 4 2 4 5\"/>", "encounter": "<path d=\"M12 22s8-7 8-13a8 8 0 1 0-16 0c0 6 8 13 8 13Z\"/><circle cx=\"12\" cy=\"9\" r=\"3\"/>", "regret": "<path d=\"M4 4v6h6M4 10a9 9 0 1 1 0 7M12 6v6l4 2\"/>", "future": "<path d=\"M3 18h18M5 18V9m14 9V9M9 14l3-3 3 3m-3-3v10M3 5h6m-3-3v6m13-6v4m-2-2h4\"/>", "uncle": "<circle cx=\"12\" cy=\"7\" r=\"4\"/><path d=\"M4 22v-3a8 8 0 0 1 16 0v3M9 16l3 5 3-5\"/>"};return '<svg class="uiIcon" viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false">'+(paths[name]||paths.home)+'</svg>';}
+function homeUiIcon(name){var paths={"home": "<path d=\"M20 5a5 5 0 0 0-8 1 5 5 0 0 0-8-1c-4 5 2 10 8 14 6-4 12-9 8-14Z\"/>", "go": "<path d=\"M4 21V3l11-1v20L4 21ZM15 4h5v16h-5\"/><circle cx=\"11.5\" cy=\"12\" r=\".8\" fill=\"currentColor\" stroke=\"none\"/>", "sleep": "<path d=\"M20.5 14A9 9 0 0 1 10 3a9 9 0 1 0 10.5 11Z\"/><path d=\"M17 3v4m-2-2h4\"/>", "chat": "<path d=\"M15 16H8l-4 3v-4a7 7 0 0 1 3-13h7a7 7 0 0 1 1 14Z\"/><path d=\"M19 8a6 6 0 0 1 1 10v3l-4-2h-4\"/><path d=\"M7 9h.01M11 9h.01M15 9h.01\"/>", "ask": "<path d=\"M19 16a8 8 0 1 0-5 3l6 2-1-5Z\"/><path d=\"M9 8a3 3 0 0 1 6 0c0 2-3 2-3 4\"/><path d=\"M12 15h.01\"/>", "daily": "<path d=\"m2 11 10-9 10 9M5 9v12h14V9M9 21v-7h6v7\"/>", "memory": "<path d=\"M7 16a7 7 0 1 1 11-2 6 6 0 0 1-11 2Z\"/><circle cx=\"5\" cy=\"19\" r=\"2\"/><path d=\"M2 23h.01\"/>", "msg": "<rect x=\"5\" y=\"2\" width=\"14\" height=\"20\" rx=\"3\"/><path d=\"M9 5h6m-4 14h2\"/>", "call": "<path d=\"m7 3 3 5-2 2c2 3 3 4 6 6l2-2 5 3c-1 4-3 5-6 3C8 17 4 13 2 7 1 4 3 2 7 3Z\"/>", "jack": "<path d=\"M12 3s-5 6-5 10a5 5 0 0 0 10 0c0-4-5-10-5-10ZM21 2s-2 3-2 4a2 2 0 0 0 4 0c0-1-2-4-2-4ZM4 14s-3 4-3 6a3 3 0 0 0 6 0c0-2-3-6-3-6Z\"/>", "nap": "<path d=\"M20.5 14A9 9 0 0 1 10 3a9 9 0 1 0 10.5 11Z\"/>", "speed": "<path d=\"m3 5 8 7-8 7V5Zm10 0 8 7-8 7V5Z\"/>", "thought": "<path d=\"M7 16a7 7 0 1 1 11-2 6 6 0 0 1-11 2Z\"/><circle cx=\"5\" cy=\"19\" r=\"2\"/><path d=\"M2 23h.01\"/>", "lock": "<rect x=\"5\" y=\"10\" width=\"14\" height=\"11\" rx=\"2\"/><path d=\"M8 10V6a4 4 0 0 1 8 0v4m-4 5v2\"/>", "eye": "<path d=\"M2 12s3.5-7 10-7 10 7 10 7-3.5 7-10 7S2 12 2 12Z\"/><circle cx=\"12\" cy=\"12\" r=\"3\"/>", "care": "<path d=\"M20 5a5 5 0 0 0-8 1 5 5 0 0 0-8-1c-4 5 2 10 8 14 6-4 12-9 8-14Z\"/>", "tv": "<rect x=\"3\" y=\"6\" width=\"18\" height=\"13\" rx=\"3\"/><path d=\"m8 2 4 4 4-4M8 22h8\"/>", "game": "<rect x=\"4\" y=\"4\" width=\"16\" height=\"16\" rx=\"3\"/><circle cx=\"8\" cy=\"8\" r=\"1\"/><circle cx=\"16\" cy=\"8\" r=\"1\"/><circle cx=\"12\" cy=\"12\" r=\"1\"/><circle cx=\"8\" cy=\"16\" r=\"1\"/><circle cx=\"16\" cy=\"16\" r=\"1\"/>", "stars": "<path d=\"m12 2 2.8 6 6.7.8-4.9 4.6 1.3 6.6-5.9-3.2L6.1 20l1.3-6.6L2.5 8.8l6.7-.8L12 2Z\"/>", "sweets": "<path d=\"M20 10a5 5 0 0 1-5-7A9 9 0 1 0 21 12a5 5 0 0 1-1-2Z\"/><circle cx=\"8\" cy=\"9\" r=\"1\"/><circle cx=\"7\" cy=\"15\" r=\"1\"/><circle cx=\"13\" cy=\"16\" r=\"1\"/>", "hobby": "<path d=\"M8 5h12v12a3 3 0 1 1-3-3V3M8 8v11a3 3 0 1 1-3-3V5h3\"/>", "bond": "<circle cx=\"8\" cy=\"7\" r=\"3\"/><path d=\"M2 20v-2a6 6 0 0 1 12 0v2M17 5a3 3 0 0 1 0 6m1 4c3 0 4 2 4 5\"/>", "encounter": "<path d=\"M12 22s8-7 8-13a8 8 0 1 0-16 0c0 6 8 13 8 13Z\"/><circle cx=\"12\" cy=\"9\" r=\"3\"/>", "regret": "<path d=\"M4 4v6h6M4 10a9 9 0 1 1 0 7M12 6v6l4 2\"/>", "future": "<path d=\"M3 18h18M5 18V9m14 9V9M9 14l3-3 3 3m-3-3v10M3 5h6m-3-3v6m13-6v4m-2-2h4\"/>", "uncle": "<circle cx=\"12\" cy=\"7\" r=\"4\"/><path d=\"M4 22v-3a8 8 0 0 1 16 0v3M9 16l3 5 3-5\"/>"};return '<svg class="uiIcon" viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false">'+(paths[name]||paths.home)+'</svg>';}
 
 
 var TIERS=[[0,"重逢的青梅竹馬"],[30,"漸漸熟稔"],[100,"無話不談的夥伴"],[250,"值得信賴的人"],[500,"特別的人"],[1000,"一輩子的家人"]];
@@ -3168,25 +3209,14 @@ function maskOpen(){var m=$("mask"),settings=$("gameSettings");return !!((m&&m.c
 function prefersReducedMotion(){try{return !!(window.matchMedia&&window.matchMedia("(prefers-reduced-motion:reduce)").matches)}catch(e){return false}}
 function ensureDayFade(){var ov=$("dayFade");if(ov)return ov;ov=document.createElement("div");ov.id="dayFade";ov.className="dayFade";ov.setAttribute("aria-live","polite");ov.setAttribute("aria-hidden","true");var host=document.querySelector(".homeui")||document.body;host.appendChild(ov);return ov}
 function playDayAdvance(newDay,onDark,done){
-  var ov=ensureDayFade();
-  var label="第 "+newDay+" 天";
-  clearTimeout(playDayAdvance._t1);clearTimeout(playDayAdvance._t2);clearTimeout(playDayAdvance._t3);
-  ov.classList.remove("on","hold","out","reduced");ov.innerHTML="";ov.setAttribute("aria-hidden","false");
-  function finish(){ov.classList.remove("on","hold","out","reduced");ov.innerHTML="";ov.setAttribute("aria-hidden","true");if(done)done()}
-  if(prefersReducedMotion()){
-    if(onDark)onDark();
-    ov.classList.add("on","hold","reduced");ov.innerHTML='<span class="dayFade-label">'+label+'</span>';
-    playDayAdvance._t1=setTimeout(finish,420);return;
-  }
-  ov.classList.add("on");
-  playDayAdvance._t1=setTimeout(function(){
-    if(onDark)onDark();
-    ov.classList.add("hold");ov.innerHTML='<span class="dayFade-label">'+label+'</span>';
-    playDayAdvance._t2=setTimeout(function(){
-      ov.classList.remove("hold");ov.classList.add("out");ov.innerHTML="";
-      playDayAdvance._t3=setTimeout(finish,520);
-    },980);
-  },480);
+ var ov=ensureDayFade(),oldDay=S&&S.day?S.day:Math.max(1,newDay-1),label="第 "+newDay+" 天";
+ clearTimeout(playDayAdvance._t1);clearTimeout(playDayAdvance._t2);clearTimeout(playDayAdvance._t3);
+ ov.classList.remove("on","hold","out","reduced");ov.innerHTML="";ov.setAttribute("aria-hidden","false");
+ function calendar(){ov.innerHTML='<div class="dayCalendar" aria-hidden="true"><div class="dayCalendar-bind"></div><div class="dayCalendar-old">第 <strong>'+oldDay+'</strong> 天</div><div class="dayCalendar-new">第 <strong>'+newDay+'</strong> 天</div></div><span class="dayAdvanceAnnouncement">'+label+'</span>'}
+ function finish(){ov.classList.remove("on","hold","out","reduced");ov.innerHTML="";ov.setAttribute("aria-hidden","true");if(done)done()}
+ if(prefersReducedMotion()){if(onDark)onDark();calendar();ov.classList.add("on","hold","reduced");playDayAdvance._t1=setTimeout(finish,300);return}
+ calendar();void ov.offsetWidth;ov.classList.add("on");
+ playDayAdvance._t1=setTimeout(function(){if(onDark)onDark();ov.classList.add("hold");playDayAdvance._t2=setTimeout(function(){ov.classList.add("out");playDayAdvance._t3=setTimeout(finish,420)},600)},300);
 }
 function advanceAfterSleep(force){if(!S)return;if(S._dayAdvancing)return;S._dayAdvancing=true;S.sleepAwaitClose=false;S.pendingYesterdayUnsaid=null;
 var newDay=(S.day|0)+1;
@@ -3216,12 +3246,12 @@ try{var _validMem={};MEMORIES.forEach(function(m){_validMem[m[0]]=1});S.memSeen=
 function save(){try{localStorage.setItem("sakura_v1",JSON.stringify(S))}catch(e){}}
 function doReset(){S=def();mq=[];busy=0;backLock=0;mbLock=0;dayLock=0;$("mask").classList.remove("on");try{localStorage.removeItem("sakura_v1")}catch(e){}say("「哼！才不是為了你，我只是為了報答阿姨而已。」","pout");render();maybeMomIntro()}
 var rc=0,rt;
-function debugJumpEnding(){if(!S)return;if(!confirm("跳到第30天、阿祿親密度100、大叔親密度99，解鎖全部日常／回憶，進入結局選擇？"))return;closeSettings();
-S.day=30;S.aff=100;S.m=99;clampAff();S.taken=false;S.endingDone=false;S.ending=0;S.trip=null;S.homeActToday=false;S.outToday=false;
-S.uncleStep=Math.max(S.uncleStep|0,10);S.uncleStarted=true;S.castOff=true;S.chatNotice=true;
+function debugJumpEnding(){if(!S)return;if(!confirm("跳到第29天、阿祿親密度100、強叔親密度90，解鎖全部日常／回憶，返回首頁供測試？"))return;closeSettings();
+S.day=29;S.aff=100;S.m=90;clampAff();S.taken=false;S.endingDone=false;S.ending=0;S.trip=null;S.homeActToday=false;S.outToday=false;
+S.uncleStep=11;S.uncleStarted=true;S.castOff=true;S.chatNotice=true;
 if(!S.seen)S.seen=[];STORY.forEach(function(s){if(S.seen.indexOf(s[0])<0)S.seen.push(s[0])});
 if(!S.memSeen)S.memSeen=[];MEMORIES.forEach(function(m){if(S.memSeen.indexOf(m[0])<0)S.memSeen.push(m[0])});S.memPending=[];
-try{save()}catch(e){}render();showEndingPrep()}
+S.dsec=0;S.pendingSq=null;S.pendingObs=null;S.sqDone=false;S.sqToday=[];S.sleepAwaitClose=false;S._dayAdvancing=false;mq=[];busy=0;dayLock=0;mbLock=0;backLock=0;sqReply=null;stopTyping($("say"),false);stopTyping($("thb"),false);$("mask").classList.remove("on");tab="";try{save()}catch(e){}render()}
 function resetAll(){var el=$("rs");if(!rc){rc=1;el.textContent="再按一次確認，清除全部進度";rt=setTimeout(function(){rc=0;el.textContent="重置存檔"},4000);return}clearTimeout(rt);rc=0;el.textContent="重置存檔";closeSettings();doReset()}
 function pick(a){return a[Math.floor(Math.random()*a.length)]}
 function withBusy(fn){if(busy)return;busy=1;try{fn()}finally{setTimeout(function(){busy=0},280)}}
@@ -3630,7 +3660,7 @@ function paintDock(){
       var need=blankActNeedAff(b[0]);
       var cls="dockBlank"+(nap?" dockBlank-nap":"")+(open?"":" is-off");
       var lab=nap?"打瞌睡・跳過等待":b[2];
-      var sub=nap?'<span class="dockSub">跳過會錯過這一段的心聲與剪影</span>':(!open?'<span class="dockSub">親密 '+need+'</span>':"");
+      var sub=!nap&&!open?'<span class="dockSub">親密 '+need+'</span>':"";
       var aria=nap?(lab+"（跳過等待）"):(open?b[2]:(b[2]+"（阿祿親密度 "+need+" 解鎖）"));
       h+='<button type="button" class="'+cls+'" data-blank="'+b[0]+'"'+(open?"":" disabled aria-disabled=\"true\"")+(open?"":(' title="阿祿親密度 '+need+' 後解鎖"'))+' aria-label="'+aria+'"><span class="dockIco" aria-hidden="true">'+homeUiIcon(b[0])+'</span><span class="dockLab">'+lab+'</span>'+sub+(isNew&&open?optNewBadge():"")+'</button>';
     });
