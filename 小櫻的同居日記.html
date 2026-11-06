@@ -2915,10 +2915,11 @@ body:has(#gameUI.outing-shell) .settingsAction,body:has(#gameUI.outing-shell) .s
 
 /* Memory dialogue softly emerges while retaining the full reading layout. */
 #mask.memory-window #mp .memoryLine{white-space:pre-wrap;opacity:0;transition:opacity .9s ease;transition-delay:var(--memory-delay,0ms)}
-#mask.memory-window #mp .memoryLine.is-recalled{opacity:1;translate:0 0}
+#mask.memory-window #mp .memoryLine.is-recalled{opacity:1;animation:memoryRecall 1.25s ease both;animation-delay:var(--memory-delay,0ms)}
+@keyframes memoryRecall{from{opacity:0}to{opacity:1}}
 #mask.memory-window #mp.memory-revealing{cursor:pointer}
 #mask.memory-window #mp:focus-visible{outline:2px solid #bd9787;outline-offset:4px;border-radius:6px}
-@media(prefers-reduced-motion:reduce){#mask.memory-window #mp .memoryLine{opacity:1;translate:none;transition:none}}
+@media(prefers-reduced-motion:reduce){#mask.memory-window #mp .memoryLine{opacity:1;translate:none;transition:none;animation:none!important}}
 
 </style>
 </head>
@@ -3329,7 +3330,7 @@ if(!S.endingDone&&(S.day|0)>=29&&(S.uncleStep|0)>=10&&step5Open()){if(!S.castOff
 endDay(true);render()})}
 function releaseDayLock(){if(!maskOpen()&&!mq.length){dayLock=0;try{flushCohabQueue()}catch(e){}}}
 var S,tab="",mq=[],thT=0,busy=0,backLock=0,mbLock=0,dayLock=0;
-function def(){return {homeActToday:false,aff:0,exp:0,trip:null,log:[],seen:[],t:Date.now(),m:0,trips:0,taken:false,day:1,dsec:0,dEv:[],qa:[],viewM:0,sq:[],sqToday:[],sqDone:false,outToday:false,pendingObs:null,optSeen:{blank:{},sq:{},ask:{}},journals:[],journalOpen:null,motif:null,journalGlow:0,metOut:false,momIntroSeen:false,memSeen:[],memPending:[],memVersion:3,uncleStarted:false,uncleStep:0,uncleTh:[],endingDone:false,ending:0,castOff:false,cohabSeen:[],cohabPending:[],cohabToday:false,chatSeen:false,chatNotice:false,pendingYesterdayUnsaid:null,pendingSq:null,sqVer:2,chatOpenStep:null,chatUnlocked:[],_chatThreadCount:null}}
+function def(){return {homeActToday:false,aff:0,exp:0,trip:null,log:[],seen:[],t:Date.now(),m:0,trips:0,taken:false,day:1,dsec:0,dEv:[],qa:[],viewM:0,sq:[],sqAsked:[],sqToday:[],sqDone:false,outToday:false,pendingObs:null,optSeen:{blank:{},sq:{},ask:{}},journals:[],journalOpen:null,motif:null,journalGlow:0,metOut:false,momIntroSeen:false,memSeen:[],memPending:[],memVersion:3,uncleStarted:false,uncleStep:0,uncleTh:[],endingDone:false,ending:0,castOff:false,cohabSeen:[],cohabPending:[],cohabToday:false,chatSeen:false,chatNotice:false,pendingYesterdayUnsaid:null,pendingSq:null,sqVer:2,chatOpenStep:null,chatUnlocked:[],_chatThreadCount:null}}
 function load(){try{var r=localStorage.getItem("sakura_v1");S=r?JSON.parse(r):def()}catch(e){S=def()}if(!S)S=def();try{delete S.coin;delete S.sta}catch(e){}if(S.homeActToday==null)S.homeActToday=false;if(!S.cohabSeen)S.cohabSeen=[];if(!S.cohabPending)S.cohabPending=[];if(S.cohabToday==null)S.cohabToday=false;if(S.chatSeen==null)S.chatSeen=false;if(S.chatNotice==null)S.chatNotice=false;if(S.pendingYesterdayUnsaid==null)S.pendingYesterdayUnsaid=null;if(S.pendingSq===undefined)S.pendingSq=null;if(S.chatOpenStep===undefined)S.chatOpenStep=null;if(!S.chatUnlocked)S.chatUnlocked=[];
 try{var _validMem={};MEMORIES.forEach(function(m){_validMem[m[0]]=1});S.memSeen=(S.memSeen||[]).filter(function(id){return _validMem[id]});S.memPending=(S.memPending||[]).filter(function(id){return _validMem[id]&&S.memSeen.indexOf(id)<0})}catch(e){}if(S.momIntroSeen==null)S.momIntroSeen=true;if(!S.memSeen)S.memSeen=[];if(!S.memPending)S.memPending=[];if(S.m==null)S.m=0;if((S.aff|0)>100)S.aff=100;if(S.uncleStarted==null)S.uncleStarted=false;if(S.uncleStep==null)S.uncleStep=0;if(!S.uncleTh)S.uncleTh=[];if(S.endingDone==null)S.endingDone=false;if(S.ending==null)S.ending=0;if(S.castOff==null)S.castOff=false;if(typeof uncleMCap==="function"){var _c=uncleMCap();if((S.m|0)>_c)S.m=_c}else if(typeof step5Open==="function"&&!step5Open()&&(S.m|0)>29)S.m=29;if(S.trips==null)S.trips=0;if(!S.seen)S.seen=[];if(S.day==null){S.day=1;S.dsec=0}if(!S.dEv)S.dEv=[];if(!S.qa)S.qa=[];if(S.viewM==null)S.viewM=0;if(!S.sq)S.sq=[];if(!S.sqToday)S.sqToday=[];if(S.outToday==null)S.outToday=false;if(S.sqDone==null)S.sqDone=!!(S.sqToday&&S.sqToday.length);if(S.pendingObs===undefined)S.pendingObs=null;if(!S.optSeen||typeof S.optSeen!="object")S.optSeen={blank:{},sq:{},ask:{}};if(!S.optSeen.blank)S.optSeen.blank={};if(!S.optSeen.sq)S.optSeen.sq={};if(!S.optSeen.ask)S.optSeen.ask={};if(!S.journals)S.journals=[];if(S.journalOpen===undefined)S.journalOpen=null;scrubJournals();if(S.motif===undefined)S.motif=null;if(S.journalGlow==null)S.journalGlow=0;if(S.metOut==null){S.metOut=!!(S.m>0||(S.journals&&S.journals.some(function(j){return j&&j.met}))||(S.dEv&&S.dEv.some(function(e){return e&&e.met})))}try{delete S.blankHintSeen;delete S.sqHintSeen;delete S.anxiety;delete S.fantasy;delete S.evidence}catch(e){}}
 function save(){try{localStorage.setItem("sakura_v1",JSON.stringify(S))}catch(e){}}
@@ -3371,10 +3372,10 @@ function memType(m){return""}
 function ensureMemoryState(){if(S.memVersion!==3){S.memSeen=[];S.memPending=[];S.memVersion=3}if(!S.memSeen)S.memSeen=[];if(!S.memPending)S.memPending=[]}
 function memoryUnlocked(m){return !!(m&&S&&(S.aff|0)>=m[0])}
 function memoryHasUnread(){ensureMemoryState();return MEMORIES.some(function(m){return memoryUnlocked(m)&&S.memSeen.indexOf(m[0])<0})}
-function paintMemoryNotice(){var el=$("navMem");if(!el)return;var dot=el.querySelector(".notice-dot"),unread=memoryHasUnread();if(unread&&!dot)el.insertAdjacentHTML("beforeend",optNewBadge());else if(!unread&&dot)dot.remove()}
-function checkMemories(){ensureMemoryState();S.memPending=[];paintMemoryNotice()}
-function flushMemoryQueue(){checkMemories()}
-function replayMem(k){ensureMemoryState();var m=MEMORIES[k];if(!memoryUnlocked(m))return;if(S.memSeen.indexOf(m[0])<0)S.memSeen.push(m[0]);S.memPending=[];save();paintMemoryNotice();if(tab==="mem")pane();mq.push([m[1],memBody(m)]);nextPop()}
+function paintMemoryNotice(){["navMem","navStory"].forEach(function(id){var el=$(id);if(el)el.querySelectorAll(".notice-dot").forEach(function(dot){dot.remove()})})}
+function checkMemories(){ensureMemoryState();MEMORIES.forEach(function(m){if(memoryUnlocked(m)&&S.memSeen.indexOf(m[0])<0&&S.memPending.indexOf(m[0])<0)S.memPending.push(m[0])});paintMemoryNotice();flushMemoryQueue()}
+function flushMemoryQueue(){if(S.taken||S.trip||!S.momIntroSeen)return;var phone=$("momPhone");if(phone&&phone.classList.contains("on"))return;(S.memPending||[]).forEach(function(id){var m=memByAff(id);if(!memoryUnlocked(m)||S.memSeen.indexOf(id)>=0||mq.some(function(entry){return entry.memoryId===id}))return;var entry=[m[1],memBody(m)];entry.memoryId=id;mq.push(entry)});if(!maskOpen()&&mq.length)nextPop()}
+function replayMem(k){ensureMemoryState();var m=MEMORIES[k];if(!memoryUnlocked(m))return;if(S.memSeen.indexOf(m[0])<0)S.memSeen.push(m[0]);S.memPending=S.memPending.filter(function(id){return id!==m[0]});save();paintMemoryNotice();if(tab==="mem")pane();mq.push([m[1],memBody(m)]);nextPop()}
 function afterAffTier(prev){if(tier()>(prev|0))flashAffTierFx();checkMemories();queueCohabUnlock()}
 var OUTING_M=4;var UNCLE_STEP_M=3;/* 遇見強叔 +4；步驟5–11 再 +3；第6天強制 0；步驟1–4 無額外 */
 function appearMAmt(){var d=S.day|0;if(d<6||d===6)return 0;return typeof OUTING_M==="number"?OUTING_M:4}
@@ -3393,7 +3394,7 @@ function addM(d,isEvent){if(!d)return 0;if((S.day|0)<6)return 0;var x=d|0;if(!x)
 function stage(){var m=effM(),st=m>=60?3:m>=38?2:m>=15?1:0;if(!step5Open()&&st>1)st=1;return st}
 function clampView(){S.viewM=Math.max(-5,Math.min(5,S.viewM|0))}
 function sqOpen(i){var q=SQ[i];if(S.taken||S.aff<q[2])return false;if(q[4]&&effM()<q[3])return false;if(!q[4]&&q[3]>0&&effM()<q[3])return false;return true}
-function sqAvail(){var a=[];for(var i=0;i<SQ.length;i++)if(sqOpen(i)&&S.sqToday.indexOf(i)<0)a.push(i);return a}
+function sqAvail(){var a=[];for(var i=0;i<SQ.length;i++)if(sqOpen(i)&&!sqWasAsked(i)&&S.sqToday.indexOf(i)<0)a.push(i);return a}
 
 function voiceFloor(){var us=S.uncleStep|0;if(us>=9)return 3;if(us>=5)return 2;if(us>=3)return 2;if(us>=1)return 1;return 0}
 function voiceBand(){return Math.max(stage(),voiceFloor())}
@@ -3457,11 +3458,13 @@ function blankAct(id){if(busy||!S.trip||S.taken)return;if(!blankActUnlocked(id))
 function showOutingActLine(title,msg){var el=$("outingActLine");if(!el)return;el.hidden=false;el.innerHTML="<b>"+title+"</b><span>"+msg+"</span><i class=\"sm\">輕觸關閉</i>";el.onclick=function(){el.hidden=true;el.innerHTML=""};}
 function blankActNow(id){if(!S.trip||S.taken)return;if(id==="nap"){skipTrip();return}if(!BLANK_TXT[id])return;var titles={msg:"📱 發訊息",call:"📞 打電話",jack:"💦 去廁所"};var title=titles[id]||id;if(!S.trip.blankOnce)S.trip.blankOnce={};if(S.trip.blankOnce[id]){showOutingActLine(title,S.trip.blankOnce[id]);if(tab==="go")closePane();render(false);return}var msg=pickBlank(id);if(!msg)return;S.trip.blankOnce[id]=msg;if(!S.trip.acts)S.trip.acts=[];if(S.trip.acts.indexOf(id)<0)S.trip.acts.push(id);markBlankOptSeen(id);var face=id=="jack"?"shy":"sad";setEx(face);faceTf(face);addLog("⏳ "+title+"｜"+msg);showOutingActLine(title,msg);if(tab==="go")closePane();render(false)}
 var sqReply=null;
-function migrateSq(){if(!S||(S.sqVer|0)===2)return;S.sqVer=2;S.sq=[];S.sqToday=[];S.pendingSq=null;S.sqDone=false;if(S.optSeen)S.optSeen.sq={};try{save()}catch(e){}}
+function migrateSq(){if(!S)return;if(!S.sq)S.sq=[];if(!S.sqAsked)S.sqAsked=S.sq.slice();if(!S.sqToday)S.sqToday=[];S.sqVer=2}
+function sqWasAsked(qi){migrateSq();return S.sqAsked.indexOf(qi)>=0||S.sq.indexOf(qi)>=0}
+
 function sqLines(o){var lines=o&&o[4];if(typeof lines==="string")lines=[lines];if(!lines||!lines.length)return ["……"];return lines}
 function ansFromMask(qi,oi){if(mbLock||S.sqDone||sqReply)return;startSqReplies(qi,oi)}
 function ans(qi,oi){if(busy||S.sqDone||sqReply)return;ansFromMask(qi,oi)}
-function startSqReplies(qi,oi){var q=SQ[qi];if(!q||S.taken||!sqOpen(qi)||S.sqDone)return;
+function startSqReplies(qi,oi){var q=SQ[qi];if(!q||S.taken||!sqOpen(qi)||S.sqDone||S.sq.indexOf(qi)>=0)return;
 var o=q[5][oi];if(!o)return;
 if(S.sq.indexOf(qi)<0)S.sq.push(qi);S.sqDone=true;if(S.sqToday.indexOf(qi)<0)S.sqToday.push(qi);
 S.pendingSq=null;paintQBtn();addLog("❓ "+q[1]+"→"+o[0]);
@@ -3617,12 +3620,12 @@ var ask=$("navAsk");if(ask){var hideAsk=outing||!!(S&&S.endingDone);ask.style.di
 ["navStory","navMem"].forEach(function(id){var el=$(id);if(!el)return;el.style.display=outing?"none":"";el.setAttribute("aria-hidden",outing?"true":"false");if(outing)return;if(id==="navStory")setNavLock(el,storyNavUnlocked(),"第一則日常可解鎖時開放");else setNavLock(el,memNavUnlocked(),"第一則回憶可解鎖時開放")});
 var ch=$("navChat");if(ch){var can=chatNavUnlocked()&&!outing&&!dayLock;ch.style.display="";ch.setAttribute("aria-hidden","false");setNavLock(ch,can,(S&&S.trip)?"外出中無法開啟":"聊天室尚未開放");if(typeof paintChatNotice==="function"&&can)paintChatNotice()}}
 function paintAskHome(){paintSideStoryMem();var ob=$("obsBtn");if(ob){ob.style.visibility="";ob.style.pointerEvents=ob.disabled?"none":""}}
-function paintQBtn(){migrateSq();var b=$("qHomeBtn");if(!b)return;var show=S&&S.pendingSq!=null&&!S.taken&&!S.trip&&!dayLock&&!maskOpen();b.classList.toggle("on",!!show);if(show)notifyContext("qHomeBtn","sq:"+S.day+":"+S.pendingSq,"question");b.setAttribute("aria-hidden",show?"false":"true");if(typeof paintAskHome==="function")paintAskHome()}
+function paintQBtn(){migrateSq();if(S.pendingSq!=null&&sqWasAsked(S.pendingSq))S.pendingSq=null;var b=$("qHomeBtn");if(!b)return;var show=S&&S.pendingSq!=null&&!S.taken&&!S.trip&&!dayLock&&!maskOpen();b.classList.toggle("on",!!show);if(show)notifyContext("qHomeBtn","sq:"+S.day+":"+S.pendingSq,"question");b.setAttribute("aria-hidden",show?"false":"true");if(typeof paintAskHome==="function")paintAskHome()}
 function openPendingSq(){if(busy||S.pendingSq==null||S.taken||S.trip)return;if(maskOpen()){say("（先看完眼前的事。）","pout");return}var qi=S.pendingSq;S.pendingSq=null;paintQBtn();mq.push({sq:qi});if(!maskOpen())nextPop();try{save()}catch(e){}render(false)}
 
 function hideSqOpts(){var el=$("sqopts");if(el){el.style.display="none";el.innerHTML=""}var mb=$("mb");if(mb)mb.style.display=""}
 function sqOptsOn(){var el=$("sqopts");return !!(el&&el.style.display==="block")}
-function showSqMask(qi){migrateSq();var q=SQ[qi];if(!q||!sqOpen(qi)){nextPop();return}sqReply=null;hideSqOpts();$("mt").textContent="❓ 小紅問你";$("mp").textContent=q[1];
+function showSqMask(qi){migrateSq();var q=SQ[qi];if(!q||!sqOpen(qi)||sqWasAsked(qi)){nextPop();return}S.sqAsked.push(qi);save();finishMemoryReveal();paintMaskChrome("❓ 小紅問你");sqReply=null;hideSqOpts();$("mt").textContent="❓ 小紅問你";$("mp").textContent=q[1];
 var box=$("sqopts");if(!box){nextPop();return}box.innerHTML="";
 q[5].forEach(function(o,oi){var b=document.createElement("button");b.type="button";b.className="btn";b.style.width="100%";b.style.whiteSpace="normal";b.style.textAlign="left";b.style.margin="6px 0";
 b.textContent=o[0];
@@ -3641,19 +3644,20 @@ syncMaskFace(obs||soft?"":tt);
 if(obs){var box=mask.querySelector(".box");if(box){box.classList.remove("obs-win-appear");void box.offsetWidth;box.classList.add("obs-win-appear")}}
 }
 var memoryReveal=null;
-function finishMemoryReveal(){var run=memoryReveal;if(!run)return;memoryReveal=null;if(run.observer)run.observer.disconnect();run.el.classList.remove("memory-revealing");run.el.removeAttribute("tabindex");run.el.querySelectorAll(".memoryLine").forEach(function(line){line.style.transition="none";line.classList.add("is-recalled")})}
+function finishMemoryReveal(){var run=memoryReveal;if(!run)return;memoryReveal=null;if(run.observer)run.observer.disconnect();run.el.classList.remove("memory-revealing");run.el.removeAttribute("tabindex");run.el.querySelectorAll(".memoryLine").forEach(function(line){line.style.transition="none";line.style.animation="none";line.classList.add("is-recalled")})}
 function revealMemoryText(){var el=$("mp"),area=$("modalReading");if(!el||!area||!$("mask").classList.contains("memory-window")||prefersReducedMotion()||presentationPrefs.textSpeed===0||!window.IntersectionObserver)return;
 var text=el.textContent,lines=text.split(/\n\s*\n/),run={el:el,text:text,observer:null};memoryReveal=run;el.textContent="";el.classList.add("memory-revealing");el.setAttribute("tabindex","0");
 lines.forEach(function(line,i){if(i)el.appendChild(document.createTextNode("\n\n"));var span=document.createElement("span");span.className="memoryLine";span.textContent=line;el.appendChild(span)});
-run.observer=new IntersectionObserver(function(entries){if(memoryReveal!==run)return;var visible=entries.filter(function(entry){return entry.isIntersecting}).sort(function(a,b){return a.boundingClientRect.top-b.boundingClientRect.top});visible.forEach(function(entry,i){entry.target.style.setProperty("--memory-delay",Math.min(i*150,600)+"ms");entry.target.classList.add("is-recalled");run.observer.unobserve(entry.target)})},{root:area,threshold:0});
+run.observer=new IntersectionObserver(function(entries){if(memoryReveal!==run)return;var visible=entries.filter(function(entry){return entry.isIntersecting}).sort(function(a,b){return a.boundingClientRect.top-b.boundingClientRect.top});visible.forEach(function(entry,i){entry.target.style.setProperty("--memory-delay",Math.min(i*300,1200)+"ms");entry.target.classList.add("is-recalled");run.observer.unobserve(entry.target)})},{root:area,threshold:0});
 Array.from(el.children).forEach(function(line){run.observer.observe(line)});
 }
 $("mp").addEventListener("click",function(){finishMemoryReveal()});
 $("mp").addEventListener("keydown",function(e){if(memoryReveal&&(e.key==="Enter"||e.key===" ")){e.preventDefault();e.stopPropagation();finishMemoryReveal()}});
 var memoryMotionQuery=window.matchMedia("(prefers-reduced-motion: reduce)");if(memoryMotionQuery.addEventListener)memoryMotionQuery.addEventListener("change",function(e){if(e.matches)finishMemoryReveal()});
 function nextPop(){if(maskOpen())return;if(!mq.length){dayLock=0;hideSqOpts();if(moodPeekOn)clearMoodPeek();return}var m=mq.shift();if(!m){releaseDayLock();hideSqOpts();if(moodPeekOn)clearMoodPeek();return}
-if(m.sq!=null){showSqMask(m.sq);return}
+if(m.sq!=null){finishMemoryReveal();showSqMask(m.sq);return}
 if(m.endingPrep){showEndingPrep();return}
+if(m.memoryId!=null){ensureMemoryState();if(S.memSeen.indexOf(m.memoryId)<0)S.memSeen.push(m.memoryId);S.memPending=S.memPending.filter(function(id){return id!==m.memoryId});save()}
 finishMemoryReveal();hideSqOpts();$("mt").textContent=m[0];$("mp").textContent=m[1];paintMaskChrome(m[0]);var reading=$("mask").querySelector(".modalReading");if(reading)reading.scrollTop=0;paintVoiceFog();$("mask").classList.add("on");revealMemoryText()}
 function dismissMask(ev){if(ev){try{ev.preventDefault();ev.stopPropagation()}catch(e){}}if(mbLock)return;finishMemoryReveal();if(sqReply){mbLock=1;sqReply.i++;if(sqReply.i<sqReply.lines.length){$("mp").textContent=sqReply.lines[sqReply.i];setTimeout(function(){mbLock=0},30);return}sqReply=null}mbLock=1;var mask=$("mask");if(mask){mask.classList.remove("on");mask.classList.remove("obs-dark");var _box=mask.querySelector(".box");if(_box)_box.classList.remove("obs-win-appear");if(!mq.length&&!moodPeekOn)mask.classList.remove("mood-chrome")}setTimeout(function(){try{nextPop()}catch(e){}if(S&&S.sleepAwaitClose&&!maskOpen()&&!(mq&&mq.length)){advanceAfterSleep(!!S.sleepForce)}else{releaseDayLock()}mbLock=0},30)}
 (function(){var mb=$("mb");if(!mb)return;mb.onpointerup=null;mb.onclick=null;mb.addEventListener("click",dismissMask,false);mb.addEventListener("pointerup",function(e){if(e.pointerType==="mouse"&&e.button!==0)return;dismissMask(e)},false);
@@ -3810,7 +3814,7 @@ if(S.trip)h+='<div class="sm" style="margin-top:6px">她出門中。底欄可直
 else if(tab=="ask"){QA.forEach(function(q,i){var lk=S.aff<q[2]||!qaGateOk(q),dn=S.qa.indexOf(i)>=0,isNew=!lk&&askOptNew(i);if(lk)return;var why=S.aff<q[2]?("需要阿祿親密度 "+q[2]):(!qaGateOk(q)?(q[4]==="uncle"?"巷口事件後解鎖":q[4]==="trip"?"外出一次後解鎖":"未解鎖"):(isNew?"答案好像出現變化":""));h+='<div class="row '+(lk?"lock":"")+'"><span class="i">'+q[0]+'</span><div class="m"><b>'+(lk?"？？？":q[1])+(isNew?optNewBadge():"")+'</b>'+(why?'<div class="sm">'+why+'</div>':'')+'</div><button class="btn" '+(lk||S.trip||S.endingDone?"disabled":"")+' onclick="ask('+i+')">提問</button></div>'});if(S.trip)h+='<div class="sm" style="margin-top:6px">小紅外出中，回來後再問她吧。</div>'}
 else if(tab=="herq"){h='<div class="sm">她有問題時，主畫面會出現「問題」按鈕；點了才打開提問窗。</div>'}
 else if(tab=="journal"){h=""}
-else if(tab=="mem"){ensureMemoryState();h="";MEMORIES.forEach(function(m,k){if(!memoryUnlocked(m))return;var unread=S.memSeen.indexOf(m[0])<0;h+='<div class="row"><span class="i">'+homeUiIcon("mem")+'</span><div class="m"><b>'+m[1]+(unread?optNewBadge():"")+'</b></div><button type="button" class="btn" onclick="replayMem('+k+')">'+(unread?"閱讀":"重看")+'</button></div>'});if(!h)h='<p class="sm">暫時沒有可查看的內容。</p>'}
+else if(tab=="mem"){ensureMemoryState();h="";MEMORIES.forEach(function(m,k){if(!memoryUnlocked(m))return;var unread=S.memSeen.indexOf(m[0])<0;h+='<div class="row"><span class="i">'+homeUiIcon("mem")+'</span><div class="m"><b>'+m[1]+'</b></div><button type="button" class="btn" onclick="replayMem('+k+')">'+(unread?"閱讀":"重看")+'</button></div>'});if(!h)h='<p class="sm">暫時沒有可查看的內容。</p>'}
 else if(tab=="story"){h="";h+='<div class="sm" style="margin-bottom:8px;opacity:.75">同居事件紀錄（親密度解鎖）</div>';STORY.forEach(function(s,k){var ok=S.seen.indexOf(s[0])>=0;if(!ok)return;h+='<div class="row '+(ok?"":"lock")+'"><span class="i">'+(ok?"🏠":"🔒")+'</span><div class="m"><b>'+(ok?s[1]:"？？？")+'</b><div class="sm">親密度 '+s[0]+' 解鎖</div></div>'+(ok?'<button class="btn" onclick="replay('+k+')">重看</button>':"")+'</div>'});
 NSTORY.forEach(function(s,k){if(S.seen.indexOf("n"+s[0])<0)return;h+='<div class="row is-secret"><span class="i">💔</span><div class="m"><b>'+s[1]+'</b><div class="sm">強叔親密度 '+s[0]+'</div></div><button class="btn" onclick="replayN('+k+')">重看</button></div>'})}
 else{h=""}
@@ -3852,7 +3856,7 @@ paintMeterValue($("mbar"),(effM()|0)+"%");
 var mn=$("mnum");if(mn)mn.textContent=String(effM()|0);
 var ot=$("outingTop");if(ot)ot.classList.toggle("off",!outing);if(outing)paintOutingHud();
 status()}
-function render(doPane){paintStats();paintDock();if(doPane!==false)pane();paintAskTab();paintQBtn();paintSideBadges();markChatThreadsNotice();paintChatNotice();try{queueCohabUnlock()}catch(e){}var pn=$("pane");if(pn){var empty=!(pn.innerHTML&&pn.innerHTML.trim());pn.classList.toggle("is-empty",empty);pn.classList.toggle("is-open",!empty&&!!tab)}syncMoodDim();syncSilhouette();refreshPresentationFeedback();save()}
+function render(doPane){paintStats();paintDock();if(doPane!==false)pane();paintAskTab();paintQBtn();paintSideBadges();markChatThreadsNotice();paintChatNotice();try{queueCohabUnlock();checkMemories()}catch(e){}var pn=$("pane");if(pn){var empty=!(pn.innerHTML&&pn.innerHTML.trim());pn.classList.toggle("is-empty",empty);pn.classList.toggle("is-open",!empty&&!!tab)}syncMoodDim();syncSilhouette();refreshPresentationFeedback();save()}
 
 var last=Date.now();
 setInterval(function(){var now=Date.now(),dt=(now-last)/1000;last=now;var paused=dayLock||maskOpen();
