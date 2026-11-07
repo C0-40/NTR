@@ -2921,6 +2921,61 @@ body:has(#gameUI.outing-shell) .settingsAction,body:has(#gameUI.outing-shell) .s
 #mask.memory-window #mp:focus-visible{outline:2px solid #bd9787;outline-offset:4px;border-radius:6px}
 @media(prefers-reduced-motion:reduce){#mask.memory-window #mp .memoryLine{opacity:1;translate:none;transition:none;animation:none!important}}
 
+
+/* A compact departure note and a warm, quiet evening diary. */
+#mask.mask.departure-window{--win-bg:linear-gradient(145deg,#fff8ec,#f2dfcf);--win-edge:#bd9384;--win-ink:#765144;--win-muted:#ae8070;--win-btn:linear-gradient(#f4dacc,#e6c2af);--win-base:#ad8272}
+#mask.mask.departure-window .box{height:auto!important;max-height:min(72svh,420px)!important;grid-template-rows:minmax(0,1fr) 16px auto 50px!important;padding:19px 17px 13px!important;border-radius:20px!important;box-shadow:inset 0 1px 0 #fff9ee,0 3px 0 #b18b7a,0 10px 25px #30201644!important;animation:departureCard .38s ease both}
+#mask.mask.departure-window .face,#mask.mask.evening-window .face{display:none!important}
+#mask.mask.departure-window #mt{font-size:16px!important;letter-spacing:.02em!important;border-bottom:1px solid #d8b7a4!important;padding:0 0 10px!important;margin:0 0 12px!important}
+#mask.mask.departure-window .modalReading{background:#fffaf166;border-radius:12px;padding:10px 10px 13px!important;max-height:48svh}
+#mask.mask.departure-window #mp{font-size:15px!important;line-height:1.9!important}
+#mask.mask.evening-window{--win-bg:linear-gradient(145deg,#644737,#463024);--win-edge:#b58f72;--win-ink:#f4e4d0;--win-muted:#d6b99b;--win-btn:linear-gradient(#88664e,#6c4c37);--win-base:#352217}
+#mask.mask.evening-window .box{height:auto!important;max-height:min(76svh,480px)!important;padding:18px 16px 13px!important;border-radius:21px!important;animation:eveningCard .7s ease both}
+#mask.mask.evening-window .modalReading{padding:15px 16px 18px!important;max-height:54svh;border:1px solid #c5a083;background:repeating-linear-gradient(0deg,#a5846810 0 1px,transparent 1px 30px),linear-gradient(#f3e3d2,#e6cdb5);border-radius:13px}
+#mask.mask.evening-window #mt{color:#8b6650!important;border-bottom:1px solid #caae95!important;font-size:15px!important;letter-spacing:.06em!important;padding:0 0 10px!important;margin:0 0 15px!important}
+#mask.mask.departure-window #mt.uiIconLabel,#mask.mask.evening-window #mt.uiIconLabel{font-size:0!important}
+#mask.mask.departure-window #mt.uiIconLabel::after{font-size:16px!important}
+#mask.mask.evening-window #mt.uiIconLabel::after{font-size:15px!important}
+#mask.mask.evening-window #mp{color:#694b3c!important;font-size:14px!important;line-height:2.05!important;max-width:30em!important;margin-inline:auto!important}
+#mask.mask #memoryEventTitle{font-size:15px!important;line-height:1.5!important;font-weight:800;color:#976d61!important;margin:0 0 15px!important;min-height:0!important;padding:0!important}
+#mask.mask #memoryEventTitle[hidden]{display:none!important}
+#gameUI.homeui #pane .memoryIntro{font-size:12px;line-height:1.8;color:#a17c68;margin:0 0 13px;padding:0 3px}
+#gameUI.homeui.outing-shell .outingDestination{display:inline-block;vertical-align:bottom;max-width:9em;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+#gameUI.homeui.outing-shell .outingDestination.is-concealed{width:5.5em;text-align:center;filter:blur(6px);opacity:.8;user-select:none;-webkit-user-select:none;pointer-events:none}
+@keyframes departureCard{from{opacity:0;translate:0 7px}to{opacity:1;translate:0 0}}
+@keyframes eveningCard{from{opacity:0}to{opacity:1}}
+/* Forum: a fixed header and a single scrollable feed, with quieter replies. */
+.chatRoom{padding:max(12px,env(safe-area-inset-top)) 12px max(12px,env(safe-area-inset-bottom))!important}
+.chatRoom .chatPanel{width:min(100%,440px)!important;height:min(82svh,690px);max-height:85svh!important;min-height:0;overflow:hidden!important;border-radius:24px!important;background:#f6e8db!important}
+.chatRoom .chatHead{flex:none;padding:14px 14px 12px!important;background:linear-gradient(#f2dcd0,#e8cab8)!important;border-bottom:2px solid #c5a18b!important;align-items:flex-start!important}
+.chatRoom .chatHeading{display:flex;align-items:flex-start;gap:10px;min-width:0;flex:1}
+.chatRoom .chatHeading>div{min-width:0}
+.chatRoom .chatHead b{font-size:16px!important;color:#765044!important;line-height:1.5}
+.chatRoom #chatSub{font-size:11px!important;line-height:1.6;color:#a07c69!important;margin-top:4px}
+.chatRoom .chatMark{flex:none;width:33px;height:33px;display:grid;place-items:center;border:1px solid #caa38b;border-radius:11px;background:#fff3e7;color:#ab7767;box-shadow:inset 0 1px 0 #fff}
+.chatRoom .chatMark .uiIcon{width:21px;height:21px}
+.chatRoom .chatHead .pane-x{flex:none;background:linear-gradient(#fff5e9,#f1dfcc)!important;color:#8f6551!important}
+.chatRoom .chatFeed{flex:1;min-height:0;overflow:auto!important;overscroll-behavior:contain;scrollbar-width:thin;scrollbar-color:#c29b84 #f2e3d4;padding:14px 13px!important;gap:0!important;background:linear-gradient(#f8ecdf,#f1dfd0)!important}
+.chatRoom .chatFeed.is-list{gap:8px!important}
+.chatRoom .chatFeed.is-list .cThread{display:flex!important;align-items:center;gap:12px;flex:none;padding:15px 12px!important;border:1px solid #d3b8a1!important;border-left:3px solid #c49b86!important;border-radius:13px!important;background:#fff6ec!important;box-shadow:inset 0 1px 0 #fff,0 1px 2px #7957470b!important;color:#725241!important}
+.chatRoom .threadCopy{flex:1;min-width:0}.chatRoom .threadCopy b{font-size:14px!important;line-height:1.6!important;color:#725044!important;margin:0 0 5px!important}
+.chatRoom .threadCopy .sm{display:block;font-size:11px!important;line-height:1.6!important;color:#aa846c!important}
+.chatRoom .threadCount{flex:none;font-size:10px;white-space:nowrap;padding:5px 8px;border-radius:10px;background:#edd8c9;color:#9b715e}
+.chatRoom .cPost{flex:none;margin:0;padding:16px 11px!important;border:0!important;border-bottom:1px solid #d5b5a2!important;border-radius:0!important;background:#f2dfd5!important;box-shadow:none!important}
+.chatRoom .cPost:last-child{border-bottom:0!important}
+.chatRoom .cPost.is-main{margin-bottom:10px;padding:16px 14px!important;border:1px solid #d5b7a0!important;border-radius:15px!important;background:#fff8ed!important;box-shadow:inset 0 1px 0 #fff!important}
+.chatRoom .forumTitle{font-size:16px;line-height:1.65;color:#765044;margin:0 0 15px;padding-bottom:12px;border-bottom:1px solid #e1c7b1;overflow-wrap:anywhere}
+.chatRoom .forumByline{display:flex;align-items:center;gap:8px;margin-bottom:9px}
+.chatRoom .forumByline .who{margin:0!important;font-size:11px!important;color:#9b7062!important}
+.chatRoom .forumAvatar{width:27px;height:27px;display:grid;place-items:center;flex:none;border:1px solid #c7a28c;border-radius:9px;color:#a16c60;background:#f2d5ca}
+.chatRoom .forumAvatar svg{width:19px;height:19px}
+.chatRoom .forumAvatar.tone-1{color:#98734f;background:#f1dfbf}.chatRoom .forumAvatar.tone-2{color:#93758b;background:#e9d8df}.chatRoom .forumAvatar.tone-3{color:#a27c69;background:#ead9c7}
+.chatRoom .cPost .body{font-size:14px!important;line-height:1.95!important;color:#715143!important;overflow-wrap:anywhere}
+.chatRoom .cPost .meta{font-size:10px!important;line-height:1.6;color:#ac8b74!important;margin-top:11px}
+.chatRoom .chatFoot{flex:none;margin:0;padding:9px 12px!important;border-top:1px solid #d3b29b;background:#ebd4c1;color:#a17c65!important;font-size:10px!important}
+@media(max-width:360px){.chatRoom .chatHead{padding:12px 10px!important}.chatRoom .chatMark{display:none}.chatRoom .chatFeed{padding:11px 10px!important}.chatRoom .cPost .body{font-size:13px!important}}
+@media(prefers-reduced-motion:reduce){#mask.mask.departure-window .box,#mask.mask.evening-window .box{animation:none!important}}
+
 </style>
 </head>
 <body>
@@ -3036,7 +3091,7 @@ body:has(#gameUI.outing-shell) .settingsAction,body:has(#gameUI.outing-shell) .s
 <div class="chatRoom" id="chatRoom" aria-hidden="true" role="dialog" aria-modal="true" aria-label="匿名聊天室" tabindex="0">
   <div class="chatPanel" role="document" onclick="event.stopPropagation()">
     <div class="chatHead">
-      <div><b>匿名聊天室</b><div class="sm" id="chatSub">偶然滑到的討論串，不知為何忍不住看下去</div></div>
+      <div class="chatHeading"><span class="chatMark" aria-hidden="true"></span><div><b>匿名聊天室</b><div class="sm" id="chatSub">偶然滑到的討論串，不知為何忍不住看下去</div></div></div>
       <button type="button" class="pane-x" id="chatClose" onclick="closeChatRoom()" aria-label="關閉">×</button>
     </div>
     <div class="chatFeed" id="chatFeed"></div>
@@ -3055,7 +3110,7 @@ body:has(#gameUI.outing-shell) .settingsAction,body:has(#gameUI.outing-shell) .s
     <div class="chromeFoot">輕觸外側關閉</div>
   </div>
 </div>
-<div class="mask" id="mask" role="dialog" aria-modal="true" aria-labelledby="mt" aria-describedby="mp"><div class="box"><div class="modalReading" id="modalReading"><div class="face"></div><h3 id="mt"></h3><p id="mp"></p></div><div class="readingHint" id="readingHint" aria-hidden="true">向下捲動閱讀 ↓</div><div class="sqopts" id="sqopts"></div><div class="tl"><button type="button" class="btn" id="mb">繼續</button></div></div></div>
+<div class="mask" id="mask" role="dialog" aria-modal="true" aria-labelledby="mt" aria-describedby="mp"><div class="box"><div class="modalReading" id="modalReading"><div class="face"></div><h3 id="mt"></h3><p id="memoryEventTitle" hidden></p><p id="mp"></p></div><div class="readingHint" id="readingHint" aria-hidden="true">向下捲動閱讀 ↓</div><div class="sqopts" id="sqopts"></div><div class="tl"><button type="button" class="btn" id="mb">繼續</button></div></div></div>
 <script>
 
 var presentationPrefs={textSpeed:30,letterSound:false,music:.35,sfx:.35,ambient:.08};
@@ -3636,7 +3691,7 @@ function isSecretCopy(tt){tt=String(tt||"");return /強叔|大叔|夜景|晚點�
 function isSecretSq(qi){var q=SQ[qi];if(!q)return false;if((q[3]|0)>0||!!q[4])return true;return isSecretCopy(q[1])}
 function isMoodChromeTitle(tt){tt=String(tt||"");if(/^🌙\s*當晚/.test(tt)||tt.indexOf("🚪 她出門了")===0)return false;if(moodPeekOn)return true;return /起疑|仔細觀察|發訊息|打電話|翻找|尻槍|去廁所|沒說出口|沒有說的|心聲|空白|已讀|輸入中|來電|震動|貼圖|定位|背景聲|靜音|收回|窺|痕跡|強叔|大叔|夜景|晚點回家|更懂我|一個人住|⏳|🔍|💔/.test(tt)||/^⏳|^🔍|^💔/.test(tt)}
 function isObsMaskTitle(tt){tt=String(tt||"");return /^🔍/.test(tt)||/起疑/.test(tt)}
-function paintMaskChrome(tt){var mask=$("mask");if(!mask)return;var memoryTitle=MEMORIES.some(function(m){return m[1]===tt});mask.classList.toggle("memory-window",memoryTitle||/浮現一段塵封的回憶/.test(tt));var obs=isObsMaskTitle(tt);var soft=!obs&&(memoryTitle||tt==="小紅"||tt==="🌸 小紅"||tt==="浮現一段塵封的回憶"||tt==="🌸 浮現一段塵封的回憶"||tt==="📱 發訊息"||tt==="📞 打電話"||tt==="💦 去廁所"||tt==="🚽 去廁所"||tt==="💦 尻槍");
+function paintMaskChrome(tt){var mask=$("mask");if(!mask)return;var memoryTitle=MEMORIES.some(function(m){return m[1]===tt});mask.classList.toggle("memory-window",memoryTitle||/浮現一段塵封的回憶/.test(tt));var departing=tt==="🚪 她出門了"||tt==="她出門了",evening=/^(?:🌙\s*)?當晚$/.test(tt);mask.classList.toggle("departure-window",departing);mask.classList.toggle("evening-window",evening);var eventTitle=$("memoryEventTitle");if(eventTitle){eventTitle.hidden=!memoryTitle;eventTitle.textContent=memoryTitle?tt:""}if(memoryTitle)$("mt").textContent="浮現一段塵封的回憶";var obs=isObsMaskTitle(tt);var soft=!obs&&(memoryTitle||tt==="小紅"||tt==="🌸 小紅"||tt==="浮現一段塵封的回憶"||tt==="🌸 浮現一段塵封的回憶"||tt==="📱 發訊息"||tt==="📞 打電話"||tt==="💦 去廁所"||tt==="🚽 去廁所"||tt==="💦 尻槍");
 /* 起疑: older dark square window (mood-chrome), never thin strip / never light paper box */
 mask.classList.toggle("obs-dark",!!obs);mask.classList.toggle("mood-chrome",!!obs||(!soft&&isMoodChromeTitle(tt)));mask.classList.toggle("mem-soft",!obs&&!!soft);mask.classList.remove("obs-strip");
 var face=mask.querySelector(".face");if(face)face.style.display="";
@@ -3668,25 +3723,22 @@ function replayN(k){var s=NSTORY[k];mq.push(["💔 "+s[1],s[2]]);nextPop()}
 function chatAvailable(){if(!S||S.trip||dayLock)return false;if(S.endingDone&&((S.ending|0)===1||(S.ending|0)===2))return true;if(S.taken)return false;return chatNavUnlocked()}
 function chatThreadUnlocked(t){if(!t)return false;if(t.ending){return !!(S.endingDone&&(S.ending|0)===(t.ending|0))}if((t.step|0)<=0){if(t.needAff&&(S.aff|0)<(t.needAff|0)&&((S.day|0)<6))return false;return true}return (S.uncleStep|0)>=(t.step|0)}
 function chatThreadList(){var list=[];(CHAT_THREADS||[]).forEach(function(t,i){if(chatThreadUnlocked(t))list.push({t:t,i:i})});return list}
-function paintChatFeed(){var feed=$("chatFeed");if(!feed)return;var open=S.chatOpenStep;var list=chatThreadList();
-if(open==null||open===""){feed.classList.add("is-list");
-var html="";list.forEach(function(x){var t=x.t;html+='<button type="button" class="cThread" onclick="chatOpenThread('+x.i+')"><b>'+t.title+'</b><span class="sm">'+(t.sub||"討論串")+'・'+(t.posts?t.posts.length:0)+' 則</span></button>'});
-if(!html)html='<p class="sm">還沒有討論串。</p>';feed.innerHTML=html;
-var sub=$("chatSub");if(sub)sub.textContent="偶然滑到的討論串，不知為何忍不住看下去";return}
-feed.classList.remove("is-list");
-var t=(CHAT_THREADS||[])[open|0];var html="";
-if(t&&t.posts){t.posts.forEach(function(p){html+='<article class="cPost"><span class="who is-anon">'+p.who+'</span><div class="body">'+p.body+'</div><span class="meta">'+p.meta+'</span></article>'})}
-if(!html)html='<p class="sm">這個討論串還沒有貼文。</p>';feed.innerHTML=html;
-var sub=$("chatSub");if(sub)sub.textContent=(t&&t.sub)||"偶然滑到的討論串，不知為何忍不住看下去"}
-function chatOpenThread(i){S.chatOpenStep=i|0;paintChatFeed();try{save()}catch(e){}}
+var chatReadingPositions={},chatRenderedKey=null;
+function rememberChatReading(){var feed=$("chatFeed");if(feed&&chatRenderedKey!=null)chatReadingPositions[chatRenderedKey]=feed.scrollTop}
+function forumAvatar(who){var hash=0;Array.from(String(who)).forEach(function(c){hash=(hash*31+c.codePointAt(0))>>>0});var shapes=['<circle cx="12" cy="12" r="5"/>','<path d="m12 5 7 7-7 7-7-7Z"/>','<path d="m12 5 7 13H5Z"/>','<rect x="6" y="6" width="12" height="12" rx="3"/>'];return '<span class="forumAvatar tone-'+hash%4+'" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7">'+shapes[hash%4]+'</svg></span>'}
+function paintChatFeed(){var feed=$("chatFeed");if(!feed)return;rememberChatReading();var open=S.chatOpenStep,list=chatThreadList(),key=open==null||open===""?"list":"thread:"+open;chatRenderedKey=key;
+if(key==="list"){feed.classList.add("is-list");var html="";list.forEach(function(x){var t=x.t;html+='<button type="button" class="cThread" onclick="chatOpenThread('+x.i+')"><span class="threadCopy"><b>'+t.title+'</b><span class="sm">'+(t.sub||"討論串")+'</span></span><span class="threadCount">'+(t.posts?t.posts.length:0)+' 則</span></button>'});if(!html)html='<p class="sm">還沒有討論串。</p>';feed.innerHTML=html;var sub=$("chatSub");if(sub)sub.textContent="偶然滑到的討論串，不知為何忍不住看下去"}
+else{feed.classList.remove("is-list");var t=(CHAT_THREADS||[])[open|0],html="";if(t&&t.posts)t.posts.forEach(function(p,i){html+='<article class="cPost'+(i===0?' is-main':'')+'">'+(i===0?'<h3 class="forumTitle">'+t.title+'</h3>':'')+'<div class="forumByline">'+forumAvatar(p.who)+'<span class="who is-anon">'+p.who+'</span></div><div class="body">'+p.body+'</div><span class="meta">'+p.meta+'</span></article>'});if(!html)html='<p class="sm">這個討論串還沒有貼文。</p>';feed.innerHTML=html;var sub=$("chatSub");if(sub)sub.textContent=(t&&t.sub)||"偶然滑到的討論串，不知為何忍不住看下去"}
+requestAnimationFrame(function(){if(chatRenderedKey===key)feed.scrollTop=chatReadingPositions[key]||0})}
+function chatOpenThread(i){rememberChatReading();S.chatOpenStep=i|0;paintChatFeed();try{save()}catch(e){}}
 function paintChatNotice(){var b=$("navChat");if(!b)return;var on=!!(S&&S.chatNotice);b.innerHTML=homeUiIcon("chat")+'<span>聊天室</span>'+(on?'<span class="opt-new notice-dot" role="img" aria-label="有新討論串" title="有新討論串"></span>':"");b.classList.toggle("chat-notice",on)}
 function markChatThreadsNotice(){if(!S||typeof chatThreadList!=="function")return;var n=chatThreadList().length;if(S._chatThreadCount==null){S._chatThreadCount=n;return}if(n>(S._chatThreadCount|0))S.chatNotice=true;S._chatThreadCount=n}
 function openChatRoom(){if(!chatAvailable()){say(S.trip?"（她出門了。等她回來再滑手機吧。）":(chatNavUnlocked()?"（現在不方便看聊天室。）":"（聊天室還沒開放。）"),"pout");return}
 if(maskOpen()||($("momPhone")&&$("momPhone").classList.contains("on"))){say("（先看完眼前的事。）","pout");return}
 S.chatOpenStep=null;S.chatNotice=false;paintChatNotice();paintChatFeed();var el=$("chatRoom");if(!el)return;el.classList.add("on");el.setAttribute("aria-hidden","false");
 if(!S.chatSeen){S.chatSeen=true;addLog("💬 打開匿名聊天室・看見一個愛抱怨的匿名路人");try{save()}catch(e){}}}
-function closeChatRoom(){var el=$("chatRoom");if(!el)return;el.classList.remove("on");el.setAttribute("aria-hidden","true");S.chatOpenStep=null}
-(function(){var el=$("chatRoom");if(!el)return;el.addEventListener("click",function(){closeChatRoom()});el.addEventListener("keydown",function(e){if(e.key==="Escape"||e.key==="Enter"||e.key===" "){e.preventDefault();closeChatRoom()}})})();
+function closeChatRoom(){rememberChatReading();chatRenderedKey=null;var el=$("chatRoom");if(!el)return;el.classList.remove("on");el.setAttribute("aria-hidden","true");S.chatOpenStep=null}
+(function(){var el=$("chatRoom");if(!el)return;el.addEventListener("click",function(e){if(e.target===el)closeChatRoom()});el.addEventListener("keydown",function(e){if(e.key==="Escape"){e.preventDefault();e.stopPropagation();closeChatRoom()}})})();
 
 function queueCohabUnlock(){if(S.taken||S.trip||S.cohabToday||!S.momIntroSeen)return;if(!S.seen)S.seen=[];
 var due=[];STORY.forEach(function(s){if((S.aff|0)<s[0])return;if(S.seen.indexOf(s[0])>=0)return;due.push(s)});
@@ -3814,14 +3866,14 @@ if(S.trip)h+='<div class="sm" style="margin-top:6px">她出門中。底欄可直
 else if(tab=="ask"){QA.forEach(function(q,i){var lk=S.aff<q[2]||!qaGateOk(q),dn=S.qa.indexOf(i)>=0,isNew=!lk&&askOptNew(i);if(lk)return;var why=S.aff<q[2]?("需要阿祿親密度 "+q[2]):(!qaGateOk(q)?(q[4]==="uncle"?"巷口事件後解鎖":q[4]==="trip"?"外出一次後解鎖":"未解鎖"):(isNew?"答案好像出現變化":""));h+='<div class="row '+(lk?"lock":"")+'"><span class="i">'+q[0]+'</span><div class="m"><b>'+(lk?"？？？":q[1])+(isNew?optNewBadge():"")+'</b>'+(why?'<div class="sm">'+why+'</div>':'')+'</div><button class="btn" '+(lk||S.trip||S.endingDone?"disabled":"")+' onclick="ask('+i+')">提問</button></div>'});if(S.trip)h+='<div class="sm" style="margin-top:6px">小紅外出中，回來後再問她吧。</div>'}
 else if(tab=="herq"){h='<div class="sm">她有問題時，主畫面會出現「問題」按鈕；點了才打開提問窗。</div>'}
 else if(tab=="journal"){h=""}
-else if(tab=="mem"){ensureMemoryState();h="";MEMORIES.forEach(function(m,k){if(!memoryUnlocked(m))return;var unread=S.memSeen.indexOf(m[0])<0;h+='<div class="row"><span class="i">'+homeUiIcon("mem")+'</span><div class="m"><b>'+m[1]+'</b></div><button type="button" class="btn" onclick="replayMem('+k+')">'+(unread?"閱讀":"重看")+'</button></div>'});if(!h)h='<p class="sm">暫時沒有可查看的內容。</p>'}
+else if(tab=="mem"){ensureMemoryState();h='<p class="memoryIntro">隨著跟小紅的相處愈多，塵封的回憶逐漸浮現</p>';MEMORIES.forEach(function(m,k){if(!memoryUnlocked(m))return;var unread=S.memSeen.indexOf(m[0])<0;h+='<div class="row"><span class="i">'+homeUiIcon("memory")+'</span><div class="m"><b>'+m[1]+'</b></div><button type="button" class="btn" onclick="replayMem('+k+')">'+(unread?"閱讀":"重看")+'</button></div>'});if(!h)h='<p class="sm">暫時沒有可查看的內容。</p>'}
 else if(tab=="story"){h="";h+='<div class="sm" style="margin-bottom:8px;opacity:.75">同居事件紀錄（親密度解鎖）</div>';STORY.forEach(function(s,k){var ok=S.seen.indexOf(s[0])>=0;if(!ok)return;h+='<div class="row '+(ok?"":"lock")+'"><span class="i">'+(ok?"🏠":"🔒")+'</span><div class="m"><b>'+(ok?s[1]:"？？？")+'</b><div class="sm">親密度 '+s[0]+' 解鎖</div></div>'+(ok?'<button class="btn" onclick="replay('+k+')">重看</button>':"")+'</div>'});
 NSTORY.forEach(function(s,k){if(S.seen.indexOf("n"+s[0])<0)return;h+='<div class="row is-secret"><span class="i">💔</span><div class="m"><b>'+s[1]+'</b><div class="sm">強叔親密度 '+s[0]+'</div></div><button class="btn" onclick="replayN('+k+')">重看</button></div>'})}
 else{h=""}
 var panelNames={home:"互動",go:"外出",ask:"提問",mem:"回憶",story:"日常",journal:"日記",herq:"她想問你"};var side=!!panelNames[tab];
 if(side){h='<div class="paneHead"><h2 class="collectionTitle">'+panelNames[tab]+'</h2><button type="button" class="pane-x" aria-label="關閉" onclick="closePane()">×</button></div>'+h}
 $("pane").innerHTML=h;var pn=$("pane");if(pn){pn.classList.toggle("has-x",!!side);pn.dataset.panelKind=tab;pn.dataset.panelSize=pn.querySelectorAll(".row").length<=3?"compact":"long";}requestAnimationFrame(function(){window.scrollTo(0,y)})}
-function paintOutingHud(){if(!(S&&S.trip))return;var oc=$("outChip");if(oc)oc.textContent="小紅出門了";var place=S.trip.place||(PLACES[S.trip.id]&&PLACES[S.trip.id][1])||"";var ac=$("aloneChip");if(ac)ac.textContent=place?("原定去處・"+place):"";var left=Math.max(0,Math.ceil((S.trip.end-Date.now())/1000));var ocn=$("outingCdNum");if(ocn)ocn.textContent=String(left);var total=PLACES[S.trip.id]?(PLACES[S.trip.id][2]|0):0;var ring=$("outingCd");if(ring&&total>0)ring.style.setProperty("--p",String(Math.max(0,Math.min(1,left/total))));var cd=$("tripCd");if(cd)cd.textContent="倒數 "+left+" 秒"}
+function paintOutingHud(){if(!(S&&S.trip))return;var oc=$("outChip");if(oc)oc.textContent="小紅出門了";var place=S.trip.place||(PLACES[S.trip.id]&&PLACES[S.trip.id][1])||"";var ac=$("aloneChip");if(ac){var concealed=!!S.trip.metUncle;ac.replaceChildren();ac.appendChild(document.createTextNode("外出地點："));var destination=document.createElement("span");destination.className="outingDestination"+(concealed?" is-concealed":"");destination.textContent=concealed?"強叔家":place;if(concealed){destination.setAttribute("aria-hidden","true");ac.setAttribute("aria-label","外出地點：地點暫不可辨識")}else ac.removeAttribute("aria-label");ac.appendChild(destination)};var left=Math.max(0,Math.ceil((S.trip.end-Date.now())/1000));var ocn=$("outingCdNum");if(ocn)ocn.textContent=String(left);var total=PLACES[S.trip.id]?(PLACES[S.trip.id][2]|0):0;var ring=$("outingCd");if(ring&&total>0)ring.style.setProperty("--p",String(Math.max(0,Math.min(1,left/total))));var cd=$("tripCd");if(cd)cd.textContent="倒數 "+left+" 秒"}
 function status(){$("affn").textContent=fmt(S.aff);var away=!!S.trip||S.taken,skipOn=S.trip&&!S.taken,thOn=skipOn;
 if(skipOn)stopTyping($("say"),false);else stopTyping($("thb"),false);var stEl=document.querySelector(".stick");if(stEl)stEl.classList.toggle("outing",!!skipOn);var hu=document.querySelector(".homeui");if(hu)hu.classList.toggle("outing-shell",!!skipOn);if(!skipOn){var _oal=$("outingActLine");if(_oal){_oal.hidden=true;_oal.innerHTML=""}}syncMoodDim();syncSilhouette();
 var acts=$("noteActs");if(acts){if(skipOn)acts.removeAttribute("hidden");else acts.setAttribute("hidden","")}var spEl=$("sp");if(spEl)spEl.style.display=skipOn?"":"none";
@@ -3904,11 +3956,12 @@ nextPop()}checkMemories()}
 function maybeMomIntro(){if(S.momIntroSeen){var el=$("momPhone");if(el){el.classList.remove("on");el.setAttribute("aria-hidden","true")}return}showMomIntro()}
 function bindMomIntro(){var el=$("momPhone");if(!el)return;el.addEventListener("click",function(){dismissMomIntro()});var btn=$("momClose");if(btn)btn.addEventListener("click",function(e){e.stopPropagation();dismissMomIntro()});el.addEventListener("keydown",function(e){if(e.key==="Enter"||e.key==="Escape"||e.key===" "){e.preventDefault();dismissMomIntro()}})}
 bindMomIntro();
+$("chatRoom").querySelector(".chatMark").innerHTML=homeUiIcon("chat");
 $("thbox").setAttribute("role","button");$("thbox").setAttribute("tabindex","0");$("thbox").setAttribute("aria-label","顯示完整心聲");$("thbox").addEventListener("click",function(){stopTyping($("thb"),true)});$("thbox").addEventListener("keydown",function(e){if(e.key==="Enter"||e.key===" "){e.preventDefault();stopTyping($("thb"),true)}});
 
 
 function skinUiLabel(el,key){if(!el)return;var raw=el.textContent||"",label=raw.replace(/^[\s\p{Extended_Pictographic}\uFE0F\u200D\u23F3\u23E9]+/u,"");el.dataset.uiLabel=label;el.classList.add("uiIconLabel");el.style.setProperty("--label-icon",'url("data:image/svg+xml,'+encodeURIComponent(homeUiIcon(key).replace("<svg ", '<svg xmlns="http://www.w3.org/2000/svg" '))+'")')}
-function skinWindowUi(){var title=$("mt"),text=title?title.textContent:"",key=/起疑|觀察/.test(text)?"eye":/發訊息/.test(text)?"msg":/電話/.test(text)?"call":/廁所/.test(text)?"jack":/問/.test(text)?"ask":/回憶/.test(text)?"memory":"daily";skinUiLabel(title,key);skinUiLabel($("thbox")&&$("thbox").querySelector("b"),"thought");skinUiLabel($("outingActLine")&&$("outingActLine").querySelector("b"),"msg");var pane=$("pane");if(pane)pane.querySelectorAll(".row>.i").forEach(function(el){if(el.classList.contains("j-sil-dot"))return;var row=el.closest(".row"),button=row.querySelector("button"),handler=button?(button.getAttribute("onclick")||""):"",match=handler.match(/(?:homeAct|ask)\((\d+)\)/),index=match?Number(match[1]):-1;var key=tab==="home"&&index>=0?(HOME_ACTS[index]&&HOME_ACTS[index][0]||"home"):tab==="ask"&&index>=0?(["hobby","bond","encounter","regret","future","uncle"][index]||"ask"):(row.classList.contains("lock")?"lock":({go:"go",story:"daily",mem:"memory"}[tab]||"daily"));var disabled=!button||button.disabled,state=disabled?"locked":"ready";if(tab==="home"&&S.homeActToday)state="used";else if(tab==="go"&&S.outToday&&!S.trip)state="used";else if(tab==="ask"&&!disabled&&S.qa.indexOf(index)>=0)state="revisit";else if(disabled&&((S&&S.endingDone)||(S&&S.taken)))state="unavailable";row.dataset.actionState=state;var info=row.querySelector(".m");if(info)info.dataset.actionHint=({locked:"尚未解鎖",used:"今日已完成",revisit:"可再次提問",unavailable:"目前無法使用",ready:tab==="ask"?"可提問":tab==="home"?"可互動":"可開啟"}[state]);if(el.dataset.uiIcon===key)return;el.dataset.uiIcon=key;el.setAttribute("aria-hidden","true");el.innerHTML=homeUiIcon(key)})}
+function skinWindowUi(){var title=$("mt"),text=title?title.textContent:"",key=/她出門了/.test(text)?"go":/^(?:🌙\s*)?當晚$/.test(text)?"sleep":/起疑|觀察/.test(text)?"eye":/發訊息/.test(text)?"msg":/電話/.test(text)?"call":/廁所/.test(text)?"jack":/問/.test(text)?"ask":/回憶/.test(text)?"memory":"daily";skinUiLabel(title,key);skinUiLabel($("thbox")&&$("thbox").querySelector("b"),"thought");skinUiLabel($("outingActLine")&&$("outingActLine").querySelector("b"),"msg");var pane=$("pane");if(pane)pane.querySelectorAll(".row>.i").forEach(function(el){if(el.classList.contains("j-sil-dot"))return;var row=el.closest(".row"),button=row.querySelector("button"),handler=button?(button.getAttribute("onclick")||""):"",match=handler.match(/(?:homeAct|ask)\((\d+)\)/),index=match?Number(match[1]):-1;var key=tab==="home"&&index>=0?(HOME_ACTS[index]&&HOME_ACTS[index][0]||"home"):tab==="ask"&&index>=0?(["hobby","bond","encounter","regret","future","uncle"][index]||"ask"):(row.classList.contains("lock")?"lock":({go:"go",story:"daily",mem:"memory"}[tab]||"daily"));var disabled=!button||button.disabled,state=disabled?"locked":"ready";if(tab==="home"&&S.homeActToday)state="used";else if(tab==="go"&&S.outToday&&!S.trip)state="used";else if(tab==="ask"&&!disabled&&S.qa.indexOf(index)>=0)state="revisit";else if(disabled&&((S&&S.endingDone)||(S&&S.taken)))state="unavailable";row.dataset.actionState=state;var info=row.querySelector(".m");if(info)info.dataset.actionHint=({locked:"尚未解鎖",used:"今日已完成",revisit:"可再次提問",unavailable:"目前無法使用",ready:tab==="ask"?"可提問":tab==="home"?"可互動":"可開啟"}[state]);if(el.dataset.uiIcon===key)return;el.dataset.uiIcon=key;el.setAttribute("aria-hidden","true");el.innerHTML=homeUiIcon(key)})}
 
 function updateReadingHint(){var area=$("modalReading"),hint=$("readingHint");if(!area||!hint)return;hint.classList.toggle("is-visible",area.scrollHeight>area.clientHeight+3&&area.scrollTop+area.clientHeight<area.scrollHeight-3)}
 var readingArea=$("modalReading");readingArea.addEventListener("scroll",updateReadingHint,{passive:true});new ResizeObserver(updateReadingHint).observe(readingArea);new MutationObserver(function(){requestAnimationFrame(updateReadingHint)}).observe(readingArea,{childList:true,subtree:true,characterData:true});new MutationObserver(function(){readingArea.scrollTop=0;requestAnimationFrame(updateReadingHint)}).observe($("mp"),{childList:true,subtree:true,characterData:true});window.addEventListener("resize",updateReadingHint);
