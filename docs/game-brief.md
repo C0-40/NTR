@@ -1,5 +1,7 @@
 # 《小櫻的同居日記》— 遊戲介紹／背景（敘事向）
 
+> **男主人設更新：** 阿祿現為大學生，受傷、兼職背叛及錯過實習面試的確認設定，以 [protagonist-profile.md](./protagonist-profile.md) 為準。本檔其餘舊設定及玩法描述尚未全面同步；實際玩法以目前 HTML 與使用者最新確認為準。
+
 > 給玩家向理解與寫作延展用。實作細節與禁令見 [HANDOFF.md](./HANDOFF.md)；系統錨點見 [game-outline.md](./game-outline.md)。
 
 ---
