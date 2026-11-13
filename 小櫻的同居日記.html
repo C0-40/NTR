@@ -2982,6 +2982,31 @@ body:has(#gameUI.outing-shell) .settingsAction,body:has(#gameUI.outing-shell) .s
 
 @media(prefers-reduced-motion:reduce){#mask.mask.departure-window .box,#mask.mask.evening-window .box{animation:none!important}}
 
+/* Approved red-haired heroine avatar; male silhouettes and anonymous forum icons keep their identity. */
+#mask .face:not(.is-sil-uncle),.dlgAv:not(.is-sil-uncle),.tf:not(.is-sil-uncle),#heartFace,.j-sil-ico,.pane .row .i.j-sil-dot{
+ background-image:url("xiaohong-normal.png")!important;background-repeat:no-repeat!important;background-size:245% auto!important;background-position:50% 6%!important;background-color:#f3dfd0!important;
+}
+/* Completed actions are quiet solid rows; locked actions keep a dashed edge and lock cue. */
+#gameUI.homeui #pane .row[data-action-state="used"]{border-style:solid!important;border-color:#bdac94!important;background:#eee5d6!important;opacity:1!important}
+#gameUI.homeui #pane .row[data-action-state="used"] .i{background:#ddd4c5!important;color:#7b725f!important}
+#gameUI.homeui #pane .row[data-action-state="used"] .btn{border-style:solid!important;background:#e3dacb!important;color:#746b5b!important;box-shadow:none!important;opacity:1!important}
+#gameUI.homeui #pane .row[data-action-state="locked"]{border-style:dashed!important}
+#gameUI.homeui #pane .row[data-action-state="used"] .m::after{display:none!important}
+/* A single visible status explains transition and reading locks. */
+#gameUI .presentationHint{position:absolute;z-index:35;left:50%;top:112px;transform:translateX(-50%);max-width:86%;box-sizing:border-box;padding:8px 14px;border:1px solid #c8ad8c;border-radius:12px;background:#fff5e5f5;color:#76523d;font-size:13px;line-height:1.5;text-align:center;box-shadow:0 2px 8px #261b1322;pointer-events:none}
+#gameUI .presentationHint[hidden]{display:none}
+#gameUI.presentation-reading .presentationHint{position:absolute;width:1px;height:1px;padding:0;border:0;overflow:hidden;clip-path:inset(50%)}
+#gameUI.presentation-reading #dlgNext{display:block!important;font-size:0!important;width:auto!important}
+#gameUI.presentation-reading #dlgNext::after{content:"輕觸繼續 ▾";font-size:11px;font-weight:600;color:#94684f;background:#fff4e7;padding:1px 4px;border-radius:4px}
+#gameUI.presentation-held .topHud,#gameUI.presentation-held .dock,#gameUI.presentation-held .sideNav,#gameUI.presentation-held #pane,#gameUI.presentation-held .contextActions{pointer-events:none!important}
+#gameUI.presentation-held .contextActions{visibility:hidden!important}
+#gameUI.presentation-held .dock,#gameUI.presentation-held .sideNav{opacity:.65}
+#gameUI.presentation-held:not(.presentation-reading) #dlg,#gameUI.presentation-held:not(.presentation-reading) #av{pointer-events:none!important}
+#gameUI.departure-pending .outingTop,#gameUI.departure-pending .silLayer,#gameUI.departure-pending .heartRow,#gameUI.departure-pending .dock{visibility:hidden!important;pointer-events:none!important}
+#gameUI.fx-leave #av:not(.away){animation:heroLeave .65s ease-in forwards!important}
+@keyframes heroLeave{from{opacity:1}to{opacity:0;translate:15px 0}}
+@media(prefers-reduced-motion:reduce){#gameUI.fx-leave #av:not(.away){animation:none!important}}
+
 </style>
 </head>
 <body>
@@ -3077,6 +3102,7 @@ body:has(#gameUI.outing-shell) .settingsAction,body:has(#gameUI.outing-shell) .s
   </div>
   </div>
   <section class="pane" id="pane" role="region" aria-label="功能面板"></section>
+  <div id="presentationHint" class="presentationHint" role="status" aria-live="polite" hidden></div>
 
 </div>
 <dialog class="gameSettings" id="gameSettings" aria-labelledby="settingsTitle">
@@ -3128,10 +3154,22 @@ function syncSceneAudio(){var outing=!!(typeof S!=="undefined"&&S&&S.trip&&!S.ta
 function unlockPresentationAudio(){var ctx=ensureSound();if(!ctx)return;if(ctx.state==="suspended")ctx.resume().then(syncSceneAudio).catch(function(){});else syncSceneAudio()}
 function syncPresentationControls(){var speed=$("textSpeed");if(speed)speed.value=String(presentationPrefs.textSpeed);var letters=$("letterSound");if(letters)letters.checked=presentationPrefs.letterSound;[["music","musicVolume","musicValue"],["sfx","sfxVolume","sfxValue"],["ambient","ambientVolume","ambientValue"]].forEach(function(row){var input=$(row[1]),output=$(row[2]);if(input)input.value=String(Math.round(presentationPrefs[row[0]]*100));if(output)output.textContent=Math.round(presentationPrefs[row[0]]*100)+"%"})}
 function setPresentationPref(key,value){if(["music","sfx","ambient"].indexOf(key)>=0)value=Math.max(0,Math.min(1,Number(value)||0));else if(key==="textSpeed"&&[0,15,30,50].indexOf(value)<0)return;else if(key==="letterSound")value=!!value;if(!(key in presentationPrefs))return;presentationPrefs[key]=value;try{localStorage.setItem("sakura_presentation_v1",JSON.stringify(presentationPrefs))}catch(e){}if(key==="textSpeed"&&value===0){stopTyping($("say"),true);stopTyping($("thb"),true);finishMemoryReveal()}syncPresentationControls();syncSceneAudio()}
-document.addEventListener("pointerdown",function(e){if(e.isTrusted)unlockPresentationAudio()},{capture:true,passive:true});document.addEventListener("keydown",function(e){if(e.isTrusted&&(e.key==="Enter"||e.key===" "))unlockPresentationAudio()},{capture:true});document.addEventListener("click",function(e){var button=e.target.closest("button");if(!button||button.disabled||button.getAttribute("aria-disabled")==="true")return;playUiSound("click")},true);document.addEventListener("visibilitychange",function(){var ctx=soundRuntime.context;if(document.hidden){syncSceneAudio();if(ctx&&ctx.state==="running")ctx.suspend().catch(function(){})}else if(ctx&&ctx.state==="suspended")ctx.resume().then(syncSceneAudio).catch(function(){})});
+document.addEventListener("pointerdown",function(e){if(e.isTrusted)unlockPresentationAudio()},{capture:true,passive:true});document.addEventListener("keydown",function(e){if(e.isTrusted&&(e.key==="Enter"||e.key===" "))unlockPresentationAudio()},{capture:true});document.addEventListener("click",function(e){var button=e.target.closest("button");if(presentationHeld()||!button||button.disabled||button.getAttribute("aria-disabled")==="true")return;playUiSound("click")},true);document.addEventListener("visibilitychange",function(){var ctx=soundRuntime.context;if(document.hidden){syncSceneAudio();if(ctx&&ctx.state==="running")ctx.suspend().catch(function(){})}else if(ctx&&ctx.state==="suspended")ctx.resume().then(syncSceneAudio).catch(function(){})});
 function pulsePresentation(el,name,duration){if(!el||prefersReducedMotion())return;var timerKey="_pulse_"+name;clearTimeout(el[timerKey]);el.classList.remove(name);void el.offsetWidth;el.classList.add(name);el[timerKey]=setTimeout(function(){el.classList.remove(name)},duration||650)}
 function interactionFeedback(amount){pulsePresentation($("av"),"fx-affection",600);playUiSound("success");if(amount<=0)return;var host=$("affn")&&$("affn").parentElement;if(!host)return;var badge=document.createElement("span");badge.className="affGainFeedback";badge.textContent="＋"+Math.round(amount);badge.setAttribute("aria-hidden","true");host.appendChild(badge);setTimeout(function(){badge.remove()},850)}
 function notifyContext(id,token,kind){var el=$(id);if(!el||el._cueToken===token)return;el._cueToken=token;pulsePresentation(el,"context-arrive",650);if(id==="qHomeBtn")pulsePresentation($("av"),"fx-attention",550);playUiSound(kind)}
+var scenePresentation={phase:"",timer:0,returnLines:[],departurePending:false};
+function presentationHeld(){return !!(scenePresentation.phase)}
+function updatePresentationState(){var root=$("gameUI"),hint=$("presentationHint"),phase=scenePresentation.phase;if(!root)return;
+root.classList.toggle("presentation-held",!!phase);root.classList.toggle("presentation-reading",phase==="return-reading");root.classList.toggle("departure-pending",scenePresentation.departurePending);root.setAttribute("aria-busy",phase&&phase!=="return-reading"?"true":"false");root.querySelectorAll(".topHud,.dock,.sideNav,.contextActions,#pane").forEach(function(el){el.inert=!!phase});
+if(hint){hint.textContent=phase==="leaving"?"小紅準備出門…":phase==="returning"?"小紅回來了…":phase==="return-reading"?"輕觸對話，繼續閱讀":"";hint.hidden=!phase;}
+}
+function cancelScenePresentation(){clearTimeout(scenePresentation.timer);scenePresentation.phase="";scenePresentation.returnLines=[];scenePresentation.departurePending=false;updatePresentationState()}
+function beginReturnReading(line){scenePresentation.phase="return-reading";say(line.text,line.face);updatePresentationState();render(false);$("dlg").focus({preventScroll:true})}
+function continueReturnReading(){if(scenePresentation.phase!=="return-reading")return false;playUiSound("click");if(stopTyping($("say"),true))return true;scenePresentation.phase="";updatePresentationState();nextPop();render(false);return true}
+function finishReturnPresentation(){var lines=scenePresentation.returnLines.slice();scenePresentation.returnLines=[];scenePresentation.phase="";for(var i=lines.length-1;i>=0;i--)mq.unshift({returnDialogue:lines[i]});updatePresentationState();nextPop();render(false)}
+function guardPresentationInput(e){if(!presentationHeld())return;var target=e.target,reading=scenePresentation.phase==="return-reading",allowed=reading&&target&&target.closest&&target.closest("#dlg,#av");if(allowed)return;if(e.type==="keydown"&&["Tab","Enter"," "].indexOf(e.key)<0)return;e.preventDefault();e.stopImmediatePropagation()}
+document.addEventListener("click",guardPresentationInput,true);document.addEventListener("keydown",guardPresentationInput,true);
 var navigationFeedback={};function refreshPresentationFeedback(){var unlocked=false;["navAsk","navStory","navMem","navChat"].forEach(function(id){var el=$(id);if(!el)return;var next=!el.disabled;if(navigationFeedback[id]===false&&next){pulsePresentation(el,"nav-unlock",700);unlocked=true}navigationFeedback[id]=next});if(unlocked)playUiSound("unlock");syncSceneAudio()}
 
 function homeUiIcon(name){var paths={"home": "<path d=\"M20 5a5 5 0 0 0-8 1 5 5 0 0 0-8-1c-4 5 2 10 8 14 6-4 12-9 8-14Z\"/>", "go": "<path d=\"M4 21V3l11-1v20L4 21ZM15 4h5v16h-5\"/><circle cx=\"11.5\" cy=\"12\" r=\".8\" fill=\"currentColor\" stroke=\"none\"/>", "sleep": "<path d=\"M20.5 14A9 9 0 0 1 10 3a9 9 0 1 0 10.5 11Z\"/><path d=\"M17 3v4m-2-2h4\"/>", "chat": "<path d=\"M15 16H8l-4 3v-4a7 7 0 0 1 3-13h7a7 7 0 0 1 1 14Z\"/><path d=\"M19 8a6 6 0 0 1 1 10v3l-4-2h-4\"/><path d=\"M7 9h.01M11 9h.01M15 9h.01\"/>", "ask": "<path d=\"M19 16a8 8 0 1 0-5 3l6 2-1-5Z\"/><path d=\"M9 8a3 3 0 0 1 6 0c0 2-3 2-3 4\"/><path d=\"M12 15h.01\"/>", "daily": "<path d=\"m2 11 10-9 10 9M5 9v12h14V9M9 21v-7h6v7\"/>", "memory": "<path d=\"M7 16a7 7 0 1 1 11-2 6 6 0 0 1-11 2Z\"/><circle cx=\"5\" cy=\"19\" r=\"2\"/><path d=\"M2 23h.01\"/>", "msg": "<rect x=\"5\" y=\"2\" width=\"14\" height=\"20\" rx=\"3\"/><path d=\"M9 5h6m-4 14h2\"/>", "call": "<path d=\"m7 3 3 5-2 2c2 3 3 4 6 6l2-2 5 3c-1 4-3 5-6 3C8 17 4 13 2 7 1 4 3 2 7 3Z\"/>", "jack": "<path d=\"M5 17c2-1 3-3 3-6l3 3 1-8 2 8 3-3c0 3 1 5 3 6-4 3-11 3-15 0Z\"/><path d=\"m4 9-1-2m17 2 1-2M8 5 7 3m10 2 1-2\"/><circle cx=\"3\" cy=\"13\" r=\".8\"/><circle cx=\"21\" cy=\"13\" r=\".8\"/><circle cx=\"12\" cy=\"2\" r=\".7\"/>", "nap": "<path d=\"M20.5 14A9 9 0 0 1 10 3a9 9 0 1 0 10.5 11Z\"/>", "speed": "<path d=\"m3 5 8 7-8 7V5Zm10 0 8 7-8 7V5Z\"/>", "thought": "<path d=\"M7 16a7 7 0 1 1 11-2 6 6 0 0 1-11 2Z\"/><circle cx=\"5\" cy=\"19\" r=\"2\"/><path d=\"M2 23h.01\"/>", "lock": "<rect x=\"5\" y=\"10\" width=\"14\" height=\"11\" rx=\"2\"/><path d=\"M8 10V6a4 4 0 0 1 8 0v4m-4 5v2\"/>", "eye": "<path d=\"M2 12s3.5-7 10-7 10 7 10 7-3.5 7-10 7S2 12 2 12Z\"/><circle cx=\"12\" cy=\"12\" r=\"3\"/>", "care": "<path d=\"M20 5a5 5 0 0 0-8 1 5 5 0 0 0-8-1c-4 5 2 10 8 14 6-4 12-9 8-14Z\"/>", "tv": "<rect x=\"3\" y=\"6\" width=\"18\" height=\"13\" rx=\"3\"/><path d=\"m8 2 4 4 4-4M8 22h8\"/>", "game": "<rect x=\"4\" y=\"4\" width=\"16\" height=\"16\" rx=\"3\"/><circle cx=\"8\" cy=\"8\" r=\"1\"/><circle cx=\"16\" cy=\"8\" r=\"1\"/><circle cx=\"12\" cy=\"12\" r=\"1\"/><circle cx=\"8\" cy=\"16\" r=\"1\"/><circle cx=\"16\" cy=\"16\" r=\"1\"/>", "stars": "<path d=\"m12 2 2.8 6 6.7.8-4.9 4.6 1.3 6.6-5.9-3.2L6.1 20l1.3-6.6L2.5 8.8l6.7-.8L12 2Z\"/>", "sweets": "<path d=\"M20 10a5 5 0 0 1-5-7A9 9 0 1 0 21 12a5 5 0 0 1-1-2Z\"/><circle cx=\"8\" cy=\"9\" r=\"1\"/><circle cx=\"7\" cy=\"15\" r=\"1\"/><circle cx=\"13\" cy=\"16\" r=\"1\"/>", "hobby": "<path d=\"M8 5h12v12a3 3 0 1 1-3-3V3M8 8v11a3 3 0 1 1-3-3V5h3\"/>", "bond": "<circle cx=\"8\" cy=\"7\" r=\"3\"/><path d=\"M2 20v-2a6 6 0 0 1 12 0v2M17 5a3 3 0 0 1 0 6m1 4c3 0 4 2 4 5\"/>", "encounter": "<path d=\"M12 22s8-7 8-13a8 8 0 1 0-16 0c0 6 8 13 8 13Z\"/><circle cx=\"12\" cy=\"9\" r=\"3\"/>", "regret": "<path d=\"M4 4v6h6M4 10a9 9 0 1 1 0 7M12 6v6l4 2\"/>", "future": "<path d=\"M3 18h18M5 18V9m14 9V9M9 14l3-3 3 3m-3-3v10M3 5h6m-3-3v6m13-6v4m-2-2h4\"/>", "uncle": "<circle cx=\"12\" cy=\"7\" r=\"4\"/><path d=\"M4 22v-3a8 8 0 0 1 16 0v3M9 16l3 5 3-5\"/>"};return '<svg class="uiIcon" viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false">'+(paths[name]||paths.home)+'</svg>';}
@@ -3329,12 +3367,10 @@ function setEx(k){ex=k||base();applyEx();clearTimeout(exT);exT=setTimeout(functi
 function uncleishLine(tt){tt=String(tt||"");return /強叔|大叔|陳叔|他的手|他靠|一個人住|更懂我|夜景|晚點回家|門外的他|那個男人/.test(tt)}
 function setSilFace(el,who){if(!el)return;el.classList.remove("is-sil","is-sil-hero","is-sil-uncle");if(!who){el.style.backgroundImage="";el.style.backgroundSize="";el.style.backgroundPosition="";el.style.backgroundColor="";return}el.classList.add("is-sil",who==="uncle"?"is-sil-uncle":"is-sil-hero")}
 function pickSilWho(line){if(effM()>0&&uncleishLine(line)&&Math.random()<.3)return "uncle";return "hero"}
-/* 心聲立繪表情：預設 atlas 格；之後可擴 HEART_FACE_SRC[k]=url 換差分圖 */
-var HEART_FACE_SRC={};
-function heartFacePos(k,box){
-  var c=EXI.calm||[0,0],H=88*AR,sc=(box||92)/44;
-  return{k:"calm",x:-(c[0]*88+24)*sc,y:-(c[1]*H+25)*sc,size:352*sc,src:HEART_FACE_SRC.calm||HEART_FACE_SRC[k]||""}
-}
+/* All heroine avatar views use the approved red-haired portrait in a fixed tone. */
+var HEART_FACE_SRC={calm:"xiaohong-normal.png"};
+function heartFacePos(k,box){return {k:"calm",x:0,y:0,size:0,src:"xiaohong-normal.png"}}
+
 function paintHeartFace(k){
   var el=$("heartFace");if(!el)return;
   var outing=!!(S.trip&&!S.taken);
@@ -3386,7 +3422,7 @@ var ev=S.dEv||[],n=0;ev.forEach(function(e){if(e.met)n++});
 var dayNow=S.day;
 addLog("📅 第"+dayNow+"天結束，外出 "+ev.length+" 次"+(n?"，遇見強叔 "+n+" 次":"")+(force?"・提早睡覺":""));
 advanceAfterSleep(!!force)}
-function sleepDay(){if(busy||S.taken||S.endingDone||dayLock||maskOpen())return;if(S.trip){say("（她還在外面。等她回來，或先點「打瞌睡」再睡。）","pout");return}withBusy(function(){if(S.trip||dayLock||maskOpen()||S.taken)return;
+function sleepDay(){if(presentationHeld()||busy||S.taken||S.endingDone||dayLock||maskOpen())return;if(S.trip){say("（她還在外面。等她回來，或先點「打瞌睡」再睡。）","pout");return}withBusy(function(){if(S.trip||dayLock||maskOpen()||S.taken)return;
 if(!S.endingDone&&(effM()|0)>=99&&(S.day|0)<30){mq.push({endingPrep:1});endDay(true);render();return}
 if(!S.endingDone&&(S.day|0)>=29&&(S.uncleStep|0)>=10&&step5Open()){if(!S.castOff)queueCastOff();else if(!S.endingDone)mq.push({endingPrep:1});endDay(true);render();return}
 endDay(true);render()})}
@@ -3396,7 +3432,7 @@ function def(){return {homeActToday:false,aff:0,exp:0,trip:null,log:[],seen:[],t
 function load(){try{var r=localStorage.getItem("sakura_v1");S=r?JSON.parse(r):def()}catch(e){S=def()}if(!S)S=def();if(S.trip&&S.trip.id===0)S.trip.place=PLACES[0][1];try{delete S.coin;delete S.sta}catch(e){}if(S.homeActToday==null)S.homeActToday=false;if(!S.cohabSeen)S.cohabSeen=[];if(!S.cohabPending)S.cohabPending=[];if(S.cohabToday==null)S.cohabToday=false;if(S.chatSeen==null)S.chatSeen=false;if(S.chatNotice==null)S.chatNotice=false;if(S.pendingYesterdayUnsaid==null)S.pendingYesterdayUnsaid=null;if(S.pendingSq===undefined)S.pendingSq=null;if(S.chatOpenStep===undefined)S.chatOpenStep=null;if(!S.chatUnlocked)S.chatUnlocked=[];
 try{var _validMem={};MEMORIES.forEach(function(m){_validMem[m[0]]=1});S.memSeen=(S.memSeen||[]).filter(function(id){return _validMem[id]});S.memPending=(S.memPending||[]).filter(function(id){return _validMem[id]&&S.memSeen.indexOf(id)<0})}catch(e){}if(S.momIntroSeen==null)S.momIntroSeen=true;if(!S.memSeen)S.memSeen=[];if(!S.memPending)S.memPending=[];if(S.m==null)S.m=0;if((S.aff|0)>100)S.aff=100;if(S.uncleStarted==null)S.uncleStarted=false;if(S.uncleStep==null)S.uncleStep=0;if(!S.uncleTh)S.uncleTh=[];if(S.endingDone==null)S.endingDone=false;if(S.ending==null)S.ending=0;if(S.castOff==null)S.castOff=false;if(typeof uncleMCap==="function"){var _c=uncleMCap();if((S.m|0)>_c)S.m=_c}else if(typeof step5Open==="function"&&!step5Open()&&(S.m|0)>29)S.m=29;if(S.trips==null)S.trips=0;if(!S.seen)S.seen=[];if(S.day==null){S.day=1;S.dsec=0}if(!S.dEv)S.dEv=[];if(!S.qa)S.qa=[];if(S.viewM==null)S.viewM=0;if(!S.sq)S.sq=[];if(!S.sqToday)S.sqToday=[];if(S.outToday==null)S.outToday=false;if(S.sqDone==null)S.sqDone=!!(S.sqToday&&S.sqToday.length);if(S.pendingObs===undefined)S.pendingObs=null;if(!S.optSeen||typeof S.optSeen!="object")S.optSeen={blank:{},sq:{},ask:{}};if(!S.optSeen.blank)S.optSeen.blank={};if(!S.optSeen.sq)S.optSeen.sq={};if(!S.optSeen.ask)S.optSeen.ask={};if(!S.journals)S.journals=[];if(S.journalOpen===undefined)S.journalOpen=null;scrubJournals();if(S.motif===undefined)S.motif=null;if(S.journalGlow==null)S.journalGlow=0;if(S.metOut==null){S.metOut=!!(S.m>0||(S.journals&&S.journals.some(function(j){return j&&j.met}))||(S.dEv&&S.dEv.some(function(e){return e&&e.met})))}try{delete S.blankHintSeen;delete S.sqHintSeen;delete S.anxiety;delete S.fantasy;delete S.evidence}catch(e){}}
 function save(){try{localStorage.setItem("sakura_v1",JSON.stringify(S))}catch(e){}}
-function doReset(){S=def();mq=[];busy=0;backLock=0;mbLock=0;dayLock=0;$("mask").classList.remove("on");try{localStorage.removeItem("sakura_v1")}catch(e){}say("「哼！才不是為了你，我只是為了報答阿姨而已。」","pout");render();maybeMomIntro()}
+function doReset(){cancelScenePresentation();S=def();mq=[];busy=0;backLock=0;mbLock=0;dayLock=0;$("mask").classList.remove("on");try{localStorage.removeItem("sakura_v1")}catch(e){}say("「哼！才不是為了你，我只是為了報答阿姨而已。」","pout");render();maybeMomIntro()}
 var rc=0,rt;
 function debugJumpEnding(){if(!S)return;if(!confirm("跳到第29天、阿祿親密度100、強叔親密度90，解鎖全部日常／回憶，返回首頁供測試？"))return;closeSettings();
 S.day=29;S.aff=100;S.m=90;clampAff();S.taken=false;S.endingDone=false;S.ending=0;S.trip=null;S.homeActToday=false;S.outToday=false;
@@ -3516,7 +3552,7 @@ function paintSideBadges(){}
 
 function blankActNeedAff(id){if(id==="msg")return 25;if(id==="call")return 50;return 0}
 function blankActUnlocked(id){var need=blankActNeedAff(id);if(!need)return true;return !!S&&(S.aff|0)>=need}
-function blankAct(id){if(busy||!S.trip||S.taken)return;if(!blankActUnlocked(id)){var need=blankActNeedAff(id);say("（阿祿親密度到 "+need+" 以後，才能用「"+(id==="msg"?"發訊息":id==="call"?"打電話":id)+"」。）","pout");return}if(maskOpen()){if(sqOptsOn())return;var mask=$("mask");if(mask)mask.classList.remove("on");if(!moodPeekOn){try{mask&&mask.classList.remove("mood-chrome")}catch(e){}}}withBusy(function(){blankActNow(id)});}
+function blankAct(id){if(presentationHeld()||busy||!S.trip||S.taken)return;if(!blankActUnlocked(id)){var need=blankActNeedAff(id);say("（阿祿親密度到 "+need+" 以後，才能用「"+(id==="msg"?"發訊息":id==="call"?"打電話":id)+"」。）","pout");return}if(maskOpen()){if(sqOptsOn())return;var mask=$("mask");if(mask)mask.classList.remove("on");if(!moodPeekOn){try{mask&&mask.classList.remove("mood-chrome")}catch(e){}}}withBusy(function(){blankActNow(id)});}
 function showOutingActLine(title,msg){var el=$("outingActLine");if(!el)return;el.hidden=false;el.innerHTML="<b>"+title+"</b><span>"+msg+"</span><i class=\"sm\">輕觸關閉</i>";el.onclick=function(){el.hidden=true;el.innerHTML=""};}
 function blankActNow(id){if(!S.trip||S.taken)return;if(id==="nap"){skipTrip();return}if(!BLANK_TXT[id])return;var titles={msg:"📱 發訊息",call:"📞 打電話",jack:"💦 去廁所"};var title=titles[id]||id;if(!S.trip.blankOnce)S.trip.blankOnce={};if(S.trip.blankOnce[id]){showOutingActLine(title,S.trip.blankOnce[id]);if(tab==="go")closePane();render(false);return}var msg=pickBlank(id);if(!msg)return;S.trip.blankOnce[id]=msg;if(!S.trip.acts)S.trip.acts=[];if(S.trip.acts.indexOf(id)<0)S.trip.acts.push(id);markBlankOptSeen(id);var face=id=="jack"?"shy":"sad";setEx(face);faceTf(face);addLog("⏳ "+title+"｜"+msg);showOutingActLine(title,msg);if(tab==="go")closePane();render(false)}
 var sqReply=null;
@@ -3535,7 +3571,7 @@ hideSqOpts();$("mt").textContent="❓ 小紅問你";$("mp").textContent=fullRepl
 var mask=$("mask");if(mask){mask.classList.toggle("mood-chrome",isSecretSq(qi));mask.classList.add("on")}
 try{save()}catch(e){}}
 function ansNow(qi,oi){startSqReplies(qi,oi)}
-function talk(){if(stopTyping($("say"),true))return;if(busy)return;if(S.endingDone){if((S.ending|0)===2||S.taken){say(END_GONE,"sad");return}var bag=END_TALK[S.ending|0];if(bag&&bag.length){say("「"+pick(bag)+"」",(S.ending|0)===3?"sad":"shy");return}}if(S.taken){say(END_GONE,"sad");return}if(S.trip){say("（她還在外面。等她回來再聊吧。）","pout");return}if(maskOpen()||dayLock)return;
+function talk(){if(continueReturnReading())return;if(presentationHeld())return;if(stopTyping($("say"),true))return;if(busy)return;if(S.endingDone){if((S.ending|0)===2||S.taken){say(END_GONE,"sad");return}var bag=END_TALK[S.ending|0];if(bag&&bag.length){say("「"+pick(bag)+"」",(S.ending|0)===3?"sad":"shy");return}}if(S.taken){say(END_GONE,"sad");return}if(S.trip){say("（她還在外面。等她回來再聊吧。）","pout");return}if(maskOpen()||dayLock)return;
 var t=tier(),st=stage();
 if(S.pendingChat){var slip=S.pendingChat;S.pendingChat=null;say("「"+slip+"」",["shy","pout","cold","cold"][Math.min(st,3)]);addLog("💬 "+slip);try{localStorage.setItem("sakura_v1",JSON.stringify(S))}catch(e){}return}
 if(dissonanceOn()&&Math.random()<.72){var fx=pick(FLAT_TALK);say("「"+fx+"」",pick(["calm","pout","cold"]));try{localStorage.setItem("sakura_v1",JSON.stringify(S))}catch(e){}return}
@@ -3557,7 +3593,7 @@ av.addEventListener("keydown",function(e){if(e.key=="Enter"||e.key==" "){e.preve
 dlg.addEventListener("click",function(){talk()},false);
 dlg.addEventListener("keydown",function(e){if(e.key=="Enter"||e.key==" "){e.preventDefault();talk()}},false);
 })();
-function homeAct(i){if(busy||S.taken||S.endingDone)return;if(S.trip){say("（她出門了，現在做不了室內互動。）","pout");return}
+function homeAct(i){if(presentationHeld()||busy||S.taken||S.endingDone)return;if(S.trip){say("（她出門了，現在做不了室內互動。）","pout");return}
 var a=HOME_ACTS[i];if(!a)return;if(S.homeActToday){say("（今天的室內互動用過了。睡一覺，明天再陪她。）","pout");return}
 withBusy(function(){homeActNow(i)});}
 function homeBand(){var m=effM()|0;var b=m>=70?2:m>=30?1:0;return Math.max(b,Math.min(2,voiceFloor()))}
@@ -3569,7 +3605,7 @@ var bag=(HOME_LINES[a[0]]||[])[homeBand()]||(HOME_LINES[a[0]]||[])[0]||["……�
 var line=pick(bag);
 if(line.charAt(0)!=="「")line="「"+line+"」";
 say(line,effM()>=70?"shy":effM()>=30?"pout":pick(["joy","shy","wink","calm"]));
-addLog("🛋️ "+a[1]+"・親密 +"+gn);if(effM()<45)hearts(4);afterAffTier(b);/* no rank popup */closePane();render();interactionFeedback(S.aff-feedbackAffBefore)}
+addLog("🛋️ "+a[1]+"・親密 +"+(S.aff-feedbackAffBefore));if(effM()<45&&S.aff>feedbackAffBefore)hearts(4);afterAffTier(b);/* no rank popup */closePane();render();interactionFeedback(S.aff-feedbackAffBefore)}
 function outingThoughtPool(){var st=voiceBand(),pool=[],d=S.day|0,met=!!(S.trip&&S.trip.metUncle);
 if(S.uncleTh&&S.uncleTh.length)pool=pool.concat(S.uncleTh);
 if(met&&d>=6&&d<=15){var early=EARLY_MEET_TH&&EARLY_MEET_TH[S.trip.id];if(early&&early.length)pool=pool.concat(early)}
@@ -3624,20 +3660,20 @@ function scheduleJournalGlow(){clearTimeout(journalGlowT);if(!journalOn()){S.jou
 function openJournal(i){return}
 function closeJournal(){S.journalOpen=null;render();syncMoodDim()}
 function runSceneFx(name,ms){if(name==="fx-leave")playUiSound("leave");else if(name==="fx-return")playUiSound("return");var hu=document.querySelector(".homeui");if(!hu)return;hu.classList.remove("fx-leave","fx-return","fx-sleep");if(!name)return;hu.classList.add(name);clearTimeout(runSceneFx._t);runSceneFx._t=setTimeout(function(){hu.classList.remove("fx-leave","fx-return","fx-sleep")},ms||520)}
-function go(i){if(busy||S.trip||S.taken||S.endingDone||S.outToday)return;runSceneFx("fx-leave",650);withBusy(function(){goNow(i)});}
-function goNow(i){if(S.trip||S.taken||S.outToday)return;var p=PLACES[i],dep=pickDepart(i);S.trip={id:i,place:p[1],end:Date.now()+OUTING_SECONDS*1000,acts:[],depart:dep,skipped:false,metUncle:uncleAppearRoll()};S.outToday=true;
+function go(i){if(presentationHeld()||busy||S.trip||S.taken||S.endingDone||S.outToday||maskOpen())return;var place=PLACES[i];if(!place||S.aff<place[3])return;closePane();scenePresentation.phase="leaving";updatePresentationState();var duration=prefersReducedMotion()?0:650;runSceneFx("fx-leave",duration||1);scenePresentation.timer=setTimeout(function(){scenePresentation.phase="";updatePresentationState();goNow(i)},duration)}
+function goNow(i){if(S.trip||S.taken||S.outToday)return;var p=PLACES[i],dep=pickDepart(i);S.trip={id:i,place:p[1],end:Date.now()+OUTING_SECONDS*1000,acts:[],depart:dep,skipped:false,metUncle:uncleAppearRoll()};S.outToday=true;scenePresentation.departurePending=true;updatePresentationState();
 closePane();
 mq.push(["🚪 她出門了",dep]);
 say("「那我出門囉！去"+p[1]+"～別等太晚喔。」","wink");addLog("🚪 外出："+p[1]+"｜"+dep.replace(/\n/g," "));thought();nextPop();render()}
 function setObsBtn(on){var b=$("obsBtn");if(!b)return;var was=b.classList.contains("on");b.classList.toggle("on",!!on);if(on&&!was){notifyContext("obsBtn",S.pendingObs,"suspicion");b.classList.remove("obs-appear");void b.offsetWidth;b.classList.add("obs-appear")}if(!on){b.classList.remove("obs-appear");b.blur()}}
-function observeTraces(){if(busy||!S.pendingObs||S.taken)return;if(maskOpen()||dayLock){say("（先看完眼前的事，再起疑。）","pout");return}
+function observeTraces(){if(presentationHeld()||busy||!S.pendingObs||S.taken)return;if(maskOpen()||dayLock){say("（先看完眼前的事，再起疑。）","pout");return}
 withBusy(function(){var p=S.pendingObs;if(!p)return;S.pendingObs=null;setObsBtn(false);
 mq.push(["🔍 起疑",p.trTxt||""]);
 if(S.dEv.length&&p.met)S.dEv[S.dEv.length-1].fr=p.trTxt;
 addLog("🔍 起疑｜"+(p.trTxt||"").slice(0,48));
 moodPeekOn=1;syncMoodDim();
 nextPop();render()})}
-function back(){if(!S.trip||backLock)return;backLock=1;runSceneFx("fx-return",760);try{var trip=S.trip,pid=trip.id,p=PLACES[pid],pm=placeMeta(pid),ev=pickPlaceEv(pid,false),it=pick(p[7]),c=p[5]+Math.floor(Math.random()*p[5]*0.4),b=tier(),acts=(trip.acts||[]).slice();
+function back(){if(!S.trip||backLock)return;backLock=1;scenePresentation.phase="returning";scenePresentation.departurePending=false;scenePresentation.returnLines=[];updatePresentationState();runSceneFx("fx-return",760);try{var trip=S.trip,pid=trip.id,p=PLACES[pid],pm=placeMeta(pid),ev=pickPlaceEv(pid,false),it=pick(p[7]),c=p[5]+Math.floor(Math.random()*p[5]*0.4),b=tier(),acts=(trip.acts||[]).slice();
 if(!acts.length)acts=[];
 /* outing: +0 親密度 */clampAff();S.trips++;
 var met=!!(trip&&trip.metUncle),g=0,st,dNow=S.day|0;
@@ -3650,7 +3686,7 @@ if(met&&dNow>=6&&dNow<=15)t="「阿祿，我回來了。我去了"+p[1]+"，"+ev
 else if(met&&dissonanceOn())t="「我回來了。」她把"+it+"放在桌上，語氣平常得像只是去買菜。";
 else if(met)t="「……我回來了。」她把"+it+"放在桌上，語氣平得像練習過。";
 else t="「阿祿，我回來了！我去了"+p[1]+"，"+ev+"。這個"+it+"送給你！」";
-say(t,met?(dissonanceOn()?"calm":["shy","shy","pout","cold"][st]):"joy");
+scenePresentation.returnLines.push({text:t,face:met?(dissonanceOn()?"calm":["shy","shy","pout","cold"][st]):"joy"});
 addLog((met?"🚪 ":p[0]+" ")+t+"｜"+dualTip());
 if(effM()<45&&!met)hearts(4);
 var trTxt=traces.join("\n\n");
@@ -3670,7 +3706,7 @@ queueCohabUnlock();
 afterAffTier(b);/* no rank popup */
 NSTORY.filter(function(s){var th=s[0]|0;var open=(th<=20)?((S.uncleStep|0)>=1&&effM()>=th):(step5Open()&&effM()>=th);return open&&S.seen.indexOf("n"+s[0])<0}).forEach(function(s){S.seen.push("n"+s[0]);mq.push(["💔 "+s[1],s[2]])});
 /* full bar does not force early move-out */
-nextPop()}finally{backLock=0}}
+scenePresentation.timer=setTimeout(finishReturnPresentation,prefersReducedMotion()?0:760)}finally{backLock=0}}
 function queueSqAsk(){/* 進新天後呼叫：掛 ❓；一天一題。未達門檻的題不上 */migrateSq();if(S.sqDone||S.taken||S.pendingSq!=null)return;var a=sqAvail();if(!a.length)return;S.pendingSq=a[Math.floor(Math.random()*a.length)];try{save()}catch(e){}paintQBtn()}
 function askNavUnlocked(){return !!S&&(S.aff|0)>=15&&!S.endingDone}
 function storyNavUnlocked(){if(!S||!STORY||!STORY.length||S.endingDone)return false;return (S.aff|0)>=(STORY[0][0]|0)}
@@ -3716,12 +3752,13 @@ Array.from(el.children).forEach(function(line){run.observer.observe(line)});
 $("mp").addEventListener("click",function(){finishMemoryReveal()});
 $("mp").addEventListener("keydown",function(e){if(memoryReveal&&(e.key==="Enter"||e.key===" ")){e.preventDefault();e.stopPropagation();finishMemoryReveal()}});
 var memoryMotionQuery=window.matchMedia("(prefers-reduced-motion: reduce)");if(memoryMotionQuery.addEventListener)memoryMotionQuery.addEventListener("change",function(e){if(e.matches)finishMemoryReveal()});
-function nextPop(){if(maskOpen())return;if(!mq.length){dayLock=0;hideSqOpts();if(moodPeekOn)clearMoodPeek();return}var m=mq.shift();if(!m){releaseDayLock();hideSqOpts();if(moodPeekOn)clearMoodPeek();return}
+function nextPop(){if(maskOpen()||presentationHeld())return;if(!mq.length){dayLock=0;hideSqOpts();if(moodPeekOn)clearMoodPeek();return}var m=mq.shift();if(!m){releaseDayLock();hideSqOpts();if(moodPeekOn)clearMoodPeek();return}
+if(m.returnDialogue){beginReturnReading(m.returnDialogue);return}
 if(m.sq!=null){finishMemoryReveal();showSqMask(m.sq);return}
 if(m.endingPrep){showEndingPrep();return}
 if(m.memoryId!=null){ensureMemoryState();if(S.memSeen.indexOf(m.memoryId)<0)S.memSeen.push(m.memoryId);S.memPending=S.memPending.filter(function(id){return id!==m.memoryId});save()}
 finishMemoryReveal();hideSqOpts();$("mt").textContent=m[0];$("mp").textContent=m[1];paintMaskChrome(m[0]);var reading=$("mask").querySelector(".modalReading");if(reading)reading.scrollTop=0;paintVoiceFog();$("mask").classList.add("on");revealMemoryText()}
-function dismissMask(ev){if(ev){try{ev.preventDefault();ev.stopPropagation()}catch(e){}}if(mbLock)return;finishMemoryReveal();if(sqReply){mbLock=1;sqReply.i++;if(sqReply.i<sqReply.lines.length){$("mp").textContent=sqReply.lines[sqReply.i];setTimeout(function(){mbLock=0},30);return}sqReply=null}mbLock=1;var mask=$("mask");if(mask){mask.classList.remove("on");mask.classList.remove("obs-dark");var _box=mask.querySelector(".box");if(_box)_box.classList.remove("obs-win-appear");if(!mq.length&&!moodPeekOn)mask.classList.remove("mood-chrome")}setTimeout(function(){try{nextPop()}catch(e){}if(S&&S.sleepAwaitClose&&!maskOpen()&&!(mq&&mq.length)){advanceAfterSleep(!!S.sleepForce)}else{releaseDayLock()}mbLock=0},30)}
+function dismissMask(ev){if(ev){try{ev.preventDefault();ev.stopPropagation()}catch(e){}}if(mbLock)return;if(scenePresentation.departurePending&&$("mask").classList.contains("departure-window")){scenePresentation.departurePending=false;updatePresentationState()}finishMemoryReveal();if(sqReply){mbLock=1;sqReply.i++;if(sqReply.i<sqReply.lines.length){$("mp").textContent=sqReply.lines[sqReply.i];setTimeout(function(){mbLock=0},30);return}sqReply=null}mbLock=1;var mask=$("mask");if(mask){mask.classList.remove("on");mask.classList.remove("obs-dark");var _box=mask.querySelector(".box");if(_box)_box.classList.remove("obs-win-appear");if(!mq.length&&!moodPeekOn)mask.classList.remove("mood-chrome")}setTimeout(function(){try{nextPop()}catch(e){}if(S&&S.sleepAwaitClose&&!maskOpen()&&!(mq&&mq.length)){advanceAfterSleep(!!S.sleepForce)}else{releaseDayLock()}mbLock=0},30)}
 (function(){var mb=$("mb");if(!mb)return;mb.onpointerup=null;mb.onclick=null;mb.addEventListener("click",dismissMask,false);mb.addEventListener("pointerup",function(e){if(e.pointerType==="mouse"&&e.button!==0)return;dismissMask(e)},false);
 var mask=$("mask");if(mask&&!mask._outsideBound){mask._outsideBound=1;mask.addEventListener("click",function(e){if(e.target===mask)dismissMask(e)},false);var box=mask.querySelector(".box");if(box&&!mask._boxStop){mask._boxStop=1;box.addEventListener("click",function(e){e.stopPropagation()},false)}}})();
 function replay(k){var s=STORY[k];mq.push(["📌 同居事件："+s[1],s[2]]);nextPop()}
@@ -3760,7 +3797,7 @@ S.uncleStep=next;S.uncleStarted=true;S.metOut=true;S.uncleTh=(a.th||[]).slice();
 var gained=addM(uncleStepMAmt());
 if(!S.chatUnlocked)S.chatUnlocked=[];if(S.chatUnlocked.indexOf(next)<0){S.chatUnlocked.push(next);S.chatNotice=true;}
 if(next===1&&S.seen.indexOf("n1")<0){S.seen.push("n1");var ns=NSTORY[0];if(ns)mq.push(["💔 "+ns[1],ns[2]])}
-if(a.home){say(a.home,next>=5?"shy":"pout");addLog("💬 "+a.home)}
+if(a.home){if(scenePresentation.phase==="returning")scenePresentation.returnLines.push({text:a.home,face:next>=5?"shy":"pout"});else say(a.home,next>=5?"shy":"pout");addLog("💬 "+a.home)}
 if(a.trace){S.pendingObs={trTxt:a.trace,met:true,motif:null};setObsBtn(true)}
 if(a.storm){try{var hu=document.querySelector(".homeui");if(hu)hu.classList.add("outing-shell");syncSilhouette()}catch(e){}}
 addLog("（外面的事，又往前推了一步。）"+(gained?"・強叔親密 +"+gained:""));
@@ -3917,10 +3954,10 @@ paintMeterValue($("mbar"),(effM()|0)+"%");
 var mn=$("mnum");if(mn)mn.textContent=String(effM()|0);
 var ot=$("outingTop");if(ot)ot.classList.toggle("off",!outing);if(outing)paintOutingHud();
 status()}
-function render(doPane){paintStats();paintDock();if(doPane!==false)pane();paintAskTab();paintQBtn();paintSideBadges();markChatThreadsNotice();paintChatNotice();try{queueCohabUnlock();checkMemories()}catch(e){}var pn=$("pane");if(pn){var empty=!(pn.innerHTML&&pn.innerHTML.trim());pn.classList.toggle("is-empty",empty);pn.classList.toggle("is-open",!empty&&!!tab)}syncMoodDim();syncSilhouette();refreshPresentationFeedback();save()}
+function render(doPane){paintStats();paintDock();if(doPane!==false)pane();paintAskTab();paintQBtn();paintSideBadges();markChatThreadsNotice();paintChatNotice();try{queueCohabUnlock();checkMemories()}catch(e){}var pn=$("pane");if(pn){var empty=!(pn.innerHTML&&pn.innerHTML.trim());pn.classList.toggle("is-empty",empty);pn.classList.toggle("is-open",!empty&&!!tab)}syncMoodDim();syncSilhouette();refreshPresentationFeedback();updatePresentationState();save()}
 
 var last=Date.now();
-setInterval(function(){var now=Date.now(),dt=(now-last)/1000;last=now;var paused=dayLock||maskOpen();
+setInterval(function(){var now=Date.now(),dt=(now-last)/1000;last=now;var paused=dayLock||maskOpen()||presentationHeld();
 if(!S.taken){if(!paused)S.dsec=Math.min(DL,S.dsec+dt*(S.trip?spd:1)*DAY_RATE)}
 if(!paused&&S.trip&&spd>1)S.trip.end-=dt*1000*(spd-1);
 if(!paused&&S.trip&&!backLock&&now>=S.trip.end){back();render()}
