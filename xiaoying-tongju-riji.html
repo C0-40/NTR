@@ -3219,7 +3219,7 @@ if(hint){hint.textContent=phase==="leaving"?"小紅準備出門…":phase==="ret
 }
 function cancelScenePresentation(){clearTimeout(scenePresentation.timer);sqReply=null;scenePresentation.phase="";scenePresentation.departurePending=false;updatePresentationState()}
 function beginReactionReading(text){scenePresentation.phase="reaction-reading";say(text,"calm");$("say").scrollTop=0;updatePresentationState();render(false);$("dlg").focus({preventScroll:true})}
-function continueReactionReading(){if(scenePresentation.phase!=="reaction-reading")return false;playUiSound("click");if(stopTyping($("say"),true))return true;sqReply=null;scenePresentation.phase="";updatePresentationState();nextPop();render(false);return true}
+function continueReactionReading(){if(scenePresentation.phase!=="reaction-reading")return false;playUiSound("click");if(stopTyping($("say"),true))return true;if(sqReply&&sqReply.i+1<sqReply.lines.length){sqReply.i++;beginReactionReading(sqReply.lines[sqReply.i]);return true}sqReply=null;scenePresentation.phase="";updatePresentationState();nextPop();render(false);return true}
 function finishReturnPresentation(){scenePresentation.phase="";updatePresentationState();nextPop();render(false)}
 function guardPresentationInput(e){if(!presentationHeld())return;var target=e.target,reading=scenePresentation.phase==="reaction-reading",allowed=reading&&target&&target.closest&&target.closest("#dlg,#av");if(allowed)return;if(e.type==="keydown"&&["Tab","Enter"," "].indexOf(e.key)<0)return;e.preventDefault();e.stopImmediatePropagation()}
 document.addEventListener("click",guardPresentationInput,true);document.addEventListener("keydown",guardPresentationInput,true);
@@ -3619,8 +3619,8 @@ function startSqReplies(qi,oi){var q=SQ[qi];if(presentationHeld()||S.trip||!q||S
 var o=q[5][oi];if(!o)return;
 if(S.sq.indexOf(qi)<0)S.sq.push(qi);S.sqDone=true;if(S.sqToday.indexOf(qi)<0)S.sqToday.push(qi);
 S.pendingSq=null;paintQBtn();addLog("❓ "+q[1]+"→"+o[0]);
-var lines=sqLines(o),fullReply=lines.join("\n\n");sqReply={i:0,lines:[fullReply]};
-hideSqOpts();var mask=$("mask");if(mask)mask.classList.remove("on","obs-dark");clearMoodPeek();closePane();beginReactionReading(fullReply);
+var lines=sqLines(o).slice();sqReply={i:0,lines:lines};
+hideSqOpts();var mask=$("mask");if(mask)mask.classList.remove("on","obs-dark");clearMoodPeek();closePane();beginReactionReading(lines[0]);
 try{save()}catch(e){}}
 function ansNow(qi,oi){startSqReplies(qi,oi)}
 function talk(){if(continueReactionReading())return;if(presentationHeld())return;if(stopTyping($("say"),true))return;if(busy)return;if(S.endingDone){if((S.ending|0)===2||S.taken){say(END_GONE,"sad");return}var bag=END_TALK[S.ending|0];if(bag&&bag.length){say("「"+pick(bag)+"」",(S.ending|0)===3?"sad":"shy");return}}if(S.taken){say(END_GONE,"sad");return}if(S.trip){say("（她還在外面。等她回來再聊吧。）","pout");return}if(maskOpen()||dayLock)return;
