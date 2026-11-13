@@ -2788,16 +2788,18 @@ body:has(#gameUI.outing-shell) .settingsAction,body:has(#gameUI.outing-shell) .s
 #mask.mask.memory-window #mt{color:#a06f6a!important;border-color:#d5afa0!important}
 #mask.mask.memory-window .face{border-color:#c49d8d!important;background-color:#f0d8cb!important}
 #mask.mask.memory-window #mp{color:#765344!important;line-height:1.9!important}
-/* Mom's messages: anchored header and footer, independently scrolling message bubbles. */
-.momPhone .chromeWin.phone{display:flex!important;flex-direction:column;overflow:hidden!important;padding:0!important;width:min(100%,410px)!important;border-color:#bf9b85!important;border-radius:25px!important}
-.momPhone .chromeWin.phone .pane-x{z-index:4;top:13px!important;right:13px!important}
-.momPhone .chromeWin.phone .chromeTitle{flex:none;margin:0!important;padding:18px 68px 16px 17px!important;min-height:76px;box-sizing:border-box;background:linear-gradient(145deg,#efdbcc,#e1c2b0);border-bottom:1px solid #c4a18a!important;gap:10px}
-.momPhone .chromeWin.phone .chromeTitle .chromeFace{background:#bb8c7e!important;color:#fff9ef!important;border:2px solid #f7e7d6!important;box-shadow:0 2px 4px #65453522!important}
-.momPhone .chromeWin.phone .chromeTitle h3{font-size:17px!important;line-height:1.4!important;color:#775346!important}
-.momPhone .chromeWin.phone .msgThread{flex:1;min-height:0;max-height:calc(76svh - 116px);overflow:auto;overscroll-behavior:contain;padding:16px 15px!important;display:flex;flex-direction:column;gap:13px;background:linear-gradient(#faf0e4,#f1e1d0)}
-.momPhone .chromeWin.phone .msgBubble{align-self:flex-start;width:fit-content;max-width:94%;box-sizing:border-box;margin:0!important;padding:12px 14px!important;background:linear-gradient(#fffaf2,#f7e8d8)!important;border:1px solid #d6b7a0!important;border-radius:17px 17px 17px 5px!important;box-shadow:inset 0 1px 0 #fff,0 2px 3px #6943330d!important;font-size:14px!important;line-height:1.8!important}
-.momPhone .chromeWin.phone .msgBubble .who{color:#b08070!important;font-size:10px!important;margin-bottom:5px!important}
-.momPhone .chromeWin.phone .chromeFoot{flex:none;margin:0!important;padding:11px 15px!important;background:#ecd8c6;color:#aa856c!important;font-size:10px!important;text-align:center;border-top:1px solid #d4b49a}
+/* Family messages: a quiet phone surface with a fixed contact bar. */
+.momPhone{padding:max(12px,env(safe-area-inset-top)) 14px max(12px,env(safe-area-inset-bottom))!important;background:#30271f91!important}
+.momPhone .chromeWin.phone{display:flex!important;flex-direction:column;overflow:hidden!important;padding:0!important;width:min(100%,410px)!important;max-height:min(86svh,760px)!important;border:1px solid #c6b5a4!important;border-radius:22px!important;background:#f8f3ea!important;box-shadow:0 16px 48px #21180f40!important}
+.momPhone .chromeWin.phone .pane-x{z-index:4;top:14px!important;right:12px!important;width:44px!important;height:44px!important;min-width:44px;border:0!important;border-radius:12px!important;background:transparent!important;box-shadow:none!important;color:#756256!important;font-size:26px!important}
+.momPhone .chromeWin.phone .chromeTitle{flex:none;justify-content:flex-start;margin:0!important;padding:15px 68px 15px 18px!important;min-height:74px;box-sizing:border-box;background:#eee9df;border-bottom:1px solid #dcd2c6!important;gap:11px}
+.momPhone .chromeWin.phone .chromeTitle .chromeFace{width:40px;height:40px;flex:none;background:#8c9b8b!important;color:#fffdf7!important;border:0!important;box-shadow:none!important;font-size:16px;font-weight:600}
+.momPhone .chromeWin.phone .chromeTitle h3{font-size:17px!important;line-height:1.4!important;font-weight:600!important;color:#4e453c!important}
+.momPhone .chromeWin.phone .msgThread{flex:1;min-height:0;max-height:calc(86svh - 116px);overflow:auto;overscroll-behavior:contain;padding:22px 16px 24px!important;display:flex;flex-direction:column;gap:14px;background:#f5f0e7;scrollbar-width:thin;scrollbar-color:#c5b7a5 transparent}
+.momPhone .chromeWin.phone .msgBubble{flex:none;align-self:flex-start;width:fit-content;max-width:89%;box-sizing:border-box;margin:0!important;padding:12px 14px!important;background:#fffdf7!important;border:1px solid #e2d8ca!important;border-radius:15px 15px 15px 4px!important;box-shadow:none!important;font-size:16px!important;font-weight:400!important;line-height:1.75!important;color:#4e443a!important;overflow-wrap:anywhere}
+.momPhone .chromeWin.phone .msgBubble .who{display:none!important}
+.momPhone .chromeWin.phone .chromeFoot{flex:none;margin:0!important;padding:11px 15px!important;background:#eee9df;color:#817164!important;font-size:12px!important;font-weight:400!important;text-align:center;border-top:1px solid #dcd2c6}
+@media(min-width:640px){.momPhone .chromeWin.phone{border:5px solid #c6b5a4!important;border-radius:28px!important}}
 
 
 #mask.mask #mb{background:var(--win-btn)!important;color:var(--win-ink)!important;border:2px solid var(--win-edge)!important;border-radius:15px!important;box-shadow:inset 0 1px 0 #fff5dc55,0 2px 0 var(--win-base)!important;text-shadow:none!important}
@@ -2944,36 +2946,40 @@ body:has(#gameUI.outing-shell) .settingsAction,body:has(#gameUI.outing-shell) .s
 #gameUI.homeui.outing-shell .outingDestination.is-concealed{width:5.5em;text-align:center;filter:blur(6px);opacity:.8;user-select:none;-webkit-user-select:none;pointer-events:none}
 @keyframes departureCard{from{opacity:0;translate:0 7px}to{opacity:1;translate:0 0}}
 @keyframes eveningCard{from{opacity:0}to{opacity:1}}
-/* Forum: a fixed header and a single scrollable feed, with quieter replies. */
-.chatRoom{padding:max(12px,env(safe-area-inset-top)) 12px max(12px,env(safe-area-inset-bottom))!important}
-.chatRoom .chatPanel{width:min(100%,440px)!important;height:min(82svh,690px);max-height:85svh!important;min-height:0;overflow:hidden!important;border-radius:24px!important;background:#f6e8db!important}
-.chatRoom .chatHead{flex:none;padding:14px 14px 12px!important;background:linear-gradient(#f2dcd0,#e8cab8)!important;border-bottom:2px solid #c5a18b!important;align-items:flex-start!important}
+/* Anonymous forum: readable posts and compact, neutral thread rows. */
+.chatRoom{padding:max(12px,env(safe-area-inset-top)) 12px max(12px,env(safe-area-inset-bottom))!important;background:#30271f91!important}
+.chatRoom .chatPanel{width:min(100%,460px)!important;height:min(84svh,740px);max-height:86svh!important;min-height:0;overflow:hidden!important;border:1px solid #c7baac!important;border-radius:20px!important;background:#f8f4ec!important;box-shadow:0 16px 48px #21180f40!important}
+.chatRoom .chatHead{flex:none;position:relative;min-height:76px;box-sizing:border-box;padding:16px 68px 14px 18px!important;background:#eee9df!important;border-bottom:1px solid #d8cfc2!important;align-items:flex-start!important}
 .chatRoom .chatHeading{display:flex;align-items:flex-start;gap:10px;min-width:0;flex:1}
 .chatRoom .chatHeading>div{min-width:0}
-.chatRoom .chatHead b{font-size:16px!important;color:#765044!important;line-height:1.5}
-.chatRoom #chatSub{font-size:11px!important;line-height:1.6;color:#a07c69!important;margin-top:4px}
-.chatRoom .chatMark{flex:none;width:33px;height:33px;display:grid;place-items:center;border:1px solid #caa38b;border-radius:11px;background:#fff3e7;color:#ab7767;box-shadow:inset 0 1px 0 #fff}
-.chatRoom .chatMark .uiIcon{width:21px;height:21px}
-.chatRoom .chatHead .pane-x{flex:none;background:linear-gradient(#fff5e9,#f1dfcc)!important;color:#8f6551!important}
-.chatRoom .chatFeed{flex:1;min-height:0;overflow:auto!important;overscroll-behavior:contain;scrollbar-width:thin;scrollbar-color:#c29b84 #f2e3d4;padding:14px 13px!important;gap:0!important;background:linear-gradient(#f8ecdf,#f1dfd0)!important}
-.chatRoom .chatFeed.is-list{gap:8px!important}
-.chatRoom .chatFeed.is-list .cThread{display:flex!important;align-items:center;gap:12px;flex:none;padding:15px 12px!important;border:1px solid #d3b8a1!important;border-left:3px solid #c49b86!important;border-radius:13px!important;background:#fff6ec!important;box-shadow:inset 0 1px 0 #fff,0 1px 2px #7957470b!important;color:#725241!important}
-.chatRoom .threadCopy{flex:1;min-width:0}.chatRoom .threadCopy b{font-size:14px!important;line-height:1.6!important;color:#725044!important;margin:0 0 5px!important}
-.chatRoom .threadCopy .sm{display:block;font-size:11px!important;line-height:1.6!important;color:#aa846c!important}
-.chatRoom .threadCount{flex:none;font-size:10px;white-space:nowrap;padding:5px 8px;border-radius:10px;background:#edd8c9;color:#9b715e}
-.chatRoom .cPost{flex:none;margin:0;padding:16px 11px!important;border:0!important;border-bottom:1px solid #d5b5a2!important;border-radius:0!important;background:#f2dfd5!important;box-shadow:none!important}
+.chatRoom .chatHead b{font-size:17px!important;font-weight:600!important;color:#4e453c!important;line-height:1.5}
+.chatRoom #chatSub{font-size:12px!important;font-weight:400;line-height:1.6;color:#7d7063!important;margin-top:4px}
+.chatRoom .chatMark{flex:none;width:30px;height:30px;display:grid;place-items:center;border:0;border-radius:9px;background:#e1d9cc;color:#766855;box-shadow:none}
+.chatRoom .chatMark .uiIcon{width:19px;height:19px}
+.chatRoom .chatHead .pane-x{position:absolute;top:14px!important;right:12px!important;width:44px!important;height:44px!important;min-width:44px;background:transparent!important;border:0!important;border-radius:12px!important;box-shadow:none!important;color:#756256!important;font-size:26px!important}
+.chatRoom .chatFeed{flex:1;min-height:0;overflow:auto!important;overscroll-behavior:contain;scrollbar-width:thin;scrollbar-color:#c5b7a5 transparent;padding:0 18px!important;gap:0!important;background:#f8f4ec!important}
+.chatRoom .chatFeed.is-list{padding:5px 16px!important;gap:0!important}
+.chatRoom .chatFeed.is-list .cThread{display:flex!important;align-items:center;gap:12px;flex:none;width:100%;min-height:76px;box-sizing:border-box;padding:15px 2px!important;margin:0!important;border:0!important;border-bottom:1px solid #ded5c9!important;border-radius:0!important;background:transparent!important;box-shadow:none!important;color:#4e443a!important;text-align:left}
+.chatRoom .chatFeed.is-list .cThread:last-child{border-bottom:0!important}
+.chatRoom .chatFeed.is-list .cThread:hover{background:#eee8dc!important}
+.chatRoom .threadCopy{flex:1;min-width:0}.chatRoom .threadCopy b{display:block;font-size:15px!important;font-weight:600!important;line-height:1.65!important;color:#4e443a!important;margin:0!important;overflow-wrap:anywhere}
+.chatRoom .threadCopy .sm{display:block;font-size:12px!important;font-weight:400!important;line-height:1.6!important;color:#817365!important;margin-top:4px}
+.chatRoom .threadCount{flex:none;font-size:12px;font-weight:400;white-space:nowrap;padding:0;border-radius:0;background:transparent;color:#817365}
+.chatRoom .cPost{flex:none;margin:0;padding:20px 0!important;border:0!important;border-bottom:1px solid #ded5c9!important;border-radius:0!important;background:transparent!important;box-shadow:none!important}
 .chatRoom .cPost:last-child{border-bottom:0!important}
-.chatRoom .cPost.is-main{margin-bottom:10px;padding:16px 14px!important;border:1px solid #d5b7a0!important;border-radius:15px!important;background:#fff8ed!important;box-shadow:inset 0 1px 0 #fff!important}
-.chatRoom .forumTitle{font-size:16px;line-height:1.65;color:#765044;margin:0 0 15px;padding-bottom:12px;border-bottom:1px solid #e1c7b1;overflow-wrap:anywhere}
-.chatRoom .forumByline{display:flex;align-items:center;gap:8px;margin-bottom:9px}
-.chatRoom .forumByline .who{margin:0!important;font-size:11px!important;color:#9b7062!important}
-.chatRoom .forumAvatar{width:27px;height:27px;display:grid;place-items:center;flex:none;border:1px solid #c7a28c;border-radius:9px;color:#a16c60;background:#f2d5ca}
-.chatRoom .forumAvatar svg{width:19px;height:19px}
-.chatRoom .forumAvatar.tone-1{color:#98734f;background:#f1dfbf}.chatRoom .forumAvatar.tone-2{color:#93758b;background:#e9d8df}.chatRoom .forumAvatar.tone-3{color:#a27c69;background:#ead9c7}
-.chatRoom .cPost .body{font-size:14px!important;line-height:1.95!important;color:#715143!important;overflow-wrap:anywhere}
-.chatRoom .cPost .meta{font-size:10px!important;line-height:1.6;color:#ac8b74!important;margin-top:11px}
-.chatRoom .chatFoot{flex:none;margin:0;padding:9px 12px!important;border-top:1px solid #d3b29b;background:#ebd4c1;color:#a17c65!important;font-size:10px!important}
-@media(max-width:360px){.chatRoom .chatHead{padding:12px 10px!important}.chatRoom .chatMark{display:none}.chatRoom .chatFeed{padding:11px 10px!important}.chatRoom .cPost .body{font-size:13px!important}}
+.chatRoom .cPost.is-main{margin:0;padding:24px 0!important;border:0!important;border-bottom:1px solid #cfc1af!important;border-radius:0!important;background:transparent!important;box-shadow:none!important}
+.chatRoom .forumTitle{font-size:19px;font-weight:600;line-height:1.6;color:#453d34;margin:0 0 20px;padding:0;border:0;overflow-wrap:anywhere}
+.chatRoom .forumByline{display:flex;align-items:center;gap:9px;margin-bottom:12px;min-width:0}
+.chatRoom .forumByline .who{min-width:0;margin:0!important;font-size:13px!important;font-weight:600!important;line-height:1.5;color:#65584b!important;overflow-wrap:anywhere}
+.chatRoom .forumAuthor{flex:none;font-size:11px;font-weight:500;color:#766957;background:#eae3d6;border:1px solid #d8cdbd;padding:1px 5px;border-radius:4px;line-height:1.5}
+.chatRoom .forumAvatar{width:28px;height:28px;display:grid;place-items:center;flex:none;border:1px solid #c7bbaa;border-radius:9px;color:#7c6c5c;background:#ece5d9}
+.chatRoom .forumAvatar svg{width:18px;height:18px}
+.chatRoom .forumAvatar.tone-1{color:#75806f;background:#e6e9df}.chatRoom .forumAvatar.tone-2{color:#827381;background:#ece5eb}.chatRoom .forumAvatar.tone-3{color:#83795f;background:#ede8d9}
+.chatRoom .cPost .body{font-size:16px!important;font-weight:400!important;line-height:1.75!important;color:#4e443a!important;white-space:pre-wrap;overflow-wrap:anywhere}
+.chatRoom .cPost .meta{display:block;font-size:12px!important;font-weight:400;line-height:1.6;color:#847668!important;margin-top:12px}
+.chatRoom .chatFoot{flex:none;margin:0;padding:11px 12px!important;border-top:1px solid #d8cfc2;background:#eee9df;color:#817164!important;font-size:12px!important;font-weight:400!important}
+@media(max-width:360px){.chatRoom .chatHead{padding-left:14px!important}.chatRoom .chatMark{display:none}.chatRoom .chatFeed{padding:0 14px!important}.chatRoom .chatFeed.is-list{padding:5px 12px!important}.chatRoom .threadCount{font-size:11px}.chatRoom .forumTitle{font-size:18px}}
+
 @media(prefers-reduced-motion:reduce){#mask.mask.departure-window .box,#mask.mask.evening-window .box{animation:none!important}}
 
 </style>
@@ -3101,7 +3107,7 @@ body:has(#gameUI.outing-shell) .settingsAction,body:has(#gameUI.outing-shell) .s
 <div class="momPhone" id="momPhone" aria-hidden="true" role="dialog" aria-modal="true" aria-label="媽媽的訊息" tabindex="0">
   <div class="chromeWin phone" role="document" onclick="event.stopPropagation()">
     <button type="button" class="pane-x" id="momClose" aria-label="關閉">×</button>
-    <div class="chromeTitle"><span class="chromeFace av" aria-hidden="true">媽</span><h3>媽媽的訊息</h3></div>
+    <div class="chromeTitle"><span class="chromeFace av" aria-hidden="true">媽</span><h3>媽媽</h3></div>
     <div class="chromeBody msgThread" id="momBubbles">
       <div class="msgBubble"><span class="who">媽媽</span>阿祿，媽知道你腿骨折要在家靜養一個月，可惜現在旅行不能照顧你</div>
       <div class="msgBubble"><span class="who">媽媽</span>你記得小紅嗎？就是那個青梅竹馬，多年沒見了吧。她最近從國外回來了，正在找地方住</div>
@@ -3727,10 +3733,12 @@ function chatThreadList(){var list=[];(CHAT_THREADS||[]).forEach(function(t,i){i
 var chatReadingPositions={},chatRenderedKey=null;
 function rememberChatReading(){var feed=$("chatFeed");if(feed&&chatRenderedKey!=null)chatReadingPositions[chatRenderedKey]=feed.scrollTop}
 function forumAvatar(who){var hash=0;Array.from(String(who)).forEach(function(c){hash=(hash*31+c.codePointAt(0))>>>0});var shapes=['<circle cx="12" cy="12" r="5"/>','<path d="m12 5 7 7-7 7-7-7Z"/>','<path d="m12 5 7 13H5Z"/>','<rect x="6" y="6" width="12" height="12" rx="3"/>'];return '<span class="forumAvatar tone-'+hash%4+'" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7">'+shapes[hash%4]+'</svg></span>'}
+function forumText(value){return String(value==null?"":value).replace(/[&<>"']/g,function(c){return {"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]})}
 function paintChatFeed(){var feed=$("chatFeed");if(!feed)return;rememberChatReading();var open=S.chatOpenStep,list=chatThreadList(),key=open==null||open===""?"list":"thread:"+open;chatRenderedKey=key;
-if(key==="list"){feed.classList.add("is-list");var html="";list.forEach(function(x){var t=x.t;html+='<button type="button" class="cThread" onclick="chatOpenThread('+x.i+')"><span class="threadCopy"><b>'+t.title+'</b><span class="sm">'+(t.sub||"討論串")+'</span></span><span class="threadCount">'+(t.posts?t.posts.length:0)+' 則</span></button>'});if(!html)html='<p class="sm">還沒有討論串。</p>';feed.innerHTML=html;var sub=$("chatSub");if(sub)sub.textContent="偶然滑到的討論串，不知為何忍不住看下去"}
-else{feed.classList.remove("is-list");var t=(CHAT_THREADS||[])[open|0],html="";if(t&&t.posts)t.posts.forEach(function(p,i){html+='<article class="cPost'+(i===0?' is-main':'')+'">'+(i===0?'<h3 class="forumTitle">'+t.title+'</h3>':'')+'<div class="forumByline">'+forumAvatar(p.who)+'<span class="who is-anon">'+p.who+'</span></div><div class="body">'+p.body+'</div><span class="meta">'+p.meta+'</span></article>'});if(!html)html='<p class="sm">這個討論串還沒有貼文。</p>';feed.innerHTML=html;var sub=$("chatSub");if(sub)sub.textContent=(t&&t.sub)||"偶然滑到的討論串，不知為何忍不住看下去"}
+if(key==="list"){feed.classList.add("is-list");var html="";list.forEach(function(x){var t=x.t,replies=Math.max(0,(t.posts?t.posts.length:0)-1);html+='<button type="button" class="cThread" onclick="chatOpenThread('+x.i+')"><span class="threadCopy"><b>'+forumText(t.title)+'</b>'+(t.sub?'<span class="sm">'+forumText(t.sub)+'</span>':"")+'</span><span class="threadCount">'+replies+' 則回覆</span></button>'});if(!html)html='<p class="sm">還沒有討論串。</p>';feed.innerHTML=html;var sub=$("chatSub");if(sub)sub.textContent="偶然滑到的討論串，不知為何忍不住看下去"}
+else{feed.classList.remove("is-list");var t=(CHAT_THREADS||[])[open|0],html="";if(t&&t.posts)t.posts.forEach(function(p,i){var author=i===0||!!(p.who&&p.who===t.posts[0].who);html+='<article class="cPost'+(i===0?' is-main':'')+'">'+(i===0?'<h3 class="forumTitle">'+forumText(t.title)+'</h3>':'')+'<div class="forumByline">'+forumAvatar(p.who)+'<span class="who is-anon">'+forumText(p.who)+'</span>'+(author?'<span class="forumAuthor">樓主</span>':"")+'</div><div class="body">'+forumText(p.body)+'</div>'+(p.meta?'<span class="meta">'+forumText(p.meta)+'</span>':"")+'</article>'});if(!html)html='<p class="sm">這個討論串還沒有貼文。</p>';feed.innerHTML=html;var sub=$("chatSub");if(sub)sub.textContent=(t&&t.sub)||"偶然滑到的討論串，不知為何忍不住看下去"}
 requestAnimationFrame(function(){if(chatRenderedKey===key)feed.scrollTop=chatReadingPositions[key]||0})}
+
 function chatOpenThread(i){rememberChatReading();S.chatOpenStep=i|0;paintChatFeed();try{save()}catch(e){}}
 function paintChatNotice(){var b=$("navChat");if(!b)return;var on=!!(S&&S.chatNotice);b.innerHTML=homeUiIcon("chat")+'<span>聊天室</span>'+(on?'<span class="opt-new notice-dot" role="img" aria-label="有新討論串" title="有新討論串"></span>':"");b.classList.toggle("chat-notice",on)}
 function markChatThreadsNotice(){if(!S||typeof chatThreadList!=="function")return;var n=chatThreadList().length;if(S._chatThreadCount==null){S._chatThreadCount=n;return}if(n>(S._chatThreadCount|0))S.chatNotice=true;S._chatThreadCount=n}
