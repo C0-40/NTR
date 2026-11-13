@@ -3007,51 +3007,52 @@ body:has(#gameUI.outing-shell) .settingsAction,body:has(#gameUI.outing-shell) .s
 @keyframes heroLeave{from{opacity:1}to{opacity:0;translate:15px 0}}
 @media(prefers-reduced-motion:reduce){#gameUI.fx-leave #av:not(.away){animation:none!important}}
 
-/* Warm visual hierarchy: quiet room and utility chrome, clear dialogue and actions. */
+/* Warm wood and clear ink: keep utility chrome quiet without washing out the artwork. */
+#gameUI.homeui:not(.outing-shell) .gameFrame{border:2px solid #946b50!important;background:#e4c19c!important;box-shadow:inset 0 1px 0 #fcebd7,0 3px 10px #62412d26}
 #gameUI.homeui:not(.outing-shell) .scene{
- background-image:linear-gradient(#f4ead84d,#f4ead84d),var(--room)!important;
+ background-image:linear-gradient(#f4ead81a,#f4ead81a),var(--room)!important;
  background-size:cover!important;background-position:56% center!important;
 }
 #gameUI.homeui:not(.outing-shell) .topHud .meterCard{
- background:#fff6e5d9!important;border:1px solid #cbbba480!important;box-shadow:none!important;
+ background:#f6e3c9eb!important;border:1px solid #b28d6c!important;box-shadow:none!important;
 }
-#gameUI.homeui:not(.outing-shell) .topHud .meterName{font-weight:500!important;color:#7d6b59!important}
-#gameUI.homeui:not(.outing-shell) .topHud .meterNum{font-weight:600!important;color:#765f4d!important}
-#gameUI.homeui:not(.outing-shell) .topHud .meterCard .bar{box-shadow:none!important;background:#dfcfbb!important}
-#gameUI.homeui:not(.outing-shell) #dayl{background:#fff6e5d9!important;border:1px solid #cbbba480!important;box-shadow:none!important}
-#gameUI.homeui:not(.outing-shell) #dayl::before{background:#cdb1a1!important;opacity:.6}
+#gameUI.homeui:not(.outing-shell) .topHud .meterName{font-weight:500!important;color:#78583e!important}
+#gameUI.homeui:not(.outing-shell) .topHud .meterNum{font-weight:600!important;color:#65412b!important}
+#gameUI.homeui:not(.outing-shell) .topHud .meterCard .bar{box-shadow:none!important;background:#d5b48f!important}
+#gameUI.homeui:not(.outing-shell) #dayl{background:#f6e3c9eb!important;border:1px solid #b28d6c!important;box-shadow:none!important}
+#gameUI.homeui:not(.outing-shell) #dayl::before{background:#b88168!important;opacity:.6}
 #gameUI.homeui:not(.outing-shell) #dayl::after{opacity:.45}
-#gameUI.homeui:not(.outing-shell) #dayl .dayMark-n{font-weight:600!important;color:#987461!important}
+#gameUI.homeui:not(.outing-shell) #dayl .dayMark-n{font-weight:600!important;color:#8c563f!important}
 #gameUI.homeui:not(.outing-shell) .topHud .collectionNav .bubble,
 #gameUI.homeui:not(.outing-shell) .topHud .collectionNav #settingsBtn{
- background:#fff6e5db!important;border:1px solid #cbbba4!important;box-shadow:none!important;color:#8c7865!important;
+ background:#f6e3c9ed!important;border:1px solid #b18d6f!important;box-shadow:none!important;color:#79583f!important;
 }
-#gameUI.homeui:not(.outing-shell) .topHud .collectionNav .bubble:disabled{background:#efe5d5cc!important;box-shadow:none!important;color:#9a8975!important}
-#gameUI.homeui:not(.outing-shell) .dialogueZone .sideNav.right{box-shadow:none!important;border:1px solid #cbbba4!important;background:#fff6e5e6!important}
+#gameUI.homeui:not(.outing-shell) .topHud .collectionNav .bubble:disabled{background:#e5d1b9ed!important;box-shadow:none!important;color:#9b7d60!important}
+#gameUI.homeui:not(.outing-shell) .dialogueZone .sideNav.right{box-shadow:none!important;border:1px solid #b18d6f!important;background:#f6e3c9ed!important}
 #gameUI.homeui:not(.outing-shell) .dialogueZone .sideNav.right .bubble{font-weight:500!important;background:transparent!important;box-shadow:none!important}
-#gameUI.homeui #dlg{border:1px solid #b8977b!important;background:#fff8eef5!important;box-shadow:0 3px 12px #4d33251a!important}
-#gameUI.homeui #dlg #say{font-size:16px!important;font-weight:400!important;line-height:1.65!important;color:#604938!important}
+#gameUI.homeui #dlg{height:104px!important;min-height:104px!important;max-height:104px!important;padding:20px 15px 22px!important;border:2px solid #8e6047!important;background:#f8e9d4fa!important;box-shadow:0 2px 0 #ac805e55,0 3px 10px #4d332526!important}
+#gameUI.homeui #dlg .dlgBody{height:100%;min-height:0}
+#gameUI.homeui #dlg #say{height:3.3em!important;min-height:3.3em!important;max-height:3.3em!important;flex:none!important;box-sizing:border-box;padding:0 3px 0 0!important;overflow-y:auto!important;overscroll-behavior:contain;font-size:16px!important;font-weight:400!important;line-height:1.65!important;color:#5b392a!important}
 #gameUI.homeui #dlg #nm{font-weight:600!important}
 #gameUI.homeui #dlg:focus{outline:none}
-#gameUI.homeui #dlg:focus-visible{outline:2px solid #c7a084;outline-offset:3px}
-#gameUI.homeui.presentation-reading #dlg{min-height:132px!important;max-height:43svh!important;padding-bottom:22px!important}
-#gameUI.homeui.presentation-reading #dlg #say{min-height:0!important;max-height:27svh!important;overflow-y:auto!important;overscroll-behavior:contain}
+#gameUI.homeui #dlg:focus-visible{outline:2px solid #a57856;outline-offset:3px}
 /* Primary actions retain depth; secondary surfaces use one fine edge. */
-#gameUI.homeui .dock.tabs button:not(:disabled){border:2px solid #b48c72!important;box-shadow:inset 0 1px 0 #fffaf066,0 2px 0 #b28c71!important;font-weight:600!important}
-#gameUI.homeui:not(.outing-shell) .dock.tabs button:not(:disabled){background:linear-gradient(#fff5e5,#ead1b5)!important;color:#714e38!important}
-#gameUI.homeui:not(.outing-shell) .dock.tabs #sleepBtn:not(:disabled){background:linear-gradient(#e6c2b5,#cc9c92)!important}
-#gameUI.homeui #pane[data-panel-kind]{border:1px solid #c3a78b!important;background:#f8eddd!important;box-shadow:0 8px 24px #3a261c24!important}
-#gameUI.homeui #pane[data-panel-kind] .paneHead{background:#f2e3d0!important;border-bottom:1px solid #d6c2aa!important;box-shadow:none!important}
-#gameUI.homeui #pane[data-panel-kind] .paneHead .collectionTitle{color:#795a43!important;font-weight:600!important;text-shadow:none!important}
-#gameUI.homeui #pane[data-panel-kind] .paneHead .pane-x{border:1px solid #c9b398!important;background:#fff5e6!important;box-shadow:none!important;color:#86674e!important}
+#gameUI.homeui .dock.tabs button:not(:disabled){border:2px solid #875a43!important;box-shadow:inset 0 1px 0 #fff5e066,0 2px 0 #98694d!important;font-weight:600!important}
+#gameUI.homeui:not(.outing-shell) .dock.tabs button:not(:disabled){background:linear-gradient(#f8e7d0,#e4bf99)!important;color:#5b392a!important}
+#gameUI.homeui:not(.outing-shell) .dock.tabs button[data-t="home"]:not(:disabled){background:linear-gradient(#e7b6a8,#cd8f85)!important}
+#gameUI.homeui:not(.outing-shell) .dock.tabs #sleepBtn:not(:disabled){background:linear-gradient(#dfb19f,#c3897d)!important}
+#gameUI.homeui #pane[data-panel-kind]{border:1px solid #ae805e!important;background:#f6e3c9!important;box-shadow:0 8px 24px #3a261c24!important}
+#gameUI.homeui #pane[data-panel-kind] .paneHead{background:#e9cfad!important;border-bottom:1px solid #c8a17c!important;box-shadow:none!important}
+#gameUI.homeui #pane[data-panel-kind] .paneHead .collectionTitle{color:#73472e!important;font-weight:600!important;text-shadow:none!important}
+#gameUI.homeui #pane[data-panel-kind] .paneHead .pane-x{border:1px solid #ad8361!important;background:#fff5e6!important;box-shadow:none!important;color:#86674e!important}
 #gameUI.homeui #pane[data-panel-kind] .row,
 #gameUI.homeui #pane[data-panel-kind] .row[data-action-state="ready"],
-#gameUI.homeui #pane[data-panel-kind] .row[data-action-state="revisit"]{border:1px solid #d7c4ad!important;background:#fff8ed!important;box-shadow:none!important}
+#gameUI.homeui #pane[data-panel-kind] .row[data-action-state="revisit"]{border:1px solid #c7a887!important;background:#fff1dc!important;box-shadow:none!important}
 #gameUI.homeui #pane[data-panel-kind] .row[data-action-state="used"]{border:1px solid #bfad94!important;background:#eee5d6!important}
 #gameUI.homeui #pane[data-panel-kind] .row[data-action-state="locked"]{border:1px dashed #c9baa5!important;background:#efe7dc!important}
-#gameUI.homeui #pane[data-panel-kind] .row b{font-size:14px!important;font-weight:600!important;color:#674b38!important}
-#gameUI.homeui #pane[data-panel-kind] .row .sm,#gameUI.homeui #pane[data-panel-kind]>.sm{font-size:12px!important;font-weight:400!important;color:#8d765d!important}
-#gameUI.homeui #pane[data-panel-kind] .row .btn:not(:disabled){border:2px solid #b48c72!important;background:linear-gradient(#f7e5cf,#dfbea0)!important;box-shadow:inset 0 1px 0 #fff8ec66,0 2px 0 #b28c71!important;color:#62452f!important;font-weight:600!important}
+#gameUI.homeui #pane[data-panel-kind] .row b{font-size:14px!important;font-weight:600!important;color:#5b392a!important}
+#gameUI.homeui #pane[data-panel-kind] .row .sm,#gameUI.homeui #pane[data-panel-kind]>.sm{font-size:12px!important;font-weight:400!important;color:#876044!important}
+#gameUI.homeui #pane[data-panel-kind] .row .btn:not(:disabled){border:2px solid #875a43!important;background:linear-gradient(#f3d8b8,#d9ad85)!important;box-shadow:inset 0 1px 0 #fff2dd66,0 2px 0 #98694d!important;color:#5b392a!important;font-weight:600!important}
 /* Preserve deferred settings and ending appearance. */
 #mask.mask:not(.presentation-ending) .box{border:1px solid #c3a78b!important;box-shadow:0 12px 32px #2d1d1433!important}
 #mask.mask:not(.presentation-ending) #mp{font-size:16px!important;font-weight:400!important;line-height:1.8!important}
