@@ -3369,33 +3369,32 @@ body:has(#gameUI.homeui.outing-shell){background:#2c221d!important;background-im
 #gameUI.homeui:not(.outing-shell) .topHud #mbox .meterNum{color:#604b55!important}
 #gameUI.homeui:not(.outing-shell) #dayl .dayMark-n{color:#745038!important}
 #gameUI.homeui:not(.outing-shell):not(.presentation-reading) .topHud .collectionNav .bubble:not(:disabled),#gameUI.homeui:not(.outing-shell):not(.presentation-reading) .topHud .collectionNav #settingsBtn{color:#694b38!important}
-/* Three stable header zones; reading destinations share the dialogue toolbar on phones. */
-#gameUI.homeui:not(.outing-shell) .topHud{grid-template-columns:minmax(0,1fr) 96px minmax(0,1fr)!important;grid-template-rows:96px!important;gap:10px!important;align-items:start!important}
-#gameUI.homeui:not(.outing-shell) .topHud .topMeta.meterStack{grid-column:1!important;grid-row:1!important;align-self:start!important}
-#gameUI.homeui:not(.outing-shell) .topHud .dayClock{grid-column:2!important;grid-row:1!important;align-self:start!important}
-#gameUI.homeui:not(.outing-shell) .topHud .collectionNav{grid-column:3!important;grid-row:1!important;align-self:start!important;justify-self:end!important;margin-top:9px}
-#gameUI.homeui:not(.outing-shell) #dayl{min-height:64px!important;padding:8px 3px!important;gap:3px!important;border-radius:22px!important}
-#gameUI.homeui:not(.outing-shell) #dayl .dayMark-n{font-size:30px!important;line-height:1!important}
-#gameUI.homeui:not(.outing-shell) #dayl .dayMark-k{font-size:11px!important}
+/* Reference header: relationship rows, day plaque and three tools stay on one line. */
+#gameUI.homeui:not(.outing-shell) .topHud{--hud-tool:clamp(30px,8.5vw,44px);grid-template-columns:minmax(0,1fr) clamp(64px,20vw,96px) auto!important;grid-template-rows:auto!important;gap:6px!important;align-items:center!important}
+#gameUI.homeui:not(.outing-shell) .topHud .topMeta.meterStack{grid-column:1!important;grid-row:1!important;align-self:start!important;padding:9px 7px!important;gap:9px!important;border-radius:18px!important;box-shadow:inset 0 1px 0 #fff8ec!important}
+#gameUI.homeui:not(.outing-shell) .topHud .meterCard:not(.off){display:grid!important;grid-template-columns:minmax(0,1fr) auto;align-items:center;gap:5px!important}
+#gameUI.homeui:not(.outing-shell) .topHud .meterHead{display:contents!important}
+#gameUI.homeui:not(.outing-shell) .topHud .meterHead .meterHeart{grid-column:1;grid-row:1;justify-self:start;font-size:12px!important}
+#gameUI.homeui:not(.outing-shell) .topHud .meterName{grid-column:1;grid-row:1;justify-self:start;margin:0 0 0 15px!important;white-space:nowrap;font-size:11px!important;letter-spacing:0!important}
+#gameUI.homeui:not(.outing-shell) .topHud .meterNum{grid-column:2;grid-row:1;margin:0!important;font-size:12px!important}
+#gameUI.homeui:not(.outing-shell) .topHud .meterCard .bar{grid-column:1;grid-row:1;width:calc(100% - 44px)!important;justify-self:end;height:6px!important}
+#gameUI.homeui:not(.outing-shell) .topHud .dayClock{grid-column:2!important;grid-row:1!important;align-self:center!important;width:100%!important}
+#gameUI.homeui:not(.outing-shell) #dayl{min-width:0!important;width:100%!important;min-height:58px!important;padding:8px 2px!important;gap:2px!important;border-radius:48% 48% 48% 48% / 28% 28% 28% 28%!important;border-color:#b99a7f!important;box-shadow:inset 0 0 0 2px #fff5e699!important}
+#gameUI.homeui:not(.outing-shell) #dayl .dayMark-n{font-size:30px!important;line-height:1!important;color:#9d5960!important}
+#gameUI.homeui:not(.outing-shell) #dayl .dayMark-k{font-size:10px!important;color:#694b38!important}
 #gameUI.homeui:not(.outing-shell) #dayl::before,#gameUI.homeui:not(.outing-shell) #dayl::after{display:none!important}
-@media(max-width:600px){
- #gameUI.homeui:not(.outing-shell) .topHud{grid-template-columns:minmax(0,1fr) 76px minmax(0,1fr)!important;gap:8px!important}
- #gameUI.homeui:not(.outing-shell) .topHud .topMeta.meterStack{padding:9px 6px!important}
- #gameUI.homeui:not(.outing-shell) .topHud .collectionNav{justify-self:end!important;margin:0!important;width:44px!important}
- #gameUI.homeui:not(.outing-shell) .dialogueZone .sideNav.right.readingNav{align-self:stretch!important;display:flex!important;width:100%;box-sizing:border-box}
- #gameUI.homeui:not(.outing-shell) .dialogueZone .sideNav.right.readingNav .bubble{flex:1 1 0!important;min-width:0!important;width:auto!important;min-height:44px!important;padding:8px 3px!important;gap:3px!important;display:inline-flex;align-items:center;justify-content:center;font-size:11px!important}
- #gameUI.homeui:not(.outing-shell) .dialogueZone .sideNav.right.readingNav .bubble[aria-hidden="true"]{display:none!important}
- #gameUI.homeui:not(.outing-shell) .dialogueZone .sideNav.right.readingNav .bubble>span:not(.opt-new){position:static!important;width:auto!important;height:auto!important;clip-path:none!important;overflow:visible!important;white-space:nowrap}
- #gameUI.homeui:not(.outing-shell) .dialogueZone .sideNav.right.readingNav .bubble .uiIcon{width:17px!important;height:17px!important;flex:none}
-}
+#gameUI.homeui:not(.outing-shell) .topHud .collectionNav{grid-column:3!important;grid-row:1!important;align-self:center!important;gap:4px!important;width:auto!important}
+#gameUI.homeui:not(.outing-shell) .topHud .collectionNav .bubble,#gameUI.homeui:not(.outing-shell) .topHud .collectionNav #settingsBtn{width:var(--hud-tool)!important;min-width:var(--hud-tool)!important;height:44px!important;min-height:44px!important;padding:0!important;border-radius:12px!important;box-shadow:inset 0 1px 0 #fff8ec,0 1px 0 #b99a7f55!important}
+#gameUI.homeui:not(.outing-shell) .topHud .collectionNav .uiIcon,#gameUI.homeui:not(.outing-shell) .topHud .collectionNav #settingsBtn svg{width:22px!important;height:22px!important}
 @media(max-width:360px){
- #gameUI.homeui:not(.outing-shell) .topHud{grid-template-columns:minmax(0,1fr) 64px minmax(0,1fr)!important;gap:6px!important}
- #gameUI.homeui:not(.outing-shell) #dayl{padding:8px 1px!important;gap:2px!important}
- #gameUI.homeui:not(.outing-shell) #dayl .dayMark-n{font-size:26px!important}
- #gameUI.homeui:not(.outing-shell) #dayl .dayMark-k{font-size:10px!important}
- #gameUI.homeui:not(.outing-shell) .topHud .meterName{font-size:11px!important;letter-spacing:0!important}
- #gameUI.homeui:not(.outing-shell) .topHud .meterNum{font-size:12px!important}
- #gameUI.homeui:not(.outing-shell) .topHud .meterHead .meterHeart{font-size:11px!important}
+ #gameUI.homeui:not(.outing-shell) .topHud{grid-template-columns:minmax(0,1fr) 58px auto!important;gap:4px!important}
+ #gameUI.homeui:not(.outing-shell) .topHud .topMeta.meterStack{padding:8px 5px!important}
+ #gameUI.homeui:not(.outing-shell) .topHud .meterName{font-size:10px!important;margin-left:12px!important}
+ #gameUI.homeui:not(.outing-shell) .topHud .meterHead .meterHeart{font-size:10px!important}
+ #gameUI.homeui:not(.outing-shell) .topHud .meterNum{font-size:11px!important}
+ #gameUI.homeui:not(.outing-shell) .topHud .meterCard .bar{width:calc(100% - 36px)!important}
+ #gameUI.homeui:not(.outing-shell) #dayl .dayMark-n{font-size:25px!important}
+ #gameUI.homeui:not(.outing-shell) #dayl .dayMark-k{font-size:9px!important}
 }
 </style>
 </head>
@@ -3408,7 +3407,7 @@ body:has(#gameUI.homeui.outing-shell){background:#2c221d!important;background-im
             <div class="meterCard meterAlu">
               <div class="meterHead">
                 <span class="meterHeart" aria-hidden="true">♥</span>
-                <span class="meterName">阿祿親密度</span>
+                <span class="meterName">阿祿</span>
                 <span class="meterNum" id="affn">0</span>
               </div>
               <div class="bar affBar" aria-hidden="true"><i id="affbar"></i><span class="affInk" id="affInk" aria-hidden="true"></span><span class="affSweep" id="affSweep" aria-hidden="true"></span></div>
@@ -3416,7 +3415,7 @@ body:has(#gameUI.homeui.outing-shell){background:#2c221d!important;background-im
             <div class="meterCard meterUncle off" id="mbox">
               <div class="meterHead">
                 <span class="meterHeart" aria-hidden="true">♥</span>
-                <span class="meterName" id="mlab">強叔親密度</span>
+                <span class="meterName" id="mlab">強叔</span>
                 <span class="meterNum" id="mnum">0</span>
               </div>
               <div class="bar m" id="mbarwrap"><i id="mbar"></i></div>
@@ -3472,7 +3471,7 @@ body:has(#gameUI.homeui.outing-shell){background:#2c221d!important;background-im
     <button type="button" class="qHomeBtn" id="qHomeBtn" aria-label="小紅有問題要問你" onclick="openPendingSq()"><svg aria-hidden="true" viewBox="0 0 24 24" width="25" height="25" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M8 8a4 4 0 1 1 6.6 3c-1.6 1.2-2.6 1.5-2.6 4"/><circle cx="12" cy="19" r="1" fill="currentColor" stroke="none"/></svg><span>她想問你</span></button>
     </div>
     <div class="dialogueZone">
-<nav class="sideNav right readingNav" id="readingNav" aria-label="聊天與提問">
+<nav class="sideNav right" aria-label="聊天與提問">
       <button type="button" class="bubble actChat" id="navChat" aria-label="打開匿名聊天室" onclick="openChatRoom()"><svg class="uiIcon" viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M15 16H8l-4 3v-4a7 7 0 0 1 3-13h7a7 7 0 0 1 1 14Z"/><path d="M19 8a6 6 0 0 1 1 10v3l-4-2h-4"/><path d="M7 9h.01M11 9h.01M15 9h.01"/></svg><span>聊天室</span></button>
       <button type="button" class="bubble" data-t="ask" id="navAsk"><svg class="uiIcon" viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M19 16a8 8 0 1 0-5 3l6 2-1-5Z"/><path d="M9 8a3 3 0 0 1 6 0c0 2-3 2-3 4"/><path d="M12 15h.01"/></svg><span>提問</span></button>
     </nav>
@@ -4538,17 +4537,6 @@ var readingArea=$("modalReading");readingArea.addEventListener("scroll",updateRe
 $("mp").addEventListener("scroll",updateReadingHint,{passive:true});new ResizeObserver(updateReadingHint).observe($("mp"));
 
 var windowSkinObserver=new MutationObserver(skinWindowUi);["mt","thbox","outingActLine","pane"].forEach(function(id){var el=$(id);if(el)windowSkinObserver.observe(el,{childList:true,subtree:true,characterData:true})});skinWindowUi();
-
-var homeMobileNavigation=window.matchMedia("(max-width:600px)");
-function syncHomeReadingNavigation(){
-  var top=document.querySelector(".collectionNav"),reading=$("readingNav"),mobile=homeMobileNavigation.matches,active=document.activeElement;
-  if(mobile){reading.insertBefore($("navStory"),$("navChat"));reading.insertBefore($("navMem"),$("navChat"))}
-  else{top.insertBefore($("navStory"),$("settingsBtn"));top.insertBefore($("navMem"),$("settingsBtn"))}
-  top.setAttribute("aria-label",mobile?"設定":"日常、回憶與設定");reading.setAttribute("aria-label",mobile?"日常、回憶、聊天室與提問":"聊天與提問");
-  if(active&&["navStory","navMem"].indexOf(active.id)>=0&&!active.disabled&&!$("gameUI").inert)active.focus({preventScroll:true});
-}
-syncHomeReadingNavigation();
-if(homeMobileNavigation.addEventListener)homeMobileNavigation.addEventListener("change",syncHomeReadingNavigation);else homeMobileNavigation.addListener(syncHomeReadingNavigation);
 
 load();
 if(S.trip&&Date.now()>=S.trip.end)back();
