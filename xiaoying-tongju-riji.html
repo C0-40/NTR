@@ -3370,7 +3370,7 @@ body:has(#gameUI.homeui.outing-shell){background:#2c221d!important;background-im
 #gameUI.homeui:not(.outing-shell) #dayl .dayMark-n{color:#745038!important}
 #gameUI.homeui:not(.outing-shell):not(.presentation-reading) .topHud .collectionNav .bubble:not(:disabled),#gameUI.homeui:not(.outing-shell):not(.presentation-reading) .topHud .collectionNav #settingsBtn{color:#694b38!important}
 /* Reference header: relationship rows, day plaque and three tools stay on one line. */
-#gameUI.homeui:not(.outing-shell) .topHud{--hud-tool:clamp(30px,8.5vw,44px);grid-template-columns:minmax(0,1fr) clamp(62px,19vw,86px) minmax(0,1fr)!important;grid-template-rows:auto!important;gap:6px!important;align-items:center!important}
+#gameUI.homeui:not(.outing-shell) .topHud{--hud-tool:36px;--hud-hit:38px;grid-template-columns:minmax(0,1fr) clamp(62px,19vw,86px) minmax(0,1fr)!important;grid-template-rows:auto!important;gap:6px!important;align-items:center!important}
 #gameUI.homeui:not(.outing-shell) .topHud .topMeta.meterStack{grid-column:1!important;grid-row:1!important;align-self:start!important;padding:9px 5px!important;gap:9px!important;border-radius:18px!important;box-shadow:inset 0 1px 0 #fff8ec!important}
 #gameUI.homeui:not(.outing-shell) .topHud .meterCard:not(.off){display:grid!important;grid-template-columns:minmax(0,1fr);align-items:center;gap:5px!important}
 #gameUI.homeui:not(.outing-shell) .topHud .meterHead{display:contents!important}
@@ -3380,16 +3380,23 @@ body:has(#gameUI.homeui.outing-shell){background:#2c221d!important;background-im
 #gameUI.homeui:not(.outing-shell) .topHud .topMeta .meterCard .bar{grid-column:1;grid-row:1;width:calc(100% - 40px)!important;justify-self:end;height:16px!important}
 #gameUI.homeui:not(.outing-shell) .topHud #mbarwrap{height:16px!important;background:#ddc6ad!important;box-shadow:none!important}
 #gameUI.homeui:not(.outing-shell) .topHud .dayClock{grid-column:2!important;grid-row:1!important;align-self:center!important;width:100%!important}
-#gameUI.homeui:not(.outing-shell) #dayl{min-width:0!important;width:100%!important;min-height:56px!important;padding:13px 2px 6px!important;gap:2px!important;border-radius:11px!important;border-color:#b49b85!important;box-shadow:none!important}
-#gameUI.homeui:not(.outing-shell) #dayl .dayMark-n{font-size:26px!important;line-height:1!important;color:#745038!important}
-#gameUI.homeui:not(.outing-shell) #dayl .dayMark-k{font-size:10px!important;color:#694b38!important}
-#gameUI.homeui:not(.outing-shell) #dayl::before{display:block!important;height:5px!important;border-radius:11px 11px 0 0!important;background:#b68b69!important;opacity:1!important}
-#gameUI.homeui:not(.outing-shell) #dayl::after{display:none!important}
+#gameUI.homeui:not(.outing-shell) #dayl{min-width:0!important;width:100%!important;min-height:60px!important;padding:14px 2px 7px!important;gap:2px!important;border-radius:11px!important;border-color:#b49b85!important;box-shadow:inset 0 -2px 0 #eddfcd,0 2px 0 #c4ad92,0 3px 3px #5b3d2520!important}
+#gameUI.homeui:not(.outing-shell) #dayl .dayMark-n{font-size:28px!important;line-height:1!important;color:#745038!important}
+#gameUI.homeui:not(.outing-shell) #dayl .dayMark-k{font-size:9px!important;color:#694b38!important}
+#gameUI.homeui:not(.outing-shell) #dayl::before{display:block!important;height:8px!important;border-radius:11px 11px 0 0!important;background:#b68b69!important;opacity:1!important}
+#gameUI.homeui:not(.outing-shell) #dayl::after{display:block!important;opacity:1!important;top:0!important;left:calc(50% - 15px)!important;width:30px!important;height:7px!important;border-radius:0!important;box-shadow:none!important;background:radial-gradient(circle,#785d49 0 1.5px,#f9ecda 1.5px 2.5px,transparent 2.5px) left center/6px 6px no-repeat,radial-gradient(circle,#785d49 0 1.5px,#f9ecda 1.5px 2.5px,transparent 2.5px) right center/6px 6px no-repeat!important}
 #gameUI.homeui:not(.outing-shell) .topHud .collectionNav{grid-column:3!important;grid-row:1!important;align-self:center!important;justify-self:end!important;gap:4px!important;width:auto!important}
-#gameUI.homeui:not(.outing-shell) .topHud .collectionNav .bubble,#gameUI.homeui:not(.outing-shell) .topHud .collectionNav #settingsBtn{width:var(--hud-tool)!important;min-width:var(--hud-tool)!important;height:44px!important;min-height:44px!important;padding:0!important;border-radius:12px!important;box-shadow:inset 0 1px 0 #fff8ec,0 1px 0 #b99a7f55!important}
-#gameUI.homeui:not(.outing-shell) .topHud .collectionNav .uiIcon,#gameUI.homeui:not(.outing-shell) .topHud .collectionNav #settingsBtn svg{width:22px!important;height:22px!important}
+#gameUI.homeui:not(.outing-shell) .topHud .collectionNav .bubble,#gameUI.homeui:not(.outing-shell) .topHud .collectionNav .bubble:disabled,#gameUI.homeui:not(.outing-shell) .topHud .collectionNav #settingsBtn{display:inline-flex!important;align-items:center!important;justify-content:center!important;width:var(--hud-hit)!important;min-width:var(--hud-hit)!important;height:44px!important;min-height:44px!important;padding:0!important;border:0!important;border-radius:10px!important;background:transparent!important;box-shadow:none!important}
+#gameUI.homeui:not(.outing-shell) .topHud .collectionNav .hudToolFace{display:flex!important;position:relative!important;align-items:center;justify-content:center;flex:none;width:var(--hud-tool)!important;height:var(--hud-tool)!important;clip-path:none!important;overflow:visible!important;box-sizing:border-box;border:1px solid #b49b85;border-radius:10px;background:#f5e7d7;box-shadow:inset 0 1px 0 #fff8ec,0 1px 0 #b99a7f55;pointer-events:none}
+#gameUI.homeui:not(.outing-shell) .topHud .collectionNav .hudToolFace>span{position:absolute;width:1px;height:1px;overflow:hidden;clip-path:inset(50%);white-space:nowrap}
+#gameUI.homeui:not(.outing-shell) .topHud .collectionNav .bubble:disabled .hudToolFace{background:#e7ddd0;border-color:#beac97;box-shadow:none}
+#gameUI.homeui:not(.outing-shell) .topHud .collectionNav .bubble.on .hudToolFace{background:#eedcc6;border-color:#a87b68}
+#gameUI.homeui:not(.outing-shell) .topHud .collectionNav button:not(:disabled):active .hudToolFace{box-shadow:inset 0 1px 3px #75473533}
+#gameUI.homeui.presentation-reading:not(.outing-shell) .topHud .collectionNav .hudToolFace{background:#e7dccd;border-color:#c1ad95;box-shadow:none}
+#gameUI.homeui:not(.outing-shell) .topHud .collectionNav .bubble:disabled::before{bottom:6px;right:3px}
+#gameUI.homeui:not(.outing-shell) .topHud .collectionNav .uiIcon,#gameUI.homeui:not(.outing-shell) .topHud .collectionNav #settingsBtn svg{width:20px!important;height:20px!important}
 @media(max-width:360px){
- #gameUI.homeui:not(.outing-shell) .topHud{grid-template-columns:minmax(0,1fr) 58px minmax(0,1fr)!important;gap:4px!important}
+ #gameUI.homeui:not(.outing-shell) .topHud{--hud-tool:34px;--hud-hit:34px;grid-template-columns:minmax(0,1fr) 58px minmax(0,1fr)!important;gap:4px!important}
  #gameUI.homeui:not(.outing-shell) .topHud .topMeta.meterStack{padding:8px 5px!important}
  #gameUI.homeui:not(.outing-shell) .topHud .meterName{font-size:10px!important;margin-left:12px!important}
  #gameUI.homeui:not(.outing-shell) .topHud .meterHead .meterHeart{font-size:10px!important}
@@ -3429,9 +3436,9 @@ body:has(#gameUI.homeui.outing-shell){background:#2c221d!important;background-im
       <div class="dayClock-day" id="dayl" data-day="1"><span class="dayMark-k">第</span><span class="dayMark-n">1</span><span class="dayMark-k">天</span></div>
     </div>
     <nav class="collectionNav" aria-label="日常、回憶與設定">
-      <button type="button" class="bubble sideStory" data-t="story" id="navStory" aria-label="日常" title="日常"><svg class="uiIcon" viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="m2 11 10-9 10 9M5 9v12h14V9M9 21v-7h6v7"/></svg><span>日常</span></button>
-      <button type="button" class="bubble sideMem" data-t="mem" id="navMem" aria-label="回憶" title="回憶"><svg class="uiIcon" viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M7 16a7 7 0 1 1 11-2 6 6 0 0 1-11 2Z"/><circle cx="5" cy="19" r="2"/><path d="M2 23h.01"/></svg><span>回憶</span></button>
-    <button type="button" class="chip chip-ico" id="settingsBtn" aria-label="開啟設定" aria-haspopup="dialog" aria-controls="gameSettings" onclick="openSettings()"><svg viewBox="0 0 24 24" width="25" height="25" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m9 3-.6 2-2 .9-2-.4-2 3.5 1.4 1.5v2.8L2.4 15l2 3.5 2-.4 2 .9.6 2h4l.6-2 2-.9 2 .4 2-3.5-1.4-1.7v-2.8L19.6 9l-2-3.5-2 .4-2-.9L13 3Z"/><circle cx="11" cy="12" r="3"/></svg></button>
+      <button type="button" class="bubble sideStory" data-t="story" id="navStory" aria-label="日常" title="日常"><span class="hudToolFace" aria-hidden="true"><svg class="uiIcon" viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="m2 11 10-9 10 9M5 9v12h14V9M9 21v-7h6v7"/></svg><span>日常</span></span></button>
+      <button type="button" class="bubble sideMem" data-t="mem" id="navMem" aria-label="回憶" title="回憶"><span class="hudToolFace" aria-hidden="true"><svg class="uiIcon" viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M7 16a7 7 0 1 1 11-2 6 6 0 0 1-11 2Z"/><circle cx="5" cy="19" r="2"/><path d="M2 23h.01"/></svg><span>回憶</span></span></button>
+    <button type="button" class="chip chip-ico" id="settingsBtn" aria-label="開啟設定" aria-haspopup="dialog" aria-controls="gameSettings" onclick="openSettings()"><span class="hudToolFace" aria-hidden="true"><svg viewBox="0 0 24 24" width="25" height="25" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m9 3-.6 2-2 .9-2-.4-2 3.5 1.4 1.5v2.8L2.4 15l2 3.5 2-.4 2 .9.6 2h4l.6-2 2-.9 2 .4 2-3.5-1.4-1.7v-2.8L19.6 9l-2-3.5-2 .4-2-.9L13 3Z"/><circle cx="11" cy="12" r="3"/></svg></span></button>
     </nav>
     </div>
     <div id="outingTop" class="outingTop off" role="status" aria-live="polite" aria-label="外出狀態">
