@@ -3325,6 +3325,22 @@ body:has(#gameUI.homeui.outing-shell){background:#2c221d!important;background-im
 #gameUI.homeui:not(.outing-shell) .dock.tabs .dockReturnHint{font-size:9.5px;font-weight:400;color:#8c6d55;white-space:nowrap}
 @media(max-width:360px){#gameUI.homeui:not(.outing-shell) .dock.tabs .dock-return{gap:4px!important}#gameUI.homeui:not(.outing-shell) .dock.tabs .dock-return .uiIcon{width:14px;height:14px}#gameUI.homeui:not(.outing-shell) .dock.tabs .dockReturnLabel{font-size:11.5px!important}}
 
+
+/* Clear relationship labels and independent, restrained idle motion. */
+#gameUI.homeui .topHud .meterHead .meterHeart{display:inline!important;font-size:12px!important;line-height:1;color:#b9797f!important;flex:none}
+#gameUI.homeui .topHud .meterName{white-space:nowrap;letter-spacing:0!important}
+@media(max-width:360px){#gameUI.homeui .topHud .meterName{font-size:11px!important}#gameUI.homeui .topHud .meterHead{gap:2px!important}}
+#gameUI.homeui:not(.outing-shell):not(.fx-leave):not(.fx-return) .girl:not(.away){animation:homeIdleBreath 6s ease-in-out infinite!important}
+@keyframes homeIdleBreath{0%,100%{scale:1 1}50%{scale:1 1.002}}
+.momPhone .momNotice{display:none;width:min(100%,350px);min-height:100px;padding:20px;border:1px solid #bea486;border-radius:18px;background:#fff2df;color:#5b4333;text-align:left;font:inherit;box-shadow:0 8px 30px #21180f44;cursor:pointer;animation:momNoticeGlow 2.4s ease-in-out infinite}
+.momNotice strong,.momNotice span{display:block}.momNotice strong{font-size:17px;margin-bottom:8px}.momNotice span{font-size:14px;line-height:1.7}.momNotice .momNoticeAction{margin-top:12px;font-size:13px;color:#8c6250;text-decoration:underline}
+.momPhone.mom-notice .momNotice{display:block}.momPhone.mom-notice .chromeWin.phone{display:none!important}
+.momPhone .chromeWin.phone{height:min(78svh,600px)!important}
+.momPhone .msgBubble[hidden]{display:none!important}
+.momPhone .momNext{min-height:44px;width:100%;margin-top:8px;border:1px solid #ae8e70;border-radius:10px;background:#e9cdaa;color:#573b33;font:inherit;font-size:14px;cursor:pointer}
+.momPhone .momNotice:focus-visible,.momPhone .momNext:focus-visible{outline:2px solid #9e6d51;outline-offset:3px}
+@keyframes momNoticeGlow{0%,100%{box-shadow:0 8px 30px #21180f44}50%{box-shadow:0 8px 30px #21180f44,0 0 14px #f6d5a866}}
+@media(prefers-reduced-motion:reduce){#gameUI.homeui:not(.outing-shell):not(.fx-leave):not(.fx-return) .girl:not(.away),.momPhone .momNotice{animation:none!important}}
 </style>
 </head>
 <body>
@@ -3336,7 +3352,7 @@ body:has(#gameUI.homeui.outing-shell){background:#2c221d!important;background-im
             <div class="meterCard meterAlu">
               <div class="meterHead">
                 <span class="meterHeart" aria-hidden="true">♥</span>
-                <span class="meterName">阿祿</span>
+                <span class="meterName">阿祿親密度</span>
                 <span class="meterNum" id="affn">0</span>
               </div>
               <div class="bar affBar" aria-hidden="true"><i id="affbar"></i><span class="affInk" id="affInk" aria-hidden="true"></span><span class="affSweep" id="affSweep" aria-hidden="true"></span></div>
@@ -3344,7 +3360,7 @@ body:has(#gameUI.homeui.outing-shell){background:#2c221d!important;background-im
             <div class="meterCard meterUncle off" id="mbox">
               <div class="meterHead">
                 <span class="meterHeart" aria-hidden="true">♥</span>
-                <span class="meterName" id="mlab">強叔</span>
+                <span class="meterName" id="mlab">強叔親密度</span>
                 <span class="meterNum" id="mnum">0</span>
               </div>
               <div class="bar m" id="mbarwrap"><i id="mbar"></i></div>
@@ -3448,15 +3464,15 @@ body:has(#gameUI.homeui.outing-shell){background:#2c221d!important;background-im
   </div>
 </div>
 <div class="momPhone" id="momPhone" aria-hidden="true" role="dialog" aria-modal="true" aria-label="媽媽的訊息" tabindex="0">
+  <button type="button" class="momNotice" id="momOpen"><strong>媽媽</strong><span>你收到新的訊息</span><span class="momNoticeAction">查看訊息</span></button>
   <div class="chromeWin phone" role="document" onclick="event.stopPropagation()">
-    <button type="button" class="pane-x" id="momClose" aria-label="關閉">×</button>
     <div class="chromeTitle"><span class="chromeFace av" aria-hidden="true">媽</span><h3>媽媽</h3></div>
     <div class="chromeBody msgThread" id="momBubbles">
-      <div class="msgBubble"><span class="who">媽媽</span>阿祿，媽知道你腿骨折要在家靜養一個月，可惜現在旅行不能照顧你</div>
-      <div class="msgBubble"><span class="who">媽媽</span>你記得小紅嗎？就是那個青梅竹馬，多年沒見了吧。她最近從國外回來了，正在找地方住</div>
-      <div class="msgBubble"><span class="who">媽媽</span>一聽到你要在家靜養，就說不介意暫住你家照顧你，直到找到地方住為止</div>
+      <div class="msgBubble"><span class="who">媽媽</span><span class="momText">阿祿，媽知道你腿骨折要在家靜養一個月，可惜現在旅行不能照顧你</span></div>
+      <div class="msgBubble"><span class="who">媽媽</span><span class="momText">你記得小紅嗎？就是那個青梅竹馬，多年沒見了吧。她最近從國外回來了，正在找地方住</span></div>
+      <div class="msgBubble"><span class="who">媽媽</span><span class="momText">一聽到你要在家靜養，就說不介意暫住你家照顧你，直到找到地方住為止</span></div>
     </div>
-    <div class="chromeFoot">輕觸外側關閉</div>
+    <div class="chromeFoot"><span id="momReadHint" role="status">輕觸加快閱讀</span><button type="button" class="momNext" id="momNext">繼續閱讀</button></div>
   </div>
 </div>
 <div class="mask" id="mask" role="dialog" aria-modal="true" aria-labelledby="mt" aria-describedby="mp"><div class="box"><div class="modalReading" id="modalReading"><div class="face"></div><h3 id="mt"></h3><div class="returnMeta" id="returnMeta" hidden><button type="button" class="returnBack" id="returnBack" onclick="toggleReturnView()" hidden>返回敘述</button><span class="returnStatus" id="returnStatus" role="status" aria-live="polite"></span></div><p id="memoryEventTitle" hidden></p><p id="mp"></p></div><div class="readingHint" id="readingHint" aria-hidden="true">向下捲動閱讀 ↓</div><div class="sqopts" id="sqopts"></div><div class="tl"><button type="button" class="btn returnObsButton" id="obsBtn" aria-label="起疑，觀察本次回家的痕跡" onclick="observeTraces()">起疑</button><button type="button" class="btn" id="mb">繼續</button></div></div></div>
@@ -4401,13 +4417,42 @@ applySp();
 function skipTrip(){if(busy||!(S.trip&&!S.taken))return;withBusy(function(){if(!(S.trip&&!S.taken))return;if(!S.trip.acts)S.trip.acts=[];if(!S.trip.acts.length)addLog("⏳ 空白：跳過等待・未行動");S.trip.skipped=true;S.dsec+=Math.max(0,(S.trip.end-Date.now())/1000);S.trip.end=Date.now()-1;back();render()})}
 applySp();
 
-function showMomIntro(){var el=$("momPhone");if(!el)return;el.classList.add("on");el.setAttribute("aria-hidden","false")}
-function dismissMomIntro(){var el=$("momPhone");if(!el||!el.classList.contains("on"))return;el.classList.remove("on");el.setAttribute("aria-hidden","true");if(!S.momIntroSeen){S.momIntroSeen=true;try{save()}catch(e){}
+var momReading={texts:[],index:-1,timer:0,active:false};
+function resetMomReading(){clearTimeout(momReading.timer);momReading.timer=0;document.querySelectorAll("#momBubbles .momText").forEach(function(el){stopTyping(el,false)});momReading.active=false}
+function momComplete(){var nodes=document.querySelectorAll("#momBubbles .momText");return momReading.index===nodes.length-1&&!isTyping(nodes[momReading.index])}
+function paintMomHint(){var done=momComplete();$("momReadHint").textContent=done?"訊息已讀完":"輕觸加快閱讀";$("momNext").textContent=done?"繼續":"繼續閱讀"}
+function revealMomMessage(){
+  if(!momReading.active)return;clearTimeout(momReading.timer);
+  var nodes=document.querySelectorAll("#momBubbles .momText");if(momReading.index+1>=nodes.length){paintMomHint();return}
+  var i=++momReading.index,el=nodes[i];el.parentElement.hidden=false;
+  typeDialogue(el,momReading.texts[i],function(){if(!momReading.active||momReading.index!==i)return;$("momBubbles").scrollTop=$("momBubbles").scrollHeight;paintMomHint();if(i+1<nodes.length)momReading.timer=setTimeout(revealMomMessage,900)});
+  $("momBubbles").scrollTop=$("momBubbles").scrollHeight;paintMomHint();
+}
+function advanceMomReading(){
+  if(!momReading.active)return;clearTimeout(momReading.timer);momReading.timer=0;
+  var el=document.querySelectorAll("#momBubbles .momText")[momReading.index];
+  if(stopTyping(el,true)){paintMomHint();return}if(!momComplete())revealMomMessage();
+}
+function openMomMessages(){
+  if(!$("momPhone").classList.contains("mom-notice"))return;
+  $("momPhone").classList.remove("mom-notice");momReading.active=true;revealMomMessage();$("momNext").focus({preventScroll:true});
+}
+function showMomIntro(){
+  var el=$("momPhone");if(!el)return;resetMomReading();momReading.index=-1;
+  document.querySelectorAll("#momBubbles .momText").forEach(function(node,i){if(momReading.texts[i]===undefined)momReading.texts[i]=node.textContent;node.textContent="";node.parentElement.hidden=true});
+  el.classList.add("on","mom-notice");el.setAttribute("aria-hidden","false");$("gameUI").inert=true;$("momOpen").focus({preventScroll:true});
+}
+function dismissMomIntro(){var el=$("momPhone");if(!el||!el.classList.contains("on")||!momReading.active||!momComplete())return;resetMomReading();$("gameUI").inert=false;el.classList.remove("on");el.setAttribute("aria-hidden","true");if(!S.momIntroSeen){S.momIntroSeen=true;try{save()}catch(e){}
 mq.push(["🚪 不請自來的同居","玄關傳來拖行李箱的輪聲。多年沒見的青梅竹馬站在門口，給人一種不好相處的感覺。\n\n「哼！才不是為了你，我只是為了報答阿姨而已。」"]);
 addLog("🚪 第一章：小紅拎著行李搬進來・「哼！才不是為了你，我只是為了報答阿姨而已。」");
 nextPop()}checkMemories()}
 function maybeMomIntro(){if(S.momIntroSeen){var el=$("momPhone");if(el){el.classList.remove("on");el.setAttribute("aria-hidden","true")}return}showMomIntro()}
-function bindMomIntro(){var el=$("momPhone");if(!el)return;el.addEventListener("click",function(){dismissMomIntro()});var btn=$("momClose");if(btn)btn.addEventListener("click",function(e){e.stopPropagation();dismissMomIntro()});el.addEventListener("keydown",function(e){if(e.key==="Enter"||e.key==="Escape"||e.key===" "){e.preventDefault();dismissMomIntro()}})}
+function bindMomIntro(){
+  $("momOpen").addEventListener("click",openMomMessages);
+  $("momBubbles").addEventListener("click",advanceMomReading);
+  $("momNext").addEventListener("click",function(){if(momComplete())dismissMomIntro();else advanceMomReading()});
+  $("momPhone").addEventListener("keydown",function(e){if((e.key==="Enter"||e.key===" ")&&!e.target.closest("button")){e.preventDefault();advanceMomReading()}});
+}
 bindMomIntro();
 $("chatRoom").querySelector(".chatMark").innerHTML=homeUiIcon("chat");
 $("thbox").setAttribute("role","button");$("thbox").setAttribute("tabindex","0");$("thbox").setAttribute("aria-label","顯示完整心聲");$("thbox").addEventListener("click",function(){stopTyping($("thb"),true)});$("thbox").addEventListener("keydown",function(e){if(e.key==="Enter"||e.key===" "){e.preventDefault();stopTyping($("thb"),true)}});
