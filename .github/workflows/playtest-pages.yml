@@ -1,0 +1,43 @@
+name: Publish playtest
+
+on:
+  push:
+    branches: [cursor/swap-side-nav-0c9e]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: playtest-pages
+  cancel-in-progress: true
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Prepare game
+        run: |
+          cmp '小櫻的同居日記.html' xiaoying-tongju-riji.html
+          mkdir -p _site
+          cp xiaoying-tongju-riji.html _site/index.html
+          cp '小櫻的同居日記.html' xiaoying-tongju-riji.html sakura-portrait.png xiaohong-normal.png sil-*.png _site/
+
+      - uses: actions/configure-pages@v5
+
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: _site
+
+      - name: Deploy
+        id: deployment
+        uses: actions/deploy-pages@v4
+# Trigger deployment

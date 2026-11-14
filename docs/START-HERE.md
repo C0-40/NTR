@@ -1,4 +1,6 @@
-你正在維護《小櫻的同居日記》。程式庫是 https://github.com/C0-40/NTR 。先讀 `docs/HANDOFF.md` 和 `docs/game-brief.md`，再改遊戲。系統以 HANDOFF 和根目錄 HTML 為準；`game-brief.md` 負責敘事。不要照 `docs/handoff-commands.md`，那份已過時。
+> 最新修改依據：先讀 [setting-authority.md](./setting-authority.md) 及 [game-script.md](./game-script.md)。使用者最新確認設定優先；`protagonist-profile.md` 僅供參考。以下舊交接內容的姓名、體力、互動加值及回憶條件等有過時資料，不可直接套用或覆蓋現況。
+
+你正在維護《褪色的雛菊》。程式庫是 https://github.com/C0-40/NTR 。先讀 `docs/HANDOFF.md` 和 `docs/game-brief.md`，再改遊戲。系統以 HANDOFF 和根目錄 HTML 為準；`game-brief.md` 負責敘事。不要照 `docs/handoff-commands.md`，那份已過時。
 
 正本是根目錄的 `小櫻的同居日記.html`。改完把整檔覆寫成 `xiaoying-tongju-riji.html`，兩份要一致。剪影圖 `sil-hero.png`、`sil-uncle.png`、`sil-hero-av.png`、`sil-uncle-av.png`、`sil-hero-ico.png` 跟 HTML 同一層，相對路徑不要改。
 
