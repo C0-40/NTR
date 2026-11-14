@@ -3096,6 +3096,180 @@ body:has(#gameUI.outing-shell) .settingsAction,body:has(#gameUI.outing-shell) .s
 #gameUI.homeui:not(.outing-shell) #affbar{background:linear-gradient(90deg,#c88b80,#ad6869)!important}
 #gameUI.homeui:not(.outing-shell) #mbar{background:linear-gradient(90deg,#ab91a1,#806c83)!important}
 
+
+/* Approved warm wood palette and action-state hierarchy. */
+/* Warm wood surfaces preserve the portrait and existing control geometry. */
+#gameUI.homeui:not(.outing-shell){--comic-ink:#573b33;--comic-edge:#8c684f;--comic-paper:#fff2df;--comic-rose:#bc7e83;--comic-shadow:#b18a69}
+#gameUI.homeui:not(.outing-shell) .gameFrame{border:2px solid #694b3b!important;border-radius:18px!important;background:#d4b18f!important;box-shadow:none!important}
+#gameUI.homeui:not(.outing-shell) .scene{border-radius:12px!important}
+#gameUI.homeui:not(.outing-shell) .topHud .topMeta.meterStack{background:#f5e7d7!important;border:1.5px solid #b49b85!important;border-radius:11px!important;box-shadow:none!important}
+#gameUI.homeui:not(.outing-shell) .topHud .meterName{color:#79604b!important;font-weight:500!important}
+#gameUI.homeui:not(.outing-shell) .topHud .meterNum{color:#654735!important;font-weight:600!important}
+#gameUI.homeui:not(.outing-shell) .meterMax{color:#977e69!important}
+#gameUI.homeui:not(.outing-shell) .topHud .topMeta .meterCard .bar{background:#ddc6ad!important}
+#gameUI.homeui:not(.outing-shell) #affbar{background:#bc7e83!important}
+#gameUI.homeui:not(.outing-shell) #dayl{background:#f5e7d7!important;border:1.5px solid #b49b85!important;border-radius:11px!important;box-shadow:none!important}
+#gameUI.homeui:not(.outing-shell) #dayl::before{height:5px!important;background:#b68b69!important;opacity:1!important}
+#gameUI.homeui:not(.outing-shell) #dayl::after{opacity:0!important}
+#gameUI.homeui:not(.outing-shell) #dayl .dayMark-n{color:#8b664c!important}
+#gameUI.homeui:not(.outing-shell) .topHud .collectionNav .bubble,#gameUI.homeui:not(.outing-shell) .topHud .collectionNav #settingsBtn{border:1.5px solid #b49b85!important;background:#f5e7d7!important;color:#795840!important;border-radius:11px!important;box-shadow:none!important}
+#gameUI.homeui:not(.outing-shell) .topHud .collectionNav .bubble:disabled{background:#e7ddd0!important;color:#9b8978!important;border-color:#beac97!important}
+#gameUI.homeui:not(.outing-shell) .topHud .collectionNav .uiIcon{stroke-width:1.9}
+#gameUI.homeui:not(.outing-shell) .dialogueZone .sideNav.right{background:#f5e7d7!important;border:1.5px solid #b49b85!important;border-radius:10px!important;box-shadow:none!important}
+#gameUI.homeui:not(.outing-shell) .dialogueZone .sideNav.right .bubble{background:transparent!important;color:#795b45!important;font-weight:500!important;border-radius:8px!important}
+#gameUI.homeui:not(.outing-shell) .dialogueZone .sideNav.right .uiIcon{color:#8c6b52!important;stroke-width:1.9}
+#gameUI.homeui:not(.outing-shell) #dlg{border:2px solid #694b3b!important;border-radius:14px!important;background:#fff2e2fa!important;box-shadow:0 3px 0 #b18a6966!important}
+#gameUI.homeui:not(.outing-shell) #dlg #say{font-size:16px!important;font-weight:400!important;color:#533b30!important;line-height:1.65!important}
+#gameUI.homeui:not(.outing-shell) #dlg #nm{padding:4px 11px!important;border:1.5px solid #80595b!important;border-radius:8px!important;background:#b97d82!important;color:#fff5e8!important;box-shadow:0 2px 0 #76504733!important;font-weight:600!important}
+#gameUI.homeui:not(.outing-shell) #dlgNext{color:#a76d74!important}
+#gameUI.homeui:not(.outing-shell) .dock.tabs button:not(:disabled){border:2px solid #694b3b!important;border-radius:14px!important;background:#f5e3ce!important;color:#573b33!important;box-shadow:0 3px 0 #b18a69!important;font-weight:600!important}
+#gameUI.homeui:not(.outing-shell) .dock.tabs #sleepBtn:not(:disabled){background:#d2b498!important;color:#573b33!important;box-shadow:0 3px 0 #a88260!important}
+#gameUI.homeui:not(.outing-shell) .dock.tabs .uiIcon{color:#806047!important;stroke-width:1.9}
+#gameUI.homeui #pane[data-panel-kind="home"]{border:2px solid #694b3b!important;border-radius:16px!important;background:#f2e1cc!important;box-shadow:0 4px 0 #a8876380,0 10px 24px #38291e20!important}
+#gameUI.homeui #pane[data-panel-kind="home"] .paneHead{background:#e5cdb2!important;border-bottom:1.5px solid #b6987d!important}
+#gameUI.homeui #pane[data-panel-kind="home"] .collectionTitle{font-weight:600!important;color:#573b33!important}
+#gameUI.homeui #pane[data-panel-kind="home"] .pane-x{background:#fff2df!important;border:1.5px solid #b5987d!important;border-radius:11px!important;box-shadow:none!important;color:#805e45!important}
+#gameUI.homeui #pane:is([data-panel-kind="home"],[data-panel-kind="go"]) .row[data-action-state="ready"]{border:1px solid #c3a88b!important;border-radius:12px!important;background:#fff3e3!important;box-shadow:none!important}
+#gameUI.homeui #pane:is([data-panel-kind="home"],[data-panel-kind="go"]) .row .i{border:1px solid #c3a88b;background:#ead4b9!important;color:#946c4d!important;border-radius:8px!important}
+#gameUI.homeui #pane:is([data-panel-kind="home"],[data-panel-kind="go"]) .row .uiIcon{stroke-width:1.9}
+#gameUI.homeui #pane:is([data-panel-kind="home"],[data-panel-kind="go"]) .row b{font-size:14px!important;font-weight:600!important;color:#573b33!important}
+#gameUI.homeui #pane:is([data-panel-kind="home"],[data-panel-kind="go"]) .row .sm,#gameUI.homeui #pane[data-panel-kind="home"]>.sm{font-weight:400!important;color:#8c6d55!important}
+#gameUI.homeui #pane:is([data-panel-kind="home"],[data-panel-kind="go"]) .row .btn:not(:disabled){border:1.5px solid #927050!important;border-radius:10px!important;background:#e9cdaa!important;color:#573b33!important;box-shadow:0 2px 0 #b78c67!important;font-weight:600!important}
+#gameUI.homeui #pane:is([data-panel-kind="home"],[data-panel-kind="go"]) .row[data-action-state="locked"]{border:1px dashed #b8aa99!important;border-radius:12px!important;background:#e9e0d4!important;box-shadow:none!important}
+#gameUI.homeui #pane:is([data-panel-kind="home"],[data-panel-kind="go"]) .row[data-action-state="locked"] .i{border-color:#c2b29e!important;background:#dfd2c2!important;color:#a28f7d!important}
+#gameUI.homeui #pane:is([data-panel-kind="home"],[data-panel-kind="go"]) .row[data-action-state="locked"] .btn{border:1px solid #baa58c!important;border-radius:10px!important;background:#ded1c0!important;color:#9b8671!important;box-shadow:none!important}
+
+/* Warm wood v2: lighter utility edges, clear primary ink, rose only in small accents. */
+#gameUI.homeui:not(.outing-shell) .topHud .topMeta.meterStack,
+#gameUI.homeui:not(.outing-shell) #dayl,
+#gameUI.homeui:not(.outing-shell) .topHud .collectionNav .bubble,
+#gameUI.homeui:not(.outing-shell) .topHud .collectionNav #settingsBtn,
+#gameUI.homeui:not(.outing-shell) .dialogueZone .sideNav.right{border-width:1px!important}
+#gameUI.homeui:not(.outing-shell) .topHud #mbar{background:#9b8b72!important}
+#gameUI.homeui #pane[data-panel-kind="home"]{border-width:1.5px!important}
+#gameUI.homeui #pane[data-panel-kind="home"] .paneHead{border-bottom-width:1px!important}
+#gameUI.homeui:not(.outing-shell) .dock.tabs button:not(:disabled){box-shadow:0 2px 0 #b18a69!important}
+#gameUI.homeui:not(.outing-shell) .dock.tabs #sleepBtn:not(:disabled){box-shadow:0 2px 0 #a88260!important}
+
+/* The outing view shares warm wood controls and keeps its dark coffee scene. */
+body:has(#gameUI.homeui.outing-shell){background:#2c221d!important;background-image:none!important}
+#gameUI.homeui.outing-shell{
+ --comic-ink:#573b33;--comic-paper:#fff2df;--comic-rose:#bc7e83;
+ --ui-face:#f5e3ce;--ui-ink:#573b33;--ui-edge:#694b3b;--ui-base:#b18a69;
+ --ui-shadow:0 3px 0 #b18a69;
+ background:transparent!important;border:0!important;box-shadow:none!important;
+}
+#gameUI.homeui.outing-shell .gameFrame{background:#4a3629!important;border:2px solid #89694e!important;border-radius:18px!important;box-shadow:none!important}
+#gameUI.homeui.outing-shell .scene{border-radius:12px!important;background:radial-gradient(ellipse at 50% 47%,#bc916234,transparent 60%),linear-gradient(165deg,#3c2b21,#211a15 85%)!important}
+/* The same thin status tracks and quiet utilities as the homepage. */
+#gameUI.homeui.outing-shell .topHud .topMeta.meterStack{padding:9px 10px!important;gap:11px!important;background:#f5e7d7!important;border:1.5px solid #b49b85!important;border-radius:11px!important;box-shadow:none!important}
+#gameUI.homeui.outing-shell .topHud .topMeta .meterCard{padding:0!important;margin:0!important;border:0!important;border-radius:0!important;background:transparent!important;box-shadow:none!important}
+#gameUI.homeui.outing-shell .topHud .meterHead{align-items:baseline!important;gap:3px!important;margin-bottom:7px!important}
+#gameUI.homeui.outing-shell .topHud .meterName{font-size:12px!important;font-weight:500!important;color:#79604b!important}
+#gameUI.homeui.outing-shell .topHud .meterNum{margin-left:auto!important;font-size:13px!important;font-weight:600!important;color:#654735!important;font-variant-numeric:tabular-nums}
+#gameUI.homeui.outing-shell .meterMax{color:#977e69!important}
+#gameUI.homeui.outing-shell .topHud .topMeta .meterCard .bar{height:6px!important;margin:0!important;padding:0!important;border:0!important;border-radius:999px!important;background:#ddc6ad!important;box-shadow:none!important;position:relative;overflow:hidden!important}
+#gameUI.homeui.outing-shell #affbar,#gameUI.homeui.outing-shell #mbar{display:block;height:100%!important;min-width:0!important;max-width:100%;margin:0;padding:0;border:0!important;border-radius:999px!important;box-shadow:none!important}
+#gameUI.homeui.outing-shell #affbar{background:#bc7e83!important}
+#gameUI.homeui.outing-shell #mbar{background:#9b8b72!important}
+#gameUI.homeui.outing-shell #dayl{background:#f5e7d7!important;border:1.5px solid #b49b85!important;border-radius:11px!important;box-shadow:none!important}
+#gameUI.homeui.outing-shell #dayl::before{height:5px!important;background:#b68b69!important;opacity:1!important}
+#gameUI.homeui.outing-shell #dayl::after{opacity:0!important}
+#gameUI.homeui.outing-shell #dayl .dayMark-n{color:#8b664c!important}
+#gameUI.homeui.outing-shell #dayl .dayMark-k{color:#79604b!important}
+#gameUI.homeui.outing-shell .topHud .collectionNav .bubble,#gameUI.homeui.outing-shell .topHud .collectionNav #settingsBtn{background:#f5e7d7!important;border:1.5px solid #b49b85!important;border-radius:11px!important;color:#795840!important;box-shadow:none!important}
+#gameUI.homeui.outing-shell .topHud .collectionNav .bubble:disabled{background:#e7ddd0!important;color:#9b8978!important;border-color:#beac97!important}
+#gameUI.homeui.outing-shell .uiIcon{stroke-width:1.9}
+/* A flat departure status card, with the existing circular timer. */
+#gameUI.homeui.outing-shell .stick.outing .outingTop{border:1.5px solid #b49b85!important;border-left:4px solid #b68b69!important;border-radius:12px!important;background:#f5e7d7!important;box-shadow:none!important;--ot-ink:#573b33;--ot-mute:#86694f;--ot-on:#573b33}
+#gameUI.homeui.outing-shell .outingTop-lead{font-size:14px!important;font-weight:600!important;color:#573b33!important;letter-spacing:0!important}
+#gameUI.homeui.outing-shell .outingTop-ask{font-size:12px!important;font-weight:400!important;color:#86694f!important}
+#gameUI.homeui.outing-shell .outingTop-acts #sp.btn{min-width:44px!important;min-height:44px!important;background:#ead5bf!important;border:1px solid #b99b7c!important;border-radius:10px!important;box-shadow:none!important;font-weight:500!important;color:#795b45!important}
+#gameUI.homeui.outing-shell .stick.outing .outingTop-cd{background:radial-gradient(closest-side,#f5e7d7 78%,transparent 80%),conic-gradient(from -90deg,#bc7e83 calc(var(--p,1) * 1turn),#d8bda2 0)!important;box-shadow:none!important}
+#gameUI.homeui.outing-shell .outingTop-cdNum{color:#573b33!important;font-weight:600!important;font-variant-numeric:tabular-nums}
+#gameUI.homeui.outing-shell .outingTop-cdLab,#gameUI.homeui.outing-shell .outingTop-cdUnit{color:#86694f!important;font-weight:400!important}
+/* Keep the portrait's original tone, the black vignette, and all fog filters. */
+#gameUI.homeui.outing-shell .heartRow{background:#4b3528!important;border:1.5px solid #a18366!important;border-radius:16px!important;box-shadow:none!important}
+#gameUI.homeui.outing-shell #heartFace{background-color:#231a16!important;border:1.5px solid #a18366!important;box-shadow:none!important}
+#gameUI.homeui.outing-shell .thbox{border:0!important;border-radius:0!important;background:transparent!important;box-shadow:none!important;color:#fff2e2!important}
+#gameUI.homeui.outing-shell .thbox b{font-size:12px!important;font-weight:500!important;color:#dab89a!important}
+#gameUI.homeui.outing-shell .thbox b.uiIconLabel{font-size:0!important}
+#gameUI.homeui.outing-shell .thbox b.uiIconLabel::after{font-size:12px!important;font-weight:500!important}
+#gameUI.homeui.outing-shell .thbox #thb{font-size:14px!important;font-weight:400!important;line-height:1.65!important;color:#fff2e2!important}
+#gameUI.homeui.outing-shell .thbox #thb.typeTarget{max-height:6.6em!important}
+#gameUI.homeui.outing-shell .thbox:focus-visible{outline-color:#dab89a!important}
+/* Primary actions use the homepage cream surface; skipping stays secondary. */
+#gameUI.homeui.outing-shell .dock.is-blank-acts{gap:9px!important}
+#gameUI.homeui.outing-shell .dock.is-blank-acts button.dockBlank:not(.dockBlank-nap):not(.is-off){background:#f5e3ce!important;border:2px solid #694b3b!important;border-radius:14px!important;box-shadow:0 3px 0 #b18a69!important;color:#573b33!important}
+#gameUI.homeui.outing-shell .dock.is-blank-acts button.dockBlank .dockLab{font-size:14px!important;font-weight:600!important;color:inherit!important}
+#gameUI.homeui.outing-shell .dock.is-blank-acts button.dockBlank .dockIco{color:inherit!important}
+#gameUI.homeui.outing-shell .dock.is-blank-acts button.dockBlank.is-off{background:#4f4438!important;border:1.5px dashed #a4907b!important;border-radius:14px!important;box-shadow:none!important;color:#c2af9b!important;opacity:1!important}
+#gameUI.homeui.outing-shell .dock.is-blank-acts button.dockBlank .dockSub{font-size:11px!important;font-weight:400!important;color:inherit!important}
+#gameUI.homeui.outing-shell .dock.is-blank-acts button.dockBlank-nap{background:#76533e!important;border:1.5px solid #b08a68!important;border-radius:12px!important;box-shadow:0 2px 0 #302219!important;color:#fff2e2!important}
+#gameUI.homeui.outing-shell .dock.is-blank-acts button.dockBlank-nap .dockLab{font-size:13px!important;font-weight:500!important}
+#gameUI.homeui.outing-shell #outingActLine{background:#fff2e2!important;border:2px solid #694b3b!important;border-radius:14px!important;box-shadow:0 3px 0 #b18a69!important;color:#573b33!important}
+#gameUI.homeui.outing-shell #outingActLine b{color:#a16d61!important;font-weight:600!important}
+/* Destination menu: same sheet, header and row language as the interaction draft. */
+#gameUI.homeui #pane[data-panel-kind="go"]{border:2px solid #694b3b!important;border-radius:16px!important;background:#f2e1cc!important;box-shadow:0 4px 0 #a8876380,0 10px 24px #38291e20!important}
+#gameUI.homeui #pane[data-panel-kind="go"] .paneHead{background:#e5cdb2!important;border-bottom:1.5px solid #b6987d!important}
+#gameUI.homeui #pane[data-panel-kind="go"] .collectionTitle{font-weight:600!important;color:#573b33!important}
+#gameUI.homeui #pane[data-panel-kind="go"] .pane-x{background:#fff2df!important;border:1.5px solid #b5987d!important;border-radius:11px!important;box-shadow:none!important;color:#805e45!important}
+#gameUI.homeui #pane[data-panel-kind="go"] .row[data-action-state="ready"]{border:1px solid #c3a88b!important;border-radius:12px!important;background:#fff3e3!important;box-shadow:none!important}
+#gameUI.homeui #pane[data-panel-kind="go"] .row .i{border:1px solid #c3a88b;background:#ead4b9!important;color:#946c4d!important;border-radius:8px!important}
+#gameUI.homeui #pane[data-panel-kind="go"] .row .uiIcon{stroke-width:1.9}
+#gameUI.homeui #pane[data-panel-kind="go"] .row b{font-size:14px!important;font-weight:600!important;color:#573b33!important}
+#gameUI.homeui #pane[data-panel-kind="go"] .row .sm,#gameUI.homeui #pane[data-panel-kind="go"]>.sm{font-weight:400!important;color:#8c6d55!important}
+#gameUI.homeui #pane[data-panel-kind="go"] .row .btn:not(:disabled){border:1.5px solid #927050!important;border-radius:10px!important;background:#e9cdaa!important;color:#573b33!important;box-shadow:0 2px 0 #b78c67!important;font-weight:600!important}
+#gameUI.homeui #pane[data-panel-kind="go"] .row[data-action-state="locked"]{border:1px dashed #b8aa99!important;border-radius:12px!important;background:#e9e0d4!important;box-shadow:none!important}
+#gameUI.homeui #pane[data-panel-kind="go"] .row[data-action-state="locked"] .i{border-color:#c2b29e!important;background:#dfd2c2!important;color:#a28f7d!important}
+#gameUI.homeui #pane[data-panel-kind="go"] .row[data-action-state="locked"] .btn{border:1px solid #baa58c!important;border-radius:10px!important;background:#ded1c0!important;color:#9b8671!important;box-shadow:none!important}
+@media(max-width:600px){
+ #gameUI.homeui.outing-shell .gameFrame{height:calc(100svh - env(safe-area-inset-top,0px) - env(safe-area-inset-bottom,0px))!important;min-height:0!important}
+ #gameUI.homeui.outing-shell .stick{flex:1 1 0!important;min-height:0!important}
+ #gameUI.homeui.outing-shell .scene{height:auto!important;min-height:0!important;max-height:none!important;flex:1 1 0!important}
+ #gameUI.homeui.outing-shell .heartRow,#gameUI.homeui.outing-shell .dock{flex:0 0 auto!important}
+}
+
+#gameUI.homeui #pane[data-panel-kind="go"]{border-width:1.5px!important}
+#gameUI.homeui #pane[data-panel-kind="go"] .paneHead{border-bottom-width:1px!important}
+#gameUI.homeui.outing-shell .dock.is-blank-acts button.dockBlank:not(.dockBlank-nap):not(.is-off){box-shadow:0 2px 0 #b18a69!important}
+
+/* Ready, completed, locked, and temporary reading states. */
+/* One clear button label per state, without repeating a separate state pill. */
+#gameUI.homeui #pane:is([data-panel-kind="home"],[data-panel-kind="go"]) .row .m::after{display:none!important}
+#gameUI.homeui #pane:is([data-panel-kind="home"],[data-panel-kind="go"]) .row .btn{display:inline-flex;align-items:center;justify-content:center;gap:4px;min-height:44px;white-space:nowrap}
+#gameUI.homeui #pane:is([data-panel-kind="home"],[data-panel-kind="go"]) .row[data-action-state="ready"]{border:1px solid #ba9672!important;background:#fff3e3!important}
+#gameUI.homeui #pane:is([data-panel-kind="home"],[data-panel-kind="go"]) .row[data-action-state="ready"] .btn{border:1.5px solid #86603f!important;background:#ecd0ad!important;box-shadow:0 2px 0 #aa805a!important;color:#573b33!important}
+#gameUI.homeui #pane:is([data-panel-kind="home"],[data-panel-kind="go"]) .row[data-action-state="used"]{border:1px solid #b9aa96!important;border-style:solid!important;background:#eee6d9!important;opacity:1!important}
+#gameUI.homeui #pane:is([data-panel-kind="home"],[data-panel-kind="go"]) .row[data-action-state="used"] .i{background:#e1d5c3!important;color:#83705a!important;border:1px solid #bba88f!important}
+#gameUI.homeui #pane:is([data-panel-kind="home"],[data-panel-kind="go"]) .row[data-action-state="used"] b{color:#75604d!important}
+#gameUI.homeui #pane:is([data-panel-kind="home"],[data-panel-kind="go"]) .row[data-action-state="used"] .sm{color:#87725c!important}
+#gameUI.homeui #pane:is([data-panel-kind="home"],[data-panel-kind="go"]) .row[data-action-state="used"] .btn{border:1px solid #b3a18a!important;border-style:solid!important;background:#e0d4c2!important;box-shadow:none!important;color:#6b5a45!important;opacity:1!important;font-size:12px!important;font-weight:500!important;padding:8px 9px!important}
+#gameUI.homeui #pane:is([data-panel-kind="home"],[data-panel-kind="go"]) .row[data-action-state="used"] .statusMark{display:block;flex:none;width:14px;height:14px}
+#gameUI.homeui #pane:is([data-panel-kind="home"],[data-panel-kind="go"]) .row[data-action-state="locked"]{border:1px dashed #b8aa99!important;background:#e8e0d5!important;opacity:1!important}
+#gameUI.homeui #pane:is([data-panel-kind="home"],[data-panel-kind="go"]) .row[data-action-state="locked"] .btn{border:1px solid #baa993!important;background:#ddd1bf!important;box-shadow:none!important;color:#8b7862!important;opacity:1!important;font-weight:500!important}
+#gameUI.homeui #pane:is([data-panel-kind="home"],[data-panel-kind="go"]) .row[data-action-state="locked"] b{color:#8a7763!important}
+#gameUI.homeui #pane:is([data-panel-kind="home"],[data-panel-kind="go"]) .row[data-action-state="locked"] .sm{color:#927d65!important}
+/* A reading marker belongs to the dialogue; its body remains exactly 104 pixels high. */
+#gameUI .readingBadge{display:none}
+#gameUI.presentation-reading #dlg .readingBadge{position:absolute;display:inline-flex;align-items:center;gap:5px;right:14px;top:-13px;min-height:24px;padding:2px 9px;border:1px solid #b59778;border-radius:8px;background:#f5e7d7;color:#795b45;font-size:11px;font-weight:500;line-height:1.4;box-shadow:none}
+#gameUI.presentation-reading #dlg .readingBadge svg{width:13px;height:13px;flex:none}
+#gameUI.presentation-reading #dlgNext::after{content:"輕觸繼續 ▾"!important;font-weight:500!important;color:#8d5e65!important;background:#fff2e2!important}
+#gameUI.presentation-reading:has(#say.is-typing) #dlgNext::after{content:"輕觸補全文 ▾"!important}
+#gameUI.presentation-reading .topHud,#gameUI.presentation-reading .dock,#gameUI.presentation-reading .sideNav{opacity:1!important}
+#gameUI.homeui.presentation-reading:not(.outing-shell) .dock.tabs button:not(:disabled){background:#e7dccd!important;border-color:#c1ad95!important;box-shadow:none!important;color:#99846c!important}
+#gameUI.homeui.presentation-reading:not(.outing-shell) .dock.tabs #sleepBtn:not(:disabled){background:#d9c7b1!important;border-color:#bda58b!important;box-shadow:none!important;color:#927a61!important}
+#gameUI.homeui.presentation-reading:not(.outing-shell) .dock.tabs :is(.homeActionLabel,.uiIcon,.dockSleep-lab,.dockSleep-sub){color:inherit!important}
+#gameUI.homeui.presentation-reading:not(.outing-shell) .dialogueZone .sideNav.right{background:#e7dccd!important;border-color:#c1ad95!important}
+#gameUI.homeui.presentation-reading:not(.outing-shell) .dialogueZone .sideNav.right .bubble,
+#gameUI.homeui.presentation-reading:not(.outing-shell) .dialogueZone .sideNav.right .uiIcon{color:#99846c!important}
+#gameUI.homeui.presentation-reading:not(.outing-shell) .topHud .collectionNav .bubble,
+#gameUI.homeui.presentation-reading:not(.outing-shell) .topHud .collectionNav #settingsBtn{background:#e7dccd!important;border-color:#c1ad95!important;color:#99846c!important}
+
+#gameUI.homeui:not(.outing-shell) .dock.tabs button.dock-used:disabled{background:#eee6d9!important;border:1px solid #b9aa96!important;box-shadow:none!important;color:#75604d!important;opacity:1!important;filter:none!important;font-size:12px!important}
+#gameUI.homeui:not(.outing-shell) .dock.tabs button.dock-used .statusMark{width:14px;height:14px;flex:none}
+#gameUI.homeui:not(.outing-shell) .dock.tabs button.dock-used .statusText{font-size:12px!important;white-space:nowrap}
+
 </style>
 </head>
 <body>
@@ -3176,7 +3350,7 @@ body:has(#gameUI.outing-shell) .settingsAction,body:has(#gameUI.outing-shell) .s
       <button type="button" class="bubble actChat" id="navChat" aria-label="打開匿名聊天室" onclick="openChatRoom()"><svg class="uiIcon" viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M15 16H8l-4 3v-4a7 7 0 0 1 3-13h7a7 7 0 0 1 1 14Z"/><path d="M19 8a6 6 0 0 1 1 10v3l-4-2h-4"/><path d="M7 9h.01M11 9h.01M15 9h.01"/></svg><span>聊天室</span></button>
       <button type="button" class="bubble" data-t="ask" id="navAsk"><svg class="uiIcon" viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M19 16a8 8 0 1 0-5 3l6 2-1-5Z"/><path d="M9 8a3 3 0 0 1 6 0c0 2-3 2-3 4"/><path d="M12 15h.01"/></svg><span>提問</span></button>
     </nav>
-    <div class="dlg" id="dlg" role="button" tabindex="0" aria-label="和她聊天（點一下對話）"><span class="dlgAv" id="dlgAv" aria-hidden="true"></span><div class="dlgBody"><b id="nm">小紅</b><span id="say">哼！才不是為了你，我只是為了報答阿姨而已。</span></div><span class="dlgNext" id="dlgNext" aria-hidden="true">▼</span></div>
+    <div class="dlg" id="dlg" role="button" tabindex="0" aria-label="和她聊天（點一下對話）"><span class="dlgAv" id="dlgAv" aria-hidden="true"></span><div class="dlgBody"><b id="nm">小紅</b><span id="say">哼！才不是為了你，我只是為了報答阿姨而已。</span></div><span class="dlgNext" id="dlgNext" aria-hidden="true">▼</span><span class="readingBadge" aria-hidden="true"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M8 4C6 2.5 3 2.5 1.5 3v10C3 12.5 6 12.5 8 14c2-1.5 5-1.5 6.5-1V3C13 2.5 10 2.5 8 4Zm0 0v10"/></svg><span>閱讀中</span></span></div>
     </div>
   </div>
   <div class="heartRow" id="heartRow" aria-label="外出心聲">
@@ -3933,6 +4107,7 @@ try{save()}catch(e){}
 setTimeout(function(){mbLock=0;render()},40)}
 
 function isOutingPhase(){return !!(S&&S.trip&&!S.taken)}
+function completedActionLabel(label){return '<svg class="statusMark" viewBox="0 0 16 16" width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m3 8 3.1 3.1L13 4.5"/></svg><span class="statusText">'+(label||"今日已完成")+'</span>'}
 function paintDock(){
   var dock=document.querySelector(".dock.tabs")||document.querySelector(".dock");
   if(!dock||!S)return;
@@ -3964,7 +4139,7 @@ function paintDock(){
   var ended=!!(S.endingDone), homeUsed=!!S.homeActToday, outUsed=!!S.outToday;
   function mkDock(t,ico,lab,used){
     var dead=ended||used;
-    var label=homeUiIcon(t)+'<span class="homeActionLabel">'+(used?"今天已做過":lab)+'</span>';
+    var label=used?completedActionLabel(lab+"已完成"):homeUiIcon(t)+'<span class="homeActionLabel">'+lab+'</span>';
     return '<button type="button" data-t="'+t+'"'+(used?' class="dock-used"':'')+(dead?' disabled aria-disabled="true"':'')+'>'+label+'</button>';
   }
   var canSleep=!ended&&!S.trip&&!dayLock&&!S.taken;
@@ -3986,13 +4161,13 @@ else if(S.endingDone&&(tab=="home"||tab=="go"||tab=="ask"||tab=="herq")){h='<div
 else if(tab=="home"){if(S.trip&&!S.taken){h+='<div class="row"><span class="i">🛋️</span><div class="m"><b>她出門了</b><div class="sm">小紅在外面時不能做室內互動。你留在家等她回來。</div></div></div>'}
 else{h+='<div class="sm" style="margin-bottom:8px">每天互動一次，增加親密度'+(S.homeActToday?'　・今天已做過':'')+'</div>';
 HOME_ACTS.forEach(function(a,i){var gn=a[4]|0,used=!!S.homeActToday,lk=(S.aff|0)<(a[3]|0);
-h+='<div class="row'+(used||lk?" lock":"")+'"><span class="i">'+a[2]+'</span><div class="m"><b>'+a[1]+'</b><div class="sm">'+(lk?"需要阿祿親密度 "+a[3]:a[5])+'</div></div><button class="btn" '+(used||lk||S.taken||S.endingDone?"disabled":"")+' onclick="homeAct('+i+')">'+(used?"今天已做過":lk?"未解鎖":"互動")+'</button></div>'})}}
+h+='<div class="row'+(used||lk?" lock":"")+'"><span class="i">'+a[2]+'</span><div class="m"><b>'+a[1]+'</b><div class="sm">'+(lk?"需要阿祿親密度 "+a[3]:a[5])+'</div></div><button class="btn" '+(used||lk||S.taken||S.endingDone?"disabled":"")+' onclick="homeAct('+i+')">'+(lk?"未解鎖":used?completedActionLabel():"互動")+'</button></div>'})}}
 else if(tab=="go"){
 if(S.trip&&!S.taken){h+='<div class="blankbox"><div class="beat">她去了'+(S.trip.place||PLACES[S.trip.id][1])+'・<span id="tripCd">倒數 -- 秒</span></div><div class="sm" style="margin-top:6px">外出行動已在底欄：發訊息／打電話／去廁所／打瞌睡。</div></div>'}
 else if(S.outToday){h+='<div class="sm" style="margin-bottom:8px">今天已經外出過一次。只有睡覺日結後，明天才能再外出。</div>'}
 else if(!S.trip){h+='<div class="sm" style="margin-bottom:8px">一天只能外出一次，而等待總是漫長。</div>'}
 PLACES.forEach(function(p,i){var lk=S.aff<p[3],bz=!!S.trip,used=!!S.outToday,ing=bz&&S.trip.id==i,left=ing?Math.max(0,Math.ceil((S.trip.end-Date.now())/1000)):0;
-h+='<div class="row '+(lk||(used&&!ing)?"lock":"")+'"><span class="i">'+p[0]+'</span><div class="m"><b>'+p[1]+'</b><div class="sm">'+(lk?"需要阿祿親密度 "+p[3]:used&&!ing?"今天已外出・明天再外出":(placeMeta(i).tag?placeMeta(i).tag+"・":"")+OUTING_SECONDS+" 秒")+'</div></div><button class="btn" '+(lk||bz||(used&&!ing)?"disabled":"")+' onclick="go('+i+')">'+(ing?"外出中":used?"今天已做過":"外出")+'</button></div>'});
+h+='<div class="row '+(lk||(used&&!ing)?"lock":"")+'"><span class="i">'+p[0]+'</span><div class="m"><b>'+p[1]+'</b><div class="sm">'+(lk?"需要阿祿親密度 "+p[3]:used&&!ing?"今天已外出・明天再外出":(placeMeta(i).tag?placeMeta(i).tag+"・":"")+OUTING_SECONDS+" 秒")+'</div></div><button class="btn" '+(lk||bz||(used&&!ing)?"disabled":"")+' onclick="go('+i+')">'+(ing?"外出中":lk?"未解鎖":used?completedActionLabel():"外出")+'</button></div>'});
 if(S.trip)h+='<div class="sm" style="margin-top:6px">她出門中。底欄可直接行動；上方可調速度或提前結束等待。</div>';
 }
 else if(tab=="ask"){QA.forEach(function(q,i){var lk=S.aff<q[2]||!qaGateOk(q),dn=S.qa.indexOf(i)>=0,isNew=!lk&&askOptNew(i);if(lk)return;var why=S.aff<q[2]?("需要阿祿親密度 "+q[2]):(!qaGateOk(q)?(q[4]==="uncle"?"巷口事件後解鎖":q[4]==="trip"?"外出一次後解鎖":"未解鎖"):(isNew?"答案好像出現變化":""));h+='<div class="row '+(lk?"lock":"")+'"><span class="i">'+q[0]+'</span><div class="m"><b>'+(lk?"？？？":q[1])+(isNew?optNewBadge():"")+'</b>'+(why?'<div class="sm">'+why+'</div>':'')+'</div><button class="btn" '+(lk||S.trip||S.endingDone?"disabled":"")+' onclick="ask('+i+')">提問</button></div>'});if(S.trip)h+='<div class="sm" style="margin-top:6px">小紅外出中，回來後再問她吧。</div>'}
@@ -4093,7 +4268,7 @@ $("thbox").setAttribute("role","button");$("thbox").setAttribute("tabindex","0")
 
 
 function skinUiLabel(el,key){if(!el)return;var raw=el.textContent||"",label=raw.replace(/^[\s\p{Extended_Pictographic}\uFE0F\u200D\u23F3\u23E9]+/u,"");el.dataset.uiLabel=label;el.classList.add("uiIconLabel");el.style.setProperty("--label-icon",'url("data:image/svg+xml,'+encodeURIComponent(homeUiIcon(key).replace("<svg ", '<svg xmlns="http://www.w3.org/2000/svg" '))+'")')}
-function skinWindowUi(){var title=$("mt"),text=title?title.textContent:"",key=/她出門了/.test(text)?"go":/^(?:🌙\s*)?當晚$/.test(text)?"sleep":/起疑|觀察/.test(text)?"eye":/發訊息/.test(text)?"msg":/電話/.test(text)?"call":/廁所/.test(text)?"jack":/問/.test(text)?"ask":/回憶/.test(text)?"memory":"daily";skinUiLabel(title,key);skinUiLabel($("thbox")&&$("thbox").querySelector("b"),"thought");skinUiLabel($("outingActLine")&&$("outingActLine").querySelector("b"),"msg");var pane=$("pane");if(pane)pane.querySelectorAll(".row>.i").forEach(function(el){if(el.classList.contains("j-sil-dot"))return;var row=el.closest(".row"),button=row.querySelector("button"),handler=button?(button.getAttribute("onclick")||""):"",match=handler.match(/(?:homeAct|ask)\((\d+)\)/),index=match?Number(match[1]):-1;var key=tab==="home"&&index>=0?(HOME_ACTS[index]&&HOME_ACTS[index][0]||"home"):tab==="ask"&&index>=0?(["hobby","bond","encounter","regret","future","uncle"][index]||"ask"):(row.classList.contains("lock")?"lock":({go:"go",story:"daily",mem:"memory"}[tab]||"daily"));var disabled=!button||button.disabled,state=disabled?"locked":"ready";if(tab==="home"&&S.homeActToday)state="used";else if(tab==="go"&&S.outToday&&!S.trip)state="used";else if(tab==="ask"&&!disabled&&S.qa.indexOf(index)>=0)state="revisit";else if(disabled&&((S&&S.endingDone)||(S&&S.taken)))state="unavailable";row.dataset.actionState=state;var info=row.querySelector(".m");if(info)info.dataset.actionHint=({locked:"尚未解鎖",used:"今日已完成",revisit:"可再次提問",unavailable:"目前無法使用",ready:tab==="ask"?"可提問":tab==="home"?"可互動":"可開啟"}[state]);if(el.dataset.uiIcon===key)return;el.dataset.uiIcon=key;el.setAttribute("aria-hidden","true");el.innerHTML=homeUiIcon(key)})}
+function skinWindowUi(){var title=$("mt"),text=title?title.textContent:"",key=/她出門了/.test(text)?"go":/^(?:🌙\s*)?當晚$/.test(text)?"sleep":/起疑|觀察/.test(text)?"eye":/發訊息/.test(text)?"msg":/電話/.test(text)?"call":/廁所/.test(text)?"jack":/問/.test(text)?"ask":/回憶/.test(text)?"memory":"daily";skinUiLabel(title,key);skinUiLabel($("thbox")&&$("thbox").querySelector("b"),"thought");skinUiLabel($("outingActLine")&&$("outingActLine").querySelector("b"),"msg");var pane=$("pane");if(pane)pane.querySelectorAll(".row>.i").forEach(function(el){if(el.classList.contains("j-sil-dot"))return;var row=el.closest(".row"),button=row.querySelector("button"),handler=button?(button.getAttribute("onclick")||""):"",match=handler.match(/(?:homeAct|ask|go)\((\d+)\)/),index=match?Number(match[1]):-1;var item=tab==="home"?HOME_ACTS[index]:tab==="go"?PLACES[index]:null,gateLocked=!!item&&(S.aff|0)<(item[3]|0);var key=tab==="home"&&index>=0?(HOME_ACTS[index]&&HOME_ACTS[index][0]||"home"):tab==="ask"&&index>=0?(["hobby","bond","encounter","regret","future","uncle"][index]||"ask"):(tab==="go"?(gateLocked?"lock":"go"):(row.classList.contains("lock")?"lock":({story:"daily",mem:"memory"}[tab]||"daily")));var disabled=!button||button.disabled,state=disabled?"locked":"ready";if(disabled&&((S&&S.endingDone)||(S&&S.taken)))state="unavailable";else if(tab==="home"&&S.homeActToday&&!gateLocked)state="used";else if(tab==="go"&&S.outToday&&!S.trip&&!gateLocked)state="used";else if(tab==="ask"&&!disabled&&S.qa.indexOf(index)>=0)state="revisit";row.dataset.actionState=state;var info=row.querySelector(".m");if(info)info.dataset.actionHint=({locked:"尚未解鎖",used:"今日已完成",revisit:"可再次提問",unavailable:"目前無法使用",ready:tab==="ask"?"可提問":tab==="home"?"可互動":"可開啟"}[state]);if(el.dataset.uiIcon===key)return;el.dataset.uiIcon=key;el.setAttribute("aria-hidden","true");el.innerHTML=homeUiIcon(key)})}
 
 function updateReadingHint(){var area=$("modalReading"),hint=$("readingHint");if(!area||!hint)return;hint.classList.toggle("is-visible",area.scrollHeight>area.clientHeight+3&&area.scrollTop+area.clientHeight<area.scrollHeight-3)}
 var readingArea=$("modalReading");readingArea.addEventListener("scroll",updateReadingHint,{passive:true});new ResizeObserver(updateReadingHint).observe(readingArea);new MutationObserver(function(){requestAnimationFrame(updateReadingHint)}).observe(readingArea,{childList:true,subtree:true,characterData:true});new MutationObserver(function(){readingArea.scrollTop=0;requestAnimationFrame(updateReadingHint)}).observe($("mp"),{childList:true,subtree:true,characterData:true});window.addEventListener("resize",updateReadingHint);
