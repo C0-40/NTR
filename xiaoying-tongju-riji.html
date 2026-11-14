@@ -729,7 +729,7 @@ html,body{color:var(--tx)}
 
 /* ===== 外出空屋：角色剪影呈現（僅顯示、不可互動；進度／放大） ===== */
 :root{
-  --sil-hero:url(sil-hero.png);
+  --sil-hero:url(sil-hero.png?v=d3f54f2d);
   --sil-uncle:url(sil-uncle.png);
   --sil-hero-av:url(sil-hero-av.png);
   --sil-uncle-av:url(sil-uncle-av.png);
@@ -3161,6 +3161,13 @@ body:has(#gameUI.homeui.outing-shell){background:#2c221d!important;background-im
 }
 #gameUI.homeui.outing-shell .gameFrame{background:#4a3629!important;border:2px solid #89694e!important;border-radius:18px!important;box-shadow:none!important}
 #gameUI.homeui.outing-shell .scene{border-radius:12px!important;background:radial-gradient(ellipse at 50% 47%,#bc916234,transparent 60%),linear-gradient(165deg,#3c2b21,#211a15 85%)!important}
+/* Solo views fit the approved full-body silhouette; paired views use bust framing below. */
+#gameUI.homeui.outing-shell .silLayer .silFig.silHero{height:96%!important;max-height:100%!important;width:auto!important;max-width:78%!important;aspect-ratio:1911 / 3920;object-fit:contain!important;object-position:center bottom!important}
+/* Match the existing uncle bust in paired views; keep his original approach centre at every stage. */
+#gameUI.homeui.outing-shell .silStage{container-type:size}
+#gameUI.homeui.outing-shell .silLayer.is-pair .silFig{width:min(100cqw,100cqh)!important;height:min(100cqw,100cqh)!important;max-width:none!important;max-height:none!important;aspect-ratio:1}
+#gameUI.homeui.outing-shell .silLayer.is-pair .silFig.silHero{object-fit:cover!important;object-position:50% 0!important}
+#gameUI.homeui.outing-shell .silLayer.is-pair .silFig.silUncle{transform:translateX(calc(min(31cqw,50cqh) - min(50cqw,50cqh))) scaleX(.92)!important}
 /* The same thin status tracks and quiet utilities as the homepage. */
 #gameUI.homeui.outing-shell .topHud .topMeta.meterStack{padding:9px 10px!important;gap:11px!important;background:#f5e7d7!important;border:1.5px solid #b49b85!important;border-radius:11px!important;box-shadow:none!important}
 #gameUI.homeui.outing-shell .topHud .topMeta .meterCard{padding:0!important;margin:0!important;border:0!important;border-radius:0!important;background:transparent!important;box-shadow:none!important}
@@ -3339,7 +3346,7 @@ body:has(#gameUI.homeui.outing-shell){background:#2c221d!important;background-im
         <div class="silGap"></div>
         <div class="silPair" id="silPair">
           <img class="silFig silUncle" id="silUncle" src="sil-uncle.png" alt="" decoding="async" draggable="false">
-          <img class="silFig silHero" id="silHero" src="sil-hero.png" alt="" decoding="async" draggable="false">
+          <img class="silFig silHero" id="silHero" src="sil-hero.png?v=d3f54f2d" width="1911" height="3920" alt="" decoding="async" draggable="false">
         </div>
       </div>
     </div>
@@ -3900,7 +3907,7 @@ function syncMoodDim(){
 
 function hasMetOut(){return uncleOpen()&&(!!S.metOut||(S.uncleStep|0)>0)}
 /* 3E 動作剪影擴充點：未來可依 blankAct／poseId 換 src（如 sil-hero-act-*.png）；本輪只用站姿圖 */
-function silPoseSrc(who){return who==="uncle"?"sil-uncle.png":"sil-hero.png"}
+function silPoseSrc(who){return who==="uncle"?"sil-uncle.png":"sil-hero.png?v=d3f54f2d"}
 function applySilPose(){var h=$("silHero"),u=$("silUncle");if(h&&h.getAttribute("src")!==silPoseSrc("hero"))h.src=silPoseSrc("hero");if(u&&u.getAttribute("src")!==silPoseSrc("uncle"))u.src=silPoseSrc("uncle")}
 function silApproach(){if(!hasMetOut()||!(effM()>0||(S.uncleStep|0)>0))return -1;var a=uncleArcByStep(S.uncleStep|0);if(a&&a.sil!=null)return Math.max(0,Math.min(3,(a.sil|0)));var st=stage();if(st<=0)return 0;if(st===1)return 1;if(st===2)return 2;return 3}
 function silDist(){return silApproach()}
