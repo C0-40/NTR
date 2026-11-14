@@ -1,4 +1,4 @@
-# 《小櫻的同居日記》玩家可見文案
+# 《褪色的雛菊》玩家可見文案
 
 Source: `小櫻的同居日記.html` (byte-identical to `xiaoying-tongju-riji.html`).
 Each line: `ID | exact current text | location note` (third column optional; keep it when editing).

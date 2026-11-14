@@ -1,4 +1,4 @@
-# 《小櫻的同居日記》— 交接指令與操作清單
+# 《褪色的雛菊》— 交接指令與操作清單
 
 > How to open / preview / sync. 搭配 [HANDOFF.md](./HANDOFF.md)。
 
