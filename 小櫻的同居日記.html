@@ -3282,13 +3282,23 @@ body:has(#gameUI.homeui.outing-shell){background:#2c221d!important;background-im
 
 /* Return and observation share one stable reading window. */
 #mask.mask #obsBtn{display:none!important}
-#mask.mask.return-window .box{width:min(92vw,380px)!important;max-width:380px!important;height:min(62svh,400px)!important;max-height:85svh!important;padding:20px 18px 16px!important;border:1.5px solid #9a795d!important;border-radius:16px!important;background:#38271f!important;box-shadow:0 12px 32px #160f0b88!important}
+#mask.mask.return-window .box{width:min(92vw,380px)!important;max-width:380px!important;height:min(62svh,440px)!important;max-height:85svh!important;padding:20px 18px 16px!important;border:1.5px solid #9a795d!important;border-radius:16px!important;background:#38271f!important;box-shadow:0 12px 32px #160f0b88!important;grid-template-columns:48px minmax(0,1fr)!important;grid-template-rows:48px minmax(0,1fr) 16px 50px!important;gap:10px 12px!important}
 #mask.mask.return-window #mt{color:#f7e8d6!important;font-weight:600!important}
 #mask.mask.return-window #mt.uiIconLabel::after{font-weight:600!important}
 #mask.mask.return-window #mp{font-size:16px!important;font-weight:400!important;line-height:1.8!important;color:#f4e3cd!important}
-#mask.mask.return-window .face{border:1px solid #a18366!important;box-shadow:none!important}
-#mask.mask.return-window .readingHint{color:#c3a98d!important}
-#mask.mask.return-window .tl{display:grid!important;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:10px}
+#mask.mask.return-window .modalReading{display:contents!important}
+#mask.mask.return-window .modalReading>.face{grid-column:1;grid-row:1;width:48px!important;height:48px!important;margin:0!important;align-self:center;border:1px solid #a18366!important;box-shadow:none!important}
+#mask.mask.return-window #mt{grid-column:2;grid-row:1;align-self:center;margin:0!important;padding:0!important;border:0!important;line-height:1.4!important}
+#mask.mask.return-window #mt.uiIconLabel::before{display:none!important}
+#mask.mask.return-window #mt.uiIconLabel::after{font-size:18px!important}
+#mask.mask.return-window #memoryEventTitle,#mask.mask.return-window .sqopts{display:none!important}
+#mask.mask.return-window #mp{grid-column:1 / -1;grid-row:2;position:relative;min-height:0!important;margin:0!important;padding:12px 2px 8px 0!important;border-top:1px solid #87674e88;overflow-y:auto!important;overflow-x:hidden!important;overscroll-behavior:contain;scrollbar-width:thin;scrollbar-color:#a58465 transparent;white-space:normal!important}
+#mask.mask.return-window .returnNarrative,#mask.mask.return-window .returnObservationText{display:block;white-space:pre-wrap}
+#mask.mask.return-window .returnObservation{display:block;margin-top:16px;padding-top:12px;border-top:1px solid #87674e88}
+#mask.mask.return-window .returnObservation:first-child{margin-top:0;padding-top:0;border-top:0}
+#mask.mask.return-window .returnSectionLabel{display:block;margin-bottom:5px;color:#dab89a;font-size:13px;font-weight:500;line-height:1.5}
+#mask.mask.return-window .readingHint{grid-column:1 / -1;grid-row:3;color:#c3a98d!important}
+#mask.mask.return-window .tl{grid-column:1 / -1;grid-row:4;display:grid!important;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:10px}
 #mask.mask.return-window .tl .btn{min-width:0!important;min-height:44px!important;width:100%;padding:8px 10px!important;display:inline-flex;align-items:center;justify-content:center;gap:6px;border-radius:11px!important;font-size:14px!important;font-weight:500!important;white-space:nowrap}
 #mask.mask.return-window #obsBtn{display:inline-flex!important;background:#81583d!important;border:1.5px solid #b08a68!important;color:#fff2df!important;box-shadow:0 2px 0 #24170e!important}
 #mask.mask.return-window #obsBtn .uiIcon{width:20px;height:20px}
@@ -3964,20 +3974,43 @@ function returnWindowOpen(){var mask=$("mask");return !!(mask&&mask.classList.co
 function setObsBtn(on){
   var button=$("obsBtn");if(!button)return;
   var state=on?"ready":"used";
-  button.classList.toggle("on",!!on);button.disabled=!on;button.setAttribute("aria-disabled",on?"false":"true");
+  button.classList.toggle("on",!!on);button.disabled=!on;button.style.pointerEvents=on?"":"none";button.setAttribute("aria-disabled",on?"false":"true");
   if(button.dataset.observationState===state)return;
   button.dataset.observationState=state;
   button.innerHTML=on?homeUiIcon("eye")+'<span>起疑</span>':completedActionLabel("今日已觀察");
   button.setAttribute("aria-label",on?"起疑，觀察本次回家的痕跡":"今日已觀察");
 }
-function showReturnWindow(){
-  if(!hasReturnObservation())return false;
+function mergeQueuedEvening(){
+  if(!S||!S.pendingObs)return;
+  for(var i=0;i<mq.length;i++){
+    var item=mq[i];if(!Array.isArray(item)||!/^(?:🌙\s*)?當晚$/.test(item[0]))continue;
+    if(typeof S.pendingObs.nightTxt!=="string")S.pendingObs.nightTxt=String(item[1]||"");
+    mq.splice(i--,1);
+  }
+}
+function renderReturnContent(nightTxt,trace,observed){
+  var body=$("mp");body.textContent="";
+  if(typeof nightTxt==="string"&&nightTxt){
+    var narrative=document.createElement("span");narrative.className="returnNarrative";narrative.textContent=nightTxt;body.appendChild(narrative);
+  }else if(!observed){body.textContent="選擇「起疑」查看本次觀察。";}
+  if(observed){
+    var section=document.createElement("span"),label=document.createElement("span"),text=document.createElement("span");
+    section.className="returnObservation";section.setAttribute("role","group");section.setAttribute("aria-label","起疑");
+    label.className="returnSectionLabel";label.textContent="起疑";
+    text.className="returnObservationText";text.textContent=trace||"";
+    section.appendChild(label);section.appendChild(text);body.appendChild(section);
+  }
+  body.scrollTop=0;
+}
+function showReturnWindow(nightTxt){
+  mergeQueuedEvening();
+  if(!S||S.trip||S.taken||(!hasReturnObservation()&&typeof nightTxt!=="string"))return false;
+  if(typeof nightTxt!=="string")nightTxt=S.pendingObs.nightTxt;
   closePane();finishMemoryReveal();hideSqOpts();
-  $("mt").textContent="她回來了";$("mp").textContent="選擇「起疑」查看本次觀察。";
-  paintMaskChrome("她回來了");
-  var reading=$("modalReading");if(reading)reading.scrollTop=0;
-  $("mask").classList.add("on");$("gameUI").inert=true;setObsBtn(true);save();
-  $("obsBtn").focus({preventScroll:true});
+  $("mt").textContent="她回來了";
+  renderReturnContent(nightTxt,"",false);paintMaskChrome("她回來了");
+  $("mask").classList.add("on");$("mp").scrollTop=0;$("gameUI").inert=true;setObsBtn(hasReturnObservation());save();
+  ($("obsBtn").disabled?$("mb"):$("obsBtn")).focus({preventScroll:true});
   return true;
 }
 function openReturnWindow(){if(presentationHeld()||busy||maskOpen()||dayLock||!hasReturnObservation())return;showReturnWindow()}
@@ -3988,8 +4021,9 @@ function observeTraces(){if(presentationHeld()||busy||!hasReturnObservation())re
     S.pendingObs=null;setObsBtn(false);
     if(S.dEv.length&&observation.met)S.dEv[S.dEv.length-1].fr=observation.trTxt;
     addLog("🔍 起疑｜"+(observation.trTxt||"").slice(0,48));
-    $("mp").textContent=observation.trTxt||"";
-    var reading=$("modalReading");if(reading)reading.scrollTop=0;
+    renderReturnContent(observation.nightTxt,observation.trTxt,true);
+    var body=$("mp"),section=body.querySelector(".returnObservation");
+    if(section)body.scrollTop=Math.max(0,section.getBoundingClientRect().top-body.getBoundingClientRect().top+body.scrollTop-6);
     moodPeekOn=1;syncMoodDim();save();render(false);$("mb").focus({preventScroll:true});
   });
 }
@@ -4019,7 +4053,7 @@ if(!S.endingDone&&(effM()|0)>=99&&(S.day|0)<30){var hasPrep=false;for(var _ei=0;
 /* ❓ 問題改到隔日進天再 queueSqAsk，回家不掛按鈕 */
 var nightTxt=(dissonanceOn()||(motif&&motif.mode==="clash"))?pick(FLAT_NIGHT):pick(NIGHT[Math.min(st,NIGHT.length-1)]);
 if(st>=2&&!dissonanceOn()&&!(motif&&motif.th))nightTxt+="\n\n你沒睡好。懷疑比她的呼吸聲更響。";
-mq.push(["🌙 當晚",nightTxt]);
+if(S.pendingObs)S.pendingObs.nightTxt=nightTxt;
 S.dEv.push({id:pid,pt:part(),met:met,fr:met?"（尚未起疑）":("她去了"+p[1]+"，"+ev+"，"+pick(SOFT))});
 queueCohabUnlock();
 afterAffTier(b);/* no rank popup */
@@ -4073,6 +4107,7 @@ $("mp").addEventListener("keydown",function(e){if(memoryReveal&&(e.key==="Enter"
 var memoryMotionQuery=window.matchMedia("(prefers-reduced-motion: reduce)");if(memoryMotionQuery.addEventListener)memoryMotionQuery.addEventListener("change",function(e){if(e.matches)finishMemoryReveal()});
 function nextPop(){if(maskOpen()||presentationHeld())return;if(!mq.length){dayLock=0;hideSqOpts();if(moodPeekOn)clearMoodPeek();return}var m=mq.shift();if(!m){releaseDayLock();hideSqOpts();if(moodPeekOn)clearMoodPeek();return}
 if(m.returnHome){if(!showReturnWindow())nextPop();return}
+if(Array.isArray(m)&&/^(?:🌙\s*)?當晚$/.test(m[0])){var night=String(m[1]||"");if(S&&S.pendingObs)S.pendingObs.nightTxt=night;if(!showReturnWindow(night))nextPop();return}
 if(m.sq!=null){finishMemoryReveal();showSqMask(m.sq);return}
 if(m.endingPrep){showEndingPrep();return}
 if(m.memoryId!=null){ensureMemoryState();if(S.memSeen.indexOf(m.memoryId)<0)S.memSeen.push(m.memoryId);S.memPending=S.memPending.filter(function(id){return id!==m.memoryId});save()}
@@ -4330,8 +4365,10 @@ $("thbox").setAttribute("role","button");$("thbox").setAttribute("tabindex","0")
 function skinUiLabel(el,key){if(!el)return;var raw=el.textContent||"",label=raw.replace(/^[\s\p{Extended_Pictographic}\uFE0F\u200D\u23F3\u23E9]+/u,"");el.dataset.uiLabel=label;el.classList.add("uiIconLabel");el.style.setProperty("--label-icon",'url("data:image/svg+xml,'+encodeURIComponent(homeUiIcon(key).replace("<svg ", '<svg xmlns="http://www.w3.org/2000/svg" '))+'")')}
 function skinWindowUi(){var title=$("mt"),text=title?title.textContent:"",key=/她出門了/.test(text)?"go":/她回來了/.test(text)?"daily":/^(?:🌙\s*)?當晚$/.test(text)?"sleep":/起疑|觀察/.test(text)?"eye":/發訊息/.test(text)?"msg":/電話/.test(text)?"call":/廁所/.test(text)?"jack":/問/.test(text)?"ask":/回憶/.test(text)?"memory":"daily";skinUiLabel(title,key);skinUiLabel($("thbox")&&$("thbox").querySelector("b"),"thought");skinUiLabel($("outingActLine")&&$("outingActLine").querySelector("b"),"msg");var pane=$("pane");if(pane)pane.querySelectorAll(".row>.i").forEach(function(el){if(el.classList.contains("j-sil-dot"))return;var row=el.closest(".row"),button=row.querySelector("button"),handler=button?(button.getAttribute("onclick")||""):"",match=handler.match(/(?:homeAct|ask|go)\((\d+)\)/),index=match?Number(match[1]):-1;var item=tab==="home"?HOME_ACTS[index]:tab==="go"?PLACES[index]:null,gateLocked=!!item&&(S.aff|0)<(item[3]|0);var key=tab==="home"&&index>=0?(HOME_ACTS[index]&&HOME_ACTS[index][0]||"home"):tab==="ask"&&index>=0?(["hobby","bond","encounter","regret","future","uncle"][index]||"ask"):(tab==="go"?(gateLocked?"lock":"go"):(row.classList.contains("lock")?"lock":({story:"daily",mem:"memory"}[tab]||"daily")));var disabled=!button||button.disabled,state=disabled?"locked":"ready";if(disabled&&((S&&S.endingDone)||(S&&S.taken)))state="unavailable";else if(tab==="home"&&S.homeActToday&&!gateLocked)state="used";else if(tab==="go"&&S.outToday&&!S.trip&&!gateLocked)state="used";else if(tab==="ask"&&!disabled&&S.qa.indexOf(index)>=0)state="revisit";row.dataset.actionState=state;var info=row.querySelector(".m");if(info)info.dataset.actionHint=({locked:"尚未解鎖",used:"今日已完成",revisit:"可再次提問",unavailable:"目前無法使用",ready:tab==="ask"?"可提問":tab==="home"?"可互動":"可開啟"}[state]);if(el.dataset.uiIcon===key)return;el.dataset.uiIcon=key;el.setAttribute("aria-hidden","true");el.innerHTML=homeUiIcon(key)})}
 
-function updateReadingHint(){var area=$("modalReading"),hint=$("readingHint");if(!area||!hint)return;hint.classList.toggle("is-visible",area.scrollHeight>area.clientHeight+3&&area.scrollTop+area.clientHeight<area.scrollHeight-3)}
+function updateReadingHint(){var area=returnWindowOpen()?$("mp"):$("modalReading"),hint=$("readingHint");if(!area||!hint)return;hint.classList.toggle("is-visible",area.scrollHeight>area.clientHeight+3&&area.scrollTop+area.clientHeight<area.scrollHeight-3)}
 var readingArea=$("modalReading");readingArea.addEventListener("scroll",updateReadingHint,{passive:true});new ResizeObserver(updateReadingHint).observe(readingArea);new MutationObserver(function(){requestAnimationFrame(updateReadingHint)}).observe(readingArea,{childList:true,subtree:true,characterData:true});new MutationObserver(function(){readingArea.scrollTop=0;requestAnimationFrame(updateReadingHint)}).observe($("mp"),{childList:true,subtree:true,characterData:true});window.addEventListener("resize",updateReadingHint);
+
+$("mp").addEventListener("scroll",updateReadingHint,{passive:true});new ResizeObserver(updateReadingHint).observe($("mp"));
 
 var windowSkinObserver=new MutationObserver(skinWindowUi);["mt","thbox","outingActLine","pane"].forEach(function(id){var el=$(id);if(el)windowSkinObserver.observe(el,{childList:true,subtree:true,characterData:true})});skinWindowUi();
 
