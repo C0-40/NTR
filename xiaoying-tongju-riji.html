@@ -3405,6 +3405,30 @@ body:has(#gameUI.homeui.outing-shell){background:#2c221d!important;background-im
  #gameUI.homeui:not(.outing-shell) #dayl .dayMark-n{font-size:22px!important}
  #gameUI.homeui:not(.outing-shell) #dayl .dayMark-k{font-size:9px!important}
 }
+/* Approved sun-faded diary identity. Existing bottom action buttons remain intact. */
+#gameUI.homeui:not(.outing-shell) .gameFrame{background:linear-gradient(90deg,#c3a17c,#d5b898 12%,#d0ad87 88%,#b9936e)!important;box-shadow:inset 0 0 0 1px #f5dfbc99!important}
+#gameUI.homeui:not(.outing-shell) .topHud .topMeta.meterStack{position:relative;background:linear-gradient(90deg,#c5a77818,transparent 12px,transparent calc(100% - 12px),#c5a77818),repeating-linear-gradient(0deg,#b79a7306 0 1px,transparent 1px 4px),#f8ecd7!important;border-color:#ba9b77!important;border-radius:13px 11px 14px 10px!important;box-shadow:inset 0 1px 0 #fff9eb,0 1px 0 #ab8c6230!important}
+#gameUI.homeui:not(.outing-shell) .topHud .topMeta.meterStack::before{content:"";position:absolute;inset:3px;pointer-events:none;border:1px dotted #b7986b44;border-radius:10px 8px 11px 7px}
+#gameUI.homeui:not(.outing-shell) .topHud .topMeta.meterStack::after{content:"";position:absolute;right:0;top:0;width:10px;height:10px;pointer-events:none;border-radius:0 10px 0 2px;background:linear-gradient(45deg,#ac8d6030 0 44%,#fff8e7 47% 75%,#e5d3b3 100%)}
+#gameUI.homeui:not(.outing-shell) .topHud .dayClock{position:relative!important;inset:auto!important}
+#gameUI.homeui:not(.outing-shell) #dayl{background:linear-gradient(90deg,#ccb08014,transparent 10px,transparent calc(100% - 10px),#ccb08014),#fbefda!important;border-color:#b6976c!important;box-shadow:inset 0 0 0 2px #fff9eb88,inset 0 -3px 0 #e7d4b3,0 2px 0 #b99b70,0 3px 3px #74543722!important}
+#gameUI.homeui:not(.outing-shell) #dayl::before{background:linear-gradient(90deg,#b88c65,#c49c75 48%,#ae825d)!important}
+#gameUI.homeui:not(.outing-shell) .calendarDaisy{position:absolute;z-index:2;right:-7px;top:-9px;width:26px;height:30px;pointer-events:none;opacity:.94;filter:drop-shadow(0 .4px .4px #76624520)}
+#gameUI.homeui:not(.outing-shell) .calendarDaisy svg{display:block;width:100%;height:100%}
+#gameUI.homeui:not(.outing-shell) .topHud .collectionNav .hudToolFace{background:repeating-linear-gradient(15deg,#b7996b07 0 1px,transparent 1px 4px),#fbefda;border-color:#b99b76;box-shadow:inset 0 0 0 2px #fff9e94d,0 1px 0 #b6977055}
+#gameUI.homeui:not(.outing-shell) .topHud .collectionNav .uiIcon,#gameUI.homeui:not(.outing-shell) .topHud .collectionNav #settingsBtn svg{stroke-width:1.7}
+#gameUI.homeui:not(.outing-shell) #dlg{background:linear-gradient(90deg,#c5a16b18,transparent 15px,transparent calc(100% - 15px),#c5a16b18),linear-gradient(#c5a16b0c,transparent 12px,transparent calc(100% - 10px),#c5a16b18),#fff4e2!important;border-color:#795338!important;box-shadow:inset 0 1px 0 #fff9ee,0 2px 0 #ae8b6155!important}
+#gameUI.homeui:not(.outing-shell) .diaryPaperEdge{position:absolute;inset:5px;pointer-events:none;border:1px solid #c7ab7d4d;border-radius:9px}
+#gameUI.homeui:not(.outing-shell) .diaryPaperEdge::after{content:"";position:absolute;right:-3px;bottom:-3px;width:10px;height:10px;pointer-events:none;background:linear-gradient(135deg,transparent 46%,#d9c09a55 49% 60%,#fff8e9 62%);border-radius:0 0 7px 0}
+#gameUI.homeui:not(.outing-shell) #dlg #nm{background:repeating-linear-gradient(0deg,#fff3dc0a 0 1px,transparent 1px 4px),linear-gradient(145deg,#a66d76,#89515b)!important;border-color:#74434d!important;border-radius:3px 3px 5px 2px!important;box-shadow:0 1px 0 #70434b33!important}
+#gameUI.homeui:not(.outing-shell) #dlg #nm::before{content:"";position:absolute;left:-6px;top:3px;width:14px;height:6px;pointer-events:none;transform:rotate(-32deg);background:#d7bc8da6;border:1px solid #d2b78666}
+#gameUI.homeui:not(.outing-shell) .dialogueZone .sideNav.right{background:repeating-linear-gradient(15deg,#b7996b06 0 1px,transparent 1px 4px),#fbefda!important;border-color:#b99b76!important;box-shadow:inset 0 1px 0 #fff9eb66,0 1px 0 #b6977033!important}
+#gameUI.homeui:not(.outing-shell) .dialogueZone .sideNav.right .bubble+.bubble{border-left-style:dashed!important}
+#gameUI.homeui:not(.outing-shell) .dialogueZone .sideNav.right .uiIcon{stroke-width:1.7}
+#gameUI.homeui:not(.outing-shell) #pane.is-open{animation:diaryPanelSettle .18s ease-out}
+@keyframes diaryPanelSettle{from{opacity:0;translate:0 4px}to{opacity:1;translate:0 0}}
+@media(max-width:360px){#gameUI.homeui:not(.outing-shell) .calendarDaisy{width:22px;height:24px;top:-9px;right:-4px}}
+@media(prefers-reduced-motion:reduce){#gameUI.homeui:not(.outing-shell) #pane.is-open{animation:none!important}}
 </style>
 </head>
 <body>
@@ -3434,6 +3458,7 @@ body:has(#gameUI.homeui.outing-shell){background:#2c221d!important;background-im
           </div>
       <div class="dayClock" id="dayClock" aria-label="天數">
       <div class="dayClock-day" id="dayl" data-day="1"><span class="dayMark-k">第</span><span class="dayMark-n">1</span><span class="dayMark-k">天</span></div>
+      <span class="calendarDaisy" aria-hidden="true"><svg viewBox="0 0 42 44" width="26" height="30" fill="none" aria-hidden="true" focusable="false"><path d="M23 25c7 4 9 10 15 16" stroke="#9c9871" stroke-width="1.3"/><path d="M30 31c-1-6 4-9 10-9-1 6-5 10-10 9Z" fill="#96966d" stroke="#86865f" stroke-width=".7"/><path d="M34 36c-6 1-9-2-11-6 6-2 10 1 11 6Z" fill="#b0aa7e" stroke="#96916a" stroke-width=".7"/><g fill="#f7edcf" stroke="#c3ae88" stroke-width=".65"><ellipse cx="18" cy="8" rx="3.3" ry="7.7" transform="rotate(0 18 18)"/><ellipse cx="18" cy="8" rx="3.3" ry="7.7" transform="rotate(30 18 18)"/><ellipse cx="18" cy="8" rx="3.3" ry="7.7" transform="rotate(60 18 18)"/><ellipse cx="18" cy="8" rx="3.3" ry="7.7" transform="rotate(90 18 18)"/><ellipse cx="18" cy="8" rx="3.3" ry="7.7" transform="rotate(120 18 18)"/><ellipse cx="18" cy="8" rx="3.3" ry="7.7" transform="rotate(150 18 18)"/><ellipse cx="18" cy="8" rx="3.3" ry="7.7" transform="rotate(180 18 18)"/><ellipse cx="18" cy="8" rx="3.3" ry="7.7" transform="rotate(210 18 18)"/><ellipse cx="18" cy="8" rx="3.3" ry="7.7" transform="rotate(240 18 18)"/><ellipse cx="18" cy="8" rx="3.3" ry="7.7" transform="rotate(270 18 18)"/><ellipse cx="18" cy="8" rx="3.3" ry="7.7" transform="rotate(300 18 18)"/><ellipse cx="18" cy="8" rx="3.3" ry="7.7" transform="rotate(330 18 18)"/></g><circle cx="18" cy="18" r="5.1" fill="#c5a056" stroke="#ae8d4e" stroke-width=".8"/><path d="m16 16 1 1m3-1-.5 1m-4 2 1-.3m3 1 1-1m-3 2 .5-1" stroke="#a48343" stroke-width=".65"/></svg></span>
     </div>
     <nav class="collectionNav" aria-label="日常、回憶與設定">
       <button type="button" class="bubble sideStory" data-t="story" id="navStory" aria-label="日常" title="日常"><span class="hudToolFace" aria-hidden="true"><svg class="uiIcon" viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="m2 11 10-9 10 9M5 9v12h14V9M9 21v-7h6v7"/></svg><span>日常</span></span></button>
@@ -3484,7 +3509,7 @@ body:has(#gameUI.homeui.outing-shell){background:#2c221d!important;background-im
       <button type="button" class="bubble actChat" id="navChat" aria-label="打開匿名聊天室" onclick="openChatRoom()"><svg class="uiIcon" viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M15 16H8l-4 3v-4a7 7 0 0 1 3-13h7a7 7 0 0 1 1 14Z"/><path d="M19 8a6 6 0 0 1 1 10v3l-4-2h-4"/><path d="M7 9h.01M11 9h.01M15 9h.01"/></svg><span>聊天室</span></button>
       <button type="button" class="bubble" data-t="ask" id="navAsk"><svg class="uiIcon" viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M19 16a8 8 0 1 0-5 3l6 2-1-5Z"/><path d="M9 8a3 3 0 0 1 6 0c0 2-3 2-3 4"/><path d="M12 15h.01"/></svg><span>提問</span></button>
     </nav>
-    <div class="dlg" id="dlg" role="button" tabindex="0" aria-label="和她聊天（點一下對話）"><span class="dlgAv" id="dlgAv" aria-hidden="true"></span><div class="dlgBody"><b id="nm">小紅</b><span id="say">哼！才不要多想，只是當初口快答應了而已！</span></div><span class="dlgNext" id="dlgNext" aria-hidden="true">▼</span><span class="readingBadge" aria-hidden="true"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M8 4C6 2.5 3 2.5 1.5 3v10C3 12.5 6 12.5 8 14c2-1.5 5-1.5 6.5-1V3C13 2.5 10 2.5 8 4Zm0 0v10"/></svg><span>閱讀中</span></span></div>
+    <div class="dlg" id="dlg" role="button" tabindex="0" aria-label="和她聊天（點一下對話）"><span class="diaryPaperEdge" aria-hidden="true"></span><span class="dlgAv" id="dlgAv" aria-hidden="true"></span><div class="dlgBody"><b id="nm">小紅</b><span id="say">哼！才不要多想，只是當初口快答應了而已！</span></div><span class="dlgNext" id="dlgNext" aria-hidden="true">▼</span><span class="readingBadge" aria-hidden="true"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M8 4C6 2.5 3 2.5 1.5 3v10C3 12.5 6 12.5 8 14c2-1.5 5-1.5 6.5-1V3C13 2.5 10 2.5 8 4Zm0 0v10"/></svg><span>閱讀中</span></span></div>
     </div>
   </div>
   <div class="heartRow" id="heartRow" aria-label="外出心聲">
