@@ -3102,7 +3102,7 @@ body:has(#gameUI.outing-shell) .settingsAction,body:has(#gameUI.outing-shell) .s
 #gameUI.homeui:not(.outing-shell){--comic-ink:#573b33;--comic-edge:#8c684f;--comic-paper:#fff2df;--comic-rose:#bc7e83;--comic-shadow:#b18a69}
 #gameUI.homeui:not(.outing-shell) .gameFrame{border:2px solid #694b3b!important;border-radius:18px!important;background:#d4b18f!important;box-shadow:none!important}
 #gameUI.homeui:not(.outing-shell) .scene{border-radius:12px!important}
-#gameUI.homeui:not(.outing-shell) .topHud .topMeta.meterStack{background:#f5e7d7!important;border:1.5px solid #b49b85!important;border-radius:11px!important;box-shadow:none!important}
+#gameUI.homeui:not(.outing-shell) .topHud .topMeta.meterStack{align-self:end!important;background:#f5e7d7!important;border:1.5px solid #b49b85!important;border-radius:11px!important;box-shadow:none!important}
 #gameUI.homeui:not(.outing-shell) .topHud .meterName{color:#79604b!important;font-weight:500!important}
 #gameUI.homeui:not(.outing-shell) .topHud .meterNum{color:#654735!important;font-weight:600!important}
 #gameUI.homeui:not(.outing-shell) .meterMax{color:#977e69!important}
@@ -3284,7 +3284,7 @@ body:has(#gameUI.homeui.outing-shell){background:#2c221d!important;background-im
 #mask.mask #obsBtn,#mask.mask .returnMeta{display:none!important}
 #mask.mask.return-window::before{content:"";position:fixed;inset:0;pointer-events:none;background:radial-gradient(ellipse at 50% 44%,#0b070622 0%,#08050499 100%);opacity:0;transition:opacity .18s ease}
 #mask.mask.return-window.return-observing::before{opacity:1}
-#mask.mask.return-window .box{z-index:1;width:min(92vw,380px)!important;max-width:380px!important;height:min(62svh,440px)!important;max-height:85svh!important;padding:20px 18px 16px!important;border:1.5px solid #9a795d!important;border-radius:16px!important;background:#38271f!important;box-shadow:0 12px 32px #160f0b88!important;grid-template-columns:48px minmax(0,1fr)!important;grid-template-rows:72px minmax(0,1fr) 16px 50px!important;gap:10px 12px!important;transition:background-color .18s ease,box-shadow .18s ease}
+#mask.mask.return-window .box{z-index:1;width:min(92vw,380px)!important;max-width:380px!important;height:clamp(280px,52svh,340px)!important;max-height:85svh!important;padding:16px 18px 14px!important;border:1.5px solid #9a795d!important;border-radius:16px!important;background:#38271f!important;box-shadow:0 12px 32px #160f0b88!important;grid-template-columns:48px minmax(0,1fr)!important;grid-template-rows:72px minmax(0,1fr) 16px 50px!important;gap:8px 12px!important;transition:background-color .18s ease,box-shadow .18s ease}
 #mask.mask.return-window.return-observing .box{background:#2f211a!important;box-shadow:inset 0 0 42px #08050444,0 12px 32px #160f0b99!important}
 #mask.mask.return-window #mt{color:#f7e8d6!important;font-weight:600!important}
 #mask.mask.return-window #mt.uiIconLabel::after{font-weight:600!important}
@@ -3297,7 +3297,7 @@ body:has(#gameUI.homeui.outing-shell){background:#2c221d!important;background-im
 #mask.mask.return-window #memoryEventTitle,#mask.mask.return-window .sqopts{display:none!important}
 #mask.mask.return-window #mp{grid-column:1 / -1;grid-row:2;position:relative;min-height:0!important;margin:0!important;padding:12px 2px 8px 0!important;border-top:1px solid #87674e88;overflow-y:auto!important;overflow-x:hidden!important;overscroll-behavior:contain;scrollbar-width:thin;scrollbar-color:#a58465 transparent;white-space:normal!important;opacity:1;transition:opacity .14s ease}
 #mask.mask.return-window.return-fading #mp{opacity:0}
-#mask.mask.return-window.return-observed #mt{align-self:start;padding-top:2px!important}
+#mask.mask.return-window.return-observed #mt{align-self:start;padding-top:0!important}
 #mask.mask.return-window .returnMeta:not([hidden]){display:flex!important;grid-column:2;grid-row:1;align-self:end;align-items:center;justify-content:space-between;gap:8px;min-width:0;height:44px}
 #mask.mask.return-window .returnBack{min-height:44px;padding:0 4px 0 0;border:0;background:transparent;color:#ecd2b2;font:inherit;font-size:12px;font-weight:400;text-decoration:underline;text-underline-offset:3px;white-space:nowrap;cursor:pointer}
 #mask.mask.return-window .returnBack[hidden]{display:none!important}
@@ -3337,7 +3337,7 @@ body:has(#gameUI.homeui.outing-shell){background:#2c221d!important;background-im
               <div class="meterHead">
                 <span class="meterHeart" aria-hidden="true">♥</span>
                 <span class="meterName">阿祿</span>
-                <span class="meterNum" id="affn">0</span><span class="meterMax" aria-hidden="true">/100</span>
+                <span class="meterNum" id="affn">0</span>
               </div>
               <div class="bar affBar" aria-hidden="true"><i id="affbar"></i><span class="affInk" id="affInk" aria-hidden="true"></span><span class="affSweep" id="affSweep" aria-hidden="true"></span></div>
             </div>
@@ -3345,7 +3345,7 @@ body:has(#gameUI.homeui.outing-shell){background:#2c221d!important;background-im
               <div class="meterHead">
                 <span class="meterHeart" aria-hidden="true">♥</span>
                 <span class="meterName" id="mlab">強叔</span>
-                <span class="meterNum" id="mnum">0</span><span class="meterMax" aria-hidden="true">/100</span>
+                <span class="meterNum" id="mnum">0</span>
               </div>
               <div class="bar m" id="mbarwrap"><i id="mbar"></i></div>
             </div>
