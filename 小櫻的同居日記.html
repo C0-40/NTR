@@ -3355,6 +3355,20 @@ body:has(#gameUI.homeui.outing-shell){background:#2c221d!important;background-im
 #gameUI.homeui.hero-arriving #av{animation:heroFirstArrival .8s ease-out both!important}
 @keyframes heroFirstArrival{from{opacity:0}to{opacity:1}}
 @media(prefers-reduced-motion:reduce){#gameUI.homeui.hero-arriving #av{animation:none!important;opacity:1!important}}
+/* Approved home refinement: darker contours, softer room, clear action hierarchy. */
+#gameUI.homeui:not(.outing-shell) .gameFrame{border-color:#543b2e!important;box-shadow:inset 0 0 0 1px #f9e0c077!important}
+#gameUI.homeui:not(.outing-shell) .scene{background-image:linear-gradient(#f4ead82e,#f4ead82e),var(--room)!important}
+#gameUI.homeui:not(.outing-shell) #dlg{border-color:#624434!important;box-shadow:inset 0 1px 0 #fff9ee,0 2px 0 #9e78594d!important}
+#gameUI.homeui:not(.outing-shell) #dlg #nm{background:#965d66!important;border-color:#71414c!important;color:#fff5e8!important;box-shadow:0 1px 0 #633e4533!important}
+#gameUI.homeui:not(.outing-shell):not(.presentation-held) .dock.tabs button:not(:disabled):not(.dock-return):not(.dock-used){border-color:#543b2e!important;color:#4f372d!important;box-shadow:inset 0 1px 0 #fff8e8aa,0 2px 0 #a37b59!important}
+#gameUI.homeui:not(.outing-shell):not(.presentation-held) .dock.tabs button:not(:disabled):not(.dock-return):not(.dock-used) .uiIcon{color:#6d4d3b!important}
+#gameUI.homeui:not(.outing-shell):not(.presentation-held) .dock.tabs #sleepBtn:not(:disabled){box-shadow:inset 0 1px 0 #ffeed477,0 2px 0 #957053!important}
+#gameUI.homeui:not(.outing-shell) .topHud .meterName{color:#6e513f!important}
+#gameUI.homeui:not(.outing-shell) .topHud .meterNum{color:#573c2b!important}
+#gameUI.homeui:not(.outing-shell) .topHud #mbox .meterName{color:#725d69!important}
+#gameUI.homeui:not(.outing-shell) .topHud #mbox .meterNum{color:#604b55!important}
+#gameUI.homeui:not(.outing-shell) #dayl .dayMark-n{color:#745038!important}
+#gameUI.homeui:not(.outing-shell):not(.presentation-reading) .topHud .collectionNav .bubble:not(:disabled),#gameUI.homeui:not(.outing-shell):not(.presentation-reading) .topHud .collectionNav #settingsBtn{color:#694b38!important}
 </style>
 </head>
 <body>
