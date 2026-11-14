@@ -2322,7 +2322,7 @@ body:has(#gameUI.outing-shell) .settingsAction,body:has(#gameUI.outing-shell) .s
  /* New portrait keeps its original transparent canvas; frame the face below the top controls. */
  width:min(202vw,calc(100svh - 70px),880px)!important;height:auto!important;aspect-ratio:1/1!important;max-width:none!important;
  bottom:-12px!important;transform:translateX(-50%)!important;transform-origin:50% 100%!important;
- background-image:url("xiaohong-normal.png")!important;background-size:auto 94%!important;background-position:center bottom!important;
+ background-image:url("xiaohong-normal.png?v=3bf235d2")!important;background-size:auto 94%!important;background-position:center bottom!important;
 }
 #gameUI.homeui.outing-shell .stick.outing .outingTop{
  background:linear-gradient(150deg,#71503ced,#432d20f0)!important;border-color:#ad896c88!important;
@@ -2984,7 +2984,7 @@ body:has(#gameUI.outing-shell) .settingsAction,body:has(#gameUI.outing-shell) .s
 
 /* Approved red-haired heroine avatar; male silhouettes and anonymous forum icons keep their identity. */
 #mask .face:not(.is-sil-uncle),.dlgAv:not(.is-sil-uncle),.tf:not(.is-sil-uncle),#heartFace,.j-sil-ico,.pane .row .i.j-sil-dot{
- background-image:url("xiaohong-normal.png")!important;background-repeat:no-repeat!important;background-size:245% auto!important;background-position:50% 6%!important;background-color:#f3dfd0!important;
+ background-image:url("xiaohong-normal.png?v=3bf235d2")!important;background-repeat:no-repeat!important;background-size:245% auto!important;background-position:50% 6%!important;background-color:#f3dfd0!important;
 }
 /* Completed actions are quiet solid rows; locked actions keep a dashed edge and lock cue. */
 #gameUI.homeui #pane .row[data-action-state="used"]{border-style:solid!important;border-color:#bdac94!important;background:#eee5d6!important;opacity:1!important}
@@ -3334,7 +3334,7 @@ body:has(#gameUI.homeui.outing-shell){background:#2c221d!important;background-im
 @keyframes homeIdleBreath{0%,100%{scale:1 1;translate:0 0}50%{scale:1.002 1.008;translate:0 -1px}}
 .momPhone .momNotice{display:none;width:min(100%,350px);min-height:100px;padding:20px;border:1px solid #bea486;border-radius:18px;background:#fff2df;color:#5b4333;text-align:left;font:inherit;box-shadow:0 8px 30px #21180f44;cursor:pointer;animation:momNoticeGlow 2.4s ease-in-out infinite}
 .momNotice strong,.momNotice span{display:block}.momNotice strong{font-size:17px;margin-bottom:8px}.momNotice span{font-size:14px;line-height:1.7}.momNotice .momNoticeAction{margin-top:12px;font-size:13px;color:#8c6250;text-decoration:underline}
-.momPhone.mom-notice .momNotice{display:block;margin:20px 16px;width:auto;flex:none;align-self:stretch}.momPhone.mom-notice #momBubbles{visibility:hidden}
+.momPhone.mom-notice .momNotice{display:block;margin:0;width:min(100%,350px);flex:none;align-self:auto}.momPhone.mom-notice #momBubbles{visibility:hidden}
 .momPhone .chromeWin.phone{height:min(78svh,600px)!important}
 .momPhone .msgBubble[hidden]{display:none!important}
 .momPhone .momNotice:focus-visible{outline:2px solid #9e6d51;outline-offset:3px}
@@ -3347,6 +3347,14 @@ body:has(#gameUI.homeui.outing-shell){background:#2c221d!important;background-im
 .momPhone .msgBubble.mom-arrive{animation:momMessageArrive .22s ease-out}
 @keyframes momMessageArrive{from{opacity:0;translate:0 7px}to{opacity:1;translate:0 0}}
 @media(prefers-reduced-motion:reduce){.momPhone .msgBubble.mom-arrive{animation:none!important}}
+/* The phone remains unseen until the opening notification is accepted. */
+.momPhone.mom-notice{background:#000!important;backdrop-filter:none!important;-webkit-backdrop-filter:none!important}
+.momPhone.mom-notice .chromeWin.phone{display:none!important}
+#gameUI.intro-pending #av,#gameUI.intro-pending #dlg{visibility:hidden!important}
+#mask.intro-arrival .face{display:none!important}
+#gameUI.homeui.hero-arriving #av{animation:heroFirstArrival .8s ease-out both!important}
+@keyframes heroFirstArrival{from{opacity:0}to{opacity:1}}
+@media(prefers-reduced-motion:reduce){#gameUI.homeui.hero-arriving #av{animation:none!important;opacity:1!important}}
 </style>
 </head>
 <body>
@@ -3426,7 +3434,7 @@ body:has(#gameUI.homeui.outing-shell){background:#2c221d!important;background-im
       <button type="button" class="bubble actChat" id="navChat" aria-label="打開匿名聊天室" onclick="openChatRoom()"><svg class="uiIcon" viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M15 16H8l-4 3v-4a7 7 0 0 1 3-13h7a7 7 0 0 1 1 14Z"/><path d="M19 8a6 6 0 0 1 1 10v3l-4-2h-4"/><path d="M7 9h.01M11 9h.01M15 9h.01"/></svg><span>聊天室</span></button>
       <button type="button" class="bubble" data-t="ask" id="navAsk"><svg class="uiIcon" viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M19 16a8 8 0 1 0-5 3l6 2-1-5Z"/><path d="M9 8a3 3 0 0 1 6 0c0 2-3 2-3 4"/><path d="M12 15h.01"/></svg><span>提問</span></button>
     </nav>
-    <div class="dlg" id="dlg" role="button" tabindex="0" aria-label="和她聊天（點一下對話）"><span class="dlgAv" id="dlgAv" aria-hidden="true"></span><div class="dlgBody"><b id="nm">小紅</b><span id="say">哼！才不是為了你，我只是為了報答阿姨而已。</span></div><span class="dlgNext" id="dlgNext" aria-hidden="true">▼</span><span class="readingBadge" aria-hidden="true"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M8 4C6 2.5 3 2.5 1.5 3v10C3 12.5 6 12.5 8 14c2-1.5 5-1.5 6.5-1V3C13 2.5 10 2.5 8 4Zm0 0v10"/></svg><span>閱讀中</span></span></div>
+    <div class="dlg" id="dlg" role="button" tabindex="0" aria-label="和她聊天（點一下對話）"><span class="dlgAv" id="dlgAv" aria-hidden="true"></span><div class="dlgBody"><b id="nm">小紅</b><span id="say">哼！才不要多想，只是當初口快答應了而已！</span></div><span class="dlgNext" id="dlgNext" aria-hidden="true">▼</span><span class="readingBadge" aria-hidden="true"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M8 4C6 2.5 3 2.5 1.5 3v10C3 12.5 6 12.5 8 14c2-1.5 5-1.5 6.5-1V3C13 2.5 10 2.5 8 4Zm0 0v10"/></svg><span>閱讀中</span></span></div>
     </div>
   </div>
   <div class="heartRow" id="heartRow" aria-label="外出心聲">
@@ -3469,10 +3477,10 @@ body:has(#gameUI.homeui.outing-shell){background:#2c221d!important;background-im
     <div class="chatFoot">輕觸外側關閉</div>
   </div>
 </div>
-<div class="momPhone" id="momPhone" aria-hidden="true" role="dialog" aria-modal="true" aria-label="媽媽的訊息" tabindex="0">
+<div class="momPhone on mom-notice" id="momPhone" aria-hidden="false" role="dialog" aria-modal="true" aria-label="媽媽的訊息" tabindex="0">
+  <button type="button" class="momNotice" id="momOpen"><span>你收到了來自媽媽的訊息</span><span class="momNoticeAction">查看訊息</span></button>
   <div class="chromeWin phone" role="document">
     <div class="chromeTitle"><span class="chromeFace av" aria-hidden="true">媽</span><h3>媽媽</h3></div>
-  <button type="button" class="momNotice" id="momOpen"><strong>媽媽</strong><span>你收到新的訊息</span><span class="momNoticeAction">查看訊息</span></button>
 
     <div class="chromeBody msgThread" id="momBubbles">
       <div class="msgBubble"><span class="who">媽媽</span><span class="momText">阿祿，媽知道你腿骨折要在家靜養一個月，可惜現在旅行不能照顧你</span></div>
@@ -3502,9 +3510,9 @@ var scenePresentation={phase:"",timer:0,departurePending:false};
 function presentationHeld(){return !!(scenePresentation.phase)}
 function updatePresentationState(){var root=$("gameUI"),hint=$("presentationHint"),phase=scenePresentation.phase;if(!root)return;
 root.classList.toggle("presentation-held",!!phase);root.classList.toggle("presentation-reading",phase==="reaction-reading");root.classList.toggle("departure-pending",scenePresentation.departurePending);root.setAttribute("aria-busy",phase&&phase!=="reaction-reading"?"true":"false");root.querySelectorAll(".topHud,.dock,.sideNav,.contextActions,#pane").forEach(function(el){el.inert=!!phase});
-if(hint){hint.textContent=phase==="leaving"?"小紅準備出門…":phase==="returning"?"小紅回來了…":phase==="reaction-reading"?"輕觸對話，繼續閱讀":"";hint.hidden=!phase;}
+if(hint){hint.textContent=phase==="leaving"?"小紅準備出門…":phase==="returning"?"小紅回來了…":phase==="hero-arriving"?"小紅來了…":phase==="reaction-reading"?"輕觸對話，繼續閱讀":"";hint.hidden=!phase;}
 }
-function cancelScenePresentation(){resetReturnReading();clearTimeout(scenePresentation.timer);sqReply=null;scenePresentation.phase="";scenePresentation.departurePending=false;var root=$("gameUI"),mask=$("mask");if(root)root.inert=false;if(mask)mask.classList.remove("return-window");updatePresentationState()}
+function cancelScenePresentation(){var root=$("gameUI");if(root)root.classList.remove("hero-arriving","intro-pending");resetReturnReading();clearTimeout(scenePresentation.timer);sqReply=null;scenePresentation.phase="";scenePresentation.departurePending=false;var root=$("gameUI"),mask=$("mask");if(root)root.inert=false;if(mask)mask.classList.remove("return-window");updatePresentationState()}
 function beginReactionReading(text){scenePresentation.phase="reaction-reading";say(text,"calm");$("say").scrollTop=0;updatePresentationState();render(false);$("dlg").focus({preventScroll:true})}
 function continueReactionReading(){if(scenePresentation.phase!=="reaction-reading")return false;playUiSound("click");if(stopTyping($("say"),true))return true;if(sqReply&&sqReply.i+1<sqReply.lines.length){sqReply.i++;beginReactionReading(sqReply.lines[sqReply.i]);return true}sqReply=null;scenePresentation.phase="";updatePresentationState();nextPop();render(false);return true}
 function finishReturnPresentation(){scenePresentation.phase="";updatePresentationState();if(hasReturnObservation()&&!mq.some(function(m){return m&&m.returnHome}))mq.unshift({returnHome:true});nextPop();render(false)}
@@ -3663,7 +3671,7 @@ var STORY=[
 [90, "停電", "小紅：咦？停電了？\n\n阿祿：妳今天已經忙了一整天，先坐下休息吧。\n\n小紅：我還有衣服沒收，垃圾也……\n\n阿祿：那些明天再做也可以。\n\n小紅：……那我只休息一下。\n\n阿祿：嗯，靠著我也沒關係。\n\n小紅：……呼……\n\n阿祿：……睡著了嗎？\n\n阿祿：……這段時間，妳一直忙著照顧我。\n\n阿祿：明明以前一直與別人保持距離，現在卻漸漸習慣了有妳在身邊。\n\n阿祿：……等雙腿康復後，也許該多出去走走了。\n\n阿祿：說不定，這個世界也沒有我想像中那麼糟糕。"],
 [100, "替她整理頭髮", "阿祿：別動，妳的頭髮亂了。\n\n小紅：咦？你、你突然做甚麼！\n\n阿祿：只是替妳整理一下。\n\n小紅：……小時候你也是這樣，總愛管我的事。\n\n阿祿：妳不是說過，等我們再見面，就讓我盡情麻煩妳嗎？\n\n小紅：……你還記得？\n\n阿祿：等我的腿好了，也讓妳盡情麻煩我吧。\n\n小紅：這樣不公平！\n\n阿祿：那妳想怎樣？\n\n小紅：我們彼此都可以盡情麻煩對方！\n\n阿祿：……好，就這麼說定了。"]
 ];
-var TALK=[["哼！才不是為了你，我只是為了報答阿姨而已。","別那樣盯著我看啦，臉上燒傷的事你不是早知道嗎？","你剛打石膏就不好隨便亂動啊！我、阿姨會擔心你的。","……要起身就說一聲啊……我又不是不會扶。"],["我想去附近走走，你有甚麼東西想買嗎？……只是順便問問你而已啊","你的房間亂得實在受不了，要好好打掃一番才行，才、才不是為了你啊！","哼，別一直看我。我又沒怎樣。"],["要坐下來一起聊聊往事嗎？別得意，只是剛好有點無聊而已。","不要總是勉強自己呀，遇到困難時也可以找我這個……同居人。","阿祿給人的感覺沒有變呢，跟以前一樣。"],["阿祿，你、你有沒有女朋友……之類？沒有啊……跟我一樣呢哈哈。","今天晚餐想吃甚麼？……沒、沒什麼只是隨口問問。","那個……可以陪我一起看特攝片嗎？一起看感覺不賴。"],["是阿祿的味道……沒、沒什麼！","不、不要再盯著我看了……我不知道應該望哪裡。","當你康復後，我還可以繼續住……剛剛你甚麼也沒聽見！"],["阿祿，謝謝你找到我。","每一天生活都像在做夢一樣，小時候的我一定想像不到呢","阿祿，這次輪到我照顧你呢。"]];
+var TALK=[["哼！才不要多想，只是當初口快答應了而已！","別那樣盯著我看啦，臉上燒傷的事你不是早知道嗎？","你剛打石膏就不好隨便亂動啊！我、阿姨會擔心你的。","……要起身就說一聲啊……我又不是不會扶。"],["我想去附近走走，你有甚麼東西想買嗎？……只是順便問問你而已啊","你的房間亂得實在受不了，要好好打掃一番才行，才、才不是為了你啊！","哼，別一直看我。我又沒怎樣。"],["要坐下來一起聊聊往事嗎？別得意，只是剛好有點無聊而已。","不要總是勉強自己呀，遇到困難時也可以找我這個……同居人。","阿祿給人的感覺沒有變呢，跟以前一樣。"],["阿祿，你、你有沒有女朋友……之類？沒有啊……跟我一樣呢哈哈。","今天晚餐想吃甚麼？……沒、沒什麼只是隨口問問。","那個……可以陪我一起看特攝片嗎？一起看感覺不賴。"],["是阿祿的味道……沒、沒什麼！","不、不要再盯著我看了……我不知道應該望哪裡。","當你康復後，我還可以繼續住……剛剛你甚麼也沒聽見！"],["阿祿，謝謝你找到我。","每一天生活都像在做夢一樣，小時候的我一定想像不到呢","阿祿，這次輪到我照顧你呢。"]];
 var NSTORY=[
 [1,"街角的強叔","她回家後猶豫了一下，才隨口說：「今天在商店街，有位大叔……幫我提了東西。」語氣太平淡了。你沒多想，卻注意到她耳尖微紅，那個稱呼，從這天起開始在家裡迴盪。"],
 [20,"陌生的聯絡人","她的手機多了一個沒存姓的聯絡人。「別誤會，阿祿。只是強叔說有店想介紹給我。」她把螢幕微微偏向自己，回訊息時嘴角彎起的弧度，是你很少見到的那種。"],
@@ -3708,8 +3716,8 @@ function uncleishLine(tt){tt=String(tt||"");return /強叔|大叔|陳叔|他的�
 function setSilFace(el,who){if(!el)return;el.classList.remove("is-sil","is-sil-hero","is-sil-uncle");if(!who){el.style.backgroundImage="";el.style.backgroundSize="";el.style.backgroundPosition="";el.style.backgroundColor="";return}el.classList.add("is-sil",who==="uncle"?"is-sil-uncle":"is-sil-hero")}
 function pickSilWho(line){if(effM()>0&&uncleishLine(line)&&Math.random()<.3)return "uncle";return "hero"}
 /* All heroine avatar views use the approved red-haired portrait in a fixed tone. */
-var HEART_FACE_SRC={calm:"xiaohong-normal.png"};
-function heartFacePos(k,box){return {k:"calm",x:0,y:0,size:0,src:"xiaohong-normal.png"}}
+var HEART_FACE_SRC={calm:"xiaohong-normal.png?v=3bf235d2"};
+function heartFacePos(k,box){return {k:"calm",x:0,y:0,size:0,src:"xiaohong-normal.png?v=3bf235d2"}}
 
 function paintHeartFace(k){
   var el=$("heartFace");if(!el)return;
@@ -3768,11 +3776,11 @@ if(!S.endingDone&&(S.day|0)>=29&&(S.uncleStep|0)>=10&&step5Open()){if(!S.castOff
 endDay(true);render()})}
 function releaseDayLock(){if(!maskOpen()&&!mq.length){dayLock=0;try{flushCohabQueue()}catch(e){}}}
 var S,tab="",mq=[],thT=0,busy=0,backLock=0,mbLock=0,dayLock=0;
-function def(){return {homeActToday:false,aff:0,exp:0,trip:null,log:[],seen:[],t:Date.now(),m:0,trips:0,taken:false,day:1,dsec:0,dEv:[],qa:[],viewM:0,sq:[],sqAsked:[],sqToday:[],sqDone:false,outToday:false,pendingObs:null,optSeen:{blank:{},sq:{},ask:{}},journals:[],journalOpen:null,motif:null,journalGlow:0,metOut:false,momIntroSeen:false,memSeen:[],memPending:[],memVersion:3,uncleStarted:false,uncleStep:0,uncleTh:[],endingDone:false,ending:0,castOff:false,cohabSeen:[],cohabPending:[],cohabToday:false,chatSeen:false,chatNotice:false,pendingYesterdayUnsaid:null,pendingSq:null,sqVer:2,chatOpenStep:null,chatUnlocked:[],_chatThreadCount:null}}
+function def(){return {homeActToday:false,aff:0,exp:0,trip:null,log:[],seen:[],t:Date.now(),m:0,trips:0,taken:false,day:1,dsec:0,dEv:[],qa:[],viewM:0,sq:[],sqAsked:[],sqToday:[],sqDone:false,outToday:false,pendingObs:null,optSeen:{blank:{},sq:{},ask:{}},journals:[],journalOpen:null,motif:null,journalGlow:0,metOut:false,momIntroSeen:false,heroIntroPending:false,memSeen:[],memPending:[],memVersion:3,uncleStarted:false,uncleStep:0,uncleTh:[],endingDone:false,ending:0,castOff:false,cohabSeen:[],cohabPending:[],cohabToday:false,chatSeen:false,chatNotice:false,pendingYesterdayUnsaid:null,pendingSq:null,sqVer:2,chatOpenStep:null,chatUnlocked:[],_chatThreadCount:null}}
 function load(){try{var r=localStorage.getItem("sakura_v1");S=r?JSON.parse(r):def()}catch(e){S=def()}if(!S)S=def();if(S.trip&&S.trip.id===0)S.trip.place=PLACES[0][1];try{delete S.coin;delete S.sta}catch(e){}if(S.homeActToday==null)S.homeActToday=false;if(!S.cohabSeen)S.cohabSeen=[];if(!S.cohabPending)S.cohabPending=[];if(S.cohabToday==null)S.cohabToday=false;if(S.chatSeen==null)S.chatSeen=false;if(S.chatNotice==null)S.chatNotice=false;if(S.pendingYesterdayUnsaid==null)S.pendingYesterdayUnsaid=null;if(S.pendingSq===undefined)S.pendingSq=null;if(S.chatOpenStep===undefined)S.chatOpenStep=null;if(!S.chatUnlocked)S.chatUnlocked=[];
 try{var _validMem={};MEMORIES.forEach(function(m){_validMem[m[0]]=1});S.memSeen=(S.memSeen||[]).filter(function(id){return _validMem[id]});S.memPending=(S.memPending||[]).filter(function(id){return _validMem[id]&&S.memSeen.indexOf(id)<0})}catch(e){}if(S.momIntroSeen==null)S.momIntroSeen=true;if(!S.memSeen)S.memSeen=[];if(!S.memPending)S.memPending=[];if(S.m==null)S.m=0;if((S.aff|0)>100)S.aff=100;if(S.uncleStarted==null)S.uncleStarted=false;if(S.uncleStep==null)S.uncleStep=0;if(!S.uncleTh)S.uncleTh=[];if(S.endingDone==null)S.endingDone=false;if(S.ending==null)S.ending=0;if(S.castOff==null)S.castOff=false;if(typeof uncleMCap==="function"){var _c=uncleMCap();if((S.m|0)>_c)S.m=_c}else if(typeof step5Open==="function"&&!step5Open()&&(S.m|0)>29)S.m=29;if(S.trips==null)S.trips=0;if(!S.seen)S.seen=[];if(S.day==null){S.day=1;S.dsec=0}if(!S.dEv)S.dEv=[];if(!S.qa)S.qa=[];if(S.viewM==null)S.viewM=0;if(!S.sq)S.sq=[];if(!S.sqToday)S.sqToday=[];if(S.outToday==null)S.outToday=false;if(S.sqDone==null)S.sqDone=!!(S.sqToday&&S.sqToday.length);if(S.pendingObs===undefined)S.pendingObs=null;if(!S.optSeen||typeof S.optSeen!="object")S.optSeen={blank:{},sq:{},ask:{}};if(!S.optSeen.blank)S.optSeen.blank={};if(!S.optSeen.sq)S.optSeen.sq={};if(!S.optSeen.ask)S.optSeen.ask={};if(!S.journals)S.journals=[];if(S.journalOpen===undefined)S.journalOpen=null;scrubJournals();if(S.motif===undefined)S.motif=null;if(S.journalGlow==null)S.journalGlow=0;if(S.metOut==null){S.metOut=!!(S.m>0||(S.journals&&S.journals.some(function(j){return j&&j.met}))||(S.dEv&&S.dEv.some(function(e){return e&&e.met})))}try{delete S.blankHintSeen;delete S.sqHintSeen;delete S.anxiety;delete S.fantasy;delete S.evidence}catch(e){}}
 function save(){try{localStorage.setItem("sakura_v1",JSON.stringify(S))}catch(e){}}
-function doReset(){cancelScenePresentation();S=def();mq=[];busy=0;backLock=0;mbLock=0;dayLock=0;$("mask").classList.remove("on");try{localStorage.removeItem("sakura_v1")}catch(e){}say("「哼！才不是為了你，我只是為了報答阿姨而已。」","pout");render();maybeMomIntro()}
+function doReset(){cancelScenePresentation();S=def();mq=[];busy=0;backLock=0;mbLock=0;dayLock=0;$("mask").classList.remove("on");try{localStorage.removeItem("sakura_v1")}catch(e){}say("「哼！才不要多想，只是當初口快答應了而已！」","pout");render();maybeMomIntro()}
 var rc=0,rt;
 function debugJumpEnding(){if(!S)return;if(!confirm("跳到第29天、阿祿親密度100、強叔親密度90，解鎖全部日常／回憶，返回首頁供測試？"))return;closeSettings();
 S.day=29;S.aff=100;S.m=90;clampAff();S.taken=false;S.endingDone=false;S.ending=0;S.trip=null;S.homeActToday=false;S.outToday=false;
@@ -4161,7 +4169,7 @@ function isSecretCopy(tt){tt=String(tt||"");return /強叔|大叔|夜景|晚點�
 function isSecretSq(qi){var q=SQ[qi];if(!q)return false;if((q[3]|0)>0||!!q[4])return true;return isSecretCopy(q[1])}
 function isMoodChromeTitle(tt){tt=String(tt||"");if(/^🌙\s*當晚/.test(tt)||tt.indexOf("🚪 她出門了")===0)return false;if(moodPeekOn)return true;return /起疑|仔細觀察|發訊息|打電話|翻找|尻槍|去廁所|沒說出口|沒有說的|心聲|空白|已讀|輸入中|來電|震動|貼圖|定位|背景聲|靜音|收回|窺|痕跡|強叔|大叔|夜景|晚點回家|更懂我|一個人住|⏳|🔍|💔/.test(tt)||/^⏳|^🔍|^💔/.test(tt)}
 function isObsMaskTitle(tt){tt=String(tt||"");return /^🔍/.test(tt)||/起疑/.test(tt)}
-function paintMaskChrome(tt){var mask=$("mask");if(!mask)return;var returned=tt==="她回來了";mask.classList.toggle("return-window",returned);if(!returned){resetReturnReading();if($("gameUI"))$("gameUI").inert=false;}mask.classList.toggle("presentation-ending",/^結局|^💬 聊天室・最後一則/.test($("mt").textContent));var memoryTitle=MEMORIES.some(function(m){return m[1]===tt});mask.classList.toggle("memory-window",memoryTitle||/浮現一段塵封的回憶/.test(tt));var departing=tt==="🚪 她出門了"||tt==="她出門了",evening=/^(?:🌙\s*)?當晚$/.test(tt);mask.classList.toggle("departure-window",departing);mask.classList.toggle("evening-window",evening);var eventTitle=$("memoryEventTitle");if(eventTitle){eventTitle.hidden=!memoryTitle;eventTitle.textContent=memoryTitle?tt:""}if(memoryTitle)$("mt").textContent="浮現一段塵封的回憶";var obs=returned||isObsMaskTitle(tt);var soft=!obs&&(memoryTitle||tt==="小紅"||tt==="🌸 小紅"||tt==="浮現一段塵封的回憶"||tt==="🌸 浮現一段塵封的回憶"||tt==="📱 發訊息"||tt==="📞 打電話"||tt==="💦 去廁所"||tt==="🚽 去廁所"||tt==="💦 尻槍");
+function paintMaskChrome(tt){var mask=$("mask");if(!mask)return;mask.classList.toggle("intro-arrival",tt==="🚪 不請自來的同居");var returned=tt==="她回來了";mask.classList.toggle("return-window",returned);if(!returned){resetReturnReading();if($("gameUI"))$("gameUI").inert=false;}mask.classList.toggle("presentation-ending",/^結局|^💬 聊天室・最後一則/.test($("mt").textContent));var memoryTitle=MEMORIES.some(function(m){return m[1]===tt});mask.classList.toggle("memory-window",memoryTitle||/浮現一段塵封的回憶/.test(tt));var departing=tt==="🚪 她出門了"||tt==="她出門了",evening=/^(?:🌙\s*)?當晚$/.test(tt);mask.classList.toggle("departure-window",departing);mask.classList.toggle("evening-window",evening);var eventTitle=$("memoryEventTitle");if(eventTitle){eventTitle.hidden=!memoryTitle;eventTitle.textContent=memoryTitle?tt:""}if(memoryTitle)$("mt").textContent="浮現一段塵封的回憶";var obs=returned||isObsMaskTitle(tt);var soft=!obs&&(memoryTitle||tt==="小紅"||tt==="🌸 小紅"||tt==="浮現一段塵封的回憶"||tt==="🌸 浮現一段塵封的回憶"||tt==="📱 發訊息"||tt==="📞 打電話"||tt==="💦 去廁所"||tt==="🚽 去廁所"||tt==="💦 尻槍");
 /* 起疑: older dark square window (mood-chrome), never thin strip / never light paper box */
 mask.classList.toggle("obs-dark",!!obs);mask.classList.toggle("mood-chrome",!!obs||(!soft&&isMoodChromeTitle(tt)));mask.classList.toggle("mem-soft",!obs&&!!soft);mask.classList.remove("obs-strip");
 var face=mask.querySelector(".face");if(face)face.style.display="";
@@ -4186,7 +4194,7 @@ if(m.sq!=null){finishMemoryReveal();showSqMask(m.sq);return}
 if(m.endingPrep){showEndingPrep();return}
 if(m.memoryId!=null){ensureMemoryState();if(S.memSeen.indexOf(m.memoryId)<0)S.memSeen.push(m.memoryId);S.memPending=S.memPending.filter(function(id){return id!==m.memoryId});save()}
 finishMemoryReveal();hideSqOpts();$("mt").textContent=m[0];$("mp").textContent=m[1];paintMaskChrome(m[0]);var reading=$("mask").querySelector(".modalReading");if(reading)reading.scrollTop=0;paintVoiceFog();$("mask").classList.add("on");revealMemoryText()}
-function dismissMask(ev){if(ev){try{ev.preventDefault();ev.stopPropagation()}catch(e){}}if(mbLock||(returnWindowOpen()&&returnReading&&returnReading.switching))return;if(returnWindowOpen()){resetReturnReading();$("gameUI").inert=false;$("mask").classList.remove("return-window");clearMoodPeek()}if(scenePresentation.departurePending&&$("mask").classList.contains("departure-window")){scenePresentation.departurePending=false;updatePresentationState()}finishMemoryReveal();if(sqReply){mbLock=1;sqReply.i++;if(sqReply.i<sqReply.lines.length){$("mp").textContent=sqReply.lines[sqReply.i];setTimeout(function(){mbLock=0},30);return}sqReply=null}mbLock=1;var mask=$("mask");if(mask){mask.classList.remove("on");mask.classList.remove("obs-dark");var _box=mask.querySelector(".box");if(_box)_box.classList.remove("obs-win-appear");if(!mq.length&&!moodPeekOn)mask.classList.remove("mood-chrome")}setTimeout(function(){try{nextPop()}catch(e){}if(S&&S.sleepAwaitClose&&!maskOpen()&&!(mq&&mq.length)){advanceAfterSleep(!!S.sleepForce)}else{releaseDayLock()}mbLock=0;paintStats()},30)}
+function dismissMask(ev){if(ev){try{ev.preventDefault();ev.stopPropagation()}catch(e){}}if(mbLock||(returnWindowOpen()&&returnReading&&returnReading.switching))return;if(returnWindowOpen()){resetReturnReading();$("gameUI").inert=false;$("mask").classList.remove("return-window");clearMoodPeek()}if(scenePresentation.departurePending&&$("mask").classList.contains("departure-window")){scenePresentation.departurePending=false;updatePresentationState()}finishMemoryReveal();if(sqReply){mbLock=1;sqReply.i++;if(sqReply.i<sqReply.lines.length){$("mp").textContent=sqReply.lines[sqReply.i];setTimeout(function(){mbLock=0},30);return}sqReply=null}mbLock=1;var mask=$("mask"),heroArrival=!!(mask&&mask.classList.contains("intro-arrival"));if(mask){mask.classList.remove("on");mask.classList.remove("obs-dark");var _box=mask.querySelector(".box");if(_box)_box.classList.remove("obs-win-appear");if(!mq.length&&!moodPeekOn)mask.classList.remove("mood-chrome")}if(heroArrival)beginHeroArrival();setTimeout(function(){try{nextPop()}catch(e){}if(S&&S.sleepAwaitClose&&!maskOpen()&&!(mq&&mq.length)){advanceAfterSleep(!!S.sleepForce)}else{releaseDayLock()}mbLock=0;paintStats()},30)}
 (function(){var mb=$("mb");if(!mb)return;mb.onpointerup=null;mb.onclick=null;mb.addEventListener("click",dismissMask,false);mb.addEventListener("pointerup",function(e){if(e.pointerType==="mouse"&&e.button!==0)return;dismissMask(e)},false);
 var mask=$("mask");if(mask&&!mask._outsideBound){mask._outsideBound=1;mask.addEventListener("click",function(e){if(e.target===mask)dismissMask(e)},false);var box=mask.querySelector(".box");if(box&&!mask._boxStop){mask._boxStop=1;box.addEventListener("click",function(e){e.stopPropagation()},false)}}})();
 function replay(k){var s=STORY[k];mq.push(["📌 同居事件："+s[1],s[2]]);nextPop()}
@@ -4424,6 +4432,19 @@ applySp();
 function skipTrip(){if(busy||!(S.trip&&!S.taken))return;withBusy(function(){if(!(S.trip&&!S.taken))return;if(!S.trip.acts)S.trip.acts=[];if(!S.trip.acts.length)addLog("⏳ 空白：跳過等待・未行動");S.trip.skipped=true;S.dsec+=Math.max(0,(S.trip.end-Date.now())/1000);S.trip.end=Date.now()-1;back();render()})}
 applySp();
 
+var HERO_ARRIVAL_TEXT="玄關傳來拖行李箱的輪聲。多年沒見的青梅竹馬站在門口，給人一種不好相處的感覺。";
+var HERO_OPENING_LINE="哼！才不要多想，只是當初口快答應了而已！";
+function queueHeroArrival(){
+  $("gameUI").classList.add("intro-pending");
+  if(!mq.some(function(m){return Array.isArray(m)&&m[0]==="🚪 不請自來的同居"}))mq.push(["🚪 不請自來的同居",HERO_ARRIVAL_TEXT]);
+  nextPop();
+}
+function beginHeroArrival(){
+  if(!S.heroIntroPending)return;var root=$("gameUI");S.heroIntroPending=false;save();root.classList.remove("intro-pending");
+  scenePresentation.phase="hero-arriving";root.inert=true;root.classList.add("hero-arriving");updatePresentationState();say(HERO_OPENING_LINE,"pout");
+  function finish(){root.classList.remove("hero-arriving");root.inert=false;scenePresentation.phase="";updatePresentationState();nextPop();render(false)}
+  if(prefersReducedMotion())finish();else scenePresentation.timer=setTimeout(finish,800);
+}
 var momReading={texts:[],index:-1,timer:0,active:false};
 function resetMomReading(){clearTimeout(momReading.timer);momReading.timer=0;document.querySelectorAll("#momBubbles .momText").forEach(function(el){stopTyping(el,false)});momReading.active=false}
 function momComplete(){return momReading.index===document.querySelectorAll("#momBubbles .momText").length-1}
@@ -4450,13 +4471,12 @@ function openMomMessages(){
 function showMomIntro(){
   var el=$("momPhone");if(!el)return;resetMomReading();momReading.index=-1;
   document.querySelectorAll("#momBubbles .momText").forEach(function(node,i){if(momReading.texts[i]===undefined)momReading.texts[i]=node.textContent;node.textContent="";node.parentElement.hidden=true;node.parentElement.classList.remove("mom-arrive")});
-  $("momReadHint").textContent="輕觸接收訊息";el.classList.add("on","mom-notice");el.setAttribute("aria-hidden","false");$("gameUI").inert=true;$("momOpen").focus({preventScroll:true});
+  $("gameUI").classList.add("intro-pending");$("momReadHint").textContent="輕觸接收訊息";el.classList.add("on","mom-notice");el.setAttribute("aria-hidden","false");$("gameUI").inert=true;$("momOpen").focus({preventScroll:true});
 }
-function dismissMomIntro(){var el=$("momPhone");if(!el||!el.classList.contains("on")||!momReading.active||!momComplete())return;resetMomReading();$("gameUI").inert=false;el.classList.remove("on");el.setAttribute("aria-hidden","true");if(!S.momIntroSeen){S.momIntroSeen=true;try{save()}catch(e){}
-mq.push(["🚪 不請自來的同居","玄關傳來拖行李箱的輪聲。多年沒見的青梅竹馬站在門口，給人一種不好相處的感覺。\n\n「哼！才不是為了你，我只是為了報答阿姨而已。」"]);
-addLog("🚪 第一章：小紅拎著行李搬進來・「哼！才不是為了你，我只是為了報答阿姨而已。」");
+function dismissMomIntro(){var el=$("momPhone");if(!el||!el.classList.contains("on")||!momReading.active||!momComplete())return;resetMomReading();$("gameUI").inert=false;el.classList.remove("on");el.setAttribute("aria-hidden","true");if(!S.momIntroSeen){S.momIntroSeen=true;S.heroIntroPending=true;try{save()}catch(e){}
+addLog("🚪 第一章：小紅拎著行李搬進來");queueHeroArrival();
 nextPop()}checkMemories()}
-function maybeMomIntro(){if(S.momIntroSeen){var el=$("momPhone");if(el){el.classList.remove("on");el.setAttribute("aria-hidden","true")}return}showMomIntro()}
+function maybeMomIntro(){if(S.momIntroSeen){var el=$("momPhone");if(el){el.classList.remove("on");el.setAttribute("aria-hidden","true")}if(S.heroIntroPending)queueHeroArrival();return}showMomIntro()}
 function bindMomIntro(){
   function tap(){if($("momPhone").classList.contains("mom-notice"))openMomMessages();else advanceMomReading()}
   $("momPhone").addEventListener("click",tap);
