@@ -3330,17 +3330,23 @@ body:has(#gameUI.homeui.outing-shell){background:#2c221d!important;background-im
 #gameUI.homeui .topHud .meterHead .meterHeart{display:inline!important;font-size:12px!important;line-height:1;color:#b9797f!important;flex:none}
 #gameUI.homeui .topHud .meterName{white-space:nowrap;letter-spacing:0!important}
 @media(max-width:360px){#gameUI.homeui .topHud .meterName{font-size:11px!important}#gameUI.homeui .topHud .meterHead{gap:2px!important}}
-#gameUI.homeui:not(.outing-shell):not(.fx-leave):not(.fx-return) .girl:not(.away){animation:homeIdleBreath 6s ease-in-out infinite!important}
-@keyframes homeIdleBreath{0%,100%{scale:1 1}50%{scale:1 1.002}}
+#gameUI.homeui:not(.outing-shell):not(.fx-leave):not(.fx-return) .girl:not(.away){animation:homeIdleBreath 5s ease-in-out infinite!important}
+@keyframes homeIdleBreath{0%,100%{scale:1 1;translate:0 0}50%{scale:1.002 1.008;translate:0 -1px}}
 .momPhone .momNotice{display:none;width:min(100%,350px);min-height:100px;padding:20px;border:1px solid #bea486;border-radius:18px;background:#fff2df;color:#5b4333;text-align:left;font:inherit;box-shadow:0 8px 30px #21180f44;cursor:pointer;animation:momNoticeGlow 2.4s ease-in-out infinite}
 .momNotice strong,.momNotice span{display:block}.momNotice strong{font-size:17px;margin-bottom:8px}.momNotice span{font-size:14px;line-height:1.7}.momNotice .momNoticeAction{margin-top:12px;font-size:13px;color:#8c6250;text-decoration:underline}
-.momPhone.mom-notice .momNotice{display:block}.momPhone.mom-notice .chromeWin.phone{display:none!important}
+.momPhone.mom-notice .momNotice{display:block;margin:20px 16px;width:auto;flex:none;align-self:stretch}.momPhone.mom-notice #momBubbles{visibility:hidden}
 .momPhone .chromeWin.phone{height:min(78svh,600px)!important}
 .momPhone .msgBubble[hidden]{display:none!important}
-.momPhone .momNext{min-height:44px;width:100%;margin-top:8px;border:1px solid #ae8e70;border-radius:10px;background:#e9cdaa;color:#573b33;font:inherit;font-size:14px;cursor:pointer}
-.momPhone .momNotice:focus-visible,.momPhone .momNext:focus-visible{outline:2px solid #9e6d51;outline-offset:3px}
+.momPhone .momNotice:focus-visible{outline:2px solid #9e6d51;outline-offset:3px}
 @keyframes momNoticeGlow{0%,100%{box-shadow:0 8px 30px #21180f44}50%{box-shadow:0 8px 30px #21180f44,0 0 14px #f6d5a866}}
 @media(prefers-reduced-motion:reduce){#gameUI.homeui:not(.outing-shell):not(.fx-leave):not(.fx-return) .girl:not(.away),.momPhone .momNotice{animation:none!important}}
+#gameUI.homeui:not(.outing-shell) .topHud .topMeta.meterStack:has(#mbox.off){align-self:start!important}
+#gameUI.homeui .topHud #mbox .meterHead .meterHeart{color:#9b8b72!important}
+.momPhone .chromeWin.phone{border:5px solid #705849!important;border-radius:28px!important}
+.momPhone .chromeWin.phone::before{content:"訊息";display:block;flex:none;padding:8px 18px;background:#e4d8c9;color:#77604e;font-size:11px;letter-spacing:.08em}
+.momPhone .msgBubble.mom-arrive{animation:momMessageArrive .22s ease-out}
+@keyframes momMessageArrive{from{opacity:0;translate:0 7px}to{opacity:1;translate:0 0}}
+@media(prefers-reduced-motion:reduce){.momPhone .msgBubble.mom-arrive{animation:none!important}}
 </style>
 </head>
 <body>
@@ -3464,15 +3470,16 @@ body:has(#gameUI.homeui.outing-shell){background:#2c221d!important;background-im
   </div>
 </div>
 <div class="momPhone" id="momPhone" aria-hidden="true" role="dialog" aria-modal="true" aria-label="媽媽的訊息" tabindex="0">
-  <button type="button" class="momNotice" id="momOpen"><strong>媽媽</strong><span>你收到新的訊息</span><span class="momNoticeAction">查看訊息</span></button>
-  <div class="chromeWin phone" role="document" onclick="event.stopPropagation()">
+  <div class="chromeWin phone" role="document">
     <div class="chromeTitle"><span class="chromeFace av" aria-hidden="true">媽</span><h3>媽媽</h3></div>
+  <button type="button" class="momNotice" id="momOpen"><strong>媽媽</strong><span>你收到新的訊息</span><span class="momNoticeAction">查看訊息</span></button>
+
     <div class="chromeBody msgThread" id="momBubbles">
       <div class="msgBubble"><span class="who">媽媽</span><span class="momText">阿祿，媽知道你腿骨折要在家靜養一個月，可惜現在旅行不能照顧你</span></div>
       <div class="msgBubble"><span class="who">媽媽</span><span class="momText">你記得小紅嗎？就是那個青梅竹馬，多年沒見了吧。她最近從國外回來了，正在找地方住</span></div>
       <div class="msgBubble"><span class="who">媽媽</span><span class="momText">一聽到你要在家靜養，就說不介意暫住你家照顧你，直到找到地方住為止</span></div>
     </div>
-    <div class="chromeFoot"><span id="momReadHint" role="status">輕觸加快閱讀</span><button type="button" class="momNext" id="momNext">繼續閱讀</button></div>
+    <div class="chromeFoot"><span id="momReadHint" role="status">輕觸接收訊息</span></div>
   </div>
 </div>
 <div class="mask" id="mask" role="dialog" aria-modal="true" aria-labelledby="mt" aria-describedby="mp"><div class="box"><div class="modalReading" id="modalReading"><div class="face"></div><h3 id="mt"></h3><div class="returnMeta" id="returnMeta" hidden><button type="button" class="returnBack" id="returnBack" onclick="toggleReturnView()" hidden>返回敘述</button><span class="returnStatus" id="returnStatus" role="status" aria-live="polite"></span></div><p id="memoryEventTitle" hidden></p><p id="mp"></p></div><div class="readingHint" id="readingHint" aria-hidden="true">向下捲動閱讀 ↓</div><div class="sqopts" id="sqopts"></div><div class="tl"><button type="button" class="btn returnObsButton" id="obsBtn" aria-label="起疑，觀察本次回家的痕跡" onclick="observeTraces()">起疑</button><button type="button" class="btn" id="mb">繼續</button></div></div></div>
@@ -3482,12 +3489,12 @@ var presentationPrefs={textSpeed:30,letterSound:false,music:.35,sfx:.35,ambient:
 try{var savedPrefs=JSON.parse(localStorage.getItem("sakura_presentation_v1")||"{}");["music","sfx","ambient"].forEach(function(k){if(typeof savedPrefs[k]==="number"&&isFinite(savedPrefs[k]))presentationPrefs[k]=Math.max(0,Math.min(1,savedPrefs[k]))});if([0,15,30,50].indexOf(savedPrefs.textSpeed)>=0)presentationPrefs.textSpeed=savedPrefs.textSpeed;if(typeof savedPrefs.letterSound==="boolean")presentationPrefs.letterSound=savedPrefs.letterSound}catch(e){}
 var soundRuntime={context:null,ambient:null,ambientGain:null,last:{},lastMusic:-1,musicFrame:0,voices:0};
 function ensureSound(){if(soundRuntime.context)return soundRuntime.context;var C=window.AudioContext||window.webkitAudioContext;if(!C)return null;try{soundRuntime.context=new C();return soundRuntime.context}catch(e){return null}}
-function playUiSound(kind){var ctx=soundRuntime.context;if(!ctx||ctx.state!=="running"||document.hidden||presentationPrefs.sfx<=0||soundRuntime.voices>=6)return false;var now=ctx.currentTime;if(now-(soundRuntime.last[kind]||-10)<(kind==="letter"?.075:.12))return false;soundRuntime.last[kind]=now;var frequencies={click:[620],success:[520,690],unlock:[690,850],question:[560],suspicion:[230],leave:[400],return:[530],letter:[920]},notes=frequencies[kind]||frequencies.click;notes.forEach(function(f,i){var osc=ctx.createOscillator(),gain=ctx.createGain(),start=now+i*.055,duration=kind==="letter"?.025:kind==="click"?.045:.13;osc.type="sine";osc.frequency.setValueAtTime(f,start);gain.gain.setValueAtTime(0,start);gain.gain.linearRampToValueAtTime(presentationPrefs.sfx*(kind==="letter"?.012:.05),start+.006);gain.gain.exponentialRampToValueAtTime(.0001,start+duration);osc.connect(gain);gain.connect(ctx.destination);soundRuntime.voices++;osc.onended=function(){osc.disconnect();gain.disconnect();soundRuntime.voices=Math.max(0,soundRuntime.voices-1)};osc.start(start);osc.stop(start+duration+.02)});return true}
+function playUiSound(kind){var ctx=soundRuntime.context;if(!ctx||ctx.state!=="running"||document.hidden||presentationPrefs.sfx<=0||soundRuntime.voices>=6)return false;var now=ctx.currentTime;if(now-(soundRuntime.last[kind]||-10)<(kind==="letter"?.075:.12))return false;soundRuntime.last[kind]=now;var frequencies={click:[620],success:[520,690],unlock:[690,850],question:[560],suspicion:[230],message:[760,1140],leave:[400],return:[530],letter:[920]},notes=frequencies[kind]||frequencies.click;notes.forEach(function(f,i){var osc=ctx.createOscillator(),gain=ctx.createGain(),start=now+i*.055,duration=kind==="letter"?.025:kind==="click"?.045:kind==="message"?.085:.13;osc.type="sine";osc.frequency.setValueAtTime(f,start);gain.gain.setValueAtTime(0,start);gain.gain.linearRampToValueAtTime(presentationPrefs.sfx*(kind==="letter"?.012:.05),start+.006);gain.gain.exponentialRampToValueAtTime(.0001,start+duration);osc.connect(gain);gain.connect(ctx.destination);soundRuntime.voices++;osc.onended=function(){osc.disconnect();gain.disconnect();soundRuntime.voices=Math.max(0,soundRuntime.voices-1)};osc.start(start);osc.stop(start+duration+.02)});return true}
 function syncSceneAudio(){var outing=!!(typeof S!=="undefined"&&S&&S.trip&&!S.taken),ctx=soundRuntime.context;if(typeof bgm!=="undefined"&&bgm){var target=presentationPrefs.music*(outing?.55:1);if(target!==soundRuntime.lastMusic){soundRuntime.lastMusic=target;cancelAnimationFrame(soundRuntime.musicFrame);var start=performance.now(),from=bgm.volume;function fadeMusic(now){var t=Math.min(1,(now-start)/250);bgm.volume=Math.max(0,Math.min(1,from+(target-from)*t));if(t<1)soundRuntime.musicFrame=requestAnimationFrame(fadeMusic)}soundRuntime.musicFrame=requestAnimationFrame(fadeMusic)}}if(!ctx)return;if(!presentationPrefs.ambient||document.hidden){if(soundRuntime.ambient){soundRuntime.ambient.stop();soundRuntime.ambient.disconnect();soundRuntime.ambientGain.disconnect();soundRuntime.ambient=null;soundRuntime.ambientGain=null}return}if(ctx.state!=="running")return;if(!soundRuntime.ambient){var buffer=ctx.createBuffer(1,ctx.sampleRate*2,ctx.sampleRate),data=buffer.getChannelData(0);for(var i=0;i<data.length;i++)data[i]=(Math.random()*2-1);var source=ctx.createBufferSource(),filter=ctx.createBiquadFilter(),gain=ctx.createGain();source.buffer=buffer;source.loop=true;filter.type="lowpass";filter.frequency.value=outing?180:320;source.connect(filter);filter.connect(gain);gain.connect(ctx.destination);gain.gain.value=0;source.start();source.onended=function(){filter.disconnect()};soundRuntime.ambient=source;soundRuntime.ambientFilter=filter;soundRuntime.ambientGain=gain}soundRuntime.ambientFilter.frequency.setTargetAtTime(outing?180:320,ctx.currentTime,.3);soundRuntime.ambientGain.gain.setTargetAtTime(presentationPrefs.ambient*(outing?.012:.02),ctx.currentTime,.3)}
 function unlockPresentationAudio(){var ctx=ensureSound();if(!ctx)return;if(ctx.state==="suspended")ctx.resume().then(syncSceneAudio).catch(function(){});else syncSceneAudio()}
 function syncPresentationControls(){var speed=$("textSpeed");if(speed)speed.value=String(presentationPrefs.textSpeed);var letters=$("letterSound");if(letters)letters.checked=presentationPrefs.letterSound;[["music","musicVolume","musicValue"],["sfx","sfxVolume","sfxValue"],["ambient","ambientVolume","ambientValue"]].forEach(function(row){var input=$(row[1]),output=$(row[2]);if(input)input.value=String(Math.round(presentationPrefs[row[0]]*100));if(output)output.textContent=Math.round(presentationPrefs[row[0]]*100)+"%"})}
 function setPresentationPref(key,value){if(["music","sfx","ambient"].indexOf(key)>=0)value=Math.max(0,Math.min(1,Number(value)||0));else if(key==="textSpeed"&&[0,15,30,50].indexOf(value)<0)return;else if(key==="letterSound")value=!!value;if(!(key in presentationPrefs))return;presentationPrefs[key]=value;try{localStorage.setItem("sakura_presentation_v1",JSON.stringify(presentationPrefs))}catch(e){}if(key==="textSpeed"&&value===0){stopTyping($("say"),true);stopTyping($("thb"),true);finishMemoryReveal()}syncPresentationControls();syncSceneAudio()}
-document.addEventListener("pointerdown",function(e){if(e.isTrusted)unlockPresentationAudio()},{capture:true,passive:true});document.addEventListener("keydown",function(e){if(e.isTrusted&&(e.key==="Enter"||e.key===" "))unlockPresentationAudio()},{capture:true});document.addEventListener("click",function(e){var button=e.target.closest("button");if(presentationHeld()||!button||button.disabled||button.getAttribute("aria-disabled")==="true")return;playUiSound("click")},true);document.addEventListener("visibilitychange",function(){var ctx=soundRuntime.context;if(document.hidden){syncSceneAudio();if(ctx&&ctx.state==="running")ctx.suspend().catch(function(){})}else if(ctx&&ctx.state==="suspended")ctx.resume().then(syncSceneAudio).catch(function(){})});
+document.addEventListener("pointerdown",function(e){if(e.isTrusted)unlockPresentationAudio()},{capture:true,passive:true});document.addEventListener("keydown",function(e){if(e.isTrusted&&(e.key==="Enter"||e.key===" "))unlockPresentationAudio()},{capture:true});document.addEventListener("click",function(e){var button=e.target.closest("button");if(e.target.closest("#momPhone")||presentationHeld()||!button||button.disabled||button.getAttribute("aria-disabled")==="true")return;playUiSound("click")},true);document.addEventListener("visibilitychange",function(){var ctx=soundRuntime.context;if(document.hidden){syncSceneAudio();if(ctx&&ctx.state==="running")ctx.suspend().catch(function(){})}else if(ctx&&ctx.state==="suspended")ctx.resume().then(syncSceneAudio).catch(function(){})});
 function pulsePresentation(el,name,duration){if(!el||prefersReducedMotion())return;var timerKey="_pulse_"+name;clearTimeout(el[timerKey]);el.classList.remove(name);void el.offsetWidth;el.classList.add(name);el[timerKey]=setTimeout(function(){el.classList.remove(name)},duration||650)}
 function interactionFeedback(amount){pulsePresentation($("av"),"fx-affection",600);playUiSound("success");if(amount<=0)return;var host=$("affn")&&$("affn").parentElement;if(!host)return;var badge=document.createElement("span");badge.className="affGainFeedback";badge.textContent="＋"+Math.round(amount);badge.setAttribute("aria-hidden","true");host.appendChild(badge);setTimeout(function(){badge.remove()},850)}
 function notifyContext(id,token,kind){var el=$(id);if(!el||el._cueToken===token)return;el._cueToken=token;pulsePresentation(el,"context-arrive",650);if(id==="qHomeBtn")pulsePresentation($("av"),"fx-attention",550);playUiSound(kind)}
@@ -4419,28 +4426,31 @@ applySp();
 
 var momReading={texts:[],index:-1,timer:0,active:false};
 function resetMomReading(){clearTimeout(momReading.timer);momReading.timer=0;document.querySelectorAll("#momBubbles .momText").forEach(function(el){stopTyping(el,false)});momReading.active=false}
-function momComplete(){var nodes=document.querySelectorAll("#momBubbles .momText");return momReading.index===nodes.length-1&&!isTyping(nodes[momReading.index])}
-function paintMomHint(){var done=momComplete();$("momReadHint").textContent=done?"訊息已讀完":"輕觸加快閱讀";$("momNext").textContent=done?"繼續":"繼續閱讀"}
+function momComplete(){return momReading.index===document.querySelectorAll("#momBubbles .momText").length-1}
+function paintMomHint(){$("momReadHint").textContent=momComplete()?"輕觸視窗繼續":"輕觸加快閱讀"}
+function playMomMessageSound(){
+  var ctx=ensureSound(),index=momReading.index;if(!ctx)return;
+  function play(){if(momReading.active&&momReading.index===index)playUiSound("message")}
+  if(ctx.state==="suspended")ctx.resume().then(play).catch(function(){});else play();
+}
 function revealMomMessage(){
-  if(!momReading.active)return;clearTimeout(momReading.timer);
+  if(!momReading.active)return;clearTimeout(momReading.timer);momReading.timer=0;
   var nodes=document.querySelectorAll("#momBubbles .momText");if(momReading.index+1>=nodes.length){paintMomHint();return}
-  var i=++momReading.index,el=nodes[i];el.parentElement.hidden=false;
-  typeDialogue(el,momReading.texts[i],function(){if(!momReading.active||momReading.index!==i)return;$("momBubbles").scrollTop=$("momBubbles").scrollHeight;paintMomHint();if(i+1<nodes.length)momReading.timer=setTimeout(revealMomMessage,900)});
-  $("momBubbles").scrollTop=$("momBubbles").scrollHeight;paintMomHint();
+  var i=++momReading.index,el=nodes[i];el.textContent=momReading.texts[i];el.parentElement.hidden=false;el.parentElement.classList.add("mom-arrive");
+  $("momBubbles").scrollTop=$("momBubbles").scrollHeight;paintMomHint();playMomMessageSound();
+  if(i+1<nodes.length)momReading.timer=setTimeout(revealMomMessage,1800);
 }
 function advanceMomReading(){
-  if(!momReading.active)return;clearTimeout(momReading.timer);momReading.timer=0;
-  var el=document.querySelectorAll("#momBubbles .momText")[momReading.index];
-  if(stopTyping(el,true)){paintMomHint();return}if(!momComplete())revealMomMessage();
+  if(!momReading.active)return;if(momComplete()){dismissMomIntro();return}revealMomMessage();
 }
 function openMomMessages(){
   if(!$("momPhone").classList.contains("mom-notice"))return;
-  $("momPhone").classList.remove("mom-notice");momReading.active=true;revealMomMessage();$("momNext").focus({preventScroll:true});
+  $("momPhone").classList.remove("mom-notice");momReading.active=true;revealMomMessage();$("momPhone").focus({preventScroll:true});
 }
 function showMomIntro(){
   var el=$("momPhone");if(!el)return;resetMomReading();momReading.index=-1;
-  document.querySelectorAll("#momBubbles .momText").forEach(function(node,i){if(momReading.texts[i]===undefined)momReading.texts[i]=node.textContent;node.textContent="";node.parentElement.hidden=true});
-  el.classList.add("on","mom-notice");el.setAttribute("aria-hidden","false");$("gameUI").inert=true;$("momOpen").focus({preventScroll:true});
+  document.querySelectorAll("#momBubbles .momText").forEach(function(node,i){if(momReading.texts[i]===undefined)momReading.texts[i]=node.textContent;node.textContent="";node.parentElement.hidden=true;node.parentElement.classList.remove("mom-arrive")});
+  $("momReadHint").textContent="輕觸接收訊息";el.classList.add("on","mom-notice");el.setAttribute("aria-hidden","false");$("gameUI").inert=true;$("momOpen").focus({preventScroll:true});
 }
 function dismissMomIntro(){var el=$("momPhone");if(!el||!el.classList.contains("on")||!momReading.active||!momComplete())return;resetMomReading();$("gameUI").inert=false;el.classList.remove("on");el.setAttribute("aria-hidden","true");if(!S.momIntroSeen){S.momIntroSeen=true;try{save()}catch(e){}
 mq.push(["🚪 不請自來的同居","玄關傳來拖行李箱的輪聲。多年沒見的青梅竹馬站在門口，給人一種不好相處的感覺。\n\n「哼！才不是為了你，我只是為了報答阿姨而已。」"]);
@@ -4448,10 +4458,9 @@ addLog("🚪 第一章：小紅拎著行李搬進來・「哼！才不是為了�
 nextPop()}checkMemories()}
 function maybeMomIntro(){if(S.momIntroSeen){var el=$("momPhone");if(el){el.classList.remove("on");el.setAttribute("aria-hidden","true")}return}showMomIntro()}
 function bindMomIntro(){
-  $("momOpen").addEventListener("click",openMomMessages);
-  $("momBubbles").addEventListener("click",advanceMomReading);
-  $("momNext").addEventListener("click",function(){if(momComplete())dismissMomIntro();else advanceMomReading()});
-  $("momPhone").addEventListener("keydown",function(e){if((e.key==="Enter"||e.key===" ")&&!e.target.closest("button")){e.preventDefault();advanceMomReading()}});
+  function tap(){if($("momPhone").classList.contains("mom-notice"))openMomMessages();else advanceMomReading()}
+  $("momPhone").addEventListener("click",tap);
+  $("momPhone").addEventListener("keydown",function(e){if((e.key==="Enter"||e.key===" ")&&!e.target.closest("button")){e.preventDefault();tap()}});
 }
 bindMomIntro();
 $("chatRoom").querySelector(".chatMark").innerHTML=homeUiIcon("chat");
