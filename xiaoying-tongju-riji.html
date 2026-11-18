@@ -3438,9 +3438,38 @@ body:has(#gameUI.homeui.outing-shell){background:#2c221d!important;background-im
 #gameUI.storm-stay .dock.tabs button small{display:block;font-size:10px;font-weight:400;line-height:1.4}
 #gameUI.storm-stay .dock.tabs #sleepBtn{background:#76533e;color:#fff2e2;border-color:#b08a68}
 #gameUI.storm-stay .dock.tabs .uiIcon{width:18px;height:18px;flex:none}
+/* Hidden route progress remains internal; the player sees only the nightly relationship message. */
+#gameUI.homeui #mbox{display:none!important}
+.daySummary[hidden],.daySummary [hidden]{display:none!important}
+.daySummary{position:fixed;inset:0;z-index:15000;display:flex;align-items:center;justify-content:center;padding:24px;box-sizing:border-box;background:#2b2028;color:#fff0dc;isolation:isolate;cursor:pointer;animation:daySummaryIn .22s ease-out}
+.daySummary::before{content:"";position:absolute;inset:0;z-index:-1;pointer-events:none;background:radial-gradient(ellipse at 50% 43%,#a66e7d15,transparent 58%);box-shadow:inset 0 0 110px #130f1688}
+.daySummary.has-uncle::before{animation:daySummaryUnease .8s ease-out both}
+.daySummary-card{width:min(100%,360px);padding:25px 7px;text-align:center}
+.daySummary-kicker{font-size:11px;letter-spacing:.2em;color:#bea6a8;margin:0 0 8px}
+.daySummary h2{font:500 23px/1.6 Georgia,"Noto Serif CJK TC","PingFang TC",serif;letter-spacing:.08em;margin:0 0 34px;color:#f6e7d3}
+.daySummary-aff{display:flex;align-items:center;justify-content:center;gap:14px;padding:17px 8px;color:#eed2c0;font-size:15px;border-top:1px solid #ac7a8433;border-bottom:1px solid #ac7a8433;animation:daySummaryLine .3s ease-out both}
+.daySummary-aff strong{font-size:27px;font-weight:500;color:#e8a9ad;font-variant-numeric:tabular-nums}
+.daySummary-uncle{margin:29px 0 0;padding:0 5px;color:#d3b5bd;font-size:16px;line-height:1.9;animation:daySummaryLine .5s .25s ease-out both}
+.daySummary-uncle em{font-style:normal;color:#dfa5b6}
+.daySummaryContinue{display:inline-flex;align-items:center;justify-content:center;min-height:44px;margin-top:46px;padding:10px 22px;background:transparent;border:1px solid #b98b985c;border-radius:8px;color:#dcc1c3;font:inherit;font-size:12px;letter-spacing:.08em;cursor:pointer}
+.daySummaryContinue:focus-visible{outline:2px solid #dfa5b6;outline-offset:4px}
+@keyframes daySummaryIn{from{opacity:0}to{opacity:1}}
+@keyframes daySummaryLine{from{opacity:0;translate:0 4px}to{opacity:1;translate:0 0}}
+@keyframes daySummaryUnease{0%{opacity:.35}60%{opacity:1}100%{opacity:.8}}
+@media(max-width:360px){.daySummary{padding:18px}.daySummary-aff{font-size:14px;gap:10px}.daySummary h2{font-size:21px}.daySummary-uncle{font-size:15px}}
+@media(prefers-reduced-motion:reduce){.daySummary,.daySummary::before,.daySummary-aff,.daySummary-uncle{animation:none!important}}
+
 </style>
 </head>
 <body>
+<div id="daySummary" class="daySummary" role="dialog" aria-modal="true" aria-labelledby="daySummaryTitle" hidden>
+  <div class="daySummary-card">
+    <p class="daySummary-kicker">今日合計</p><h2 id="daySummaryTitle"></h2>
+    <div id="daySummaryAff" class="daySummary-aff"><span>小紅與阿祿的親密度</span><strong id="daySummaryAffValue"></strong></div>
+    <p id="daySummaryUncle" class="daySummary-uncle"><em>小紅與強叔</em>的關係，又近了一些。</p>
+    <button type="button" id="daySummaryContinue" class="daySummaryContinue">輕觸繼續</button>
+  </div>
+</div>
 <div class="w homeui" id="gameUI">
   <div class="gameFrame">
   <div class="stick" id="homeStick"><div class="scene" id="scene">
@@ -3515,7 +3544,7 @@ body:has(#gameUI.homeui.outing-shell){background:#2c221d!important;background-im
     </div>
     <div class="dialogueZone">
 <nav class="sideNav right" aria-label="聊天與提問">
-      <button type="button" class="bubble actChat" id="navChat" aria-label="打開匿名聊天室" onclick="openChatRoom()"><svg class="uiIcon" viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M15 16H8l-4 3v-4a7 7 0 0 1 3-13h7a7 7 0 0 1 1 14Z"/><path d="M19 8a6 6 0 0 1 1 10v3l-4-2h-4"/><path d="M7 9h.01M11 9h.01M15 9h.01"/></svg><span>聊天室</span></button>
+      <button type="button" class="bubble actChat" id="navChat" aria-label="打開匿名討論區" onclick="openChatRoom()"><svg class="uiIcon" viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M15 16H8l-4 3v-4a7 7 0 0 1 3-13h7a7 7 0 0 1 1 14Z"/><path d="M19 8a6 6 0 0 1 1 10v3l-4-2h-4"/><path d="M7 9h.01M11 9h.01M15 9h.01"/></svg><span>討論區</span></button>
       <button type="button" class="bubble" data-t="ask" id="navAsk"><svg class="uiIcon" viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M19 16a8 8 0 1 0-5 3l6 2-1-5Z"/><path d="M9 8a3 3 0 0 1 6 0c0 2-3 2-3 4"/><path d="M12 15h.01"/></svg><span>提問</span></button>
     </nav>
     <div class="dlg" id="dlg" role="button" tabindex="0" aria-label="和她聊天（點一下對話）"><span class="diaryPaperEdge" aria-hidden="true"></span><span class="dlgAv" id="dlgAv" aria-hidden="true"></span><div class="dlgBody"><b id="nm">小紅</b><span id="say">哼！才不要多想，只是當初口快答應了而已！</span></div><span class="dlgNext" id="dlgNext" aria-hidden="true">▼</span><span class="readingBadge" aria-hidden="true"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M8 4C6 2.5 3 2.5 1.5 3v10C3 12.5 6 12.5 8 14c2-1.5 5-1.5 6.5-1V3C13 2.5 10 2.5 8 4Zm0 0v10"/></svg><span>閱讀中</span></span></div>
@@ -3551,10 +3580,10 @@ body:has(#gameUI.homeui.outing-shell){background:#2c221d!important;background-im
     <button type="button" class="settingsAction" id="dj" onclick="debugJumpEnding()">結局測試</button>
   </div>
 </dialog>
-<div class="chatRoom" id="chatRoom" aria-hidden="true" role="dialog" aria-modal="true" aria-label="匿名聊天室" tabindex="0">
+<div class="chatRoom" id="chatRoom" aria-hidden="true" role="dialog" aria-modal="true" aria-label="匿名討論區" tabindex="0">
   <div class="chatPanel" role="document" onclick="event.stopPropagation()">
     <div class="chatHead">
-      <div class="chatHeading"><span class="chatMark" aria-hidden="true"></span><div><b>匿名聊天室</b><div class="sm" id="chatSub">偶然滑到的討論串，不知為何忍不住看下去</div></div></div>
+      <div class="chatHeading"><span class="chatMark" aria-hidden="true"></span><div><b>匿名討論區</b><div class="sm" id="chatSub">偶然滑到的討論串，不知為何忍不住看下去</div></div></div>
       <button type="button" class="pane-x" id="chatClose" onclick="closeChatRoom()" aria-label="關閉">×</button>
     </div>
     <div class="chatFeed" id="chatFeed"></div>
@@ -3581,7 +3610,7 @@ var presentationPrefs={textSpeed:30,letterSound:false,music:.35,sfx:.35,ambient:
 try{var savedPrefs=JSON.parse(localStorage.getItem("sakura_presentation_v1")||"{}");["music","sfx","ambient"].forEach(function(k){if(typeof savedPrefs[k]==="number"&&isFinite(savedPrefs[k]))presentationPrefs[k]=Math.max(0,Math.min(1,savedPrefs[k]))});if([0,15,30,50].indexOf(savedPrefs.textSpeed)>=0)presentationPrefs.textSpeed=savedPrefs.textSpeed;if(typeof savedPrefs.letterSound==="boolean")presentationPrefs.letterSound=savedPrefs.letterSound}catch(e){}
 var soundRuntime={context:null,ambient:null,ambientGain:null,last:{},lastMusic:-1,musicFrame:0,voices:0};
 function ensureSound(){if(soundRuntime.context)return soundRuntime.context;var C=window.AudioContext||window.webkitAudioContext;if(!C)return null;try{soundRuntime.context=new C();return soundRuntime.context}catch(e){return null}}
-function playUiSound(kind){var ctx=soundRuntime.context;if(!ctx||ctx.state!=="running"||document.hidden||presentationPrefs.sfx<=0||soundRuntime.voices>=6)return false;var now=ctx.currentTime;if(now-(soundRuntime.last[kind]||-10)<(kind==="letter"?.075:.12))return false;soundRuntime.last[kind]=now;var frequencies={click:[620],success:[520,690],unlock:[690,850],question:[560],suspicion:[230],message:[760,1140],leave:[400],return:[530],letter:[920]},notes=frequencies[kind]||frequencies.click;notes.forEach(function(f,i){var osc=ctx.createOscillator(),gain=ctx.createGain(),start=now+i*.055,duration=kind==="letter"?.025:kind==="click"?.045:kind==="message"?.085:.13;osc.type="sine";osc.frequency.setValueAtTime(f,start);gain.gain.setValueAtTime(0,start);gain.gain.linearRampToValueAtTime(presentationPrefs.sfx*(kind==="letter"?.012:.05),start+.006);gain.gain.exponentialRampToValueAtTime(.0001,start+duration);osc.connect(gain);gain.connect(ctx.destination);soundRuntime.voices++;osc.onended=function(){osc.disconnect();gain.disconnect();soundRuntime.voices=Math.max(0,soundRuntime.voices-1)};osc.start(start);osc.stop(start+duration+.02)});return true}
+function playUiSound(kind){var ctx=soundRuntime.context;if(!ctx||ctx.state!=="running"||document.hidden||presentationPrefs.sfx<=0||soundRuntime.voices>=6)return false;var now=ctx.currentTime;if(now-(soundRuntime.last[kind]||-10)<(kind==="letter"?.075:.12))return false;soundRuntime.last[kind]=now;var frequencies={click:[620],success:[520,690],unlock:[690,850],question:[560],suspicion:[230],unease:[112],message:[760,1140],leave:[400],return:[530],letter:[920]},notes=frequencies[kind]||frequencies.click;notes.forEach(function(f,i){var osc=ctx.createOscillator(),gain=ctx.createGain(),start=now+i*.055,duration=kind==="unease"?.24:kind==="letter"?.025:kind==="click"?.045:kind==="message"?.085:.13;osc.type="sine";osc.frequency.setValueAtTime(f,start);gain.gain.setValueAtTime(0,start);gain.gain.linearRampToValueAtTime(presentationPrefs.sfx*(kind==="letter"?.012:.05),start+.006);gain.gain.exponentialRampToValueAtTime(.0001,start+duration);osc.connect(gain);gain.connect(ctx.destination);soundRuntime.voices++;osc.onended=function(){osc.disconnect();gain.disconnect();soundRuntime.voices=Math.max(0,soundRuntime.voices-1)};osc.start(start);osc.stop(start+duration+.02)});return true}
 function syncSceneAudio(){var outing=!!(typeof S!=="undefined"&&S&&S.trip&&!S.taken),ctx=soundRuntime.context;if(typeof bgm!=="undefined"&&bgm){var target=presentationPrefs.music*(outing?.55:1);if(target!==soundRuntime.lastMusic){soundRuntime.lastMusic=target;cancelAnimationFrame(soundRuntime.musicFrame);var start=performance.now(),from=bgm.volume;function fadeMusic(now){var t=Math.min(1,(now-start)/250);bgm.volume=Math.max(0,Math.min(1,from+(target-from)*t));if(t<1)soundRuntime.musicFrame=requestAnimationFrame(fadeMusic)}soundRuntime.musicFrame=requestAnimationFrame(fadeMusic)}}if(!ctx)return;if(!presentationPrefs.ambient||document.hidden){if(soundRuntime.ambient){soundRuntime.ambient.stop();soundRuntime.ambient.disconnect();soundRuntime.ambientGain.disconnect();soundRuntime.ambient=null;soundRuntime.ambientGain=null}return}if(ctx.state!=="running")return;if(!soundRuntime.ambient){var buffer=ctx.createBuffer(1,ctx.sampleRate*2,ctx.sampleRate),data=buffer.getChannelData(0);for(var i=0;i<data.length;i++)data[i]=(Math.random()*2-1);var source=ctx.createBufferSource(),filter=ctx.createBiquadFilter(),gain=ctx.createGain();source.buffer=buffer;source.loop=true;filter.type="lowpass";filter.frequency.value=outing?180:320;source.connect(filter);filter.connect(gain);gain.connect(ctx.destination);gain.gain.value=0;source.start();source.onended=function(){filter.disconnect()};soundRuntime.ambient=source;soundRuntime.ambientFilter=filter;soundRuntime.ambientGain=gain}soundRuntime.ambientFilter.frequency.setTargetAtTime(outing?180:320,ctx.currentTime,.3);soundRuntime.ambientGain.gain.setTargetAtTime(presentationPrefs.ambient*(outing?.012:.02),ctx.currentTime,.3)}
 function unlockPresentationAudio(){var ctx=ensureSound();if(!ctx)return;if(ctx.state==="suspended")ctx.resume().then(syncSceneAudio).catch(function(){});else syncSceneAudio()}
 function syncPresentationControls(){var speed=$("textSpeed");if(speed)speed.value=String(presentationPrefs.textSpeed);var letters=$("letterSound");if(letters)letters.checked=presentationPrefs.letterSound;[["music","musicVolume","musicValue"],["sfx","sfxVolume","sfxValue"],["ambient","ambientVolume","ambientValue"]].forEach(function(row){var input=$(row[1]),output=$(row[2]);if(input)input.value=String(Math.round(presentationPrefs[row[0]]*100));if(output)output.textContent=Math.round(presentationPrefs[row[0]]*100)+"%"})}
@@ -3596,7 +3625,7 @@ function updatePresentationState(){var root=$("gameUI"),hint=$("presentationHint
 root.classList.toggle("presentation-held",!!phase);root.classList.toggle("presentation-reading",phase==="reaction-reading");root.classList.toggle("departure-pending",scenePresentation.departurePending);root.setAttribute("aria-busy",phase&&phase!=="reaction-reading"?"true":"false");root.querySelectorAll(".topHud,.dock,.sideNav,.contextActions,#pane").forEach(function(el){el.inert=!!phase});
 if(hint){hint.textContent=phase==="leaving"?"小紅準備出門…":phase==="returning"?"小紅回來了…":phase==="hero-arriving"?"小紅來了…":phase==="reaction-reading"?"輕觸對話，繼續閱讀":"";hint.hidden=!phase;}
 }
-function cancelScenePresentation(){var root=$("gameUI");if(root)root.classList.remove("hero-arriving","intro-pending");resetReturnReading();clearTimeout(scenePresentation.timer);sqReply=null;scenePresentation.phase="";scenePresentation.departurePending=false;var root=$("gameUI"),mask=$("mask");if(root)root.inert=false;if(mask)mask.classList.remove("return-window");updatePresentationState()}
+function cancelScenePresentation(){hideDaySummary();var root=$("gameUI");if(root)root.classList.remove("hero-arriving","intro-pending");resetReturnReading();clearTimeout(scenePresentation.timer);sqReply=null;scenePresentation.phase="";scenePresentation.departurePending=false;var root=$("gameUI"),mask=$("mask");if(root)root.inert=false;if(mask)mask.classList.remove("return-window");updatePresentationState()}
 function beginReactionReading(text){scenePresentation.phase="reaction-reading";say(text,"calm");$("say").scrollTop=0;updatePresentationState();render(false);$("dlg").focus({preventScroll:true})}
 function continueReactionReading(){if(scenePresentation.phase!=="reaction-reading")return false;playUiSound("click");if(stopTyping($("say"),true))return true;if(sqReply&&sqReply.i+1<sqReply.lines.length){sqReply.i++;beginReactionReading(sqReply.lines[sqReply.i]);return true}sqReply=null;scenePresentation.phase="";updatePresentationState();nextPop();render(false);return true}
 function finishReturnPresentation(){scenePresentation.phase="";updatePresentationState();if(isStormNight()){openStormNight();render(false);return}if(hasReturnObservation()&&!mq.some(function(m){return m&&m.returnHome}))mq.unshift({returnHome:true});nextPop();render(false)}
@@ -4360,9 +4389,56 @@ function ask(i){if(busy||S.endingDone||isStormNight())return;var q=QA[i];if(!q||
 askOptNew(i);var x=qaAnswer(q),st=effM()|0;
 say("「"+x+"」",st>=70?"shy":st>=30?"pout":["joy","wink","shy","calm","joy","shy","calm","wink","joy","sad"][i%10],function(){markAskOptSeen(i,x)});
 addLog("💬 "+q[1]+"→「"+x+"」");if(S.qa.indexOf(i)<0){S.qa.push(i);/* 首次提問不加親密度 */try{save()}catch(e){}}closePane();render()}
-function maskOpen(){var m=$("mask"),settings=$("gameSettings");return !!((m&&m.classList.contains("on"))||(settings&&settings.open))}
+function maskOpen(){if(daySummaryOpen())return true;var m=$("mask"),settings=$("gameSettings");return !!((m&&m.classList.contains("on"))||(settings&&settings.open))}
 function prefersReducedMotion(){try{return !!(window.matchMedia&&window.matchMedia("(prefers-reduced-motion:reduce)").matches)}catch(e){return false}}
 function ensureDayFade(){var ov=$("dayFade");if(ov)return ov;ov=document.createElement("div");ov.id="dayFade";ov.className="dayFade";ov.setAttribute("aria-live","polite");ov.setAttribute("aria-hidden","true");var host=document.querySelector(".homeui")||document.body;host.appendChild(ov);return ov}
+var daySummaryToneTimer=0;
+function ensureDailyBase(){
+  if(!S)return;
+  if(!S.dailyBase||S.dailyBase.day!==(S.day|0))S.dailyBase={day:S.day|0,aff:+S.aff||0,m:S.m|0};
+}
+function daySummaryTotals(){
+  ensureDailyBase();return {aff:Math.max(0,Math.round((+S.aff||0)-S.dailyBase.aff)),uncle:Math.max(0,(S.m|0)-S.dailyBase.m)};
+}
+function daySummaryOpen(){var el=$("daySummary");return !!(el&&!el.hidden)}
+function hideDaySummary(){
+  clearTimeout(daySummaryToneTimer);var el=$("daySummary");if(el){el.hidden=true;el.classList.remove("has-uncle")}
+  if($("gameUI"))$("gameUI").inert=false;
+}
+function showDaySummary(force,totals){
+  if(!totals.aff&&!totals.uncle)return false;
+  if(!S.pendingDayEnd||S.pendingDayEnd.day!==(S.day|0))S.pendingDayEnd={day:S.day|0,force:!!force,phase:"summary",aff:totals.aff,uncle:totals.uncle,queued:mq.slice()};
+  var el=$("daySummary"),run=S.pendingDayEnd;dayLock=1;
+  $("daySummaryTitle").textContent="第 "+run.day+" 天結束";
+  $("daySummaryAff").hidden=!(run.aff>0);$("daySummaryAffValue").textContent="＋"+run.aff;
+  $("daySummaryUncle").hidden=!(run.uncle>0);el.classList.toggle("has-uncle",run.uncle>0);
+  el.hidden=false;$("gameUI").inert=true;save();$("daySummaryContinue").focus({preventScroll:true});
+  clearTimeout(daySummaryToneTimer);
+  if(run.uncle>0)daySummaryToneTimer=setTimeout(function(){if(daySummaryOpen()&&S.pendingDayEnd===run)playUiSound("unease")},prefersReducedMotion()?0:350);
+  return true;
+}
+function continueDaySummary(){
+  var run=S&&S.pendingDayEnd;if(!daySummaryOpen()||!run||run.phase!=="summary")return;
+  run.phase="advancing";save();hideDaySummary();advanceAfterSleep(run.force,true);
+}
+function resumeDayEnd(){
+  var run=S&&S.pendingDayEnd;if(!run)return false;
+  if(Array.isArray(run.queued)){var old=run.queued;mq=old.concat(mq.filter(function(m){return !old.some(function(x){return JSON.stringify(x)===JSON.stringify(m)})}))}
+  if(run.phase==="arrived"&&run.newDay===(S.day|0)){S.pendingDayEnd=null;S._dayAdvancing=false;dayLock=0;save();if(!resumeStormStay()){nextPop();render(false)}return true}
+  if(run.day!==(S.day|0)){S.pendingDayEnd=null;S._dayAdvancing=false;save();return false}
+  S._dayAdvancing=false;dayLock=1;
+  if(run.phase==="summary")return showDaySummary(run.force,{aff:run.aff,uncle:run.uncle});
+  advanceAfterSleep(run.force,true);return true;
+}
+function publishDueForumThreads(){
+  if(!S.forumPublishDays)S.forumPublishDays={};if(!S.chatUnlocked)S.chatUnlocked=[];
+  Object.keys(S.forumPublishDays).forEach(function(key){
+    var step=key|0;if((S.forumPublishDays[key]|0)>(S.day|0)||S.chatUnlocked.indexOf(step)>=0)return;
+    if(!CHAT_THREADS.some(function(t){return !t.retired&&!t.ending&&t.step===step}))return;
+    S.chatUnlocked.push(step);S.chatNotice=true;
+  });
+}
+
 function playDayAdvance(newDay,onDark,done){
  var ov=ensureDayFade(),oldDay=S&&S.day?S.day:Math.max(1,newDay-1),label="第 "+newDay+" 天";
  clearTimeout(playDayAdvance._t1);clearTimeout(playDayAdvance._t2);clearTimeout(playDayAdvance._t3);
@@ -4373,17 +4449,18 @@ function playDayAdvance(newDay,onDark,done){
  calendar();void ov.offsetWidth;ov.classList.add("on");
  playDayAdvance._t1=setTimeout(function(){if(onDark)onDark();ov.classList.add("hold");playDayAdvance._t2=setTimeout(function(){ov.classList.add("out");playDayAdvance._t3=setTimeout(finish,420)},600)},300);
 }
-function advanceAfterSleep(force){if(!S)return;var stormReturn=isStormNight()?S.stormStay:null;if(S._dayAdvancing)return;S._dayAdvancing=true;S.sleepAwaitClose=false;S.pendingYesterdayUnsaid=null;
+function advanceAfterSleep(force,skipSummary){if(!S||S._dayAdvancing)return;ensureDailyBase();if(!skipSummary&&showDaySummary(force,daySummaryTotals()))return;var stormReturn=isStormNight()?S.stormStay:null;if(!S.pendingDayEnd)S.pendingDayEnd={day:S.day|0,force:!!force,phase:"advancing",queued:mq.slice()};S.pendingDayEnd.phase="advancing";S._dayAdvancing=true;$("gameUI").inert=true;save();S.sleepAwaitClose=false;S.pendingYesterdayUnsaid=null;
 var newDay=(S.day|0)+1;
 function applyDay(){
   var hadOuting=!!(S.dEv&&S.dEv.length);
   S.day=newDay;S.dsec=force?0:Math.max(0,(S.dsec|0)-DL);S.homeActToday=false;S.cohabToday=false;S.dEv=[];S.sqToday=[];S.sqDone=false;S.pendingSq=null;S.outToday=false;S.pendingObs=null;S.motif=null;S.journalGlow=0;S.pendingChat=null;setObsBtn(false);
+  if(S.pendingDayEnd){S.pendingDayEnd.phase="arrived";S.pendingDayEnd.newDay=S.day|0}S.dailyBase={day:S.day|0,aff:+S.aff||0,m:S.m|0};publishDueForumThreads();
   if(stormReturn){stormReturn.phase="return";S.stormStay=stormReturn;S.pendingObs=stormReturn.observation;setObsBtn(true)}
   /* 前一日有外出：進新天後才掛 ❓ 問題（一天一題；未答則再睡時清掉） */
   if(hadOuting)queueSqAsk();
   try{save()}catch(e){}try{render()}catch(e){}
 }
-function unlock(){dayLock=0;S._dayAdvancing=false;if(stormReturn)resumeStormStay();try{flushCohabQueue()}catch(e){}try{render()}catch(e){}}
+function unlock(){dayLock=0;S._dayAdvancing=false;S.pendingDayEnd=null;$("gameUI").inert=false;if(stormReturn)resumeStormStay();try{flushCohabQueue()}catch(e){}try{render()}catch(e){}nextPop()}
 playDayAdvance(newDay,applyDay,unlock)}
 function endDay(force){if(dayLock||S.taken||S.trip||maskOpen())return;if(!force&&S.dsec<DL)return;dayLock=1;
 var ev=S.dEv||[],n=0;ev.forEach(function(e){if(e.met)n++});
@@ -4397,15 +4474,15 @@ if(!S.endingDone&&(S.day|0)>=29&&(S.uncleStep|0)>=10&&step5Open()){if(!S.castOff
 endDay(true);render()})}
 function releaseDayLock(){if(!maskOpen()&&!mq.length){dayLock=0;try{flushCohabQueue()}catch(e){}}}
 var S,tab="",mq=[],thT=0,busy=0,backLock=0,mbLock=0,dayLock=0;
-function def(){return {homeActToday:false,aff:0,exp:0,trip:null,log:[],seen:[],t:Date.now(),m:0,trips:0,taken:false,day:1,dsec:0,dEv:[],qa:[],viewM:0,sq:[],sqAsked:[],sqToday:[],sqDone:false,outToday:false,pendingObs:null,stormStay:null,optSeen:{blank:{},sq:{},ask:{}},journals:[],journalOpen:null,motif:null,journalGlow:0,metOut:false,momIntroSeen:false,heroIntroPending:false,memSeen:[],memPending:[],memVersion:3,uncleStarted:false,uncleStep:0,uncleTh:[],endingDone:false,ending:0,castOff:false,cohabSeen:[],cohabPending:[],cohabToday:false,chatSeen:false,chatNotice:false,pendingYesterdayUnsaid:null,pendingSq:null,sqVer:2,chatOpenStep:null,chatUnlocked:[],_chatThreadCount:null}}
-function load(){try{var r=localStorage.getItem("sakura_v1");S=r?JSON.parse(r):def()}catch(e){S=def()}if(!S)S=def();if(!S.stormStay)S.stormStay=null;if(S.trip&&S.trip.id===0)S.trip.place=PLACES[0][1];try{delete S.coin;delete S.sta}catch(e){}if(S.homeActToday==null)S.homeActToday=false;if(!S.cohabSeen)S.cohabSeen=[];if(!S.cohabPending)S.cohabPending=[];if(S.cohabToday==null)S.cohabToday=false;if(S.chatSeen==null)S.chatSeen=false;if(S.chatNotice==null)S.chatNotice=false;if(S.pendingYesterdayUnsaid==null)S.pendingYesterdayUnsaid=null;if(S.pendingSq===undefined)S.pendingSq=null;if(S.chatOpenStep===undefined)S.chatOpenStep=null;if(!S.chatUnlocked)S.chatUnlocked=[];
+function def(){return {homeActToday:false,aff:0,exp:0,trip:null,log:[],seen:[],t:Date.now(),m:0,trips:0,taken:false,day:1,dsec:0,dEv:[],qa:[],viewM:0,sq:[],sqAsked:[],sqToday:[],sqDone:false,outToday:false,pendingObs:null,stormStay:null,dailyBase:null,pendingDayEnd:null,forumPublishDays:{},optSeen:{blank:{},sq:{},ask:{}},journals:[],journalOpen:null,motif:null,journalGlow:0,metOut:false,momIntroSeen:false,heroIntroPending:false,memSeen:[],memPending:[],memVersion:3,uncleStarted:false,uncleStep:0,uncleTh:[],endingDone:false,ending:0,castOff:false,cohabSeen:[],cohabPending:[],cohabToday:false,chatSeen:false,chatNotice:false,pendingYesterdayUnsaid:null,pendingSq:null,sqVer:2,chatOpenStep:null,chatUnlocked:[],_chatThreadCount:null}}
+function load(){try{var r=localStorage.getItem("sakura_v1");S=r?JSON.parse(r):def()}catch(e){S=def()}if(!S)S=def();if(!S.stormStay)S.stormStay=null;if(!S.forumPublishDays)S.forumPublishDays={};if(!S.pendingDayEnd)S.pendingDayEnd=null;if(S.trip&&S.trip.id===0)S.trip.place=PLACES[0][1];try{delete S.coin;delete S.sta}catch(e){}if(S.homeActToday==null)S.homeActToday=false;if(!S.cohabSeen)S.cohabSeen=[];if(!S.cohabPending)S.cohabPending=[];if(S.cohabToday==null)S.cohabToday=false;if(S.chatSeen==null)S.chatSeen=false;if(S.chatNotice==null)S.chatNotice=false;if(S.pendingYesterdayUnsaid==null)S.pendingYesterdayUnsaid=null;if(S.pendingSq===undefined)S.pendingSq=null;if(S.chatOpenStep===undefined)S.chatOpenStep=null;if(!S.chatUnlocked)S.chatUnlocked=[];
 try{var _validMem={};MEMORIES.forEach(function(m){_validMem[m[0]]=1});S.memSeen=(S.memSeen||[]).filter(function(id){return _validMem[id]});S.memPending=(S.memPending||[]).filter(function(id){return _validMem[id]&&S.memSeen.indexOf(id)<0})}catch(e){}if(S.momIntroSeen==null)S.momIntroSeen=true;if(!S.memSeen)S.memSeen=[];if(!S.memPending)S.memPending=[];if(S.m==null)S.m=0;if((S.aff|0)>100)S.aff=100;if(S.uncleStarted==null)S.uncleStarted=false;if(S.uncleStep==null)S.uncleStep=0;if(!S.uncleTh)S.uncleTh=[];if(S.endingDone==null)S.endingDone=false;if(S.ending==null)S.ending=0;if(S.castOff==null)S.castOff=false;if(typeof uncleMCap==="function"){var _c=uncleMCap();if((S.m|0)>_c)S.m=_c}else if(typeof step5Open==="function"&&!step5Open()&&(S.m|0)>29)S.m=29;if(S.trips==null)S.trips=0;if(!S.seen)S.seen=[];if(S.day==null){S.day=1;S.dsec=0}if(!S.dEv)S.dEv=[];if(!S.qa)S.qa=[];if(S.viewM==null)S.viewM=0;if(!S.sq)S.sq=[];if(!S.sqToday)S.sqToday=[];if(S.outToday==null)S.outToday=false;if(S.sqDone==null)S.sqDone=!!(S.sqToday&&S.sqToday.length);if(S.pendingObs===undefined)S.pendingObs=null;if(!S.optSeen||typeof S.optSeen!="object")S.optSeen={blank:{},sq:{},ask:{}};if(!S.optSeen.blank)S.optSeen.blank={};if(!S.optSeen.sq)S.optSeen.sq={};if(!S.optSeen.ask)S.optSeen.ask={};if(!S.journals)S.journals=[];if(S.journalOpen===undefined)S.journalOpen=null;scrubJournals();if(S.motif===undefined)S.motif=null;if(S.journalGlow==null)S.journalGlow=0;if(S.metOut==null){S.metOut=!!(S.m>0||(S.journals&&S.journals.some(function(j){return j&&j.met}))||(S.dEv&&S.dEv.some(function(e){return e&&e.met})))}try{delete S.blankHintSeen;delete S.sqHintSeen;delete S.anxiety;delete S.fantasy;delete S.evidence}catch(e){}}
 function save(){try{localStorage.setItem("sakura_v1",JSON.stringify(S))}catch(e){}}
 function doReset(){cancelScenePresentation();S=def();mq=[];busy=0;backLock=0;mbLock=0;dayLock=0;$("mask").classList.remove("on");try{localStorage.removeItem("sakura_v1")}catch(e){}say("「哼！才不要多想，只是當初口快答應了而已！」","pout");render();maybeMomIntro()}
 var rc=0,rt;
-function debugJumpEnding(){if(!S)return;if(!confirm("跳到第29天、阿祿親密度100、強叔親密度90，解鎖全部日常／回憶，返回首頁供測試？"))return;closeSettings();
+function debugJumpEnding(){if(!S)return;if(!confirm("跳到第29天、阿祿親密度100，解鎖全部日常／回憶，返回首頁供測試？"))return;closeSettings();
 S.day=29;S.aff=100;S.m=90;clampAff();S.taken=false;S.endingDone=false;S.ending=0;S.trip=null;S.homeActToday=false;S.outToday=false;
-S.uncleStep=11;S.uncleStarted=true;S.castOff=true;S.chatNotice=true;S.stormStay=null;
+S.uncleStep=11;S.uncleStarted=true;S.castOff=true;S.chatNotice=true;S.stormStay=null;S.pendingDayEnd=null;S.dailyBase={day:S.day|0,aff:S.aff,m:S.m};S.forumPublishDays={};
 if(!S.seen)S.seen=[];STORY.forEach(function(s){if(S.seen.indexOf(s[0])<0)S.seen.push(s[0])});
 if(!S.memSeen)S.memSeen=[];MEMORIES.forEach(function(m){if(S.memSeen.indexOf(m[0])<0)S.memSeen.push(m[0])});S.memPending=[];
 S.dsec=0;S.pendingSq=null;S.pendingObs=null;S.sqDone=false;S.sqToday=[];S.sleepAwaitClose=false;S._dayAdvancing=false;mq=[];busy=0;dayLock=0;mbLock=0;backLock=0;sqReply=null;stopTyping($("say"),false);stopTyping($("thb"),false);$("mask").classList.remove("on");tab="";try{save()}catch(e){}render()}
@@ -4457,7 +4534,7 @@ function effM(){return S.m|0}
 function maybeStartUncleRoute(fromUnlock){if(S.uncleStarted)return;if(fromUnlock){/* 回憶集滿：允許踏入步驟五親密度帶，不重置已有進度 */}S.uncleStarted=true;try{save()}catch(e){}}
 function mCapForStep(st){st=st|0;if(st<=0)return 0;if(st<=2)return 14;if(st<=4)return 29;if(st<=6)return 49;if(st<=9)return 69;if(st===10)return 84;return 99}
 function uncleMCap(){var st=S.uncleStep|0;var a=typeof uncleArcByStep==="function"?uncleArcByStep(st):null;var cap=a&&a.mCap!=null?a.mCap|0:mCapForStep(st);if(!step5Open())cap=Math.min(cap,29);return Math.max(0,Math.min(99,cap))}
-function addM(d,isEvent){if(!d)return 0;if((S.day|0)<6)return 0;var x=d|0;if(!x)return 0;var next=(S.m|0)+x;var cap=uncleMCap();if(next>cap)next=cap;S.m=Math.max(0,Math.min(100,next));return x}
+function addM(d,isEvent){ensureDailyBase();if(!d)return 0;if((S.day|0)<6)return 0;var x=d|0;if(!x)return 0;var next=(S.m|0)+x;var cap=uncleMCap();if(next>cap)next=cap;S.m=Math.max(0,Math.min(100,next));return x}
 function stage(){var m=effM(),st=m>=60?3:m>=38?2:m>=15?1:0;if(!step5Open()&&st>1)st=1;return st}
 function clampView(){S.viewM=Math.max(-5,Math.min(5,S.viewM|0))}
 function sqOpen(i){var q=SQ[i];if(S.taken||S.aff<q[2])return false;if(q[4]&&effM()<q[3])return false;if(!q[4]&&q[3]>0&&effM()<q[3])return false;return true}
@@ -4474,7 +4551,7 @@ function paintVoiceFog(){var readable=voiceReadable();setFogged($("thb"),!readab
 function pickPlaceEv(pid,met){var st=voiceBand(),rows=PLACE_EV[pid];if(!rows)return pick(PLACES[pid][6]);var band=st;if(st<=0&&!met)band=0;else if(met)band=Math.max(1,st);band=Math.max(band,voiceFloor());return pick(rows[Math.min(band,rows.length-1)])}
 function placeMeta(pid){return PLACE_META[pid]||{meet:1,mMul:1,tag:""}}
 function pickDepart(pid){var soft=["「很快回來。」她在玄關揮了揮手。","出門理由很普通：走走、買點東西。","她繫好鞋帶，說燈就先開著。","她把手機放進口袋，語氣輕快地說掰掰。","整理一下袖口就出門了，很日常。","她笑著說去透氣。笑完，視線在你臉上停了一秒。"];if(voiceBand()<=0&&(S.uncleStep|0)<1){var p0=DEPART_P[pid]?DEPART_P[pid][0]+"。":"";return p0+pick(soft)}var base=pick(DEPART),extra=DEPART_P[pid]?DEPART_P[pid][0]+"。"+DEPART_P[pid][1]:"";return extra+"\n"+base}
-function dualTip(){return uncleOpen()?("親密 "+Math.floor(S.aff)+"・強叔 "+(effM()|0)+"%"):("親密 "+Math.floor(S.aff))}
+function dualTip(){return "親密 "+Math.floor(S.aff)}
 function traceBand(met){var st=stage();if(st<=0)return met?1:0;if(st==1)return met?2:1;if(st==2)return 2;return 3}
 function dissonanceOn(){return stage()>=2&&effM()>=38}
 function pickTripMotif(pid,met,acts,st){return null}
@@ -4568,7 +4645,7 @@ function homeBand(){var m=effM()|0;var b=m>=70?2:m>=30?1:0;return Math.max(b,Mat
 function homeActNow(i){if(isStormNight())return;var a=HOME_ACTS[i];if(!a||S.taken||S.trip||S.homeActToday||S.endingDone)return;
 if((S.aff|0)<(a[3]|0)){say("（親密再高一點，才能做這件事。）","pout");return}
 var b=tier(),gn=a[4]|0; /* 大綱：強叔親密度不削減互動加值 */
-var feedbackAffBefore=S.aff;S.homeActToday=true;S.aff+=gn;clampAff();S.dsec=Math.min(DL,(S.dsec|0)+HOME_TIME);
+ensureDailyBase();var feedbackAffBefore=S.aff;S.homeActToday=true;S.aff+=gn;clampAff();S.dsec=Math.min(DL,(S.dsec|0)+HOME_TIME);
 var bag=(HOME_LINES[a[0]]||[])[homeBand()]||(HOME_LINES[a[0]]||[])[0]||["……今天也還好。"];
 var line=pick(bag);
 if(line.charAt(0)!=="「")line="「"+line+"」";
@@ -4810,7 +4887,7 @@ function setNavLock(el,open,lockHint){if(!el)return;el.classList.toggle("is-off"
 function paintSideStoryMem(){paintMemoryNotice();var outing=!!(S&&S.trip&&!S.taken)||(typeof isOutingPhase==="function"&&isOutingPhase());
 var ask=$("navAsk");if(ask){var hideAsk=outing||!!(S&&S.endingDone);ask.style.display=hideAsk?"none":"";ask.setAttribute("aria-hidden",hideAsk?"true":"false");if(!hideAsk)setNavLock(ask,askNavUnlocked(),"阿祿親密度 15 後解鎖提問")}
 ["navStory","navMem"].forEach(function(id){var el=$(id);if(!el)return;el.style.display=outing?"none":"";el.setAttribute("aria-hidden",outing?"true":"false");if(outing)return;if(id==="navStory")setNavLock(el,storyNavUnlocked(),"第一則日常可解鎖時開放");else setNavLock(el,memNavUnlocked(),"第一則回憶可解鎖時開放")});
-var ch=$("navChat");if(ch){var can=chatNavUnlocked()&&!outing&&!dayLock;ch.style.display="";ch.setAttribute("aria-hidden","false");setNavLock(ch,can,(S&&S.trip)?"外出中無法開啟":"聊天室尚未開放");if(typeof paintChatNotice==="function"&&can)paintChatNotice()}}
+var ch=$("navChat");if(ch){var can=chatNavUnlocked()&&!outing&&!dayLock;ch.style.display="";ch.setAttribute("aria-hidden","false");setNavLock(ch,can,(S&&S.trip)?"外出中無法開啟":"討論區尚未開放");if(typeof paintChatNotice==="function"&&can)paintChatNotice()}}
 function paintAskHome(){paintSideStoryMem();var ob=$("obsBtn");if(ob){ob.style.visibility="";ob.style.pointerEvents=ob.disabled?"none":""}}
 function paintQBtn(){migrateSq();if(S.pendingSq!=null&&sqWasAsked(S.pendingSq))S.pendingSq=null;var b=$("qHomeBtn");if(!b)return;var show=S&&S.pendingSq!=null&&!S.taken&&!S.trip&&!dayLock&&!maskOpen();b.classList.toggle("on",!!show);if(show)notifyContext("qHomeBtn","sq:"+S.day+":"+S.pendingSq,"question");b.setAttribute("aria-hidden",show?"false":"true");if(typeof paintAskHome==="function")paintAskHome()}
 function openPendingSq(){if(busy||S.pendingSq==null||S.taken||S.trip)return;if(maskOpen()){say("（先看完眼前的事。）","pout");return}var qi=S.pendingSq;S.pendingSq=null;paintQBtn();mq.push({sq:qi});if(!maskOpen())nextPop();try{save()}catch(e){}render(false)}
@@ -4828,7 +4905,7 @@ function isSecretCopy(tt){tt=String(tt||"");return /強叔|大叔|夜景|晚點�
 function isSecretSq(qi){var q=SQ[qi];if(!q)return false;if((q[3]|0)>0||!!q[4])return true;return isSecretCopy(q[1])}
 function isMoodChromeTitle(tt){tt=String(tt||"");if(/^🌙\s*當晚/.test(tt)||tt.indexOf("🚪 她出門了")===0)return false;if(moodPeekOn)return true;return /起疑|仔細觀察|發訊息|打電話|翻找|尻槍|去廁所|沒說出口|沒有說的|心聲|空白|已讀|輸入中|來電|震動|貼圖|定位|背景聲|靜音|收回|窺|痕跡|強叔|大叔|夜景|晚點回家|更懂我|一個人住|⏳|🔍|💔/.test(tt)||/^⏳|^🔍|^💔/.test(tt)}
 function isObsMaskTitle(tt){tt=String(tt||"");return /^🔍/.test(tt)||/起疑/.test(tt)}
-function paintMaskChrome(tt){var mask=$("mask");if(!mask)return;mask.classList.toggle("storm-window",tt==="暴風雨之夜");mask.classList.toggle("intro-arrival",tt==="🚪 不請自來的同居");var returned=tt==="她回來了";mask.classList.toggle("return-window",returned);if(!returned){resetReturnReading();if($("gameUI"))$("gameUI").inert=false;}mask.classList.toggle("presentation-ending",/^結局|^💬 聊天室・最後一則/.test($("mt").textContent));var memoryTitle=MEMORIES.some(function(m){return m[1]===tt});mask.classList.toggle("memory-window",memoryTitle||/浮現一段塵封的回憶/.test(tt));var departing=tt==="🚪 她出門了"||tt==="她出門了",evening=/^(?:🌙\s*)?當晚$/.test(tt);mask.classList.toggle("departure-window",departing);mask.classList.toggle("evening-window",evening);var eventTitle=$("memoryEventTitle");if(eventTitle){eventTitle.hidden=!memoryTitle;eventTitle.textContent=memoryTitle?tt:""}if(memoryTitle)$("mt").textContent="浮現一段塵封的回憶";var obs=returned||isObsMaskTitle(tt);var soft=!obs&&(memoryTitle||tt==="小紅"||tt==="🌸 小紅"||tt==="浮現一段塵封的回憶"||tt==="🌸 浮現一段塵封的回憶"||tt==="📱 發訊息"||tt==="📞 打電話"||tt==="💦 去廁所"||tt==="🚽 去廁所"||tt==="💦 尻槍");
+function paintMaskChrome(tt){var mask=$("mask");if(!mask)return;mask.classList.toggle("storm-window",tt==="暴風雨之夜");mask.classList.toggle("intro-arrival",tt==="🚪 不請自來的同居");var returned=tt==="她回來了";mask.classList.toggle("return-window",returned);if(!returned){resetReturnReading();if($("gameUI"))$("gameUI").inert=false;}mask.classList.toggle("presentation-ending",/^結局|^💬 討論區・最後一則/.test($("mt").textContent));var memoryTitle=MEMORIES.some(function(m){return m[1]===tt});mask.classList.toggle("memory-window",memoryTitle||/浮現一段塵封的回憶/.test(tt));var departing=tt==="🚪 她出門了"||tt==="她出門了",evening=/^(?:🌙\s*)?當晚$/.test(tt);mask.classList.toggle("departure-window",departing);mask.classList.toggle("evening-window",evening);var eventTitle=$("memoryEventTitle");if(eventTitle){eventTitle.hidden=!memoryTitle;eventTitle.textContent=memoryTitle?tt:""}if(memoryTitle)$("mt").textContent="浮現一段塵封的回憶";var obs=returned||isObsMaskTitle(tt);var soft=!obs&&(memoryTitle||tt==="小紅"||tt==="🌸 小紅"||tt==="浮現一段塵封的回憶"||tt==="🌸 浮現一段塵封的回憶"||tt==="📱 發訊息"||tt==="📞 打電話"||tt==="💦 去廁所"||tt==="🚽 去廁所"||tt==="💦 尻槍");
 /* 起疑: older dark square window (mood-chrome), never thin strip / never light paper box */
 mask.classList.toggle("obs-dark",!!obs);mask.classList.toggle("mood-chrome",!!obs||(!soft&&isMoodChromeTitle(tt)));mask.classList.toggle("mem-soft",!obs&&!!soft);mask.classList.remove("obs-strip");
 var face=mask.querySelector(".face");if(face)face.style.display="";
@@ -4860,7 +4937,7 @@ function replay(k){var s=STORY[k];mq.push(["📌 同居事件："+s[1],s[2]]);ne
 function replayN(k){var s=NSTORY[k];mq.push(["💔 "+s[1],s[2]]);nextPop()}
 
 function chatAvailable(){if(!S||S.trip||isStormNight()||dayLock)return false;if(S.endingDone&&((S.ending|0)===1||(S.ending|0)===2))return true;if(S.taken)return false;return chatNavUnlocked()}
-function chatThreadUnlocked(t){if(!t||t.retired)return false;if(t.ending){return !!(S.endingDone&&(S.ending|0)===(t.ending|0))}if((t.step|0)<=0){if(t.needAff&&(S.aff|0)<(t.needAff|0)&&((S.day|0)<6))return false;return true}return (S.uncleStep|0)>=(t.step|0)}
+function chatThreadUnlocked(t){if(!t||t.retired)return false;if(t.ending){return !!(S.endingDone&&(S.ending|0)===(t.ending|0))}if((t.step|0)<=0){if(t.needAff&&(S.aff|0)<(t.needAff|0)&&((S.day|0)<6))return false;return true}var due=S.forumPublishDays&&S.forumPublishDays[t.step|0];return (S.uncleStep|0)>=(t.step|0)&&(due==null||(S.day|0)>=(due|0))}
 function chatThreadList(){var list=[];(CHAT_THREADS||[]).forEach(function(t,i){if(chatThreadUnlocked(t))list.push({t:t,i:i})});return list}
 var chatReadingPositions={},chatRenderedKey=null;
 function rememberChatReading(){var feed=$("chatFeed");if(feed&&chatRenderedKey!=null)chatReadingPositions[chatRenderedKey]=feed.scrollTop}
@@ -4872,12 +4949,12 @@ else{feed.classList.remove("is-list");var t=(CHAT_THREADS||[])[open|0],html="";i
 requestAnimationFrame(function(){if(chatRenderedKey===key)feed.scrollTop=chatReadingPositions[key]||0})}
 
 function chatOpenThread(i){if(!chatThreadUnlocked((CHAT_THREADS||[])[i|0]))return;rememberChatReading();S.chatOpenStep=i|0;paintChatFeed();try{save()}catch(e){}}
-function paintChatNotice(){var b=$("navChat");if(!b)return;var on=!!(S&&S.chatNotice);b.innerHTML=homeUiIcon("chat")+'<span>聊天室</span>'+(on?'<span class="opt-new notice-dot" role="img" aria-label="有新討論串" title="有新討論串"></span>':"");b.classList.toggle("chat-notice",on)}
+function paintChatNotice(){var b=$("navChat");if(!b)return;var on=!!(S&&S.chatNotice);b.innerHTML=homeUiIcon("chat")+'<span>討論區</span>'+(on?'<span class="opt-new notice-dot" role="img" aria-label="有新討論串" title="有新討論串"></span>':"");b.classList.toggle("chat-notice",on)}
 function markChatThreadsNotice(){if(!S||typeof chatThreadList!=="function")return;var n=chatThreadList().length;if(S._chatThreadCount==null){S._chatThreadCount=n;return}if(n>(S._chatThreadCount|0))S.chatNotice=true;S._chatThreadCount=n}
-function openChatRoom(){if(!chatAvailable()){say(S.trip?"（她出門了。等她回來再滑手機吧。）":(chatNavUnlocked()?"（現在不方便看聊天室。）":"（聊天室還沒開放。）"),"pout");return}
+function openChatRoom(){if(!chatAvailable()){say(S.trip?"（她出門了。等她回來再滑手機吧。）":(chatNavUnlocked()?"（現在不方便看討論區。）":"（討論區還沒開放。）"),"pout");return}
 if(maskOpen()||($("momPhone")&&$("momPhone").classList.contains("on"))){say("（先看完眼前的事。）","pout");return}
 S.chatOpenStep=null;S.chatNotice=false;paintChatNotice();paintChatFeed();var el=$("chatRoom");if(!el)return;el.classList.add("on");el.setAttribute("aria-hidden","false");
-if(!S.chatSeen){S.chatSeen=true;addLog("💬 打開匿名聊天室・看見一個愛抱怨的匿名路人");try{save()}catch(e){}}}
+if(!S.chatSeen){S.chatSeen=true;addLog("💬 打開匿名討論區・看見一個愛抱怨的匿名路人");try{save()}catch(e){}}}
 function closeChatRoom(){rememberChatReading();chatRenderedKey=null;var el=$("chatRoom");if(!el)return;el.classList.remove("on");el.setAttribute("aria-hidden","true");S.chatOpenStep=null}
 (function(){var el=$("chatRoom");if(!el)return;el.addEventListener("click",function(e){if(e.target===el)closeChatRoom()});el.addEventListener("keydown",function(e){if(e.key==="Escape"){e.preventDefault();e.stopPropagation();closeChatRoom()}})})();
 
@@ -4890,12 +4967,12 @@ function canAdvanceUncle(){if(isStormNight())return false;var next=(S.uncleStep|
 function queueUncleStep(){if(!canAdvanceUncle())return false;var next=(S.uncleStep|0)+1;var a=uncleArcByStep(next);if(!a)return false;
 S.uncleStep=next;S.uncleStarted=true;S.metOut=true;S.uncleTh=(a.th||[]).slice();
 var gained=addM(uncleStepMAmt());
-if(!S.chatUnlocked)S.chatUnlocked=[];if(next!==9&&S.chatUnlocked.indexOf(next)<0){S.chatUnlocked.push(next);S.chatNotice=true;}
+if(!S.chatUnlocked)S.chatUnlocked=[];if(!S.forumPublishDays)S.forumPublishDays={};if(next!==9)S.forumPublishDays[next]=(S.day|0)+1;
 if(next===1&&S.seen.indexOf("n1")<0){S.seen.push("n1");var ns=NSTORY[0];if(ns)mq.push(["💔 "+ns[1],ns[2]])}
 if(a.home){if(scenePresentation.phase!=="returning"&&!a.storm)say(a.home,next>=5?"shy":"pout");if(!a.storm)addLog("💬 "+a.home)}
 if(a.trace){S.pendingObs={trTxt:a.trace,met:true,motif:null};setObsBtn(true)}
 if(a.storm){try{var hu=document.querySelector(".homeui");if(hu)hu.classList.add("outing-shell");syncSilhouette()}catch(e){}}
-addLog("（外面的事，又往前推了一步。）"+(gained?"・強叔親密 +"+gained:""));
+addLog("（外面的事，又往前推了一步。）");
 if(next>=11&&(S.day|0)>=29)queueCastOff();
 if(!S.endingDone&&(effM()|0)>=99&&(S.day|0)<30){var hasPrep=false;for(var qi=0;qi<mq.length;qi++){if(mq[qi]&&mq[qi].endingPrep)hasPrep=true}if(!hasPrep)mq.push({endingPrep:1})}
 try{save()}catch(e){}return true}
@@ -4903,7 +4980,7 @@ function queueCastOff(){if(S.castOff)return;S.castOff=true;
 mq.push(["🩺 石膏拆了","上門的醫護人員拆掉石膏，宣布你可以自己走路了。\n\n媽媽來電：「小紅可以回去了吧？」\n\n房間忽然變得很寬。你本來想問她——可以繼續住下去嗎？"]);
 mq.push({endingPrep:1})}
 function showEndingPrep(){hideSqOpts();
-$("mt").textContent="💬 聊天室・最後一則";$("mp").textContent=ENDING_CHAT+"\n\n細節對上了：髮夾、暴風雨、只有她不會丟下我。\n\n你要怎麼面對？";
+$("mt").textContent="💬 討論區・最後一則";$("mp").textContent=ENDING_CHAT+"\n\n細節對上了：髮夾、暴風雨、只有她不會丟下我。\n\n你要怎麼面對？";
 paintMaskChrome("強叔");
 var box=$("sqopts"),mb=$("mb");box.innerHTML="";
 [["不相信——那不是她",0],["面對真相——那就是她",1]].forEach(function(o){
@@ -4994,7 +5071,7 @@ function setTab(t){if(!t||t==="log"||isStormNight())return;if(S.endingDone&&(t==
 document.querySelectorAll(".bubble[data-t],.footnav [data-t],.chip[data-t]").forEach(function(a){a.onclick=function(e){e.preventDefault();if(a.disabled||a.classList.contains("is-off"))return;setTab(a.dataset.t)}});
 function pane(){var y=window.scrollY||document.documentElement.scrollTop||0,h="";
 if((S.taken||(S.endingDone&&(S.ending|0)===2))&&(tab=="home"||tab=="go"||tab=="ask"||tab=="herq")){h='<div class="row"><span class="i">🗝️</span><div class="m"><b>女主已搬走</b><div class="sm">小紅搬去強叔那裡了。房間裡只剩下她搬走後空掉的位置。</div></div><button class="btn" onclick="doReset()">重新開始</button></div>'}
-else if(S.endingDone&&(tab=="home"||tab=="go"||tab=="ask"||tab=="herq")){h='<div class="row"><span class="i">📜</span><div class="m"><b>結局已定</b><div class="sm">互動／外出／提問已關閉。聊天室仍可回看。</div></div><button class="btn" onclick="doReset()">重新開始</button></div>'}
+else if(S.endingDone&&(tab=="home"||tab=="go"||tab=="ask"||tab=="herq")){h='<div class="row"><span class="i">📜</span><div class="m"><b>結局已定</b><div class="sm">互動／外出／提問已關閉。討論區仍可回看。</div></div><button class="btn" onclick="doReset()">重新開始</button></div>'}
 else if(tab=="home"){if(S.trip&&!S.taken){h+='<div class="row"><span class="i">🛋️</span><div class="m"><b>她出門了</b><div class="sm">小紅在外面時不能做室內互動。你留在家等她回來。</div></div></div>'}
 else{h+='<div class="sm" style="margin-bottom:8px">每天互動一次，增加親密度'+(S.homeActToday?'　・今天已做過':'')+'</div>';
 HOME_ACTS.forEach(function(a,i){var gn=a[4]|0,used=!!S.homeActToday,lk=(S.aff|0)<(a[3]|0);
@@ -5012,7 +5089,7 @@ else if(tab=="herq"){h='<div class="sm">她有問題時，主畫面會出現「�
 else if(tab=="journal"){h=""}
 else if(tab=="mem"){ensureMemoryState();h='<p class="memoryIntro">隨著跟小紅的相處愈多，塵封的回憶逐漸浮現</p>';MEMORIES.forEach(function(m,k){if(!memoryUnlocked(m))return;var unread=S.memSeen.indexOf(m[0])<0;h+='<div class="row"><span class="i">'+homeUiIcon("memory")+'</span><div class="m"><b>'+m[1]+'</b></div><button type="button" class="btn" onclick="replayMem('+k+')">'+(unread?"閱讀":"重看")+'</button></div>'});if(!h)h='<p class="sm">暫時沒有可查看的內容。</p>'}
 else if(tab=="story"){h="";h+='<div class="sm" style="margin-bottom:8px;opacity:.75">同居事件紀錄（親密度解鎖）</div>';STORY.forEach(function(s,k){var ok=S.seen.indexOf(s[0])>=0;if(!ok)return;h+='<div class="row '+(ok?"":"lock")+'"><span class="i">'+(ok?"🏠":"🔒")+'</span><div class="m"><b>'+(ok?s[1]:"？？？")+'</b><div class="sm">親密度 '+s[0]+' 解鎖</div></div>'+(ok?'<button class="btn" onclick="replay('+k+')">重看</button>':"")+'</div>'});
-NSTORY.forEach(function(s,k){if(S.seen.indexOf("n"+s[0])<0)return;h+='<div class="row is-secret"><span class="i">💔</span><div class="m"><b>'+s[1]+'</b><div class="sm">強叔親密度 '+s[0]+'</div></div><button class="btn" onclick="replayN('+k+')">重看</button></div>'})}
+NSTORY.forEach(function(s,k){if(S.seen.indexOf("n"+s[0])<0)return;h+='<div class="row is-secret"><span class="i">💔</span><div class="m"><b>'+s[1]+'</b><div class="sm">已發生的事件</div></div><button class="btn" onclick="replayN('+k+')">重看</button></div>'})}
 else{h=""}
 var panelNames={home:"互動",go:"外出",ask:"提問",mem:"回憶",story:"日常",journal:"日記",herq:"她想問你"};var side=!!panelNames[tab];
 if(side){h='<div class="paneHead"><h2 class="collectionTitle">'+panelNames[tab]+'</h2><button type="button" class="pane-x" aria-label="關閉" onclick="closePane()">×</button></div>'+h}
@@ -5046,7 +5123,7 @@ $("affn").textContent=fmt(S.aff);
 paintMeterValue($("affbar"),Math.min(100,Math.max(0,S.aff))+"%");
 var outing=!!(typeof isOutingPhase==="function"?isOutingPhase():(S&&S.trip&&!S.taken));
 /* 強叔卡片：路線開始（第6天遇見、uncleStarted）才顯示，不改數值 */
-var showM=!!(S&&S.uncleStarted);
+var showM=false; /* hidden route value: game rules still use S.m */
 var box=$("mbox");if(box)box.classList.toggle("off",!showM);
 paintMeterValue($("mbar"),(effM()|0)+"%");
 var mn=$("mnum");if(mn)mn.textContent=String(effM()|0);
@@ -5143,6 +5220,8 @@ function bindMomIntro(){
   $("momPhone").addEventListener("keydown",function(e){if((e.key==="Enter"||e.key===" ")&&!e.target.closest("button")){e.preventDefault();tap()}});
 }
 bindMomIntro();
+$("daySummary").addEventListener("click",continueDaySummary);
+$("daySummary").addEventListener("keydown",function(e){if(e.key==="Escape"||e.key==="Enter"||e.key===" "){e.preventDefault();continueDaySummary()}else if(e.key==="Tab"){e.preventDefault();$("daySummaryContinue").focus()}});
 $("chatRoom").querySelector(".chatMark").innerHTML=homeUiIcon("chat");
 $("thbox").setAttribute("role","button");$("thbox").setAttribute("tabindex","0");$("thbox").setAttribute("aria-label","顯示完整心聲");$("thbox").addEventListener("click",function(){stopTyping($("thb"),true)});$("thbox").addEventListener("keydown",function(e){if(e.key==="Enter"||e.key===" "){e.preventDefault();stopTyping($("thb"),true)}});
 
@@ -5159,13 +5238,16 @@ var windowSkinObserver=new MutationObserver(skinWindowUi);["mt","thbox","outingA
 
 function syncUpdatedEarlyThoughts(){var a=uncleArcByStep(S.uncleStep|0);if(a&&a.step>=1&&a.step<=11)S.uncleTh=(a.th||[]).slice()}
 load();
+if(!S.pendingDayEnd)S._dayAdvancing=false;
+ensureDailyBase();
+publishDueForumThreads();
 syncUpdatedEarlyThoughts();
 if(S.trip&&Date.now()>=S.trip.end)back();
 render();
 ex=base();applyEx();
 syncDlgAv(($("say")&&$("say").textContent)||"");faceTf(ex);
 maybeMomIntro();
-resumeStormStay();
+if(!resumeDayEnd())resumeStormStay();
 </script>
 </body>
 </html>

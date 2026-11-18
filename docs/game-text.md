@@ -1272,12 +1272,12 @@ CHAT-T14-P1-BODY | 那個阿祿還在等燈嗎？隨便。她現在睡我這邊�
 CHAT-T14-P2-WHO | 匿名 | CHAT_THREADS[14].posts[2].who; dup-of CHAT-T0-P0-WHO
 CHAT-T14-P2-META | 攻略完結感言 | CHAT_THREADS[14].posts[2].meta
 CHAT-T14-P2-BODY | 裝可憐到最後。你們學不會的。 | CHAT_THREADS[14].posts[2].body
-CHAT-ROOM-TITLE | 匿名聊天室 | HTML
+CHAT-ROOM-TITLE | 匿名討論區 | HTML
 CHAT-ROOM-SUB | 偶然滑到的討論串，不知為何忍不住看下去 | HTML
 CHAT-CLOSE | 關閉 | HTML
 CHAT-BACK | ← 討論串 | HTML
 CHAT-TAP-OUT | 輕觸外側關閉 | HTML
-CHAT-NAV | 💬 聊天室 | navChat
+CHAT-NAV | 討論區 | navChat
 CHAT-OPEN-LOG | 💬 打開匿名聊天室・看見一個愛抱怨的匿名路人 | openChatRoom
 CHAT-BUSY-TRIP | （她出門了。等她回來再滑手機吧。） | openChatRoom
 CHAT-BUSY | （現在不方便看聊天室。） | openChatRoom
@@ -1542,7 +1542,7 @@ UI-TITLE | 小櫻養成日記 | HTML
 UI-AFF-ALU | ❤️ 阿祿親密度 | HTML
 UI-AFF-UNCLE | ❤️ 大叔親密度 | paintStats
 UI-NAV-ASK | 💬 提問 | HTML; dup-of ASK-UI-01
-UI-NAV-CHAT | 💬 聊天室 | HTML; dup-of CHAT-NAV
+UI-NAV-CHAT | 討論區 | HTML; dup-of CHAT-NAV
 UI-NAV-DAILY | 📖 日常 | HTML
 UI-NAV-MEM | 🌸 回憶 | HTML
 UI-DOCK-HOME | 互動 | mkDock
@@ -1562,8 +1562,8 @@ UI-ARIA-EV | 打開事件 | HTML
 UI-TITLE-LOG | 紀錄 | HTML
 UI-ARIA-LOG | 打開紀錄 | HTML
 UI-ARIA-DAY | 天數 | HTML
-UI-ARIA-ASKCHAT | 提問與聊天室 | HTML
-UI-ARIA-OPENCHAT | 打開匿名聊天室 | HTML
+UI-ARIA-ASKCHAT | 提問與討論區 | HTML
+UI-ARIA-OPENCHAT | 打開匿名討論區 | HTML
 UI-ARIA-DAILYMEM | 日常與回憶 | HTML
 UI-ARIA-GIRL-HOLD | 和她聊天（長按可戳一下） | HTML
 UI-ARIA-OUTING-LINE | 外出行動結果，點一下關閉 | HTML
@@ -1574,7 +1574,7 @@ UI-ARIA-DLG | 和她聊天（點一下對話） | HTML
 UI-ARIA-TH | 外出心聲 | HTML
 UI-ARIA-DOCK | 主要行動 | HTML
 UI-ARIA-SLEEP | 睡覺，進入下一天 | HTML
-UI-ARIA-CHATROOM | 匿名聊天室 | HTML; dup-of CHAT-ROOM-TITLE
+UI-ARIA-CHATROOM | 匿名討論區 | HTML; dup-of CHAT-ROOM-TITLE
 UI-ARIA-MOM | 媽媽的訊息 | HTML; dup-of OPEN-MOM-ARIA
 UI-ARIA-OUTING-DOCK | 外出中的行動 | paintDock
 UI-SPEAKER-SAKURA | 小櫻 | HTML; dup-of END-INLINE-07
@@ -1670,3 +1670,16 @@ DBG-END-CONFIRM | 跳到第30天、阿祿親密度100、大叔親密度99，進�
 4. Send the edited file (or just the changed `ID | text` rows). We grep the location note / original text in both HTML files and replace.
 
 _Entries: 1411_
+
+## 日結介面（2026-11-18）
+
+DAY-SUMMARY-KICKER | 今日合計 | daySummary kicker
+DAY-SUMMARY-TITLE | 第 {day} 天結束 | showDaySummary
+DAY-SUMMARY-AFF | 小紅與阿祿的親密度 | daySummaryAff
+DAY-SUMMARY-AFF-VALUE | ＋{actualGain} | 當日實際增加，上限封頂後以實際差額計算
+DAY-SUMMARY-UNCLE | 小紅與強叔的關係，又近了一些。 | daySummaryUncle; 隱藏精確數值
+DAY-SUMMARY-CONTINUE | 輕觸繼續 | daySummaryContinue
+FORUM-NAV | 討論區 | navChat / paintChatNotice
+FORUM-TITLE | 匿名討論區 | chatRoom heading / aria-label
+
+強叔數值及其門檻提示已對玩家隱藏。本檔其他舊數值條目屬歷史匯出，應先對照現行 HTML，不能直接復原到玩家介面。
