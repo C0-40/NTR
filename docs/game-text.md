@@ -1699,3 +1699,7 @@ OUTING-FOCUS-TARGET-ARIA | 按住聚焦 | focusPad aria-label
 OUTING-FOCUS-ACTIVE | 聚焦中 | focusFeedback; 僅按住期間顯示
 
 操作只改剪影辨認程度，不新增劇本內容或改動原有資料 ID。
+
+## 2026-11-19 行為註記
+
+打電話只提供原有情報，不阻礙強叔事件推進；同居〈電視〉等重溫修正重複排入及關閉干擾，所有對白與事件ID保留原樣。
