@@ -3439,7 +3439,7 @@ body:has(#gameUI.homeui.outing-shell){background:#2c221d!important;background-im
 #gameUI.storm-stay .dock.tabs #sleepBtn{background:#76533e;color:#fff2e2;border-color:#b08a68}
 #gameUI.storm-stay .dock.tabs .uiIcon{width:18px;height:18px;flex:none}
 /* Hidden route progress remains internal; the player sees only the nightly relationship message. */
-#gameUI.homeui #mbox{display:none!important}
+/* The uncle relationship is visible after its original unlock; its amount stays concealed. */
 .daySummary[hidden],.daySummary [hidden]{display:none!important}
 .daySummary{position:fixed;inset:0;z-index:15000;display:flex;align-items:center;justify-content:center;padding:24px;box-sizing:border-box;background:#2b2028;color:#fff0dc;isolation:isolate;cursor:pointer;animation:daySummaryIn .22s ease-out}
 .daySummary::before{content:"";position:absolute;inset:0;z-index:-1;pointer-events:none;background:radial-gradient(ellipse at 50% 43%,#a66e7d15,transparent 58%);box-shadow:inset 0 0 110px #130f1688}
@@ -3459,11 +3459,57 @@ body:has(#gameUI.homeui.outing-shell){background:#2c221d!important;background-im
 @media(max-width:360px){.daySummary{padding:18px}.daySummary-aff{font-size:14px;gap:10px}.daySummary h2{font-size:21px}.daySummary-uncle{font-size:15px}}
 @media(prefers-reduced-motion:reduce){.daySummary,.daySummary::before,.daySummary-aff,.daySummary-uncle{animation:none!important}}
 
+
+/* Fixed concealment pattern: none of its dimensions or opacity depend on S.m. */
+#gameUI.homeui .topHud #mbox #mbar{display:none!important}
+#gameUI.homeui .topHud #mbox #mbarwrap{position:relative!important;overflow:hidden!important;background:#695461!important;border-radius:5px!important;box-shadow:inset 0 0 0 1px #4b374b55!important}
+#gameUI.homeui .topHud #mbox #mbarwrap::before{content:"";position:absolute;inset:0;background:repeating-linear-gradient(118deg,#e8bccb22 0 2px,#30243222 2px 4px,transparent 4px 7px),linear-gradient(100deg,#6a5468,#957482 43%,#635064);opacity:.8;pointer-events:none}
+#gameUI.homeui .topHud #mbox #mbarwrap::after{content:"";position:absolute;inset:0;background:#311d31;opacity:0;pointer-events:none}
+#gameUI.homeui .topHud #mbox #mnum{width:calc(100% - 40px)!important;margin:0!important;text-align:center!important;color:#fff0e8!important;font-size:9px!important;font-weight:400!important;line-height:16px!important;letter-spacing:.04em!important;text-shadow:0 1px 1px #291a2d88!important;z-index:2}
+#gameUI.homeui .topHud #mbox .meterHead .meterHeart{color:#99717f!important}
+#gameUI.homeui .topHud #mbox.uncle-unease #mbarwrap::after{animation:uncleVeilDeepen .85s ease-out}
+@keyframes uncleVeilDeepen{0%,100%{opacity:0}50%{opacity:.48}}
+@media(max-width:360px){#gameUI.homeui .topHud #mbox #mnum{width:calc(100% - 36px)!important;font-size:8.5px!important}}
+@media(prefers-reduced-motion:reduce){#gameUI.homeui .topHud #mbox.uncle-unease #mbarwrap::after{animation:none!important}}
+
+/* Layered nightly recap: warm acknowledgment, then a subdued shift in atmosphere. */
+.daySummary{animation:recapEnter .3s ease-out both}
+.daySummary-card{position:relative;animation:recapCardEnter .4s cubic-bezier(.2,.65,.35,1) both}
+.daySummaryDaisy{display:block;width:28px;height:28px;margin:0 auto 13px;fill:none;stroke:#d6b999;opacity:.65}
+.daySummaryDaisy ellipse,.daySummaryDaisy circle{stroke-dasharray:28;stroke-dashoffset:28;animation:recapDaisyDraw .65s .08s ease-out forwards}
+.daySummary-kicker{animation:daySummaryLine .4s .06s ease-out both}
+.daySummary h2{animation:daySummaryLine .45s .12s ease-out both}
+.daySummary-aff{position:relative;animation:daySummaryLine .45s .22s ease-out both}
+.daySummary-aff::after{content:"";position:absolute;left:12%;right:12%;bottom:-1px;height:1px;background:linear-gradient(90deg,transparent,#e6b7a1,transparent);transform-origin:center;animation:recapWarmLine 1.1s .32s ease-out both;pointer-events:none}
+.daySummary-aff strong{display:inline-block;animation:recapAffLand .55s .33s cubic-bezier(.18,.6,.32,1) both}
+.daySummary-uncle{animation:recapSecretEnter .65s .3s ease-out both}
+.daySummary.has-aff.has-uncle .daySummary-uncle{animation-delay:.7s}
+.daySummary.has-aff.has-uncle::before{animation-delay:.55s}
+.daySummaryGlow{display:none;position:absolute;z-index:-1;left:50%;top:43%;width:min(130vw,560px);height:390px;border-radius:50%;pointer-events:none}
+.daySummary.has-aff .daySummaryGlow.warmth{display:block;background:radial-gradient(ellipse,#a5705f2c,transparent 66%);animation:recapWarmGlow 2.2s ease-out both}
+.daySummary.has-uncle .daySummaryGlow.secret{display:block;background:radial-gradient(ellipse,#824d6d3d,transparent 68%);animation:recapSecretGlow 2.7s .25s ease-out both}
+.daySummary.has-aff.has-uncle .daySummaryGlow.secret{animation-delay:.65s}
+.daySummary.is-leaving{animation:recapExit .16s ease-in both}
+.daySummary.is-leaving .daySummary-card{animation:recapCardExit .16s ease-in both}
+.daySummaryContinue:disabled{cursor:default}
+@keyframes recapEnter{from{opacity:0}to{opacity:1}}
+@keyframes recapCardEnter{from{opacity:0;translate:0 9px}to{opacity:1;translate:0 0}}
+@keyframes recapDaisyDraw{to{stroke-dashoffset:0}}
+@keyframes recapAffLand{0%{opacity:0;transform:translateY(5px) scale(.9)}65%{opacity:1;transform:translateY(-1px) scale(1.08)}100%{opacity:1;transform:translateY(0) scale(1)}}
+@keyframes recapWarmLine{0%{opacity:0;scale:.2 1}45%{opacity:.85;scale:1 1}100%{opacity:0;scale:1 1}}
+@keyframes recapSecretEnter{from{opacity:0;translate:0 5px}to{opacity:1;translate:0 0}}
+@keyframes recapWarmGlow{0%{opacity:0;transform:translate(-50%,-50%) scale(.88)}40%{opacity:.95}100%{opacity:.48;transform:translate(-50%,-54%) scale(1.07)}}
+@keyframes recapSecretGlow{0%{opacity:0;transform:translate(-48%,-45%) scale(.9)}50%{opacity:.9}100%{opacity:.55;transform:translate(-50%,-50%) scale(1.05)}}
+@keyframes recapExit{to{opacity:0}}
+@keyframes recapCardExit{to{opacity:0;translate:0 -5px}}
+@media(prefers-reduced-motion:reduce){.daySummary,.daySummary::before,.daySummary-card,.daySummary-kicker,.daySummary h2,.daySummary-aff,.daySummary-aff::after,.daySummary-aff strong,.daySummary-uncle,.daySummaryGlow,.daySummaryDaisy ellipse,.daySummaryDaisy circle{animation:none!important}.daySummaryDaisy ellipse,.daySummaryDaisy circle{stroke-dashoffset:0}.daySummary-aff::after{opacity:0}.daySummaryGlow{opacity:.4;transform:translate(-50%,-50%)}}
 </style>
 </head>
 <body>
 <div id="daySummary" class="daySummary" role="dialog" aria-modal="true" aria-labelledby="daySummaryTitle" hidden>
+  <span class="daySummaryGlow warmth" aria-hidden="true"></span><span class="daySummaryGlow secret" aria-hidden="true"></span>
   <div class="daySummary-card">
+    <svg class="daySummaryDaisy" viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><g class="memoryDaisy" stroke-width="1.25"><ellipse cx="12" cy="5.65" rx="1.45" ry="3.45" transform="rotate(0 12 12)"/><ellipse cx="12" cy="5.65" rx="1.45" ry="3.45" transform="rotate(30 12 12)"/><ellipse cx="12" cy="5.65" rx="1.45" ry="3.45" transform="rotate(60 12 12)"/><ellipse cx="12" cy="5.65" rx="1.45" ry="3.45" transform="rotate(90 12 12)"/><ellipse cx="12" cy="5.65" rx="1.45" ry="3.45" transform="rotate(120 12 12)"/><ellipse cx="12" cy="5.65" rx="1.45" ry="3.45" transform="rotate(150 12 12)"/><ellipse cx="12" cy="5.65" rx="1.45" ry="3.45" transform="rotate(180 12 12)"/><ellipse cx="12" cy="5.65" rx="1.45" ry="3.45" transform="rotate(210 12 12)"/><ellipse cx="12" cy="5.65" rx="1.45" ry="3.45" transform="rotate(240 12 12)"/><ellipse cx="12" cy="5.65" rx="1.45" ry="3.45" transform="rotate(270 12 12)"/><ellipse cx="12" cy="5.65" rx="1.45" ry="3.45" transform="rotate(300 12 12)"/><ellipse cx="12" cy="5.65" rx="1.45" ry="3.45" transform="rotate(330 12 12)"/><circle cx="12" cy="12" r="2.8"/></g></svg>
     <p class="daySummary-kicker">今日合計</p><h2 id="daySummaryTitle"></h2>
     <div id="daySummaryAff" class="daySummary-aff"><span>小紅與阿祿的親密度</span><strong id="daySummaryAffValue"></strong></div>
     <p id="daySummaryUncle" class="daySummary-uncle"><em>小紅與強叔</em>的關係，又近了一些。</p>
@@ -3487,9 +3533,9 @@ body:has(#gameUI.homeui.outing-shell){background:#2c221d!important;background-im
               <div class="meterHead">
                 <span class="meterHeart" aria-hidden="true">♥</span>
                 <span class="meterName" id="mlab">強叔</span>
-                <span class="meterNum" id="mnum">0</span>
+                <span class="meterNum" id="mnum" aria-hidden="true">關係不明</span>
               </div>
-              <div class="bar m" id="mbarwrap"><i id="mbar"></i></div>
+              <div class="bar m" id="mbarwrap" role="img" aria-label="關係不明，實際進度隱藏" title="關係不明，實際進度隱藏"><i id="mbar"></i></div>
             </div>
             <div class="sm" id="afft"></div>
             <div class="sm" id="inc"></div>
@@ -3500,7 +3546,7 @@ body:has(#gameUI.homeui.outing-shell){background:#2c221d!important;background-im
     </div>
     <nav class="collectionNav" aria-label="日常、回憶與設定">
       <button type="button" class="bubble sideStory" data-t="story" id="navStory" aria-label="日常" title="日常"><span class="hudToolFace" aria-hidden="true"><svg class="uiIcon" viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="m2 11 10-9 10 9M5 9v12h14V9M9 21v-7h6v7"/></svg><span>日常</span></span></button>
-      <button type="button" class="bubble sideMem" data-t="mem" id="navMem" aria-label="回憶" title="回憶"><span class="hudToolFace" aria-hidden="true"><svg class="uiIcon" viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M7 16a7 7 0 1 1 11-2 6 6 0 0 1-11 2Z"/><circle cx="5" cy="19" r="2"/><path d="M2 23h.01"/></svg><span>回憶</span></span></button>
+      <button type="button" class="bubble sideMem" data-t="mem" id="navMem" aria-label="回憶" title="回憶"><span class="hudToolFace" aria-hidden="true"><svg class="uiIcon" viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><g class="memoryDaisy" stroke-width="1.25"><ellipse cx="12" cy="5.65" rx="1.45" ry="3.45" transform="rotate(0 12 12)"/><ellipse cx="12" cy="5.65" rx="1.45" ry="3.45" transform="rotate(30 12 12)"/><ellipse cx="12" cy="5.65" rx="1.45" ry="3.45" transform="rotate(60 12 12)"/><ellipse cx="12" cy="5.65" rx="1.45" ry="3.45" transform="rotate(90 12 12)"/><ellipse cx="12" cy="5.65" rx="1.45" ry="3.45" transform="rotate(120 12 12)"/><ellipse cx="12" cy="5.65" rx="1.45" ry="3.45" transform="rotate(150 12 12)"/><ellipse cx="12" cy="5.65" rx="1.45" ry="3.45" transform="rotate(180 12 12)"/><ellipse cx="12" cy="5.65" rx="1.45" ry="3.45" transform="rotate(210 12 12)"/><ellipse cx="12" cy="5.65" rx="1.45" ry="3.45" transform="rotate(240 12 12)"/><ellipse cx="12" cy="5.65" rx="1.45" ry="3.45" transform="rotate(270 12 12)"/><ellipse cx="12" cy="5.65" rx="1.45" ry="3.45" transform="rotate(300 12 12)"/><ellipse cx="12" cy="5.65" rx="1.45" ry="3.45" transform="rotate(330 12 12)"/><circle cx="12" cy="12" r="2.8"/></g></svg><span>回憶</span></span></button>
     <button type="button" class="chip chip-ico" id="settingsBtn" aria-label="開啟設定" aria-haspopup="dialog" aria-controls="gameSettings" onclick="openSettings()"><span class="hudToolFace" aria-hidden="true"><svg viewBox="0 0 24 24" width="25" height="25" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m9 3-.6 2-2 .9-2-.4-2 3.5 1.4 1.5v2.8L2.4 15l2 3.5 2-.4 2 .9.6 2h4l.6-2 2-.9 2 .4 2-3.5-1.4-1.7v-2.8L19.6 9l-2-3.5-2 .4-2-.9L13 3Z"/><circle cx="11" cy="12" r="3"/></svg></span></button>
     </nav>
     </div>
@@ -3633,7 +3679,7 @@ function guardPresentationInput(e){if(!presentationHeld())return;var target=e.ta
 document.addEventListener("click",guardPresentationInput,true);document.addEventListener("keydown",guardPresentationInput,true);
 var navigationFeedback={};function refreshPresentationFeedback(){var unlocked=false;["navAsk","navStory","navMem","navChat"].forEach(function(id){var el=$(id);if(!el)return;var next=!el.disabled;if(navigationFeedback[id]===false&&next){pulsePresentation(el,"nav-unlock",700);unlocked=true}navigationFeedback[id]=next});if(unlocked)playUiSound("unlock");syncSceneAudio()}
 
-function homeUiIcon(name){var paths={"home": "<path d=\"M20 5a5 5 0 0 0-8 1 5 5 0 0 0-8-1c-4 5 2 10 8 14 6-4 12-9 8-14Z\"/>", "go": "<path d=\"M4 21V3l11-1v20L4 21ZM15 4h5v16h-5\"/><circle cx=\"11.5\" cy=\"12\" r=\".8\" fill=\"currentColor\" stroke=\"none\"/>", "sleep": "<path d=\"M20.5 14A9 9 0 0 1 10 3a9 9 0 1 0 10.5 11Z\"/><path d=\"M17 3v4m-2-2h4\"/>", "chat": "<path d=\"M15 16H8l-4 3v-4a7 7 0 0 1 3-13h7a7 7 0 0 1 1 14Z\"/><path d=\"M19 8a6 6 0 0 1 1 10v3l-4-2h-4\"/><path d=\"M7 9h.01M11 9h.01M15 9h.01\"/>", "ask": "<path d=\"M19 16a8 8 0 1 0-5 3l6 2-1-5Z\"/><path d=\"M9 8a3 3 0 0 1 6 0c0 2-3 2-3 4\"/><path d=\"M12 15h.01\"/>", "daily": "<path d=\"m2 11 10-9 10 9M5 9v12h14V9M9 21v-7h6v7\"/>", "memory": "<path d=\"M7 16a7 7 0 1 1 11-2 6 6 0 0 1-11 2Z\"/><circle cx=\"5\" cy=\"19\" r=\"2\"/><path d=\"M2 23h.01\"/>", "msg": "<rect x=\"5\" y=\"2\" width=\"14\" height=\"20\" rx=\"3\"/><path d=\"M9 5h6m-4 14h2\"/>", "call": "<path d=\"m7 3 3 5-2 2c2 3 3 4 6 6l2-2 5 3c-1 4-3 5-6 3C8 17 4 13 2 7 1 4 3 2 7 3Z\"/>", "jack": "<path d=\"M5 17c2-1 3-3 3-6l3 3 1-8 2 8 3-3c0 3 1 5 3 6-4 3-11 3-15 0Z\"/><path d=\"m4 9-1-2m17 2 1-2M8 5 7 3m10 2 1-2\"/><circle cx=\"3\" cy=\"13\" r=\".8\"/><circle cx=\"21\" cy=\"13\" r=\".8\"/><circle cx=\"12\" cy=\"2\" r=\".7\"/>", "nap": "<path d=\"M20.5 14A9 9 0 0 1 10 3a9 9 0 1 0 10.5 11Z\"/>", "speed": "<path d=\"m3 5 8 7-8 7V5Zm10 0 8 7-8 7V5Z\"/>", "thought": "<path d=\"M7 16a7 7 0 1 1 11-2 6 6 0 0 1-11 2Z\"/><circle cx=\"5\" cy=\"19\" r=\"2\"/><path d=\"M2 23h.01\"/>", "lock": "<rect x=\"5\" y=\"10\" width=\"14\" height=\"11\" rx=\"2\"/><path d=\"M8 10V6a4 4 0 0 1 8 0v4m-4 5v2\"/>", "eye": "<path d=\"M2 12s3.5-7 10-7 10 7 10 7-3.5 7-10 7S2 12 2 12Z\"/><circle cx=\"12\" cy=\"12\" r=\"3\"/>", "care": "<path d=\"M20 5a5 5 0 0 0-8 1 5 5 0 0 0-8-1c-4 5 2 10 8 14 6-4 12-9 8-14Z\"/>", "tv": "<rect x=\"3\" y=\"6\" width=\"18\" height=\"13\" rx=\"3\"/><path d=\"m8 2 4 4 4-4M8 22h8\"/>", "game": "<rect x=\"4\" y=\"4\" width=\"16\" height=\"16\" rx=\"3\"/><circle cx=\"8\" cy=\"8\" r=\"1\"/><circle cx=\"16\" cy=\"8\" r=\"1\"/><circle cx=\"12\" cy=\"12\" r=\"1\"/><circle cx=\"8\" cy=\"16\" r=\"1\"/><circle cx=\"16\" cy=\"16\" r=\"1\"/>", "stars": "<path d=\"m12 2 2.8 6 6.7.8-4.9 4.6 1.3 6.6-5.9-3.2L6.1 20l1.3-6.6L2.5 8.8l6.7-.8L12 2Z\"/>", "sweets": "<path d=\"M20 10a5 5 0 0 1-5-7A9 9 0 1 0 21 12a5 5 0 0 1-1-2Z\"/><circle cx=\"8\" cy=\"9\" r=\"1\"/><circle cx=\"7\" cy=\"15\" r=\"1\"/><circle cx=\"13\" cy=\"16\" r=\"1\"/>", "hobby": "<path d=\"M8 5h12v12a3 3 0 1 1-3-3V3M8 8v11a3 3 0 1 1-3-3V5h3\"/>", "bond": "<circle cx=\"8\" cy=\"7\" r=\"3\"/><path d=\"M2 20v-2a6 6 0 0 1 12 0v2M17 5a3 3 0 0 1 0 6m1 4c3 0 4 2 4 5\"/>", "encounter": "<path d=\"M12 22s8-7 8-13a8 8 0 1 0-16 0c0 6 8 13 8 13Z\"/><circle cx=\"12\" cy=\"9\" r=\"3\"/>", "regret": "<path d=\"M4 4v6h6M4 10a9 9 0 1 1 0 7M12 6v6l4 2\"/>", "future": "<path d=\"M3 18h18M5 18V9m14 9V9M9 14l3-3 3 3m-3-3v10M3 5h6m-3-3v6m13-6v4m-2-2h4\"/>", "uncle": "<circle cx=\"12\" cy=\"7\" r=\"4\"/><path d=\"M4 22v-3a8 8 0 0 1 16 0v3M9 16l3 5 3-5\"/>"};return '<svg class="uiIcon" viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false">'+(paths[name]||paths.home)+'</svg>';}
+function homeUiIcon(name){var paths={"home": "<path d=\"M20 5a5 5 0 0 0-8 1 5 5 0 0 0-8-1c-4 5 2 10 8 14 6-4 12-9 8-14Z\"/>", "go": "<path d=\"M4 21V3l11-1v20L4 21ZM15 4h5v16h-5\"/><circle cx=\"11.5\" cy=\"12\" r=\".8\" fill=\"currentColor\" stroke=\"none\"/>", "sleep": "<path d=\"M20.5 14A9 9 0 0 1 10 3a9 9 0 1 0 10.5 11Z\"/><path d=\"M17 3v4m-2-2h4\"/>", "chat": "<path d=\"M15 16H8l-4 3v-4a7 7 0 0 1 3-13h7a7 7 0 0 1 1 14Z\"/><path d=\"M19 8a6 6 0 0 1 1 10v3l-4-2h-4\"/><path d=\"M7 9h.01M11 9h.01M15 9h.01\"/>", "ask": "<path d=\"M19 16a8 8 0 1 0-5 3l6 2-1-5Z\"/><path d=\"M9 8a3 3 0 0 1 6 0c0 2-3 2-3 4\"/><path d=\"M12 15h.01\"/>", "daily": "<path d=\"m2 11 10-9 10 9M5 9v12h14V9M9 21v-7h6v7\"/>", "memory": "<path d=\"M7 16a7 7 0 1 1 11-2 6 6 0 0 1-11 2Z\"/><circle cx=\"5\" cy=\"19\" r=\"2\"/><path d=\"M2 23h.01\"/>", "msg": "<rect x=\"5\" y=\"2\" width=\"14\" height=\"20\" rx=\"3\"/><path d=\"M9 5h6m-4 14h2\"/>", "call": "<path d=\"m7 3 3 5-2 2c2 3 3 4 6 6l2-2 5 3c-1 4-3 5-6 3C8 17 4 13 2 7 1 4 3 2 7 3Z\"/>", "jack": "<path d=\"M5 17c2-1 3-3 3-6l3 3 1-8 2 8 3-3c0 3 1 5 3 6-4 3-11 3-15 0Z\"/><path d=\"m4 9-1-2m17 2 1-2M8 5 7 3m10 2 1-2\"/><circle cx=\"3\" cy=\"13\" r=\".8\"/><circle cx=\"21\" cy=\"13\" r=\".8\"/><circle cx=\"12\" cy=\"2\" r=\".7\"/>", "nap": "<path d=\"M20.5 14A9 9 0 0 1 10 3a9 9 0 1 0 10.5 11Z\"/>", "speed": "<path d=\"m3 5 8 7-8 7V5Zm10 0 8 7-8 7V5Z\"/>", "thought": "<path d=\"M7 16a7 7 0 1 1 11-2 6 6 0 0 1-11 2Z\"/><circle cx=\"5\" cy=\"19\" r=\"2\"/><path d=\"M2 23h.01\"/>", "lock": "<rect x=\"5\" y=\"10\" width=\"14\" height=\"11\" rx=\"2\"/><path d=\"M8 10V6a4 4 0 0 1 8 0v4m-4 5v2\"/>", "eye": "<path d=\"M2 12s3.5-7 10-7 10 7 10 7-3.5 7-10 7S2 12 2 12Z\"/><circle cx=\"12\" cy=\"12\" r=\"3\"/>", "care": "<path d=\"M20 5a5 5 0 0 0-8 1 5 5 0 0 0-8-1c-4 5 2 10 8 14 6-4 12-9 8-14Z\"/>", "tv": "<rect x=\"3\" y=\"6\" width=\"18\" height=\"13\" rx=\"3\"/><path d=\"m8 2 4 4 4-4M8 22h8\"/>", "game": "<rect x=\"4\" y=\"4\" width=\"16\" height=\"16\" rx=\"3\"/><circle cx=\"8\" cy=\"8\" r=\"1\"/><circle cx=\"16\" cy=\"8\" r=\"1\"/><circle cx=\"12\" cy=\"12\" r=\"1\"/><circle cx=\"8\" cy=\"16\" r=\"1\"/><circle cx=\"16\" cy=\"16\" r=\"1\"/>", "stars": "<path d=\"m12 2 2.8 6 6.7.8-4.9 4.6 1.3 6.6-5.9-3.2L6.1 20l1.3-6.6L2.5 8.8l6.7-.8L12 2Z\"/>", "sweets": "<path d=\"M20 10a5 5 0 0 1-5-7A9 9 0 1 0 21 12a5 5 0 0 1-1-2Z\"/><circle cx=\"8\" cy=\"9\" r=\"1\"/><circle cx=\"7\" cy=\"15\" r=\"1\"/><circle cx=\"13\" cy=\"16\" r=\"1\"/>", "hobby": "<path d=\"M8 5h12v12a3 3 0 1 1-3-3V3M8 8v11a3 3 0 1 1-3-3V5h3\"/>", "bond": "<circle cx=\"8\" cy=\"7\" r=\"3\"/><path d=\"M2 20v-2a6 6 0 0 1 12 0v2M17 5a3 3 0 0 1 0 6m1 4c3 0 4 2 4 5\"/>", "encounter": "<path d=\"M12 22s8-7 8-13a8 8 0 1 0-16 0c0 6 8 13 8 13Z\"/><circle cx=\"12\" cy=\"9\" r=\"3\"/>", "regret": "<path d=\"M4 4v6h6M4 10a9 9 0 1 1 0 7M12 6v6l4 2\"/>", "future": "<path d=\"M3 18h18M5 18V9m14 9V9M9 14l3-3 3 3m-3-3v10M3 5h6m-3-3v6m13-6v4m-2-2h4\"/>", "uncle": "<circle cx=\"12\" cy=\"7\" r=\"4\"/><path d=\"M4 22v-3a8 8 0 0 1 16 0v3M9 16l3 5 3-5\"/>"};paths.memory="<g class=\"memoryDaisy\" stroke-width=\"1.25\"><ellipse cx=\"12\" cy=\"5.65\" rx=\"1.45\" ry=\"3.45\" transform=\"rotate(0 12 12)\"/><ellipse cx=\"12\" cy=\"5.65\" rx=\"1.45\" ry=\"3.45\" transform=\"rotate(30 12 12)\"/><ellipse cx=\"12\" cy=\"5.65\" rx=\"1.45\" ry=\"3.45\" transform=\"rotate(60 12 12)\"/><ellipse cx=\"12\" cy=\"5.65\" rx=\"1.45\" ry=\"3.45\" transform=\"rotate(90 12 12)\"/><ellipse cx=\"12\" cy=\"5.65\" rx=\"1.45\" ry=\"3.45\" transform=\"rotate(120 12 12)\"/><ellipse cx=\"12\" cy=\"5.65\" rx=\"1.45\" ry=\"3.45\" transform=\"rotate(150 12 12)\"/><ellipse cx=\"12\" cy=\"5.65\" rx=\"1.45\" ry=\"3.45\" transform=\"rotate(180 12 12)\"/><ellipse cx=\"12\" cy=\"5.65\" rx=\"1.45\" ry=\"3.45\" transform=\"rotate(210 12 12)\"/><ellipse cx=\"12\" cy=\"5.65\" rx=\"1.45\" ry=\"3.45\" transform=\"rotate(240 12 12)\"/><ellipse cx=\"12\" cy=\"5.65\" rx=\"1.45\" ry=\"3.45\" transform=\"rotate(270 12 12)\"/><ellipse cx=\"12\" cy=\"5.65\" rx=\"1.45\" ry=\"3.45\" transform=\"rotate(300 12 12)\"/><ellipse cx=\"12\" cy=\"5.65\" rx=\"1.45\" ry=\"3.45\" transform=\"rotate(330 12 12)\"/><circle cx=\"12\" cy=\"12\" r=\"2.8\"/></g>";return '<svg class="uiIcon" viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false">'+(paths[name]||paths.home)+'</svg>';}
 
 
 var TIERS=[[0,"重逢的青梅竹馬"],[30,"漸漸熟稔"],[100,"無話不談的夥伴"],[250,"值得信賴的人"],[500,"特別的人"],[1000,"一輩子的家人"]];
@@ -4392,7 +4438,7 @@ addLog("💬 "+q[1]+"→「"+x+"」");if(S.qa.indexOf(i)<0){S.qa.push(i);/* 首�
 function maskOpen(){if(daySummaryOpen())return true;var m=$("mask"),settings=$("gameSettings");return !!((m&&m.classList.contains("on"))||(settings&&settings.open))}
 function prefersReducedMotion(){try{return !!(window.matchMedia&&window.matchMedia("(prefers-reduced-motion:reduce)").matches)}catch(e){return false}}
 function ensureDayFade(){var ov=$("dayFade");if(ov)return ov;ov=document.createElement("div");ov.id="dayFade";ov.className="dayFade";ov.setAttribute("aria-live","polite");ov.setAttribute("aria-hidden","true");var host=document.querySelector(".homeui")||document.body;host.appendChild(ov);return ov}
-var daySummaryToneTimer=0;
+var daySummaryToneTimer=0,daySummaryExitTimer=0;
 function ensureDailyBase(){
   if(!S)return;
   if(!S.dailyBase||S.dailyBase.day!==(S.day|0))S.dailyBase={day:S.day|0,aff:+S.aff||0,m:S.m|0};
@@ -4402,7 +4448,7 @@ function daySummaryTotals(){
 }
 function daySummaryOpen(){var el=$("daySummary");return !!(el&&!el.hidden)}
 function hideDaySummary(){
-  clearTimeout(daySummaryToneTimer);var el=$("daySummary");if(el){el.hidden=true;el.classList.remove("has-uncle")}
+  clearTimeout(daySummaryToneTimer);clearTimeout(daySummaryExitTimer);var el=$("daySummary");if(el){el.hidden=true;el.classList.remove("has-uncle","has-aff","is-leaving")}
   if($("gameUI"))$("gameUI").inert=false;
 }
 function showDaySummary(force,totals){
@@ -4411,15 +4457,17 @@ function showDaySummary(force,totals){
   var el=$("daySummary"),run=S.pendingDayEnd;dayLock=1;
   $("daySummaryTitle").textContent="第 "+run.day+" 天結束";
   $("daySummaryAff").hidden=!(run.aff>0);$("daySummaryAffValue").textContent="＋"+run.aff;
-  $("daySummaryUncle").hidden=!(run.uncle>0);el.classList.toggle("has-uncle",run.uncle>0);
+  $("daySummaryUncle").hidden=!(run.uncle>0);el.classList.toggle("has-uncle",run.uncle>0);el.classList.toggle("has-aff",run.aff>0);el.classList.remove("is-leaving");$("daySummaryContinue").disabled=false;
   el.hidden=false;$("gameUI").inert=true;save();$("daySummaryContinue").focus({preventScroll:true});
   clearTimeout(daySummaryToneTimer);
-  if(run.uncle>0)daySummaryToneTimer=setTimeout(function(){if(daySummaryOpen()&&S.pendingDayEnd===run)playUiSound("unease")},prefersReducedMotion()?0:350);
+  if(run.uncle>0)daySummaryToneTimer=setTimeout(function(){if(daySummaryOpen()&&S.pendingDayEnd===run)playUiSound("unease")},prefersReducedMotion()?0:(run.aff>0?750:300));
   return true;
 }
 function continueDaySummary(){
   var run=S&&S.pendingDayEnd;if(!daySummaryOpen()||!run||run.phase!=="summary")return;
-  run.phase="advancing";save();hideDaySummary();advanceAfterSleep(run.force,true);
+  if(run.uncle>0)S.uncleCuePending=true;run.phase="advancing";save();clearTimeout(daySummaryToneTimer);
+  function finish(){if(S.pendingDayEnd!==run||run.phase!=="advancing")return;hideDaySummary();advanceAfterSleep(run.force,true)}
+  if(prefersReducedMotion())finish();else{$("daySummary").classList.add("is-leaving");$("daySummaryContinue").disabled=true;daySummaryExitTimer=setTimeout(finish,160)}
 }
 function resumeDayEnd(){
   var run=S&&S.pendingDayEnd;if(!run)return false;
@@ -4474,8 +4522,8 @@ if(!S.endingDone&&(S.day|0)>=29&&(S.uncleStep|0)>=10&&step5Open()){if(!S.castOff
 endDay(true);render()})}
 function releaseDayLock(){if(!maskOpen()&&!mq.length){dayLock=0;try{flushCohabQueue()}catch(e){}}}
 var S,tab="",mq=[],thT=0,busy=0,backLock=0,mbLock=0,dayLock=0;
-function def(){return {homeActToday:false,aff:0,exp:0,trip:null,log:[],seen:[],t:Date.now(),m:0,trips:0,taken:false,day:1,dsec:0,dEv:[],qa:[],viewM:0,sq:[],sqAsked:[],sqToday:[],sqDone:false,outToday:false,pendingObs:null,stormStay:null,dailyBase:null,pendingDayEnd:null,forumPublishDays:{},optSeen:{blank:{},sq:{},ask:{}},journals:[],journalOpen:null,motif:null,journalGlow:0,metOut:false,momIntroSeen:false,heroIntroPending:false,memSeen:[],memPending:[],memVersion:3,uncleStarted:false,uncleStep:0,uncleTh:[],endingDone:false,ending:0,castOff:false,cohabSeen:[],cohabPending:[],cohabToday:false,chatSeen:false,chatNotice:false,pendingYesterdayUnsaid:null,pendingSq:null,sqVer:2,chatOpenStep:null,chatUnlocked:[],_chatThreadCount:null}}
-function load(){try{var r=localStorage.getItem("sakura_v1");S=r?JSON.parse(r):def()}catch(e){S=def()}if(!S)S=def();if(!S.stormStay)S.stormStay=null;if(!S.forumPublishDays)S.forumPublishDays={};if(!S.pendingDayEnd)S.pendingDayEnd=null;if(S.trip&&S.trip.id===0)S.trip.place=PLACES[0][1];try{delete S.coin;delete S.sta}catch(e){}if(S.homeActToday==null)S.homeActToday=false;if(!S.cohabSeen)S.cohabSeen=[];if(!S.cohabPending)S.cohabPending=[];if(S.cohabToday==null)S.cohabToday=false;if(S.chatSeen==null)S.chatSeen=false;if(S.chatNotice==null)S.chatNotice=false;if(S.pendingYesterdayUnsaid==null)S.pendingYesterdayUnsaid=null;if(S.pendingSq===undefined)S.pendingSq=null;if(S.chatOpenStep===undefined)S.chatOpenStep=null;if(!S.chatUnlocked)S.chatUnlocked=[];
+function def(){return {homeActToday:false,aff:0,exp:0,trip:null,log:[],seen:[],t:Date.now(),m:0,trips:0,taken:false,day:1,dsec:0,dEv:[],qa:[],viewM:0,sq:[],sqAsked:[],sqToday:[],sqDone:false,outToday:false,pendingObs:null,stormStay:null,uncleCuePending:false,dailyBase:null,pendingDayEnd:null,forumPublishDays:{},optSeen:{blank:{},sq:{},ask:{}},journals:[],journalOpen:null,motif:null,journalGlow:0,metOut:false,momIntroSeen:false,heroIntroPending:false,memSeen:[],memPending:[],memVersion:3,uncleStarted:false,uncleStep:0,uncleTh:[],endingDone:false,ending:0,castOff:false,cohabSeen:[],cohabPending:[],cohabToday:false,chatSeen:false,chatNotice:false,pendingYesterdayUnsaid:null,pendingSq:null,sqVer:2,chatOpenStep:null,chatUnlocked:[],_chatThreadCount:null}}
+function load(){try{var r=localStorage.getItem("sakura_v1");S=r?JSON.parse(r):def()}catch(e){S=def()}if(!S)S=def();if(!S.stormStay)S.stormStay=null;if(S.uncleCuePending==null)S.uncleCuePending=false;if(!S.forumPublishDays)S.forumPublishDays={};if(!S.pendingDayEnd)S.pendingDayEnd=null;if(S.trip&&S.trip.id===0)S.trip.place=PLACES[0][1];try{delete S.coin;delete S.sta}catch(e){}if(S.homeActToday==null)S.homeActToday=false;if(!S.cohabSeen)S.cohabSeen=[];if(!S.cohabPending)S.cohabPending=[];if(S.cohabToday==null)S.cohabToday=false;if(S.chatSeen==null)S.chatSeen=false;if(S.chatNotice==null)S.chatNotice=false;if(S.pendingYesterdayUnsaid==null)S.pendingYesterdayUnsaid=null;if(S.pendingSq===undefined)S.pendingSq=null;if(S.chatOpenStep===undefined)S.chatOpenStep=null;if(!S.chatUnlocked)S.chatUnlocked=[];
 try{var _validMem={};MEMORIES.forEach(function(m){_validMem[m[0]]=1});S.memSeen=(S.memSeen||[]).filter(function(id){return _validMem[id]});S.memPending=(S.memPending||[]).filter(function(id){return _validMem[id]&&S.memSeen.indexOf(id)<0})}catch(e){}if(S.momIntroSeen==null)S.momIntroSeen=true;if(!S.memSeen)S.memSeen=[];if(!S.memPending)S.memPending=[];if(S.m==null)S.m=0;if((S.aff|0)>100)S.aff=100;if(S.uncleStarted==null)S.uncleStarted=false;if(S.uncleStep==null)S.uncleStep=0;if(!S.uncleTh)S.uncleTh=[];if(S.endingDone==null)S.endingDone=false;if(S.ending==null)S.ending=0;if(S.castOff==null)S.castOff=false;if(typeof uncleMCap==="function"){var _c=uncleMCap();if((S.m|0)>_c)S.m=_c}else if(typeof step5Open==="function"&&!step5Open()&&(S.m|0)>29)S.m=29;if(S.trips==null)S.trips=0;if(!S.seen)S.seen=[];if(S.day==null){S.day=1;S.dsec=0}if(!S.dEv)S.dEv=[];if(!S.qa)S.qa=[];if(S.viewM==null)S.viewM=0;if(!S.sq)S.sq=[];if(!S.sqToday)S.sqToday=[];if(S.outToday==null)S.outToday=false;if(S.sqDone==null)S.sqDone=!!(S.sqToday&&S.sqToday.length);if(S.pendingObs===undefined)S.pendingObs=null;if(!S.optSeen||typeof S.optSeen!="object")S.optSeen={blank:{},sq:{},ask:{}};if(!S.optSeen.blank)S.optSeen.blank={};if(!S.optSeen.sq)S.optSeen.sq={};if(!S.optSeen.ask)S.optSeen.ask={};if(!S.journals)S.journals=[];if(S.journalOpen===undefined)S.journalOpen=null;scrubJournals();if(S.motif===undefined)S.motif=null;if(S.journalGlow==null)S.journalGlow=0;if(S.metOut==null){S.metOut=!!(S.m>0||(S.journals&&S.journals.some(function(j){return j&&j.met}))||(S.dEv&&S.dEv.some(function(e){return e&&e.met})))}try{delete S.blankHintSeen;delete S.sqHintSeen;delete S.anxiety;delete S.fantasy;delete S.evidence}catch(e){}}
 function save(){try{localStorage.setItem("sakura_v1",JSON.stringify(S))}catch(e){}}
 function doReset(){cancelScenePresentation();S=def();mq=[];busy=0;backLock=0;mbLock=0;dayLock=0;$("mask").classList.remove("on");try{localStorage.removeItem("sakura_v1")}catch(e){}say("「哼！才不要多想，只是當初口快答應了而已！」","pout");render();maybeMomIntro()}
@@ -5117,18 +5165,22 @@ var tb=$("thbox")&&$("thbox").querySelector("b");if(tb){var cur=tb.textContent||
 if(S.taken||(S.endingDone&&(S.ending|0)===2)){if($("nh").textContent!=="女主已搬走"){$("nh").textContent="女主已搬走";$("nt").textContent="小紅搬去強叔那裡了。互動／外出／提問／睡覺都已關閉。"}}
 else if(S.trip){paintOutingHud()}else{}paintStormStay()}
 function paintMeterValue(el,width){if(!el)return;var next=parseFloat(width),old=parseFloat(el.dataset.meterValue);el.style.width=width;el.dataset.meterValue=String(next);if(isFinite(old)&&next>old){el.classList.remove("meter-rise");void el.offsetWidth;el.classList.add("meter-rise");clearTimeout(el._meterGlow);el._meterGlow=setTimeout(function(){el.classList.remove("meter-rise")},650)}}
+function maybeUncleUneaseCue(){
+  if(!S||!S.uncleCuePending||!S.uncleStarted||S.trip||S.taken||isStormNight()||dayLock||S._dayAdvancing||maskOpen()||presentationHeld()||(mq&&mq.length))return;
+  var fade=$("dayFade");if(fade&&fade.getAttribute("aria-hidden")!=="true")return;
+  S.uncleCuePending=false;save();pulsePresentation($("mbox"),"uncle-unease",900);
+}
 function paintStats(){clampAff();
 $("inc").textContent="每天互動一次，增加親密度・外出一次・只有睡覺才會日結";
 $("affn").textContent=fmt(S.aff);
 paintMeterValue($("affbar"),Math.min(100,Math.max(0,S.aff))+"%");
 var outing=!!(typeof isOutingPhase==="function"?isOutingPhase():(S&&S.trip&&!S.taken));
 /* 強叔卡片：路線開始（第6天遇見、uncleStarted）才顯示，不改數值 */
-var showM=false; /* hidden route value: game rules still use S.m */
+var showM=!!(S&&S.uncleStarted); /* concealed route display; original unlock condition */
 var box=$("mbox");if(box)box.classList.toggle("off",!showM);
-paintMeterValue($("mbar"),(effM()|0)+"%");
-var mn=$("mnum");if(mn)mn.textContent=String(effM()|0);
+var mn=$("mnum");if(mn)mn.textContent="關係不明";
 var ot=$("outingTop");if(ot)ot.classList.toggle("off",!outing);if(outing)paintOutingHud();
-status()}
+status();maybeUncleUneaseCue()}
 function render(doPane){paintStats();paintDock();if(doPane!==false)pane();paintAskTab();paintQBtn();paintSideBadges();markChatThreadsNotice();paintChatNotice();try{queueCohabUnlock();checkMemories()}catch(e){}var pn=$("pane");if(pn){var empty=!(pn.innerHTML&&pn.innerHTML.trim());pn.classList.toggle("is-empty",empty);pn.classList.toggle("is-open",!empty&&!!tab)}syncMoodDim();syncSilhouette();paintStormStay();refreshPresentationFeedback();updatePresentationState();save()}
 
 var last=Date.now();

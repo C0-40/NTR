@@ -1683,3 +1683,11 @@ FORUM-NAV | 討論區 | navChat / paintChatNotice
 FORUM-TITLE | 匿名討論區 | chatRoom heading / aria-label
 
 強叔數值及其門檻提示已對玩家隱藏。本檔其他舊數值條目屬歷史匯出，應先對照現行 HTML，不能直接復原到玩家介面。
+
+## 首頁關係遮掩與回憶圖示（2026-11-19）
+
+HOME-UNCLE-UNKNOWN | 關係不明 | mnum; 固定文字，取代數值
+HOME-UNCLE-UNKNOWN-ARIA | 關係不明，實際進度隱藏 | mbarwrap aria-label / title
+HOME-MEMORY-ICON | 雛菊線條圖示 | navMem SVG / homeUiIcon(memory); 回憶名稱及原功能維持不變
+
+強叔關係列按原條件出現，固定遮掩紋理不隨數值變化；已觸發日結後的一次性加深效果不重播。
