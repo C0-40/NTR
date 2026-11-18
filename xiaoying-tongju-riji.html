@@ -3503,6 +3503,30 @@ body:has(#gameUI.homeui.outing-shell){background:#2c221d!important;background-im
 @keyframes recapExit{to{opacity:0}}
 @keyframes recapCardExit{to{opacity:0;translate:0 -5px}}
 @media(prefers-reduced-motion:reduce){.daySummary,.daySummary::before,.daySummary-card,.daySummary-kicker,.daySummary h2,.daySummary-aff,.daySummary-aff::after,.daySummary-aff strong,.daySummary-uncle,.daySummaryGlow,.daySummaryDaisy ellipse,.daySummaryDaisy circle{animation:none!important}.daySummaryDaisy ellipse,.daySummaryDaisy circle{stroke-dashoffset:0}.daySummary-aff::after{opacity:0}.daySummaryGlow{opacity:.4;transform:translate(-50%,-50%)}}
+/* The existing silhouettes stay in their approved positions behind an abstract frosted surface. */
+#gameUI.homeui.outing-shell #silLayer.focus-scene{background:radial-gradient(ellipse at 50% 54%,#8c6a6b29,transparent 68%),#2c2429!important;border:1px solid #a68a7740!important;border-radius:15px!important;isolation:isolate}
+#gameUI.homeui.outing-shell #silLayer.focus-scene .silStage{filter:none!important;opacity:1!important;transition:none!important}
+#gameUI.homeui.outing-shell #av.away{visibility:hidden!important}
+#gameUI.homeui.outing-shell #silLayer.focus-scene .silGap{opacity:.2!important}
+#gameUI.homeui.outing-shell #silLayer.focus-scene .silPair{opacity:0!important;filter:blur(9px)!important;animation:none!important;transition:none!important;will-change:auto;pointer-events:none!important}
+#gameUI.homeui.outing-shell #silLayer.focus-scene.focus-ready .silPair{opacity:var(--focus-ink,.22)!important;filter:blur(var(--focus-blur,9px))!important;will-change:filter,opacity}
+#gameUI.homeui.outing-shell #silLayer.focus-scene .silFig{filter:drop-shadow(0 3px 8px #130e1844)!important;transition:none!important;animation:none!important}
+.focusVeil{display:none;position:absolute;inset:0;z-index:3;border-radius:inherit;pointer-events:none;background:radial-gradient(ellipse at 50% 57%,#45394744 10%,#29222bdb 78%),repeating-linear-gradient(115deg,transparent 0 27px,#c7b2b605 28px 29px,transparent 30px 58px)}
+#gameUI.homeui.outing-shell #silLayer.focus-scene .focusVeil{display:block;opacity:var(--focus-veil,.68);box-shadow:inset 0 0 36px #160e1e66}
+.focusPad[hidden],.focusHint[hidden],.focusFeedback[hidden]{display:none!important}
+#gameUI.homeui.outing-shell #silLayer .focusPad{display:block;position:absolute;inset:0;z-index:5;width:100%;height:100%;min-height:44px;padding:0;margin:0;border:0!important;border-radius:inherit;background:transparent!important;box-shadow:none!important;transform:none!important;translate:none!important;scale:none!important;pointer-events:auto!important;cursor:crosshair;touch-action:none;user-select:none;-webkit-user-select:none;-webkit-touch-callout:none}
+#gameUI.homeui.outing-shell #silLayer .focusPad:focus-visible{outline:1px solid #dab5c0;outline-offset:-5px}
+.focusHint,.focusFeedback{position:absolute;z-index:6;left:50%;bottom:15px;transform:translateX(-50%);margin:0;padding:7px 13px;border:1px solid #b2978459;border-radius:8px;background:#211924e8;color:#f0d8cf;font-size:12px;line-height:1.5;letter-spacing:.08em;white-space:nowrap;pointer-events:none}
+.focusFeedback{color:#e7bccb;border-color:#b58a9e70;background:#281c2ae8}
+#gameUI.homeui.outing-shell #silLayer.is-focusing{box-shadow:inset 0 0 28px #140e1e66!important}
+@media(prefers-reduced-motion:reduce){#gameUI.homeui.outing-shell #silLayer .silPair{will-change:auto!important}}
+
+
+/* Shared fill with the existing memory Continue button; preserve all disabled/reading states. */
+:root{--memory-continue-fill:linear-gradient(#f2dace,#d7b2a2)}
+#mask.mask.memory-window{--win-btn:var(--memory-continue-fill)}
+#gameUI.homeui:not(.outing-shell):not(.presentation-held) .dock.tabs button[data-t="home"]:not(:disabled):not(.dock-used):not(.dock-return),
+#gameUI.homeui:not(.outing-shell):not(.presentation-held) .dock.tabs button[data-t="go"]:not(:disabled):not(.dock-used):not(.dock-return){background:var(--memory-continue-fill)!important}
 </style>
 </head>
 <body>
@@ -3583,6 +3607,10 @@ body:has(#gameUI.homeui.outing-shell){background:#2c221d!important;background-im
           <img class="silFig silUncle" id="silUncle" src="sil-uncle.png" alt="" decoding="async" draggable="false">
           <img class="silFig silHero" id="silHero" src="sil-hero.png?v=d3f54f2d" width="1911" height="3920" alt="" decoding="async" draggable="false">
         </div>
+        <div class="focusVeil" aria-hidden="true"></div>
+        <button type="button" id="focusPad" class="focusPad" aria-label="按住聚焦" hidden disabled></button>
+        <span id="focusHint" class="focusHint" role="status" hidden>按住聚焦</span>
+        <span id="focusFeedback" class="focusFeedback" role="status" aria-live="polite" hidden>聚焦中</span>
       </div>
     </div>
     <div class="contextActions" aria-label="情境互動">
@@ -3661,7 +3689,7 @@ function syncSceneAudio(){var outing=!!(typeof S!=="undefined"&&S&&S.trip&&!S.ta
 function unlockPresentationAudio(){var ctx=ensureSound();if(!ctx)return;if(ctx.state==="suspended")ctx.resume().then(syncSceneAudio).catch(function(){});else syncSceneAudio()}
 function syncPresentationControls(){var speed=$("textSpeed");if(speed)speed.value=String(presentationPrefs.textSpeed);var letters=$("letterSound");if(letters)letters.checked=presentationPrefs.letterSound;[["music","musicVolume","musicValue"],["sfx","sfxVolume","sfxValue"],["ambient","ambientVolume","ambientValue"]].forEach(function(row){var input=$(row[1]),output=$(row[2]);if(input)input.value=String(Math.round(presentationPrefs[row[0]]*100));if(output)output.textContent=Math.round(presentationPrefs[row[0]]*100)+"%"})}
 function setPresentationPref(key,value){if(["music","sfx","ambient"].indexOf(key)>=0)value=Math.max(0,Math.min(1,Number(value)||0));else if(key==="textSpeed"&&[0,15,30,50].indexOf(value)<0)return;else if(key==="letterSound")value=!!value;if(!(key in presentationPrefs))return;presentationPrefs[key]=value;try{localStorage.setItem("sakura_presentation_v1",JSON.stringify(presentationPrefs))}catch(e){}if(key==="textSpeed"&&value===0){stopTyping($("say"),true);stopTyping($("thb"),true);finishMemoryReveal()}syncPresentationControls();syncSceneAudio()}
-document.addEventListener("pointerdown",function(e){if(e.isTrusted)unlockPresentationAudio()},{capture:true,passive:true});document.addEventListener("keydown",function(e){if(e.isTrusted&&(e.key==="Enter"||e.key===" "))unlockPresentationAudio()},{capture:true});document.addEventListener("click",function(e){var button=e.target.closest("button");if(e.target.closest("#momPhone")||presentationHeld()||!button||button.disabled||button.getAttribute("aria-disabled")==="true")return;playUiSound("click")},true);document.addEventListener("visibilitychange",function(){var ctx=soundRuntime.context;if(document.hidden){syncSceneAudio();if(ctx&&ctx.state==="running")ctx.suspend().catch(function(){})}else if(ctx&&ctx.state==="suspended")ctx.resume().then(syncSceneAudio).catch(function(){})});
+document.addEventListener("pointerdown",function(e){if(e.isTrusted)unlockPresentationAudio()},{capture:true,passive:true});document.addEventListener("keydown",function(e){if(e.isTrusted&&(e.key==="Enter"||e.key===" "))unlockPresentationAudio()},{capture:true});document.addEventListener("click",function(e){var button=e.target.closest("button");if(e.target.closest("#momPhone,#focusPad")||presentationHeld()||!button||button.disabled||button.getAttribute("aria-disabled")==="true")return;playUiSound("click")},true);document.addEventListener("visibilitychange",function(){var ctx=soundRuntime.context;if(document.hidden){syncSceneAudio();if(ctx&&ctx.state==="running")ctx.suspend().catch(function(){})}else if(ctx&&ctx.state==="suspended")ctx.resume().then(syncSceneAudio).catch(function(){})});
 function pulsePresentation(el,name,duration){if(!el||prefersReducedMotion())return;var timerKey="_pulse_"+name;clearTimeout(el[timerKey]);el.classList.remove(name);void el.offsetWidth;el.classList.add(name);el[timerKey]=setTimeout(function(){el.classList.remove(name)},duration||650)}
 function interactionFeedback(amount){pulsePresentation($("av"),"fx-affection",600);playUiSound("success");if(amount<=0)return;var host=$("affn")&&$("affn").parentElement;if(!host)return;var badge=document.createElement("span");badge.className="affGainFeedback";badge.textContent="＋"+Math.round(amount);badge.setAttribute("aria-hidden","true");host.appendChild(badge);setTimeout(function(){badge.remove()},850)}
 function notifyContext(id,token,kind){var el=$(id);if(!el||el._cueToken===token)return;el._cueToken=token;pulsePresentation(el,"context-arrive",650);if(id==="qHomeBtn")pulsePresentation($("av"),"fx-attention",550);playUiSound(kind)}
@@ -3671,7 +3699,7 @@ function updatePresentationState(){var root=$("gameUI"),hint=$("presentationHint
 root.classList.toggle("presentation-held",!!phase);root.classList.toggle("presentation-reading",phase==="reaction-reading");root.classList.toggle("departure-pending",scenePresentation.departurePending);root.setAttribute("aria-busy",phase&&phase!=="reaction-reading"?"true":"false");root.querySelectorAll(".topHud,.dock,.sideNav,.contextActions,#pane").forEach(function(el){el.inert=!!phase});
 if(hint){hint.textContent=phase==="leaving"?"小紅準備出門…":phase==="returning"?"小紅回來了…":phase==="hero-arriving"?"小紅來了…":phase==="reaction-reading"?"輕觸對話，繼續閱讀":"";hint.hidden=!phase;}
 }
-function cancelScenePresentation(){hideDaySummary();var root=$("gameUI");if(root)root.classList.remove("hero-arriving","intro-pending");resetReturnReading();clearTimeout(scenePresentation.timer);sqReply=null;scenePresentation.phase="";scenePresentation.departurePending=false;var root=$("gameUI"),mask=$("mask");if(root)root.inert=false;if(mask)mask.classList.remove("return-window");updatePresentationState()}
+function cancelScenePresentation(){cancelOutingFocus();hideDaySummary();var root=$("gameUI");if(root)root.classList.remove("hero-arriving","intro-pending");resetReturnReading();clearTimeout(scenePresentation.timer);sqReply=null;scenePresentation.phase="";scenePresentation.departurePending=false;var root=$("gameUI"),mask=$("mask");if(root)root.inert=false;if(mask)mask.classList.remove("return-window");updatePresentationState()}
 function beginReactionReading(text){scenePresentation.phase="reaction-reading";say(text,"calm");$("say").scrollTop=0;updatePresentationState();render(false);$("dlg").focus({preventScroll:true})}
 function continueReactionReading(){if(scenePresentation.phase!=="reaction-reading")return false;playUiSound("click");if(stopTyping($("say"),true))return true;if(sqReply&&sqReply.i+1<sqReply.lines.length){sqReply.i++;beginReactionReading(sqReply.lines[sqReply.i]);return true}sqReply=null;scenePresentation.phase="";updatePresentationState();nextPop();render(false);return true}
 function finishReturnPresentation(){scenePresentation.phase="";updatePresentationState();if(isStormNight()){openStormNight();render(false);return}if(hasReturnObservation()&&!mq.some(function(m){return m&&m.returnHome}))mq.unshift({returnHome:true});nextPop();render(false)}
@@ -4522,8 +4550,8 @@ if(!S.endingDone&&(S.day|0)>=29&&(S.uncleStep|0)>=10&&step5Open()){if(!S.castOff
 endDay(true);render()})}
 function releaseDayLock(){if(!maskOpen()&&!mq.length){dayLock=0;try{flushCohabQueue()}catch(e){}}}
 var S,tab="",mq=[],thT=0,busy=0,backLock=0,mbLock=0,dayLock=0;
-function def(){return {homeActToday:false,aff:0,exp:0,trip:null,log:[],seen:[],t:Date.now(),m:0,trips:0,taken:false,day:1,dsec:0,dEv:[],qa:[],viewM:0,sq:[],sqAsked:[],sqToday:[],sqDone:false,outToday:false,pendingObs:null,stormStay:null,uncleCuePending:false,dailyBase:null,pendingDayEnd:null,forumPublishDays:{},optSeen:{blank:{},sq:{},ask:{}},journals:[],journalOpen:null,motif:null,journalGlow:0,metOut:false,momIntroSeen:false,heroIntroPending:false,memSeen:[],memPending:[],memVersion:3,uncleStarted:false,uncleStep:0,uncleTh:[],endingDone:false,ending:0,castOff:false,cohabSeen:[],cohabPending:[],cohabToday:false,chatSeen:false,chatNotice:false,pendingYesterdayUnsaid:null,pendingSq:null,sqVer:2,chatOpenStep:null,chatUnlocked:[],_chatThreadCount:null}}
-function load(){try{var r=localStorage.getItem("sakura_v1");S=r?JSON.parse(r):def()}catch(e){S=def()}if(!S)S=def();if(!S.stormStay)S.stormStay=null;if(S.uncleCuePending==null)S.uncleCuePending=false;if(!S.forumPublishDays)S.forumPublishDays={};if(!S.pendingDayEnd)S.pendingDayEnd=null;if(S.trip&&S.trip.id===0)S.trip.place=PLACES[0][1];try{delete S.coin;delete S.sta}catch(e){}if(S.homeActToday==null)S.homeActToday=false;if(!S.cohabSeen)S.cohabSeen=[];if(!S.cohabPending)S.cohabPending=[];if(S.cohabToday==null)S.cohabToday=false;if(S.chatSeen==null)S.chatSeen=false;if(S.chatNotice==null)S.chatNotice=false;if(S.pendingYesterdayUnsaid==null)S.pendingYesterdayUnsaid=null;if(S.pendingSq===undefined)S.pendingSq=null;if(S.chatOpenStep===undefined)S.chatOpenStep=null;if(!S.chatUnlocked)S.chatUnlocked=[];
+function def(){return {homeActToday:false,aff:0,exp:0,trip:null,log:[],seen:[],t:Date.now(),m:0,trips:0,taken:false,day:1,dsec:0,dEv:[],qa:[],viewM:0,sq:[],sqAsked:[],sqToday:[],sqDone:false,outToday:false,pendingObs:null,stormStay:null,uncleCuePending:false,focusHintSeen:false,dailyBase:null,pendingDayEnd:null,forumPublishDays:{},optSeen:{blank:{},sq:{},ask:{}},journals:[],journalOpen:null,motif:null,journalGlow:0,metOut:false,momIntroSeen:false,heroIntroPending:false,memSeen:[],memPending:[],memVersion:3,uncleStarted:false,uncleStep:0,uncleTh:[],endingDone:false,ending:0,castOff:false,cohabSeen:[],cohabPending:[],cohabToday:false,chatSeen:false,chatNotice:false,pendingYesterdayUnsaid:null,pendingSq:null,sqVer:2,chatOpenStep:null,chatUnlocked:[],_chatThreadCount:null}}
+function load(){try{var r=localStorage.getItem("sakura_v1");S=r?JSON.parse(r):def()}catch(e){S=def()}if(!S)S=def();if(!S.stormStay)S.stormStay=null;if(S.uncleCuePending==null)S.uncleCuePending=false;if(S.focusHintSeen==null)S.focusHintSeen=false;if(!S.forumPublishDays)S.forumPublishDays={};if(!S.pendingDayEnd)S.pendingDayEnd=null;if(S.trip&&S.trip.id===0)S.trip.place=PLACES[0][1];try{delete S.coin;delete S.sta}catch(e){}if(S.homeActToday==null)S.homeActToday=false;if(!S.cohabSeen)S.cohabSeen=[];if(!S.cohabPending)S.cohabPending=[];if(S.cohabToday==null)S.cohabToday=false;if(S.chatSeen==null)S.chatSeen=false;if(S.chatNotice==null)S.chatNotice=false;if(S.pendingYesterdayUnsaid==null)S.pendingYesterdayUnsaid=null;if(S.pendingSq===undefined)S.pendingSq=null;if(S.chatOpenStep===undefined)S.chatOpenStep=null;if(!S.chatUnlocked)S.chatUnlocked=[];
 try{var _validMem={};MEMORIES.forEach(function(m){_validMem[m[0]]=1});S.memSeen=(S.memSeen||[]).filter(function(id){return _validMem[id]});S.memPending=(S.memPending||[]).filter(function(id){return _validMem[id]&&S.memSeen.indexOf(id)<0})}catch(e){}if(S.momIntroSeen==null)S.momIntroSeen=true;if(!S.memSeen)S.memSeen=[];if(!S.memPending)S.memPending=[];if(S.m==null)S.m=0;if((S.aff|0)>100)S.aff=100;if(S.uncleStarted==null)S.uncleStarted=false;if(S.uncleStep==null)S.uncleStep=0;if(!S.uncleTh)S.uncleTh=[];if(S.endingDone==null)S.endingDone=false;if(S.ending==null)S.ending=0;if(S.castOff==null)S.castOff=false;if(typeof uncleMCap==="function"){var _c=uncleMCap();if((S.m|0)>_c)S.m=_c}else if(typeof step5Open==="function"&&!step5Open()&&(S.m|0)>29)S.m=29;if(S.trips==null)S.trips=0;if(!S.seen)S.seen=[];if(S.day==null){S.day=1;S.dsec=0}if(!S.dEv)S.dEv=[];if(!S.qa)S.qa=[];if(S.viewM==null)S.viewM=0;if(!S.sq)S.sq=[];if(!S.sqToday)S.sqToday=[];if(S.outToday==null)S.outToday=false;if(S.sqDone==null)S.sqDone=!!(S.sqToday&&S.sqToday.length);if(S.pendingObs===undefined)S.pendingObs=null;if(!S.optSeen||typeof S.optSeen!="object")S.optSeen={blank:{},sq:{},ask:{}};if(!S.optSeen.blank)S.optSeen.blank={};if(!S.optSeen.sq)S.optSeen.sq={};if(!S.optSeen.ask)S.optSeen.ask={};if(!S.journals)S.journals=[];if(S.journalOpen===undefined)S.journalOpen=null;scrubJournals();if(S.motif===undefined)S.motif=null;if(S.journalGlow==null)S.journalGlow=0;if(S.metOut==null){S.metOut=!!(S.m>0||(S.journals&&S.journals.some(function(j){return j&&j.met}))||(S.dEv&&S.dEv.some(function(e){return e&&e.met})))}try{delete S.blankHintSeen;delete S.sqHintSeen;delete S.anxiety;delete S.fantasy;delete S.evidence}catch(e){}}
 function save(){try{localStorage.setItem("sakura_v1",JSON.stringify(S))}catch(e){}}
 function doReset(){cancelScenePresentation();S=def();mq=[];busy=0;backLock=0;mbLock=0;dayLock=0;$("mask").classList.remove("on");try{localStorage.removeItem("sakura_v1")}catch(e){}say("「哼！才不要多想，只是當初口快答應了而已！」","pout");render();maybeMomIntro()}
@@ -4733,21 +4761,114 @@ function silPoseSrc(who){return who==="uncle"?"sil-uncle.png":"sil-hero.png?v=d3
 function applySilPose(){var h=$("silHero"),u=$("silUncle");if(h&&h.getAttribute("src")!==silPoseSrc("hero"))h.src=silPoseSrc("hero");if(u&&u.getAttribute("src")!==silPoseSrc("uncle"))u.src=silPoseSrc("uncle")}
 function silApproach(){if(!hasMetOut()||!(effM()>0||(S.uncleStep|0)>0))return -1;var a=uncleArcByStep(S.uncleStep|0);if(a&&a.sil!=null)return Math.max(0,Math.min(3,(a.sil|0)));var st=stage();if(st<=0)return 0;if(st===1)return 1;if(st===2)return 2;return 3}
 function silDist(){return silApproach()}
+/* A temporary viewing effect only: never changes a trip, affection or story result. */
+var OUTING_FOCUS_WINDOW=15,OUTING_FOCUS_HOLD_MS=1200;
+var outingFocus={trip:null,holding:false,pointer:null,key:null,progress:0,started:0,startProgress:0,last:0,frame:0,hintUntil:0,audio:null};
+function outingFocusWindow(){return Math.min(OUTING_SECONDS,Math.max(OUTING_FOCUS_WINDOW,2.5*(typeof spd==="number"?spd:1)))}
+function outingFocusCap(){
+  if(!(S&&S.trip&&S.trip.metUncle))return 1;
+  var arc=uncleArcByStep(S.uncleStep|0);return Math.max(1,Math.min(3,arc&&arc.sil!=null?arc.sil|0:1));
+}
+function outingFocusAvailable(){return !!(S&&S.trip&&!S.taken&&!isStormNight()&&S.trip.end>Date.now()&&(S.trip.end-Date.now())/1000<=outingFocusWindow())}
+function canHoldOutingFocus(){
+  var result=$("outingActLine");
+  return outingFocusAvailable()&&!document.hidden&&!busy&&!dayLock&&!maskOpen()&&!presentationHeld()&&!scenePresentation.departurePending&&(!result||result.hidden);
+}
+function stopFocusAudio(){
+  var audio=outingFocus.audio;if(!audio)return;outingFocus.audio=null;
+  var now=audio.context.currentTime;
+  try{audio.gain.gain.cancelScheduledValues(now);audio.gain.gain.setValueAtTime(Math.max(.0001,audio.gain.gain.value),now);audio.gain.gain.exponentialRampToValueAtTime(.0001,now+.1);audio.osc.stop(now+.12)}catch(e){}
+}
+function startFocusAudio(){
+  var ctx=soundRuntime.context;if(!ctx||ctx.state!=="running"||presentationPrefs.sfx<=0||soundRuntime.voices>=6)return;
+  var osc=ctx.createOscillator(),gain=ctx.createGain(),now=ctx.currentTime;osc.type="sine";osc.frequency.setValueAtTime(96,now);
+  gain.gain.setValueAtTime(.0001,now);gain.gain.linearRampToValueAtTime(presentationPrefs.sfx*.018,now+.12);
+  osc.connect(gain);gain.connect(ctx.destination);soundRuntime.voices++;
+  osc.onended=function(){osc.disconnect();gain.disconnect();soundRuntime.voices=Math.max(0,soundRuntime.voices-1)};
+  outingFocus.audio={context:ctx,osc:osc,gain:gain};osc.start(now);
+}
+function paintOutingFocus(){
+  var el=$("silLayer"),r=outingFocus,cap=outingFocusCap();
+  var level=Math.min(cap,Math.max(0,r.progress)),clarity=level/3;
+  el.style.setProperty("--focus-blur",(9-5*clarity).toFixed(2)+"px");
+  el.style.setProperty("--focus-ink",(.22+.43*clarity).toFixed(3));
+  el.style.setProperty("--focus-veil",(.68-.30*clarity).toFixed(3));
+  el.dataset.focusLevel=String(Math.floor(level+.001));
+  el.classList.toggle("is-focusing",r.holding);
+  var feedback=$("focusFeedback"),hint=$("focusHint");
+  if(feedback.hidden===r.holding)feedback.hidden=!r.holding;
+  var showHint=canHoldOutingFocus()&&!r.holding&&performance.now()<r.hintUntil;
+  if(hint.hidden===showHint)hint.hidden=!showHint;
+}
+function releaseOutingFocus(){
+  var r=outingFocus,pad=$("focusPad"),id=r.pointer;r.holding=false;r.pointer=null;r.key=null;stopFocusAudio();
+  if(id!=null&&pad&&pad.hasPointerCapture&&pad.hasPointerCapture(id)){try{pad.releasePointerCapture(id)}catch(e){}}
+  if(prefersReducedMotion())r.progress=0;
+  paintOutingFocus();if(r.progress>0)queueOutingFocusFrame();
+}
+function cancelOutingFocus(){
+  var r=outingFocus;releaseOutingFocus();if(r.frame)cancelAnimationFrame(r.frame);
+  r.frame=0;r.progress=0;r.last=0;r.hintUntil=0;paintOutingFocus();
+}
+function outingFocusFrame(now){
+  var r=outingFocus;r.frame=0;
+  if(!outingFocusAvailable()){releaseOutingFocus();r.progress=0;syncOutingFocus();return}
+  if(r.holding&&!canHoldOutingFocus())releaseOutingFocus();
+  var dt=r.last?Math.max(0,Math.min(100,now-r.last)):16;r.last=now;
+  if(r.holding)r.progress=prefersReducedMotion()?outingFocusCap():Math.min(outingFocusCap(),r.startProgress+(now-r.started)*3/OUTING_FOCUS_HOLD_MS);
+  else r.progress=prefersReducedMotion()?0:r.progress*Math.exp(-dt/260);
+  if(r.progress<.015)r.progress=0;
+  paintOutingFocus();
+  if(r.holding||r.progress>0||now<r.hintUntil)queueOutingFocusFrame();
+}
+function queueOutingFocusFrame(){if(!outingFocus.frame)outingFocus.frame=requestAnimationFrame(outingFocusFrame)}
+function beginOutingFocus(){
+  syncOutingFocus();if(!canHoldOutingFocus()||outingFocus.holding)return false;
+  var r=outingFocus;r.holding=true;r.hintUntil=0;r.started=performance.now();r.startProgress=r.progress;r.last=r.started;
+  if(prefersReducedMotion())r.progress=outingFocusCap();
+  startFocusAudio();paintOutingFocus();queueOutingFocusFrame();return true;
+}
+function syncOutingFocus(){
+  var r=outingFocus,el=$("silLayer"),pad=$("focusPad");if(!el||!pad)return;
+  var trip=S&&S.trip&&!S.taken&&!isStormNight()?S.trip:null;
+  if(r.trip!==trip){cancelOutingFocus();r.trip=trip}
+  el.classList.toggle("focus-scene",!!trip);
+  var ready=!!trip&&outingFocusAvailable(),allowed=ready&&canHoldOutingFocus();
+  el.classList.toggle("focus-ready",ready);pad.hidden=!ready;pad.disabled=!allowed;pad.tabIndex=allowed?0:-1;
+  el.setAttribute("aria-hidden",ready?"false":"true");
+  if(!allowed&&r.holding)releaseOutingFocus();
+  if(allowed&&!S.focusHintSeen){S.focusHintSeen=true;r.hintUntil=performance.now()+2400;save();queueOutingFocusFrame()}
+  paintOutingFocus();
+}
+function bindOutingFocus(){
+  var pad=$("focusPad");
+  pad.addEventListener("pointerdown",function(e){if(e.isPrimary===false||(e.pointerType==="mouse"&&e.button!==0))return;if(!beginOutingFocus())return;e.preventDefault();outingFocus.pointer=e.pointerId;try{pad.setPointerCapture(e.pointerId)}catch(err){}});
+  pad.addEventListener("pointermove",function(e){if(outingFocus.pointer!==e.pointerId)return;var b=pad.getBoundingClientRect();if(e.clientX<b.left||e.clientX>b.right||e.clientY<b.top||e.clientY>b.bottom)releaseOutingFocus()});
+  ["pointerup","pointercancel","lostpointercapture"].forEach(function(name){pad.addEventListener(name,function(e){if(outingFocus.pointer===e.pointerId)releaseOutingFocus()})});
+  pad.addEventListener("keydown",function(e){if(e.key!==" "&&e.key!=="Enter")return;e.preventDefault();if(e.repeat)return;if(beginOutingFocus())outingFocus.key=e.key});
+  pad.addEventListener("keyup",function(e){if(e.key===outingFocus.key){e.preventDefault();releaseOutingFocus()}});
+  pad.addEventListener("blur",releaseOutingFocus);
+  pad.addEventListener("contextmenu",function(e){e.preventDefault()});
+  pad.addEventListener("click",function(e){e.preventDefault();e.stopPropagation()});
+  window.addEventListener("blur",cancelOutingFocus);
+  document.addEventListener("visibilitychange",function(){if(document.hidden)cancelOutingFocus()});
+}
+
 function syncSilhouette(){
   var el=$("silLayer");if(!el)return;
   var on=!!(S.trip&&!S.taken);
   el.classList.toggle("is-on",on);
   el.classList.remove("is-solo","is-pair","sil-far","sil-edge","sil-mid","sil-close","sil-near","sil-lv0","sil-lv1","sil-lv2","sil-lv3");
-  if(!on)return;
+  if(!on){syncOutingFocus();return}
   applySilPose();
   var pair=$("silPair");
   if(pair){pair.style.removeProperty("--sil-gap");pair.style.removeProperty("--sil-ux")}
   /* 本次外出未遇見強叔：不顯示大叔剪影 */
-  if(!(S.trip&&S.trip.metUncle)){el.classList.add("is-solo");return}
+  if(!(S.trip&&S.trip.metUncle)){el.classList.add("is-solo");syncOutingFocus();return}
   var ap=silApproach();
   if(ap<0)ap=0;
   el.classList.add("is-pair");
-  el.classList.add(["sil-edge","sil-mid","sil-close","sil-near"][ap]);
+  el.classList.add(["sil-edge","sil-mid","sil-close","sil-near"][ap]);syncOutingFocus();
 }
 function scheduleJournalGlow(){clearTimeout(journalGlowT);if(!journalOn()){S.journalGlow=0;return}S.journalGlow=0;paintSideBadges();journalGlowT=setTimeout(function(){if(S.trip||S.taken||!journalOn())return;var has=S.journals&&S.journals.some(function(x){return x.day===S.day});if(!has)return;S.journalGlow=1;paintSideBadges();try{save()}catch(e){}},3200)}
 function openJournal(i){return}
@@ -4890,7 +5011,7 @@ function resumeStormStay(){
   return false;
 }
 
-function back(){if(!S.trip||backLock)return;backLock=1;scenePresentation.phase="returning";scenePresentation.departurePending=false;updatePresentationState();runSceneFx("fx-return",760);try{var returnStepBefore=S.uncleStep|0;var trip=S.trip,pid=trip.id,p=PLACES[pid],pm=placeMeta(pid),ev=pickPlaceEv(pid,false),it=pick(p[7]),c=p[5]+Math.floor(Math.random()*p[5]*0.4),b=tier(),acts=(trip.acts||[]).slice();
+function back(){if(!S.trip||backLock)return;cancelOutingFocus();backLock=1;scenePresentation.phase="returning";scenePresentation.departurePending=false;updatePresentationState();runSceneFx("fx-return",760);try{var returnStepBefore=S.uncleStep|0;var trip=S.trip,pid=trip.id,p=PLACES[pid],pm=placeMeta(pid),ev=pickPlaceEv(pid,false),it=pick(p[7]),c=p[5]+Math.floor(Math.random()*p[5]*0.4),b=tier(),acts=(trip.acts||[]).slice();
 if(!acts.length)acts=[];
 /* outing: +0 親密度 */clampAff();S.trips++;
 var met=!!(trip&&trip.metUncle),g=0,st,dNow=S.day|0;
@@ -5272,6 +5393,7 @@ function bindMomIntro(){
   $("momPhone").addEventListener("keydown",function(e){if((e.key==="Enter"||e.key===" ")&&!e.target.closest("button")){e.preventDefault();tap()}});
 }
 bindMomIntro();
+bindOutingFocus();
 $("daySummary").addEventListener("click",continueDaySummary);
 $("daySummary").addEventListener("keydown",function(e){if(e.key==="Escape"||e.key==="Enter"||e.key===" "){e.preventDefault();continueDaySummary()}else if(e.key==="Tab"){e.preventDefault();$("daySummaryContinue").focus()}});
 $("chatRoom").querySelector(".chatMark").innerHTML=homeUiIcon("chat");

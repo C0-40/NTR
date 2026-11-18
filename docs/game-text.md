@@ -1691,3 +1691,11 @@ HOME-UNCLE-UNKNOWN-ARIA | 關係不明，實際進度隱藏 | mbarwrap aria-labe
 HOME-MEMORY-ICON | 雛菊線條圖示 | navMem SVG / homeUiIcon(memory); 回憶名稱及原功能維持不變
 
 強叔關係列按原條件出現，固定遮掩紋理不隨數值變化；已觸發日結後的一次性加深效果不重播。
+
+## 外出聚焦介面（2026-11-19）
+
+OUTING-FOCUS-HINT | 按住聚焦 | focusHint; 首次可操作時顯示一次
+OUTING-FOCUS-TARGET-ARIA | 按住聚焦 | focusPad aria-label
+OUTING-FOCUS-ACTIVE | 聚焦中 | focusFeedback; 僅按住期間顯示
+
+操作只改剪影辨認程度，不新增劇本內容或改動原有資料 ID。
