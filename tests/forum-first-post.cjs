@@ -74,7 +74,7 @@ async function fixture(page, day, aff = 0) {
   await page.evaluate(() => { openChatRoom(); chatOpenThread(0); });
   const rendered = await page.locator('#chatFeed .cPost').evaluateAll(posts => posts.map(post => [post.querySelector('.who').textContent, post.querySelector('.body').textContent]));
   check('Day3 shows the exact five approved posts in order', JSON.stringify(rendered) === JSON.stringify(expectedPosts));
-  check('New title and fixed publication date render', await page.evaluate(() => document.querySelector('.forumTitle').textContent === '我的人生是否完蛋了？' && document.querySelector('.cPost .meta').textContent === '第3天・發佈'));
+  check('New title renders without displaying publication days', await page.evaluate(() => document.querySelector('.forumTitle').textContent === '我的人生是否完蛋了？' && !document.querySelector('#chatFeed').textContent.includes('第3天')));
   await page.evaluate(() => save());
   await page.reload();
   check('Reload keeps publication available at zero affinity', await page.evaluate(() => S.day === 3 && S.aff === 0 && chatThreadUnlocked(CHAT_THREADS[0])));

@@ -1146,6 +1146,8 @@ NIGHT-MASK-TITLE | 當晚 | mask title string
 
 ## 聊天室
 
+2026-11-19 起論壇畫面省略時間 metadata；下列 META 條目仍保留資料來源，版面與新標籤見 `game-script.md` 的 `CHAT-UI`。
+
 CHAT-T0-TITLE | 我的人生是否完蛋了？ | CHAT_THREADS[0].title
 CHAT-T0-P0-WHO | 龜頭孛力丸 | CHAT_THREADS[0].posts[0].who
 CHAT-T0-P0-META | 第3天・發佈 | CHAT_THREADS[0].posts[0].meta

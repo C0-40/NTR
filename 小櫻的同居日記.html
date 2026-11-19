@@ -2946,39 +2946,63 @@ body:has(#gameUI.outing-shell) .settingsAction,body:has(#gameUI.outing-shell) .s
 #gameUI.homeui.outing-shell .outingDestination.is-concealed{width:5.5em;text-align:center;filter:blur(6px);opacity:.8;user-select:none;-webkit-user-select:none;pointer-events:none}
 @keyframes departureCard{from{opacity:0;translate:0 7px}to{opacity:1;translate:0 0}}
 @keyframes eveningCard{from{opacity:0}to{opacity:1}}
-/* Anonymous forum: readable posts and compact, neutral thread rows. */
-.chatRoom{padding:max(12px,env(safe-area-inset-top)) 12px max(12px,env(safe-area-inset-bottom))!important;background:#30271f91!important}
-.chatRoom .chatPanel{width:min(100%,460px)!important;height:min(84svh,740px);max-height:86svh!important;min-height:0;overflow:hidden!important;border:1px solid #c7baac!important;border-radius:20px!important;background:#f8f4ec!important;box-shadow:0 16px 48px #21180f40!important}
-.chatRoom .chatHead{flex:none;position:relative;min-height:76px;box-sizing:border-box;padding:16px 68px 14px 18px!important;background:#eee9df!important;border-bottom:1px solid #d8cfc2!important;align-items:flex-start!important}
-.chatRoom .chatHeading{display:flex;align-items:flex-start;gap:10px;min-width:0;flex:1}
+/* Phone forum: dark masthead, warm reading surface, threaded replies. */
+.chatRoom{padding:max(10px,env(safe-area-inset-top)) 10px max(10px,env(safe-area-inset-bottom))!important;background:#231c22b8!important}
+.chatRoom .chatPanel{width:min(100%,480px)!important;height:min(92svh,820px);max-height:calc(100svh - 24px)!important;min-height:0;overflow:hidden!important;border:1px solid #80615f!important;border-radius:19px!important;background:#f8f4ec!important;box-shadow:0 20px 64px #160d1360!important}
+.chatRoom .chatHead{flex:none;position:relative;min-height:88px;box-sizing:border-box;padding:17px 68px 13px 18px!important;background:#4b292f!important;border-bottom:1px solid #73434a!important;align-items:flex-start!important}
+.chatRoom .chatHeading{display:flex;align-items:flex-start;gap:11px;min-width:0;flex:1}
 .chatRoom .chatHeading>div{min-width:0}
-.chatRoom .chatHead b{font-size:17px!important;font-weight:600!important;color:#4e453c!important;line-height:1.5}
-.chatRoom #chatSub{font-size:12px!important;font-weight:400;line-height:1.6;color:#7d7063!important;margin-top:4px}
-.chatRoom .chatMark{flex:none;width:30px;height:30px;display:grid;place-items:center;border:0;border-radius:9px;background:#e1d9cc;color:#766855;box-shadow:none}
-.chatRoom .chatMark .uiIcon{width:19px;height:19px}
-.chatRoom .chatHead .pane-x{position:absolute;top:14px!important;right:12px!important;width:44px!important;height:44px!important;min-width:44px;background:transparent!important;border:0!important;border-radius:12px!important;box-shadow:none!important;color:#756256!important;font-size:26px!important}
-.chatRoom .chatFeed{flex:1;min-height:0;overflow:auto!important;overscroll-behavior:contain;scrollbar-width:thin;scrollbar-color:#c5b7a5 transparent;padding:0 18px!important;gap:0!important;background:#f8f4ec!important}
-.chatRoom .chatFeed.is-list{padding:5px 16px!important;gap:0!important}
-.chatRoom .chatFeed.is-list .cThread{display:flex!important;align-items:center;gap:12px;flex:none;width:100%;min-height:76px;box-sizing:border-box;padding:15px 2px!important;margin:0!important;border:0!important;border-bottom:1px solid #ded5c9!important;border-radius:0!important;background:transparent!important;box-shadow:none!important;color:#4e443a!important;text-align:left}
+.chatRoom .chatHead b{font-size:18px!important;font-weight:650!important;color:#fff1e1!important;line-height:1.5;letter-spacing:.06em}
+.chatRoom #chatSub{display:flex;align-items:center;gap:8px;min-height:28px;font-size:12px!important;font-weight:400;line-height:1.6;color:#dfc6c0!important;margin-top:3px}
+.chatRoom .chatMark{flex:none;width:35px;height:35px;display:grid;place-items:center;border:1px solid #956970;border-radius:10px;background:#634049;color:#f2d4c6;box-shadow:none}
+.chatRoom .chatMark .uiIcon{width:21px;height:21px}
+.chatRoom .chatHead .pane-x{position:absolute;top:12px!important;right:10px!important;width:44px!important;height:44px!important;min-width:44px;background:transparent!important;border:0!important;border-radius:12px!important;box-shadow:none!important;color:#f2dbd1!important;font-size:26px!important}
+.chatRoom .forumBack{font:inherit;color:#ffeadb;background:transparent;border:0;border-bottom:1px solid #b78b8e;border-radius:0;padding:0 2px;min-height:44px;box-shadow:none;cursor:pointer}
+.chatRoom .chatFeed{flex:1;min-height:0;overflow:auto!important;overscroll-behavior:contain;scrollbar-width:thin;scrollbar-color:#b9a698 transparent;padding:0 20px!important;gap:0!important;background:#f8f4ec!important}
+.chatRoom .chatFeed.is-list{padding:0 18px!important;gap:0!important}
+.chatRoom .chatFeed.is-list .cThread{display:block!important;flex:none;width:100%;min-height:126px;box-sizing:border-box;padding:20px 2px!important;margin:0!important;border:0!important;border-bottom:1px solid #dcd0c4!important;border-radius:0!important;background:transparent!important;box-shadow:none!important;color:#4e443a!important;text-align:left}
 .chatRoom .chatFeed.is-list .cThread:last-child{border-bottom:0!important}
-.chatRoom .chatFeed.is-list .cThread:hover{background:#eee8dc!important}
-.chatRoom .threadCopy{flex:1;min-width:0}.chatRoom .threadCopy b{display:block;font-size:15px!important;font-weight:600!important;line-height:1.65!important;color:#4e443a!important;margin:0!important;overflow-wrap:anywhere}
-.chatRoom .threadCopy .sm{display:block;font-size:12px!important;font-weight:400!important;line-height:1.6!important;color:#817365!important;margin-top:4px}
-.chatRoom .threadCount{flex:none;font-size:12px;font-weight:400;white-space:nowrap;padding:0;border-radius:0;background:transparent;color:#817365}
-.chatRoom .cPost{flex:none;margin:0;padding:20px 0!important;border:0!important;border-bottom:1px solid #ded5c9!important;border-radius:0!important;background:transparent!important;box-shadow:none!important}
+.chatRoom .chatFeed.is-list .cThread:hover{background:#efe6dd!important}
+.chatRoom .threadCopy{display:block;min-width:0}
+.chatRoom .threadTitle{display:flex;align-items:flex-start;gap:10px;justify-content:space-between}
+.chatRoom .threadCopy b{display:block;font-size:16px!important;font-weight:650!important;line-height:1.6!important;color:#4f3033!important;margin:0!important;overflow-wrap:anywhere}
+.chatRoom .threadCopy .sm{display:block;font-size:12px!important;font-weight:400!important;line-height:1.6!important;color:#716156!important;margin-top:6px}
+.chatRoom .threadAuthor{display:flex;align-items:center;gap:7px;margin-top:11px;min-width:0;color:#73655a;font-size:12px;line-height:1.5}
+.chatRoom .threadAuthor>span:last-child{overflow-wrap:anywhere}
+.chatRoom .threadAuthor .forumAvatar{width:22px;height:22px;border-radius:7px}
+.chatRoom .threadAuthor .forumAvatar svg{width:14px;height:14px}
+.chatRoom .threadStats{display:flex;flex-wrap:wrap;gap:6px 18px;margin-top:11px;color:#716156;font-size:12px;line-height:1.5}
+.chatRoom .forumMetric{display:inline-flex;align-items:center;gap:5px;white-space:nowrap}
+.chatRoom .forumMetric .uiIcon{width:15px;height:15px;flex:none;opacity:.8}
+.chatRoom .forumNew{flex:none;margin-top:4px;padding:1px 6px;border:1px solid #b47d80;border-radius:4px;background:#f0dfe0;color:#87434e;font-size:11px;line-height:1.5;font-weight:600}
+.chatRoom .cPost{flex:none;margin:0;padding:20px 0!important;border:0!important;border-bottom:1px solid #e0d6cb!important;border-radius:0!important;background:transparent!important;box-shadow:none!important}
 .chatRoom .cPost:last-child{border-bottom:0!important}
-.chatRoom .cPost.is-main{margin:0;padding:24px 0!important;border:0!important;border-bottom:1px solid #cfc1af!important;border-radius:0!important;background:transparent!important;box-shadow:none!important}
-.chatRoom .forumTitle{font-size:19px;font-weight:600;line-height:1.6;color:#453d34;margin:0 0 20px;padding:0;border:0;overflow-wrap:anywhere}
-.chatRoom .forumByline{display:flex;align-items:center;gap:9px;margin-bottom:12px;min-width:0}
-.chatRoom .forumByline .who{min-width:0;margin:0!important;font-size:13px!important;font-weight:600!important;line-height:1.5;color:#65584b!important;overflow-wrap:anywhere}
-.chatRoom .forumAuthor{flex:none;font-size:11px;font-weight:500;color:#766957;background:#eae3d6;border:1px solid #d8cdbd;padding:1px 5px;border-radius:4px;line-height:1.5}
-.chatRoom .forumAvatar{width:28px;height:28px;display:grid;place-items:center;flex:none;border:1px solid #c7bbaa;border-radius:9px;color:#7c6c5c;background:#ece5d9}
+.chatRoom .cPost.is-main{margin:0;padding:25px 0 22px!important;border:0!important;border-bottom:1px solid #cbb6a7!important;border-radius:0!important;background:transparent!important;box-shadow:none!important}
+.chatRoom .forumTitle{font-size:23px;font-weight:650;line-height:1.5;color:#4b292f;margin:0 0 20px;padding:0;border:0;overflow-wrap:anywhere;outline-offset:5px}
+.chatRoom .forumTitle:focus:not(:focus-visible){outline:none}
+.chatRoom .forumByline{display:flex;align-items:center;flex-wrap:wrap;gap:6px 8px;margin-bottom:13px;min-width:0}
+.chatRoom .forumByline .who{min-width:0;margin:0!important;font-size:13px!important;font-weight:600!important;line-height:1.5;color:#65584b!important;overflow-wrap:anywhere;flex:1}
+.chatRoom .forumAuthor{flex:none;font-size:10px;font-weight:600;color:#864653;background:#f0dfe0;border:1px solid #d9b5b9;padding:1px 5px;border-radius:4px;line-height:1.5}
+.chatRoom .forumFloor{font-size:11px;font-weight:400;color:#716156;line-height:1.5;white-space:nowrap}
+.chatRoom .forumAvatar{width:29px;height:29px;display:grid;place-items:center;flex:none;border:1px solid #c7bbaa;border-radius:9px;color:#7c6c5c;background:#ece5d9}
 .chatRoom .forumAvatar svg{width:18px;height:18px}
-.chatRoom .forumAvatar.tone-1{color:#75806f;background:#e6e9df}.chatRoom .forumAvatar.tone-2{color:#827381;background:#ece5eb}.chatRoom .forumAvatar.tone-3{color:#83795f;background:#ede8d9}
-.chatRoom .cPost .body{font-size:16px!important;font-weight:400!important;line-height:1.75!important;color:#4e443a!important;white-space:pre-wrap;overflow-wrap:anywhere}
-.chatRoom .cPost .meta{display:block;font-size:12px!important;font-weight:400;line-height:1.6;color:#847668!important;margin-top:12px}
-.chatRoom .chatFoot{flex:none;margin:0;padding:11px 12px!important;border-top:1px solid #d8cfc2;background:#eee9df;color:#817164!important;font-size:12px!important;font-weight:400!important}
-@media(max-width:360px){.chatRoom .chatHead{padding-left:14px!important}.chatRoom .chatMark{display:none}.chatRoom .chatFeed{padding:0 14px!important}.chatRoom .chatFeed.is-list{padding:5px 12px!important}.chatRoom .threadCount{font-size:11px}.chatRoom .forumTitle{font-size:18px}}
+.chatRoom .forumAvatar.tone-1{color:#65725e;background:#e6e9df}.chatRoom .forumAvatar.tone-2{color:#827381;background:#ece5eb}.chatRoom .forumAvatar.tone-3{color:#83795f;background:#ede8d9}
+.chatRoom .forumMetrics{display:flex;flex-wrap:wrap;gap:7px 18px;padding-bottom:19px;margin-top:-2px;font-size:12px;line-height:1.5;color:#716156}
+.chatRoom .cPost .body{font-size:16px!important;font-weight:400!important;line-height:1.85!important;color:#483e35!important;white-space:pre-wrap;overflow-wrap:anywhere}
+.chatRoom .cPost:not(.is-main) .body{padding-left:37px}
+.chatRoom .forumReplyHeading{display:flex;align-items:center;gap:8px;flex:none;margin:0;padding:17px 0 2px;font-size:13px;font-weight:650;line-height:1.5;color:#644c46}
+.chatRoom .forumReplyHeading span{font-size:12px;color:#716156;font-weight:400}
+.chatRoom .forumPostFoot{display:flex;justify-content:flex-end;margin-top:22px}
+.chatRoom .forumLike{display:inline-flex;align-items:center;justify-content:center;gap:8px;min-height:44px;min-width:96px;box-sizing:border-box;padding:8px 14px;font:inherit;font-size:13px;font-weight:500;line-height:1.5;color:#84605e;background:#f5ece5;border:1px solid #ceb5aa;border-radius:24px;box-shadow:none;cursor:pointer;touch-action:manipulation}
+.chatRoom .forumLike .uiIcon{width:19px;height:19px;flex:none}
+.chatRoom .forumLike.is-liked{background:#efdadd;border-color:#b77580;color:#8e3d50}
+.chatRoom .forumLike.is-liked svg{fill:currentColor;animation:forumHeart .24s ease-out}
+.chatRoom .forumEmpty{margin:24px 0;color:#7b6b60;font-size:14px;line-height:1.7}
+.chatRoom .forum-enter{animation:forumPage .15s ease-out}
+@keyframes forumPage{from{opacity:.4;translate:0 4px}to{opacity:1;translate:0 0}}
+@keyframes forumHeart{0%{scale:.85}55%{scale:1.18}100%{scale:1}}
+@media(max-width:360px){.chatRoom .chatHead{padding-left:14px!important}.chatRoom .chatMark{display:none}.chatRoom .chatFeed{padding:0 15px!important}.chatRoom .chatFeed.is-list{padding:0 14px!important}.chatRoom .forumTitle{font-size:21px}.chatRoom .cPost:not(.is-main) .body{padding-left:0}}
+@media(prefers-reduced-motion:reduce){.chatRoom .forum-enter,.chatRoom .forumLike.is-liked svg{animation:none}}
 
 @media(prefers-reduced-motion:reduce){#mask.mask.departure-window .box,#mask.mask.evening-window .box{animation:none!important}}
 
@@ -3724,8 +3748,7 @@ body:has(#gameUI.homeui.outing-shell){background:#2c221d!important;background-im
       <div class="chatHeading"><span class="chatMark" aria-hidden="true"></span><div><b>匿名討論區</b><div class="sm" id="chatSub">偶然滑到的討論串，不知為何忍不住看下去</div></div></div>
       <button type="button" class="pane-x" id="chatClose" onclick="closeChatRoom()" aria-label="關閉">×</button>
     </div>
-    <div class="chatFeed" id="chatFeed"></div>
-    <div class="chatFoot">輕觸外側關閉</div>
+    <div class="chatFeed" id="chatFeed" tabindex="-1"></div>
   </div>
 </div>
 <div class="momPhone on mom-notice" id="momPhone" aria-hidden="false" role="dialog" aria-modal="true" aria-label="媽媽的訊息" tabindex="0">
@@ -4780,8 +4803,11 @@ advanceAfterSleep(!!force)}
 function sleepDay(){if(sleepFlowHeld()||presentationHeld()||busy||S.taken||S.endingDone||dayLock||maskOpen())return;if(S.trip){say("（她還在外面。等她回來，或先點「打瞌睡」再睡。）","pout");return}withBusy(function(){startSleepRun(true);render(false)})}
 function releaseDayLock(){if(!maskOpen()&&!mq.length){dayLock=0;try{flushCohabQueue()}catch(e){}}}
 var S,tab="",mq=[],thT=0,busy=0,backLock=0,mbLock=0,dayLock=0;
-function def(){return {affinityRulesVersion:2,affinityRulesStartDay:1,lastDailyAffinityGrantedDay:0,day20Check:null,sleepRun:null,ending4Read:false,finalMemoryConfirmed:false,homeActToday:false,aff:0,exp:0,trip:null,log:[],seen:[],t:Date.now(),m:0,trips:0,taken:false,day:1,dsec:0,dEv:[],qa:[],viewM:0,sq:[],sqAsked:[],sqToday:[],sqDone:false,outToday:false,pendingObs:null,stormStay:null,uncleCuePending:false,focusHintSeen:false,thoughtFocusHintSeen:false,dailyBase:null,pendingDayEnd:null,forumPublishDays:{},optSeen:{blank:{},sq:{},ask:{}},journals:[],journalOpen:null,motif:null,journalGlow:0,metOut:false,momIntroSeen:false,heroIntroPending:false,memSeen:[],memPending:[],memVersion:3,uncleStarted:false,uncleStep:0,uncleTh:[],endingDone:false,ending:0,castOff:false,cohabSeen:[],cohabPending:[],cohabToday:false,chatSeen:false,chatNotice:false,pendingYesterdayUnsaid:null,pendingSq:null,sqVer:2,chatOpenStep:null,chatUnlocked:[],_chatThreadCount:null}}
-function load(){try{var r=localStorage.getItem("sakura_v1");S=r?JSON.parse(r):def()}catch(e){S=def()}if(!S)S=def();if(S.finalMemoryConfirmed==null)S.finalMemoryConfirmed=false;migrateAffinityRules();if(!S.sleepRun)S.sleepRun=null;if(!S.stormStay)S.stormStay=null;if(S.uncleCuePending==null)S.uncleCuePending=false;if(S.focusHintSeen==null)S.focusHintSeen=false;if(S.thoughtFocusHintSeen==null)S.thoughtFocusHintSeen=false;if(!S.forumPublishDays)S.forumPublishDays={};if(!S.pendingDayEnd)S.pendingDayEnd=null;if(S.trip&&S.trip.id===0)S.trip.place=PLACES[0][1];try{delete S.coin;delete S.sta}catch(e){}if(S.homeActToday==null)S.homeActToday=false;if(!S.cohabSeen)S.cohabSeen=[];if(!S.cohabPending)S.cohabPending=[];if(S.cohabToday==null)S.cohabToday=false;if(S.chatSeen==null)S.chatSeen=false;if(S.chatNotice==null)S.chatNotice=false;if(S.pendingYesterdayUnsaid==null)S.pendingYesterdayUnsaid=null;if(S.pendingSq===undefined)S.pendingSq=null;if(S.chatOpenStep===undefined)S.chatOpenStep=null;if(!S.chatUnlocked)S.chatUnlocked=[];
+function def(){return {affinityRulesVersion:2,affinityRulesStartDay:1,lastDailyAffinityGrantedDay:0,day20Check:null,sleepRun:null,ending4Read:false,finalMemoryConfirmed:false,homeActToday:false,aff:0,exp:0,trip:null,log:[],seen:[],t:Date.now(),m:0,trips:0,taken:false,day:1,dsec:0,dEv:[],qa:[],viewM:0,sq:[],sqAsked:[],sqToday:[],sqDone:false,outToday:false,pendingObs:null,stormStay:null,uncleCuePending:false,focusHintSeen:false,thoughtFocusHintSeen:false,dailyBase:null,pendingDayEnd:null,forumPublishDays:{},forumRead:{},forumLiked:{},optSeen:{blank:{},sq:{},ask:{}},journals:[],journalOpen:null,motif:null,journalGlow:0,metOut:false,momIntroSeen:false,heroIntroPending:false,memSeen:[],memPending:[],memVersion:3,uncleStarted:false,uncleStep:0,uncleTh:[],endingDone:false,ending:0,castOff:false,cohabSeen:[],cohabPending:[],cohabToday:false,chatSeen:false,chatNotice:false,pendingYesterdayUnsaid:null,pendingSq:null,sqVer:2,chatOpenStep:null,chatUnlocked:[],_chatThreadCount:null}}
+function load(){try{var r=localStorage.getItem("sakura_v1");S=r?JSON.parse(r):def()}catch(e){S=def()}if(!S)S=def();
+if(!S.forumRead||typeof S.forumRead!=="object"||Array.isArray(S.forumRead))S.forumRead={};
+if(!S.forumLiked||typeof S.forumLiked!=="object"||Array.isArray(S.forumLiked))S.forumLiked={};
+if(S.finalMemoryConfirmed==null)S.finalMemoryConfirmed=false;migrateAffinityRules();if(!S.sleepRun)S.sleepRun=null;if(!S.stormStay)S.stormStay=null;if(S.uncleCuePending==null)S.uncleCuePending=false;if(S.focusHintSeen==null)S.focusHintSeen=false;if(S.thoughtFocusHintSeen==null)S.thoughtFocusHintSeen=false;if(!S.forumPublishDays)S.forumPublishDays={};if(!S.pendingDayEnd)S.pendingDayEnd=null;if(S.trip&&S.trip.id===0)S.trip.place=PLACES[0][1];try{delete S.coin;delete S.sta}catch(e){}if(S.homeActToday==null)S.homeActToday=false;if(!S.cohabSeen)S.cohabSeen=[];if(!S.cohabPending)S.cohabPending=[];if(S.cohabToday==null)S.cohabToday=false;if(S.chatSeen==null)S.chatSeen=false;if(S.chatNotice==null)S.chatNotice=false;if(S.pendingYesterdayUnsaid==null)S.pendingYesterdayUnsaid=null;if(S.pendingSq===undefined)S.pendingSq=null;if(S.chatOpenStep===undefined)S.chatOpenStep=null;if(!S.chatUnlocked)S.chatUnlocked=[];
 try{var _validMem={};MEMORIES.forEach(function(m){_validMem[m[0]]=1});S.memSeen=(S.memSeen||[]).filter(function(id){return _validMem[id]});S.memPending=(S.memPending||[]).filter(function(id){return _validMem[id]&&S.memSeen.indexOf(id)<0})}catch(e){}if(S.momIntroSeen==null)S.momIntroSeen=true;if(!S.memSeen)S.memSeen=[];if(!S.memPending)S.memPending=[];if(S.m==null)S.m=0;if((S.aff|0)>100)S.aff=100;if(S.uncleStarted==null)S.uncleStarted=false;if(S.uncleStep==null)S.uncleStep=0;if(!S.uncleTh)S.uncleTh=[];if(S.endingDone==null)S.endingDone=false;if(S.ending==null)S.ending=0;if(S.castOff==null)S.castOff=false;if(typeof uncleMCap==="function"){var _c=uncleMCap();if((S.m|0)>_c)S.m=_c}else if(typeof step5Open==="function"&&!step5Open()&&(S.m|0)>29)S.m=29;if(S.trips==null)S.trips=0;if(!S.seen)S.seen=[];if(S.day==null){S.day=1;S.dsec=0}if(!S.dEv)S.dEv=[];if(!S.qa)S.qa=[];if(S.viewM==null)S.viewM=0;if(!S.sq)S.sq=[];if(!S.sqToday)S.sqToday=[];if(S.outToday==null)S.outToday=false;if(S.sqDone==null)S.sqDone=!!(S.sqToday&&S.sqToday.length);if(S.pendingObs===undefined)S.pendingObs=null;if(!S.optSeen||typeof S.optSeen!="object")S.optSeen={blank:{},sq:{},ask:{}};if(!S.optSeen.blank)S.optSeen.blank={};if(!S.optSeen.sq)S.optSeen.sq={};if(!S.optSeen.ask)S.optSeen.ask={};if(!S.journals)S.journals=[];if(S.journalOpen===undefined)S.journalOpen=null;scrubJournals();if(S.motif===undefined)S.motif=null;if(S.journalGlow==null)S.journalGlow=0;if(S.metOut==null){S.metOut=!!(S.m>0||(S.journals&&S.journals.some(function(j){return j&&j.met}))||(S.dEv&&S.dEv.some(function(e){return e&&e.met})))}try{delete S.blankHintSeen;delete S.sqHintSeen;delete S.anxiety;delete S.fantasy;delete S.evidence}catch(e){}}
 function save(){if(sleepSettlementInProgress)return;try{localStorage.setItem("sakura_v1",JSON.stringify(S))}catch(e){}}
 function doReset(){cancelScenePresentation();S=def();mq=[];busy=0;backLock=0;mbLock=0;dayLock=0;$("mask").classList.remove("on");try{localStorage.removeItem("sakura_v1")}catch(e){}say("「哼！才不要多想，只是當初口快答應了而已！」","pout");render();maybeMomIntro()}
@@ -5353,24 +5379,149 @@ if(!t||t.retired)return false;
 if(t.publishDay&&(S.day|0)<t.publishDay)return false;
 if(t.ending){return !!(S.endingDone&&(S.ending|0)===(t.ending|0))}if((t.step|0)<=0){if(t.needAff&&(S.aff|0)<(t.needAff|0)&&((S.day|0)<6))return false;return true}var due=S.forumPublishDays&&S.forumPublishDays[t.step|0];return (S.uncleStep|0)>=(t.step|0)&&(due==null||(S.day|0)>=(due|0))}
 function chatThreadList(){var list=[];(CHAT_THREADS||[]).forEach(function(t,i){if(chatThreadUnlocked(t))list.push({t:t,i:i})});return list}
+/* Forum statistics are authored scenery. Later threads attract larger audiences. */
+var FORUM_VIEW_COUNTS=[186,432,1260,2840,5680,9130,15400,22100,31800,42700,56200,74800,93600,112800,136500];
 var chatReadingPositions={},chatRenderedKey=null;
-function rememberChatReading(){var feed=$("chatFeed");if(feed&&chatRenderedKey!=null)chatReadingPositions[chatRenderedKey]=feed.scrollTop}
+function rememberChatReading(){
+  var feed=$("chatFeed");
+  if(feed&&chatRenderedKey!=null)chatReadingPositions[chatRenderedKey]=feed.scrollTop;
+}
 function forumAvatar(who){var hash=0;Array.from(String(who)).forEach(function(c){hash=(hash*31+c.codePointAt(0))>>>0});var shapes=['<circle cx="12" cy="12" r="5"/>','<path d="m12 5 7 7-7 7-7-7Z"/>','<path d="m12 5 7 13H5Z"/>','<rect x="6" y="6" width="12" height="12" rx="3"/>'];return '<span class="forumAvatar tone-'+hash%4+'" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7">'+shapes[hash%4]+'</svg></span>'}
 function forumText(value){return String(value==null?"":value).replace(/[&<>"']/g,function(c){return {"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]})}
-function paintChatFeed(){var feed=$("chatFeed");if(!feed)return;rememberChatReading();var open=S.chatOpenStep,list=chatThreadList(),key=open==null||open===""?"list":"thread:"+open;chatRenderedKey=key;
-if(key==="list"){feed.classList.add("is-list");var html="";list.forEach(function(x){var t=x.t,replies=Math.max(0,(t.posts?t.posts.length:0)-1);html+='<button type="button" class="cThread" onclick="chatOpenThread('+x.i+')"><span class="threadCopy"><b>'+forumText(t.title)+'</b>'+(t.sub?'<span class="sm">'+forumText(t.sub)+'</span>':"")+'</span><span class="threadCount">'+replies+' 則回覆</span></button>'});if(!html)html='<p class="sm">還沒有討論串。</p>';feed.innerHTML=html;var sub=$("chatSub");if(sub)sub.textContent="偶然滑到的討論串，不知為何忍不住看下去"}
-else{feed.classList.remove("is-list");var t=(CHAT_THREADS||[])[open|0],html="";if(!chatThreadUnlocked(t)){S.chatOpenStep=null;paintChatFeed();return}if(t&&t.posts)t.posts.forEach(function(p,i){var author=i===0||!!(p.who&&p.who===t.posts[0].who);html+='<article class="cPost'+(i===0?' is-main':'')+'">'+(i===0?'<h3 class="forumTitle">'+forumText(t.title)+'</h3>':'')+'<div class="forumByline">'+forumAvatar(p.who)+'<span class="who is-anon">'+forumText(p.who)+'</span>'+(author?'<span class="forumAuthor">樓主</span>':"")+'</div><div class="body">'+forumText(p.body)+'</div>'+(p.meta?'<span class="meta">'+forumText(p.meta)+'</span>':"")+'</article>'});if(!html)html='<p class="sm">這個討論串還沒有貼文。</p>';feed.innerHTML=html;var sub=$("chatSub");if(sub)sub.textContent=(t&&t.sub)||"偶然滑到的討論串，不知為何忍不住看下去"}
-requestAnimationFrame(function(){if(chatRenderedKey===key)feed.scrollTop=chatReadingPositions[key]||0})}
-
-function chatOpenThread(i){if(!chatThreadUnlocked((CHAT_THREADS||[])[i|0]))return;rememberChatReading();S.chatOpenStep=i|0;paintChatFeed();try{save()}catch(e){}}
+function forumMetrics(thread,index){
+  var views=(FORUM_VIEW_COUNTS[index]||0).toLocaleString("en-US");
+  var replies=Math.max(0,(thread.posts||[]).length-1);
+  return '<span class="forumMetric">'+homeUiIcon("eye")+'<span>'+views+' 次瀏覽</span></span>'+
+    '<span class="forumMetric">'+homeUiIcon("chat")+'<span>'+replies+' 則回覆</span></span>';
+}
+function forumLikeContents(liked){
+  return '<svg class="uiIcon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" aria-hidden="true"><path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0l-1 1-1-1a5.5 5.5 0 0 0-7.8 7.8L12 21l8.8-8.6a5.5 5.5 0 0 0 0-7.8Z"/></svg><span>'+(liked?'已喜歡':'喜歡')+'</span>';
+}
+function forumThreadRow(thread,index){
+  var author=thread.posts&&thread.posts[0]?thread.posts[0].who:"";
+  var unread=!(S.forumRead&&S.forumRead['CHAT-T'+index]);
+  return '<button type="button" class="cThread" data-thread-index="'+index+'" onclick="chatOpenThread('+index+')">'+
+    '<span class="threadCopy"><span class="threadTitle"><b>'+forumText(thread.title)+'</b>'+
+    (unread?'<span class="forumNew">新</span>':'')+'</span>'+
+    '<span class="threadAuthor">'+forumAvatar(author)+'<span>'+forumText(author)+'</span></span>'+
+    (thread.sub?'<span class="sm">'+forumText(thread.sub)+'</span>':'')+
+    '<span class="threadStats">'+forumMetrics(thread,index)+'</span></span></button>';
+}
+function forumPost(post,floor,threadIndex){
+  var thread=CHAT_THREADS[threadIndex],main=floor===0;
+  var author=main||post.who===thread.posts[0].who;
+  var liked=!!(S.forumLiked&&S.forumLiked['CHAT-T'+threadIndex]);
+  var html='<article class="cPost'+(main?' is-main':'')+'">';
+  if(main)html+='<h3 class="forumTitle" tabindex="-1">'+forumText(thread.title)+'</h3>';
+  html+='<div class="forumByline">'+forumAvatar(post.who)+'<span class="who is-anon">'+forumText(post.who)+'</span>'+
+    (author?'<span class="forumAuthor">樓主</span>':'')+
+    '<span class="forumFloor">'+(main?'主帖':'B'+floor)+'</span></div>';
+  if(main)html+='<div class="forumMetrics">'+forumMetrics(thread,threadIndex)+'</div>';
+  html+='<div class="body">'+forumText(post.body)+'</div>';
+  if(main)html+='<div class="forumPostFoot"><button type="button" class="forumLike'+(liked?' is-liked':'')+'" aria-pressed="'+liked+'" aria-label="'+(liked?'取消喜歡此帖文':'喜歡此帖文')+'" onclick="toggleForumLike('+threadIndex+',this)">'+forumLikeContents(liked)+'</button></div>';
+  return html+'</article>';
+}
+function paintChatFeed(){
+  var feed=$("chatFeed");
+  if(!feed)return;
+  rememberChatReading();
+  var open=S.chatOpenStep,list=chatThreadList();
+  var isList=open==null||open==="";
+  var thread=isList?null:CHAT_THREADS[open|0];
+  if(!isList&&!chatThreadUnlocked(thread)){
+    S.chatOpenStep=null;
+    isList=true;
+  }
+  var key=isList?'list':'thread:'+open;
+  var changed=chatRenderedKey!==key;
+  chatRenderedKey=key;
+  feed.classList.toggle('is-list',isList);
+  feed.classList.remove('forum-enter');
+  if(isList){
+    feed.innerHTML=list.map(function(item){return forumThreadRow(item.t,item.i)}).join('')||'<p class="forumEmpty">還沒有討論串。</p>';
+    $("chatSub").textContent=list.length+' 篇討論串';
+  }else{
+    var posts=thread.posts||[],replies=Math.max(0,posts.length-1);
+    var html=posts.length?forumPost(posts[0],0,open|0):'';
+    if(replies)html+='<h4 class="forumReplyHeading">回覆 <span>'+replies+'</span></h4>';
+    html+=posts.slice(1).map(function(post,index){return forumPost(post,index+1,open|0)}).join('');
+    feed.innerHTML=html||'<p class="forumEmpty">這個討論串還沒有貼文。</p>';
+    $("chatSub").innerHTML='<button type="button" class="forumBack" onclick="chatBackToList()">討論區</button><span aria-hidden="true">／</span><span>帖文</span>';
+  }
+  if(changed){void feed.offsetWidth;feed.classList.add('forum-enter')}
+  requestAnimationFrame(function(){
+    if(chatRenderedKey===key)feed.scrollTop=chatReadingPositions[key]||0;
+  });
+}
+function chatOpenThread(index){
+  if(!chatThreadUnlocked(CHAT_THREADS[index]))return;
+  rememberChatReading();
+  S.chatOpenStep=index;
+  if(!S.forumRead)S.forumRead={};
+  S.forumRead['CHAT-T'+index]=true;
+  paintChatFeed();
+  save();
+  var title=$("chatFeed").querySelector('.forumTitle');
+  if(title)title.focus({preventScroll:true});
+}
+function chatBackToList(){
+  var previous=S.chatOpenStep;
+  rememberChatReading();
+  S.chatOpenStep=null;
+  paintChatFeed();
+  save();
+  var row=$("chatFeed").querySelector('[data-thread-index="'+previous+'"]');
+  if(row)row.focus({preventScroll:true});
+}
+function toggleForumLike(index,button){
+  if(!S||!$("chatRoom").classList.contains('on')||S.chatOpenStep!==index||!chatThreadUnlocked(CHAT_THREADS[index]))return;
+  if(!S.forumLiked)S.forumLiked={};
+  var key='CHAT-T'+index,liked=!S.forumLiked[key];
+  S.forumLiked[key]=liked;
+  save();
+  button.classList.toggle('is-liked',liked);
+  button.setAttribute('aria-pressed',String(liked));
+  button.setAttribute('aria-label',liked?'取消喜歡此帖文':'喜歡此帖文');
+  button.innerHTML=forumLikeContents(liked);
+}
 function paintChatNotice(){var b=$("navChat");if(!b)return;var on=!!(S&&S.chatNotice);b.innerHTML=homeUiIcon("chat")+'<span>討論區</span>'+(on?'<span class="opt-new notice-dot" role="img" aria-label="有新討論串" title="有新討論串"></span>':"");b.classList.toggle("chat-notice",on)}
 function markChatThreadsNotice(){if(!S||typeof chatThreadList!=="function")return;var n=chatThreadList().length;if(S._chatThreadCount==null){S._chatThreadCount=n;return}if(n>(S._chatThreadCount|0))S.chatNotice=true;S._chatThreadCount=n}
 function openChatRoom(){if(!chatAvailable()){say(S.trip?"（她出門了。等她回來再滑手機吧。）":(chatNavUnlocked()?"（現在不方便看討論區。）":"（討論區還沒開放。）"),"pout");return}
 if(maskOpen()||($("momPhone")&&$("momPhone").classList.contains("on"))){say("（先看完眼前的事。）","pout");return}
-S.chatOpenStep=null;S.chatNotice=false;paintChatNotice();paintChatFeed();var el=$("chatRoom");if(!el)return;el.classList.add("on");el.setAttribute("aria-hidden","false");
+S.chatOpenStep=null;S.chatNotice=false;paintChatNotice();paintChatFeed();var el=$("chatRoom");if(!el)return;el.classList.add("on");el.setAttribute("aria-hidden","false");$("chatClose").focus({preventScroll:true});
 if(!S.chatSeen){S.chatSeen=true;addLog("💬 打開匿名討論區・看見一個愛抱怨的匿名路人");try{save()}catch(e){}}}
-function closeChatRoom(){rememberChatReading();chatRenderedKey=null;var el=$("chatRoom");if(!el)return;el.classList.remove("on");el.setAttribute("aria-hidden","true");S.chatOpenStep=null}
-(function(){var el=$("chatRoom");if(!el)return;el.addEventListener("click",function(e){if(e.target===el)closeChatRoom()});el.addEventListener("keydown",function(e){if(e.key==="Escape"){e.preventDefault();e.stopPropagation();closeChatRoom()}})})();
+function closeChatRoom(){
+  rememberChatReading();
+  chatRenderedKey=null;
+  var el=$("chatRoom");
+  if(!el)return;
+  el.classList.remove("on");
+  el.setAttribute("aria-hidden","true");
+  S.chatOpenStep=null;
+  var nav=$("navChat");
+  if(nav)nav.focus({preventScroll:true});
+}
+(function(){
+  var el=$("chatRoom");
+  if(!el)return;
+  el.addEventListener("click",function(event){if(event.target===el)closeChatRoom()});
+  el.addEventListener("keydown",function(event){
+    if(event.key==="Escape"){
+      event.preventDefault();
+      event.stopPropagation();
+      closeChatRoom();
+    }else if(event.key==="Tab"){
+      var buttons=Array.from(el.querySelectorAll('button:not(:disabled)')).filter(function(button){return button.offsetParent!==null});
+      var first=buttons[0],last=buttons[buttons.length-1];
+      var outside=buttons.indexOf(document.activeElement)<0;
+      if(event.shiftKey&&(document.activeElement===first||outside)){
+        event.preventDefault();if(last)last.focus();
+      }else if(!event.shiftKey&&(document.activeElement===last||outside)){
+        event.preventDefault();if(first)first.focus();
+      }
+    }
+  });
+})();
 
 function queueCohabUnlock(){if(S.endingDone||S.taken||S.trip||S.cohabToday||!S.momIntroSeen)return;if(!S.seen)S.seen=[];
 var due=[];STORY.forEach(function(s){if((S.aff|0)<s[0])return;if(s[0]===100&&!S.finalMemoryConfirmed)return;if(S.seen.indexOf(s[0])>=0)return;due.push(s)});
