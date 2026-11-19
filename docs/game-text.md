@@ -1712,7 +1712,9 @@ OUTING-FOCUS-ACTIVE | 聚焦中 | focusFeedback; 按住時取代閒置標籤
 ## 2026-11-19 v2 日結介面
 
 DAILY-LIFE-GAIN | 共同生活・親密 +{實際值} | 日結發放；上限可能只增1或0
-AUTO-OUTING-NOTICE | 小紅今天自行出門了。 | 本輪採用的自動外出通知
+AUTO-OUTING-REVIEW-TITLE | 第 {day} 天・準備休息 | 日結前回顧標題
+AUTO-OUTING-REVIEW-RETURN | 她自行出門了一趟,傍晚才回到家中。 | 普通自動行程回顧；留宿當晚省略
+AUTO-OUTING-REVIEW-MISSED | 你沒有查看她外出期間的心聲及剪影。 | 自動行程日結前提示第二句
 ENDING4-TITLE | 結局四・她的離開 | ENDING4_DRAFT.title
 ENDING4-DRAFT-LABEL | 暫行文本・待結局階段細化 | ENDING4_DRAFT.label
 ENDING4-REVIEW | 重看結局 | reviewEndingFour

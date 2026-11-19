@@ -4527,8 +4527,9 @@ function autoOutingPlace(){
   return ids.length?ids[Math.floor(Math.random()*ids.length)]:0;
 }
 function showAutomaticOutingNotice(){
-  finishMemoryReveal();hideSqOpts();$("mt").textContent="小紅出門了";$("mp").textContent="小紅今天自行出門了。";
-  paintMaskChrome("小紅出門了");$("mask").classList.add("on");syncSleepLock();$("mb").focus({preventScroll:true});
+  finishMemoryReveal();hideSqOpts();$("mt").textContent="第 "+(S.day|0)+" 天・準備休息";
+  $("mp").textContent=(isStormNight()?"":"她自行出門了一趟,傍晚才回到家中。\n")+"你沒有查看她外出期間的心聲及剪影。";
+  paintMaskChrome($("mt").textContent);$("mask").classList.add("on");syncSleepLock();$("mb").focus({preventScroll:true});
 }
 function startSleepRun(force){
   if(sleepFlowHeld()||S.endingDone||S.trip)return;
@@ -4536,9 +4537,9 @@ function startSleepRun(force){
   if(!S.outToday&&!(S.dEv&&S.dEv.length)&&!isStormNight()){
     var id=autoOutingPlace();
     S.sleepRun.autoTrip={uid:"day-"+(S.day|0)+"-outing",day:S.day|0,id:id,place:PLACES[id][1],end:Date.now(),acts:[],auto:true,skipped:true,metUncle:uncleAppearRoll()};
-    S.sleepRun.phase="notice";mq.unshift({automaticOutingNotice:true});
+    S.sleepRun.phase="auto-settle";
   }
-  rememberSleepQueue(null);syncSleepLock();nextPop();
+  rememberSleepQueue(null);syncSleepLock();if(S.sleepRun.autoTrip)settleAutomaticOuting();else nextPop();
 }
 function settleAutomaticOuting(){
   var run=S&&S.sleepRun;if(!run||!run.autoTrip||S.endingDone)return false;
@@ -4564,6 +4565,7 @@ function grantDailyAffinity(){
 }
 function finishSleepPreparation(){
   var run=S&&S.sleepRun;if(!run||S.endingDone||maskOpen()||presentationHeld()||mq.length)return;
+  if(run.autoTrip&&!run.outingReviewSeen){run.phase="outing-review";mq.unshift({automaticOutingReview:true});rememberSleepQueue(null);nextPop();return}
   if((S.day|0)===20&&S.day20Check==null){S.day20Check=S.aff>=100?"passed":"failed";save()}
   run.phase=S.day20Check==="failed"&&(S.day|0)===20?"ending-four":"ready";rememberSleepQueue(null);
   dayLock=0;endDay(run.force);syncSleepLock();
@@ -4573,7 +4575,8 @@ function resumeSleepRun(){
   syncSleepLock();if(maskOpen()||presentationHeld())return true;
   if(run.phase==="auto-settle"){settleAutomaticOuting();return true}
   if(mq.length){nextPop();return true}
-  if(run.phase==="notice"){mq.unshift({automaticOutingNotice:true});nextPop();return true}
+  if(run.phase==="notice"){settleAutomaticOuting();return true}
+  if(run.phase==="outing-review"){mq.unshift({automaticOutingReview:true});nextPop();return true}
   if(run.phase==="events"){grantDailyAffinity();return true}
   if(run.phase==="bonus-events"){finishSleepPreparation();return true}
   if(run.phase==="ready"||run.phase==="ending-four"){dayLock=0;endDay(run.force);return true}
@@ -4581,7 +4584,9 @@ function resumeSleepRun(){
 }
 function acknowledgeSleepEntry(){
   var run=S&&S.sleepRun;if(!run)return false;
-  var automatic=!!(run.active&&run.active.automaticOutingNotice);rememberSleepQueue(null);
+  var automatic=!!(run.active&&run.active.automaticOutingNotice),review=!!(run.active&&run.active.automaticOutingReview);
+  if(review){run.outingReviewSeen=true;run.phase="bonus-events"}
+  rememberSleepQueue(null);
   if(automatic){settleAutomaticOuting();return true}
   return false;
 }
@@ -5238,7 +5243,8 @@ var memoryMotionQuery=window.matchMedia("(prefers-reduced-motion: reduce)");if(m
 function nextPop(){if(maskOpen()||presentationHeld())return;if(!mq.length){dayLock=0;hideSqOpts();if(moodPeekOn)clearMoodPeek();if(sleepFlowHeld()){rememberSleepQueue(null);resumeSleepRun()}return}var m=mq.shift();if(!m){releaseDayLock();hideSqOpts();if(moodPeekOn)clearMoodPeek();return}
 if(Array.isArray(m)&&typeof m[0]==="string"&&m[0].indexOf("📌 同居事件：")===0){mq=mq.filter(function(entry){return !Array.isArray(entry)||entry[0]!==m[0]||entry[1]!==m[1]})}
 if(sleepFlowHeld())rememberSleepQueue(m);
-if(m.automaticOutingNotice){showAutomaticOutingNotice();return}
+if(m.automaticOutingNotice){rememberSleepQueue(null);settleAutomaticOuting();return}
+if(m.automaticOutingReview){showAutomaticOutingNotice();return}
 if(m.stormNight){if(!openStormNight())nextPop();syncSleepLock();return}
 if(m.returnHome){if(!showReturnWindow(m.nightTxt))nextPop();return}
 if(Array.isArray(m)&&/^(?:🌙\s*)?當晚$/.test(m[0])){var night=String(m[1]||"");if(S&&S.pendingObs)S.pendingObs.nightTxt=night;if(!showReturnWindow(night))nextPop();return}
