@@ -3559,6 +3559,11 @@ body:has(#gameUI.homeui.outing-shell){background:#2c221d!important;background-im
 @keyframes outingStatusBreathe{0%,100%{opacity:.4}50%{opacity:.8}}
 @media(max-width:360px){#gameUI.homeui.outing-shell .outingTop-lead{font-size:14px!important;letter-spacing:.03em!important;gap:4px}.outingDoor{width:17px}.outingStatusLight{width:4px;height:4px}#gameUI.homeui.outing-shell #heartRow .thoughtFocusButton{min-width:94px;padding:6px;font-size:10px}}
 @media(prefers-reduced-motion:reduce){#gameUI.homeui.outing-shell .outingTop,#gameUI.homeui.outing-shell:not(.departure-pending):not(.storm-stay) .outingTop:not(.off),.outingTitle-rule path,.outingStatusLight{animation:none!important}.outingTitle-rule path{stroke-dashoffset:0}#gameUI.homeui.outing-shell #heartRow .thoughtFocusButton{transition:none!important;translate:none!important}}
+/* The provisional early ending reuses the existing window; the heroine has left. */
+#gameUI.ending-four #av{display:none!important}
+#gameUI.ending-four .dialogueZone,#gameUI.ending-four .contextActions{visibility:hidden!important;pointer-events:none!important}
+#gameUI.ending-four #note.on{display:block!important;position:absolute!important;left:50%!important;top:38%!important;bottom:auto!important;width:min(80%,300px)!important;transform:translate(-50%,-50%)!important;text-align:center}
+#gameUI.ending-four .dock.tabs{display:grid!important;grid-template-columns:1fr 1fr!important}
 </style>
 </head>
 <body>
@@ -3743,12 +3748,12 @@ var TIERS=[[0,"重逢的青梅竹馬"],[30,"漸漸熟稔"],[100,"無話不談的
 var HOME_TIME=12;
 /* [id, label, icon, _unused, affGain, tip] — 無體力；每天室內互動一次 */
 var HOME_ACTS=[
-/* [id, label, icon, unlockAff, affGain, tip] — 室內互動一律 +7 */
-["care","關心她","💗",0,7,"聊聊今天，聽她說外出的見聞"],
-["tv","一起看電視","📺",10,7,"並肩坐在沙發上選一部片，邊看邊聊"],
-["game","玩桌遊","🎲",30,7,"輸的人要答應對方一個小要求"],
-["stars","窗邊看星星","✨",70,7,"熄燈後並肩坐在窗邊"],
-["sweets","一起做點心","🍪",90,7,"他口述步驟，她動手，做一份甜點"]
+/* [id, label, icon, unlockAff, affGain, tip] — V2 主動互動 +5；日結另 +2 */
+["care","關心她","💗",0,5,"聊聊今天，聽她說外出的見聞"],
+["tv","一起看電視","📺",10,5,"並肩坐在沙發上選一部片，邊看邊聊"],
+["game","玩桌遊","🎲",30,5,"輸的人要答應對方一個小要求"],
+["stars","窗邊看星星","✨",70,5,"熄燈後並肩坐在窗邊"],
+["sweets","一起做點心","🍪",90,5,"他口述步驟，她動手，做一份甜點"]
 ];
 var HOME_LINES={"care":[["今天商場那個店員超怪……你笑什麼啦！","公園那隻狗黏死人。……你幹嘛一直看我。","你這樣聽我說，我會講個不停的。……才不是想黏著你。"],["強叔……算了，別問。總之我很安全。","外面那些事，講兩句就好。……你別用那種眼神。","今天還好。……換你說，腿還痛不痛？"],["就……買了點東西。真的。","你問起他，我會停一下。……他還好啦。你腿先要緊。","手機先扣著。……今天聽你說就好。"]],"tv":[["這部是剛好選到的。……才不是想跟你看愛情片。","我靠一下肩膀而已！醒來不准笑。","好無聊……可是再看一點點也可以。"],["我在查食譜啦，不是在看誰的訊息。","……頭借你靠。繼續看。","片尾我有在笑。……有專心。大概。"],["手機放遠一點。……今晚陪你。","看完再坐一下。……你別問為什麼。","燈這樣暗著就好。……我在。"]],"game":[["這局不算！你作弊。","真心話……你是笨蛋。講完了。","再來！這次不准讓我。"],["啊……又輸了。我有在想別的事嗎？沒有。","不要讓我。認真贏。","……再一局。我這次會盯著棋盤。"],["我故意輸的。……你想要什麼？","陪你再玩一局。——答應了。","……再一局。小聲一點就好。"]],"stars":[["星星有什麼好看的。……我沒有要走。","風有點涼。我抱膝蓋是因為冷，不是想靠近你。","……多看一下下也可以啦。"],["手機亮一下而已。……不是重要的人。","你講話，我聽。……別突然安靜。","今晚星星普通。……人比較不普通。"],["別靠太近。……不是討厭你。","我數星星是在整理表情。……你別拆穿。","阿祿。……手可以待著，問句話就算了。"]],"sweets":[["形狀怪是你口述不清！……好吃就行。","粉別灑我臉上。——你笑什麼啦。","分你一半。……才不是討誇。"],["甜度我有照你說的。……心思有飄一下，抱歉。","烤箱叮了就好。……訊息我待會再回。","你先吃。我洗手。……洗久一點。"],["今天我來攪。……你歇著。","焦了也吃。……我會負責。","甜的留給你。……我不太敢看你的臉。"]]};
 
@@ -4487,6 +4492,120 @@ function syncDlgAv(line){var av=$("dlgAv");if(!av)return;var outing=!!(S.trip&&!
 function syncMaskFace(tt){var face=document.querySelector("#mask .face");if(!face)return;if(isMoodChromeTitle(tt)){setSilFace(face,pickSilWho(tt));return}setSilFace(face,null)}
 function detect(t){var R=[["surprise",/呀|咦|嚇|驚|突然/],["sad",/哭|難過|委屈|嗚|被丟下|對不起|愧疚|心虛/],["shy",/心跳|臉紅|害羞|牽|喜歡的人|好看|摸摸頭|陪我看|先別碰|突然碰|手還/],["pout",/煩|別一直|不要問|別亂碰|哼|不想再跟你說|才不是/],["cold",/受夠|無聊|不是你|無所謂|放那邊|不想跟你說話|不用等我|跟你有關係/],["joy",/最喜歡|太棒|哇|開心|幸福|太好|布丁/],["wink",/謝謝|安心|一直在|生活下去|送給你|守護/]];for(var i=0;i<R.length;i++)if(R[i][1].test(t))return R[i][0];return null}
 var DL=180,DAY_RATE=2;
+/* V2 sleep transaction: one outing, one daily grant, then the Day 20 check. */
+var DAILY_AFFINITY=2,AFFINITY_RULES_VERSION=2,sleepSettlementInProgress=false;
+var ENDING4_DRAFT={title:"結局四・她的離開",label:"暫行文本・待結局階段細化",body:"日子一天天過去，照顧漸漸成了兩人之間唯一的聯繫。\n\n小紅收好了行李。她曾期待這次重逢能讓彼此靠近，最後卻只等到一次次沉默。\n\n照顧的日子尚未走完，她已決定離開。這一個月，在第二十天提前結束。"};
+function newAffinityRulesToday(){return !!(S&&(S.affinityRulesVersion|0)>=AFFINITY_RULES_VERSION&&(S.day|0)>=(S.affinityRulesStartDay|0))}
+function homeAffinityGain(a){return newAffinityRulesToday()?(a[4]|0):7}
+function migrateAffinityRules(){
+  if(!S||S.affinityRulesVersion===AFFINITY_RULES_VERSION)return;
+  /* Preserve every earned point and the current old-rule day; no historical grants. */
+  var day=Math.max(1,S.day|0);S.affinityRulesVersion=AFFINITY_RULES_VERSION;S.affinityRulesStartDay=day+1;
+  S.lastDailyAffinityGrantedDay=day;S.day20Check=day>20||(day===20&&S.pendingDayEnd)?"legacy-passed":null;
+}
+function encodeSleepEntry(entry){
+  if(!Array.isArray(entry))return entry;
+  return {sleepLine:true,title:entry[0],body:entry[1],memoryId:entry.memoryId==null?null:entry.memoryId};
+}
+function decodeSleepEntry(entry){
+  if(!entry||!entry.sleepLine)return entry;
+  var line=[entry.title,entry.body];if(entry.memoryId!=null)line.memoryId=entry.memoryId;return line;
+}
+function rememberSleepQueue(active){
+  if(!S||!S.sleepRun)return;
+  if(arguments.length)S.sleepRun.active=active?encodeSleepEntry(active):null;
+  S.sleepRun.queued=mq.map(encodeSleepEntry);save();
+}
+function restoreSleepQueue(){
+  var run=S&&S.sleepRun;if(!run||run.day!==(S.day|0)||S.pendingDayEnd)return;
+  mq=(run.active?[run.active]:[]).concat(run.queued||[]).map(decodeSleepEntry);
+}
+function sleepFlowHeld(){return !!(S&&S.sleepRun&&S.sleepRun.day===(S.day|0))}
+function syncSleepLock(){if(sleepFlowHeld())$("gameUI").inert=true}
+function autoOutingPlace(){
+  var ids=[];PLACES.forEach(function(p,i){if(S.aff>=p[3])ids.push(i)});
+  return ids.length?ids[Math.floor(Math.random()*ids.length)]:0;
+}
+function showAutomaticOutingNotice(){
+  finishMemoryReveal();hideSqOpts();$("mt").textContent="小紅出門了";$("mp").textContent="小紅今天自行出門了。";
+  paintMaskChrome("小紅出門了");$("mask").classList.add("on");syncSleepLock();$("mb").focus({preventScroll:true});
+}
+function startSleepRun(force){
+  if(sleepFlowHeld()||S.endingDone||S.trip)return;
+  ensureDailyBase();closePane();S.sleepRun={day:S.day|0,force:!!force,phase:"events",active:null,queued:[],autoTrip:null};
+  if(!S.outToday&&!(S.dEv&&S.dEv.length)&&!isStormNight()){
+    var id=autoOutingPlace();
+    S.sleepRun.autoTrip={uid:"day-"+(S.day|0)+"-outing",day:S.day|0,id:id,place:PLACES[id][1],end:Date.now(),acts:[],auto:true,skipped:true,metUncle:uncleAppearRoll()};
+    S.sleepRun.phase="notice";mq.unshift({automaticOutingNotice:true});
+  }
+  rememberSleepQueue(null);syncSleepLock();nextPop();
+}
+function settleAutomaticOuting(){
+  var run=S&&S.sleepRun;if(!run||!run.autoTrip||S.endingDone)return false;
+  run.phase="auto-settle";S.trip=run.autoTrip;S.outToday=true;save();
+  /* No save may expose half of back()'s synchronous settlement. */
+  sleepSettlementInProgress=true;
+  try{back()}finally{sleepSettlementInProgress=false}
+  run.phase="events";
+  if(isStormNight())rememberSleepQueue({stormNight:true});
+  else{if(hasReturnObservation()&&!mq.some(function(m){return m&&m.returnHome}))mq.unshift({returnHome:true,nightTxt:S.pendingObs.nightTxt});rememberSleepQueue(null)}
+  save();render(false);syncSleepLock();return true;
+}
+function grantDailyAffinity(){
+  var run=S.sleepRun;run.phase="bonus-events";ensureDailyBase();
+  var before=S.aff,previousTier=tier();
+  if(newAffinityRulesToday()&&(S.lastDailyAffinityGrantedDay|0)<(S.day|0)){
+    S.lastDailyAffinityGrantedDay=S.day|0;S.aff=Math.min(100,S.aff+DAILY_AFFINITY);run.dailyGain=S.aff-before;
+    save();if(run.dailyGain>0)addLog("🏠 共同生活・親密 +"+run.dailyGain);
+    afterAffTier(previousTier);
+  }
+  rememberSleepQueue();render(false);syncSleepLock();
+  if(!maskOpen()&&!presentationHeld()&&!mq.length)finishSleepPreparation();else nextPop();
+}
+function finishSleepPreparation(){
+  var run=S&&S.sleepRun;if(!run||S.endingDone||maskOpen()||presentationHeld()||mq.length)return;
+  if((S.day|0)===20&&S.day20Check==null){S.day20Check=S.aff>=100?"passed":"failed";save()}
+  run.phase=S.day20Check==="failed"&&(S.day|0)===20?"ending-four":"ready";rememberSleepQueue(null);
+  dayLock=0;endDay(run.force);syncSleepLock();
+}
+function resumeSleepRun(){
+  var run=S&&S.sleepRun;if(!run||run.day!==(S.day|0)||S.endingDone)return false;
+  syncSleepLock();if(maskOpen()||presentationHeld())return true;
+  if(run.phase==="auto-settle"){settleAutomaticOuting();return true}
+  if(mq.length){nextPop();return true}
+  if(run.phase==="notice"){mq.unshift({automaticOutingNotice:true});nextPop();return true}
+  if(run.phase==="events"){grantDailyAffinity();return true}
+  if(run.phase==="bonus-events"){finishSleepPreparation();return true}
+  if(run.phase==="ready"||run.phase==="ending-four"){dayLock=0;endDay(run.force);return true}
+  return true;
+}
+function acknowledgeSleepEntry(){
+  var run=S&&S.sleepRun;if(!run)return false;
+  var automatic=!!(run.active&&run.active.automaticOutingNotice);rememberSleepQueue(null);
+  if(automatic){settleAutomaticOuting();return true}
+  return false;
+}
+function isEndingFour(){return !!(S&&S.endingDone&&(S.ending|0)===4)}
+function openEndingFour(){
+  if(!isEndingFour())return;
+  finishMemoryReveal();hideSqOpts();$("mt").textContent=ENDING4_DRAFT.title;
+  $("mp").textContent="【"+ENDING4_DRAFT.label+"】\n\n"+ENDING4_DRAFT.body;
+  paintMaskChrome(ENDING4_DRAFT.title);$("mask").classList.add("on","ending-four-window");$("mb").style.display="";$("mb").focus({preventScroll:true});
+}
+function finishEndingFour(){
+  cancelScenePresentation();S.endingDone=true;S.ending=4;S.taken=false;S.ending4Read=false;S.ending4DraftVersion=1;
+  S.sleepRun=null;S.pendingDayEnd=null;S.stormStay=null;S.trip=null;S.pendingObs=null;S.pendingSq=null;S._dayAdvancing=false;S.uncleCuePending=false;
+  mq=[];dayLock=busy=backLock=mbLock=0;setObsBtn(false);save();render(false);openEndingFour();
+}
+function paintEndingFour(){
+  var root=$("gameUI");root.classList.toggle("ending-four",isEndingFour());if(!isEndingFour())return;
+  $("av").classList.add("away");$("note").classList.add("on");$("ne").textContent="第二十天";$("nh").textContent="她離開了";$("nt").textContent="這一個月，在此提前結束。";
+}
+function canOfferFinalEnding(){
+  if(!S||S.endingDone||(S.day|0)<30||(S.uncleStep|0)<11)return false;
+  var thread=CHAT_THREADS.find(function(t){return t.step===11&&!t.ending&&!t.retired});return !!thread&&chatThreadUnlocked(thread);
+}
+
 function part(){return S.dsec<60?0:S.dsec<120?1:2}
 function ask(i){if(busy||S.endingDone||isStormNight())return;var q=QA[i];if(!q||S.taken||S.trip||S.aff<q[2]||!qaGateOk(q))return;
 askOptNew(i);var x=qaAnswer(q),st=effM()|0;
@@ -4554,12 +4673,12 @@ function playDayAdvance(newDay,onDark,done){
  calendar();void ov.offsetWidth;ov.classList.add("on");
  playDayAdvance._t1=setTimeout(function(){if(onDark)onDark();ov.classList.add("hold");playDayAdvance._t2=setTimeout(function(){ov.classList.add("out");playDayAdvance._t3=setTimeout(finish,420)},600)},300);
 }
-function advanceAfterSleep(force,skipSummary){if(!S||S._dayAdvancing)return;ensureDailyBase();if(!skipSummary&&showDaySummary(force,daySummaryTotals()))return;var stormReturn=isStormNight()?S.stormStay:null;if(!S.pendingDayEnd)S.pendingDayEnd={day:S.day|0,force:!!force,phase:"advancing",queued:mq.slice()};S.pendingDayEnd.phase="advancing";S._dayAdvancing=true;$("gameUI").inert=true;save();S.sleepAwaitClose=false;S.pendingYesterdayUnsaid=null;
+function advanceAfterSleep(force,skipSummary){if(!S||S._dayAdvancing)return;ensureDailyBase();if(!skipSummary&&showDaySummary(force,daySummaryTotals()))return;if(S.sleepRun&&S.sleepRun.phase==="ending-four"){finishEndingFour();return}var stormReturn=isStormNight()?S.stormStay:null;if(!S.pendingDayEnd)S.pendingDayEnd={day:S.day|0,force:!!force,phase:"advancing",queued:mq.slice()};S.pendingDayEnd.phase="advancing";S._dayAdvancing=true;$("gameUI").inert=true;save();S.sleepAwaitClose=false;S.pendingYesterdayUnsaid=null;
 var newDay=(S.day|0)+1;
 function applyDay(){
   var hadOuting=!!(S.dEv&&S.dEv.length);
-  S.day=newDay;S.dsec=force?0:Math.max(0,(S.dsec|0)-DL);S.homeActToday=false;S.cohabToday=false;S.dEv=[];S.sqToday=[];S.sqDone=false;S.pendingSq=null;S.outToday=false;S.pendingObs=null;S.motif=null;S.journalGlow=0;S.pendingChat=null;setObsBtn(false);
-  if(S.pendingDayEnd){S.pendingDayEnd.phase="arrived";S.pendingDayEnd.newDay=S.day|0}S.dailyBase={day:S.day|0,aff:+S.aff||0,m:S.m|0};publishDueForumThreads();
+  S.day=newDay;S.sleepRun=null;S.dsec=force?0:Math.max(0,(S.dsec|0)-DL);S.homeActToday=false;S.cohabToday=false;S.dEv=[];S.sqToday=[];S.sqDone=false;S.pendingSq=null;S.outToday=false;S.pendingObs=null;S.motif=null;S.journalGlow=0;S.pendingChat=null;setObsBtn(false);
+  if(S.pendingDayEnd){S.pendingDayEnd.phase="arrived";S.pendingDayEnd.newDay=S.day|0}S.dailyBase={day:S.day|0,aff:+S.aff||0,m:S.m|0};publishDueForumThreads();if(canOfferFinalEnding()&&!S.castOff)queueCastOff();
   if(stormReturn){stormReturn.phase="return";S.stormStay=stormReturn;S.pendingObs=stormReturn.observation;setObsBtn(true)}
   /* 前一日有外出：進新天後才掛 ❓ 問題（一天一題；未答則再睡時清掉） */
   if(hadOuting)queueSqAsk();
@@ -4570,19 +4689,15 @@ playDayAdvance(newDay,applyDay,unlock)}
 function endDay(force){if(dayLock||S.taken||S.trip||maskOpen())return;if(!force&&S.dsec<DL)return;dayLock=1;
 var ev=S.dEv||[],n=0;ev.forEach(function(e){if(e.met)n++});
 var dayNow=S.day;
-addLog("📅 第"+dayNow+"天結束，外出 "+ev.length+" 次"+(n?"，遇見強叔 "+n+" 次":"")+(force?"・提早睡覺":""));
+if(!S.sleepRun||!S.sleepRun.logged){addLog("📅 第"+dayNow+"天結束，外出 "+ev.length+" 次"+(n?"，遇見強叔 "+n+" 次":"")+(force?"・提早睡覺":""));if(S.sleepRun)S.sleepRun.logged=true;}
 advanceAfterSleep(!!force)}
-function sleepDay(){if(presentationHeld()||busy||S.taken||S.endingDone||dayLock||maskOpen())return;if(S.trip){say("（她還在外面。等她回來，或先點「打瞌睡」再睡。）","pout");return}withBusy(function(){if(S.trip||dayLock||maskOpen()||S.taken)return;
-if(isStormNight()){endDay(true);render();return}
-if(!S.endingDone&&(effM()|0)>=99&&(S.day|0)<30){mq.push({endingPrep:1});endDay(true);render();return}
-if(!S.endingDone&&(S.day|0)>=29&&(S.uncleStep|0)>=10&&step5Open()){if(!S.castOff)queueCastOff();else if(!S.endingDone)mq.push({endingPrep:1});endDay(true);render();return}
-endDay(true);render()})}
+function sleepDay(){if(sleepFlowHeld()||presentationHeld()||busy||S.taken||S.endingDone||dayLock||maskOpen())return;if(S.trip){say("（她還在外面。等她回來，或先點「打瞌睡」再睡。）","pout");return}withBusy(function(){startSleepRun(true);render(false)})}
 function releaseDayLock(){if(!maskOpen()&&!mq.length){dayLock=0;try{flushCohabQueue()}catch(e){}}}
 var S,tab="",mq=[],thT=0,busy=0,backLock=0,mbLock=0,dayLock=0;
-function def(){return {homeActToday:false,aff:0,exp:0,trip:null,log:[],seen:[],t:Date.now(),m:0,trips:0,taken:false,day:1,dsec:0,dEv:[],qa:[],viewM:0,sq:[],sqAsked:[],sqToday:[],sqDone:false,outToday:false,pendingObs:null,stormStay:null,uncleCuePending:false,focusHintSeen:false,thoughtFocusHintSeen:false,dailyBase:null,pendingDayEnd:null,forumPublishDays:{},optSeen:{blank:{},sq:{},ask:{}},journals:[],journalOpen:null,motif:null,journalGlow:0,metOut:false,momIntroSeen:false,heroIntroPending:false,memSeen:[],memPending:[],memVersion:3,uncleStarted:false,uncleStep:0,uncleTh:[],endingDone:false,ending:0,castOff:false,cohabSeen:[],cohabPending:[],cohabToday:false,chatSeen:false,chatNotice:false,pendingYesterdayUnsaid:null,pendingSq:null,sqVer:2,chatOpenStep:null,chatUnlocked:[],_chatThreadCount:null}}
-function load(){try{var r=localStorage.getItem("sakura_v1");S=r?JSON.parse(r):def()}catch(e){S=def()}if(!S)S=def();if(!S.stormStay)S.stormStay=null;if(S.uncleCuePending==null)S.uncleCuePending=false;if(S.focusHintSeen==null)S.focusHintSeen=false;if(S.thoughtFocusHintSeen==null)S.thoughtFocusHintSeen=false;if(!S.forumPublishDays)S.forumPublishDays={};if(!S.pendingDayEnd)S.pendingDayEnd=null;if(S.trip&&S.trip.id===0)S.trip.place=PLACES[0][1];try{delete S.coin;delete S.sta}catch(e){}if(S.homeActToday==null)S.homeActToday=false;if(!S.cohabSeen)S.cohabSeen=[];if(!S.cohabPending)S.cohabPending=[];if(S.cohabToday==null)S.cohabToday=false;if(S.chatSeen==null)S.chatSeen=false;if(S.chatNotice==null)S.chatNotice=false;if(S.pendingYesterdayUnsaid==null)S.pendingYesterdayUnsaid=null;if(S.pendingSq===undefined)S.pendingSq=null;if(S.chatOpenStep===undefined)S.chatOpenStep=null;if(!S.chatUnlocked)S.chatUnlocked=[];
+function def(){return {affinityRulesVersion:2,affinityRulesStartDay:1,lastDailyAffinityGrantedDay:0,day20Check:null,sleepRun:null,ending4Read:false,homeActToday:false,aff:0,exp:0,trip:null,log:[],seen:[],t:Date.now(),m:0,trips:0,taken:false,day:1,dsec:0,dEv:[],qa:[],viewM:0,sq:[],sqAsked:[],sqToday:[],sqDone:false,outToday:false,pendingObs:null,stormStay:null,uncleCuePending:false,focusHintSeen:false,thoughtFocusHintSeen:false,dailyBase:null,pendingDayEnd:null,forumPublishDays:{},optSeen:{blank:{},sq:{},ask:{}},journals:[],journalOpen:null,motif:null,journalGlow:0,metOut:false,momIntroSeen:false,heroIntroPending:false,memSeen:[],memPending:[],memVersion:3,uncleStarted:false,uncleStep:0,uncleTh:[],endingDone:false,ending:0,castOff:false,cohabSeen:[],cohabPending:[],cohabToday:false,chatSeen:false,chatNotice:false,pendingYesterdayUnsaid:null,pendingSq:null,sqVer:2,chatOpenStep:null,chatUnlocked:[],_chatThreadCount:null}}
+function load(){try{var r=localStorage.getItem("sakura_v1");S=r?JSON.parse(r):def()}catch(e){S=def()}if(!S)S=def();migrateAffinityRules();if(!S.sleepRun)S.sleepRun=null;if(!S.stormStay)S.stormStay=null;if(S.uncleCuePending==null)S.uncleCuePending=false;if(S.focusHintSeen==null)S.focusHintSeen=false;if(S.thoughtFocusHintSeen==null)S.thoughtFocusHintSeen=false;if(!S.forumPublishDays)S.forumPublishDays={};if(!S.pendingDayEnd)S.pendingDayEnd=null;if(S.trip&&S.trip.id===0)S.trip.place=PLACES[0][1];try{delete S.coin;delete S.sta}catch(e){}if(S.homeActToday==null)S.homeActToday=false;if(!S.cohabSeen)S.cohabSeen=[];if(!S.cohabPending)S.cohabPending=[];if(S.cohabToday==null)S.cohabToday=false;if(S.chatSeen==null)S.chatSeen=false;if(S.chatNotice==null)S.chatNotice=false;if(S.pendingYesterdayUnsaid==null)S.pendingYesterdayUnsaid=null;if(S.pendingSq===undefined)S.pendingSq=null;if(S.chatOpenStep===undefined)S.chatOpenStep=null;if(!S.chatUnlocked)S.chatUnlocked=[];
 try{var _validMem={};MEMORIES.forEach(function(m){_validMem[m[0]]=1});S.memSeen=(S.memSeen||[]).filter(function(id){return _validMem[id]});S.memPending=(S.memPending||[]).filter(function(id){return _validMem[id]&&S.memSeen.indexOf(id)<0})}catch(e){}if(S.momIntroSeen==null)S.momIntroSeen=true;if(!S.memSeen)S.memSeen=[];if(!S.memPending)S.memPending=[];if(S.m==null)S.m=0;if((S.aff|0)>100)S.aff=100;if(S.uncleStarted==null)S.uncleStarted=false;if(S.uncleStep==null)S.uncleStep=0;if(!S.uncleTh)S.uncleTh=[];if(S.endingDone==null)S.endingDone=false;if(S.ending==null)S.ending=0;if(S.castOff==null)S.castOff=false;if(typeof uncleMCap==="function"){var _c=uncleMCap();if((S.m|0)>_c)S.m=_c}else if(typeof step5Open==="function"&&!step5Open()&&(S.m|0)>29)S.m=29;if(S.trips==null)S.trips=0;if(!S.seen)S.seen=[];if(S.day==null){S.day=1;S.dsec=0}if(!S.dEv)S.dEv=[];if(!S.qa)S.qa=[];if(S.viewM==null)S.viewM=0;if(!S.sq)S.sq=[];if(!S.sqToday)S.sqToday=[];if(S.outToday==null)S.outToday=false;if(S.sqDone==null)S.sqDone=!!(S.sqToday&&S.sqToday.length);if(S.pendingObs===undefined)S.pendingObs=null;if(!S.optSeen||typeof S.optSeen!="object")S.optSeen={blank:{},sq:{},ask:{}};if(!S.optSeen.blank)S.optSeen.blank={};if(!S.optSeen.sq)S.optSeen.sq={};if(!S.optSeen.ask)S.optSeen.ask={};if(!S.journals)S.journals=[];if(S.journalOpen===undefined)S.journalOpen=null;scrubJournals();if(S.motif===undefined)S.motif=null;if(S.journalGlow==null)S.journalGlow=0;if(S.metOut==null){S.metOut=!!(S.m>0||(S.journals&&S.journals.some(function(j){return j&&j.met}))||(S.dEv&&S.dEv.some(function(e){return e&&e.met})))}try{delete S.blankHintSeen;delete S.sqHintSeen;delete S.anxiety;delete S.fantasy;delete S.evidence}catch(e){}}
-function save(){try{localStorage.setItem("sakura_v1",JSON.stringify(S))}catch(e){}}
+function save(){if(sleepSettlementInProgress)return;try{localStorage.setItem("sakura_v1",JSON.stringify(S))}catch(e){}}
 function doReset(){cancelScenePresentation();S=def();mq=[];busy=0;backLock=0;mbLock=0;dayLock=0;$("mask").classList.remove("on");try{localStorage.removeItem("sakura_v1")}catch(e){}say("「哼！才不要多想，只是當初口快答應了而已！」","pout");render();maybeMomIntro()}
 var rc=0,rt;
 function debugJumpEnding(){if(!S)return;if(!confirm("跳到第29天、阿祿親密度100，解鎖全部日常／回憶，返回首頁供測試？"))return;closeSettings();
@@ -4622,7 +4737,7 @@ function ensureMemoryState(){if(S.memVersion!==3){S.memSeen=[];S.memPending=[];S
 function memoryUnlocked(m){return !!(m&&S&&(S.aff|0)>=m[0])}
 function memoryHasUnread(){ensureMemoryState();return MEMORIES.some(function(m){return memoryUnlocked(m)&&S.memSeen.indexOf(m[0])<0})}
 function paintMemoryNotice(){["navMem","navStory"].forEach(function(id){var el=$(id);if(el)el.querySelectorAll(".notice-dot").forEach(function(dot){dot.remove()})})}
-function checkMemories(){ensureMemoryState();MEMORIES.forEach(function(m){if(memoryUnlocked(m)&&S.memSeen.indexOf(m[0])<0&&S.memPending.indexOf(m[0])<0)S.memPending.push(m[0])});paintMemoryNotice();flushMemoryQueue()}
+function checkMemories(){if(isEndingFour())return;ensureMemoryState();MEMORIES.forEach(function(m){if(memoryUnlocked(m)&&S.memSeen.indexOf(m[0])<0&&S.memPending.indexOf(m[0])<0)S.memPending.push(m[0])});paintMemoryNotice();flushMemoryQueue()}
 function flushMemoryQueue(){if(S.taken||S.trip||!S.momIntroSeen)return;var phone=$("momPhone");if(phone&&phone.classList.contains("on"))return;(S.memPending||[]).forEach(function(id){var m=memByAff(id);if(!memoryUnlocked(m)||S.memSeen.indexOf(id)>=0||mq.some(function(entry){return entry.memoryId===id}))return;var entry=[m[1],memBody(m)];entry.memoryId=id;mq.push(entry)});if(!maskOpen()&&mq.length)nextPop()}
 function replayMem(k){ensureMemoryState();var m=MEMORIES[k];if(!memoryUnlocked(m))return;if(S.memSeen.indexOf(m[0])<0)S.memSeen.push(m[0]);S.memPending=S.memPending.filter(function(id){return id!==m[0]});save();paintMemoryNotice();if(tab==="mem")pane();mq.push([m[1],memBody(m)]);nextPop()}
 function afterAffTier(prev){if(tier()>(prev|0))flashAffTierFx();checkMemories();queueCohabUnlock()}
@@ -4669,7 +4784,7 @@ var us=S.uncleStep|0,key=us<=0?"time":(us<=4?"body":"item"),arr=placeBag[key];
 if(!arr||!arr.length){arr=placeBag.time||placeBag.body||placeBag.item||[];}
 return arr.length?[arr[0]]:[];
 }
-function tname(){if(S.endingDone&&(S.ending|0)===2||S.taken)return"女主已搬走";if(S.endingDone&&(S.ending|0)===1)return"出軌之後";if(S.endingDone&&(S.ending|0)===3)return"回不去的戀人";return effM()>=70?"對你愧疚的人":effM()>=45?"嘴硬心虛的人":TIERS[tier()][1]}
+function tname(){if(isEndingFour())return"離開之後";if(S.endingDone&&(S.ending|0)===2||S.taken)return"女主已搬走";if(S.endingDone&&(S.ending|0)===1)return"出軌之後";if(S.endingDone&&(S.ending|0)===3)return"回不去的戀人";return effM()>=70?"對你愧疚的人":effM()>=45?"嘴硬心虛的人":TIERS[tier()][1]}
 function ntrOn(){return uncleOpen()&&((S.day|0)>=6)&&((S.uncleStep|0)>0||effM()>0||(S.aff>=100&&S.trips>=5)||canAdvanceUncle())}
 function rate(){return +(1+tier()*1.5).toFixed(1)}
 function $(i){return document.getElementById(i)}
@@ -4721,7 +4836,7 @@ var lines=sqLines(o).slice();sqReply={i:0,lines:lines};
 hideSqOpts();var mask=$("mask");if(mask)mask.classList.remove("on","obs-dark");clearMoodPeek();closePane();beginReactionReading(lines[0]);
 try{save()}catch(e){}}
 function ansNow(qi,oi){startSqReplies(qi,oi)}
-function talk(){if(isStormNight())return;if(continueReactionReading())return;if(presentationHeld())return;if(stopTyping($("say"),true))return;if(busy)return;if(S.endingDone){if((S.ending|0)===2||S.taken){say(END_GONE,"sad");return}var bag=END_TALK[S.ending|0];if(bag&&bag.length){say("「"+pick(bag)+"」",(S.ending|0)===3?"sad":"shy");return}}if(S.taken){say(END_GONE,"sad");return}if(S.trip){say("（她還在外面。等她回來再聊吧。）","pout");return}if(maskOpen()||dayLock)return;
+function talk(){if(isEndingFour()){openEndingFour();return}if(isStormNight())return;if(continueReactionReading())return;if(presentationHeld())return;if(stopTyping($("say"),true))return;if(busy)return;if(S.endingDone){if((S.ending|0)===2||S.taken){say(END_GONE,"sad");return}var bag=END_TALK[S.ending|0];if(bag&&bag.length){say("「"+pick(bag)+"」",(S.ending|0)===3?"sad":"shy");return}}if(S.taken){say(END_GONE,"sad");return}if(S.trip){say("（她還在外面。等她回來再聊吧。）","pout");return}if(maskOpen()||dayLock)return;
 var t=tier(),st=stage();
 if(S.pendingChat){var slip=S.pendingChat;S.pendingChat=null;say("「"+slip+"」",["shy","pout","cold","cold"][Math.min(st,3)]);addLog("💬 "+slip);try{localStorage.setItem("sakura_v1",JSON.stringify(S))}catch(e){}return}
 if(dissonanceOn()&&Math.random()<.72){var fx=pick(FLAT_TALK);say("「"+fx+"」",pick(["calm","pout","cold"]));try{localStorage.setItem("sakura_v1",JSON.stringify(S))}catch(e){}return}
@@ -4747,9 +4862,9 @@ function homeAct(i){if(presentationHeld()||busy||S.taken||S.endingDone||isStormN
 var a=HOME_ACTS[i];if(!a)return;if(S.homeActToday){say("（今天的室內互動用過了。睡一覺，明天再陪她。）","pout");return}
 withBusy(function(){homeActNow(i)});}
 function homeBand(){var m=effM()|0;var b=m>=70?2:m>=30?1:0;return Math.max(b,Math.min(2,voiceFloor()))}
-function homeActNow(i){if(isStormNight())return;var a=HOME_ACTS[i];if(!a||S.taken||S.trip||S.homeActToday||S.endingDone)return;
+function homeActNow(i){if(isStormNight()||sleepFlowHeld())return;var a=HOME_ACTS[i];if(!a||S.taken||S.trip||S.homeActToday||S.endingDone)return;
 if((S.aff|0)<(a[3]|0)){say("（親密再高一點，才能做這件事。）","pout");return}
-var b=tier(),gn=a[4]|0; /* 大綱：強叔親密度不削減互動加值 */
+var b=tier(),gn=homeAffinityGain(a); /* 大綱：強叔親密度不削減互動加值 */
 ensureDailyBase();var feedbackAffBefore=S.aff;S.homeActToday=true;S.aff+=gn;clampAff();S.dsec=Math.min(DL,(S.dsec|0)+HOME_TIME);
 var bag=(HOME_LINES[a[0]]||[])[homeBand()]||(HOME_LINES[a[0]]||[])[0]||["……今天也還好。"];
 var line=pick(bag);
@@ -4902,8 +5017,8 @@ function scheduleJournalGlow(){clearTimeout(journalGlowT);if(!journalOn()){S.jou
 function openJournal(i){return}
 function closeJournal(){S.journalOpen=null;render();syncMoodDim()}
 function runSceneFx(name,ms){if(name==="fx-leave")playUiSound("leave");else if(name==="fx-return")playUiSound("return");var hu=document.querySelector(".homeui");if(!hu)return;hu.classList.remove("fx-leave","fx-return","fx-sleep");if(!name)return;hu.classList.add(name);clearTimeout(runSceneFx._t);runSceneFx._t=setTimeout(function(){hu.classList.remove("fx-leave","fx-return","fx-sleep")},ms||520)}
-function go(i){if(presentationHeld()||busy||S.trip||S.taken||S.endingDone||S.outToday||isStormNight()||maskOpen())return;var place=PLACES[i];if(!place||S.aff<place[3])return;closePane();scenePresentation.phase="leaving";updatePresentationState();var duration=prefersReducedMotion()?0:650;runSceneFx("fx-leave",duration||1);scenePresentation.timer=setTimeout(function(){scenePresentation.phase="";updatePresentationState();goNow(i)},duration)}
-function goNow(i){if(S.trip||S.taken||S.outToday||isStormNight())return;var p=PLACES[i],dep=pickDepart(i);S.trip={id:i,place:p[1],end:Date.now()+OUTING_SECONDS*1000,acts:[],depart:dep,skipped:false,metUncle:uncleAppearRoll()};S.outToday=true;scenePresentation.departurePending=true;updatePresentationState();
+function go(i){if(sleepFlowHeld()||presentationHeld()||busy||S.trip||S.taken||S.endingDone||S.outToday||isStormNight()||maskOpen())return;var place=PLACES[i];if(!place||S.aff<place[3])return;closePane();scenePresentation.phase="leaving";updatePresentationState();var duration=prefersReducedMotion()?0:650;runSceneFx("fx-leave",duration||1);scenePresentation.timer=setTimeout(function(){scenePresentation.phase="";updatePresentationState();goNow(i)},duration)}
+function goNow(i){if(sleepFlowHeld()||S.trip||S.taken||S.outToday||isStormNight())return;var p=PLACES[i],dep=pickDepart(i);S.trip={uid:"day-"+(S.day|0)+"-outing",day:S.day|0,id:i,place:p[1],end:Date.now()+OUTING_SECONDS*1000,acts:[],depart:dep,skipped:false,metUncle:uncleAppearRoll()};S.outToday=true;scenePresentation.departurePending=true;updatePresentationState();
 closePane();
 mq.push(["🚪 她出門了",dep]);
 say("「那我出門囉！去"+p[1]+"～別等太晚喔。」","wink");addLog("🚪 外出："+p[1]+"｜"+dep.replace(/\n/g," "));thought();nextPop();render()}
@@ -5061,13 +5176,13 @@ setObsBtn(true);
 if(met&&canAdvanceUncle())queueUncleStep(); /* Phone calls provide information only. */
 if(met){addM(appearMAmt())}
 if((S.day|0)===6){S.m=0}
-if(!S.endingDone&&(effM()|0)>=99&&(S.day|0)<30){var hasPrep=false;for(var _ei=0;_ei<mq.length;_ei++){if(mq[_ei]&&mq[_ei].endingPrep)hasPrep=true}if(!hasPrep)mq.push({endingPrep:1})}
+if(canOfferFinalEnding()){var hasPrep=false;for(var _ei=0;_ei<mq.length;_ei++){if(mq[_ei]&&mq[_ei].endingPrep)hasPrep=true}if(!hasPrep)mq.push({endingPrep:1})}
 /* ❓ 問題改到隔日進天再 queueSqAsk，回家不掛按鈕 */
 var nightTxt=(dissonanceOn()||(motif&&motif.mode==="clash"))?pick(FLAT_NIGHT):pick(NIGHT[Math.min(st,NIGHT.length-1)]);
 if(st>=2&&!dissonanceOn()&&!(motif&&motif.th))nightTxt+="\n\n你沒睡好。懷疑比她的呼吸聲更響。";
 var freshHomeArc=(S.uncleStep|0)>returnStepBefore&&(S.uncleStep|0)<=11?uncleArcByStep(S.uncleStep|0):null;
 if(S.pendingObs){S.pendingObs.nightTxt=freshHomeArc?freshHomeArc.home:nightTxt;if(freshHomeArc)S.pendingObs.homeStep=freshHomeArc.step;}
-S.dEv.push({id:pid,pt:part(),met:met,fr:met?"（尚未起疑）":("她去了"+p[1]+"，"+ev+"，"+pick(SOFT))});
+S.dEv.push({id:pid,tripId:trip.uid||("day-"+(S.day|0)+"-outing"),auto:!!trip.auto,pt:part(),met:met,fr:met?"（尚未起疑）":("她去了"+p[1]+"，"+ev+"，"+pick(SOFT))});
 queueCohabUnlock();
 afterAffTier(b);/* no rank popup */
 NSTORY.filter(function(s){var th=s[0]|0;var open=(th<=20)?((S.uncleStep|0)>=1&&effM()>=th):(step5Open()&&effM()>=th);return open&&S.seen.indexOf("n"+s[0])<0}).forEach(function(s){S.seen.push("n"+s[0]);mq.push(["💔 "+s[1],s[2]])});
@@ -5120,15 +5235,18 @@ Array.from(el.children).forEach(function(line){run.observer.observe(line)});
 $("mp").addEventListener("click",function(){finishMemoryReveal()});
 $("mp").addEventListener("keydown",function(e){if(memoryReveal&&(e.key==="Enter"||e.key===" ")){e.preventDefault();e.stopPropagation();finishMemoryReveal()}});
 var memoryMotionQuery=window.matchMedia("(prefers-reduced-motion: reduce)");if(memoryMotionQuery.addEventListener)memoryMotionQuery.addEventListener("change",function(e){if(e.matches)finishMemoryReveal()});
-function nextPop(){if(maskOpen()||presentationHeld())return;if(!mq.length){dayLock=0;hideSqOpts();if(moodPeekOn)clearMoodPeek();return}var m=mq.shift();if(!m){releaseDayLock();hideSqOpts();if(moodPeekOn)clearMoodPeek();return}
+function nextPop(){if(maskOpen()||presentationHeld())return;if(!mq.length){dayLock=0;hideSqOpts();if(moodPeekOn)clearMoodPeek();if(sleepFlowHeld()){rememberSleepQueue(null);resumeSleepRun()}return}var m=mq.shift();if(!m){releaseDayLock();hideSqOpts();if(moodPeekOn)clearMoodPeek();return}
 if(Array.isArray(m)&&typeof m[0]==="string"&&m[0].indexOf("📌 同居事件：")===0){mq=mq.filter(function(entry){return !Array.isArray(entry)||entry[0]!==m[0]||entry[1]!==m[1]})}
-if(m.returnHome){if(!showReturnWindow())nextPop();return}
+if(sleepFlowHeld())rememberSleepQueue(m);
+if(m.automaticOutingNotice){showAutomaticOutingNotice();return}
+if(m.stormNight){if(!openStormNight())nextPop();syncSleepLock();return}
+if(m.returnHome){if(!showReturnWindow(m.nightTxt))nextPop();return}
 if(Array.isArray(m)&&/^(?:🌙\s*)?當晚$/.test(m[0])){var night=String(m[1]||"");if(S&&S.pendingObs)S.pendingObs.nightTxt=night;if(!showReturnWindow(night))nextPop();return}
 if(m.sq!=null){finishMemoryReveal();showSqMask(m.sq);return}
 if(m.endingPrep){showEndingPrep();return}
 if(m.memoryId!=null){ensureMemoryState();if(S.memSeen.indexOf(m.memoryId)<0)S.memSeen.push(m.memoryId);S.memPending=S.memPending.filter(function(id){return id!==m.memoryId});save()}
-finishMemoryReveal();hideSqOpts();sqReply=null;$("mt").textContent=m[0];$("mp").textContent=m[1];paintMaskChrome(m[0]);var reading=$("mask").querySelector(".modalReading");if(reading)reading.scrollTop=0;paintVoiceFog();$("mask").classList.add("on");revealMemoryText()}
-function dismissMask(ev){if(ev){try{ev.preventDefault();ev.stopPropagation()}catch(e){}}if(mbLock||(returnWindowOpen()&&returnReading&&returnReading.switching))return;if(isStormNight()&&$("mask").classList.contains("storm-window")){S.stormStay.nightShown=true;save()}if(returnWindowOpen()){resetReturnReading();$("gameUI").inert=false;$("mask").classList.remove("return-window");clearMoodPeek()}if(scenePresentation.departurePending&&$("mask").classList.contains("departure-window")){scenePresentation.departurePending=false;updatePresentationState()}finishMemoryReveal();mbLock=1;var mask=$("mask"),heroArrival=!!(mask&&mask.classList.contains("intro-arrival"));if(mask){mask.classList.remove("on");mask.classList.remove("obs-dark");var _box=mask.querySelector(".box");if(_box)_box.classList.remove("obs-win-appear");if(!mq.length&&!moodPeekOn)mask.classList.remove("mood-chrome")}if(heroArrival)beginHeroArrival();setTimeout(function(){try{nextPop()}catch(e){}if(S&&S.sleepAwaitClose&&!maskOpen()&&!(mq&&mq.length)){advanceAfterSleep(!!S.sleepForce)}else{releaseDayLock()}mbLock=0;paintStats()},30)}
+finishMemoryReveal();hideSqOpts();sqReply=null;$("mt").textContent=m[0];$("mp").textContent=m[1];paintMaskChrome(m[0]);var reading=$("mask").querySelector(".modalReading");if(reading)reading.scrollTop=0;paintVoiceFog();$("mask").classList.add("on");revealMemoryText();syncSleepLock()}
+function dismissMask(ev){if(ev){try{ev.preventDefault();ev.stopPropagation()}catch(e){}}if(mbLock||(returnWindowOpen()&&returnReading&&returnReading.switching))return;if(isEndingFour()&&$("mask").classList.contains("ending-four-window")){S.ending4Read=true;$("mask").classList.remove("ending-four-window");save()}if(isStormNight()&&$("mask").classList.contains("storm-window")){S.stormStay.nightShown=true;save()}if(returnWindowOpen()){resetReturnReading();$("gameUI").inert=false;$("mask").classList.remove("return-window");clearMoodPeek()}if(scenePresentation.departurePending&&$("mask").classList.contains("departure-window")){scenePresentation.departurePending=false;updatePresentationState()}finishMemoryReveal();mbLock=1;var mask=$("mask"),heroArrival=!!(mask&&mask.classList.contains("intro-arrival"));if(mask){mask.classList.remove("on");mask.classList.remove("obs-dark");var _box=mask.querySelector(".box");if(_box)_box.classList.remove("obs-win-appear");if(!mq.length&&!moodPeekOn)mask.classList.remove("mood-chrome")}if(heroArrival)beginHeroArrival();setTimeout(function(){if(acknowledgeSleepEntry()){mbLock=0;paintStats();return}try{nextPop()}catch(e){}if(S&&S.sleepAwaitClose&&!maskOpen()&&!(mq&&mq.length)){advanceAfterSleep(!!S.sleepForce)}else{releaseDayLock()}mbLock=0;paintStats()},30)}
 (function(){var mb=$("mb");if(!mb)return;mb.onpointerup=null;mb.onclick=null;mb.addEventListener("click",dismissMask,false);mb.addEventListener("pointerup",function(e){if(e.pointerType==="mouse"&&e.button!==0)return;dismissMask(e)},false);
 var mask=$("mask");if(mask&&!mask._outsideBound){mask._outsideBound=1;mask.addEventListener("click",function(e){if(e.target===mask)dismissMask(e)},false);var box=mask.querySelector(".box");if(box&&!mask._boxStop){mask._boxStop=1;box.addEventListener("click",function(e){e.stopPropagation()},false)}}})();
 function replay(k){if(maskOpen()||presentationHeld()||mbLock||dayLock)return;var s=STORY[k];if(!s)return;mq.push(["📌 同居事件："+s[1],s[2]]);nextPop()}
@@ -5156,7 +5274,7 @@ if(!S.chatSeen){S.chatSeen=true;addLog("💬 打開匿名討論區・看見一�
 function closeChatRoom(){rememberChatReading();chatRenderedKey=null;var el=$("chatRoom");if(!el)return;el.classList.remove("on");el.setAttribute("aria-hidden","true");S.chatOpenStep=null}
 (function(){var el=$("chatRoom");if(!el)return;el.addEventListener("click",function(e){if(e.target===el)closeChatRoom()});el.addEventListener("keydown",function(e){if(e.key==="Escape"){e.preventDefault();e.stopPropagation();closeChatRoom()}})})();
 
-function queueCohabUnlock(){if(S.taken||S.trip||S.cohabToday||!S.momIntroSeen)return;if(!S.seen)S.seen=[];
+function queueCohabUnlock(){if(S.endingDone||S.taken||S.trip||S.cohabToday||!S.momIntroSeen)return;if(!S.seen)S.seen=[];
 var due=[];STORY.forEach(function(s){if((S.aff|0)<s[0])return;if(S.seen.indexOf(s[0])>=0)return;due.push(s)});
 if(!due.length)return;due.sort(function(a,b){return a[0]-b[0]});var s=due[0];S.seen.push(s[0]);S.cohabToday=true;
 mq.push(["📌 同居事件："+s[1],s[2]]);addLog("📌 同居事件・"+s[1]);if(!maskOpen())nextPop()}
@@ -5171,8 +5289,8 @@ if(a.home){if(scenePresentation.phase!=="returning"&&!a.storm)say(a.home,next>=5
 if(a.trace){S.pendingObs={trTxt:a.trace,met:true,motif:null};setObsBtn(true)}
 if(a.storm){try{var hu=document.querySelector(".homeui");if(hu)hu.classList.add("outing-shell");syncSilhouette()}catch(e){}}
 addLog("（外面的事，又往前推了一步。）");
-if(next>=11&&(S.day|0)>=29)queueCastOff();
-if(!S.endingDone&&(effM()|0)>=99&&(S.day|0)<30){var hasPrep=false;for(var qi=0;qi<mq.length;qi++){if(mq[qi]&&mq[qi].endingPrep)hasPrep=true}if(!hasPrep)mq.push({endingPrep:1})}
+if(canOfferFinalEnding()&&!S.castOff)queueCastOff();
+if(canOfferFinalEnding()){var hasPrep=false;for(var qi=0;qi<mq.length;qi++){if(mq[qi]&&mq[qi].endingPrep)hasPrep=true}if(!hasPrep)mq.push({endingPrep:1})}
 try{save()}catch(e){}return true}
 function queueCastOff(){if(S.castOff)return;S.castOff=true;
 mq.push(["🩺 石膏拆了","上門的醫護人員拆掉石膏，宣布你可以自己走路了。\n\n媽媽來電：「小紅可以回去了吧？」\n\n房間忽然變得很寬。你本來想問她——可以繼續住下去嗎？"]);
@@ -5221,6 +5339,11 @@ function completedActionLabel(label){return '<svg class="statusMark" viewBox="0 
 function paintDock(){
   var dock=document.querySelector(".dock.tabs")||document.querySelector(".dock");
   if(!dock||!S)return;
+  if(isEndingFour()){
+    dock.classList.remove("is-places","is-blank-acts");dock.setAttribute("aria-label","故事結束後的行動");
+    dock.innerHTML='<button type="button" id="reviewEndingFour">重看結局</button><button type="button" id="restartEndingFour">重新開始</button>';
+    $("reviewEndingFour").onclick=openEndingFour;$("restartEndingFour").onclick=doReset;return;
+  }
   if(isStormNight()){paintStormDock(dock);return}
   if(isOutingPhase()){
     dock.classList.add("is-places");
@@ -5271,8 +5394,8 @@ function pane(){var y=window.scrollY||document.documentElement.scrollTop||0,h=""
 if((S.taken||(S.endingDone&&(S.ending|0)===2))&&(tab=="home"||tab=="go"||tab=="ask"||tab=="herq")){h='<div class="row"><span class="i">🗝️</span><div class="m"><b>女主已搬走</b><div class="sm">小紅搬去強叔那裡了。房間裡只剩下她搬走後空掉的位置。</div></div><button class="btn" onclick="doReset()">重新開始</button></div>'}
 else if(S.endingDone&&(tab=="home"||tab=="go"||tab=="ask"||tab=="herq")){h='<div class="row"><span class="i">📜</span><div class="m"><b>結局已定</b><div class="sm">互動／外出／提問已關閉。討論區仍可回看。</div></div><button class="btn" onclick="doReset()">重新開始</button></div>'}
 else if(tab=="home"){if(S.trip&&!S.taken){h+='<div class="row"><span class="i">🛋️</span><div class="m"><b>她出門了</b><div class="sm">小紅在外面時不能做室內互動。你留在家等她回來。</div></div></div>'}
-else{h+='<div class="sm" style="margin-bottom:8px">每天互動一次，增加親密度'+(S.homeActToday?'　・今天已做過':'')+'</div>';
-HOME_ACTS.forEach(function(a,i){var gn=a[4]|0,used=!!S.homeActToday,lk=(S.aff|0)<(a[3]|0);
+else{h+='<div class="sm" style="margin-bottom:8px">主動互動每天一次・完成 +'+homeAffinityGain(HOME_ACTS[0])+(S.homeActToday?'　・今天已做過':'')+'</div>';
+HOME_ACTS.forEach(function(a,i){var gn=homeAffinityGain(a),used=!!S.homeActToday,lk=(S.aff|0)<(a[3]|0);
 h+='<div class="row'+(used||lk?" lock":"")+'"><span class="i">'+a[2]+'</span><div class="m"><b>'+a[1]+'</b><div class="sm">'+(lk?"需要阿祿親密度 "+a[3]:a[5])+'</div></div><button class="btn" '+(used||lk||S.taken||S.endingDone?"disabled":"")+' onclick="homeAct('+i+')">'+(lk?"未解鎖":used?completedActionLabel():"互動")+'</button></div>'})}}
 else if(tab=="go"){
 if(S.trip&&!S.taken){h+='<div class="blankbox"><div class="beat">她去了'+(S.trip.place||PLACES[S.trip.id][1])+'・<span id="tripCd">倒數 -- 秒</span></div><div class="sm" style="margin-top:6px">外出行動已在底欄：發訊息／打電話／去廁所／打瞌睡。</div></div>'}
@@ -5313,7 +5436,7 @@ else{if(ot)ot.classList.add("off");if(note){var showNote=!!(S.taken||(S.endingDo
 if(away){var ne=$("ne"),nh=$("nh"),nt=$("nt");if(S.taken||(S.endingDone&&(S.ending|0)===2)){if(ne)ne.textContent="空屋";if(nh)nh.textContent="女主已搬走";if(nt)nt.textContent="小紅搬去強叔那裡了。互動／外出／提問／睡覺都已關閉。"}}
 var tb=$("thbox")&&$("thbox").querySelector("b");if(tb){var cur=tb.textContent||"";if(cur.indexOf("⏳")!==0){var wantLab="💭 心聲";if(cur!==wantLab)tb.textContent=wantLab}}
 if(S.taken||(S.endingDone&&(S.ending|0)===2)){if($("nh").textContent!=="女主已搬走"){$("nh").textContent="女主已搬走";$("nt").textContent="小紅搬去強叔那裡了。互動／外出／提問／睡覺都已關閉。"}}
-else if(S.trip){paintOutingHud()}else{}paintStormStay()}
+else if(S.trip){paintOutingHud()}else{}paintStormStay();paintEndingFour()}
 function paintMeterValue(el,width){if(!el)return;var next=parseFloat(width),old=parseFloat(el.dataset.meterValue);el.style.width=width;el.dataset.meterValue=String(next);if(isFinite(old)&&next>old){el.classList.remove("meter-rise");void el.offsetWidth;el.classList.add("meter-rise");clearTimeout(el._meterGlow);el._meterGlow=setTimeout(function(){el.classList.remove("meter-rise")},650)}}
 function maybeUncleUneaseCue(){
   if(!S||!S.uncleCuePending||!S.uncleStarted||S.trip||S.taken||isStormNight()||dayLock||S._dayAdvancing||maskOpen()||presentationHeld()||(mq&&mq.length))return;
@@ -5321,7 +5444,7 @@ function maybeUncleUneaseCue(){
   S.uncleCuePending=false;save();pulsePresentation($("mbox"),"uncle-unease",900);
 }
 function paintStats(){clampAff();
-$("inc").textContent="每天互動一次，增加親密度・外出一次・只有睡覺才會日結";
+$("inc").textContent=newAffinityRulesToday()?"日結 +2・主動互動 +5・每天最多一次":"舊存檔本日維持原計分，翌日起日結 +2／互動 +5";
 $("affn").textContent=fmt(S.aff);
 paintMeterValue($("affbar"),Math.min(100,Math.max(0,S.aff))+"%");
 var outing=!!(typeof isOutingPhase==="function"?isOutingPhase():(S&&S.trip&&!S.taken));
@@ -5331,7 +5454,7 @@ var box=$("mbox");if(box)box.classList.toggle("off",!showM);
 var mn=$("mnum");if(mn)mn.textContent="關係不明";
 var ot=$("outingTop");if(ot)ot.classList.toggle("off",!outing);if(outing)paintOutingHud();
 status();maybeUncleUneaseCue()}
-function render(doPane){paintStats();paintDock();if(doPane!==false)pane();paintAskTab();paintQBtn();paintSideBadges();markChatThreadsNotice();paintChatNotice();try{queueCohabUnlock();checkMemories()}catch(e){}var pn=$("pane");if(pn){var empty=!(pn.innerHTML&&pn.innerHTML.trim());pn.classList.toggle("is-empty",empty);pn.classList.toggle("is-open",!empty&&!!tab)}syncMoodDim();syncSilhouette();paintStormStay();refreshPresentationFeedback();updatePresentationState();save()}
+function render(doPane){paintStats();paintDock();if(doPane!==false)pane();paintAskTab();paintQBtn();paintSideBadges();markChatThreadsNotice();paintChatNotice();try{queueCohabUnlock();checkMemories()}catch(e){}var pn=$("pane");if(pn){var empty=!(pn.innerHTML&&pn.innerHTML.trim());pn.classList.toggle("is-empty",empty);pn.classList.toggle("is-open",!empty&&!!tab)}syncMoodDim();syncSilhouette();paintStormStay();refreshPresentationFeedback();updatePresentationState();syncSleepLock();save()}
 
 var last=Date.now();
 setInterval(function(){var now=Date.now(),dt=(now-last)/1000;last=now;var paused=dayLock||maskOpen()||presentationHeld();
@@ -5441,16 +5564,17 @@ var windowSkinObserver=new MutationObserver(skinWindowUi);["mt","thbox","outingA
 
 function syncUpdatedEarlyThoughts(){var a=uncleArcByStep(S.uncleStep|0);if(a&&a.step>=1&&a.step<=11)S.uncleTh=(a.th||[]).slice()}
 load();
+restoreSleepQueue();
 if(!S.pendingDayEnd)S._dayAdvancing=false;
 ensureDailyBase();
 publishDueForumThreads();
 syncUpdatedEarlyThoughts();
-if(S.trip&&Date.now()>=S.trip.end)back();
+if(S.trip&&Date.now()>=S.trip.end&&!sleepFlowHeld())back();
 render();
 ex=base();applyEx();
 syncDlgAv(($("say")&&$("say").textContent)||"");faceTf(ex);
 maybeMomIntro();
-if(!resumeDayEnd())resumeStormStay();
+if(!resumeDayEnd()&&!resumeSleepRun()){if(isEndingFour()&&!S.ending4Read)openEndingFour();else resumeStormStay()}
 </script>
 </body>
 </html>

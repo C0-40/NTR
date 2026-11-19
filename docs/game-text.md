@@ -163,12 +163,12 @@ HOME_LINES-sweets-1-2 | 烤箱叮一聲，她先看手機，再看你。 | HOME_
 HOME_LINES-sweets-2-0 | 她把整盤都留給你：「這次不分給別人。」 | HOME_LINES.sweets[2][0]
 HOME_LINES-sweets-2-1 | 說完自己也愣了一下。 | HOME_LINES.sweets[2][1]
 HOME_LINES-sweets-2-2 | 「……吃吧。趁熱。」 | HOME_LINES.sweets[2][2]
-HOME-PANE-HINT | 每天互動一次，增加親密度 | pane()
+HOME-PANE-HINT | 主動互動每天一次・完成 +{當日互動值} | pane(); 新制5，舊檔切換當日7
 HOME-PANE-DONE | ・今天已做過 | pane()
 HOME-PANE-AWAY-TITLE | 她出門了 | pane()
 HOME-PANE-AWAY-BODY | 小櫻在外面時不能做室內互動。你留在家等她回來。 | pane()
 HOME-DOCK-USED | 今天已做過 | mkDock
-STATS-INC | 每天互動一次，增加親密度・外出一次・只有睡覺才會日結 | paintStats #inc
+STATS-INC | 日結 +2・主動互動 +5・每天最多一次 | paintStats #inc
 HOME-ACTS-COMMENT | 無體力；每天室內互動一次 | HOME_ACTS comment (dev note near player tip)
 HOMEACT-INLINE-01 | （親密再高一點，才能做這件事。） | function homeActNow
 HOMEACT-INLINE-02 | 你們一起度過了一段安靜的時間。 | function homeActNow
@@ -1708,3 +1708,14 @@ OUTING-FOCUS-ACTIVE | 聚焦中 | focusFeedback; 按住時取代閒置標籤
 ## 2026-11-19 心聲專用按鈕與外出標題更新（最新版）
 
 取消剪影及整卡聚焦入口，只有心聲解鎖後出現的獨立按鈕能操作。心聲原文不變，聚焦期間固定完整句子。首次提示沿用上列已批准文字；「小紅出門了」仍為原文，只增加圖示、分色、手繪紙牌及動畫，不加其他敘事說明。
+
+## 2026-11-19 v2 日結介面
+
+DAILY-LIFE-GAIN | 共同生活・親密 +{實際值} | 日結發放；上限可能只增1或0
+AUTO-OUTING-NOTICE | 小紅今天自行出門了。 | 本輪採用的自動外出通知
+ENDING4-TITLE | 結局四・她的離開 | ENDING4_DRAFT.title
+ENDING4-DRAFT-LABEL | 暫行文本・待結局階段細化 | ENDING4_DRAFT.label
+ENDING4-REVIEW | 重看結局 | reviewEndingFour
+ENDING4-RESTART | 重新開始 | restartEndingFour
+
+結局四正文與觸發分離，暫用稿另見 `game-script.md` 的 `ENDING-4-DRAFT`；未視為使用者最終定稿。
