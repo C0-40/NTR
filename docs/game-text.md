@@ -1712,7 +1712,7 @@ OUTING-FOCUS-ACTIVE | 聚焦中 | focusFeedback; 按住時取代閒置標籤
 ## 2026-11-19 v2 日結介面
 
 DAILY-LIFE-GAIN | 共同生活・親密 +{實際值} | 日結發放；上限可能只增1或0
-AUTO-OUTING-REVIEW-TITLE | 第 {day} 天・準備休息 | 日結前回顧標題
+AUTO-OUTING-REVIEW-TITLE | 第 {day} 天・準備休息 | automaticReviewDay; 日結前過場小標
 AUTO-OUTING-REVIEW-RETURN | 她自行出門了一趟,傍晚才回到家中。 | 普通自動行程回顧；留宿當晚省略
 AUTO-OUTING-REVIEW-MISSED | 你沒有查看她外出期間的心聲及剪影。 | 自動行程日結前提示第二句
 ENDING4-TITLE | 結局四・她的離開 | ENDING4_DRAFT.title
@@ -1721,3 +1721,8 @@ ENDING4-REVIEW | 重看結局 | reviewEndingFour
 ENDING4-RESTART | 重新開始 | restartEndingFour
 
 結局四正文與觸發分離，暫用稿另見 `game-script.md` 的 `ENDING-4-DRAFT`；未視為使用者最終定稿。
+
+AUTO-OUTING-REVIEW-REVEAL | 輕觸顯示全文 | automaticReviewHint; 演出淡入期間
+AUTO-OUTING-REVIEW-CONTINUE | 輕觸繼續 | automaticReviewHint; 全文顯示後
+
+自動行程的普通回家視窗省略，必要階段正文改用原階段標題；以上兩句原文改為獨立全屏演出，沒有變更正文。

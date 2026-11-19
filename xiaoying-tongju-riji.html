@@ -3564,9 +3564,39 @@ body:has(#gameUI.homeui.outing-shell){background:#2c221d!important;background-im
 #gameUI.ending-four .dialogueZone,#gameUI.ending-four .contextActions{visibility:hidden!important;pointer-events:none!important}
 #gameUI.ending-four #note.on{display:block!important;position:absolute!important;left:50%!important;top:38%!important;bottom:auto!important;width:min(80%,300px)!important;transform:translate(-50%,-50%)!important;text-align:center}
 #gameUI.ending-four .dock.tabs{display:grid!important;grid-template-columns:1fr 1fr!important}
+/* A quiet stage transition for an unobserved outing, without a modal card. */
+.automaticReview[hidden]{display:none!important}
+.automaticReview{position:fixed;inset:0;z-index:110;display:grid;place-items:center;box-sizing:border-box;overflow:auto;overscroll-behavior:contain;padding:max(24px,env(safe-area-inset-top)) 24px max(32px,env(safe-area-inset-bottom));background:radial-gradient(ellipse at 45% 37%,#77544927,transparent 60%),radial-gradient(ellipse at center,transparent 8%,#100d1388 100%),#211a20;color:#f0dfd2;animation:autoReviewStageIn .38s ease-out both;isolation:isolate}
+.automaticReview::before{content:"";position:absolute;inset:0;z-index:-1;pointer-events:none;background:repeating-linear-gradient(113deg,#d5b8a503 0 1px,transparent 1px 9px)}
+.automaticReviewContent{width:min(100%,390px);position:relative;margin:auto;pointer-events:none;padding:16px 0 95px;box-sizing:border-box}
+.automaticReviewEmblem{display:block;width:36px;height:42px;margin:0 0 24px;fill:none;stroke:#bc9293;stroke-width:1.15;stroke-linecap:round;stroke-linejoin:round;opacity:.7}
+.automaticReviewDay{margin:0 0 26px;font-size:12px;font-weight:400;line-height:1.6;letter-spacing:.14em;color:#c5a7a5}
+.automaticReviewCopy{position:relative;padding-left:18px;border-left:1px solid #bc92934d}
+.automaticReviewLine{margin:0;font-size:clamp(18px,4.8vw,23px);font-weight:400;line-height:1.9;letter-spacing:.035em;text-wrap:pretty;overflow-wrap:anywhere;opacity:0;translate:0 7px;animation:autoReviewLineIn .5s .12s ease-out forwards}
+.automaticReviewLine[hidden]{display:none!important}
+.automaticReviewLine.missed{margin-top:20px;padding-top:19px;border-top:1px solid #bc92932c;font-size:clamp(14px,3.8vw,16px);line-height:1.95;letter-spacing:.025em;color:#c6acb5;animation-delay:.5s}
+.automaticReview.is-overnight .automaticReviewLine.missed{margin-top:0;padding-top:0;border-top:0;animation-delay:.12s}
+.automaticReviewContinue{position:absolute;inset:0;display:block;width:100%;height:100%;min-height:44px;border:0;background:transparent;color:#c3a7a6;box-shadow:none;padding:0;margin:0;font:inherit;cursor:pointer;touch-action:manipulation;-webkit-tap-highlight-color:transparent}
+.automaticReviewContinue span{position:absolute;left:24px;right:24px;bottom:max(34px,env(safe-area-inset-bottom));display:flex;align-items:center;justify-content:center;gap:12px;font-size:12px;line-height:1.6;letter-spacing:.12em}
+.automaticReviewContinue span::before,.automaticReviewContinue span::after{content:"";display:block;width:27px;height:1px;background:#b28a8d55}
+.automaticReviewContinue:focus-visible{outline:1px solid #c7a1a6;outline-offset:-9px}
+.automaticReview.is-revealed .automaticReviewLine{animation:none!important;opacity:1;translate:none}
+@keyframes autoReviewStageIn{from{opacity:0}to{opacity:1}}
+@keyframes autoReviewLineIn{to{opacity:1;translate:0 0}}
+@media(max-height:600px){.automaticReview{padding:20px}.automaticReviewContent{padding-top:8px;padding-bottom:70px}.automaticReviewEmblem{width:28px;height:32px;margin-bottom:16px}.automaticReviewDay{margin-bottom:18px}.automaticReviewContinue span{bottom:max(24px,env(safe-area-inset-bottom))}}
+@media(prefers-reduced-motion:reduce){.automaticReview,.automaticReviewLine{animation:none!important}.automaticReviewLine{opacity:1;translate:none}}
+
 </style>
 </head>
 <body>
+<section id="automaticReview" class="automaticReview" role="dialog" aria-modal="true" aria-hidden="true" aria-labelledby="automaticReviewDay" aria-describedby="automaticReviewReturn automaticReviewMissed" hidden>
+  <div class="automaticReviewContent">
+    <svg class="automaticReviewEmblem" viewBox="0 0 32 38" aria-hidden="true"><path d="M5 34h23M8 34V6l15-2v30M23 8h4v26M18 19v3"/></svg>
+    <h2 class="automaticReviewDay" id="automaticReviewDay">準備休息</h2>
+    <div class="automaticReviewCopy"><p class="automaticReviewLine" id="automaticReviewReturn">她自行出門了一趟,傍晚才回到家中。</p><p class="automaticReviewLine missed" id="automaticReviewMissed">你沒有查看她外出期間的心聲及剪影。</p></div>
+  </div>
+  <button type="button" class="automaticReviewContinue" id="automaticReviewContinue" aria-label="繼續日結"><span id="automaticReviewHint">輕觸繼續</span></button>
+</section>
 <div id="daySummary" class="daySummary" role="dialog" aria-modal="true" aria-labelledby="daySummaryTitle" hidden>
   <span class="daySummaryGlow warmth" aria-hidden="true"></span><span class="daySummaryGlow secret" aria-hidden="true"></span>
   <div class="daySummary-card">
@@ -3733,10 +3763,10 @@ function updatePresentationState(){var root=$("gameUI"),hint=$("presentationHint
 root.classList.toggle("presentation-held",!!phase);root.classList.toggle("presentation-reading",phase==="reaction-reading");root.classList.toggle("departure-pending",scenePresentation.departurePending);root.setAttribute("aria-busy",phase&&phase!=="reaction-reading"?"true":"false");root.querySelectorAll(".topHud,.dock,.sideNav,.contextActions,#pane").forEach(function(el){el.inert=!!phase});
 if(hint){hint.textContent=phase==="leaving"?"小紅準備出門…":phase==="returning"?"小紅回來了…":phase==="hero-arriving"?"小紅來了…":phase==="reaction-reading"?"輕觸對話，繼續閱讀":"";hint.hidden=!phase;}
 }
-function cancelScenePresentation(){cancelOutingFocus();hideDaySummary();var root=$("gameUI");if(root)root.classList.remove("hero-arriving","intro-pending");resetReturnReading();clearTimeout(scenePresentation.timer);sqReply=null;scenePresentation.phase="";scenePresentation.departurePending=false;var root=$("gameUI"),mask=$("mask");if(root)root.inert=false;if(mask)mask.classList.remove("return-window");updatePresentationState()}
+function cancelScenePresentation(){cancelOutingFocus();hideAutomaticReview();hideDaySummary();var root=$("gameUI");if(root)root.classList.remove("hero-arriving","intro-pending");resetReturnReading();clearTimeout(scenePresentation.timer);sqReply=null;scenePresentation.phase="";scenePresentation.departurePending=false;var root=$("gameUI"),mask=$("mask");if(root)root.inert=false;if(mask)mask.classList.remove("return-window");updatePresentationState()}
 function beginReactionReading(text){scenePresentation.phase="reaction-reading";say(text,"calm");$("say").scrollTop=0;updatePresentationState();render(false);$("dlg").focus({preventScroll:true})}
 function continueReactionReading(){if(scenePresentation.phase!=="reaction-reading")return false;playUiSound("click");if(stopTyping($("say"),true))return true;if(sqReply&&sqReply.i+1<sqReply.lines.length){sqReply.i++;beginReactionReading(sqReply.lines[sqReply.i]);return true}sqReply=null;scenePresentation.phase="";updatePresentationState();nextPop();render(false);return true}
-function finishReturnPresentation(){scenePresentation.phase="";updatePresentationState();if(isStormNight()){openStormNight();render(false);return}if(hasReturnObservation()&&!mq.some(function(m){return m&&m.returnHome}))mq.unshift({returnHome:true});nextPop();render(false)}
+function finishReturnPresentation(){scenePresentation.phase="";updatePresentationState();if(isStormNight()){openStormNight();render(false);return}if(hasReturnObservation()&&!(S.sleepRun&&S.sleepRun.autoTrip)&&!mq.some(function(m){return m&&m.returnHome}))mq.unshift({returnHome:true});nextPop();render(false)}
 function guardPresentationInput(e){if(!presentationHeld())return;var target=e.target,reading=scenePresentation.phase==="reaction-reading",allowed=reading&&target&&target.closest&&target.closest("#dlg,#av");if(allowed)return;if(e.type==="keydown"&&["Tab","Enter"," "].indexOf(e.key)<0)return;e.preventDefault();e.stopImmediatePropagation()}
 document.addEventListener("click",guardPresentationInput,true);document.addEventListener("keydown",guardPresentationInput,true);
 var navigationFeedback={};function refreshPresentationFeedback(){var unlocked=false;["navAsk","navStory","navMem","navChat"].forEach(function(id){var el=$(id);if(!el)return;var next=!el.disabled;if(navigationFeedback[id]===false&&next){pulsePresentation(el,"nav-unlock",700);unlocked=true}navigationFeedback[id]=next});if(unlocked)playUiSound("unlock");syncSceneAudio()}
@@ -4526,11 +4556,41 @@ function autoOutingPlace(){
   var ids=[];PLACES.forEach(function(p,i){if(S.aff>=p[3])ids.push(i)});
   return ids.length?ids[Math.floor(Math.random()*ids.length)]:0;
 }
-function showAutomaticOutingNotice(){
-  finishMemoryReveal();hideSqOpts();$("mt").textContent="第 "+(S.day|0)+" 天・準備休息";
-  $("mp").textContent=(isStormNight()?"":"她自行出門了一趟,傍晚才回到家中。\n")+"你沒有查看她外出期間的心聲及剪影。";
-  paintMaskChrome($("mt").textContent);$("mask").classList.add("on");syncSleepLock();$("mb").focus({preventScroll:true});
+var automaticReview={timer:0,ready:false};
+function automaticReviewOpen(){var el=$("automaticReview");return !!(el&&!el.hidden)}
+function finishAutomaticReviewReveal(){
+  if(!automaticReviewOpen())return;
+  clearTimeout(automaticReview.timer);automaticReview.timer=0;automaticReview.ready=true;
+  $("automaticReview").classList.add("is-revealed");$("automaticReviewHint").textContent="輕觸繼續";
 }
+function hideAutomaticReview(){
+  clearTimeout(automaticReview.timer);automaticReview.timer=0;automaticReview.ready=false;
+  var el=$("automaticReview");if(!el)return;
+  if(el.contains(document.activeElement))document.activeElement.blur();
+  el.hidden=true;el.setAttribute("aria-hidden","true");el.classList.remove("is-revealed");
+}
+function showAutomaticOutingNotice(){
+  finishMemoryReveal();hideSqOpts();hideAutomaticReview();
+  $("automaticReviewDay").textContent="第 "+(S.day|0)+" 天・準備休息";
+  $("automaticReviewReturn").hidden=isStormNight();
+  $("automaticReviewHint").textContent="輕觸顯示全文";
+  var el=$("automaticReview");el.classList.toggle("is-overnight",isStormNight());el.setAttribute("aria-describedby",isStormNight()?"automaticReviewMissed":"automaticReviewReturn automaticReviewMissed");el.hidden=false;el.setAttribute("aria-hidden","false");
+  dayLock=1;syncSleepLock();$("automaticReviewContinue").focus({preventScroll:true});
+  if(prefersReducedMotion())finishAutomaticReviewReveal();
+  else automaticReview.timer=setTimeout(finishAutomaticReviewReveal,1000);
+}
+function continueAutomaticReview(){
+  var run=S&&S.sleepRun;if(!automaticReviewOpen()||!run||run.outingReviewSeen)return;
+  if(!automaticReview.ready){finishAutomaticReviewReveal();return}
+  hideAutomaticReview();run.outingReviewSeen=true;run.phase="bonus-events";rememberSleepQueue(null);dayLock=0;
+  nextPop();paintStats();
+}
+function queueAutomaticReturnStory(){
+  var run=S&&S.sleepRun,step=S&&S.pendingObs&&S.pendingObs.homeStep;
+  if(!run||!run.autoTrip||!step||isStormNight())return;
+  if(!mq.some(function(m){return m&&m.automaticReturnStory===step}))mq.unshift({automaticReturnStory:step});
+}
+
 function startSleepRun(force){
   if(sleepFlowHeld()||S.endingDone||S.trip)return;
   ensureDailyBase();closePane();S.sleepRun={day:S.day|0,force:!!force,phase:"events",active:null,queued:[],autoTrip:null};
@@ -4549,7 +4609,7 @@ function settleAutomaticOuting(){
   try{back()}finally{sleepSettlementInProgress=false}
   run.phase="events";
   if(isStormNight())rememberSleepQueue({stormNight:true});
-  else{if(hasReturnObservation()&&!mq.some(function(m){return m&&m.returnHome}))mq.unshift({returnHome:true,nightTxt:S.pendingObs.nightTxt});rememberSleepQueue(null)}
+  else{queueAutomaticReturnStory();rememberSleepQueue(null)}
   save();render(false);syncSleepLock();return true;
 }
 function grantDailyAffinity(){
@@ -4616,7 +4676,7 @@ function ask(i){if(busy||S.endingDone||isStormNight())return;var q=QA[i];if(!q||
 askOptNew(i);var x=qaAnswer(q),st=effM()|0;
 say("「"+x+"」",st>=70?"shy":st>=30?"pout":["joy","wink","shy","calm","joy","shy","calm","wink","joy","sad"][i%10],function(){markAskOptSeen(i,x)});
 addLog("💬 "+q[1]+"→「"+x+"」");if(S.qa.indexOf(i)<0){S.qa.push(i);/* 首次提問不加親密度 */try{save()}catch(e){}}closePane();render()}
-function maskOpen(){if(daySummaryOpen())return true;var m=$("mask"),settings=$("gameSettings");return !!((m&&m.classList.contains("on"))||(settings&&settings.open))}
+function maskOpen(){if(daySummaryOpen()||automaticReviewOpen())return true;var m=$("mask"),settings=$("gameSettings");return !!((m&&m.classList.contains("on"))||(settings&&settings.open))}
 function prefersReducedMotion(){try{return !!(window.matchMedia&&window.matchMedia("(prefers-reduced-motion:reduce)").matches)}catch(e){return false}}
 function ensureDayFade(){var ov=$("dayFade");if(ov)return ov;ov=document.createElement("div");ov.id="dayFade";ov.className="dayFade";ov.setAttribute("aria-live","polite");ov.setAttribute("aria-hidden","true");var host=document.querySelector(".homeui")||document.body;host.appendChild(ov);return ov}
 var daySummaryToneTimer=0,daySummaryExitTimer=0;
@@ -5239,20 +5299,22 @@ Array.from(el.children).forEach(function(line){run.observer.observe(line)});
 }
 $("mp").addEventListener("click",function(){finishMemoryReveal()});
 $("mp").addEventListener("keydown",function(e){if(memoryReveal&&(e.key==="Enter"||e.key===" ")){e.preventDefault();e.stopPropagation();finishMemoryReveal()}});
-var memoryMotionQuery=window.matchMedia("(prefers-reduced-motion: reduce)");if(memoryMotionQuery.addEventListener)memoryMotionQuery.addEventListener("change",function(e){if(e.matches)finishMemoryReveal()});
+var memoryMotionQuery=window.matchMedia("(prefers-reduced-motion: reduce)");if(memoryMotionQuery.addEventListener)memoryMotionQuery.addEventListener("change",function(e){if(e.matches){finishMemoryReveal();finishAutomaticReviewReveal()}});
 function nextPop(){if(maskOpen()||presentationHeld())return;if(!mq.length){dayLock=0;hideSqOpts();if(moodPeekOn)clearMoodPeek();if(sleepFlowHeld()){rememberSleepQueue(null);resumeSleepRun()}return}var m=mq.shift();if(!m){releaseDayLock();hideSqOpts();if(moodPeekOn)clearMoodPeek();return}
 if(Array.isArray(m)&&typeof m[0]==="string"&&m[0].indexOf("📌 同居事件：")===0){mq=mq.filter(function(entry){return !Array.isArray(entry)||entry[0]!==m[0]||entry[1]!==m[1]})}
 if(sleepFlowHeld())rememberSleepQueue(m);
 if(m.automaticOutingNotice){rememberSleepQueue(null);settleAutomaticOuting();return}
 if(m.automaticOutingReview){showAutomaticOutingNotice();return}
 if(m.stormNight){if(!openStormNight())nextPop();syncSleepLock();return}
+if(m.returnHome&&S.sleepRun&&S.sleepRun.autoTrip){var automaticStep=S.pendingObs&&S.pendingObs.homeStep;if(!automaticStep){nextPop();return}m={automaticReturnStory:automaticStep}}
+if(m.automaticReturnStory){var automaticArc=uncleArcByStep(m.automaticReturnStory);if(!automaticArc||!automaticArc.home){nextPop();return}m=[automaticArc.title,automaticArc.home]}
 if(m.returnHome){if(!showReturnWindow(m.nightTxt))nextPop();return}
 if(Array.isArray(m)&&/^(?:🌙\s*)?當晚$/.test(m[0])){var night=String(m[1]||"");if(S&&S.pendingObs)S.pendingObs.nightTxt=night;if(!showReturnWindow(night))nextPop();return}
 if(m.sq!=null){finishMemoryReveal();showSqMask(m.sq);return}
 if(m.endingPrep){showEndingPrep();return}
 if(m.memoryId!=null){ensureMemoryState();if(S.memSeen.indexOf(m.memoryId)<0)S.memSeen.push(m.memoryId);S.memPending=S.memPending.filter(function(id){return id!==m.memoryId});save()}
 finishMemoryReveal();hideSqOpts();sqReply=null;$("mt").textContent=m[0];$("mp").textContent=m[1];paintMaskChrome(m[0]);var reading=$("mask").querySelector(".modalReading");if(reading)reading.scrollTop=0;paintVoiceFog();$("mask").classList.add("on");revealMemoryText();syncSleepLock()}
-function dismissMask(ev){if(ev){try{ev.preventDefault();ev.stopPropagation()}catch(e){}}if(mbLock||(returnWindowOpen()&&returnReading&&returnReading.switching))return;if(isEndingFour()&&$("mask").classList.contains("ending-four-window")){S.ending4Read=true;$("mask").classList.remove("ending-four-window");save()}if(isStormNight()&&$("mask").classList.contains("storm-window")){S.stormStay.nightShown=true;save()}if(returnWindowOpen()){resetReturnReading();$("gameUI").inert=false;$("mask").classList.remove("return-window");clearMoodPeek()}if(scenePresentation.departurePending&&$("mask").classList.contains("departure-window")){scenePresentation.departurePending=false;updatePresentationState()}finishMemoryReveal();mbLock=1;var mask=$("mask"),heroArrival=!!(mask&&mask.classList.contains("intro-arrival"));if(mask){mask.classList.remove("on");mask.classList.remove("obs-dark");var _box=mask.querySelector(".box");if(_box)_box.classList.remove("obs-win-appear");if(!mq.length&&!moodPeekOn)mask.classList.remove("mood-chrome")}if(heroArrival)beginHeroArrival();setTimeout(function(){if(acknowledgeSleepEntry()){mbLock=0;paintStats();return}try{nextPop()}catch(e){}if(S&&S.sleepAwaitClose&&!maskOpen()&&!(mq&&mq.length)){advanceAfterSleep(!!S.sleepForce)}else{releaseDayLock()}mbLock=0;paintStats()},30)}
+function dismissMask(ev){if(automaticReviewOpen())return;if(ev){try{ev.preventDefault();ev.stopPropagation()}catch(e){}}if(mbLock||(returnWindowOpen()&&returnReading&&returnReading.switching))return;if(isEndingFour()&&$("mask").classList.contains("ending-four-window")){S.ending4Read=true;$("mask").classList.remove("ending-four-window");save()}if(isStormNight()&&$("mask").classList.contains("storm-window")){S.stormStay.nightShown=true;save()}if(returnWindowOpen()){resetReturnReading();$("gameUI").inert=false;$("mask").classList.remove("return-window");clearMoodPeek()}if(scenePresentation.departurePending&&$("mask").classList.contains("departure-window")){scenePresentation.departurePending=false;updatePresentationState()}finishMemoryReveal();mbLock=1;var mask=$("mask"),heroArrival=!!(mask&&mask.classList.contains("intro-arrival"));if(mask){mask.classList.remove("on");mask.classList.remove("obs-dark");var _box=mask.querySelector(".box");if(_box)_box.classList.remove("obs-win-appear");if(!mq.length&&!moodPeekOn)mask.classList.remove("mood-chrome")}if(heroArrival)beginHeroArrival();setTimeout(function(){if(acknowledgeSleepEntry()){mbLock=0;paintStats();return}try{nextPop()}catch(e){}if(S&&S.sleepAwaitClose&&!maskOpen()&&!(mq&&mq.length)){advanceAfterSleep(!!S.sleepForce)}else{releaseDayLock()}mbLock=0;paintStats()},30)}
 (function(){var mb=$("mb");if(!mb)return;mb.onpointerup=null;mb.onclick=null;mb.addEventListener("click",dismissMask,false);mb.addEventListener("pointerup",function(e){if(e.pointerType==="mouse"&&e.button!==0)return;dismissMask(e)},false);
 var mask=$("mask");if(mask&&!mask._outsideBound){mask._outsideBound=1;mask.addEventListener("click",function(e){if(e.target===mask)dismissMask(e)},false);var box=mask.querySelector(".box");if(box&&!mask._boxStop){mask._boxStop=1;box.addEventListener("click",function(e){e.stopPropagation()},false)}}})();
 function replay(k){if(maskOpen()||presentationHeld()||mbLock||dayLock)return;var s=STORY[k];if(!s)return;mq.push(["📌 同居事件："+s[1],s[2]]);nextPop()}
@@ -5552,6 +5614,8 @@ function bindMomIntro(){
 }
 bindMomIntro();
 bindOutingFocus();
+$("automaticReviewContinue").addEventListener("click",continueAutomaticReview);
+$("automaticReview").addEventListener("keydown",function(e){if(e.key==="Tab"){e.preventDefault();$("automaticReviewContinue").focus({preventScroll:true})}else if(e.key==="Escape"){e.preventDefault();e.stopPropagation();continueAutomaticReview()}});
 $("daySummary").addEventListener("click",continueDaySummary);
 $("daySummary").addEventListener("keydown",function(e){if(e.key==="Escape"||e.key==="Enter"||e.key===" "){e.preventDefault();continueDaySummary()}else if(e.key==="Tab"){e.preventDefault();$("daySummaryContinue").focus()}});
 $("chatRoom").querySelector(".chatMark").innerHTML=homeUiIcon("chat");
