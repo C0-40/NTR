@@ -4811,8 +4811,8 @@ function appearMAmt(){var d=S.day|0;if(d<6||d===6)return 0;return typeof OUTING_
 function uncleStepMAmt(){var d=S.day|0,st=S.uncleStep|0;if(d===6)return 0;if(st<=4)return 0;if(d>=16&&st>=5)return typeof UNCLE_STEP_M==="number"?UNCLE_STEP_M:3;return 0}
 function uncleAppearRoll(){var d=S.day|0;if(d<6)return false;if(d<=15)return Math.random()<0.6;return true}
 function memoriesComplete(){if(!S.memSeen||!MEMORIES||!MEMORIES.length)return false;for(var i=0;i<MEMORIES.length;i++){if(S.memSeen.indexOf(MEMORIES[i][0])<0)return false}return true}
-/* 強叔步驟一～四：第6天起；步驟五：全部同居事件解鎖。回憶不再閘路線 */
-function step5Open(){return typeof storyComplete==="function"?storyComplete():false}
+/* 第五階段：第四階段後，0篇同居，不加額外日期；原路線日數／數值／相遇仍檢查。 */
+function step5Open(){return !!S&&(S.uncleStep|0)>=4}
 function storyComplete(){if(!STORY||!STORY.length||!S.seen)return false;for(var i=0;i<STORY.length;i++){if(S.seen.indexOf(STORY[i][0])<0)return false}return true}
 function uncleOpen(){return true}
 function effM(){return S.m|0}
@@ -5347,7 +5347,7 @@ var due=[];STORY.forEach(function(s){if((S.aff|0)<s[0])return;if(S.seen.indexOf(
 if(!due.length)return;due.sort(function(a,b){return a[0]-b[0]});var s=due[0];S.seen.push(s[0]);S.cohabToday=true;
 mq.push(["📌 同居事件："+s[1],s[2]]);addLog("📌 同居事件・"+s[1]);if(!maskOpen())nextPop()}
 function uncleArcByStep(n){for(var i=0;i<UNCLE_ARC.length;i++)if(UNCLE_ARC[i].step===n)return UNCLE_ARC[i];return null}
-function canAdvanceUncle(){if(isStormNight())return false;var next=(S.uncleStep|0)+1;if(next>11)return false;if((S.day|0)<6)return false;var a=uncleArcByStep(next);if(!a)return false;if(a.needStep5&&!step5Open())return false;var need=(a.mNeed!=null)?(a.mNeed|0):(UNCLE_STEP_MNEED&&UNCLE_STEP_MNEED[next]!=null?UNCLE_STEP_MNEED[next]|0:0);if((effM()|0)<need)return false;return true}
+function canAdvanceUncle(){if(isStormNight())return false;var next=(S.uncleStep|0)+1;if(next>11)return false;if((S.day|0)<6)return false;var a=uncleArcByStep(next);if(!a)return false;if(a.needStep5&&!step5Open())return false;/* 第10階段起保留既有八件紀錄條件，實際觀看前置另待導入。 */if(next>=10&&!storyComplete())return false;var need=(a.mNeed!=null)?(a.mNeed|0):(UNCLE_STEP_MNEED&&UNCLE_STEP_MNEED[next]!=null?UNCLE_STEP_MNEED[next]|0:0);if((effM()|0)<need)return false;return true}
 function queueUncleStep(){if(!canAdvanceUncle())return false;var next=(S.uncleStep|0)+1;var a=uncleArcByStep(next);if(!a)return false;
 S.uncleStep=next;S.uncleStarted=true;S.metOut=true;S.uncleTh=(a.th||[]).slice();
 var gained=addM(uncleStepMAmt());
