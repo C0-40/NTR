@@ -1694,16 +1694,17 @@ HOME-MEMORY-ICON | 雛菊線條圖示 | navMem SVG / homeUiIcon(memory); 回憶�
 
 ## 外出聚焦介面（2026-11-19）
 
-OUTING-FOCUS-HINT | 按住聚焦 | focusHint; 首次可操作時顯示一次
-OUTING-FOCUS-TARGET-ARIA | 按住聚焦 | focusPad aria-label
-OUTING-FOCUS-ACTIVE | 聚焦中 | focusFeedback; 僅按住期間顯示
+OUTING-FOCUS-HINT | 按住聚焦，讀取她的心聲 | focusHint; 心聲解鎖後首次可操作時顯示一次
+OUTING-FOCUS-TARGET-ARIA | 按住聚焦，讀取她的心聲 | focusPad aria-label
+OUTING-FOCUS-IDLE | 按住聚焦 | focusFeedback; 按鈕閒置標籤
+OUTING-FOCUS-ACTIVE | 聚焦中 | focusFeedback; 按住時取代閒置標籤
 
-操作只改剪影辨認程度，不新增劇本內容或改動原有資料 ID。
+操作只改心聲清晰程度，不改剪影、不新增劇本內容或改動原有資料 ID。
 
 ## 2026-11-19 行為註記
 
 打電話只提供原有情報，不阻礙強叔事件推進；同居〈電視〉等重溫修正重複排入及關閉干擾，所有對白與事件ID保留原樣。
 
-## 2026-11-19 全程聚焦行為更新
+## 2026-11-19 心聲專用按鈕與外出標題更新（最新版）
 
-OUTING-FOCUS-HINT／OUTING-FOCUS-ACTIVE文字維持「按住聚焦／聚焦中」，改為整段外出可用；剪影與心聲共用操作。心聲正文沿用原稿，聚焦期間固定當前完整句子，不新增對白。「小紅出門了」標題文字維持現況，新增標題文案另待確認。
+取消剪影及整卡聚焦入口，只有心聲解鎖後出現的獨立按鈕能操作。心聲原文不變，聚焦期間固定完整句子。首次提示沿用上列已批准文字；「小紅出門了」仍為原文，只增加圖示、分色、手繪紙牌及動畫，不加其他敘事說明。

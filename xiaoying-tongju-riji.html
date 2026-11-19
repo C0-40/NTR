@@ -3503,24 +3503,9 @@ body:has(#gameUI.homeui.outing-shell){background:#2c221d!important;background-im
 @keyframes recapExit{to{opacity:0}}
 @keyframes recapCardExit{to{opacity:0;translate:0 -5px}}
 @media(prefers-reduced-motion:reduce){.daySummary,.daySummary::before,.daySummary-card,.daySummary-kicker,.daySummary h2,.daySummary-aff,.daySummary-aff::after,.daySummary-aff strong,.daySummary-uncle,.daySummaryGlow,.daySummaryDaisy ellipse,.daySummaryDaisy circle{animation:none!important}.daySummaryDaisy ellipse,.daySummaryDaisy circle{stroke-dashoffset:0}.daySummary-aff::after{opacity:0}.daySummaryGlow{opacity:.4;transform:translate(-50%,-50%)}}
-/* The existing silhouettes stay in their approved positions behind an abstract frosted surface. */
-#gameUI.homeui.outing-shell #silLayer.focus-scene{background:radial-gradient(ellipse at 50% 54%,#8c6a6b29,transparent 68%),#2c2429!important;border:1px solid #a68a7740!important;border-radius:15px!important;isolation:isolate}
-#gameUI.homeui.outing-shell #silLayer.focus-scene .silStage{filter:none!important;opacity:1!important;transition:none!important}
+/* Silhouettes are display-only again; existing story classes retain their fog and distance. */
+#gameUI.homeui.outing-shell #silLayer.outing-scene{background:radial-gradient(ellipse at 50% 54%,#8c6a6b29,transparent 68%),#2c2429!important;border:1px solid #a68a7740!important;border-radius:15px!important;isolation:isolate}
 #gameUI.homeui.outing-shell #av.away{visibility:hidden!important}
-#gameUI.homeui.outing-shell #silLayer.focus-scene .silGap{opacity:.2!important}
-#gameUI.homeui.outing-shell #silLayer.focus-scene .silPair{opacity:0!important;filter:blur(9px)!important;animation:none!important;transition:none!important;will-change:auto;pointer-events:none!important}
-#gameUI.homeui.outing-shell #silLayer.focus-scene.focus-ready .silPair{opacity:var(--focus-ink,.22)!important;filter:blur(var(--focus-blur,9px))!important;will-change:filter,opacity}
-#gameUI.homeui.outing-shell #silLayer.focus-scene .silFig{filter:drop-shadow(0 3px 8px #130e1844)!important;transition:none!important;animation:none!important}
-.focusVeil{display:none;position:absolute;inset:0;z-index:3;border-radius:inherit;pointer-events:none;background:radial-gradient(ellipse at 50% 57%,#45394744 10%,#29222bdb 78%),repeating-linear-gradient(115deg,transparent 0 27px,#c7b2b605 28px 29px,transparent 30px 58px)}
-#gameUI.homeui.outing-shell #silLayer.focus-scene .focusVeil{display:block;opacity:var(--focus-veil,.68);box-shadow:inset 0 0 36px #160e1e66}
-.focusPad[hidden],.focusHint[hidden],.focusFeedback[hidden]{display:none!important}
-#gameUI.homeui.outing-shell #silLayer .focusPad{display:block;position:absolute;inset:0;z-index:5;width:100%;height:100%;min-height:44px;padding:0;margin:0;border:0!important;border-radius:inherit;background:transparent!important;box-shadow:none!important;transform:none!important;translate:none!important;scale:none!important;pointer-events:auto!important;cursor:crosshair;touch-action:none;user-select:none;-webkit-user-select:none;-webkit-touch-callout:none}
-#gameUI.homeui.outing-shell #silLayer .focusPad:focus-visible{outline:1px solid #dab5c0;outline-offset:-5px}
-.focusHint,.focusFeedback{position:absolute;z-index:6;left:50%;bottom:15px;transform:translateX(-50%);margin:0;padding:7px 13px;border:1px solid #b2978459;border-radius:8px;background:#211924e8;color:#f0d8cf;font-size:12px;line-height:1.5;letter-spacing:.08em;white-space:nowrap;pointer-events:none}
-.focusFeedback{color:#e7bccb;border-color:#b58a9e70;background:#281c2ae8}
-#gameUI.homeui.outing-shell #silLayer.is-focusing{box-shadow:inset 0 0 28px #140e1e66!important}
-@media(prefers-reduced-motion:reduce){#gameUI.homeui.outing-shell #silLayer .silPair{will-change:auto!important}}
-
 
 /* Shared fill with the existing memory Continue button; preserve all disabled/reading states. */
 :root{--memory-continue-fill:linear-gradient(#f2dace,#d7b2a2)}
@@ -3528,12 +3513,52 @@ body:has(#gameUI.homeui.outing-shell){background:#2c221d!important;background-im
 #gameUI.homeui:not(.outing-shell):not(.presentation-held) .dock.tabs button[data-t="home"]:not(:disabled):not(.dock-used):not(.dock-return),
 #gameUI.homeui:not(.outing-shell):not(.presentation-held) .dock.tabs button[data-t="go"]:not(:disabled):not(.dock-used):not(.dock-return){background:var(--memory-continue-fill)!important}
 
-/* Both visual clues share one hold. Story and affinity still determine their separate ceilings. */
-.heartFocusFeedback[hidden]{display:none!important}
-#gameUI.homeui.outing-shell #heartRow.focus-thought-ready{position:relative;pointer-events:auto!important;cursor:crosshair;touch-action:none;user-select:none;-webkit-user-select:none;-webkit-touch-callout:none}
+/* An explicit, unlock-gated thought control; the card and silhouette are not hold targets. */
+.thoughtFocusButton[hidden],.thoughtFocusHint[hidden]{display:none!important}
+#gameUI.homeui.outing-shell #heartRow{position:relative;pointer-events:none!important;cursor:default}
+#gameUI.homeui.outing-shell #heartRow .thbox{cursor:default!important}
+#gameUI.homeui.outing-shell #heartRow .thText{overflow:visible!important}
+#gameUI.homeui.outing-shell #heartRow .thoughtHead{display:flex;align-items:center;justify-content:space-between;gap:6px;width:100%;flex:0 0 auto;min-height:24px}
+#gameUI.homeui.outing-shell #heartRow .thoughtHead b{margin:0!important;flex:0 0 auto}
+#gameUI.homeui.outing-shell #heartRow .thoughtFocusButton{
+ display:inline-flex;align-items:center;justify-content:center;gap:5px;flex:0 0 auto;min-height:44px;min-width:100px;
+ margin:-5px -3px -5px 0;padding:6px 8px;box-sizing:border-box;border:1px solid #b78a94;border-radius:10px 8px 11px 9px;
+ background:#34242b;color:#f0d5d7;box-shadow:inset 0 1px 0 #f3dbd415;font:inherit;font-size:11px;font-weight:500;line-height:1.3;
+ cursor:pointer;pointer-events:auto!important;touch-action:none;user-select:none;-webkit-user-select:none;-webkit-touch-callout:none;
+ transition:background .12s ease,border-color .12s ease,translate .1s ease;
+}
+#gameUI.homeui.outing-shell #heartRow .thoughtFocusButton:focus-visible{outline:2px solid #e0b8bd;outline-offset:3px}
+#gameUI.homeui.outing-shell #heartRow .thoughtFocusButton:disabled{opacity:.5;cursor:default}
+#gameUI.homeui.outing-shell #heartRow .thoughtFocusButton.is-focusing{background:#51313e;border-color:#e4b4c2;translate:0 1px}
+.thoughtFocusButton svg{width:19px;height:19px;flex:none;fill:none;stroke:currentColor;stroke-width:1.5;stroke-linecap:round;stroke-linejoin:round}
+.thoughtFocusMeter{stroke-dasharray:25.14;stroke-dashoffset:calc(25.14 * (1 - var(--thought-focus-progress,0)));transform:rotate(-90deg);transform-origin:12px 12px}
 #gameUI.homeui.outing-shell #heartRow.focus-thought-ready #thb:not(.is-fogged){filter:blur(var(--thought-focus-blur,6.5px))!important;opacity:var(--thought-focus-ink,.38);transition:none!important;user-select:none;-webkit-user-select:none}
-#gameUI.homeui.outing-shell #heartRow.focus-thought-ready:focus-visible{outline:2px solid #d6adbd;outline-offset:2px}
-#gameUI.homeui.outing-shell #heartRow .heartFocusFeedback{position:absolute;z-index:3;right:10px;top:4px;padding:2px 7px;border:1px solid #b58a9e55;border-radius:6px;background:#281c2af2;color:#e7bccb;font-size:10px;line-height:1.4;letter-spacing:.04em;pointer-events:none}
+.thoughtFocusHint{position:absolute;z-index:8;left:10px;right:10px;bottom:calc(100% + 7px);width:fit-content;max-width:calc(100% - 20px);margin:0;padding:7px 10px;box-sizing:border-box;border:1px solid #a77c87;border-radius:9px;background:#2d2029f5;color:#f0d5d7;font-size:12px;line-height:1.5;pointer-events:none}
+.thoughtFocusHint::after{content:"";position:absolute;right:24px;top:100%;width:7px;height:7px;border-right:1px solid #a77c87;border-bottom:1px solid #a77c87;background:#2d2029;transform:translateY(-3px) rotate(45deg)}
+/* A dark hand-inked departure plaque, separate from the live information below. */
+#gameUI.homeui.outing-shell .stick.outing .outingTop{
+ position:absolute;isolation:isolate;overflow:visible!important;animation:none!important;
+ padding:12px 12px 12px 14px!important;border:1.5px solid #a57a7b!important;border-left:3px solid #c39491!important;
+ border-radius:15px 12px 16px 11px!important;background:repeating-linear-gradient(117deg,#e3c0b403 0 1px,transparent 1px 8px),#32232a!important;
+ box-shadow:inset 0 1px 0 #eed8ca12,0 3px 9px #160e1429!important;
+}
+#gameUI.homeui.outing-shell .outingTop::before{content:"";position:absolute;inset:4px;z-index:-1;border:1px solid #b3908626;border-radius:11px 8px 12px 7px;pointer-events:none}
+#gameUI.homeui.outing-shell .outingTop-copy{gap:5px!important}
+#gameUI.homeui.outing-shell .outingTop-lead{position:relative;display:flex;align-items:center;gap:6px;width:fit-content;max-width:100%;padding-bottom:5px!important;font-size:16px!important;font-weight:600!important;line-height:1.5!important;letter-spacing:.06em!important;color:#f4e4d4!important;white-space:nowrap}
+.outingDoor{width:19px;height:22px;flex:none;fill:none;stroke:#b99596;stroke-width:1.45;stroke-linecap:round;stroke-linejoin:round}
+.outingTitle-name{color:#f4e4d4}.outingTitle-action{color:#cda0aa}
+.outingStatusLight{display:inline-block;flex:none;width:5px;height:5px;margin-left:1px;border-radius:50%;background:#c9959c;box-shadow:0 0 5px #c9959c33;opacity:.55}
+.outingTitle-rule{position:absolute;left:25px;right:0;bottom:0;width:calc(100% - 25px);height:5px;overflow:visible;fill:none;stroke:#b8858d;stroke-width:1.25;stroke-linecap:round;opacity:.75}
+.outingTitle-rule path{stroke-dasharray:110;stroke-dashoffset:0}
+#gameUI.homeui.outing-shell .outingTop-ask{margin-top:0!important;font-size:11px!important;font-weight:400!important;line-height:1.5!important;letter-spacing:.01em!important;color:#cbb4ac!important}
+#gameUI.homeui.outing-shell:not(.departure-pending):not(.storm-stay) .outingTop:not(.off){animation:outingPlaqueEnter .4s cubic-bezier(.2,.7,.3,1) both!important}
+#gameUI.homeui.outing-shell:not(.departure-pending):not(.storm-stay) .outingTop:not(.off) .outingTitle-rule path{animation:outingRuleDraw .45s .18s ease-out both}
+#gameUI.homeui.outing-shell:not(.departure-pending):not(.storm-stay) .outingTop:not(.off) .outingStatusLight{animation:outingStatusBreathe 3.6s .4s ease-in-out infinite}
+@keyframes outingPlaqueEnter{from{opacity:0;translate:0 5px}to{opacity:1;translate:0 0}}
+@keyframes outingRuleDraw{from{stroke-dashoffset:110}to{stroke-dashoffset:0}}
+@keyframes outingStatusBreathe{0%,100%{opacity:.4}50%{opacity:.8}}
+@media(max-width:360px){#gameUI.homeui.outing-shell .outingTop-lead{font-size:14px!important;letter-spacing:.03em!important;gap:4px}.outingDoor{width:17px}.outingStatusLight{width:4px;height:4px}#gameUI.homeui.outing-shell #heartRow .thoughtFocusButton{min-width:94px;padding:6px;font-size:10px}}
+@media(prefers-reduced-motion:reduce){#gameUI.homeui.outing-shell .outingTop,#gameUI.homeui.outing-shell:not(.departure-pending):not(.storm-stay) .outingTop:not(.off),.outingTitle-rule path,.outingStatusLight{animation:none!important}.outingTitle-rule path{stroke-dashoffset:0}#gameUI.homeui.outing-shell #heartRow .thoughtFocusButton{transition:none!important;translate:none!important}}
 </style>
 </head>
 <body>
@@ -3583,7 +3608,7 @@ body:has(#gameUI.homeui.outing-shell){background:#2c221d!important;background-im
     </div>
     <div id="outingTop" class="outingTop off" role="status" aria-live="polite" aria-label="外出狀態">
       <div class="outingTop-copy">
-        <p class="outingTop-lead" id="outChip">小紅出門了</p>
+        <p class="outingTop-lead" id="outChip"><svg class="outingDoor" viewBox="0 0 24 26" aria-hidden="true"><path d="M4 23h16M6 23V4l11-1v20M17 5h3v18M13 13v2"/></svg><span class="outingTitle-name">小紅</span><span class="outingTitle-action">出門了</span><i class="outingStatusLight" aria-hidden="true"></i><svg class="outingTitle-rule" viewBox="0 0 110 5" preserveAspectRatio="none" aria-hidden="true"><path d="M1 3Q28 .7 54 2.5T109 1.5"/></svg></p>
         <p class="outingTop-ask" id="aloneChip">屋裡只剩你，打算做甚麼？</p>
       </div>
       <div class="outingTop-foot">
@@ -3614,10 +3639,6 @@ body:has(#gameUI.homeui.outing-shell){background:#2c221d!important;background-im
           <img class="silFig silUncle" id="silUncle" src="sil-uncle.png" alt="" decoding="async" draggable="false">
           <img class="silFig silHero" id="silHero" src="sil-hero.png?v=d3f54f2d" width="1911" height="3920" alt="" decoding="async" draggable="false">
         </div>
-        <div class="focusVeil" aria-hidden="true"></div>
-        <button type="button" id="focusPad" class="focusPad" aria-label="按住聚焦" hidden disabled></button>
-        <span id="focusHint" class="focusHint" role="status" hidden>按住聚焦</span>
-        <span id="focusFeedback" class="focusFeedback" role="status" aria-live="polite" hidden>聚焦中</span>
       </div>
     </div>
     <div class="contextActions" aria-label="情境互動">
@@ -3632,9 +3653,9 @@ body:has(#gameUI.homeui.outing-shell){background:#2c221d!important;background-im
     </div>
   </div>
   <div class="heartRow" id="heartRow" aria-label="外出心聲">
-    <span id="heartFocusFeedback" class="heartFocusFeedback" role="status" aria-live="polite" hidden>聚焦中</span>
+    <span id="focusHint" class="thoughtFocusHint" role="status" hidden>按住聚焦，讀取她的心聲</span>
     <div class="heartFace" id="heartFace" aria-hidden="true" data-face="calm"></div>
-    <div class="thbox" id="thbox"><div class="thText"><b>💭 心聲</b><span id="thb"></span></div></div>
+    <div class="thbox" id="thbox"><div class="thText"><div class="thoughtHead"><b>💭 心聲</b><button type="button" id="focusPad" class="thoughtFocusButton" aria-label="按住聚焦，讀取她的心聲" aria-pressed="false" hidden disabled><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 3H3v5m13-5h5v5M3 16v5h5m13-5v5h-5"/><circle class="thoughtFocusMeter" cx="12" cy="12" r="4"/></svg><span id="focusFeedback" aria-live="polite">按住聚焦</span></button></div><span id="thb"></span></div></div>
   </div></div>
   <div class="dock tabs" role="tablist" aria-label="主要行動">
     <button type="button" data-t="home">🛋️ 互動</button>
@@ -4558,8 +4579,8 @@ if(!S.endingDone&&(S.day|0)>=29&&(S.uncleStep|0)>=10&&step5Open()){if(!S.castOff
 endDay(true);render()})}
 function releaseDayLock(){if(!maskOpen()&&!mq.length){dayLock=0;try{flushCohabQueue()}catch(e){}}}
 var S,tab="",mq=[],thT=0,busy=0,backLock=0,mbLock=0,dayLock=0;
-function def(){return {homeActToday:false,aff:0,exp:0,trip:null,log:[],seen:[],t:Date.now(),m:0,trips:0,taken:false,day:1,dsec:0,dEv:[],qa:[],viewM:0,sq:[],sqAsked:[],sqToday:[],sqDone:false,outToday:false,pendingObs:null,stormStay:null,uncleCuePending:false,focusHintSeen:false,dailyBase:null,pendingDayEnd:null,forumPublishDays:{},optSeen:{blank:{},sq:{},ask:{}},journals:[],journalOpen:null,motif:null,journalGlow:0,metOut:false,momIntroSeen:false,heroIntroPending:false,memSeen:[],memPending:[],memVersion:3,uncleStarted:false,uncleStep:0,uncleTh:[],endingDone:false,ending:0,castOff:false,cohabSeen:[],cohabPending:[],cohabToday:false,chatSeen:false,chatNotice:false,pendingYesterdayUnsaid:null,pendingSq:null,sqVer:2,chatOpenStep:null,chatUnlocked:[],_chatThreadCount:null}}
-function load(){try{var r=localStorage.getItem("sakura_v1");S=r?JSON.parse(r):def()}catch(e){S=def()}if(!S)S=def();if(!S.stormStay)S.stormStay=null;if(S.uncleCuePending==null)S.uncleCuePending=false;if(S.focusHintSeen==null)S.focusHintSeen=false;if(!S.forumPublishDays)S.forumPublishDays={};if(!S.pendingDayEnd)S.pendingDayEnd=null;if(S.trip&&S.trip.id===0)S.trip.place=PLACES[0][1];try{delete S.coin;delete S.sta}catch(e){}if(S.homeActToday==null)S.homeActToday=false;if(!S.cohabSeen)S.cohabSeen=[];if(!S.cohabPending)S.cohabPending=[];if(S.cohabToday==null)S.cohabToday=false;if(S.chatSeen==null)S.chatSeen=false;if(S.chatNotice==null)S.chatNotice=false;if(S.pendingYesterdayUnsaid==null)S.pendingYesterdayUnsaid=null;if(S.pendingSq===undefined)S.pendingSq=null;if(S.chatOpenStep===undefined)S.chatOpenStep=null;if(!S.chatUnlocked)S.chatUnlocked=[];
+function def(){return {homeActToday:false,aff:0,exp:0,trip:null,log:[],seen:[],t:Date.now(),m:0,trips:0,taken:false,day:1,dsec:0,dEv:[],qa:[],viewM:0,sq:[],sqAsked:[],sqToday:[],sqDone:false,outToday:false,pendingObs:null,stormStay:null,uncleCuePending:false,focusHintSeen:false,thoughtFocusHintSeen:false,dailyBase:null,pendingDayEnd:null,forumPublishDays:{},optSeen:{blank:{},sq:{},ask:{}},journals:[],journalOpen:null,motif:null,journalGlow:0,metOut:false,momIntroSeen:false,heroIntroPending:false,memSeen:[],memPending:[],memVersion:3,uncleStarted:false,uncleStep:0,uncleTh:[],endingDone:false,ending:0,castOff:false,cohabSeen:[],cohabPending:[],cohabToday:false,chatSeen:false,chatNotice:false,pendingYesterdayUnsaid:null,pendingSq:null,sqVer:2,chatOpenStep:null,chatUnlocked:[],_chatThreadCount:null}}
+function load(){try{var r=localStorage.getItem("sakura_v1");S=r?JSON.parse(r):def()}catch(e){S=def()}if(!S)S=def();if(!S.stormStay)S.stormStay=null;if(S.uncleCuePending==null)S.uncleCuePending=false;if(S.focusHintSeen==null)S.focusHintSeen=false;if(S.thoughtFocusHintSeen==null)S.thoughtFocusHintSeen=false;if(!S.forumPublishDays)S.forumPublishDays={};if(!S.pendingDayEnd)S.pendingDayEnd=null;if(S.trip&&S.trip.id===0)S.trip.place=PLACES[0][1];try{delete S.coin;delete S.sta}catch(e){}if(S.homeActToday==null)S.homeActToday=false;if(!S.cohabSeen)S.cohabSeen=[];if(!S.cohabPending)S.cohabPending=[];if(S.cohabToday==null)S.cohabToday=false;if(S.chatSeen==null)S.chatSeen=false;if(S.chatNotice==null)S.chatNotice=false;if(S.pendingYesterdayUnsaid==null)S.pendingYesterdayUnsaid=null;if(S.pendingSq===undefined)S.pendingSq=null;if(S.chatOpenStep===undefined)S.chatOpenStep=null;if(!S.chatUnlocked)S.chatUnlocked=[];
 try{var _validMem={};MEMORIES.forEach(function(m){_validMem[m[0]]=1});S.memSeen=(S.memSeen||[]).filter(function(id){return _validMem[id]});S.memPending=(S.memPending||[]).filter(function(id){return _validMem[id]&&S.memSeen.indexOf(id)<0})}catch(e){}if(S.momIntroSeen==null)S.momIntroSeen=true;if(!S.memSeen)S.memSeen=[];if(!S.memPending)S.memPending=[];if(S.m==null)S.m=0;if((S.aff|0)>100)S.aff=100;if(S.uncleStarted==null)S.uncleStarted=false;if(S.uncleStep==null)S.uncleStep=0;if(!S.uncleTh)S.uncleTh=[];if(S.endingDone==null)S.endingDone=false;if(S.ending==null)S.ending=0;if(S.castOff==null)S.castOff=false;if(typeof uncleMCap==="function"){var _c=uncleMCap();if((S.m|0)>_c)S.m=_c}else if(typeof step5Open==="function"&&!step5Open()&&(S.m|0)>29)S.m=29;if(S.trips==null)S.trips=0;if(!S.seen)S.seen=[];if(S.day==null){S.day=1;S.dsec=0}if(!S.dEv)S.dEv=[];if(!S.qa)S.qa=[];if(S.viewM==null)S.viewM=0;if(!S.sq)S.sq=[];if(!S.sqToday)S.sqToday=[];if(S.outToday==null)S.outToday=false;if(S.sqDone==null)S.sqDone=!!(S.sqToday&&S.sqToday.length);if(S.pendingObs===undefined)S.pendingObs=null;if(!S.optSeen||typeof S.optSeen!="object")S.optSeen={blank:{},sq:{},ask:{}};if(!S.optSeen.blank)S.optSeen.blank={};if(!S.optSeen.sq)S.optSeen.sq={};if(!S.optSeen.ask)S.optSeen.ask={};if(!S.journals)S.journals=[];if(S.journalOpen===undefined)S.journalOpen=null;scrubJournals();if(S.motif===undefined)S.motif=null;if(S.journalGlow==null)S.journalGlow=0;if(S.metOut==null){S.metOut=!!(S.m>0||(S.journals&&S.journals.some(function(j){return j&&j.met}))||(S.dEv&&S.dEv.some(function(e){return e&&e.met})))}try{delete S.blankHintSeen;delete S.sqHintSeen;delete S.anxiety;delete S.fantasy;delete S.evidence}catch(e){}}
 function save(){try{localStorage.setItem("sakura_v1",JSON.stringify(S))}catch(e){}}
 function doReset(){cancelScenePresentation();S=def();mq=[];busy=0;backLock=0;mbLock=0;dayLock=0;$("mask").classList.remove("on");try{localStorage.removeItem("sakura_v1")}catch(e){}say("「哼！才不要多想，只是當初口快答應了而已！」","pout");render();maybeMomIntro()}
@@ -4773,11 +4794,7 @@ function silDist(){return silApproach()}
 var OUTING_FOCUS_HOLD_MS=3000;
 var outingFocus={trip:null,holding:false,target:null,pointer:null,key:null,progress:0,started:0,startProgress:0,releasedAt:0,releaseFrom:0,last:0,frame:0,hintUntil:0,audio:null};
 function outingFocusHoldMs(){var speed=typeof spd==="number"?spd:1;return OUTING_FOCUS_HOLD_MS-1000*Math.max(0,Math.min(1,(speed-1)/9))}
-function outingFocusCap(){
-  if(!(S&&S.trip&&S.trip.metUncle))return 1;
-  var arc=uncleArcByStep(S.uncleStep|0);return Math.max(1,Math.min(3,arc&&arc.sil!=null?arc.sil|0:1));
-}
-function outingFocusAvailable(){return !!(S&&S.trip&&!S.taken&&!isStormNight()&&S.trip.end>Date.now())}
+function outingFocusAvailable(){return !!(S&&S.trip&&!S.taken&&!isStormNight()&&voiceReadable()&&S.trip.end>Date.now())}
 function canHoldOutingFocus(){
   var result=$("outingActLine");
   return outingFocusAvailable()&&!document.hidden&&!busy&&!dayLock&&!maskOpen()&&!presentationHeld()&&!scenePresentation.departurePending&&(!result||result.hidden);
@@ -4796,25 +4813,17 @@ function startFocusAudio(){
   outingFocus.audio={context:ctx,osc:osc,gain:gain};osc.start(now);
 }
 function paintOutingFocus(){
-  var el=$("silLayer"),r=outingFocus,cap=outingFocusCap();
-  var level=Math.min(cap,Math.max(0,r.progress)),clarity=level/3;
-  el.style.setProperty("--focus-blur",(9-5*clarity).toFixed(2)+"px");
-  el.style.setProperty("--focus-ink",(.22+.43*clarity).toFixed(3));
-  el.style.setProperty("--focus-veil",(.68-.30*clarity).toFixed(3));
-  el.dataset.focusLevel=String(Math.floor(level+.001));
-  el.classList.toggle("is-focusing",r.holding);
-  var feedback=$("focusFeedback"),hint=$("focusHint");
-  var heart=$("heartRow"),heartFeedback=$("heartFocusFeedback"),onHeart=r.holding&&r.target===heart;
-  var sceneFeedback=r.holding&&!onHeart;if(feedback.hidden===sceneFeedback)feedback.hidden=!sceneFeedback;
-  if(heartFeedback.hidden===onHeart)heartFeedback.hidden=!onHeart;
-  heart.classList.toggle("is-focusing",onHeart);heart.setAttribute("aria-label",onHeart?"聚焦中":"按住聚焦");
-  var thoughtClarity=Math.max(0,Math.min(1,r.progress/3)),readable=voiceReadable();
-  heart.style.setProperty("--thought-focus-blur",(6.5*(1-thoughtClarity)).toFixed(2)+"px");
-  heart.style.setProperty("--thought-focus-ink",(.38+.62*thoughtClarity).toFixed(3));
-  var accessible=outingFocusAvailable()&&readable&&thoughtClarity>=.98;$("thb").setAttribute("aria-hidden",accessible?"false":"true");
-  if(accessible)heart.setAttribute("aria-describedby","thb");else heart.removeAttribute("aria-describedby");
-  var showHint=canHoldOutingFocus()&&!r.holding&&performance.now()<r.hintUntil;
-  if(hint.hidden===showHint)hint.hidden=!showHint;
+  var r=outingFocus,heart=$("heartRow"),pad=$("focusPad"),feedback=$("focusFeedback"),hint=$("focusHint");
+  var clarity=Math.max(0,Math.min(1,r.progress/3)),readable=voiceReadable();
+  pad.classList.toggle("is-focusing",r.holding);pad.setAttribute("aria-pressed",r.holding?"true":"false");
+  var label=r.holding?"聚焦中":"按住聚焦";if(feedback.textContent!==label)feedback.textContent=label;
+  pad.setAttribute("aria-label",r.holding?"聚焦中":"按住聚焦，讀取她的心聲");
+  pad.style.setProperty("--thought-focus-progress",clarity.toFixed(3));
+  heart.style.setProperty("--thought-focus-blur",(6.5*(1-clarity)).toFixed(2)+"px");
+  heart.style.setProperty("--thought-focus-ink",(.38+.62*clarity).toFixed(3));
+  var accessible=outingFocusAvailable()&&readable&&clarity>=.98;$("thb").setAttribute("aria-hidden",accessible?"false":"true");
+  var showHint=canHoldOutingFocus()&&!r.holding&&performance.now()<r.hintUntil;hint.hidden=!showHint;
+  if(accessible)pad.setAttribute("aria-describedby","thb");else if(showHint)pad.setAttribute("aria-describedby","focusHint");else pad.removeAttribute("aria-describedby");
 }
 function releaseOutingFocus(){
   var r=outingFocus,pad=r.target||$("focusPad"),id=r.pointer,wasHolding=r.holding;r.holding=false;r.target=null;r.pointer=null;r.key=null;if(wasHolding){r.releasedAt=performance.now();r.releaseFrom=r.progress;if(S&&S.trip)thT=Date.now()}stopFocusAudio();
@@ -4839,7 +4848,7 @@ function outingFocusFrame(now){
 }
 function queueOutingFocusFrame(){if(!outingFocus.frame)outingFocus.frame=requestAnimationFrame(outingFocusFrame)}
 function beginOutingFocus(target){
-  syncOutingFocus();if(!canHoldOutingFocus()||outingFocus.holding)return false;
+  syncOutingFocus();if((target&&target!==$("focusPad"))||!canHoldOutingFocus()||outingFocus.holding)return false;
   if(!$("thb").textContent.trim())thought();stopTyping($("thb"),false);
   var r=outingFocus;r.holding=true;r.target=target||$("focusPad");r.hintUntil=0;r.started=performance.now();r.startProgress=r.progress;r.last=r.started;
   if(prefersReducedMotion())r.progress=3;
@@ -4849,17 +4858,16 @@ function syncOutingFocus(){
   var r=outingFocus,el=$("silLayer"),pad=$("focusPad");if(!el||!pad)return;
   var trip=S&&S.trip&&!S.taken&&!isStormNight()?S.trip:null;
   if(r.trip!==trip){cancelOutingFocus();r.trip=trip}
-  el.classList.toggle("focus-scene",!!trip);
+  el.classList.toggle("outing-scene",!!trip);
   var ready=!!trip&&outingFocusAvailable(),allowed=ready&&canHoldOutingFocus();
-  el.classList.toggle("focus-ready",ready);pad.hidden=!ready;pad.disabled=!allowed;pad.tabIndex=allowed?0:-1;
-  el.setAttribute("aria-hidden",ready?"false":"true");
-  var heart=$("heartRow");heart.classList.toggle("focus-thought-ready",!!trip);heart.tabIndex=allowed?0:-1;heart.setAttribute("aria-disabled",allowed?"false":"true");
-  if(!allowed&&r.holding)releaseOutingFocus();
-  if(allowed&&!S.focusHintSeen){S.focusHintSeen=true;r.hintUntil=performance.now()+2400;save();queueOutingFocusFrame()}
+  pad.hidden=!ready;pad.disabled=!allowed;pad.tabIndex=allowed?0:-1;
+  $("heartRow").classList.toggle("focus-thought-ready",ready);
+  if(!allowed&&(r.holding||!ready))cancelOutingFocus();
+  if(allowed&&!S.thoughtFocusHintSeen){S.thoughtFocusHintSeen=true;r.hintUntil=performance.now()+5000;save();queueOutingFocusFrame()}
   paintOutingFocus();
 }
 function bindOutingFocus(){
-  [$("focusPad"),$("heartRow")].forEach(function(target){
+  [$("focusPad")].forEach(function(target){
     target.setAttribute("role","button");target.setAttribute("aria-label","按住聚焦");
     target.addEventListener("pointerdown",function(e){if(e.isPrimary===false||(e.pointerType==="mouse"&&e.button!==0))return;if(!beginOutingFocus(target))return;e.preventDefault();outingFocus.pointer=e.pointerId;try{target.setPointerCapture(e.pointerId)}catch(err){}});
     target.addEventListener("pointermove",function(e){if(outingFocus.pointer!==e.pointerId)return;var b=target.getBoundingClientRect();if(e.clientX<b.left||e.clientX>b.right||e.clientY<b.top||e.clientY>b.bottom)releaseOutingFocus()});
@@ -5284,7 +5292,7 @@ else{h=""}
 var panelNames={home:"互動",go:"外出",ask:"提問",mem:"回憶",story:"日常",journal:"日記",herq:"她想問你"};var side=!!panelNames[tab];
 if(side){h='<div class="paneHead"><h2 class="collectionTitle">'+panelNames[tab]+'</h2><button type="button" class="pane-x" aria-label="關閉" onclick="closePane()">×</button></div>'+h}
 $("pane").innerHTML=h;var pn=$("pane");if(pn){pn.classList.toggle("has-x",!!side);pn.dataset.panelKind=tab;pn.dataset.panelSize=pn.querySelectorAll(".row").length<=3?"compact":"long";}requestAnimationFrame(function(){window.scrollTo(0,y)})}
-function paintOutingHud(){if(!(S&&S.trip))return;var oc=$("outChip");if(oc)oc.textContent="小紅出門了";var place=S.trip.place||(PLACES[S.trip.id]&&PLACES[S.trip.id][1])||"";var ac=$("aloneChip");if(ac){var concealed=!!S.trip.metUncle;ac.replaceChildren();ac.appendChild(document.createTextNode("外出地點："));var destination=document.createElement("span");destination.className="outingDestination"+(concealed?" is-concealed":"");destination.textContent=concealed?"強叔家":place;if(concealed){destination.setAttribute("aria-hidden","true");ac.setAttribute("aria-label","外出地點：地點暫不可辨識")}else ac.removeAttribute("aria-label");ac.appendChild(destination)};var left=Math.max(0,Math.ceil((S.trip.end-Date.now())/1000));var ocn=$("outingCdNum");if(ocn)ocn.textContent=String(left);var total=OUTING_SECONDS;var ring=$("outingCd");if(ring&&total>0)ring.style.setProperty("--p",String(Math.max(0,Math.min(1,left/total))));var cd=$("tripCd");if(cd)cd.textContent="倒數 "+left+" 秒"}
+function paintOutingHud(){if(!(S&&S.trip))return;var oc=$("outChip");if(oc&&!oc.querySelector(".outingTitle-name"))oc.innerHTML='<svg class="outingDoor" viewBox="0 0 24 26" aria-hidden="true"><path d="M4 23h16M6 23V4l11-1v20M17 5h3v18M13 13v2"/></svg><span class="outingTitle-name">小紅</span><span class="outingTitle-action">出門了</span><i class="outingStatusLight" aria-hidden="true"></i><svg class="outingTitle-rule" viewBox="0 0 110 5" preserveAspectRatio="none" aria-hidden="true"><path d="M1 3Q28 .7 54 2.5T109 1.5"/></svg>';var place=S.trip.place||(PLACES[S.trip.id]&&PLACES[S.trip.id][1])||"";var ac=$("aloneChip");if(ac){var concealed=!!S.trip.metUncle;ac.replaceChildren();ac.appendChild(document.createTextNode("外出地點："));var destination=document.createElement("span");destination.className="outingDestination"+(concealed?" is-concealed":"");destination.textContent=concealed?"強叔家":place;if(concealed){destination.setAttribute("aria-hidden","true");ac.setAttribute("aria-label","外出地點：地點暫不可辨識")}else ac.removeAttribute("aria-label");ac.appendChild(destination)};var left=Math.max(0,Math.ceil((S.trip.end-Date.now())/1000));var ocn=$("outingCdNum");if(ocn)ocn.textContent=String(left);var total=OUTING_SECONDS;var ring=$("outingCd");if(ring&&total>0)ring.style.setProperty("--p",String(Math.max(0,Math.min(1,left/total))));var cd=$("tripCd");if(cd)cd.textContent="倒數 "+left+" 秒"}
 function status(){$("affn").textContent=fmt(S.aff);var away=!!S.trip||S.taken,skipOn=S.trip&&!S.taken,thOn=skipOn;
 if(skipOn)stopTyping($("say"),false);else stopTyping($("thb"),false);var stEl=document.querySelector(".stick");if(stEl)stEl.classList.toggle("outing",!!skipOn);var hu=document.querySelector(".homeui");if(hu)hu.classList.toggle("outing-shell",!!skipOn);if(!skipOn){var _oal=$("outingActLine");if(_oal){_oal.hidden=true;_oal.innerHTML=""}}syncMoodDim();syncSilhouette();
 var acts=$("noteActs");if(acts){if(skipOn)acts.removeAttribute("hidden");else acts.setAttribute("hidden","")}var spEl=$("sp");if(spEl)spEl.style.display=skipOn?"":"none";
@@ -5418,7 +5426,7 @@ bindOutingFocus();
 $("daySummary").addEventListener("click",continueDaySummary);
 $("daySummary").addEventListener("keydown",function(e){if(e.key==="Escape"||e.key==="Enter"||e.key===" "){e.preventDefault();continueDaySummary()}else if(e.key==="Tab"){e.preventDefault();$("daySummaryContinue").focus()}});
 $("chatRoom").querySelector(".chatMark").innerHTML=homeUiIcon("chat");
-/* The heart row now shares hold-to-focus input with the silhouette; thought lines stay whole. */
+/* Only the explicit thought button accepts hold-to-focus input; thought lines stay whole. */
 
 
 function skinUiLabel(el,key){if(!el)return;var raw=el.textContent||"",label=raw.replace(/^[\s\p{Extended_Pictographic}\uFE0F\u200D\u23F3\u23E9]+/u,"");el.dataset.uiLabel=label;el.classList.add("uiIconLabel");el.style.setProperty("--label-icon",'url("data:image/svg+xml,'+encodeURIComponent(homeUiIcon(key).replace("<svg ", '<svg xmlns="http://www.w3.org/2000/svg" '))+'")')}
