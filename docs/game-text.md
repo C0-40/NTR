@@ -1146,24 +1146,27 @@ NIGHT-MASK-TITLE | 當晚 | mask title string
 
 ## 聊天室
 
-CHAT-T0-TITLE | 腿傷無聊・隨便刷到 | CHAT_THREADS[0].title
-CHAT-T0-P0-WHO | 匿名 | CHAT_THREADS[0].posts[0].who
-CHAT-T0-P0-META | 昨天・看板 | CHAT_THREADS[0].posts[0].meta
-CHAT-T0-P0-BODY | 又輸光了。這個月的房租在哪裡？什麼時候才輪到我有女朋友。 | CHAT_THREADS[0].posts[0].body
-CHAT-T0-P1-WHO | 匿名 | CHAT_THREADS[0].posts[1].who; dup-of CHAT-T0-P0-WHO
-CHAT-T0-P1-META | 昨天・看板 | CHAT_THREADS[0].posts[1].meta; dup-of CHAT-T0-P0-META
-CHAT-T0-P1-BODY | 沒人陪就算了，連賭桌都嫌我。這日子還有什麼意思。 | CHAT_THREADS[0].posts[1].body
-CHAT-T0-P2-WHO | 路人A | CHAT_THREADS[0].posts[2].who
+CHAT-T0-TITLE | 我的人生是否完蛋了？ | CHAT_THREADS[0].title
+CHAT-T0-P0-WHO | 龜頭孛力丸 | CHAT_THREADS[0].posts[0].who
+CHAT-T0-P0-META | 第3天・發佈 | CHAT_THREADS[0].posts[0].meta
+CHAT-T0-P0-BODY | 我現在已經快五字頭，身邊的人已經結婚生子。反觀自己又肥又窮又宅，還賭到欠得一身屁債。\n\n每次只要出街見到年青男女在放閃，就搞到我一整個人心理不平衡，我也想要大奶白滑的少女做我女朋友\n\n上天真是不公平，甚麼時候才給我翻身的機會？ | CHAT_THREADS[0].posts[0].body
+CHAT-T0-P1-WHO | 人被幹就會爽 | CHAT_THREADS[0].posts[1].who
+CHAT-T0-P1-META | 回覆 | CHAT_THREADS[0].posts[1].meta
+CHAT-T0-P1-BODY | 想翻生就戒賭開始吧 | CHAT_THREADS[0].posts[1].body
+CHAT-T0-P2-WHO | 龜頭孛力丸 | CHAT_THREADS[0].posts[2].who
 CHAT-T0-P2-META | 回覆 | CHAT_THREADS[0].posts[2].meta
-CHAT-T0-P2-BODY | 兄弟別再賭了，先找份工作吧。 | CHAT_THREADS[0].posts[2].body
-CHAT-T0-P3-WHO | 匿名 | CHAT_THREADS[0].posts[3].who; dup-of CHAT-T0-P0-WHO
-CHAT-T0-P3-META | 回覆 | CHAT_THREADS[0].posts[3].meta; dup-of CHAT-T0-P2-META
-CHAT-T0-P3-BODY | 說得容易。誰會看上我這種被丟下的人。 | CHAT_THREADS[0].posts[3].body
+CHAT-T0-P2-BODY | 閉嘴，我這種人人生已經完蛋了，要翻身只能靠絕地一博 | CHAT_THREADS[0].posts[2].body
+CHAT-T0-P3-WHO | 樹下的孤太狼 | CHAT_THREADS[0].posts[3].who
+CHAT-T0-P3-META | 回覆 | CHAT_THREADS[0].posts[3].meta
+CHAT-T0-P3-BODY | 心動不如行動，嫖妓比較實際 | CHAT_THREADS[0].posts[3].body
+CHAT-T0-P4-WHO | 龜頭孛力丸 | CHAT_THREADS[0].posts[4].who
+CHAT-T0-P4-META | 回覆 | CHAT_THREADS[0].posts[4].meta
+CHAT-T0-P4-BODY | 你給我錢嗎？ | CHAT_THREADS[0].posts[4].body
 CHAT-T1-TITLE | 還是那個看板 | CHAT_THREADS[1].title
-CHAT-T1-P0-WHO | 匿名 | CHAT_THREADS[1].posts[0].who; dup-of CHAT-T0-P0-WHO
+CHAT-T1-P0-WHO | 匿名 | CHAT_THREADS[1].posts[0].who
 CHAT-T1-P0-META | 今天・看板 | CHAT_THREADS[1].posts[0].meta
 CHAT-T1-P0-BODY | 現在的女人都現實。溫柔？那是裝的。誰真心陪你走到最後。 | CHAT_THREADS[1].posts[0].body
-CHAT-T1-P1-WHO | 匿名 | CHAT_THREADS[1].posts[1].who; dup-of CHAT-T0-P0-WHO
+CHAT-T1-P1-WHO | 匿名 | CHAT_THREADS[1].posts[1].who
 CHAT-T1-P1-META | 今天・看板 | CHAT_THREADS[1].posts[1].meta; dup-of CHAT-T1-P0-META
 CHAT-T1-P1-BODY | 又輸了一晚。算了。抱怨給空氣聽，總比誰都不理我好。 | CHAT_THREADS[1].posts[1].body
 CHAT-T2-TITLE | 活了大輩子，終於輪到我有豔遇了 | CHAT_THREADS[2].title
@@ -1250,26 +1253,26 @@ CHAT-T12-P1-WHO | 樹下的孤太狼 | CHAT_THREADS[12].posts[1].who
 CHAT-T12-P1-META | 回覆 | CHAT_THREADS[12].posts[1].meta
 CHAT-T12-P1-BODY | 還是樓主厲害，看完帖後下面已經硬爆 | CHAT_THREADS[12].posts[1].body
 CHAT-T13-TITLE | 匿名・她出軌之後 | CHAT_THREADS[13].title
-CHAT-T13-P0-WHO | 匿名 | CHAT_THREADS[13].posts[0].who; dup-of CHAT-T0-P0-WHO
+CHAT-T13-P0-WHO | 匿名 | CHAT_THREADS[13].posts[0].who
 CHAT-T13-P0-META | 新串・結局後 | CHAT_THREADS[13].posts[0].meta
 CHAT-T13-P0-BODY | 他們正式在一起了，還住同一屋簷下。可笑——晚上過來的人還是我。她說因為我需要她。 | CHAT_THREADS[13].posts[0].body
-CHAT-T13-P1-WHO | 匿名 | CHAT_THREADS[13].posts[1].who; dup-of CHAT-T0-P0-WHO
+CHAT-T13-P1-WHO | 匿名 | CHAT_THREADS[13].posts[1].who
 CHAT-T13-P1-META | 續 | CHAT_THREADS[13].posts[1].meta; dup-of CHAT-T3-P1-META
 CHAT-T13-P1-BODY | 她一邊愧疚一邊來。髮夾還在她頭上，味道還在我房間。阿祿若問晚歸，她大概又會心虛地笑。 | CHAT_THREADS[13].posts[1].body
 CHAT-T13-P2-WHO | 路人D | CHAT_THREADS[13].posts[2].who
 CHAT-T13-P2-META | 回覆 | CHAT_THREADS[13].posts[2].meta; dup-of CHAT-T0-P2-META
 CHAT-T13-P2-BODY | ……你這樣寫不太好吧。 | CHAT_THREADS[13].posts[2].body
-CHAT-T13-P3-WHO | 匿名 | CHAT_THREADS[13].posts[3].who; dup-of CHAT-T0-P0-WHO
+CHAT-T13-P3-WHO | 匿名 | CHAT_THREADS[13].posts[3].who
 CHAT-T13-P3-META | 回覆 | CHAT_THREADS[13].posts[3].meta; dup-of CHAT-T0-P2-META
 CHAT-T13-P3-BODY | 關你什麼事。她自己沒切斷。 | CHAT_THREADS[13].posts[3].body
 CHAT-T14-TITLE | 匿名・她搬過來了 | CHAT_THREADS[14].title
-CHAT-T14-P0-WHO | 匿名 | CHAT_THREADS[14].posts[0].who; dup-of CHAT-T0-P0-WHO
+CHAT-T14-P0-WHO | 匿名 | CHAT_THREADS[14].posts[0].who
 CHAT-T14-P0-META | 新串・結局後 | CHAT_THREADS[14].posts[0].meta; dup-of CHAT-T13-P0-META
 CHAT-T14-P0-BODY | 她搬過來了。行李不大，心倒很大——說「他比你更需要我」。對，就是我。 | CHAT_THREADS[14].posts[0].body
-CHAT-T14-P1-WHO | 匿名 | CHAT_THREADS[14].posts[1].who; dup-of CHAT-T0-P0-WHO
+CHAT-T14-P1-WHO | 匿名 | CHAT_THREADS[14].posts[1].who
 CHAT-T14-P1-META | 續 | CHAT_THREADS[14].posts[1].meta; dup-of CHAT-T3-P1-META
 CHAT-T14-P1-BODY | 那個阿祿還在等燈嗎？隨便。她現在睡我這邊。 | CHAT_THREADS[14].posts[1].body
-CHAT-T14-P2-WHO | 匿名 | CHAT_THREADS[14].posts[2].who; dup-of CHAT-T0-P0-WHO
+CHAT-T14-P2-WHO | 匿名 | CHAT_THREADS[14].posts[2].who
 CHAT-T14-P2-META | 攻略完結感言 | CHAT_THREADS[14].posts[2].meta
 CHAT-T14-P2-BODY | 裝可憐到最後。你們學不會的。 | CHAT_THREADS[14].posts[2].body
 CHAT-ROOM-TITLE | 匿名討論區 | HTML

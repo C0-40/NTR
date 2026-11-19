@@ -3804,28 +3804,34 @@ var EARLY_MEET_TH=[["回訊：超市。才不是繞路……他走不動、屋�
 var CHAT_THREADS=[
   {
     "step": 0,
-    "title": "腿傷無聊・隨便刷到",
+    "title": "我的人生是否完蛋了？",
     "sub": "",
+    "publishDay": 3,
     "posts": [
       {
-        "who": "匿名",
-        "meta": "昨天・看板",
-        "body": "又輸光了。這個月的房租在哪裡？什麼時候才輪到我有女朋友。"
+        "who": "龜頭孛力丸",
+        "meta": "第3天・發佈",
+        "body": "我現在已經快五字頭，身邊的人已經結婚生子。反觀自己又肥又窮又宅，還賭到欠得一身屁債。\n\n每次只要出街見到年青男女在放閃，就搞到我一整個人心理不平衡，我也想要大奶白滑的少女做我女朋友\n\n上天真是不公平，甚麼時候才給我翻身的機會？"
       },
       {
-        "who": "匿名",
-        "meta": "昨天・看板",
-        "body": "沒人陪就算了，連賭桌都嫌我。這日子還有什麼意思。"
-      },
-      {
-        "who": "路人A",
+        "who": "人被幹就會爽",
         "meta": "回覆",
-        "body": "兄弟別再賭了，先找份工作吧。"
+        "body": "想翻生就戒賭開始吧"
       },
       {
-        "who": "匿名",
+        "who": "龜頭孛力丸",
         "meta": "回覆",
-        "body": "說得容易。誰會看上我這種被丟下的人。"
+        "body": "閉嘴，我這種人人生已經完蛋了，要翻身只能靠絕地一博"
+      },
+      {
+        "who": "樹下的孤太狼",
+        "meta": "回覆",
+        "body": "心動不如行動，嫖妓比較實際"
+      },
+      {
+        "who": "龜頭孛力丸",
+        "meta": "回覆",
+        "body": "你給我錢嗎？"
       }
     ]
   },
@@ -5327,7 +5333,10 @@ function replay(k){if(maskOpen()||presentationHeld()||mbLock||dayLock)return;var
 function replayN(k){var s=NSTORY[k];mq.push(["💔 "+s[1],s[2]]);nextPop()}
 
 function chatAvailable(){if(!S||S.trip||isStormNight()||dayLock)return false;if(S.endingDone&&((S.ending|0)===1||(S.ending|0)===2))return true;if(S.taken)return false;return chatNavUnlocked()}
-function chatThreadUnlocked(t){if(!t||t.retired)return false;if(t.ending){return !!(S.endingDone&&(S.ending|0)===(t.ending|0))}if((t.step|0)<=0){if(t.needAff&&(S.aff|0)<(t.needAff|0)&&((S.day|0)<6))return false;return true}var due=S.forumPublishDays&&S.forumPublishDays[t.step|0];return (S.uncleStep|0)>=(t.step|0)&&(due==null||(S.day|0)>=(due|0))}
+function chatThreadUnlocked(t){
+if(!t||t.retired)return false;
+if(t.publishDay&&(S.day|0)<t.publishDay)return false;
+if(t.ending){return !!(S.endingDone&&(S.ending|0)===(t.ending|0))}if((t.step|0)<=0){if(t.needAff&&(S.aff|0)<(t.needAff|0)&&((S.day|0)<6))return false;return true}var due=S.forumPublishDays&&S.forumPublishDays[t.step|0];return (S.uncleStep|0)>=(t.step|0)&&(due==null||(S.day|0)>=(due|0))}
 function chatThreadList(){var list=[];(CHAT_THREADS||[]).forEach(function(t,i){if(chatThreadUnlocked(t))list.push({t:t,i:i})});return list}
 var chatReadingPositions={},chatRenderedKey=null;
 function rememberChatReading(){var feed=$("chatFeed");if(feed&&chatRenderedKey!=null)chatReadingPositions[chatRenderedKey]=feed.scrollTop}

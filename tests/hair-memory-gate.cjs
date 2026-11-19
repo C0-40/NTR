@@ -7,7 +7,11 @@ function check(name,pass,detail){checks.push({name,pass:!!pass,detail});if(!pass
 function literal(s,n){return vm.runInNewContext('('+s.match(new RegExp('var '+n+'=(\\[.*?\\]);','s'))[1]+')');}
 check('Production HTML files are identical',Buffer.from(source).equals(fs.readFileSync(path.join(root,'小櫻的同居日記.html'))));
 for(const m of source.matchAll(/<script\b[^>]*>([\s\S]*?)<\/script>/g))new vm.Script(m[1]);
-for(const name of ['UNCLE_ARC','CHAT_THREADS','STORY','MEMORIES','NSTORY','HOME_TH','PLACE_TH','NIGHT','FLAT_NIGHT'])check(`${name}: approved prose and data unchanged`,JSON.stringify(literal(source,name))===JSON.stringify(literal(before,name)));
+for(const name of ['UNCLE_ARC','CHAT_THREADS','STORY','MEMORIES','NSTORY','HOME_TH','PLACE_TH','NIGHT','FLAT_NIGHT']){
+ const actual=literal(source,name),expected=literal(before,name);
+ // CHAT-T0 was replaced by the approved Day3 thread; forum-first-post.cjs checks it.
+ check(`${name}: approved prose and data unchanged`,JSON.stringify(name==='CHAT_THREADS'?actual.slice(1):actual)===JSON.stringify(name==='CHAT_THREADS'?expected.slice(1):expected));
+}
 const server=http.createServer((req,res)=>{
  const pn=decodeURIComponent(new URL(req.url,'http://localhost').pathname);
  try{const b=fs.readFileSync(path.join(root,pn==='/'?'xiaoying-tongju-riji.html':pn.slice(1)));res.setHeader('Content-Type',pn.endsWith('.png')?'image/png':'text/html; charset=utf-8');res.end(b)}catch(e){res.writeHead(404);res.end()}
