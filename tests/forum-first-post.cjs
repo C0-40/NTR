@@ -20,6 +20,13 @@ const expectedPosts = [
   ['樹下的孤太狼', '心動不如行動，嫖妓比較實際'],
   ['龜頭孛力丸', '你給我錢嗎？'],
 ];
+const expectedSecondPosts = [
+  ['龜頭孛力丸', '本來收到內幕消息打算穩賺一筆，還借錢下了個重注，誰知血本無歸，現在還被債主追上門了\n\n我的人生已經看不到未來了，只希望死前可以找個大奶騷女好好爽爽'],
+  ['人被幹就會爽', '一想到未來我有機會變成這樣的可憐人，就立刻有動力工作了（雙手合十'],
+  ['龜頭孛力丸', '滾！你媽生下你才可憐'],
+  ['Cyberpunk2067', '不要太過悲觀，現在人生開始努力也不遲'],
+  ['龜頭孛力丸', '你給我錢就不悲觀了'],
+];
 check('Both production HTML files match', source === fs.readFileSync(path.join(root, '小櫻的同居日記.html'), 'utf8'));
 for (const match of source.matchAll(/<script\b[^>]*>([\s\S]*?)<\/script>/g)) new vm.Script(match[1]);
 const server = http.createServer((request, response) => {
@@ -87,6 +94,24 @@ async function fixture(page, day, aff = 0) {
   check('Normal day advance publishes on Day3 and shows the update notice', await page.evaluate(() => S.day === 3 && chatThreadUnlocked(CHAT_THREADS[0]) && S.chatNotice));
   await page.evaluate(() => { openChatRoom(); chatOpenThread(0); });
   check('Opening the published thread clears its update notice', await page.evaluate(() => S.chatOpenStep === 0 && !S.chatNotice));
+  for (const { day, aff, unlocked } of [
+    { day: 1, aff: 29, unlocked: false },
+    { day: 1, aff: 30, unlocked: true },
+    { day: 5, aff: 29, unlocked: false },
+    { day: 5, aff: 30, unlocked: true },
+    { day: 6, aff: 0, unlocked: true },
+  ]) {
+    await fixture(page, day, aff);
+    await page.evaluate(() => { openChatRoom(); chatOpenThread(1); });
+    check(`Second thread keeps its existing Day${day}/affinity${aff} gate`, await page.evaluate(unlocked => chatThreadUnlocked(CHAT_THREADS[1]) === unlocked && (unlocked ? S.chatOpenStep === 1 : S.chatOpenStep == null), unlocked));
+  }
+  const secondRendered = await page.locator('#chatFeed .cPost').evaluateAll(posts => posts.map(post => [post.querySelector('.who').textContent, post.querySelector('.body').textContent]));
+  check('Second thread shows all five approved posts and names verbatim', JSON.stringify(secondRendered) === JSON.stringify(expectedSecondPosts));
+  check('Second thread displays its approved title', await page.evaluate(() => document.querySelector('.forumTitle').textContent === '又輸到血本無歸了'));
+  await page.evaluate(() => save());
+  await page.reload();
+  await page.evaluate(() => { openChatRoom(); chatOpenThread(1); });
+  check('Reload opens the updated second thread at its original index', await page.evaluate(() => S.chatOpenStep === 1 && document.querySelector('.forumTitle').textContent === '又輸到血本無歸了' && document.querySelectorAll('#chatFeed .cPost').length === 5));
   await fixture(page, 10);
   await page.evaluate(() => { S.uncleStep = 1; S.forumPublishDays = { 1: 11 }; });
   check('Stage threads still wait until the following day', await page.evaluate(() => !chatThreadUnlocked(CHAT_THREADS.find(thread => thread.step === 1))));

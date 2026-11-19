@@ -9,8 +9,8 @@ check('Production HTML files are identical',Buffer.from(source).equals(fs.readFi
 for(const m of source.matchAll(/<script\b[^>]*>([\s\S]*?)<\/script>/g))new vm.Script(m[1]);
 for(const name of ['UNCLE_ARC','CHAT_THREADS','STORY','MEMORIES','NSTORY','HOME_TH','PLACE_TH','NIGHT','FLAT_NIGHT']){
  const actual=literal(source,name),expected=literal(before,name);
- // CHAT-T0 was replaced by the approved Day3 thread; forum-first-post.cjs checks it.
- check(`${name}: approved prose and data unchanged`,JSON.stringify(name==='CHAT_THREADS'?actual.slice(1):actual)===JSON.stringify(name==='CHAT_THREADS'?expected.slice(1):expected));
+ // CHAT-T0 and CHAT-T1 have approved replacements checked by forum-first-post.cjs.
+ check(`${name}: approved prose and data unchanged`,JSON.stringify(name==='CHAT_THREADS'?actual.slice(2):actual)===JSON.stringify(name==='CHAT_THREADS'?expected.slice(2):expected));
 }
 const server=http.createServer((req,res)=>{
  const pn=decodeURIComponent(new URL(req.url,'http://localhost').pathname);
