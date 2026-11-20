@@ -3615,16 +3615,17 @@ body:has(#gameUI.homeui.outing-shell){background:#2c221d!important;background-im
 #gameUI.room-trip .roomTripCard{
   position:absolute;z-index:5;left:50%;top:50%;transform:translate(-50%,-50%);
   display:block;width:min(78%,300px);padding:0;overflow:hidden;cursor:pointer;
-  border:2px solid #603e36;border-radius:18px 6px;background:linear-gradient(115deg,#fff2d9,#f0d6b6);
-  color:#49342c;box-shadow:0 4px 0 #64453c,0 8px 18px #38231d42;font:inherit
+  border:1px solid #987760;border-radius:5px 9px 6px 8px;
+  background:repeating-linear-gradient(6deg,#9a704905 0 1px,transparent 1px 4px),#fbedd5;
+  color:#49342c;box-shadow:0 3px 9px #38231d30,inset 0 1px 0 #fff8e7;font:inherit
 }
-.roomTripFace{display:flex;align-items:center;gap:8px;padding:17px 12px}
-.roomTripFlower{width:24px;height:24px;flex:none;color:#996e58}
-.roomTripCard strong{font-family:serif;font-size:clamp(17px,4.9vw,23px);letter-spacing:.04em}
-.roomTripCard time{margin-left:auto;font:600 14px/1.2 monospace;color:#795754}
+.roomTripFace{position:relative;display:grid;grid-template-columns:1fr auto;align-items:center;gap:12px 8px;padding:20px 18px 8px}
+.roomTripFlower{position:absolute;left:16px;bottom:-20px;width:48px;height:48px;color:#9d765b;opacity:.18;pointer-events:none}
+.roomTripCard strong{position:relative;grid-column:1;grid-row:2;font-family:serif;font-size:clamp(20px,5.4vw,25px);letter-spacing:.06em;text-align:left}
+.roomTripCard time{position:relative;grid-column:2;grid-row:1;font:500 13px/1.2 monospace;color:#795f50}
 .roomTripCard time:empty{display:none}
-.roomTripLink{display:flex;justify-content:space-between;align-items:center;padding:9px 16px;background:#853f49;color:#fff2dc;font-size:14px;font-weight:600}
-.roomTripLink::after{content:"›";font-size:21px;line-height:1}
+.roomTripLink{position:relative;display:flex;justify-content:flex-end;align-items:center;gap:8px;width:max-content;max-width:calc(100% - 36px);margin:12px 18px 16px auto;padding:5px 0;color:#8c414b;border-bottom:1px solid #aa6570;font-size:14px;font-weight:500;line-height:1.4}
+.roomTripLink::after{content:"›";font-size:20px;line-height:1}
 @media(prefers-reduced-motion:no-preference){#roomBathroom svg{transition:transform .15s ease-out}#roomBathroom:active svg{transform:scale(1.16)}}
 .roomTripCard:focus-visible{outline:3px solid #fff0ba;outline-offset:5px}
 #gameUI.room-trip .roomTripCard:active{scale:.99}
