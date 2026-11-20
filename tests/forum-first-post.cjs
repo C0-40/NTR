@@ -58,6 +58,14 @@ async function fixture(page, day, aff = 0) {
     render();
   }, { day, aff });
 }
+async function openDuringOuting(page, thread) {
+  await page.evaluate(thread => {
+    S.trip = { id: 0, place: '超市', end: Date.now() + 60000, acts: [] };
+    render();
+    openChatRoom();
+    chatOpenThread(thread);
+  }, thread);
+}
 (async () => {
   await new Promise(resolve => server.listen(0, '127.0.0.1', resolve));
   browser = await chromium.launch({ executablePath: process.env.NTR_CHROMIUM_PATH || '/usr/bin/chromium', args: ['--no-sandbox'] });
@@ -67,11 +75,11 @@ async function fixture(page, day, aff = 0) {
   await page.goto('http://127.0.0.1:' + server.address().port + '/');
   for (const day of [1, 2]) {
     await fixture(page, day, 100);
-    await page.evaluate(() => { openChatRoom(); chatOpenThread(0); });
+    await openDuringOuting(page, 0);
     check(`Day${day} list and direct open hide the new first thread`, await page.evaluate(() => !chatThreadUnlocked(CHAT_THREADS[0]) && S.chatOpenStep == null && !document.querySelector('#chatFeed').textContent.includes('我的人生是否完蛋了？')));
   }
   await fixture(page, 3);
-  await page.evaluate(() => { openChatRoom(); chatOpenThread(0); });
+  await openDuringOuting(page, 0);
   const rendered = await page.locator('#chatFeed .cPost').evaluateAll(posts => posts.map(post => [post.querySelector('.who').textContent, post.querySelector('.body').textContent]));
   check('Day3 shows the exact five approved posts in order', JSON.stringify(rendered) === JSON.stringify(expectedPosts));
   check('New title renders without displaying publication days', await page.evaluate(() => document.querySelector('.forumTitle').textContent === '我的人生是否完蛋了？' && !document.querySelector('#chatFeed').textContent.includes('第3天')));
@@ -92,7 +100,7 @@ async function fixture(page, day, aff = 0) {
   await page.locator('#daySummaryContinue').click();
   await page.clock.runFor(1800);
   check('Normal day advance publishes on Day3 and shows the update notice', await page.evaluate(() => S.day === 3 && chatThreadUnlocked(CHAT_THREADS[0]) && S.chatNotice));
-  await page.evaluate(() => { openChatRoom(); chatOpenThread(0); });
+  await openDuringOuting(page, 0);
   check('Opening the published thread clears its update notice', await page.evaluate(() => S.chatOpenStep === 0 && !S.chatNotice));
   for (const { day, aff, unlocked } of [
     { day: 1, aff: 29, unlocked: false },
@@ -102,7 +110,7 @@ async function fixture(page, day, aff = 0) {
     { day: 6, aff: 0, unlocked: true },
   ]) {
     await fixture(page, day, aff);
-    await page.evaluate(() => { openChatRoom(); chatOpenThread(1); });
+    await openDuringOuting(page, 1);
     check(`Second thread keeps its existing Day${day}/affinity${aff} gate`, await page.evaluate(unlocked => chatThreadUnlocked(CHAT_THREADS[1]) === unlocked && (unlocked ? S.chatOpenStep === 1 : S.chatOpenStep == null), unlocked));
   }
   const secondRendered = await page.locator('#chatFeed .cPost').evaluateAll(posts => posts.map(post => [post.querySelector('.who').textContent, post.querySelector('.body').textContent]));
@@ -110,7 +118,7 @@ async function fixture(page, day, aff = 0) {
   check('Second thread displays its approved title', await page.evaluate(() => document.querySelector('.forumTitle').textContent === '又輸到血本無歸了'));
   await page.evaluate(() => save());
   await page.reload();
-  await page.evaluate(() => { openChatRoom(); chatOpenThread(1); });
+  await openDuringOuting(page, 1);
   check('Reload opens the updated second thread at its original index', await page.evaluate(() => S.chatOpenStep === 1 && document.querySelector('.forumTitle').textContent === '又輸到血本無歸了' && document.querySelectorAll('#chatFeed .cPost').length === 5));
   await fixture(page, 10);
   await page.evaluate(() => { S.uncleStep = 1; S.forumPublishDays = { 1: 11 }; });

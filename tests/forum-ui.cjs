@@ -40,6 +40,7 @@ async function fixture(page, options = {}) {
     mq = []; busy = backLock = mbLock = dayLock = 0;
     chatReadingPositions = {}; chatRenderedKey = null;
     Object.assign(presentationPrefs, { textSpeed: 0, letterSound: false, music: 0, ambient: 0, sfx: 0 });
+    S.trip = { id: 0, place: "超市", end: Date.now() + 60000, acts: [] };
     ensureDailyBase(); render(); openChatRoom();
   }, options);
   await page.clock.runFor(250);
