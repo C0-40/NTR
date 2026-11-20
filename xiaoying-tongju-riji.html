@@ -3635,6 +3635,13 @@ body:has(#gameUI.homeui.outing-shell){background:#2c221d!important;background-im
 @keyframes roomPlaqueAppear{from{opacity:0;translate:0 5px}to{opacity:1;translate:0 0}}
 #tripRoomBack{min-height:44px;padding:4px 10px;color:#ffefdf;background:#49333a;border:1px solid #a88380;border-radius:9px;font:inherit;font-size:13px}
 @media(prefers-reduced-motion:no-preference){.room-trip .roomTripCard{animation:roomPlaqueAppear .3s ease-out}.roomTripCard.is-due .roomTripFace,.roomTripCard.is-due .roomTripLink{animation:roomPlaqueAppear .35s ease-out}}
+#tripRoomBack{display:none}
+#gameUI.outing-shell:not(.storm-stay) #tripRoomBack{display:block;align-self:center;flex:none;min-height:44px;margin:3px auto 4px;padding:6px 22px}
+#roomActionDialogue{display:none}
+#gameUI.room-trip.reading-room-action #roomActionDialogue{display:grid;gap:4px;width:100%;box-sizing:border-box;pointer-events:auto;text-align:left;font:inherit;color:#513b32;background:#fff0da;border:1.5px solid #936f59;border-radius:6px 14px;padding:9px 14px;box-shadow:0 2px 0 #67493c44}
+#roomActionDialogue b{justify-self:start;background:#86545c;color:#fff2dc;padding:2px 9px;border-radius:4px;font-size:13px}
+#roomActionText{max-height:22vh;overflow:auto;white-space:pre-wrap;line-height:1.55}
+#roomActionDialogue small{justify-self:end;color:#79594c;font-size:11px}
 </style>
 </head>
 <body>
@@ -3702,7 +3709,6 @@ body:has(#gameUI.homeui.outing-shell){background:#2c221d!important;background-im
           <span class="outingTop-cdUnit">秒</span>
         </div>
         <div class="outingTop-acts note-acts" id="noteActs" hidden>
-          <button type="button" id="tripRoomBack" onclick="switchTripView(false)">返回客廳</button>
         </div>
       </div>
     </div>
@@ -3737,6 +3743,7 @@ body:has(#gameUI.homeui.outing-shell){background:#2c221d!important;background-im
       <button type="button" class="bubble" data-t="ask" id="navAsk"><svg class="uiIcon" viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M19 16a8 8 0 1 0-5 3l6 2-1-5Z"/><path d="M9 8a3 3 0 0 1 6 0c0 2-3 2-3 4"/><path d="M12 15h.01"/></svg><span>提問</span></button>
     </nav>
 
+    <button type="button" id="roomActionDialogue" onclick="closeRoomActionDialogue()"><b>阿祿</b><span id="roomActionText"></span><small>輕觸繼續 ▾</small></button>
     <div class="dlg" id="dlg" role="button" tabindex="0" aria-label="和她聊天（點一下對話）"><span class="diaryPaperEdge" aria-hidden="true"></span><span class="dlgAv" id="dlgAv" aria-hidden="true"></span><div class="dlgBody"><b id="nm">小紅</b><span id="say">哼！才不要多想，只是當初口快答應了而已！</span></div><span class="dlgNext" id="dlgNext" aria-hidden="true">▼</span><span class="readingBadge" aria-hidden="true"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M8 4C6 2.5 3 2.5 1.5 3v10C3 12.5 6 12.5 8 14c2-1.5 5-1.5 6.5-1V3C13 2.5 10 2.5 8 4Zm0 0v10"/></svg><span>閱讀中</span></span></div>
     </div>
   </div>
@@ -3751,6 +3758,7 @@ body:has(#gameUI.homeui.outing-shell){background:#2c221d!important;background-im
     <button type="button" id="sleepBtn" class="dockSleep" aria-label="睡覺，進入下一天" onclick="sleepDay()"><span class="dockSleep-ico" aria-hidden="true"><svg class="uiIcon" viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M20.5 14A9 9 0 0 1 10 3a9 9 0 1 0 10.5 11Z"/><path d="M17 3v4m-2-2h4"/></svg></span><span class="dockSleep-txt"><span class="dockSleep-lab">睡覺</span><span class="dockSleep-sub">進入下一天</span></span></button>
     <button type="button" data-t="herq" style="display:none" aria-hidden="true">❓ 被問</button>
   </div>
+  <button type="button" id="tripRoomBack" onclick="switchTripView(false)">返回客廳</button>
   </div>
   <section class="pane" id="pane" role="region" aria-label="功能面板"></section>
   <div id="presentationHint" class="presentationHint" role="status" aria-live="polite" hidden></div>
@@ -3812,14 +3820,14 @@ function notifyContext(id,token,kind){var el=$(id);if(!el||el._cueToken===token)
 var scenePresentation={phase:"",timer:0,departurePending:false};
 function presentationHeld(){return !!(scenePresentation.phase)}
 function updatePresentationState(){var root=$("gameUI"),hint=$("presentationHint"),phase=scenePresentation.phase;if(!root)return;
-root.classList.toggle("presentation-held",!!phase);root.classList.toggle("presentation-reading",phase==="reaction-reading");root.classList.toggle("departure-pending",scenePresentation.departurePending);root.setAttribute("aria-busy",phase&&phase!=="reaction-reading"?"true":"false");root.querySelectorAll(".topHud,.dock,.sideNav,.contextActions,#pane").forEach(function(el){el.inert=!!phase});
-if(hint){hint.textContent=phase==="leaving"?"小紅準備出門…":phase==="returning"?"小紅回來了…":phase==="hero-arriving"?"小紅來了…":phase==="reaction-reading"?"輕觸對話，繼續閱讀":"";hint.hidden=!phase;}
+root.classList.toggle("reading-room-action",phase==="room-action");root.classList.toggle("presentation-held",!!phase);root.classList.toggle("presentation-reading",phase==="reaction-reading");root.classList.toggle("departure-pending",scenePresentation.departurePending);root.setAttribute("aria-busy",phase&&phase!=="reaction-reading"?"true":"false");root.querySelectorAll(".topHud,.dock,.sideNav,.contextActions,#pane").forEach(function(el){el.inert=!!phase});
+if(hint){hint.textContent=phase==="leaving"?"小紅準備出門…":phase==="returning"?"小紅回來了…":phase==="hero-arriving"?"小紅來了…":phase==="reaction-reading"?"輕觸對話，繼續閱讀":"";hint.hidden=!phase||phase==="room-action";}
 }
 function cancelScenePresentation(){cancelOutingFocus();hideAutomaticReview();hideDaySummary();var root=$("gameUI");if(root)root.classList.remove("hero-arriving","intro-pending");resetReturnReading();clearTimeout(scenePresentation.timer);sqReply=null;scenePresentation.phase="";scenePresentation.departurePending=false;var root=$("gameUI"),mask=$("mask");if(root)root.inert=false;if(mask)mask.classList.remove("return-window");updatePresentationState()}
 function beginReactionReading(text){scenePresentation.phase="reaction-reading";say(text,"calm");$("say").scrollTop=0;updatePresentationState();render(false);$("dlg").focus({preventScroll:true})}
 function continueReactionReading(){if(scenePresentation.phase!=="reaction-reading")return false;playUiSound("click");if(stopTyping($("say"),true))return true;if(sqReply&&sqReply.i+1<sqReply.lines.length){sqReply.i++;beginReactionReading(sqReply.lines[sqReply.i]);return true}sqReply=null;scenePresentation.phase="";updatePresentationState();nextPop();render(false);return true}
 function finishReturnPresentation(){scenePresentation.phase="";updatePresentationState();if(isStormNight()){openStormNight();render(false);return}if(hasReturnObservation()&&!(S.sleepRun&&S.sleepRun.autoTrip)&&!mq.some(function(m){return m&&m.returnHome}))mq.unshift({returnHome:true});nextPop();render(false)}
-function guardPresentationInput(e){if(!presentationHeld())return;var target=e.target,reading=scenePresentation.phase==="reaction-reading",allowed=reading&&target&&target.closest&&target.closest("#dlg,#av");if(allowed)return;if(e.type==="keydown"&&["Tab","Enter"," "].indexOf(e.key)<0)return;e.preventDefault();e.stopImmediatePropagation()}
+function guardPresentationInput(e){if(!presentationHeld())return;var target=e.target,reading=scenePresentation.phase==="reaction-reading",allowed=reading&&target&&target.closest&&target.closest("#dlg,#av");if(allowed||(scenePresentation.phase==="room-action"&&target.closest&&target.closest("#roomActionDialogue")))return;if(e.type==="keydown"&&["Tab","Enter"," "].indexOf(e.key)<0)return;e.preventDefault();e.stopImmediatePropagation()}
 document.addEventListener("click",guardPresentationInput,true);document.addEventListener("keydown",guardPresentationInput,true);
 var navigationFeedback={};function refreshPresentationFeedback(){var unlocked=false;["navAsk","navStory","navMem","navChat"].forEach(function(id){var el=$(id);if(!el)return;var next=!el.disabled;if(navigationFeedback[id]===false&&next){pulsePresentation(el,"nav-unlock",700);unlocked=true}navigationFeedback[id]=next});if(unlocked)playUiSound("unlock");syncSceneAudio()}
 
@@ -4966,7 +4974,19 @@ function paintSideBadges(){}
 function blankActNeedAff(id){if(id==="msg")return 25;if(id==="call")return 50;return 0}
 function blankActUnlocked(id){var need=blankActNeedAff(id);if(!need)return true;return !!S&&(S.aff|0)>=need}
 function blankAct(id){if(tripDue()||(id==="jack"&&(isOutingPhase()||maskOpen())))return;if(presentationHeld()||busy||!S.trip||S.taken)return;if(!blankActUnlocked(id)){var need=blankActNeedAff(id);say("（阿祿親密度到 "+need+" 以後，才能用「"+(id==="msg"?"發訊息":id==="call"?"打電話":id)+"」。）","pout");return}if(maskOpen()){if(sqOptsOn())return;var mask=$("mask");if(mask)mask.classList.remove("on");if(!moodPeekOn){try{mask&&mask.classList.remove("mood-chrome")}catch(e){}}}withBusy(function(){blankActNow(id)});}
-function showOutingActLine(title,msg){if(!isOutingPhase()){popup(title,msg);return}var el=$("outingActLine");if(!el)return;el.hidden=false;el.innerHTML="<b>"+title+"</b><span>"+msg+"</span><i class=\"sm\">輕觸關閉</i>";el.onclick=function(){el.hidden=true;el.innerHTML=""};}
+function closeRoomActionDialogue(){
+  if(scenePresentation.phase!=="room-action"||stopTyping($("roomActionText"),true))return;
+  scenePresentation.phase="";
+  updatePresentationState();
+  (tripDue()?$("tripInspect"):$("roomBathroom")).focus({preventScroll:true});
+}
+function showOutingActLine(title,msg){if(!isOutingPhase()){
+  scenePresentation.phase="room-action";
+  updatePresentationState();
+  typeDialogue($("roomActionText"),msg);
+  $("roomActionDialogue").focus({preventScroll:true});
+  return;
+}var el=$("outingActLine");if(!el)return;el.hidden=false;el.innerHTML="<b>"+title+"</b><span>"+msg+"</span><i class=\"sm\">輕觸關閉</i>";el.onclick=function(){el.hidden=true;el.innerHTML=""};}
 function blankActNow(id){if(!S.trip||S.taken||!blankActUnlocked(id)||(id==="msg"&&S.aff>=50))return;if(id==="nap"){skipTrip();return}if(!BLANK_TXT[id])return;var titles={msg:"📱 發訊息",call:"📞 打電話",jack:"💦 去廁所"};var title=titles[id]||id;if(!S.trip.blankOnce)S.trip.blankOnce={};if(S.trip.blankOnce[id]){showOutingActLine(title,S.trip.blankOnce[id]);if(tab==="go")closePane();render(false);return}var msg=pickBlank(id);if(!msg)return;S.trip.blankOnce[id]=msg;if(!S.trip.acts)S.trip.acts=[];if(S.trip.acts.indexOf(id)<0)S.trip.acts.push(id);markBlankOptSeen(id);var face=id=="jack"?"shy":"sad";setEx(face);faceTf(face);addLog("⏳ "+title+"｜"+msg);showOutingActLine(title,msg);if(tab==="go")closePane();render(false)}
 var sqReply=null;
 function migrateSq(){if(!S)return;if(!S.sq)S.sq=[];if(!S.sqAsked)S.sqAsked=S.sq.slice();if(!S.sqToday)S.sqToday=[];S.sqVer=2}
