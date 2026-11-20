@@ -3614,21 +3614,23 @@ body:has(#gameUI.homeui.outing-shell){background:#2c221d!important;background-im
 #gameUI.room-trip #dlg,#gameUI.room-trip #av,#gameUI.room-trip #heartRow,#gameUI.room-trip #silLayer,#gameUI.room-trip #navAsk,#gameUI.storm-stay #tripRoomBack{display:none!important}
 #gameUI.room-trip .roomTripCard{
   position:absolute;z-index:5;left:50%;top:50%;transform:translate(-50%,-50%);
-  display:block;width:min(78%,300px);padding:0;overflow:hidden;cursor:pointer;
-  border:1px solid #987760;border-radius:5px 9px 6px 8px;
-  background:repeating-linear-gradient(6deg,#9a704905 0 1px,transparent 1px 4px),#fbedd5;
-  color:#49342c;box-shadow:0 3px 9px #38231d30,inset 0 1px 0 #fff8e7;font:inherit
+  display:block;width:min(76%,278px);padding:17px 18px 18px;overflow:visible;cursor:pointer;
+  border:1.5px solid #936a59;border-radius:28px 28px 22px 22px;
+  background:radial-gradient(ellipse at 50% 0,#fff9e8,transparent 75%),#f9e8cf;
+  color:#664438;box-shadow:0 3px 0 #aa82674d,0 6px 16px #38231d24,inset 0 0 0 4px #fff3df;font:inherit
 }
-.roomTripFace{position:relative;display:grid;grid-template-columns:1fr auto;align-items:center;gap:12px 8px;padding:20px 18px 8px}
-.roomTripFlower{position:absolute;left:16px;bottom:-20px;width:48px;height:48px;color:#9d765b;opacity:.18;pointer-events:none}
-.roomTripCard strong{position:relative;grid-column:1;grid-row:2;font-family:serif;font-size:clamp(20px,5.4vw,25px);letter-spacing:.06em;text-align:left}
-.roomTripCard time{position:relative;grid-column:2;grid-row:1;font:500 13px/1.2 monospace;color:#795f50}
+.roomTripCard::before{content:"";position:absolute;inset:8px;border:1px dashed #bc9c7b80;border-radius:21px 21px 15px 15px;pointer-events:none}
+.roomTripFace{position:relative;display:grid;justify-items:center;gap:9px;padding:0 0 11px}
+.roomTripFlower{width:35px;height:35px;padding:7px;border:1px solid #ccaa8a;border-radius:50%;background:#ecd3bd;color:#9c7658;box-shadow:0 1px 0 #fff5df}
+.roomTripCard strong{font-family:serif;font-size:clamp(21px,5.5vw,25px);letter-spacing:.08em;font-weight:600;line-height:1.5}
+.roomTripCard time{display:flex;align-items:center;gap:6px;font:500 13px/1.3 monospace;color:#88604f}
+.roomTripCard time::before{content:"";width:10px;height:10px;border:1px solid currentColor;border-radius:50%;background:linear-gradient(currentColor,currentColor) 50% 30%/1px 4px no-repeat,linear-gradient(currentColor,currentColor) 70% 55%/3px 1px no-repeat}
 .roomTripCard time:empty{display:none}
-.roomTripLink{position:relative;display:flex;justify-content:flex-end;align-items:center;gap:8px;width:max-content;max-width:calc(100% - 36px);margin:12px 18px 16px auto;padding:5px 0;color:#8c414b;border-bottom:1px solid #aa6570;font-size:14px;font-weight:500;line-height:1.4}
-.roomTripLink::after{content:"›";font-size:20px;line-height:1}
+.roomTripLink{position:relative;display:flex;justify-content:center;align-items:center;gap:10px;min-height:38px;margin:0;padding:1px 10px;color:#8a4855;background:#f2d9ce;border:1px solid #bf8d87;border-radius:18px;font-size:14px;font-weight:500;line-height:1.4;box-shadow:inset 0 1px 0 #fff0e3}
+.roomTripLink::after{content:"›";font-size:21px;line-height:1}
 @media(prefers-reduced-motion:no-preference){#roomBathroom svg{transition:transform .15s ease-out}#roomBathroom:active svg{transform:scale(1.16)}}
 .roomTripCard:focus-visible{outline:3px solid #fff0ba;outline-offset:5px}
-#gameUI.room-trip .roomTripCard:active{scale:.99}
+#gameUI.room-trip .roomTripCard:active{scale:.985}
 #gameUI.room-trip .dock #navChat,#gameUI.room-trip .dock #roomBathroom{background:#f6e3c9!important;color:#543b32!important;border-color:#98765d!important}
 #roomNap small{display:block;font-size:10px}.forumDockNew{position:absolute;top:2px;right:4px;color:#fff5e3;background:#854150;padding:1px 4px;border-radius:4px;font-size:10px}#navChat{position:relative}
 #gameUI.ending-four .dock.tabs{grid-template-columns:repeat(3,1fr)!important}
