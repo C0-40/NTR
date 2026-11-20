@@ -3645,7 +3645,118 @@ body:has(#gameUI.homeui.outing-shell){background:#2c221d!important;background-im
 #roomActionDialogue b{justify-self:start;background:#86545c;color:#fff2dc;padding:2px 9px;border-radius:4px;font-size:13px}
 #roomActionText{max-height:22vh;overflow:auto;white-space:pre-wrap;line-height:1.55}
 #roomActionDialogue small{justify-self:end;color:#79594c;font-size:11px}
+#gameUI.room-trip .dock.tabs{display:grid!important;grid-template-columns:repeat(3,minmax(0,1fr))!important;gap:8px!important;height:auto!important;margin-top:-142px!important}
+#gameUI.room-trip .dock.tabs>button{min-width:0!important;min-height:60px!important}
+#gameUI.room-trip .dock.tabs #roomNap{grid-column:1 / -1;min-height:44px!important;display:flex!important;flex-direction:row!important;justify-content:center;align-items:center;gap:9px}
+#roomContact small{display:block;font-size:10px;font-weight:400}
+#roomNap span{display:flex;align-items:center;gap:10px}
+#gameUI.outing-shell .dock.tabs:empty{display:none!important}
+#gameUI.homeui.outing-shell #tripRoomBack{width:calc(100% - 28px);margin:8px 14px;min-height:46px;background:#4a3430;border-color:#ad8b75}
+#gameUI.homeui.outing-shell .outingTop-lead{font-family:"YuKyokasho","HanziPen TC","DFKai-SB","BiauKai",cursive!important;font-size:19px!important;letter-spacing:.1em!important;font-weight:600!important}
+#gameUI.homeui.outing-shell .outingTitle-name{color:#ffe6d1;text-shadow:0 1px 0 #412720}
+#gameUI.homeui.outing-shell .outingTitle-action{color:#e6b6b7}
+#gameUI.thought-focusing .scene::after{background:radial-gradient(ellipse at 50% 68%,transparent 15%,#160e0bc7 100%)!important;opacity:1!important}
+#gameUI.thought-focusing #heartRow{z-index:8}
+@media(prefers-reduced-motion:no-preference){#gameUI .scene::after{transition:background .2s,opacity .2s}}
+@font-face{font-family:"OutingRound";src:url("data:font/woff;base64,d09GRgABAAAAAAhAABAAAAAACnQAAQBCAAAAAAAAAAAAAAAAAAAAAAAAAABCQVNFAAAHRAAAAIcAAADSaUJ7QkdQT1MAAAfMAAAAIAAAACBEdkx1R1NVQgAAB+wAAAAgAAAAIER2THVPUy8yAAAB5AAAAEcAAABgrYcG9GNtYXAAAAI8AAAAPwAAAFTPHkCXZ2FzcAAABzwAAAAIAAAACAAAAAtnbHlmAAACjAAAA7IAAATgqLC5gWhlYWQAAAFsAAAANgAAADYayzftaGhlYQAAAaQAAAAgAAAAJAgMAVFobXR4AAACLAAAAA4AAAAOBLUAdmxvY2EAAAJ8AAAADgAAAA4D1QK8bWF4cAAAAcQAAAAdAAAAIAAjAi9uYW1lAAAGQAAAAOcAAAHIJrs+FHBvc3QAAAcoAAAAEwAAACD/fgAUdmhlYQAACAwAAAAiAAAAJAXUEZ52bXR4AAAIMAAAAA4AAAAOBMADvgABAAAAAQBCmMe2Yl8PPPUACwPoAAAAANqWNWgAAAAA3ZS+XP98/zEEBQPTAAAABgACAAAAAAAAeJxjYGRgYOn494CBgfn1/5p/LSysDEARFMAIAKQZBmJ4nGNgZGBgYGO8xCDKEM3AwgDiIQAzAyMAHz4BVAAAAHicY2BhPs/4hYGVgYGpiymCgYHBG0IzxjGIMCowoAEOJHaUq58ig4Nf29QG5oL/HQwMLB1g9YwgOcYHTHuAlAIDMwAwNQwlAAPoAAAAUABYACYAHgBXAAB4nGNgYGBiYGBgBmIRIMkIplkYHIA0DwMHUI7Fry3wVwx/LevUhv//GRiQeRur13Es/tL0P6sVrA8OAFbXErgAAAAAAABPALcBFgIFAnAAAHicZZTNaxtHGMZndqWZ1epjZ2d3R9pdeVerrVaqUBTZ0kpOhIWr2NhRgm0lld2EpL302ENK+kFKA0kptD0Yg3EOvRQKbSmEQHrrIZQEauilt/Yv6akQSZ2VnA9q2I/nNzsMz7zPOwsg2Jn+Kn4gGqAFQLwYlIN2c6ndDltcBZ02yzKW7YmdduB7xSBstZveEmMIZwTMmKEjeIXlIXS1nZuVq+sKTJMSydgp1u21SU4sjB9R06TCrXBFKZ0pbm8VisHBppnNWsHe4L0H3UwlRWAmaaaTjreQSHsmpWZ1tW9q1Qpp37v87dcAgnemf4kH4gWwM3MXhJGFJWYYOmPNpuqfHpqDOtvEyy8I+f7pIVgb3ijnNd02wsaDT1/p27au27caoRFxcHP40VGjFel8cGNYc7c2jgzLMg6q1TQccTqMaD+ibqQmx+lqdT9Shxtb7uQhp4OIjjgBEQTTJ+IfYgdooAy6Lyre4cZeGNdRCQXlujAbZllHyDIU51H0BD6LpxGVHiH4Sc4RhIV8013Q9IVt+LdWTRc238phTdOKOLu64aal5/dVOe2tdyl+Q6Mq1nvrXqqyZjPmCiIrCT8w22bjK29v/ptK0Mbdr1Y1HyGidu7dOUNqTA7U+udfdHQqYVc//839Bk2BGHCmD8U/xW1wHXwG9sH3M/+hihBGJ9uIrsh7MDebfd01x/Yr4hOD4PVNRmuU+VK8Ap15q83yPek5Htgswpko/b8ep0sGJWpWBpZhCQJjsqWoVUNfbpGMJCc9Ja7glGOjhE+ILCUKXiZjJxdt2VeIJOvneo6/thCXY5JMFEdO5m1JSqrUkRRtyTIfRx399JfoCR+rpqn++Fukn39HUjiVM1A8r6pqHGfNJIXvUxdjw8BxSoiNJN3AUnqU0+CXsQR3pVELQgEa51zyZlmWPUXBckxGRmsxo0mS5BE17BiyIQ0aqpSUPVIcXSuLSJBVnClgjAldXKTE496II6DY5LaW60cHSLhu0sgXNcc/RdxALrH6FyyVxmIWdQdr2WAFp4m23DXUfCymqEa7SYgHAAJ700fioVgDFqjzv8F50AeDlx3aE8JZGrNc5n06y/4E5/Hw/0Ez9HXm8aMW+qVmEPh+EcVP3sI/jKdhMc+V744Gg9Hy7ual8YpmDUbN3YsXd+9YQv3jY29if3jWewZ/P4aFs6W6N+k+48Kre5ctXXegKJs5+G5veG3Y7w/HP2/3cE4XnkawN1ydVPSccHVQc5zapVo+X+P3fxw0xvwAAHicjY89TsNAEEafSSCi4QBUoQtSAjElSEgIAVUoEKJIF/4WSyFG2C7gXByIE3AGntdGMhVotN43M998swYGzOmR9DeBD0/DCWOzhtfY4rPlHsd8tdzvaNbZTsYtbzBKzjkl54U3XskIPFEy5ICpJ5WurTx4z/2uvGcsVFbShXOl3Yw7sxNrdZbbLcxH0anUueCQfSOorBUVt+w5k/Mcq7kRWOr/KK3UFNbf476JmmZf6Gzb/fM1M/v3cuX8lRykZdSm7p4aKUe6nHHJTqTa78et6zX55XUj1/+XxZcOO27/dPgG/UpG7gB4nGNgZgCD/9UMIgxYAAAlFgGSAAABAAH//wAKeJxjYGRgYOBgSGKIY2BhYHNx8wlhUEuuLMphsEgvSs1msMhIzMtkUMtOzEtkUMtJLMljsGBgYwABJqB6OQYlBjWGSVARZqAID4MAgwhDAwPj//UMjMyeQLoDKCrGwJKZnJYExCWZKan5Rfm5eWTapYVhlwQDI4Mm0K79DCCfMDJUAAA8giROAAABAAAACgAcAB4AAURGTFQACAAEAAAAAP//AAAAAAAAAAEAAAAKABwAHgABREZMVAAIAAQAAAAA//8AAAAAAAB4nGNgFGBg/PKPh4GB+cX/uf9XstgzMDAwMiADRgClAAaFAAAD6ANwAFsALQA5ACEARAAA") format("woff");font-weight:500;font-display:swap}
+#gameUI.homeui.outing-shell .outingTop-lead{font-family:"OutingRound",sans-serif!important;font-weight:500!important}
 </style>
+<!-- Zen Maru Gothic title subset
+Copyright 2021 The Zen Maru Gothic Project Authors (https://github.com/googlefonts/zen-marugothic)
+
+This Font Software is licensed under the SIL Open Font License, Version 1.1.
+This license is copied below, and is also available with a FAQ at:
+http://scripts.sil.org/OFL
+
+
+-----------------------------------------------------------
+SIL OPEN FONT LICENSE Version 1.1 - 26 February 2007
+-----------------------------------------------------------
+
+PREAMBLE
+The goals of the Open Font License (OFL) are to stimulate worldwide
+development of collaborative font projects, to support the font creation
+efforts of academic and linguistic communities, and to provide a free and
+open framework in which fonts may be shared and improved in partnership
+with others.
+
+The OFL allows the licensed fonts to be used, studied, modified and
+redistributed freely as long as they are not sold by themselves. The
+fonts, including any derivative works, can be bundled, embedded,
+redistributed and/or sold with any software provided that any reserved
+names are not used by derivative works. The fonts and derivatives,
+however, cannot be released under any other type of license. The
+requirement for fonts to remain under this license does not apply
+to any document created using the fonts or their derivatives.
+
+DEFINITIONS
+"Font Software" refers to the set of files released by the Copyright
+Holder(s) under this license and clearly marked as such. This may
+include source files, build scripts and documentation.
+
+"Reserved Font Name" refers to any names specified as such after the
+copyright statement(s).
+
+"Original Version" refers to the collection of Font Software components as
+distributed by the Copyright Holder(s).
+
+"Modified Version" refers to any derivative made by adding to, deleting,
+or substituting -- in part or in whole -- any of the components of the
+Original Version, by changing formats or by porting the Font Software to a
+new environment.
+
+"Author" refers to any designer, engineer, programmer, technical
+writer or other person who contributed to the Font Software.
+
+PERMISSION & CONDITIONS
+Permission is hereby granted, free of charge, to any person obtaining
+a copy of the Font Software, to use, study, copy, merge, embed, modify,
+redistribute, and sell modified and unmodified copies of the Font
+Software, subject to the following conditions:
+
+1) Neither the Font Software nor any of its individual components,
+in Original or Modified Versions, may be sold by itself.
+
+2) Original or Modified Versions of the Font Software may be bundled,
+redistributed and/or sold with any software, provided that each copy
+contains the above copyright notice and this license. These can be
+included either as stand-alone text files, human-readable headers or
+in the appropriate machine-readable metadata fields within text or
+binary files as long as those fields can be easily viewed by the user.
+
+3) No Modified Version of the Font Software may use the Reserved Font
+Name(s) unless explicit written permission is granted by the corresponding
+Copyright Holder. This restriction only applies to the primary font name as
+presented to the users.
+
+4) The name(s) of the Copyright Holder(s) or the Author(s) of the Font
+Software shall not be used to promote, endorse or advertise any
+Modified Version, except to acknowledge the contribution(s) of the
+Copyright Holder(s) and the Author(s) or with their explicit written
+permission.
+
+5) The Font Software, modified or unmodified, in part or in whole,
+must be distributed entirely under this license, and must not be
+distributed under any other license. The requirement for fonts to
+remain under this license does not apply to any document created
+using the Font Software.
+
+TERMINATION
+This license becomes null and void if any of the above conditions are
+not met.
+
+DISCLAIMER
+THE FONT SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
+EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO ANY WARRANTIES OF
+MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT
+OF COPYRIGHT, PATENT, TRADEMARK, OR OTHER RIGHT. IN NO EVENT SHALL THE
+COPYRIGHT HOLDER BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY,
+INCLUDING ANY GENERAL, SPECIAL, INDIRECT, INCIDENTAL, OR CONSEQUENTIAL
+DAMAGES, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
+FROM, OUT OF THE USE OR INABILITY TO USE THE FONT SOFTWARE OR FROM
+OTHER DEALINGS IN THE FONT SOFTWARE.
+
+-->
 </head>
 <body>
 <section id="automaticReview" class="automaticReview" role="dialog" aria-modal="true" aria-hidden="true" aria-labelledby="automaticReviewDay" aria-describedby="automaticReviewReturn automaticReviewMissed" hidden>
@@ -3719,7 +3830,7 @@ body:has(#gameUI.homeui.outing-shell){background:#2c221d!important;background-im
 
     <button type="button" id="tripInspect" class="roomTripCard" onclick="switchTripView(true)">
       <span class="roomTripFace"><svg class="roomTripFlower" aria-hidden="true" viewBox="0 0 24 24" stroke="currentColor" fill="#fff2d9"><ellipse cx="12" cy="5.8" rx="2.2" ry="4.2" transform="rotate(0 12 12)"/><ellipse cx="12" cy="5.8" rx="2.2" ry="4.2" transform="rotate(45 12 12)"/><ellipse cx="12" cy="5.8" rx="2.2" ry="4.2" transform="rotate(90 12 12)"/><ellipse cx="12" cy="5.8" rx="2.2" ry="4.2" transform="rotate(135 12 12)"/><ellipse cx="12" cy="5.8" rx="2.2" ry="4.2" transform="rotate(180 12 12)"/><ellipse cx="12" cy="5.8" rx="2.2" ry="4.2" transform="rotate(225 12 12)"/><ellipse cx="12" cy="5.8" rx="2.2" ry="4.2" transform="rotate(270 12 12)"/><ellipse cx="12" cy="5.8" rx="2.2" ry="4.2" transform="rotate(315 12 12)"/><circle cx="12" cy="12" r="3" fill="#bb9061"/></svg><strong id="roomTripLabel"></strong><time id="roomTripClock"></time></span>
-      <span class="roomTripLink">查看外出情況</span>
+      <span class="roomTripLink">查看小紅狀態</span>
     </button>
     <div class="girl" id="av" role="button" aria-label="和她聊天" tabindex="0"></div>
     <div class="outingActLine" id="outingActLine" hidden role="button" tabindex="0" aria-label="外出行動結果，點一下關閉"></div>
@@ -3812,7 +3923,7 @@ try{var savedPrefs=JSON.parse(localStorage.getItem("sakura_presentation_v1")||"{
 var soundRuntime={context:null,ambient:null,ambientGain:null,last:{},lastMusic:-1,musicFrame:0,voices:0};
 function ensureSound(){if(soundRuntime.context)return soundRuntime.context;var C=window.AudioContext||window.webkitAudioContext;if(!C)return null;try{soundRuntime.context=new C();return soundRuntime.context}catch(e){return null}}
 function playUiSound(kind){var ctx=soundRuntime.context;if(!ctx||ctx.state!=="running"||document.hidden||presentationPrefs.sfx<=0||soundRuntime.voices>=6)return false;var now=ctx.currentTime;if(now-(soundRuntime.last[kind]||-10)<(kind==="letter"?.075:.12))return false;soundRuntime.last[kind]=now;var frequencies={click:[620],success:[520,690],unlock:[690,850],question:[560],suspicion:[230],unease:[112],message:[760,1140],leave:[400],return:[530],letter:[920]},notes=frequencies[kind]||frequencies.click;notes.forEach(function(f,i){var osc=ctx.createOscillator(),gain=ctx.createGain(),start=now+i*.055,duration=kind==="unease"?.24:kind==="letter"?.025:kind==="click"?.045:kind==="message"?.085:.13;osc.type="sine";osc.frequency.setValueAtTime(f,start);gain.gain.setValueAtTime(0,start);gain.gain.linearRampToValueAtTime(presentationPrefs.sfx*(kind==="letter"?.012:.05),start+.006);gain.gain.exponentialRampToValueAtTime(.0001,start+duration);osc.connect(gain);gain.connect(ctx.destination);soundRuntime.voices++;osc.onended=function(){osc.disconnect();gain.disconnect();soundRuntime.voices=Math.max(0,soundRuntime.voices-1)};osc.start(start);osc.stop(start+duration+.02)});return true}
-function syncSceneAudio(){var outing=!!(typeof S!=="undefined"&&S&&S.trip&&!S.taken),ctx=soundRuntime.context;if(typeof bgm!=="undefined"&&bgm){var target=presentationPrefs.music*(outing?.55:1);if(target!==soundRuntime.lastMusic){soundRuntime.lastMusic=target;cancelAnimationFrame(soundRuntime.musicFrame);var start=performance.now(),from=bgm.volume;function fadeMusic(now){var t=Math.min(1,(now-start)/250);bgm.volume=Math.max(0,Math.min(1,from+(target-from)*t));if(t<1)soundRuntime.musicFrame=requestAnimationFrame(fadeMusic)}soundRuntime.musicFrame=requestAnimationFrame(fadeMusic)}}if(!ctx)return;if(!presentationPrefs.ambient||document.hidden){if(soundRuntime.ambient){soundRuntime.ambient.stop();soundRuntime.ambient.disconnect();soundRuntime.ambientGain.disconnect();soundRuntime.ambient=null;soundRuntime.ambientGain=null}return}if(ctx.state!=="running")return;if(!soundRuntime.ambient){var buffer=ctx.createBuffer(1,ctx.sampleRate*2,ctx.sampleRate),data=buffer.getChannelData(0);for(var i=0;i<data.length;i++)data[i]=(Math.random()*2-1);var source=ctx.createBufferSource(),filter=ctx.createBiquadFilter(),gain=ctx.createGain();source.buffer=buffer;source.loop=true;filter.type="lowpass";filter.frequency.value=outing?180:320;source.connect(filter);filter.connect(gain);gain.connect(ctx.destination);gain.gain.value=0;source.start();source.onended=function(){filter.disconnect()};soundRuntime.ambient=source;soundRuntime.ambientFilter=filter;soundRuntime.ambientGain=gain}soundRuntime.ambientFilter.frequency.setTargetAtTime(outing?180:320,ctx.currentTime,.3);soundRuntime.ambientGain.gain.setTargetAtTime(presentationPrefs.ambient*(outing?.012:.02),ctx.currentTime,.3)}
+function syncSceneAudio(){var outing=!!(typeof S!=="undefined"&&S&&S.trip&&!S.taken),ctx=soundRuntime.context;if(typeof bgm!=="undefined"&&bgm){var focused=typeof outingFocus!=="undefined"&&outingFocus.holding;var target=presentationPrefs.music*(outing?.55:1)*(focused?.4:1);if(target!==soundRuntime.lastMusic){soundRuntime.lastMusic=target;cancelAnimationFrame(soundRuntime.musicFrame);var start=performance.now(),from=bgm.volume;function fadeMusic(now){var t=Math.min(1,(now-start)/250);bgm.volume=Math.max(0,Math.min(1,from+(target-from)*t));if(t<1)soundRuntime.musicFrame=requestAnimationFrame(fadeMusic)}soundRuntime.musicFrame=requestAnimationFrame(fadeMusic)}}if(!ctx)return;if(!presentationPrefs.ambient||document.hidden){if(soundRuntime.ambient){soundRuntime.ambient.stop();soundRuntime.ambient.disconnect();soundRuntime.ambientGain.disconnect();soundRuntime.ambient=null;soundRuntime.ambientGain=null}return}if(ctx.state!=="running")return;if(!soundRuntime.ambient){var buffer=ctx.createBuffer(1,ctx.sampleRate*2,ctx.sampleRate),data=buffer.getChannelData(0);for(var i=0;i<data.length;i++)data[i]=(Math.random()*2-1);var source=ctx.createBufferSource(),filter=ctx.createBiquadFilter(),gain=ctx.createGain();source.buffer=buffer;source.loop=true;filter.type="lowpass";filter.frequency.value=outing?180:320;source.connect(filter);filter.connect(gain);gain.connect(ctx.destination);gain.gain.value=0;source.start();source.onended=function(){filter.disconnect()};soundRuntime.ambient=source;soundRuntime.ambientFilter=filter;soundRuntime.ambientGain=gain}soundRuntime.ambientFilter.frequency.setTargetAtTime(outing?180:320,ctx.currentTime,.3);soundRuntime.ambientGain.gain.setTargetAtTime(presentationPrefs.ambient*(outing?.012:.02)*(focused?.35:1),ctx.currentTime,.3)}
 function unlockPresentationAudio(){var ctx=ensureSound();if(!ctx)return;if(ctx.state==="suspended")ctx.resume().then(syncSceneAudio).catch(function(){});else syncSceneAudio()}
 function syncPresentationControls(){var speed=$("textSpeed");if(speed)speed.value=String(presentationPrefs.textSpeed);var letters=$("letterSound");if(letters)letters.checked=presentationPrefs.letterSound;[["music","musicVolume","musicValue"],["sfx","sfxVolume","sfxValue"],["ambient","ambientVolume","ambientValue"]].forEach(function(row){var input=$(row[1]),output=$(row[2]);if(input)input.value=String(Math.round(presentationPrefs[row[0]]*100));if(output)output.textContent=Math.round(presentationPrefs[row[0]]*100)+"%"})}
 function setPresentationPref(key,value){if(["music","sfx","ambient"].indexOf(key)>=0)value=Math.max(0,Math.min(1,Number(value)||0));else if(key==="textSpeed"&&[0,15,30,50].indexOf(value)<0)return;else if(key==="letterSound")value=!!value;if(!(key in presentationPrefs))return;presentationPrefs[key]=value;try{localStorage.setItem("sakura_presentation_v1",JSON.stringify(presentationPrefs))}catch(e){}if(key==="textSpeed"&&value===0){stopTyping($("say"),true);stopTyping($("thb"),true);finishMemoryReveal()}syncPresentationControls();syncSceneAudio()}
@@ -4986,6 +5097,7 @@ function closeRoomActionDialogue(){
 function showOutingActLine(title,msg){if(!isOutingPhase()){
   scenePresentation.phase="room-action";
   updatePresentationState();
+  $("roomActionDialogue").querySelector("b").textContent=/發訊息/.test(title)?"小紅的訊息":/電話/.test(title)?"電話另一端":"阿祿";
   typeDialogue($("roomActionText"),msg);
   $("roomActionDialogue").focus({preventScroll:true});
   return;
@@ -5100,6 +5212,7 @@ function startFocusAudio(){
 function paintOutingFocus(){
   var r=outingFocus,heart=$("heartRow"),pad=$("focusPad"),feedback=$("focusFeedback"),hint=$("focusHint");
   var clarity=Math.max(0,Math.min(1,r.progress/3)),readable=voiceReadable();
+  var root=$("gameUI");if(root.classList.contains("thought-focusing")!==r.holding){root.classList.toggle("thought-focusing",r.holding);syncSceneAudio()}
   pad.classList.toggle("is-focusing",r.holding);pad.setAttribute("aria-pressed",r.holding?"true":"false");
   var label=r.holding?"聚焦中":"按住聚焦";if(feedback.textContent!==label)feedback.textContent=label;
   pad.setAttribute("aria-label",r.holding?"聚焦中":"按住聚焦，讀取她的心聲");
@@ -5658,10 +5771,11 @@ function paintRoomTrip(){
   $("roomTripLabel").textContent=seconds?"小紅外出中":storm?"暴風雨之夜":"小紅回來了……";
   $("roomTripClock").textContent=seconds?String(Math.floor(seconds/60)).padStart(2,"0")+":"+String(seconds%60).padStart(2,"0"):"";
   var nap=$("roomNap");if(nap)nap.disabled=seconds===0;
+  var contact=$("roomContact");if(contact)contact.disabled=!seconds||!blankActUnlocked(contact.getAttribute("data-contact"));
   var bathroom=$("roomBathroom");if(bathroom)bathroom.disabled=!seconds||!blankActUnlocked("jack");
   var inspect=$("tripInspect");
   inspect.classList.toggle("is-due",seconds===0);
-  if(inspect)inspect.lastElementChild.textContent=seconds?"查看外出情況":storm?"查看雨夜事件":"查看回家情況";
+  if(inspect)inspect.lastElementChild.textContent=seconds?"查看小紅狀態":storm?"查看雨夜事件":"查看回家情況";
 }
 function completedActionLabel(label){return '<svg class="statusMark" viewBox="0 0 16 16" width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m3 8 3.1 3.1L13 4.5"/></svg><span class="statusText">'+(label||"今日已完成")+'</span>'}
 function forumDockButton(){
@@ -5679,37 +5793,15 @@ function paintDock(){
   if(S.trip&&!isOutingPhase()&&!S.taken){
     dock.classList.remove("is-places","is-blank-acts");
     dock.setAttribute("aria-label","客廳行動");
-    dock.innerHTML=forumDockButton()+'<button type="button" id="roomBathroom" onclick="blankAct(\'jack\')">'+homeUiIcon("jack")+'<span>去廁所</span>'+(blankOptNew("jack")?optNewBadge():"")+'</button><button type="button" class="dockSleep" id="roomNap" onclick="skipTrip()">'+homeUiIcon("sleep")+'<span>打瞌睡<small>跳過等待</small></span></button>';
+    var contact=S.aff>=50?"call":"msg",open=blankActUnlocked(contact);
+    dock.innerHTML='<button type="button" id="roomContact" data-contact="'+contact+'" onclick="blankAct(\''+contact+'\')"'+(open?'':' disabled aria-disabled="true"')+'>'+homeUiIcon(contact)+'<span>'+(contact==="call"?"打電話":"發訊息")+(open?'':'<small>親密度 25 解鎖</small>')+'</span></button><button type="button" id="roomBathroom" onclick="blankAct(\'jack\')">'+homeUiIcon("jack")+'<span>去廁所</span>'+(blankOptNew("jack")?optNewBadge():"")+'</button>'+forumDockButton()+'<button type="button" class="dockSleep" id="roomNap" onclick="skipTrip()">'+homeUiIcon("sleep")+'<span>打瞌睡<small>跳過等待</small></span></button>';
+    if(contact==="call"&&!S.callUpgradeShown){S.callUpgradeShown=true;pulsePresentation($("roomContact"),"nav-unlock",700);save()}
     paintRoomTrip();return;
   }
   if(isOutingPhase()){
-    dock.classList.add("is-places");
-    dock.classList.add("is-blank-acts");
-    dock.setAttribute("aria-label","外出中的行動");
-    var h="";
-    var contact=S.aff>=50?"call":"msg";
-    BLANK_ACT.forEach(function(b){
-      if(b[0]==="jack")return;
-      if((b[0]==="msg"||b[0]==="call")&&b[0]!==contact)return;
-      var isNew=typeof blankOptNew==="function"&&blankOptNew(b[0]);
-      var nap=b[0]==="nap";
-      var open=nap||blankActUnlocked(b[0]);
-      var need=blankActNeedAff(b[0]);
-      var cls="dockBlank"+(nap?" dockBlank-nap":"")+(open?"":" is-off");
-      var lab=nap?"打瞌睡・跳過等待":b[2];
-      var sub=!nap&&!open?'<span class="dockSub">親密 '+need+'</span>':"";
-      var aria=nap?(lab+"（跳過等待）"):(open?b[2]:(b[2]+"（阿祿親密度 "+need+" 解鎖）"));
-      h+='<button type="button" class="'+cls+'" data-blank="'+b[0]+'"'+(open?"":" disabled aria-disabled=\"true\"")+(open?"":(' title="阿祿親密度 '+need+' 後解鎖"'))+' aria-label="'+aria+'"><span class="dockIco" aria-hidden="true">'+homeUiIcon(b[0])+'</span><span class="dockLab">'+lab+'</span>'+sub+(isNew&&open?optNewBadge():"")+'</button>';
-    });
-    dock.innerHTML=h;
-    if(contact==="call"&&!S.callUpgradeShown){
-      S.callUpgradeShown=true;
-      pulsePresentation(dock.querySelector('[data-blank="call"]'),"nav-unlock",700);
-      save();
-    }
-    dock.querySelectorAll("button.dockBlank").forEach(function(btn){
-      btn.onclick=function(){var id=btn.getAttribute("data-blank");if(btn.disabled||btn.classList.contains("is-off")){if(id&&id!=="nap")blankAct(id);return}if(id==="nap")skipTrip();else blankAct(id)};
-    });
+    dock.classList.remove("is-places","is-blank-acts");
+    dock.setAttribute("aria-label","小紅狀態");
+    dock.innerHTML="";
     return;
   }
   dock.classList.remove("is-places");
