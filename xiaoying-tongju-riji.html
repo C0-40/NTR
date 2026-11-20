@@ -3612,15 +3612,29 @@ body:has(#gameUI.homeui.outing-shell){background:#2c221d!important;background-im
 
 .roomTripCard{display:none}
 #gameUI.room-trip #dlg,#gameUI.room-trip #av,#gameUI.room-trip #heartRow,#gameUI.room-trip #silLayer,#gameUI.room-trip #navAsk,#gameUI.storm-stay #tripRoomBack{display:none!important}
-#gameUI.room-trip .roomTripCard{position:absolute;z-index:4;top:29%;right:8%;display:grid;justify-items:center;gap:4px;min-width:108px;padding:12px 16px 10px;pointer-events:none;border:1px solid #9e735c;border-radius:6px 9px 7px 6px;background:linear-gradient(145deg,#fff4dd,#f1dbb8);box-shadow:inset 0 0 0 3px #fbedd5,0 3px 6px #452c2433;color:#68453d;transform-origin:50% -18px}
-.roomTripCard::before{content:"";position:absolute;width:48px;height:30px;bottom:100%;left:50%;translate:-50% 0;background:linear-gradient(146deg,transparent 47%,#7d4944 49% 52%,transparent 54%) left bottom/50% 60% no-repeat,linear-gradient(34deg,transparent 47%,#7d4944 49% 52%,transparent 54%) right bottom/50% 60% no-repeat}
-.roomTripDoor{width:23px;height:24px;stroke:#945659;stroke-width:1.5;fill:none}.roomTripCard time{font-variant-numeric:tabular-nums;color:#805249}.roomTripCard time:empty{display:none}
+#gameUI.room-trip .roomTripCard{
+  position:absolute;z-index:5;left:50%;top:50%;transform:translate(-50%,-50%);
+  display:block;width:min(78%,300px);padding:0;overflow:hidden;cursor:pointer;
+  border:2px solid #603e36;border-radius:18px 6px;background:linear-gradient(115deg,#fff2d9,#f0d6b6);
+  color:#49342c;box-shadow:0 4px 0 #64453c,0 8px 18px #38231d42;font:inherit
+}
+.roomTripFace{display:flex;align-items:center;gap:8px;padding:17px 12px}
+.roomTripFlower{width:24px;height:24px;flex:none;color:#996e58}
+.roomTripCard strong{font-family:serif;font-size:clamp(17px,4.9vw,23px);letter-spacing:.04em}
+.roomTripCard time{margin-left:auto;font:600 14px/1.2 monospace;color:#795754}
+.roomTripCard time:empty{display:none}
+.roomTripLink{display:flex;justify-content:space-between;align-items:center;padding:9px 16px;background:#853f49;color:#fff2dc;font-size:14px;font-weight:600}
+.roomTripLink::after{content:"›";font-size:21px;line-height:1}
+@media(prefers-reduced-motion:no-preference){#roomBathroom svg{transition:transform .15s ease-out}#roomBathroom:active svg{transform:scale(1.16)}}
+.roomTripCard:focus-visible{outline:3px solid #fff0ba;outline-offset:5px}
+#gameUI.room-trip .roomTripCard:active{scale:.99}
+#gameUI.room-trip .dock #navChat,#gameUI.room-trip .dock #roomBathroom{background:#f6e3c9!important;color:#543b32!important;border-color:#98765d!important}
 #roomNap small{display:block;font-size:10px}.forumDockNew{position:absolute;top:2px;right:4px;color:#fff5e3;background:#854150;padding:1px 4px;border-radius:4px;font-size:10px}#navChat{position:relative}
 #gameUI.ending-four .dock.tabs{grid-template-columns:repeat(3,1fr)!important}
 #gameUI.room-trip .dialogueZone .sideNav.right{display:none!important}
-@keyframes roomPlaqueSwing{0%{rotate:-4deg}65%{rotate:1.5deg}100%{rotate:0deg}}
+@keyframes roomPlaqueAppear{from{opacity:0;translate:0 5px}to{opacity:1;translate:0 0}}
 #tripRoomBack{min-height:44px;padding:4px 10px;color:#ffefdf;background:#49333a;border:1px solid #a88380;border-radius:9px;font:inherit;font-size:13px}
-@media(prefers-reduced-motion:no-preference){.room-trip .roomTripCard{animation:roomPlaqueSwing .55s ease-out}}
+@media(prefers-reduced-motion:no-preference){.room-trip .roomTripCard{animation:roomPlaqueAppear .3s ease-out}.roomTripCard.is-due .roomTripFace,.roomTripCard.is-due .roomTripLink{animation:roomPlaqueAppear .35s ease-out}}
 </style>
 </head>
 <body>
@@ -3694,7 +3708,10 @@ body:has(#gameUI.homeui.outing-shell){background:#2c221d!important;background-im
     </div>
 
 
-    <div class="roomTripCard"><svg class="roomTripDoor" viewBox="0 0 26 28" aria-hidden="true"><path d="M3 25h19M6 24V5l12-2v21M18 6h4v18M14 13v3"/></svg><strong id="roomTripLabel"></strong><time id="roomTripClock"></time></div>
+    <button type="button" id="tripInspect" class="roomTripCard" onclick="switchTripView(true)">
+      <span class="roomTripFace"><svg class="roomTripFlower" aria-hidden="true" viewBox="0 0 24 24" stroke="currentColor" fill="#fff2d9"><ellipse cx="12" cy="5.8" rx="2.2" ry="4.2" transform="rotate(0 12 12)"/><ellipse cx="12" cy="5.8" rx="2.2" ry="4.2" transform="rotate(45 12 12)"/><ellipse cx="12" cy="5.8" rx="2.2" ry="4.2" transform="rotate(90 12 12)"/><ellipse cx="12" cy="5.8" rx="2.2" ry="4.2" transform="rotate(135 12 12)"/><ellipse cx="12" cy="5.8" rx="2.2" ry="4.2" transform="rotate(180 12 12)"/><ellipse cx="12" cy="5.8" rx="2.2" ry="4.2" transform="rotate(225 12 12)"/><ellipse cx="12" cy="5.8" rx="2.2" ry="4.2" transform="rotate(270 12 12)"/><ellipse cx="12" cy="5.8" rx="2.2" ry="4.2" transform="rotate(315 12 12)"/><circle cx="12" cy="12" r="3" fill="#bb9061"/></svg><strong id="roomTripLabel"></strong><time id="roomTripClock"></time></span>
+      <span class="roomTripLink">查看外出情況</span>
+    </button>
     <div class="girl" id="av" role="button" aria-label="和她聊天" tabindex="0"></div>
     <div class="outingActLine" id="outingActLine" hidden role="button" tabindex="0" aria-label="外出行動結果，點一下關閉"></div>
     <div class="note" id="note" aria-live="polite">
@@ -4948,8 +4965,8 @@ function paintSideBadges(){}
 
 function blankActNeedAff(id){if(id==="msg")return 25;if(id==="call")return 50;return 0}
 function blankActUnlocked(id){var need=blankActNeedAff(id);if(!need)return true;return !!S&&(S.aff|0)>=need}
-function blankAct(id){if(presentationHeld()||busy||!S.trip||S.taken)return;if(!blankActUnlocked(id)){var need=blankActNeedAff(id);say("（阿祿親密度到 "+need+" 以後，才能用「"+(id==="msg"?"發訊息":id==="call"?"打電話":id)+"」。）","pout");return}if(maskOpen()){if(sqOptsOn())return;var mask=$("mask");if(mask)mask.classList.remove("on");if(!moodPeekOn){try{mask&&mask.classList.remove("mood-chrome")}catch(e){}}}withBusy(function(){blankActNow(id)});}
-function showOutingActLine(title,msg){var el=$("outingActLine");if(!el)return;el.hidden=false;el.innerHTML="<b>"+title+"</b><span>"+msg+"</span><i class=\"sm\">輕觸關閉</i>";el.onclick=function(){el.hidden=true;el.innerHTML=""};}
+function blankAct(id){if(tripDue()||(id==="jack"&&(isOutingPhase()||maskOpen())))return;if(presentationHeld()||busy||!S.trip||S.taken)return;if(!blankActUnlocked(id)){var need=blankActNeedAff(id);say("（阿祿親密度到 "+need+" 以後，才能用「"+(id==="msg"?"發訊息":id==="call"?"打電話":id)+"」。）","pout");return}if(maskOpen()){if(sqOptsOn())return;var mask=$("mask");if(mask)mask.classList.remove("on");if(!moodPeekOn){try{mask&&mask.classList.remove("mood-chrome")}catch(e){}}}withBusy(function(){blankActNow(id)});}
+function showOutingActLine(title,msg){if(!isOutingPhase()){popup(title,msg);return}var el=$("outingActLine");if(!el)return;el.hidden=false;el.innerHTML="<b>"+title+"</b><span>"+msg+"</span><i class=\"sm\">輕觸關閉</i>";el.onclick=function(){el.hidden=true;el.innerHTML=""};}
 function blankActNow(id){if(!S.trip||S.taken||!blankActUnlocked(id)||(id==="msg"&&S.aff>=50))return;if(id==="nap"){skipTrip();return}if(!BLANK_TXT[id])return;var titles={msg:"📱 發訊息",call:"📞 打電話",jack:"💦 去廁所"};var title=titles[id]||id;if(!S.trip.blankOnce)S.trip.blankOnce={};if(S.trip.blankOnce[id]){showOutingActLine(title,S.trip.blankOnce[id]);if(tab==="go")closePane();render(false);return}var msg=pickBlank(id);if(!msg)return;S.trip.blankOnce[id]=msg;if(!S.trip.acts)S.trip.acts=[];if(S.trip.acts.indexOf(id)<0)S.trip.acts.push(id);markBlankOptSeen(id);var face=id=="jack"?"shy":"sad";setEx(face);faceTf(face);addLog("⏳ "+title+"｜"+msg);showOutingActLine(title,msg);if(tab==="go")closePane();render(false)}
 var sqReply=null;
 function migrateSq(){if(!S)return;if(!S.sq)S.sq=[];if(!S.sqAsked)S.sqAsked=S.sq.slice();if(!S.sqToday)S.sqToday=[];S.sqVer=2}
@@ -5615,10 +5632,12 @@ function paintRoomTrip(){
   if(!room)return;
   var seconds=Math.max(0,Math.ceil((S.trip.end-Date.now())/1000));
   var storm=seconds===0&&stormDue();
-  $("roomTripLabel").textContent=seconds?"小紅外出中":storm?"暴風雨之夜":"小紅回來了";
-  $("roomTripClock").textContent=seconds?Math.floor(seconds/60)+":"+String(seconds%60).padStart(2,"0"):"";
+  $("roomTripLabel").textContent=seconds?"小紅外出中":storm?"暴風雨之夜":"小紅回來了……";
+  $("roomTripClock").textContent=seconds?String(Math.floor(seconds/60)).padStart(2,"0")+":"+String(seconds%60).padStart(2,"0"):"";
   var nap=$("roomNap");if(nap)nap.disabled=seconds===0;
+  var bathroom=$("roomBathroom");if(bathroom)bathroom.disabled=!seconds||!blankActUnlocked("jack");
   var inspect=$("tripInspect");
+  inspect.classList.toggle("is-due",seconds===0);
   if(inspect)inspect.lastElementChild.textContent=seconds?"查看外出情況":storm?"查看雨夜事件":"查看回家情況";
 }
 function completedActionLabel(label){return '<svg class="statusMark" viewBox="0 0 16 16" width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m3 8 3.1 3.1L13 4.5"/></svg><span class="statusText">'+(label||"今日已完成")+'</span>'}
@@ -5637,7 +5656,7 @@ function paintDock(){
   if(S.trip&&!isOutingPhase()&&!S.taken){
     dock.classList.remove("is-places","is-blank-acts");
     dock.setAttribute("aria-label","客廳行動");
-    dock.innerHTML=forumDockButton()+'<button type="button" id="tripInspect" data-t="go" onclick="switchTripView(true)">'+homeUiIcon("go")+'<span>查看外出情況</span></button><button type="button" class="dockSleep" id="roomNap" onclick="skipTrip()">'+homeUiIcon("sleep")+'<span>打瞌睡<small>跳過等待</small></span></button>';
+    dock.innerHTML=forumDockButton()+'<button type="button" id="roomBathroom" onclick="blankAct(\'jack\')">'+homeUiIcon("jack")+'<span>去廁所</span>'+(blankOptNew("jack")?optNewBadge():"")+'</button><button type="button" class="dockSleep" id="roomNap" onclick="skipTrip()">'+homeUiIcon("sleep")+'<span>打瞌睡<small>跳過等待</small></span></button>';
     paintRoomTrip();return;
   }
   if(isOutingPhase()){
@@ -5647,6 +5666,7 @@ function paintDock(){
     var h="";
     var contact=S.aff>=50?"call":"msg";
     BLANK_ACT.forEach(function(b){
+      if(b[0]==="jack")return;
       if((b[0]==="msg"||b[0]==="call")&&b[0]!==contact)return;
       var isNew=typeof blankOptNew==="function"&&blankOptNew(b[0]);
       var nap=b[0]==="nap";
@@ -5665,7 +5685,7 @@ function paintDock(){
       save();
     }
     dock.querySelectorAll("button.dockBlank").forEach(function(btn){
-      btn.onclick=function(){var id=btn.getAttribute("data-blank");if(btn.disabled||btn.classList.contains("is-off")){if(id&&id!=="nap")blankAct(id);return}if(id==="nap")skipTrip();else{blankAct(id);if(id==="jack")requestAnimationFrame(function(){var icon=dock.querySelector('[data-blank="jack"] .dockIco svg');if(!icon||typeof icon.animate!=="function"||window.matchMedia("(prefers-reduced-motion: reduce)").matches)return;icon.animate([{transform:"scale(.65)",opacity:.5},{transform:"scale(1.3)",opacity:1,offset:.55},{transform:"scale(1)",opacity:1}],{duration:420,easing:"ease-out"})})}};
+      btn.onclick=function(){var id=btn.getAttribute("data-blank");if(btn.disabled||btn.classList.contains("is-off")){if(id&&id!=="nap")blankAct(id);return}if(id==="nap")skipTrip();else blankAct(id)};
     });
     return;
   }
