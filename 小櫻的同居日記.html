@@ -3673,41 +3673,52 @@ body:has(#gameUI.homeui.outing-shell){background:#2c221d!important;background-im
 @media(prefers-reduced-motion:no-preference){.room-trip .roomTripCard.peek-cue{animation:peekCue .85s ease-out}}
 
 #gameUI.homeui.room-trip:not(.outing-shell) .dock.tabs{
- background:linear-gradient(180deg,transparent 0%,#36251ed9 30%,#30221eef 100%)!important;
+ background:linear-gradient(180deg,transparent 0%,#bd997d44 45%,#a7836966 100%)!important;
  border:0!important;border-radius:0!important;box-shadow:none!important;
  padding:15px 9px 12px!important;gap:10px 9px!important;margin-top:-155px!important
 }
 #gameUI.homeui.room-trip:not(.outing-shell) .dock.tabs #roomContact,
 #gameUI.homeui.room-trip:not(.outing-shell) .dock.tabs #roomBathroom,
 #gameUI.homeui.room-trip:not(.outing-shell) .dock.tabs #navChat{
- background:linear-gradient(180deg,#5a4034,#403029)!important;color:#f6e3ca!important;
+ background:linear-gradient(180deg,#faead3,#efdbc1)!important;color:#543c31!important;
  border:1.5px solid #ab8565!important;border-radius:13px!important;
- box-shadow:inset 0 1px 0 #f5d8b51f,0 2px 0 #241a16!important;
+ box-shadow:inset 0 1px 0 #f5d8b51f,0 2px 0 #96775b80!important;
  font-size:14px!important;font-weight:500!important;min-height:62px!important
 }
 #gameUI.homeui.room-trip:not(.outing-shell) .dock.tabs #navChat{
- background:linear-gradient(180deg,#654249,#493136)!important;border-color:#c18d95!important
+ background:linear-gradient(180deg,#f2e2dc,#e2cac6)!important;border-color:#c18d95!important
 }
 #gameUI.homeui.room-trip:not(.outing-shell) .dock.tabs #roomNap{
- background:#62534b!important;color:#eee0ce!important;border:1px solid #a28c7a!important;
- border-radius:13px!important;box-shadow:inset 0 1px 0 #fff2d91a,0 2px 0 #29201b!important;
+ background:#d8bba1!important;color:#523c31!important;border:1px solid #a28c7a!important;
+ border-radius:13px!important;box-shadow:inset 0 1px 0 #fff2d91a,0 2px 0 #97785b80!important;
  min-height:44px!important;font-weight:500!important
 }
 #gameUI.homeui.room-trip:not(.outing-shell) .dock.tabs #roomContact .uiIcon,
 #gameUI.homeui.room-trip:not(.outing-shell) .dock.tabs #roomBathroom .uiIcon,
 #gameUI.homeui.room-trip:not(.outing-shell) .dock.tabs #navChat .uiIcon,
-#gameUI.homeui.room-trip:not(.outing-shell) .dock.tabs #roomNap .uiIcon{color:#ecd4b6!important;stroke-width:1.6}
-#gameUI.homeui.room-trip:not(.outing-shell) .dock.tabs #navChat .uiIcon{color:#f0cbd0!important}
-#gameUI.homeui.room-trip:not(.outing-shell) .dock.tabs #roomNap small{color:#c9b6a4!important;font-weight:400}
+#gameUI.homeui.room-trip:not(.outing-shell) .dock.tabs #roomNap .uiIcon{color:#785744!important;stroke-width:1.6}
+#gameUI.homeui.room-trip:not(.outing-shell) .dock.tabs #navChat .uiIcon{color:#845962!important}
+#gameUI.homeui.room-trip:not(.outing-shell) .dock.tabs #roomNap small{color:#604a3e!important;font-weight:400}
 #gameUI.homeui.room-trip:not(.outing-shell) .dock.tabs button:active{transform:translateY(2px);filter:brightness(1.12)}
 
 #gameUI.homeui.room-trip .dock.tabs #roomBathroom{position:relative!important}
 #gameUI.homeui.room-trip .dock.tabs #roomBathroom>.notice-dot{position:absolute!important;top:5px!important;right:6px!important;left:auto!important;bottom:auto!important;transform:none!important}
 #gameUI.room-trip #roomActionDialogue{transition:opacity .18s ease,translate .18s ease}
 #gameUI.room-trip #roomActionDialogue.is-closing{opacity:0;translate:0 4px;pointer-events:none}
-#gameUI.room-trip #roomActionDialogue.is-message{background:#f8eddf;border-radius:17px 17px 5px 17px;border-color:#b38f85}
-#gameUI.room-trip #roomActionDialogue.is-message b{background:transparent;color:#86505b;padding-left:0}
+#gameUI.room-trip #roomActionDialogue.is-message{background:#49332c;border-radius:17px 17px 5px 17px;border-color:#b38f85}
+#gameUI.room-trip #roomActionDialogue.is-message b{background:transparent;color:#f2c7b8;padding-left:0}
 @media(prefers-reduced-motion:reduce){#gameUI.room-trip #roomActionDialogue{transition:none}}
+#gameUI.room-trip.reading-room-action #roomActionDialogue{background:#432f28;color:#fff1dd;border-color:#aa8769}
+#gameUI.room-trip #roomActionDialogue b{color:#ffe9d3;background:#6d4e41}
+#gameUI.room-trip #roomActionDialogue small{color:#d3bca4}
+#roomTripLabel span{display:inline-block}
+@keyframes outingLetterHop{0%,8%,100%{transform:translateY(0)}3%{transform:translateY(-3px)}6%{transform:translateY(.5px)}}
+@keyframes outingDaisyNod{0%,12%,24%,100%{transform:rotate(0)}16%{transform:rotate(3deg)}20%{transform:rotate(-2deg)}}
+@media(prefers-reduced-motion:no-preference){
+ .room-trip .roomTripCard:not(.is-due) #roomTripLabel span{animation:outingLetterHop 6s ease-in-out infinite;animation-delay:calc(var(--order)*100ms)}
+ .room-trip .roomTripCard:not(.is-due) .roomTripFlower{animation:outingDaisyNod 6s ease-in-out infinite}
+ body:has(#chatRoom.on) .roomTripCard *,#gameUI.reading-room-action .roomTripCard *,#gameUI.presentation-held .roomTripCard *{animation-play-state:paused!important}
+}
 </style>
 <!-- Zen Maru Gothic title subset
 Copyright 2021 The Zen Maru Gothic Project Authors (https://github.com/googlefonts/zen-marugothic)
@@ -5139,6 +5150,7 @@ function blankActUnlocked(id){var need=blankActNeedAff(id);if(!need)return true;
 function blankAct(id){if(tripDue()||(id==="jack"&&(isOutingPhase()||maskOpen())))return;if(presentationHeld()||busy||!S.trip||S.taken)return;if(!blankActUnlocked(id)){var need=blankActNeedAff(id);say("（阿祿親密度到 "+need+" 以後，才能用「"+(id==="msg"?"發訊息":id==="call"?"打電話":id)+"」。）","pout");return}if(maskOpen()){if(sqOptsOn())return;var mask=$("mask");if(mask)mask.classList.remove("on");if(!moodPeekOn){try{mask&&mask.classList.remove("mood-chrome")}catch(e){}}}withBusy(function(){blankActNow(id)});}
 var roomActionReading={active:false,timer:0,deadline:0,remaining:0,pointer:null,key:false};
 function closeRoomActionDialogue(){
+  stopTyping($("roomActionText"),false);
   clearTimeout(roomActionReading.timer);
   roomActionReading.active=false;roomActionReading.pointer=null;roomActionReading.key=false;
   $("roomActionDialogue").classList.remove("is-closing");
@@ -5146,7 +5158,7 @@ function closeRoomActionDialogue(){
 }
 function scheduleRoomActionClose(){
   clearTimeout(roomActionReading.timer);
-  if(!roomActionReading.active||roomActionReading.pointer!=null||roomActionReading.key)return;
+  if(!roomActionReading.active||isTyping($("roomActionText"))||roomActionReading.pointer!=null||roomActionReading.key)return;
   roomActionReading.deadline=Date.now()+roomActionReading.remaining;
   roomActionReading.timer=setTimeout(function(){
     $("roomActionDialogue").classList.add("is-closing");
@@ -5156,7 +5168,7 @@ function scheduleRoomActionClose(){
 function holdRoomAction(){
   if(!roomActionReading.active)return;
   clearTimeout(roomActionReading.timer);
-  roomActionReading.remaining=Math.max(1000,roomActionReading.deadline-Date.now());
+  if(!isTyping($("roomActionText"))&&roomActionReading.deadline)roomActionReading.remaining=Math.max(1000,roomActionReading.deadline-Date.now());
   $("roomActionDialogue").classList.remove("is-closing");
 }
 (function(){
@@ -5199,10 +5211,10 @@ function showOutingActLine(title,msg){if(!isOutingPhase()){
   panel.classList.toggle("is-message",/發訊息/.test(title));
   panel.querySelector("b").textContent=/發訊息/.test(title)?"小紅的訊息":/電話/.test(title)?"電話另一端":"阿祿";
   stopTyping($("roomActionText"),false);
-  $("roomActionText").textContent=msg;$("roomActionText").scrollTop=0;
+  $("roomActionText").scrollTop=0;roomActionReading.deadline=0;
   roomActionReading.active=true;
   roomActionReading.remaining=Math.max(3000,Math.min(7000,2200+Array.from(msg).length*70));
-  updatePresentationState();scheduleRoomActionClose();return;
+  updatePresentationState();typeDialogue($("roomActionText"),msg,scheduleRoomActionClose);return;
 }var el=$("outingActLine");if(!el)return;el.hidden=false;el.innerHTML="<b>"+title+"</b><span>"+msg+"</span><i class=\"sm\">輕觸關閉</i>";el.onclick=function(){el.hidden=true;el.innerHTML=""};}
 function blankActNow(id){if(!S.trip||S.taken||!blankActUnlocked(id)||(id==="msg"&&S.aff>=50))return;if(id==="nap"){skipTrip();return}if(!BLANK_TXT[id])return;var titles={msg:"📱 發訊息",call:"📞 打電話",jack:"💦 去廁所"};var title=titles[id]||id;if(!S.trip.blankOnce)S.trip.blankOnce={};if(S.trip.blankOnce[id]){showOutingActLine(title,S.trip.blankOnce[id]);if(tab==="go")closePane();render(false);return}var msg=pickBlank(id);if(!msg)return;S.trip.blankOnce[id]=msg;if(!S.trip.acts)S.trip.acts=[];if(S.trip.acts.indexOf(id)<0)S.trip.acts.push(id);markBlankOptSeen(id);var face=id=="jack"?"shy":"sad";setEx(face);faceTf(face);addLog("⏳ "+title+"｜"+msg);showOutingActLine(title,msg);if(tab==="go")closePane();render(false)}
 var sqReply=null;
@@ -5909,7 +5921,13 @@ if(room&&(!S.peekEntryCueSeen||(S.aff>=50&&!S.peekFocusCueSeen))){
   if(!room)return;
   var seconds=tripSeconds();
   var storm=seconds===0&&stormDue();
-  $("roomTripLabel").textContent=seconds?"小紅外出中":storm?"暴風雨之夜":"小紅回來了……";
+  var label=$("roomTripLabel"),title=seconds?"小紅外出中":storm?"暴風雨之夜":"小紅回來了……";
+  if(label.textContent!==title){
+    if(seconds)label.replaceChildren(...Array.from(title,function(letter,index){
+      var span=document.createElement("span");span.textContent=letter;span.style.setProperty("--order",index);return span;
+    }));
+    else label.textContent=title;
+  }
   $("roomTripClock").textContent=seconds?String(Math.floor(seconds/60)).padStart(2,"0")+":"+String(seconds%60).padStart(2,"0"):"";
   var nap=$("roomNap");if(nap)nap.disabled=seconds===0;
   var contact=$("roomContact");if(contact)contact.disabled=!seconds||!blankActUnlocked(contact.getAttribute("data-contact"));
