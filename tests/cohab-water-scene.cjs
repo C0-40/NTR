@@ -38,7 +38,9 @@ await p.reload();
 assert.equal(await p.evaluate(()=>S.cohabScene.index),1);
 assert(await p.locator('#cohabPlay').isVisible());
 await p.emulateMedia({reducedMotion:'reduce'});await p.evaluate(()=>stopTyping($('cohabText'),true));
+const dialogueBounds=await p.locator("#cohabDialogue").boundingBox();
 for(let i=1;i<9;i++){
+  assert.deepEqual(await p.locator("#cohabDialogue").boundingBox(),dialogueBounds);
   assert.equal(await p.evaluate(()=>S.cohabScene.index),i);
   if(i===8)assert.equal(await p.locator('#cohabNext').innerText(),'結束 ▾');
   await p.locator('#cohabDialogue').click();
@@ -59,6 +61,7 @@ for(const width of [320,390,430]){
  await p.setViewportSize({width,height:640});await p.clock.runFor(100);
  assert(await p.locator('#cohabDialogue').evaluate(e=>{const r=e.getBoundingClientRect();return r.left>=0&&r.right<=innerWidth&&r.top>120&&r.bottom<innerHeight}));
  await p.evaluate(()=>typeDialogue($('cohabText'),'水'.repeat(35)));
+ console.log(width,await p.locator('#cohabText').evaluate(e=>[e.scrollHeight,e.clientHeight,e.scrollWidth,e.clientWidth,getComputedStyle(e).lineHeight,getComputedStyle(e.parentNode).gridTemplateRows]));
  assert(await p.locator('#cohabText').evaluate(e=>e.scrollHeight<=e.clientHeight+1&&e.scrollWidth<=e.clientWidth+1));
 }
 await p.locator('#cohabSkip').click();

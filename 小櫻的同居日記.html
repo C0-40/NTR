@@ -3724,9 +3724,9 @@ body:has(#gameUI.homeui.outing-shell){background:#2c221d!important;background-im
 .cohabHeading{position:absolute;top:112px;left:18px;right:18px;display:flex;align-items:center;justify-content:space-between;color:#694838}
 #cohabTitle{background:#fff0dce8;border:1px solid #ab896e;border-radius:9px;padding:7px 15px;font:600 18px serif}
 #cohabSkip{pointer-events:auto;min-height:44px;min-width:60px;font:inherit;font-size:13px;color:#735448;background:#fff1dce8;border:1px solid #a3826a;border-radius:10px}
-#cohabDialogue{position:absolute;left:14px;right:14px;bottom:104px;pointer-events:auto;padding:13px 15px 9px;border:1.5px solid #946d55;border-radius:15px;background:#fff0dff5;color:#533c31;box-shadow:0 3px 0 #75543e44;display:grid;gap:7px}
+#cohabDialogue{box-sizing:border-box;height:160px;grid-template-rows:26px minmax(0,1fr) 16px;position:absolute;left:14px;right:14px;bottom:104px;pointer-events:auto;padding:13px 15px 9px;border:1.5px solid #946d55;border-radius:15px;background:#fff0dff5;color:#533c31;box-shadow:0 3px 0 #75543e44;display:grid;gap:7px}
 #cohabSpeaker{justify-self:start;font-size:13px;background:#965d66;color:#fff2dc;border-radius:5px;padding:3px 12px}
-#cohabText{position:relative;display:block;justify-self:center;width:100%;max-width:18em;min-height:3.3em;max-height:6.6em;overflow-y:auto;font-size:15px;line-height:1.65;white-space:pre-wrap}
+#cohabText{position:relative;display:block;justify-self:center;width:100%;max-width:18em;height:100%;min-height:0;overflow-y:auto;font-size:15px;line-height:1.65;white-space:pre-wrap}
 #cohabNext{justify-self:end;color:#886450;font-size:11px}
 #cohabDialogue.is-narration #cohabSpeaker{background:#80634c}
 #gameUI.cohab-playing .dock,#gameUI.cohab-playing .dialogueZone,#gameUI.cohab-playing .contextActions{visibility:hidden!important;pointer-events:none!important}
