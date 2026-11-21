@@ -3671,6 +3671,43 @@ body:has(#gameUI.homeui.outing-shell){background:#2c221d!important;background-im
 #forumPauseHint{padding:4px 16px;color:#bc9f91;font-size:11px}
 @keyframes peekCue{0%,100%{box-shadow:0 3px 0 #aa82674d,0 6px 16px #38231d24}45%{box-shadow:0 0 0 4px #f5d29c88,0 0 22px #f5d29c99}}
 @media(prefers-reduced-motion:no-preference){.room-trip .roomTripCard.peek-cue{animation:peekCue .85s ease-out}}
+
+#gameUI.homeui.room-trip:not(.outing-shell) .dock.tabs{
+ background:linear-gradient(180deg,transparent 0%,#36251ed9 30%,#30221eef 100%)!important;
+ border:0!important;border-radius:0!important;box-shadow:none!important;
+ padding:15px 9px 12px!important;gap:10px 9px!important;margin-top:-155px!important
+}
+#gameUI.homeui.room-trip:not(.outing-shell) .dock.tabs #roomContact,
+#gameUI.homeui.room-trip:not(.outing-shell) .dock.tabs #roomBathroom,
+#gameUI.homeui.room-trip:not(.outing-shell) .dock.tabs #navChat{
+ background:linear-gradient(180deg,#5a4034,#403029)!important;color:#f6e3ca!important;
+ border:1.5px solid #ab8565!important;border-radius:13px!important;
+ box-shadow:inset 0 1px 0 #f5d8b51f,0 2px 0 #241a16!important;
+ font-size:14px!important;font-weight:500!important;min-height:62px!important
+}
+#gameUI.homeui.room-trip:not(.outing-shell) .dock.tabs #navChat{
+ background:linear-gradient(180deg,#654249,#493136)!important;border-color:#c18d95!important
+}
+#gameUI.homeui.room-trip:not(.outing-shell) .dock.tabs #roomNap{
+ background:#62534b!important;color:#eee0ce!important;border:1px solid #a28c7a!important;
+ border-radius:13px!important;box-shadow:inset 0 1px 0 #fff2d91a,0 2px 0 #29201b!important;
+ min-height:44px!important;font-weight:500!important
+}
+#gameUI.homeui.room-trip:not(.outing-shell) .dock.tabs #roomContact .uiIcon,
+#gameUI.homeui.room-trip:not(.outing-shell) .dock.tabs #roomBathroom .uiIcon,
+#gameUI.homeui.room-trip:not(.outing-shell) .dock.tabs #navChat .uiIcon,
+#gameUI.homeui.room-trip:not(.outing-shell) .dock.tabs #roomNap .uiIcon{color:#ecd4b6!important;stroke-width:1.6}
+#gameUI.homeui.room-trip:not(.outing-shell) .dock.tabs #navChat .uiIcon{color:#f0cbd0!important}
+#gameUI.homeui.room-trip:not(.outing-shell) .dock.tabs #roomNap small{color:#c9b6a4!important;font-weight:400}
+#gameUI.homeui.room-trip:not(.outing-shell) .dock.tabs button:active{transform:translateY(2px);filter:brightness(1.12)}
+
+#gameUI.homeui.room-trip .dock.tabs #roomBathroom{position:relative!important}
+#gameUI.homeui.room-trip .dock.tabs #roomBathroom>.notice-dot{position:absolute!important;top:5px!important;right:6px!important;left:auto!important;bottom:auto!important;transform:none!important}
+#gameUI.room-trip #roomActionDialogue{transition:opacity .18s ease,translate .18s ease}
+#gameUI.room-trip #roomActionDialogue.is-closing{opacity:0;translate:0 4px;pointer-events:none}
+#gameUI.room-trip #roomActionDialogue.is-message{background:#f8eddf;border-radius:17px 17px 5px 17px;border-color:#b38f85}
+#gameUI.room-trip #roomActionDialogue.is-message b{background:transparent;color:#86505b;padding-left:0}
+@media(prefers-reduced-motion:reduce){#gameUI.room-trip #roomActionDialogue{transition:none}}
 </style>
 <!-- Zen Maru Gothic title subset
 Copyright 2021 The Zen Maru Gothic Project Authors (https://github.com/googlefonts/zen-marugothic)
@@ -3868,7 +3905,7 @@ OTHER DEALINGS IN THE FONT SOFTWARE.
       <button type="button" class="bubble" data-t="ask" id="navAsk"><svg class="uiIcon" viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M19 16a8 8 0 1 0-5 3l6 2-1-5Z"/><path d="M9 8a3 3 0 0 1 6 0c0 2-3 2-3 4"/><path d="M12 15h.01"/></svg><span>提問</span></button>
     </nav>
 
-    <button type="button" id="roomActionDialogue" onclick="closeRoomActionDialogue()"><b>阿祿</b><span id="roomActionText"></span><small>輕觸繼續 ▾</small></button>
+    <section id="roomActionDialogue" tabindex="0" aria-label="行動回覆，按住暫停收起"><b>阿祿</b><span id="roomActionText" aria-live="polite"></span><small>按住暫停收起</small></section>
     <div class="dlg" id="dlg" role="button" tabindex="0" aria-label="和她聊天（點一下對話）"><span class="diaryPaperEdge" aria-hidden="true"></span><span class="dlgAv" id="dlgAv" aria-hidden="true"></span><div class="dlgBody"><b id="nm">小紅</b><span id="say">哼！才不要多想，只是當初口快答應了而已！</span></div><span class="dlgNext" id="dlgNext" aria-hidden="true">▼</span><span class="readingBadge" aria-hidden="true"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M8 4C6 2.5 3 2.5 1.5 3v10C3 12.5 6 12.5 8 14c2-1.5 5-1.5 6.5-1V3C13 2.5 10 2.5 8 4Zm0 0v10"/></svg><span>閱讀中</span></span></div>
     </div>
   </div>
@@ -3946,18 +3983,18 @@ function notifyContext(id,token,kind){var el=$(id);if(!el||el._cueToken===token)
 var scenePresentation={phase:"",timer:0,departurePending:false};
 function presentationHeld(){return !!(scenePresentation.phase)}
 function updatePresentationState(){var root=$("gameUI"),hint=$("presentationHint"),phase=scenePresentation.phase;if(!root)return;
-root.classList.toggle("reading-room-action",phase==="room-action");root.classList.toggle("presentation-held",!!phase);root.classList.toggle("presentation-reading",phase==="reaction-reading");root.classList.toggle("departure-pending",scenePresentation.departurePending);root.setAttribute("aria-busy",phase&&phase!=="reaction-reading"?"true":"false");root.querySelectorAll(".topHud,.dock,.sideNav,.contextActions,#pane").forEach(function(el){el.inert=!!phase});
-if(hint){hint.textContent=phase==="leaving"?"小紅準備出門…":phase==="returning"?"小紅回來了…":phase==="hero-arriving"?"小紅來了…":phase==="reaction-reading"?"輕觸對話，繼續閱讀":"";hint.hidden=!phase||phase==="room-action";}
+root.classList.toggle("reading-room-action",!!(roomActionReading&&roomActionReading.active));root.classList.toggle("presentation-held",!!phase);root.classList.toggle("presentation-reading",phase==="reaction-reading");root.classList.toggle("departure-pending",scenePresentation.departurePending);root.setAttribute("aria-busy",phase&&phase!=="reaction-reading"?"true":"false");root.querySelectorAll(".topHud,.dock,.sideNav,.contextActions,#pane").forEach(function(el){el.inert=!!phase});
+if(hint){hint.textContent=phase==="leaving"?"小紅準備出門…":phase==="returning"?"小紅回來了…":phase==="hero-arriving"?"小紅來了…":phase==="reaction-reading"?"輕觸對話，繼續閱讀":"";hint.hidden=!phase;}
 }
-function cancelScenePresentation(){cancelOutingFocus();hideAutomaticReview();hideDaySummary();var root=$("gameUI");if(root)root.classList.remove("hero-arriving","intro-pending");resetReturnReading();clearTimeout(scenePresentation.timer);sqReply=null;scenePresentation.phase="";scenePresentation.departurePending=false;var root=$("gameUI"),mask=$("mask");if(root)root.inert=false;if(mask)mask.classList.remove("return-window");updatePresentationState()}
+function cancelScenePresentation(){closeRoomActionDialogue();cancelOutingFocus();hideAutomaticReview();hideDaySummary();var root=$("gameUI");if(root)root.classList.remove("hero-arriving","intro-pending");resetReturnReading();clearTimeout(scenePresentation.timer);sqReply=null;scenePresentation.phase="";scenePresentation.departurePending=false;var root=$("gameUI"),mask=$("mask");if(root)root.inert=false;if(mask)mask.classList.remove("return-window");updatePresentationState()}
 function beginReactionReading(text){scenePresentation.phase="reaction-reading";say(text,"calm");$("say").scrollTop=0;updatePresentationState();render(false);$("dlg").focus({preventScroll:true})}
 function continueReactionReading(){if(scenePresentation.phase!=="reaction-reading")return false;playUiSound("click");if(stopTyping($("say"),true))return true;if(sqReply&&sqReply.i+1<sqReply.lines.length){sqReply.i++;beginReactionReading(sqReply.lines[sqReply.i]);return true}sqReply=null;scenePresentation.phase="";updatePresentationState();nextPop();render(false);return true}
 function finishReturnPresentation(){scenePresentation.phase="";updatePresentationState();if(isStormNight()){openStormNight();render(false);return}if(hasReturnObservation()&&!(S.sleepRun&&S.sleepRun.autoTrip)&&!mq.some(function(m){return m&&m.returnHome}))mq.unshift({returnHome:true});nextPop();render(false)}
-function guardPresentationInput(e){if(!presentationHeld())return;var target=e.target,reading=scenePresentation.phase==="reaction-reading",allowed=reading&&target&&target.closest&&target.closest("#dlg,#av");if(allowed||(scenePresentation.phase==="room-action"&&target.closest&&target.closest("#roomActionDialogue")))return;if(e.type==="keydown"&&["Tab","Enter"," "].indexOf(e.key)<0)return;e.preventDefault();e.stopImmediatePropagation()}
+function guardPresentationInput(e){if(!presentationHeld())return;var target=e.target,reading=scenePresentation.phase==="reaction-reading",allowed=reading&&target&&target.closest&&target.closest("#dlg,#av");if(allowed)return;if(e.type==="keydown"&&["Tab","Enter"," "].indexOf(e.key)<0)return;e.preventDefault();e.stopImmediatePropagation()}
 document.addEventListener("click",guardPresentationInput,true);document.addEventListener("keydown",guardPresentationInput,true);
 var navigationFeedback={};function refreshPresentationFeedback(){var unlocked=false;["navAsk","navStory","navMem","navChat"].forEach(function(id){var el=$(id);if(!el)return;var next=!el.disabled;if(navigationFeedback[id]===false&&next){pulsePresentation(el,"nav-unlock",700);unlocked=true}navigationFeedback[id]=next});if(unlocked)playUiSound("unlock");syncSceneAudio()}
 
-function homeUiIcon(name){var paths={"home": "<path d=\"M20 5a5 5 0 0 0-8 1 5 5 0 0 0-8-1c-4 5 2 10 8 14 6-4 12-9 8-14Z\"/>", "go": "<path d=\"M4 21V3l11-1v20L4 21ZM15 4h5v16h-5\"/><circle cx=\"11.5\" cy=\"12\" r=\".8\" fill=\"currentColor\" stroke=\"none\"/>", "sleep": "<path d=\"M20.5 14A9 9 0 0 1 10 3a9 9 0 1 0 10.5 11Z\"/><path d=\"M17 3v4m-2-2h4\"/>", "chat": "<path d=\"M15 16H8l-4 3v-4a7 7 0 0 1 3-13h7a7 7 0 0 1 1 14Z\"/><path d=\"M19 8a6 6 0 0 1 1 10v3l-4-2h-4\"/><path d=\"M7 9h.01M11 9h.01M15 9h.01\"/>", "ask": "<path d=\"M19 16a8 8 0 1 0-5 3l6 2-1-5Z\"/><path d=\"M9 8a3 3 0 0 1 6 0c0 2-3 2-3 4\"/><path d=\"M12 15h.01\"/>", "daily": "<path d=\"m2 11 10-9 10 9M5 9v12h14V9M9 21v-7h6v7\"/>", "memory": "<path d=\"M7 16a7 7 0 1 1 11-2 6 6 0 0 1-11 2Z\"/><circle cx=\"5\" cy=\"19\" r=\"2\"/><path d=\"M2 23h.01\"/>", "msg": "<rect x=\"5\" y=\"2\" width=\"14\" height=\"20\" rx=\"3\"/><path d=\"M9 5h6m-4 14h2\"/>", "call": "<path d=\"m7 3 3 5-2 2c2 3 3 4 6 6l2-2 5 3c-1 4-3 5-6 3C8 17 4 13 2 7 1 4 3 2 7 3Z\"/>", "jack": "<path d=\"M5 17c2-1 3-3 3-6l3 3 1-8 2 8 3-3c0 3 1 5 3 6-4 3-11 3-15 0Z\"/><path d=\"m4 9-1-2m17 2 1-2M8 5 7 3m10 2 1-2\"/><circle cx=\"3\" cy=\"13\" r=\".8\"/><circle cx=\"21\" cy=\"13\" r=\".8\"/><circle cx=\"12\" cy=\"2\" r=\".7\"/>", "nap": "<path d=\"M20.5 14A9 9 0 0 1 10 3a9 9 0 1 0 10.5 11Z\"/>", "speed": "<path d=\"m3 5 8 7-8 7V5Zm10 0 8 7-8 7V5Z\"/>", "thought": "<path d=\"M7 16a7 7 0 1 1 11-2 6 6 0 0 1-11 2Z\"/><circle cx=\"5\" cy=\"19\" r=\"2\"/><path d=\"M2 23h.01\"/>", "lock": "<rect x=\"5\" y=\"10\" width=\"14\" height=\"11\" rx=\"2\"/><path d=\"M8 10V6a4 4 0 0 1 8 0v4m-4 5v2\"/>", "eye": "<path d=\"M2 12s3.5-7 10-7 10 7 10 7-3.5 7-10 7S2 12 2 12Z\"/><circle cx=\"12\" cy=\"12\" r=\"3\"/>", "care": "<path d=\"M20 5a5 5 0 0 0-8 1 5 5 0 0 0-8-1c-4 5 2 10 8 14 6-4 12-9 8-14Z\"/>", "tv": "<rect x=\"3\" y=\"6\" width=\"18\" height=\"13\" rx=\"3\"/><path d=\"m8 2 4 4 4-4M8 22h8\"/>", "game": "<rect x=\"4\" y=\"4\" width=\"16\" height=\"16\" rx=\"3\"/><circle cx=\"8\" cy=\"8\" r=\"1\"/><circle cx=\"16\" cy=\"8\" r=\"1\"/><circle cx=\"12\" cy=\"12\" r=\"1\"/><circle cx=\"8\" cy=\"16\" r=\"1\"/><circle cx=\"16\" cy=\"16\" r=\"1\"/>", "stars": "<path d=\"m12 2 2.8 6 6.7.8-4.9 4.6 1.3 6.6-5.9-3.2L6.1 20l1.3-6.6L2.5 8.8l6.7-.8L12 2Z\"/>", "sweets": "<path d=\"M20 10a5 5 0 0 1-5-7A9 9 0 1 0 21 12a5 5 0 0 1-1-2Z\"/><circle cx=\"8\" cy=\"9\" r=\"1\"/><circle cx=\"7\" cy=\"15\" r=\"1\"/><circle cx=\"13\" cy=\"16\" r=\"1\"/>", "hobby": "<path d=\"M8 5h12v12a3 3 0 1 1-3-3V3M8 8v11a3 3 0 1 1-3-3V5h3\"/>", "bond": "<circle cx=\"8\" cy=\"7\" r=\"3\"/><path d=\"M2 20v-2a6 6 0 0 1 12 0v2M17 5a3 3 0 0 1 0 6m1 4c3 0 4 2 4 5\"/>", "encounter": "<path d=\"M12 22s8-7 8-13a8 8 0 1 0-16 0c0 6 8 13 8 13Z\"/><circle cx=\"12\" cy=\"9\" r=\"3\"/>", "regret": "<path d=\"M4 4v6h6M4 10a9 9 0 1 1 0 7M12 6v6l4 2\"/>", "future": "<path d=\"M3 18h18M5 18V9m14 9V9M9 14l3-3 3 3m-3-3v10M3 5h6m-3-3v6m13-6v4m-2-2h4\"/>", "uncle": "<circle cx=\"12\" cy=\"7\" r=\"4\"/><path d=\"M4 22v-3a8 8 0 0 1 16 0v3M9 16l3 5 3-5\"/>"};paths.memory="<g class=\"memoryDaisy\" stroke-width=\"1.25\"><ellipse cx=\"12\" cy=\"5.65\" rx=\"1.45\" ry=\"3.45\" transform=\"rotate(0 12 12)\"/><ellipse cx=\"12\" cy=\"5.65\" rx=\"1.45\" ry=\"3.45\" transform=\"rotate(30 12 12)\"/><ellipse cx=\"12\" cy=\"5.65\" rx=\"1.45\" ry=\"3.45\" transform=\"rotate(60 12 12)\"/><ellipse cx=\"12\" cy=\"5.65\" rx=\"1.45\" ry=\"3.45\" transform=\"rotate(90 12 12)\"/><ellipse cx=\"12\" cy=\"5.65\" rx=\"1.45\" ry=\"3.45\" transform=\"rotate(120 12 12)\"/><ellipse cx=\"12\" cy=\"5.65\" rx=\"1.45\" ry=\"3.45\" transform=\"rotate(150 12 12)\"/><ellipse cx=\"12\" cy=\"5.65\" rx=\"1.45\" ry=\"3.45\" transform=\"rotate(180 12 12)\"/><ellipse cx=\"12\" cy=\"5.65\" rx=\"1.45\" ry=\"3.45\" transform=\"rotate(210 12 12)\"/><ellipse cx=\"12\" cy=\"5.65\" rx=\"1.45\" ry=\"3.45\" transform=\"rotate(240 12 12)\"/><ellipse cx=\"12\" cy=\"5.65\" rx=\"1.45\" ry=\"3.45\" transform=\"rotate(270 12 12)\"/><ellipse cx=\"12\" cy=\"5.65\" rx=\"1.45\" ry=\"3.45\" transform=\"rotate(300 12 12)\"/><ellipse cx=\"12\" cy=\"5.65\" rx=\"1.45\" ry=\"3.45\" transform=\"rotate(330 12 12)\"/><circle cx=\"12\" cy=\"12\" r=\"2.8\"/></g>";return '<svg class="uiIcon" viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false">'+(paths[name]||paths.home)+'</svg>';}
+function homeUiIcon(name){var paths={"home": "<path d=\"M20 5a5 5 0 0 0-8 1 5 5 0 0 0-8-1c-4 5 2 10 8 14 6-4 12-9 8-14Z\"/>", "go": "<path d=\"M4 21V3l11-1v20L4 21ZM15 4h5v16h-5\"/><circle cx=\"11.5\" cy=\"12\" r=\".8\" fill=\"currentColor\" stroke=\"none\"/>", "sleep": "<path d=\"M20.5 14A9 9 0 0 1 10 3a9 9 0 1 0 10.5 11Z\"/><path d=\"M17 3v4m-2-2h4\"/>", "chat": "<path d=\"M15 16H8l-4 3v-4a7 7 0 0 1 3-13h7a7 7 0 0 1 1 14Z\"/><path d=\"M19 8a6 6 0 0 1 1 10v3l-4-2h-4\"/><path d=\"M7 9h.01M11 9h.01M15 9h.01\"/>", "ask": "<path d=\"M19 16a8 8 0 1 0-5 3l6 2-1-5Z\"/><path d=\"M9 8a3 3 0 0 1 6 0c0 2-3 2-3 4\"/><path d=\"M12 15h.01\"/>", "daily": "<path d=\"m2 11 10-9 10 9M5 9v12h14V9M9 21v-7h6v7\"/>", "memory": "<path d=\"M7 16a7 7 0 1 1 11-2 6 6 0 0 1-11 2Z\"/><circle cx=\"5\" cy=\"19\" r=\"2\"/><path d=\"M2 23h.01\"/>", "msg": "<rect x=\"5\" y=\"2\" width=\"14\" height=\"20\" rx=\"3\"/><path d=\"M9 5h6m-4 14h2\"/>", "call": "<path d=\"m7 3 3 5-2 2c2 3 3 4 6 6l2-2 5 3c-1 4-3 5-6 3C8 17 4 13 2 7 1 4 3 2 7 3Z\"/>", "jack": "<path d=\"M9 7c-1 3-5 5-5 8a3 3 0 0 0 6 0c0-3-1-5-1-8Z\"/><path d=\"M18 3c-1 2-4 4-4 6a2.5 2.5 0 0 0 5 0c0-2-1-4-1-6Z\"/><path d=\"M19 14c-1 2-3 3-3 5a2 2 0 0 0 4 0c0-2-1-3-1-5Z\"/>", "nap": "<path d=\"M20.5 14A9 9 0 0 1 10 3a9 9 0 1 0 10.5 11Z\"/>", "speed": "<path d=\"m3 5 8 7-8 7V5Zm10 0 8 7-8 7V5Z\"/>", "thought": "<path d=\"M7 16a7 7 0 1 1 11-2 6 6 0 0 1-11 2Z\"/><circle cx=\"5\" cy=\"19\" r=\"2\"/><path d=\"M2 23h.01\"/>", "lock": "<rect x=\"5\" y=\"10\" width=\"14\" height=\"11\" rx=\"2\"/><path d=\"M8 10V6a4 4 0 0 1 8 0v4m-4 5v2\"/>", "eye": "<path d=\"M2 12s3.5-7 10-7 10 7 10 7-3.5 7-10 7S2 12 2 12Z\"/><circle cx=\"12\" cy=\"12\" r=\"3\"/>", "care": "<path d=\"M20 5a5 5 0 0 0-8 1 5 5 0 0 0-8-1c-4 5 2 10 8 14 6-4 12-9 8-14Z\"/>", "tv": "<rect x=\"3\" y=\"6\" width=\"18\" height=\"13\" rx=\"3\"/><path d=\"m8 2 4 4 4-4M8 22h8\"/>", "game": "<rect x=\"4\" y=\"4\" width=\"16\" height=\"16\" rx=\"3\"/><circle cx=\"8\" cy=\"8\" r=\"1\"/><circle cx=\"16\" cy=\"8\" r=\"1\"/><circle cx=\"12\" cy=\"12\" r=\"1\"/><circle cx=\"8\" cy=\"16\" r=\"1\"/><circle cx=\"16\" cy=\"16\" r=\"1\"/>", "stars": "<path d=\"m12 2 2.8 6 6.7.8-4.9 4.6 1.3 6.6-5.9-3.2L6.1 20l1.3-6.6L2.5 8.8l6.7-.8L12 2Z\"/>", "sweets": "<path d=\"M20 10a5 5 0 0 1-5-7A9 9 0 1 0 21 12a5 5 0 0 1-1-2Z\"/><circle cx=\"8\" cy=\"9\" r=\"1\"/><circle cx=\"7\" cy=\"15\" r=\"1\"/><circle cx=\"13\" cy=\"16\" r=\"1\"/>", "hobby": "<path d=\"M8 5h12v12a3 3 0 1 1-3-3V3M8 8v11a3 3 0 1 1-3-3V5h3\"/>", "bond": "<circle cx=\"8\" cy=\"7\" r=\"3\"/><path d=\"M2 20v-2a6 6 0 0 1 12 0v2M17 5a3 3 0 0 1 0 6m1 4c3 0 4 2 4 5\"/>", "encounter": "<path d=\"M12 22s8-7 8-13a8 8 0 1 0-16 0c0 6 8 13 8 13Z\"/><circle cx=\"12\" cy=\"9\" r=\"3\"/>", "regret": "<path d=\"M4 4v6h6M4 10a9 9 0 1 1 0 7M12 6v6l4 2\"/>", "future": "<path d=\"M3 18h18M5 18V9m14 9V9M9 14l3-3 3 3m-3-3v10M3 5h6m-3-3v6m13-6v4m-2-2h4\"/>", "uncle": "<circle cx=\"12\" cy=\"7\" r=\"4\"/><path d=\"M4 22v-3a8 8 0 0 1 16 0v3M9 16l3 5 3-5\"/>"};paths.memory="<g class=\"memoryDaisy\" stroke-width=\"1.25\"><ellipse cx=\"12\" cy=\"5.65\" rx=\"1.45\" ry=\"3.45\" transform=\"rotate(0 12 12)\"/><ellipse cx=\"12\" cy=\"5.65\" rx=\"1.45\" ry=\"3.45\" transform=\"rotate(30 12 12)\"/><ellipse cx=\"12\" cy=\"5.65\" rx=\"1.45\" ry=\"3.45\" transform=\"rotate(60 12 12)\"/><ellipse cx=\"12\" cy=\"5.65\" rx=\"1.45\" ry=\"3.45\" transform=\"rotate(90 12 12)\"/><ellipse cx=\"12\" cy=\"5.65\" rx=\"1.45\" ry=\"3.45\" transform=\"rotate(120 12 12)\"/><ellipse cx=\"12\" cy=\"5.65\" rx=\"1.45\" ry=\"3.45\" transform=\"rotate(150 12 12)\"/><ellipse cx=\"12\" cy=\"5.65\" rx=\"1.45\" ry=\"3.45\" transform=\"rotate(180 12 12)\"/><ellipse cx=\"12\" cy=\"5.65\" rx=\"1.45\" ry=\"3.45\" transform=\"rotate(210 12 12)\"/><ellipse cx=\"12\" cy=\"5.65\" rx=\"1.45\" ry=\"3.45\" transform=\"rotate(240 12 12)\"/><ellipse cx=\"12\" cy=\"5.65\" rx=\"1.45\" ry=\"3.45\" transform=\"rotate(270 12 12)\"/><ellipse cx=\"12\" cy=\"5.65\" rx=\"1.45\" ry=\"3.45\" transform=\"rotate(300 12 12)\"/><ellipse cx=\"12\" cy=\"5.65\" rx=\"1.45\" ry=\"3.45\" transform=\"rotate(330 12 12)\"/><circle cx=\"12\" cy=\"12\" r=\"2.8\"/></g>";return '<svg class="uiIcon" viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false">'+(paths[name]||paths.home)+'</svg>';}
 
 
 var TIERS=[[0,"重逢的青梅竹馬"],[30,"漸漸熟稔"],[100,"無話不談的夥伴"],[250,"值得信賴的人"],[500,"特別的人"],[1000,"一輩子的家人"]];
@@ -5100,19 +5137,72 @@ function paintSideBadges(){}
 function blankActNeedAff(id){if(id==="msg")return 25;if(id==="call")return 50;return 0}
 function blankActUnlocked(id){var need=blankActNeedAff(id);if(!need)return true;return !!S&&(S.aff|0)>=need}
 function blankAct(id){if(tripDue()||(id==="jack"&&(isOutingPhase()||maskOpen())))return;if(presentationHeld()||busy||!S.trip||S.taken)return;if(!blankActUnlocked(id)){var need=blankActNeedAff(id);say("（阿祿親密度到 "+need+" 以後，才能用「"+(id==="msg"?"發訊息":id==="call"?"打電話":id)+"」。）","pout");return}if(maskOpen()){if(sqOptsOn())return;var mask=$("mask");if(mask)mask.classList.remove("on");if(!moodPeekOn){try{mask&&mask.classList.remove("mood-chrome")}catch(e){}}}withBusy(function(){blankActNow(id)});}
+var roomActionReading={active:false,timer:0,deadline:0,remaining:0,pointer:null,key:false};
 function closeRoomActionDialogue(){
-  if(scenePresentation.phase!=="room-action"||stopTyping($("roomActionText"),true))return;
-  scenePresentation.phase="";
+  clearTimeout(roomActionReading.timer);
+  roomActionReading.active=false;roomActionReading.pointer=null;roomActionReading.key=false;
+  $("roomActionDialogue").classList.remove("is-closing");
   updatePresentationState();
-  (tripDue()?$("tripInspect"):$("roomBathroom")).focus({preventScroll:true});
 }
+function scheduleRoomActionClose(){
+  clearTimeout(roomActionReading.timer);
+  if(!roomActionReading.active||roomActionReading.pointer!=null||roomActionReading.key)return;
+  roomActionReading.deadline=Date.now()+roomActionReading.remaining;
+  roomActionReading.timer=setTimeout(function(){
+    $("roomActionDialogue").classList.add("is-closing");
+    roomActionReading.timer=setTimeout(closeRoomActionDialogue,prefersReducedMotion()?0:180);
+  },roomActionReading.remaining);
+}
+function holdRoomAction(){
+  if(!roomActionReading.active)return;
+  clearTimeout(roomActionReading.timer);
+  roomActionReading.remaining=Math.max(1000,roomActionReading.deadline-Date.now());
+  $("roomActionDialogue").classList.remove("is-closing");
+}
+(function(){
+  var panel=$("roomActionDialogue");
+  panel.addEventListener("pointerdown",function(event){
+    if(!roomActionReading.active||roomActionReading.pointer!=null)return;
+    holdRoomAction();roomActionReading.pointer=event.pointerId;
+    try{panel.setPointerCapture(event.pointerId)}catch(error){}
+  });
+  function release(event){
+    if(roomActionReading.pointer!==event.pointerId)return;
+    roomActionReading.pointer=null;scheduleRoomActionClose();
+  }
+  panel.addEventListener("pointerup",release);
+  panel.addEventListener("pointercancel",release);
+  panel.addEventListener("lostpointercapture",release);
+  panel.addEventListener("keydown",function(event){
+    if(event.key!==" "&&event.key!=="Enter")return;
+    event.preventDefault();
+    if(roomActionReading.key)return;
+    holdRoomAction();roomActionReading.key=true;
+  });
+  panel.addEventListener("keyup",function(event){
+    if(event.key!==" "&&event.key!=="Enter")return;
+    event.preventDefault();roomActionReading.key=false;scheduleRoomActionClose();
+  });
+  panel.addEventListener("blur",function(){
+    if(roomActionReading.key){roomActionReading.key=false;scheduleRoomActionClose()}
+  });
+  function dismissForAction(event){
+    if(busy||!roomActionReading.active||!event.target.closest||event.target.closest("#roomActionDialogue"))return;
+    if(event.target.closest("button,[data-t]"))closeRoomActionDialogue();
+  }
+  document.addEventListener("pointerdown",dismissForAction,true);
+  document.addEventListener("click",dismissForAction,true);
+})();
 function showOutingActLine(title,msg){if(!isOutingPhase()){
-  scenePresentation.phase="room-action";
-  updatePresentationState();
-  $("roomActionDialogue").querySelector("b").textContent=/發訊息/.test(title)?"小紅的訊息":/電話/.test(title)?"電話另一端":"阿祿";
-  typeDialogue($("roomActionText"),msg);
-  $("roomActionDialogue").focus({preventScroll:true});
-  return;
+  closeRoomActionDialogue();
+  var panel=$("roomActionDialogue");
+  panel.classList.toggle("is-message",/發訊息/.test(title));
+  panel.querySelector("b").textContent=/發訊息/.test(title)?"小紅的訊息":/電話/.test(title)?"電話另一端":"阿祿";
+  stopTyping($("roomActionText"),false);
+  $("roomActionText").textContent=msg;$("roomActionText").scrollTop=0;
+  roomActionReading.active=true;
+  roomActionReading.remaining=Math.max(3000,Math.min(7000,2200+Array.from(msg).length*70));
+  updatePresentationState();scheduleRoomActionClose();return;
 }var el=$("outingActLine");if(!el)return;el.hidden=false;el.innerHTML="<b>"+title+"</b><span>"+msg+"</span><i class=\"sm\">輕觸關閉</i>";el.onclick=function(){el.hidden=true;el.innerHTML=""};}
 function blankActNow(id){if(!S.trip||S.taken||!blankActUnlocked(id)||(id==="msg"&&S.aff>=50))return;if(id==="nap"){skipTrip();return}if(!BLANK_TXT[id])return;var titles={msg:"📱 發訊息",call:"📞 打電話",jack:"💦 去廁所"};var title=titles[id]||id;if(!S.trip.blankOnce)S.trip.blankOnce={};if(S.trip.blankOnce[id]){showOutingActLine(title,S.trip.blankOnce[id]);if(tab==="go")closePane();render(false);return}var msg=pickBlank(id);if(!msg)return;S.trip.blankOnce[id]=msg;if(!S.trip.acts)S.trip.acts=[];if(S.trip.acts.indexOf(id)<0)S.trip.acts.push(id);markBlankOptSeen(id);var face=id=="jack"?"shy":"sad";setEx(face);faceTf(face);addLog("⏳ "+title+"｜"+msg);showOutingActLine(title,msg);if(tab==="go")closePane();render(false)}
 var sqReply=null;
@@ -5793,7 +5883,7 @@ function resumeForumTrip(){
   S.trip.end=Date.now()+S.trip.forumRemaining;delete S.trip.forumRemaining;save();
 }
 function maybeReturnHome(){
-  if(!tripDue()||S.trip.auto||sleepFlowHeld()||busy||backLock||mbLock||dayLock||maskOpen()||presentationHeld()||$("chatRoom").classList.contains("on"))return;
+  if(roomActionReading.active||!tripDue()||S.trip.auto||sleepFlowHeld()||busy||backLock||mbLock||dayLock||maskOpen()||presentationHeld()||$("chatRoom").classList.contains("on"))return;
   var result=$("outingActLine");if(result&&!result.hidden)return;
   var panel=$("pane");if(panel&&panel.classList.contains("is-open"))return;
   back();render();

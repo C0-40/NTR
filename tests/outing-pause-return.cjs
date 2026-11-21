@@ -30,7 +30,7 @@ await p.setViewportSize({width,height:740});
 assert(await p.locator('#roomNap').evaluate(e=>e.getBoundingClientRect().bottom<=innerHeight));
 await p.locator('#roomBathroom').click();await p.clock.runFor(100);
 assert(await p.locator('#roomActionDialogue').evaluate(e=>e.getBoundingClientRect().bottom<document.querySelector('.dock').getBoundingClientRect().top));
-await p.locator('#roomActionDialogue').click();await p.clock.runFor(100);
+await p.clock.runFor(7200);
 }
 await p.locator('#navChat').click();const remaining=await p.evaluate(()=>S.trip.forumRemaining);
 await p.clock.runFor(90000);assert.equal(await p.evaluate(()=>tripSeconds()),Math.ceil(remaining/1000));assert(await p.locator('#forumPauseHint').isVisible());
@@ -38,7 +38,7 @@ await p.reload();assert(await p.locator('#roomTripLabel').isVisible());
 assert(await p.evaluate(r=>S.trip.end-Date.now()<=r&&S.trip.end-Date.now()>r-1000,remaining));
 await p.locator('#navChat').click();await p.locator('#chatClose').click();
 await p.locator('#roomBathroom').click();await p.evaluate(()=>S.trip.end=Date.now()-1);await p.clock.runFor(1000);
-assert(await p.locator('#roomActionDialogue').isVisible());await p.locator('#roomActionDialogue').click();await p.clock.runFor(1000);
+assert(await p.locator('#roomActionDialogue').isVisible());await p.clock.runFor(7200);
 assert(await p.locator('#mask.on.return-window').isVisible());
 await p.locator('#mb').click();await p.clock.runFor(300);
 assert.equal(await p.evaluate(()=>S.pendingObs),null);assert(await p.locator('.dock [data-t="go"]').isDisabled());
