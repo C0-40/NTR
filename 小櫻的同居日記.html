@@ -3758,6 +3758,28 @@ body:has(#gameUI.homeui.outing-shell){background:#2c221d!important;background-im
 #gameUI.homeui.cohab-playing:not(.outing-shell) .dialogueZone .sideNav.right,#gameUI.cohab-playing #navAsk,#gameUI.cohab-playing #qHomeBtn,#gameUI.cohab-playing #obsBtn{display:none!important}
 #cohabOffer button:focus-visible{outline:2px solid #be9079;outline-offset:3px}
 #gameUI.homeui:not(.outing-shell) #dlg #say{font-size:14px!important;line-height:1.65!important;letter-spacing:0!important;padding:0!important}
+/* Daisy stationery for cohabitation scenes. */
+.cohabHeading{border-radius:20px 12px 20px 12px}
+.cohabHeadingText{padding-left:48px;min-width:0}
+.cohabHeadingDaisy{position:absolute;left:13px;top:50%;transform:translateY(-50%);display:grid;place-items:center;width:38px;height:38px;border-radius:50%;border:1px solid #bf9979;background:#f6e4c9;box-shadow:inset 0 1px 0 #fff8e7}
+.cohabDaisy{display:block;width:29px;height:29px;color:#a17758}
+#cohabTitle{position:relative}
+#cohabTitle::after{content:"";position:absolute;left:0;right:0;bottom:-4px;height:3px;border-top:1px solid #b8867a;border-radius:50%;transform:rotate(-2deg)}
+#cohabSkip{background:#ecd9c2;color:#795448;border-color:#ae8a73;border-radius:24px;font-size:12px;min-width:68px}
+#cohabSkip span{margin-left:3px;color:#a17665;font-size:17px}
+#cohabDialogue[data-speaker="阿祿"] #cohabSpeaker{background:#80624c;border-color:#684b3a}
+#cohabDialogue[data-speaker="小紅"] #cohabSpeaker{background:#a46b76;border-color:#80515b}
+#gameUI.cohab-playing #av{filter:brightness(1) drop-shadow(0 6px 10px #5a3b422e)!important;transition:filter .2s ease}
+#gameUI.cohab-playing[data-cohab-speaker="阿祿"] #av{filter:brightness(.9) drop-shadow(0 6px 10px #5a3b422e)!important}
+.cohabOfferFlower{display:grid;place-items:center;width:50px;height:50px;margin:0 auto;border-radius:50%;border:1px solid #c49c80;background:#f2ddc2;box-shadow:inset 0 1px 0 #fff8e7}
+.cohabOfferFlower .cohabDaisy{width:35px;height:35px}
+#cohabOffer{border-radius:26px;border-color:#ac8167;box-shadow:inset 0 0 0 4px #fff1da,0 10px 35px #36231d55}
+#cohabOfferSkip{background:#edddc6;color:#7c5b49}
+#cohabOfferPlay{background:#a36b78;border-color:#83515f}
+@keyframes cohabCardIn{from{opacity:0;transform:scale(.97)}to{opacity:1;transform:scale(1)}}
+@keyframes cohabDaisyHello{0%,100%{transform:rotate(0)}45%{transform:rotate(4deg)}75%{transform:rotate(-2deg)}}
+@media(prefers-reduced-motion:no-preference){#cohabOffer[open]{animation:cohabCardIn .3s ease-out}#cohabOffer[open] .cohabDaisy{animation:cohabDaisyHello .3s ease-out}}
+@media(prefers-reduced-motion:reduce){#gameUI.cohab-playing #av{transition:none}}
 </style>
 <!-- Zen Maru Gothic title subset
 Copyright 2021 The Zen Maru Gothic Project Authors (https://github.com/googlefonts/zen-marugothic)
@@ -3858,7 +3880,7 @@ OTHER DEALINGS IN THE FONT SOFTWARE.
 </head>
 <body>
 <dialog id="cohabOffer" aria-labelledby="cohabOfferTitle">
-  <div class="cohabOfferFlower" aria-hidden="true">✿</div>
+  <div class="cohabOfferFlower" aria-hidden="true"><svg class="cohabDaisy" aria-hidden="true" viewBox="0 0 24 24" stroke="currentColor" fill="#fff2d9"><ellipse cx="12" cy="5.8" rx="2.2" ry="4.2" transform="rotate(0 12 12)"/><ellipse cx="12" cy="5.8" rx="2.2" ry="4.2" transform="rotate(45 12 12)"/><ellipse cx="12" cy="5.8" rx="2.2" ry="4.2" transform="rotate(90 12 12)"/><ellipse cx="12" cy="5.8" rx="2.2" ry="4.2" transform="rotate(135 12 12)"/><ellipse cx="12" cy="5.8" rx="2.2" ry="4.2" transform="rotate(180 12 12)"/><ellipse cx="12" cy="5.8" rx="2.2" ry="4.2" transform="rotate(225 12 12)"/><ellipse cx="12" cy="5.8" rx="2.2" ry="4.2" transform="rotate(270 12 12)"/><ellipse cx="12" cy="5.8" rx="2.2" ry="4.2" transform="rotate(315 12 12)"/><circle cx="12" cy="12" r="3" fill="#bb9061"/></svg></div>
   <p>新同居事件</p><h2 id="cohabOfferTitle"></h2>
   <div class="cohabOfferActions"><button type="button" id="cohabOfferSkip" onclick="chooseCohabOffer(false)">跳過</button><button type="button" id="cohabOfferPlay" onclick="chooseCohabOffer(true)">播放</button></div>
 </dialog>
@@ -3937,7 +3959,7 @@ OTHER DEALINGS IN THE FONT SOFTWARE.
       <span class="roomTripLink">窺探小紅狀態</span>
     </button>
     <section id="cohabPlay" aria-label="同居事件" hidden>
-      <div class="cohabHeading"><div class="cohabHeadingText"><small>同居事件</small><span id="cohabTitle"></span></div><button type="button" id="cohabSkip" onclick="finishCohabScene()">跳過</button></div>
+      <div class="cohabHeading"><span class="cohabHeadingDaisy" aria-hidden="true"><svg class="cohabDaisy" aria-hidden="true" viewBox="0 0 24 24" stroke="currentColor" fill="#fff2d9"><ellipse cx="12" cy="5.8" rx="2.2" ry="4.2" transform="rotate(0 12 12)"/><ellipse cx="12" cy="5.8" rx="2.2" ry="4.2" transform="rotate(45 12 12)"/><ellipse cx="12" cy="5.8" rx="2.2" ry="4.2" transform="rotate(90 12 12)"/><ellipse cx="12" cy="5.8" rx="2.2" ry="4.2" transform="rotate(135 12 12)"/><ellipse cx="12" cy="5.8" rx="2.2" ry="4.2" transform="rotate(180 12 12)"/><ellipse cx="12" cy="5.8" rx="2.2" ry="4.2" transform="rotate(225 12 12)"/><ellipse cx="12" cy="5.8" rx="2.2" ry="4.2" transform="rotate(270 12 12)"/><ellipse cx="12" cy="5.8" rx="2.2" ry="4.2" transform="rotate(315 12 12)"/><circle cx="12" cy="12" r="3" fill="#bb9061"/></svg></span><div class="cohabHeadingText"><small>同居事件</small><span id="cohabTitle"></span></div><button type="button" id="cohabSkip" onclick="finishCohabScene()">跳過<span aria-hidden="true"> »</span></button></div>
 
     </section>
     <div class="girl" id="av" role="button" aria-label="和她聊天" tabindex="0"></div>
@@ -5726,6 +5748,7 @@ function showCohabScene(id){
   $("cohabTitle").textContent=event[1];
   var turns=cohabTurns(event),turn=turns[S.cohabScene.index]||turns[0];
   $("cohabSpeaker").textContent=turn.speaker;
+  $("gameUI").dataset.cohabSpeaker=turn.speaker;$("cohabDialogue").dataset.speaker=turn.speaker;
   $("cohabDialogue").classList.toggle("is-narration",turn.speaker==="旁述");
   $("cohabNext").textContent=S.cohabScene.index===turns.length-1?"結束 ▾":"輕觸繼續 ▾";
   $("cohabText").scrollTop=0;

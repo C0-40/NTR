@@ -39,8 +39,16 @@ assert(await p.evaluate(()=>isTyping($('cohabText'))));
 await p.locator('#cohabDialogue').dispatchEvent('click');
 assert.equal(await p.evaluate(()=>S.cohabScene.index),0);
 assert.equal(await p.locator('#cohabText').innerText(),'……只是倒杯水而已。');
+await p.clock.runFor(250);
+assert((await p.locator('#av').evaluate(e=>getComputedStyle(e).filter)).includes('brightness(0.9)'));
+const maleBadge=await p.locator('#cohabSpeaker').evaluate(e=>getComputedStyle(e).backgroundColor);
+
 await p.locator('#cohabDialogue').click();
 assert.equal(await p.locator('#cohabSpeaker').innerText(),'小紅');
+await p.clock.runFor(250);
+assert(await p.locator('#av').evaluate(e=>{getComputedStyle(e).filter;e.getAnimations().filter(animation=>Number.isFinite(animation.effect.getComputedTiming().endTime)).forEach(animation=>animation.finish());return Number(getComputedStyle(e).filter.match(/brightness\(([\d.]+)\)/)[1])>=.99}));
+assert.notEqual(await p.locator('#cohabSpeaker').evaluate(e=>getComputedStyle(e).backgroundColor),maleBadge);
+
 await p.reload();
 assert.equal(await p.evaluate(()=>S.cohabScene.index),1);
 assert(await p.locator('#cohabPlay').isVisible());
