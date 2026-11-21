@@ -19,7 +19,15 @@ function data(text, name) {
 }
 check('Both HTML files are identical', source === fs.readFileSync(path.join(root, '小櫻的同居日記.html'), 'utf8'));
 for (const name of ['CHAT_THREADS', 'UNCLE_ARC', 'STORY', 'MEMORIES', 'NSTORY']) {
-  check(name + ' approved data remains byte-for-byte equivalent', JSON.stringify(data(source, name)) === JSON.stringify(data(before, name)));
+  if(name==='NSTORY')continue; // Approved replacement is verified in nstory-integration.cjs.
+  const current=data(source,name),previous=data(before,name);
+  if(name==='UNCLE_ARC'){
+    current.find(event=>event.step===10).home=previous.find(event=>event.step===10).home;
+    current.find(event=>event.step===5).th=previous.find(event=>event.step===5).th;
+    current.find(event=>event.step===6).th=previous.find(event=>event.step===6).th;
+    current.find(event=>event.step===1).trace=previous.find(event=>event.step===1).trace;
+  }
+  check(name + ' approved data matches outside the new return text', JSON.stringify(current) === JSON.stringify(previous));
 }
 for (const script of source.matchAll(/<script\b[^>]*>([\s\S]*?)<\/script>/g)) new vm.Script(script[1]);
 const server = http.createServer((request, response) => {
@@ -36,6 +44,7 @@ async function fixture(page, options = {}) {
     S = def();
     Object.assign(S, { day: 25, aff: 100, m: 90, uncleStep: 11, uncleStarted: true, momIntroSeen: true, heroIntroPending: false, cohabToday: true }, options);
     S.seen = STORY.map(event => event[0]).concat(NSTORY.map(event => 'n' + event[0]));
+  S.nstory.read=Object.fromEntries(NSTORY.map(event=>[event[0],true]));
     S.memSeen = MEMORIES.map(event => event[0]); S.memPending = [];
     mq = []; busy = backLock = mbLock = dayLock = 0;
     chatReadingPositions = {}; chatRenderedKey = null;

@@ -8,7 +8,15 @@ function literal(s,n){return vm.runInNewContext('('+s.match(new RegExp('var '+n+
 check('Production HTML files are identical',Buffer.from(source).equals(fs.readFileSync(path.join(root,'小櫻的同居日記.html'))));
 for(const m of source.matchAll(/<script\b[^>]*>([\s\S]*?)<\/script>/g))new vm.Script(m[1]);
 for(const name of ['UNCLE_ARC','CHAT_THREADS','STORY','MEMORIES','NSTORY','HOME_TH','PLACE_TH','NIGHT','FLAT_NIGHT']){
+ if(name==='NSTORY')continue; // Approved replacement is verified in nstory-integration.cjs.
  const actual=literal(source,name),expected=literal(before,name);
+ if(name==='UNCLE_ARC'){
+   actual.find(event=>event.step===10).home=expected.find(event=>event.step===10).home;
+   actual.find(event=>event.step===5).th=expected.find(event=>event.step===5).th;
+   actual.find(event=>event.step===6).th=expected.find(event=>event.step===6).th;
+   actual.find(event=>event.step===1).trace=expected.find(event=>event.step===1).trace;
+ }
+ // The separately approved next-day home text is verified in nstory-integration.cjs.
  // CHAT-T0 and CHAT-T1 have approved replacements checked by forum-first-post.cjs.
  check(`${name}: approved prose and data unchanged`,JSON.stringify(name==='CHAT_THREADS'?actual.slice(2):actual)===JSON.stringify(name==='CHAT_THREADS'?expected.slice(2):expected));
 }
@@ -22,24 +30,25 @@ async function fixture(p,{day=20,aff=50,m=24,step=4}={}){
   document.querySelectorAll('#mask,#momPhone,#chatRoom').forEach(e=>e.classList.remove('on'));document.querySelector('#gameUI').inert=false;
   S=def();Object.assign(S,{day:o.day,aff:o.aff,m:o.m,uncleStep:o.step,uncleStarted:o.step>0,metOut:o.step>0,momIntroSeen:true,heroIntroPending:false,cohabToday:true,chatNotice:false});
   S.seen=STORY.map(x=>x[0]).concat(NSTORY.map(x=>'n'+x[0]));S.memSeen=MEMORIES.map(x=>x[0]);S.memPending=[];
+  S.nstory.read=Object.fromEntries(NSTORY.map(event=>[event[0],true]));S.nstory.milestones['10-return']=true;
   S.uncleTh=o.step?uncleArcByStep(o.step).th.slice():[];tab='';mq=[];busy=backLock=mbLock=dayLock=0;
   Object.assign(presentationPrefs,{textSpeed:0,letterSound:false,music:0,ambient:0,sfx:0});Math.random=()=>.1;ensureDailyBase();render();
  },{day,aff,m,step});
 }
-async function dismiss(p){await p.evaluate(()=>{busy=mbLock=0;if(automaticReviewOpen())continueAutomaticReview();else dismissMask()});await p.clock.runFor(100);}
+async function dismiss(p){await p.evaluate(()=>{busy=mbLock=0;if(automaticReviewOpen())continueAutomaticReview();else if($("cohabOffer").open)chooseCohabOffer(false);else if(S.cohabScene)finishCohabScene();else dismissMask()});await p.clock.runFor(100);}
 async function back(p){await p.evaluate(()=>{S.trip={id:0,place:PLACES[0][1],end:Date.now()+60000,acts:[],metUncle:true};S.outToday=true;back();render()});await p.clock.runFor(900);}
 async function sleep(p){await p.evaluate(()=>{busy=mbLock=0;sleepDay()});}
 async function continueSummary(p){await p.locator('#daySummaryContinue').click();await p.clock.runFor(1600);}
 async function snap(p){return p.evaluate(()=>({day:S.day,aff:S.aff,m:S.m,step:S.uncleStep,trips:S.trips,summary:daySummaryOpen(),totals:daySummaryTotals(),pending:S.pendingDayEnd,notice:S.chatNotice,thread:chatThreadUnlocked(CHAT_THREADS.find(t=>t.step===5)),title:document.querySelector('#mt').textContent}));}
 async function drainNight(p,fromDay,{stopSummary=false,stopReview=false}={}){
  for(let i=0;i<70;i++){
-  const s=await p.evaluate(()=>({day:S.day,ended:S.endingDone,ending:S.ending,summary:daySummaryOpen(),mask:document.querySelector('#mask').classList.contains('on'),phase:scenePresentation.phase,flow:S.sleepRun&&S.sleepRun.phase,review:automaticReviewOpen(),title:document.querySelector('#mt').textContent,options:sqOptsOn()}));
+  const s=await p.evaluate(()=>({day:S.day,ended:S.endingDone,ending:S.ending,summary:daySummaryOpen(),mask:maskOpen()||!!S.cohabScene,phase:scenePresentation.phase,flow:S.sleepRun&&S.sleepRun.phase,review:automaticReviewOpen(),title:document.querySelector('#mt').textContent,options:sqOptsOn()}));
   if(s.day>fromDay||s.ended)return s;
   if(stopSummary&&s.summary)return s;
   if(stopReview&&s.flow==='outing-review'&&s.review)return s;
   if(s.summary)await p.evaluate(()=>continueDaySummary());
   else if(s.review)await p.evaluate(()=>{finishAutomaticReviewReveal();continueAutomaticReview()});
-  else if(s.mask&&!s.options)await p.evaluate(()=>{busy=mbLock=0;dismissMask()});
+  else if(s.mask&&!s.options)await p.evaluate(()=>{busy=mbLock=0;if($("cohabOffer").open)chooseCohabOffer(false);else if(S.cohabScene)finishCohabScene();else dismissMask()});
   else if(s.options)throw new Error('Unexpected ending/options before day end: '+JSON.stringify(s));
   await p.clock.runFor(900);
  }
@@ -67,7 +76,7 @@ async function drainNight(p,fromDay,{stopSummary=false,stopReview=false}={}){
   for(let d=1;d<=20;d++){
    if(activeDays.includes(d))await p.evaluate(()=>{busy=0;homeActNow(0)});
    // Read any newly unlocked event before pressing sleep.
-   for(let j=0;j<20&&await p.evaluate(()=>maskOpen()&&!daySummaryOpen());j++){await p.evaluate(()=>{mbLock=busy=0;dismissMask()});await p.clock.runFor(350)}
+   for(let j=0;j<20&&await p.evaluate(()=>maskOpen()&&!daySummaryOpen());j++){await p.evaluate(()=>{mbLock=busy=0;if($("cohabOffer").open)chooseCohabOffer(false);else if(S.cohabScene)finishCohabScene();else dismissMask()});await p.clock.runFor(350)}
    await sleep(p);await drainNight(p,d);await p.clock.runFor(350);
   }
   const got=await p.evaluate(()=>({aff:S.aff,day:S.day,ending:S.ending,checked:S.day20Check,trips:S.trips,last:S.lastDailyAffinityGrantedDay}));
@@ -106,9 +115,9 @@ async function drainNight(p,fromDay,{stopSummary=false,stopReview=false}={}){
   await fixture(p,{day:1,aff:0,step:0,m:0});await p.evaluate(seed=>{S.seen=[];S.memSeen=[];S.memPending=[];S.cohabToday=false;S.dailyBase={day:1,aff:0,m:0};window.__rng=seed;Math.random=()=>{window.__rng=(Math.imul(window.__rng,1664525)+1013904223)>>>0;return window.__rng/4294967296};save()},scenario.seed);
   const timeline=[];
   for(let d=1;d<30;d++){
-   for(let j=0;j<25&&await p.evaluate(()=>maskOpen()&&!daySummaryOpen());j++){if(await p.evaluate(()=>sqOptsOn()))throw new Error('Premature final options '+d);await p.evaluate(()=>{busy=mbLock=0;dismissMask()});await p.clock.runFor(350)}
+   for(let j=0;j<25&&await p.evaluate(()=>maskOpen()&&!daySummaryOpen());j++){if(await p.evaluate(()=>sqOptsOn()))throw new Error('Premature final options '+d);await p.evaluate(()=>{busy=mbLock=0;if($("cohabOffer").open)chooseCohabOffer(false);else if(S.cohabScene)finishCohabScene();else dismissMask()});await p.clock.runFor(350)}
    if(scenario.active.includes(d))await p.evaluate(()=>{busy=0;homeActNow(0)});
-   for(let j=0;j<25&&await p.evaluate(()=>maskOpen()&&!daySummaryOpen());j++){await p.evaluate(()=>{busy=mbLock=0;dismissMask()});await p.clock.runFor(350)}
+   for(let j=0;j<25&&await p.evaluate(()=>maskOpen()&&!daySummaryOpen());j++){await p.evaluate(()=>{busy=mbLock=0;if($("cohabOffer").open)chooseCohabOffer(false);else if(S.cohabScene)finishCohabScene();else dismissMask()});await p.clock.runFor(350)}
    await sleep(p);await drainNight(p,d);await p.clock.runFor(350);timeline.push(await p.evaluate(()=>({day:S.day,step:S.uncleStep,aff:S.aff,trips:S.trips,ending:S.ending})));
    if(await p.evaluate(()=>S.endingDone))break;
   }

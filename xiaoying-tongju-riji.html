@@ -4738,7 +4738,7 @@ var CHAT_THREADS=[
 var PLACE_EV=[[["買了飯糰與牛奶，店員多找了零錢。","冰箱前猶豫很久，最後選了你喜歡的口味。","順路帶了洗髮精，說家裡剛好沒了。"],["袋口露出超市收據，時間普通。","她說熟食區排隊——便當還燙。","提袋印著店標，跟出門說的吻合。"],["收據品項對，眼神卻飄。","布丁放桌上，先去洗手，水聲偏長。","「就買了點東西。」語氣練習過。"],["袋裡幾乎是空的，卻說逛了很久。","收據角被撕掉一小塊。","她把某個小東西塞進抽屜最深處。"]],[["試穿幾件又放下，說沒有合適的。","廣場表演看了一會兒。","日用品買了一袋，很日常。"],["購物袋邊角磨損，像真逛過。","停車單時間對得上。","手帕塞給你，耳尖紅。"],["袋偏輕，解釋是人太多。","試用裝小樣撕口還新。","話題很快從「遇見誰」繞開。"],["空袋摺得很整齊。","吊牌線頭還在指上。","她笑著說累，不讓你靠太近。"]],[["熱可可喝完，杯套還留著。","靠窗坐很久，帶回一塊蛋糕。","店名片隨手放桌上。"],["杯套店名你認得。","袖口淡淡咖啡香。","她說人不多——沒提第二個人。"],["兩杯的金額在收據上。","糖包碎屑在口袋。","袖口往下拉了拉。"],["咖啡香被另一層味道蓋過。","名片折痕很深。","她先進浴室，水聲開很滿。"]],[["長椅坐一會兒，鞋邊乾草。","步道慢慢走，拍了花。","烤地瓜還熱。"],["褲腳沙塵，說走走。","落葉書籤塞進你手心。","風大，她拍裙子。"],["草屑在外套下擺。","並肩的寬度她說不清楚。","回家先換鞋，動作偏急。"],["乾草味道很淡，像洗過。","書籤在，人卻心不在。","「就去透氣。」重複兩次。"]],[["她帶了一枚白色貝殼回來，笑說浪很大、日落很美。","裙襬沾了一點沙，她邊走邊拍掉，神情很放鬆。","外套有海風的鹹味，很乾淨，像真的只去散了心。"],["她在防波堤坐得偏久，說看日落看得出神。","回來的路上繞了遠路，說想買海鹽糖給你。","袖口有一點潮，她說是浪花濺到的。"],["她回家先沖腳，水聲比平常長。說沙粒黏得難受。","鎖骨有一道淺淺的曬痕，形狀不像自己曬的。","袋裡的貝殼多了一枚，她說是「撿到兩枚，另一枚送你了」。"],["她回來時髮尾還微濕，說在海邊洗了把臉。","裙襬的褶皺不太自然，像被揉過又撫平。","她主動親你額頭，說「今天的海很美，下次帶你去」——語氣像在贖罪。"]]];
 var CHAT_POSTS=CHAT_THREADS;/* compat alias */
 /* 強叔十一步驟：無彈窗；經心聲／剪影／聊天室討論串／痕跡／回家低語傳遞。1–4 回憶未滿可推進；5+ 需 step5Open */
-var UNCLE_STEP_MNEED={1:0,2:6,3:12,4:18,5:24,6:40,7:49,8:58,9:65,10:69,11:80};var UNCLE_ARC=[{"step":1,"mNeed":0,"mGain":10,"mCap":14,"home":"小紅回來時，神情有些疲倦，卻又像是完成了一件值得驕傲的事。\n\n阿祿：怎麼這麼晚？\n\n小紅：路上有人被欺負，我就出手幫了點忙。\n\n阿祿：妳沒受傷吧？\n\n小紅：沒有啦！……不過，只是想著要是以前的你，肯定也會這樣做吧。\n\n阿祿：下次記得不要做危險的事啊\n\n小紅：我知道了，多謝阿祿關心\n\n她說完，有些不好意思地別過臉。","trace":"袖口有一點擦傷的藥味。她說只是撞到牆。","th":["那個人好像被欺負了……我該什麼做……","周圍明明有人路過，卻沒有一個肯停下來幫忙……我也很害怕啊……","換作是以前的阿祿，想必他一定會毫不猶豫地走過去吧？"],"sil":1,"title":"像當年的你一樣"},{"step":2,"mNeed":6,"mGain":8,"mCap":14,"home":"小紅把買回來的東西放在桌上，卻似乎還在想著別的事。\n\n小紅：阿祿，你說……有人明明很努力，卻一直遇上倒楣事，是不是很不公平？\n\n阿祿：怎麼突然這樣問？\n\n小紅：沒甚麼。只是今天聽到一些事而已。","trace":"茶几上多了一張折痕很深的收據，不是你家附近的店。","th":["原來發生過這樣的事……難怪他欠債，還看上去十分疲倦。","可是……說到底這些事情跟我又沒關係","……嗯，不知道有沒有我能幫忙的地方……"],"sil":1,"title":"不能就這樣不管他"},{"step":3,"mNeed":12,"mGain":7,"mCap":29,"home":"今天小紅比以往更晚回來，臉色略帶疲倦\n\n阿祿：妳今天去了哪裡？去做苦力嗎？\n\n小紅：才不是！只是幫上次那強叔一些小忙\n\n她活動了一下肩膀後，然後就一下子躺在沙發\n\n小紅：不過還真累呢……先讓我休息一下","trace":"她髮梢有清潔劑的味道，不像自家的品牌。","th":["鳥鳥真很可愛，來來來，快吃瓜子","真奇怪，明明是我來幫忙的，最後卻變成他在關心我","……嗯，沒想到比想像中還舒服……"],"sil":2,"title":"第一次被他觸碰"},{"step":4,"mNeed":18,"mGain":6,"mCap":29,"home":"小紅回家後異常安靜，卻不像是心情不好。\n\n阿祿：今天好像很開心？\n\n小紅：……嗯，今天有人聽我講了些以前的事。\n\n阿祿：是嗎？\n\n小紅：他沒有笑我，也沒有露出奇怪的表情。\n\n她輕輕摸了一下自己的臉。\n\n小紅：……沒甚麼。阿祿，今晚一起看電視吧。","trace":"她說話時避開你的眼睛，手指卻一直轉著髮夾。","th":["……原來全身按摩是這麼舒服，感覺整個人都輕鬆……","他從來不會一直盯著我臉上的傷，也不會露出那種尷尬的表情……","……不知為何跟他相處總是很放鬆的樣子，就像我的爸爸一樣……"],"sil":2,"title":"原來被照顧是這種感覺"},{"step":5,"mNeed":24,"mGain":8,"mCap":49,"needStep5":true,"home":"小紅回家後，沒有像往常一樣立即打招呼，只是默默坐在沙發的一角。\n\n阿祿：小紅？妳怎麼了？\n\n小紅：……沒甚麼，只是今天有點累。\n\n阿祿：那今晚早點休息吧，我來點外賣。\n\n小紅：……阿祿，今天可以陪我坐一會兒嗎？\n\n她沒有解釋原因，只是悄悄挪近了阿祿一些。","trace":"洗手台的水漬還在滴。她把袖口捲得很高。","th":["……！！！為甚麼？","對方的體溫傳過來了，吐息好重……","雖然有點突然，但又有點溫暖……"],"sil":3,"title":"第一次感到害怕"},{"step":6,"mNeed":40,"mGain":7,"mCap":49,"needStep5":true,"home":"小紅進門後，站在玄關盯著手機看了好一會兒，直到阿祿叫她才回過神。\n\n阿祿：小紅？妳在看甚麼？\n\n小紅：咦？沒甚麼啊！只是一些無聊的訊息。\n\n阿祿：妳最近好像總是心不在焉。\n\n小紅：有、有嗎？一定是你想多了！\n\n她匆匆收起手機，轉身走進廚房。","trace":"沙發上仍攤著兩個人的毯子，只坐過一邊。","th":["……怎麼會這樣？明明只是打算過來看一眼而已……","可是……如果我現在就這樣離開，他該怎麼辦……","……先回去吧，不能讓阿祿擔心。"],"sil":3,"title":"若無其事"},{"step":7,"mNeed":49,"mGain":8,"mCap":69,"needStep5":true,"home":"小紅回來後，一言不發地把東西放下，愣了一會兒，才像忽然想起甚麼似的走向阿祿。\n\n阿祿：小紅？妳今天怎麼了？\n\n小紅：咦？沒甚麼啊！只是有點累了。\n\n阿祿：是嗎？妳好像有心事。\n\n小紅：才、才沒有呢！對了，阿祿今晚想吃甚麼？\n\n她露出平日的笑容，卻始終不敢直視阿祿。","trace":"外套內袋露出一角收據，金額大得不合理。","th":["……明明知道這樣是不對的……但拒絕強叔的話太可憐了……","……對不起……","……很溫，很暖……"],"sil":3,"title":"賭局翻身"},{"step":8,"mNeed":58,"mGain":8,"mCap":69,"needStep5":true,"home":"小紅一進門，便像平常一樣興高采烈地把購物袋放在桌上。\n\n小紅：阿祿！看我買了甚麼回來！\n\n阿祿：今天好像回來得比較晚？\n\n小紅：因為逛了好幾家店嘛！真是的，難得替你買了喜歡的東西，你就只會問這個嗎？\n\n阿祿：哈哈，謝謝妳。\n\n小紅：哼，知道就好！今晚想吃甚麼？本小姐心情好，可以特別招待你喔！\n\n她自然地笑著，彷彿今天只是再普通不過的一天。","trace":"她把一叠紙塞進抽屜最深處，不讓你看標題。","th":["……只有我可以幫助到他……","……感覺身體變得奇怪，不像平時的自己……","……見到強叔滿足的樣子，我也不知為何有點開心……"],"sil":3,"title":"債主又來了"},{"step":9,"mNeed":65,"mGain":9,"mCap":69,"needStep5":true,"home":"小紅像往常一樣提著食材走進家門，向阿祿露出笑容，只是動作比平時慢了些。\n\n小紅：阿祿！今天有乖乖做伸展運動嗎？\n\n阿祿：當然有。妳今天買了不少東西呢。\n\n小紅：哼，誰叫你只會吃現成的……今天還特意多逛了幾家店呢。\n\n阿祿：妳看起來很累。今晚叫外賣吧？\n\n小紅：才不用呢！我都已經買好……\n\n她望著袋中的食材，沉默了一會兒。\n\n小紅：……算了，就今天一次吧。\n\n她坐到阿祿身旁，順手替他拉好膝上的薄毯，然後安靜地靠在沙發上。","trace":"浴室蒸汽從門縫溢很久。她換好家居服才肯坐下。","th":["……只要這一次就好了吧？阿祿……對不起……","……沒關係的，只要忍一下，時間就好過了……","……很噁心，相比之下，強叔好很多了……"],"sil":3,"title":"以身抵息"},{"step":10,"mNeed":69,"mGain":12,"mCap":84,"needStep5":true,"storm":true,"home":"翌日，小紅終於回來，神情略顯疲倦。\n\n阿祿：昨晚在朋友家睡好嗎？\n\n小紅：雨聲那麼大……睡得不太好……\n\n阿祿：那先休息一下吧，坐下來吃早餐。\n\n小紅：……你自己準備的？\n\n阿祿：嗯，腿雖然還傷著，但做個三文治還是辦得到的。\n\n小紅沒有立即回答，只是走過去替他整理好膝上的薄毯。\n\n小紅：……笨蛋，下次記得等我回來。","trace":"她格外溫柔，話卻很少。鎖骨一帶被衣領遮住。","th":["……雨怎麼還不停，阿祿現在應該已經睡了吧……","明明說好只留宿一晚，為甚麼事情會變成這樣……","……他握住我的手時，我明明可以推開的……可是，為甚麼有一瞬間，我竟然希望他不要放開……"],"sil":3,"title":"暴風雨之夜","stormText":"雨勢比預報的還要猛烈。\n\n小紅望著手機上不斷出現的交通停駛消息，終於放棄了當晚回家的打算。她向阿祿報了平安，只說自己借住在附近一位認識的人家中，明早便會回去。\n\n強叔：今晚真是麻煩妳了。\n\n小紅：沒甚麼啦。反正現在也走不了。\n\n強叔：那妳睡床吧，我睡外面。\n\n小紅：你不是還在生病嗎？哪有讓病人睡沙發的道理！我睡外面就好。\n\n深夜，雨聲仍未停歇。\n\n小紅聽見房內傳來咳嗽聲，猶豫片刻，還是走了進去。\n\n小紅：強叔？還好嗎？\n\n強叔：抱歉，把妳吵醒了。\n\n小紅：真是的……身體不好就別逞強了。\n\n強叔：妳還肯這樣關心我，我真的不知道該怎麼謝妳。\n\n小紅：……別說這些了。\n\n小紅說完，便在床邊坐了下來。\n\n強叔：不用一直陪著我，妳也累了。\n\n小紅：……我再坐一會兒。\n\n窗外的雨聲掩蓋了房間裡短暫的沉默。\n\n強叔輕輕握住她的手。這一次，小紅沒有立即抽開，卻也沒有忘記自己答應過阿祿甚麼。\n\n她本來只是想再陪強叔一會兒。\n\n然而，那一夜最終沒有停留在普通的陪伴。\n\n畫面逐漸轉向窗外，直到雨聲完全淹沒房間裡的對話。"},{"step":11,"mNeed":80,"mGain":10,"mCap":99,"needStep5":true,"home":"小紅進門後，熟練地把買來的東西放好，又替阿祿倒了一杯溫水。\n\n阿祿：最近妳好像經常出去幫別人忙。\n\n小紅：怎麼？本小姐不在，你就覺得寂寞了？\n\n阿祿：有一點吧。不過，我更怕妳太勉強自己。\n\n小紅：……放心啦，我知道自己在做甚麼。\n\n她說得十分自然，隨後又像平日一樣，坐到阿祿身旁陪他看電視。","trace":"她更黏你，卻不讓你靠太近。手機在枕頭邊亮了又暗。","th":["……果然強叔沒有我不行……","……又不小心被強叔牽著走了，總是讓我做些羞恥的事……可是，又不討厭……","……男人也是這副樣子嗎？如果是阿祿的話……"],"sil":3,"title":"只有妳不會拋棄我"}];
+var UNCLE_STEP_MNEED={1:0,2:6,3:12,4:18,5:24,6:40,7:49,8:58,9:65,10:69,11:80};var UNCLE_ARC=[{"step":1,"mNeed":0,"mGain":10,"mCap":14,"home":"小紅回來時，神情有些疲倦，卻又像是完成了一件值得驕傲的事。\n\n阿祿：怎麼這麼晚？\n\n小紅：路上有人被欺負，我就出手幫了點忙。\n\n阿祿：妳沒受傷吧？\n\n小紅：沒有啦！……不過，只是想著要是以前的你，肯定也會這樣做吧。\n\n阿祿：下次記得不要做危險的事啊\n\n小紅：我知道了，多謝阿祿關心\n\n她說完，有些不好意思地別過臉。","trace":"她一邊收拾買回來的東西，一邊小聲哼歌。提起街角的事時，她偷偷看了你一眼，像是在等你說些甚麼。","th":["那個人好像被欺負了……我該什麼做……","周圍明明有人路過，卻沒有一個肯停下來幫忙……我也很害怕啊……","換作是以前的阿祿，想必他一定會毫不猶豫地走過去吧？"],"sil":1,"title":"像當年的你一樣"},{"step":2,"mNeed":6,"mGain":8,"mCap":14,"home":"小紅把買回來的東西放在桌上，卻似乎還在想著別的事。\n\n小紅：阿祿，你說……有人明明很努力，卻一直遇上倒楣事，是不是很不公平？\n\n阿祿：怎麼突然這樣問？\n\n小紅：沒甚麼。只是今天聽到一些事而已。","trace":"茶几上多了一張折痕很深的收據，不是你家附近的店。","th":["原來發生過這樣的事……難怪他欠債，還看上去十分疲倦。","可是……說到底這些事情跟我又沒關係","……嗯，不知道有沒有我能幫忙的地方……"],"sil":1,"title":"不能就這樣不管他"},{"step":3,"mNeed":12,"mGain":7,"mCap":29,"home":"今天小紅比以往更晚回來，臉色略帶疲倦\n\n阿祿：妳今天去了哪裡？去做苦力嗎？\n\n小紅：才不是！只是幫上次那強叔一些小忙\n\n她活動了一下肩膀後，然後就一下子躺在沙發\n\n小紅：不過還真累呢……先讓我休息一下","trace":"她髮梢有清潔劑的味道，不像自家的品牌。","th":["鳥鳥真很可愛，來來來，快吃瓜子","真奇怪，明明是我來幫忙的，最後卻變成他在關心我","……嗯，沒想到比想像中還舒服……"],"sil":2,"title":"第一次被他觸碰"},{"step":4,"mNeed":18,"mGain":6,"mCap":29,"home":"小紅回家後異常安靜，卻不像是心情不好。\n\n阿祿：今天好像很開心？\n\n小紅：……嗯，今天有人聽我講了些以前的事。\n\n阿祿：是嗎？\n\n小紅：他沒有笑我，也沒有露出奇怪的表情。\n\n她輕輕摸了一下自己的臉。\n\n小紅：……沒甚麼。阿祿，今晚一起看電視吧。","trace":"她說話時避開你的眼睛，手指卻一直轉著髮夾。","th":["……原來全身按摩是這麼舒服，感覺整個人都輕鬆……","他從來不會一直盯著我臉上的傷，也不會露出那種尷尬的表情……","……不知為何跟他相處總是很放鬆的樣子，就像我的爸爸一樣……"],"sil":2,"title":"原來被照顧是這種感覺"},{"step":5,"mNeed":24,"mGain":8,"mCap":49,"needStep5":true,"home":"小紅回家後，沒有像往常一樣立即打招呼，只是默默坐在沙發的一角。\n\n阿祿：小紅？妳怎麼了？\n\n小紅：……沒甚麼，只是今天有點累。\n\n阿祿：那今晚早點休息吧，我來點外賣。\n\n小紅：……阿祿，今天可以陪我坐一會兒嗎？\n\n她沒有解釋原因，只是悄悄挪近了阿祿一些。","trace":"洗手台的水漬還在滴。她把袖口捲得很高。","th":["……為甚麼突然這樣！","對方的體溫傳過來了，吐息好重……","一切也太突然了，一時候拒絕不了……"],"sil":3,"title":"第一次感到害怕"},{"step":6,"mNeed":40,"mGain":7,"mCap":49,"needStep5":true,"home":"小紅進門後，站在玄關盯著手機看了好一會兒，直到阿祿叫她才回過神。\n\n阿祿：小紅？妳在看甚麼？\n\n小紅：咦？沒甚麼啊！只是一些無聊的訊息。\n\n阿祿：妳最近好像總是心不在焉。\n\n小紅：有、有嗎？一定是你想多了！\n\n她匆匆收起手機，轉身走進廚房。","trace":"沙發上仍攤著兩個人的毯子，只坐過一邊。","th":["……他已經為上次的事道歉了……可是，我明明答應過阿祿，不再跟他聯絡……","他說病已經治不好了……如果連我也不理他，他就真的只剩下一個人了……","……只是過來看一眼而已……確認他沒事，我就回家……"],"sil":3,"title":"若無其事"},{"step":7,"mNeed":49,"mGain":8,"mCap":69,"needStep5":true,"home":"小紅回來後，一言不發地把東西放下，愣了一會兒，才像忽然想起甚麼似的走向阿祿。\n\n阿祿：小紅？妳今天怎麼了？\n\n小紅：咦？沒甚麼啊！只是有點累了。\n\n阿祿：是嗎？妳好像有心事。\n\n小紅：才、才沒有呢！對了，阿祿今晚想吃甚麼？\n\n她露出平日的笑容，卻始終不敢直視阿祿。","trace":"外套內袋露出一角收據，金額大得不合理。","th":["……明明知道這樣是不對的……但拒絕強叔的話太可憐了……","……對不起……","……很溫，很暖……"],"sil":3,"title":"賭局翻身"},{"step":8,"mNeed":58,"mGain":8,"mCap":69,"needStep5":true,"home":"小紅一進門，便像平常一樣興高采烈地把購物袋放在桌上。\n\n小紅：阿祿！看我買了甚麼回來！\n\n阿祿：今天好像回來得比較晚？\n\n小紅：因為逛了好幾家店嘛！真是的，難得替你買了喜歡的東西，你就只會問這個嗎？\n\n阿祿：哈哈，謝謝妳。\n\n小紅：哼，知道就好！今晚想吃甚麼？本小姐心情好，可以特別招待你喔！\n\n她自然地笑著，彷彿今天只是再普通不過的一天。","trace":"她把一叠紙塞進抽屜最深處，不讓你看標題。","th":["……只有我可以幫助到他……","……感覺身體變得奇怪，不像平時的自己……","……見到強叔滿足的樣子，我也不知為何有點開心……"],"sil":3,"title":"債主又來了"},{"step":9,"mNeed":65,"mGain":9,"mCap":69,"needStep5":true,"home":"小紅像往常一樣提著食材走進家門，向阿祿露出笑容，只是動作比平時慢了些。\n\n小紅：阿祿！今天有乖乖做伸展運動嗎？\n\n阿祿：當然有。妳今天買了不少東西呢。\n\n小紅：哼，誰叫你只會吃現成的……今天還特意多逛了幾家店呢。\n\n阿祿：妳看起來很累。今晚叫外賣吧？\n\n小紅：才不用呢！我都已經買好……\n\n她望著袋中的食材，沉默了一會兒。\n\n小紅：……算了，就今天一次吧。\n\n她坐到阿祿身旁，順手替他拉好膝上的薄毯，然後安靜地靠在沙發上。","trace":"浴室蒸汽從門縫溢很久。她換好家居服才肯坐下。","th":["……只要這一次就好了吧？阿祿……對不起……","……沒關係的，只要忍一下，時間就好過了……","……很噁心，相比之下，強叔好很多了……"],"sil":3,"title":"以身抵息"},{"step":10,"mNeed":69,"mGain":12,"mCap":84,"needStep5":true,"storm":true,"home":"翌日，小紅終於回到家中，看起來有些疲倦。\n\n阿祿：回來了？昨晚在朋友家還好嗎？\n\n小紅：嗯……雨聲太大，沒怎麼睡。\n\n阿祿：那先休息一下吧。\n\n小紅：……嗯。讓你擔心了。","trace":"她格外溫柔，話卻很少。鎖骨一帶被衣領遮住。","th":["……雨怎麼還不停，阿祿現在應該已經睡了吧……","明明說好只留宿一晚，為甚麼事情會變成這樣……","……他握住我的手時，我明明可以推開的……可是，為甚麼有一瞬間，我竟然希望他不要放開……"],"sil":3,"title":"暴風雨之夜","stormText":"雨勢比預報的還要猛烈。\n\n小紅望著手機上不斷出現的交通停駛消息，終於放棄了當晚回家的打算。她向阿祿報了平安，只說自己借住在附近一位認識的人家中，明早便會回去。\n\n強叔：今晚真是麻煩妳了。\n\n小紅：沒甚麼啦。反正現在也走不了。\n\n強叔：那妳睡床吧，我睡外面。\n\n小紅：你不是還在生病嗎？哪有讓病人睡沙發的道理！我睡外面就好。\n\n深夜，雨聲仍未停歇。\n\n小紅聽見房內傳來咳嗽聲，猶豫片刻，還是走了進去。\n\n小紅：強叔？還好嗎？\n\n強叔：抱歉，把妳吵醒了。\n\n小紅：真是的……身體不好就別逞強了。\n\n強叔：妳還肯這樣關心我，我真的不知道該怎麼謝妳。\n\n小紅：……別說這些了。\n\n小紅說完，便在床邊坐了下來。\n\n強叔：不用一直陪著我，妳也累了。\n\n小紅：……我再坐一會兒。\n\n窗外的雨聲掩蓋了房間裡短暫的沉默。\n\n強叔輕輕握住她的手。這一次，小紅沒有立即抽開，卻也沒有忘記自己答應過阿祿甚麼。\n\n她本來只是想再陪強叔一會兒。\n\n然而，那一夜最終沒有停留在普通的陪伴。\n\n畫面逐漸轉向窗外，直到雨聲完全淹沒房間裡的對話。"},{"step":11,"mNeed":80,"mGain":10,"mCap":99,"needStep5":true,"home":"小紅進門後，熟練地把買來的東西放好，又替阿祿倒了一杯溫水。\n\n阿祿：最近妳好像經常出去幫別人忙。\n\n小紅：怎麼？本小姐不在，你就覺得寂寞了？\n\n阿祿：有一點吧。不過，我更怕妳太勉強自己。\n\n小紅：……放心啦，我知道自己在做甚麼。\n\n她說得十分自然，隨後又像平日一樣，坐到阿祿身旁陪他看電視。","trace":"她更黏你，卻不讓你靠太近。手機在枕頭邊亮了又暗。","th":["……果然強叔沒有我不行……","……又不小心被強叔牽著走了，總是讓我做些羞恥的事……可是，又不討厭……","……男人也是這副樣子嗎？如果是阿祿的話……"],"sil":3,"title":"只有妳不會拋棄我"}];
 
 var END_TALK={"1":["……燈開著就好。我愛你，這是真的。……晚歸的事，別問太細。","我們在一起了。可是他還需要我。……我知道自己很過分。","他傳訊來了。我出去一下就回。……對不起，阿祿。","你那麼溫柔，我更羞愧。……可是我還是會去。","有時候我會對不起你。可是我放不下那個需要我的人。……討厭這樣的自己。"],"3":["我是不是……很蠢？","那些善意，哪些是真的？我分不清了。","阿祿，你還願意牽我的手嗎。","對不起。對不起。我不知道自己在救誰。","以後有人求助，我會先停一秒。……然後怕自己又點頭。"]};
 var END_GONE="（女主已搬走。房間裡只剩她留下的空箱子，與空掉的位置。）";
@@ -4788,11 +4788,12 @@ var STORY=[
 ];
 var TALK=[["哼！才不要多想，只是當初口快答應了而已！","別那樣盯著我看啦，臉上燒傷的事你不是早知道嗎？","你剛打石膏就不好隨便亂動啊！我、阿姨會擔心你的。","……要起身就說一聲啊……我又不是不會扶。"],["我想去附近走走，你有甚麼東西想買嗎？……只是順便問問你而已啊","你的房間亂得實在受不了，要好好打掃一番才行，才、才不是為了你啊！","哼，別一直看我。我又沒怎樣。"],["要坐下來一起聊聊往事嗎？別得意，只是剛好有點無聊而已。","不要總是勉強自己呀，遇到困難時也可以找我這個……同居人。","阿祿給人的感覺沒有變呢，跟以前一樣。"],["阿祿，你、你有沒有女朋友……之類？沒有啊……跟我一樣呢哈哈。","今天晚餐想吃甚麼？……沒、沒什麼只是隨口問問。","那個……可以陪我一起看特攝片嗎？一起看感覺不賴。"],["是阿祿的味道……沒、沒什麼！","不、不要再盯著我看了……我不知道應該望哪裡。","當你康復後，我還可以繼續住……剛剛你甚麼也沒聽見！"],["阿祿，謝謝你找到我。","每一天生活都像在做夢一樣，小時候的我一定想像不到呢","阿祿，這次輪到我照顧你呢。"]];
 var NSTORY=[
-[1,"街角的強叔","她回家後猶豫了一下，才隨口說：「今天在商店街，有位大叔……幫我提了東西。」語氣太平淡了。你沒多想，卻注意到她耳尖微紅，那個稱呼，從這天起開始在家裡迴盪。"],
-[20,"陌生的聯絡人","她的手機多了一個沒存姓的聯絡人。「別誤會，阿祿。只是強叔說有店想介紹給我。」她把螢幕微微偏向自己，回訊息時嘴角彎起的弧度，是你很少見到的那種。"],
-[45,"漸漸變冷的餐桌","晚餐時她把手機壓在桌緣下，螢光一明一滅。你剛開口，她抬眼：「阿祿，我又不是小孩子……不是每則訊息都要給你看。」菜涼了，她卻仍在等下一則回覆。"],
-[70,"沒有回來的夜晚","那晚她很晚才推門進來，領口有一點不自然的皺褶，空氣裡混著陌生的菸草與低沉的古龍水。「……我晚了。」她小聲說完，終於不敢看你的眼睛。"],
-[100,"空掉的房間","（此段不再由親密度滿值自動觸發搬走；僅結局路線會走到離開或出軌同居。）"]];
+[1, "街角的大叔", "小紅：～♪\n\n阿祿：發生了甚麼好事嗎？\n\n小紅：沒甚麼呀，只是見義勇為，幫了一位可憐的大叔。當時在街角見到他被小混混包圍，我就把他們通通趕跑了！\n\n阿祿：小混混？你有沒有事？\n\n小紅：放心，我自有分寸。現在的我跟小時候不一樣了，他們幾個全上也不是我的對手！\n\n阿祿：幾個？即使幫人也要小心自己呀，你有受傷嗎？\n\n小紅：都說沒有呀，你剛才只顧著問我的事。可是我有幫助到別人……你就沒別的話要說嗎？\n\n阿祿：這次你運氣好，下次別再多管閒事了，不然吃虧的是自己。\n\n小紅：真是的，明明你以前不會這樣。\n\n阿祿：……以前的歸以前了……\n\n小紅：甚麼意思？\n\n阿祿：沒甚麼。因為你比較要緊，比起照顧其他人，我更希望你重視自己。\n\n小紅：你、你說我比較要緊嗎？\n\n阿祿：畢竟……那個，我們是朋友，我當然會擔心你。\n\n小紅：朋友嗎……好吧，如果會讓你擔心的話，我之後會稍微注意一下。\n\n小紅：不過你也一樣，有事就叫我，不要死撐，別讓我事事操心。\n\n阿祿：放心，我自有分寸。"],
+[20, "日常的侵蝕", "小紅：阿祿，今晚的麵我好像煮得有點淡，要不要加點辣椒油？\n\n阿祿：我覺得已經很好吃了，不過也想加一點試試，麻煩你了。\n\n小紅：等一下，我先看個訊息。\n\n阿祿：誰找你？\n\n小紅：就是之前在街角幫過的那位大叔。\n\n阿祿：原來你們還有聯絡？\n\n小紅：之前有次出門又碰見他。他說想好好道謝，我就留了電話。怎麼了？\n\n阿祿：沒甚麼……好吧。\n\n小紅：怎麼突然一副欲言又止的樣子？\n\n阿祿：只是有點好奇，你跟大叔會有甚麼話題。\n\n小紅：大叔家剛好有養雀，所以會傳一些雀的短片。牠的頭會跟著節奏一晃一晃的，超可愛！等等給你看！\n\n阿祿：你雙眼都發光了。\n\n小紅：嗯……他有時還會傳些長輩圖，挺有趣的。你也要看嗎？\n\n阿祿：這個就不用了，先把辣椒油瓶拿給我吧。\n\n小紅：啊，對，光顧著看鳥都忘記了。給你。"],
+[45, "她與他的坦白", "阿祿：今天為甚麼這麼晚才回來？出甚麼事了？\n\n小紅：沒甚麼，只是有點累。\n\n阿祿：這樣就不對了。平時叫我別死撐的人明明是你，現在就輪到你死撐嗎？\n\n小紅：才沒有死撐！\n\n阿祿：那有甚麼事，不妨跟我說啊。\n\n小紅：那個……好吧。\n\n阿祿：你慢慢說。\n\n小紅：其實這陣子，見那位大叔一個人孤零零的，我偶爾會去他家煮飯和打掃一下。\n\n阿祿：甚麼？你是說之前幫過的那個？\n\n小紅：對啊，他讓我叫他強叔，就住在這附近。\n\n阿祿：……強叔？住在附近，還養著鳥……\n\n小紅：怎麼了？\n\n阿祿：你有他的照片嗎？\n\n小紅：有，之前他傳過跟雀的合照。等等，我找給你看。\n\n阿祿：……！\n\n小紅：阿祿？\n\n阿祿：……是他。\n\n小紅：你認識他？\n\n阿祿：我的腿，就是因為幫他而弄傷的。\n\n小紅：甚麼！我一直都不知道……你們之間發生過甚麼事？\n\n阿祿：那個……我們是在做同一份兼職時認識的。那時候明明是他負責搬貨，卻擅自把工作丟給我一個人處理。我明明說過，自己剛上班，不熟悉搬貨的事，最後就……\n\n小紅：原來那次受傷，背後還有這些事……\n\n阿祿：可氣的不只是受傷！出事之後，強叔卻說是我自作主張，不按守則工作，還跟其他同事串通口供，要我倒貼貨物損失的錢。\n\n小紅：我還一直覺得他很可憐……想不到他會這樣對你。\n\n阿祿：不是你的錯，當時你甚麼都不知道。況且，當初知道你見義勇為的事，我心底裡……其實幾羨慕的。\n\n小紅：笨蛋……為甚麼現在才說這些啊……\n\n阿祿：抱歉，我只顧著吐苦水……對了，他有沒有為難你？\n\n小紅：今天他……\n\n我握緊拳頭，正想追問，她卻先看向我的手。\n\n小紅：……沒有啊，頂多只是聽他說些欠債的苦惱。\n\n阿祿：果然還是那副德性。\n\n小紅：好了好了，先不說了。你拳頭都握得通紅了，這樣會讓我、我擔心你啊。\n\n阿祿：抱歉。不過，你以後別再去他那裡了。\n\n小紅：嗯，既然知道他這樣傷害阿祿，我以後當然不會再跟他聯絡。\n\n阿祿：我不是想管著你，只是……\n\n小紅：我知道，你不用解釋。\n\n小紅：我先去倒杯水。你今天好好休息，有甚麼明天再說吧。\n\n阿祿：那個……謝謝你。這些事，我明明連父母都沒有說過。\n\n小紅：終於知道謝謝我了嗎？那平日記得對自己好一點，減輕我的負擔。\n\n阿祿：嗯嗯，我會記住的。"],
+[70, "心不在焉的她", "小紅：我回來了。\n\n阿祿：回來了，外面很冷嗎？\n\n小紅：嗯……\n\n阿祿：小紅？\n\n小紅：啊？你剛才說甚麼？\n\n阿祿：我問你冷不冷，你站在門口好一會兒了。\n\n小紅：不冷呀，還有點熱……啊，我忘了買外賣給你了。\n\n阿祿：沒關係，那我今晚泡個杯麵吃就可以了。倒是你，最近是不是很累？\n\n小紅：只是買點東西，能有多累啊。\n\n阿祿：可是你最近回來總是心不在焉的樣子。常常顧著看手機，我跟你說話也沒聽見。\n\n小紅：是這樣嗎……抱歉。\n\n阿祿：這不像你耶。平時不應該說『是你說話太小聲，我才聽不見』這樣嗎？\n\n小紅：喂，原來我在你眼中是這樣子嗎？\n\n阿祿：誰知道呢。\n\n小紅：笨蛋！\n\n阿祿：這才有點像平時的你。其實……我怕是不是因為照顧我，讓你連自己的事都顧不上。\n\n小紅：才、才不是！不關阿祿的事！\n\n阿祿：那麼是甚麼事？\n\n小紅：……\n\n阿祿：好吧，那我就不亂猜了。可是有甚麼事，也記得可以找我商量。\n\n小紅：阿祿……\n\n阿祿：這陣子都是你在照顧我。雖然有些事我幫不上忙，但至少可以聽你說，不用甚麼都自己扛著。\n\n小紅：……知道了，我真的沒事的。\n\n阿祿：……嗯，那就好了。對了，我在等你的時候泡了花茶，你先坐下休息一下吧。\n\n小紅：明明泡茶這種事，我來做就可以了。\n\n阿祿：泡茶這種小事，我還是做得到的。總不能每次都只有你照顧我吧。\n\n小紅：笨蛋……不，謝謝你，阿祿。"],
+[100, "沒有回音的雨夜", "雷聲響起，窗戶正被外面風雨猛力敲打。\n\n你隻身坐在客廳，再次撥打小紅的電話，仍舊無人接聽。\n\n稍後，手機屏幕終於亮起。\n\n『不好意思，外面雨太大了，所以今晚會在朋友家住。不用擔心我，記得早點睡。』\n\n你見狀鬆了口氣。\n\n『安全就好。方便接一下電話嗎？』\n\n沒有回覆。\n\n『小紅在嗎？』\n\n仍然沒有回覆。\n\n你手指剛輸入幾個字，又逐一刪掉。\n\n『那你早點休息，明天別冒雨趕回來。』\n\n你發出最後一個訊息，便在孤寂的雨夜中匆匆入睡。\n\n像是要抹去心中不安似的。"]
+];
 var NEAR_SAY=[["……外面有點亂。其他的，別問了。","有些話到嘴邊，又吞回去了。","我很好。真的。……別用那種眼神看我。"],["別問了，好不好。說了你會擔心。……也會失望。","我有把該記得的人放在心上。……你別追問細節。","今天差點跟你坦白一件事。算了，當我沒提。"],["算了。……差點說出來。","你想聽真話嗎？我怕聽完，你會更溫柔——然後我更愧疚。","門關上前我停了兩秒——不是整理鞋，是整理謊。"],["我差點告訴你今天……算了。不是你不該聽，是我沒臉說。","口罩下我差點叫錯名字。你聽見了嗎？……對不起。","他說比你更懂我。我沒回答。……我不敢看你。"]];
 var NT=[[],["……巷口有人被圍著打。我手比腦子快，才不是想當英雄。","他流血了。……你別盯著我的指節看，擦破一點而已。","回去路上我一直在想，你會不會罵我太衝動。……罵也沒關係，反正我已經那樣做了。"],["他要人叫他強叔。……講母親的時候，眼睛紅得不像假的。","醫藥費那些話我聽得悶。……我知道不該全信陌生人，可他看起來好孤單。","阿祿，你別問細節。我不是不想說，是說了你會擔心，我又心虛。"],["晚了二十分鐘。……我去幫人掃掃地、煮個飯，又不是什麼大事。","被人需要的感覺好奇怪。……不是說你不需要我！你別曲解。","今晚煮你愛吃的。……補償而已，少得意。"],["有人懂我。——我剛說完就後悔了。你會擔心的吧。","不是說你不懂。……我只是，忽然有人願意聽我講小時候那些事。","算了。你別追問。……我怕講完，自己更對不起你。"],["我沒有怎樣。……真的。你別用那種眼神。","他說太孤單。……手伸過來的時候我該退的。我知道。","對不起，阿祿。我一直告訴自己沒事。……嘴巴好硬，心卻在抖。"],["……電影，算了。今晚先這樣。","他那邊有人上門討債。我不能不去。……你等我的事，我知道很過分。","熱牛奶放你手邊了。……別問我去哪，問了我更說不出口。"],["最近……比較常不小心。你別多想。","收據什麼的，我自己會收。……你一靠近，我反而更想逃開話題。","病歷那些紙，我看過。……看完還是覺得他可憐。阿祿，我知道這很矛盾。"],["阿祿不能——不想讓你擔心。講快了。","他病得……看起來很重。我若不去，會整夜睡不著。","你那麼溫柔，我更羞。……可我還是會去看他。討厭這樣的自己。"],["……我活著回來就好。其他的，別問。","水開很大，是因為我想清醒一下。……不是躲你。也是躲你。","你別碰我袖口。……對不起。我不是討厭你，是我沒臉被你碰。"],["早餐我來。……你腿還不方便，少逞強。","暴風雨那晚的事，別問。……我回來了，這句先夠不夠？","越對你好，我越像在騙你。……可我還是想對你好。嘴巴好笨。"],["他說只有我不會丟下他。……你別皺眉，我聽了也不好受。","我黏你，是真的。……躲你，也是真的。兩樣一起發生，我自己都煩。","阿祿，謝謝你還肯看我。……講完當我沒說。才不是要你原諒。"]];
 var SOFT=["陽光落在肩上，想快點回家跟你說。","我笑了。……想讓你也看見。","拍了張照片，想回去給你看。","停下腳步時，想到的是你。"];
@@ -4917,6 +4918,11 @@ function continueAutomaticReview(){
 function queueAutomaticReturnStory(){
   var run=S&&S.sleepRun,step=S&&S.pendingObs&&S.pendingObs.homeStep;
   if(!run||!run.autoTrip||!step||isStormNight())return;
+  if(S.pendingObs.nstoryId){
+    var id=S.pendingObs.nstoryId;
+    if(!mq.some(function(entry){return entry.nstory===id}))mq.unshift({nstory:id,kind:"automatic-home"});
+    return;
+  }
   if(!mq.some(function(m){return m&&m.automaticReturnStory===step}))mq.unshift({automaticReturnStory:step});
 }
 
@@ -5073,7 +5079,7 @@ function applyDay(){
   var hadOuting=!!(S.dEv&&S.dEv.length);
   S.day=newDay;S.sleepRun=null;enqueueMorningCohab();S.dsec=force?0:Math.max(0,(S.dsec|0)-DL);S.homeActToday=false;S.cohabToday=false;S.dEv=[];S.sqToday=[];S.sqDone=false;S.pendingSq=null;S.outToday=false;S.pendingObs=null;S.motif=null;S.journalGlow=0;S.pendingChat=null;setObsBtn(false);
   if(S.pendingDayEnd){S.pendingDayEnd.phase="arrived";S.pendingDayEnd.newDay=S.day|0}S.dailyBase={day:S.day|0,aff:+S.aff||0,m:S.m|0};publishDueForumThreads();if(canOfferFinalEnding()&&!S.castOff)queueCastOff();
-  if(stormReturn){stormReturn.phase="return";S.stormStay=stormReturn;S.pendingObs=stormReturn.observation;setObsBtn(true)}
+  if(stormReturn){stormReturn.phase="return";S.stormStay=stormReturn;S.pendingObs=stormReturn.observation;if(S.pendingObs)S.pendingObs.stormReturn=true;setObsBtn(true)}
   /* 前一日有外出：進新天後才掛 ❓ 問題（一天一題；未答則再睡時清掉） */
   if(hadOuting)queueSqAsk();
   try{save()}catch(e){}try{render()}catch(e){}
@@ -5088,7 +5094,7 @@ advanceAfterSleep(!!force)}
 function sleepDay(){if(sleepFlowHeld()||presentationHeld()||busy||S.taken||S.endingDone||dayLock||maskOpen())return;if(S.trip){say("（她還在外面。等她回來，或先點「打瞌睡」再睡。）","pout");return}withBusy(function(){startSleepRun(true);render(false)})}
 function releaseDayLock(){if(!maskOpen()&&!mq.length){dayLock=0;try{flushCohabQueue()}catch(e){}}}
 var S,tab="",mq=[],thT=0,busy=0,backLock=0,mbLock=0,dayLock=0;
-function def(){return {affinityRulesVersion:2,affinityRulesStartDay:1,lastDailyAffinityGrantedDay:0,day20Check:null,sleepRun:null,ending4Read:false,finalMemoryConfirmed:false,homeActToday:false,aff:0,exp:0,trip:null,log:[],seen:[],t:Date.now(),m:0,trips:0,taken:false,day:1,dsec:0,dEv:[],qa:[],viewM:0,sq:[],sqAsked:[],sqToday:[],sqDone:false,outToday:false,pendingObs:null,stormStay:null,uncleCuePending:false,focusHintSeen:false,thoughtFocusHintSeen:false,dailyBase:null,pendingDayEnd:null,forumPublishDays:{},forumRead:{},forumLiked:{},optSeen:{blank:{},sq:{},ask:{}},journals:[],journalOpen:null,motif:null,journalGlow:0,metOut:false,momIntroSeen:false,heroIntroPending:false,memSeen:[],memPending:[],memVersion:3,uncleStarted:false,uncleStep:0,uncleTh:[],endingDone:false,ending:0,castOff:false,cohabSeen:[],cohabPending:[],cohabToday:false,chatSeen:false,chatNotice:false,pendingYesterdayUnsaid:null,pendingSq:null,sqVer:2,chatOpenStep:null,chatUnlocked:[],_chatThreadCount:null}}
+function def(){return {nstory:{version:1,read:{},milestones:{},legacyBefore:0,active:null},affinityRulesVersion:2,affinityRulesStartDay:1,lastDailyAffinityGrantedDay:0,day20Check:null,sleepRun:null,ending4Read:false,finalMemoryConfirmed:false,homeActToday:false,aff:0,exp:0,trip:null,log:[],seen:[],t:Date.now(),m:0,trips:0,taken:false,day:1,dsec:0,dEv:[],qa:[],viewM:0,sq:[],sqAsked:[],sqToday:[],sqDone:false,outToday:false,pendingObs:null,stormStay:null,uncleCuePending:false,focusHintSeen:false,thoughtFocusHintSeen:false,dailyBase:null,pendingDayEnd:null,forumPublishDays:{},forumRead:{},forumLiked:{},optSeen:{blank:{},sq:{},ask:{}},journals:[],journalOpen:null,motif:null,journalGlow:0,metOut:false,momIntroSeen:false,heroIntroPending:false,memSeen:[],memPending:[],memVersion:3,uncleStarted:false,uncleStep:0,uncleTh:[],endingDone:false,ending:0,castOff:false,cohabSeen:[],cohabPending:[],cohabToday:false,chatSeen:false,chatNotice:false,pendingYesterdayUnsaid:null,pendingSq:null,sqVer:2,chatOpenStep:null,chatUnlocked:[],_chatThreadCount:null}}
 function load(){try{var r=localStorage.getItem("sakura_v1");S=r?JSON.parse(r):def()}catch(e){S=def()}if(!S)S=def();
 if(!S.forumRead||typeof S.forumRead!=="object"||Array.isArray(S.forumRead))S.forumRead={};
 if(!S.forumLiked||typeof S.forumLiked!=="object"||Array.isArray(S.forumLiked))S.forumLiked={};
@@ -5150,6 +5156,85 @@ function uncleStepMAmt(){var d=S.day|0,st=S.uncleStep|0;if(d===6)return 0;if(st<
 function uncleAppearRoll(){var d=S.day|0;if(d<6)return false;if(d<=15)return Math.random()<0.6;return true}
 function memoriesComplete(){if(!S.memSeen||!MEMORIES||!MEMORIES.length)return false;for(var i=0;i<MEMORIES.length;i++){if(S.memSeen.indexOf(MEMORIES[i][0])<0)return false}return true}
 /* 第五階段：第四階段後，0篇同居，不加額外日期；原路線日數／數值／相遇仍檢查。 */
+var NSTORY_STEPS={1:1,20:2,45:5,70:8,100:10};
+var NSTORY_OLD_TITLES=["街角的強叔","陌生的聯絡人","漸漸變冷的餐桌","沒有回來的夜晚","空掉的房間"];
+function nstoryById(id){return NSTORY.find(function(event){return event[0]===id})}
+function nstorySatisfied(id){
+  return !!(S.nstory&&(S.nstory.read[id]||S.nstory.legacyBefore>=NSTORY_STEPS[id]));
+}
+function nstoryCanPlay(id){
+  var index=NSTORY.findIndex(function(event){return event[0]===id});
+  return index>=0&&!S.nstory.read[id]&&!!S.nstory.milestones[NSTORY_STEPS[id]]&&
+    NSTORY_STEPS[id]>S.nstory.legacyBefore&&(index===0||nstorySatisfied(NSTORY[index-1][0]));
+}
+function migrateNstory(){
+  if(S.nstory&&S.nstory.version===1)return;
+  var step=S.uncleStep|0,pending=S.pendingObs&&S.pendingObs.homeStep;
+  var dayEnding=!!S.pendingDayEnd;
+  var stormNight=!!(S.stormStay&&S.stormStay.phase==="night");
+  var overnightReturn=step===10&&!stormNight&&!!(pending===10||(S.stormStay&&S.stormStay.phase==="return"));
+  var boundary=step;
+  if(pending===step&&!dayEnding&&!overnightReturn)boundary=Math.max(0,step-1);
+  if(stormNight&&!dayEnding)boundary=Math.min(boundary,9);
+  S.nstory={version:1,read:{},milestones:{},legacyBefore:boundary,active:null};
+  if(overnightReturn&&!dayEnding)S.nstory.returnPending=true;
+  if(pending)S.nstory.milestones[pending]=true;
+  if(S.stormStay)S.nstory.milestones[10]=true;
+  if(pending&&pending!==10){
+    var event=NSTORY.find(function(entry){return NSTORY_STEPS[entry[0]]===pending});
+    if(event&&nstoryCanPlay(event[0]))S.pendingObs.nstoryId=event[0];
+  }
+  function currentEntry(entry){
+    var title=Array.isArray(entry)?entry[0]:entry&&entry.sleepLine?entry.title:null;
+    return !NSTORY_OLD_TITLES.some(function(old){return title==="💔 "+old||title===old});
+  }
+  if(S.sleepRun){
+    if(S.sleepRun.active&&!currentEntry(S.sleepRun.active))S.sleepRun.active=null;
+    S.sleepRun.queued=(S.sleepRun.queued||[]).filter(currentEntry);
+    if(!dayEnding&&S.sleepRun.autoTrip&&S.pendingObs&&S.pendingObs.nstoryId){
+      S.sleepRun.queued.unshift({nstory:S.pendingObs.nstoryId,kind:"automatic-home"});
+    }
+  }
+  if(S.pendingDayEnd)S.pendingDayEnd.queued=(S.pendingDayEnd.queued||[]).filter(currentEntry);
+}
+function registerNstoryReturn(arc){
+  if(!arc)return;
+  S.nstory.milestones[arc.step]=true;
+  if(arc.storm)return;
+  var event=NSTORY.find(function(entry){return NSTORY_STEPS[entry[0]]===arc.step});
+  if(event&&nstoryCanPlay(event[0])&&S.pendingObs){
+    S.pendingObs.nstoryId=event[0];S.pendingObs.nightTxt=event[2];
+  }
+}
+function completeNstory(){
+  var active=S.nstory.active;if(!active)return;
+  S.nstory.read[active.id]=true;
+  if(S.seen.indexOf("n"+active.id)<0)S.seen.push("n"+active.id);
+  S.nstory.active=null;
+  mq=mq.filter(function(entry){return entry.nstory!==active.id&&entry.nstoryHome!==active.id});
+  save();
+}
+function showNstoryText(id,kind){
+  var event=nstoryById(id);if(!event||!nstoryCanPlay(id))return false;
+  closePane();finishMemoryReveal();hideSqOpts();
+  S.nstory.active={id:id,kind:kind};
+  if(sleepFlowHeld())rememberSleepQueue({nstory:id,kind:kind});
+  $("mt").textContent=event[1];$("mp").textContent=event[2];paintMaskChrome(event[1]);
+  $("mask").classList.add("on");$("modalReading").scrollTop=0;
+  save();$("mb").focus({preventScroll:true});return true;
+}
+function resumeNstoryPresentation(){
+  if(maskOpen()||presentationHeld())return false;
+  if(S.nstory.active){
+    var active=S.nstory.active;
+    if(active.kind==="home"&&S.pendingObs)return showReturnWindow();
+    return showNstoryText(active.id,active.kind);
+  }
+  if(S.pendingObs&&S.pendingObs.nstoryId&&!S.nstory.read[S.pendingObs.nstoryId]&&!(S.sleepRun&&S.sleepRun.autoTrip))return showReturnWindow();
+  if(S.nstory.returnPending)return showReturnWindow(uncleArcByStep(10).home);
+  if(isStormNight()&&S.stormStay.nightShown&&nstoryCanPlay(100))return showNstoryText(100,"night");
+  return false;
+}
 function step5Open(){return !!S&&(S.uncleStep|0)>=4}
 function storyComplete(){if(!STORY||!STORY.length||!S.seen)return false;for(var i=0;i<STORY.length;i++){if(S.seen.indexOf(STORY[i][0])<0)return false}return true}
 function uncleOpen(){return true}
@@ -5569,11 +5654,16 @@ function toggleReturnView(){
 function showReturnWindow(nightTxt){
   mergeQueuedEvening();
   if(!S||S.trip||S.taken||(!hasReturnObservation()&&typeof nightTxt!=="string"))return false;
+  var nstoryId=S.pendingObs&&S.pendingObs.nstoryId;
+  if(nstoryId&&!S.nstory.read[nstoryId]){
+    nightTxt=nstoryById(nstoryId)[2];S.nstory.active={id:nstoryId,kind:"home"};
+  }
   if(typeof nightTxt!=="string")nightTxt=S.pendingObs.nightTxt;
   closePane();finishMemoryReveal();hideSqOpts();
   resetReturnReading();returnReading={nightTxt:typeof nightTxt==="string"?nightTxt:"",trTxt:S.pendingObs?S.pendingObs.trTxt:"",observed:false,view:"night",switching:false,timer:0};
   $("mt").textContent="她回來了";
   renderReturnContent();paintMaskChrome("她回來了");
+  if(nstoryId)$("mt").textContent=nstoryById(nstoryId)[1];
   $("mask").classList.add("on");$("mp").scrollTop=0;$("gameUI").inert=true;setObsBtn(hasReturnObservation());save();
   ($("obsBtn").disabled?$("mb"):$("obsBtn")).focus({preventScroll:true});
   return true;
@@ -5619,7 +5709,7 @@ function resumeStormStay(){
   if(!S||!S.stormStay)return false;
   if(S.stormStay.phase==="return"){
     if(maskOpen()||presentationHeld())return false;
-    S.stormStay=null;S._dayAdvancing=false;dayLock=0;var arc=uncleArcByStep(10);if(arc)addLog("💬 "+arc.home);save();showReturnWindow();render(false);return true;
+    S.stormStay=null;S.nstory.returnPending=true;S._dayAdvancing=false;dayLock=0;var arc=uncleArcByStep(10);if(arc)addLog("💬 "+arc.home);save();showReturnWindow();render(false);return true;
   }
   if(isStormNight()&&!S.stormStay.nightShown&&!maskOpen()&&!presentationHeld())return openStormNight();
   return false;
@@ -5653,10 +5743,11 @@ var nightTxt=(dissonanceOn()||(motif&&motif.mode==="clash"))?pick(FLAT_NIGHT):pi
 if(st>=2&&!dissonanceOn()&&!(motif&&motif.th))nightTxt+="\n\n你沒睡好。懷疑比她的呼吸聲更響。";
 var freshHomeArc=(S.uncleStep|0)>returnStepBefore&&(S.uncleStep|0)<=11?uncleArcByStep(S.uncleStep|0):null;
 if(S.pendingObs){S.pendingObs.nightTxt=freshHomeArc?freshHomeArc.home:nightTxt;if(freshHomeArc)S.pendingObs.homeStep=freshHomeArc.step;}
+registerNstoryReturn(freshHomeArc);
 S.dEv.push({id:pid,tripId:trip.uid||("day-"+(S.day|0)+"-outing"),auto:!!trip.auto,pt:part(),met:met,fr:met?"（尚未起疑）":("她去了"+p[1]+"，"+ev+"，"+pick(SOFT))});
 queueCohabUnlock();
 afterAffTier(b);/* no rank popup */
-NSTORY.filter(function(s){var th=s[0]|0;var open=(th<=20)?((S.uncleStep|0)>=1&&effM()>=th):(step5Open()&&effM()>=th);return open&&S.seen.indexOf("n"+s[0])<0}).forEach(function(s){S.seen.push("n"+s[0]);mq.push(["💔 "+s[1],s[2]])});
+
 /* full bar does not force early move-out */
 if(freshHomeArc&&freshHomeArc.storm){S.stormStay={phase:"night",day:S.day|0,nightShown:false,observation:S.pendingObs};S.pendingObs=null;setObsBtn(false)}
 if(freshHomeArc)save();
@@ -5780,7 +5871,8 @@ function finishCohabScene(){
 $("cohabDialogue").addEventListener("keydown",function(event){
   if(event.key==="Enter"||event.key===" "){event.preventDefault();continueCohabScene()}
 });
-function nextPop(){if(maskOpen()||presentationHeld())return;if(!mq.length){dayLock=0;hideSqOpts();if(moodPeekOn)clearMoodPeek();if(sleepFlowHeld()){rememberSleepQueue(null);resumeSleepRun()}return}var m=mq.shift();if(!m){releaseDayLock();hideSqOpts();if(moodPeekOn)clearMoodPeek();return}
+function nextPop(){if(maskOpen()||presentationHeld())return;
+if(resumeNstoryPresentation())return;if(!mq.length){dayLock=0;hideSqOpts();if(moodPeekOn)clearMoodPeek();if(sleepFlowHeld()){rememberSleepQueue(null);resumeSleepRun()}return}var m=mq.shift();if(!m){releaseDayLock();hideSqOpts();if(moodPeekOn)clearMoodPeek();return}
 if(Array.isArray(m)&&typeof m[0]==="string"&&m[0].indexOf("📌 同居事件：")===0){mq=mq.filter(function(entry){return !Array.isArray(entry)||entry[0]!==m[0]||entry[1]!==m[1]})}
 if(sleepFlowHeld())rememberSleepQueue(m);
 if(m.morningCohab!=null){
@@ -5790,10 +5882,12 @@ if(m.morningCohab!=null){
 }
 if(m.cohabOffer!=null){showCohabOffer(m.cohabOffer);return}
 if(m.cohabScene!=null){showCohabScene(m.cohabScene);return}
+if(m.nstory!=null){if(!showNstoryText(m.nstory,m.kind||"automatic-home"))nextPop();return}
 if(m.automaticOutingNotice){rememberSleepQueue(null);settleAutomaticOuting();return}
 if(m.automaticOutingReview){showAutomaticOutingNotice();return}
 if(m.stormNight){if(!openStormNight())nextPop();syncSleepLock();return}
 if(m.returnHome&&S.sleepRun&&S.sleepRun.autoTrip){var automaticStep=S.pendingObs&&S.pendingObs.homeStep;if(!automaticStep){nextPop();return}m={automaticReturnStory:automaticStep}}
+if(m.automaticReturnStory&&S.pendingObs&&S.pendingObs.nstoryId){if(!showNstoryText(S.pendingObs.nstoryId,"automatic-home"))nextPop();return}
 if(m.automaticReturnStory){var automaticArc=uncleArcByStep(m.automaticReturnStory);if(!automaticArc||!automaticArc.home){nextPop();return}m=[automaticArc.title,automaticArc.home]}
 if(m.returnHome){if(!showReturnWindow(m.nightTxt))nextPop();return}
 if(Array.isArray(m)&&/^(?:🌙\s*)?當晚$/.test(m[0])){var night=String(m[1]||"");if(S&&S.pendingObs)S.pendingObs.nightTxt=night;if(!showReturnWindow(night))nextPop();return}
@@ -5801,7 +5895,10 @@ if(m.sq!=null){finishMemoryReveal();showSqMask(m.sq);return}
 if(m.endingPrep){showEndingPrep();return}
 if(m.memoryId!=null){ensureMemoryState();if(S.memSeen.indexOf(m.memoryId)<0)S.memSeen.push(m.memoryId);S.memPending=S.memPending.filter(function(id){return id!==m.memoryId});save()}
 finishMemoryReveal();hideSqOpts();sqReply=null;$("mt").textContent=m[0];$("mp").textContent=m[1];paintMaskChrome(m[0]);var reading=$("mask").querySelector(".modalReading");if(reading)reading.scrollTop=0;paintVoiceFog();$("mask").classList.add("on");revealMemoryText();syncSleepLock()}
-function dismissMask(ev){if(automaticReviewOpen())return;if(ev){try{ev.preventDefault();ev.stopPropagation()}catch(e){}}if(mbLock||(returnWindowOpen()&&returnReading&&returnReading.switching))return;confirmFinalMemoryFromContinue(ev);if(S.activeMorningCohab!=null){
+function dismissMask(ev){if(automaticReviewOpen())return;if(ev){try{ev.preventDefault();ev.stopPropagation()}catch(e){}}if(mbLock||(returnWindowOpen()&&returnReading&&returnReading.switching))return;confirmFinalMemoryFromContinue(ev);
+if(S.nstory.active)completeNstory();
+if(returnWindowOpen()&&S.nstory.returnPending){S.nstory.milestones["10-return"]=true;S.nstory.returnPending=false;}
+if(S.activeMorningCohab!=null){
 S.morningCohab=(S.morningCohab||[]).filter(function(item){return item.id!==S.activeMorningCohab});S.activeMorningCohab=null;save();
 }if(isEndingFour()&&$("mask").classList.contains("ending-four-window")){S.ending4Read=true;$("mask").classList.remove("ending-four-window");save()}if(isStormNight()&&$("mask").classList.contains("storm-window")){S.stormStay.nightShown=true;save()}if(returnWindowOpen()){S.pendingObs=null;setObsBtn(false);save();resetReturnReading();$("gameUI").inert=false;$("mask").classList.remove("return-window");clearMoodPeek()}if(scenePresentation.departurePending&&$("mask").classList.contains("departure-window")){scenePresentation.departurePending=false;updatePresentationState()}finishMemoryReveal();mbLock=1;var mask=$("mask"),heroArrival=!!(mask&&mask.classList.contains("intro-arrival"));if(mask){mask.classList.remove("on");mask.classList.remove("obs-dark");var _box=mask.querySelector(".box");if(_box)_box.classList.remove("obs-win-appear");if(!mq.length&&!moodPeekOn)mask.classList.remove("mood-chrome")}if(heroArrival)beginHeroArrival();setTimeout(function(){if(acknowledgeSleepEntry()){mbLock=0;paintStats();return}try{nextPop()}catch(e){}if(S&&S.sleepAwaitClose&&!maskOpen()&&!(mq&&mq.length)){advanceAfterSleep(!!S.sleepForce)}else{releaseDayLock()}mbLock=0;paintStats()},30)}
 (function(){var mb=$("mb");if(!mb)return;mb.onpointerup=null;mb.onclick=null;mb.addEventListener("click",dismissMask,false);mb.addEventListener("pointerup",function(e){if(e.pointerType==="mouse"&&e.button!==0)return;dismissMask(e)},false);
@@ -5978,12 +6075,15 @@ if(deferSleepUnlocks()){
 S.cohabToday=true;
 mq.push({cohabOffer:s[0]});addLog("📌 同居事件・"+s[1]);if(!maskOpen())nextPop()}
 function uncleArcByStep(n){for(var i=0;i<UNCLE_ARC.length;i++)if(UNCLE_ARC[i].step===n)return UNCLE_ARC[i];return null}
-function canAdvanceUncle(){if(isStormNight())return false;var next=(S.uncleStep|0)+1;if(next>11)return false;if((S.day|0)<6)return false;var a=uncleArcByStep(next);if(!a)return false;if(a.needStep5&&!step5Open())return false;/* 第10階段起同居解鎖即完成；最後同居另受回憶確認限制。 */if(next>=10&&!storyComplete())return false;var need=(a.mNeed!=null)?(a.mNeed|0):(UNCLE_STEP_MNEED&&UNCLE_STEP_MNEED[next]!=null?UNCLE_STEP_MNEED[next]|0:0);if((effM()|0)<need)return false;return true}
+function canAdvanceUncle(){if(isStormNight())return false;var next=(S.uncleStep|0)+1;if(next>11)return false;
+if(next===6&&!nstorySatisfied(45))return false;
+if(next===10&&!nstorySatisfied(70))return false;
+if(next===11&&(!nstorySatisfied(100)||(!S.nstory.milestones["10-return"]&&S.nstory.legacyBefore<10)))return false;if((S.day|0)<6)return false;var a=uncleArcByStep(next);if(!a)return false;if(a.needStep5&&!step5Open())return false;/* 第10階段起同居解鎖即完成；最後同居另受回憶確認限制。 */if(next>=10&&!storyComplete())return false;var need=(a.mNeed!=null)?(a.mNeed|0):(UNCLE_STEP_MNEED&&UNCLE_STEP_MNEED[next]!=null?UNCLE_STEP_MNEED[next]|0:0);if((effM()|0)<need)return false;return true}
 function queueUncleStep(){if(!canAdvanceUncle())return false;var next=(S.uncleStep|0)+1;var a=uncleArcByStep(next);if(!a)return false;
 S.uncleStep=next;S.uncleStarted=true;S.metOut=true;S.uncleTh=(a.th||[]).slice();
 var gained=addM(uncleStepMAmt());
 if(!S.chatUnlocked)S.chatUnlocked=[];if(!S.forumPublishDays)S.forumPublishDays={};if(next!==9)S.forumPublishDays[next]=(S.day|0)+1;
-if(next===1&&S.seen.indexOf("n1")<0){S.seen.push("n1");var ns=NSTORY[0];if(ns)mq.push(["💔 "+ns[1],ns[2]])}
+
 if(a.home){if(scenePresentation.phase!=="returning"&&!a.storm)say(a.home,next>=5?"shy":"pout");if(!a.storm)addLog("💬 "+a.home)}
 if(a.trace){S.pendingObs={trTxt:a.trace,met:true,motif:null};setObsBtn(true)}
 if(a.storm){try{var hu=document.querySelector(".homeui");if(hu)hu.classList.add("outing-shell");syncSilhouette()}catch(e){}}
@@ -6303,6 +6403,7 @@ var windowSkinObserver=new MutationObserver(skinWindowUi);["mt","thbox","outingA
 
 function syncUpdatedEarlyThoughts(){var a=uncleArcByStep(S.uncleStep|0);if(a&&a.step>=1&&a.step<=11)S.uncleTh=(a.th||[]).slice()}
 load();
+migrateNstory();
 restoreSleepQueue();
 if(S.cohabScene){
   mq=mq.filter(function(entry){return entry.cohabScene!==S.cohabScene.id&&entry.cohabOffer!==S.cohabScene.id&&entry.morningCohab!==S.cohabScene.id});
@@ -6323,6 +6424,7 @@ ex=base();applyEx();
 syncDlgAv(($("say")&&$("say").textContent)||"");faceTf(ex);
 maybeMomIntro();
 if(!resumeDayEnd()&&!resumeSleepRun()){if(isEndingFour()&&!S.ending4Read)openEndingFour();else resumeStormStay();if(!S._dayAdvancing)nextPop()}
+if(!maskOpen()&&!presentationHeld())resumeNstoryPresentation();
 </script>
 </body>
 </html>

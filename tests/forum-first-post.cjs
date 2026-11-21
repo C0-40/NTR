@@ -49,6 +49,7 @@ async function fixture(page, day, aff = 0) {
     S = def();
     Object.assign(S, { day, aff, momIntroSeen: true, heroIntroPending: false, cohabToday: true, outToday: true });
     S.seen = STORY.map(event => event[0]).concat(NSTORY.map(event => 'n' + event[0]));
+  S.nstory.read=Object.fromEntries(NSTORY.map(event=>[event[0],true]));
     S.memSeen = MEMORIES.map(event => event[0]);
     S.memPending = [];
     mq = [];

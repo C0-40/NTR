@@ -19,6 +19,7 @@ cancelScenePresentation();resetMomReading();closePane();hideSqOpts();clearMoodPe
 document.querySelectorAll('#mask,#momPhone,#chatRoom').forEach(e=>e.classList.remove('on'));
 $('gameUI').inert=false;S=def();Object.assign(S,{day:4,aff,momIntroSeen:true,cohabToday:true,heroIntroPending:false});
 S.seen=STORY.map(x=>x[0]).concat(NSTORY.map(x=>'n'+x[0]));S.memSeen=MEMORIES.map(x=>x[0]);S.memPending=[];tab='';mq=[];busy=backLock=mbLock=dayLock=0;
+  S.nstory.read=Object.fromEntries(NSTORY.map(event=>[event[0],true]));
 Object.assign(presentationPrefs,{textSpeed:0,music:0,ambient:0,sfx:0});ensureDailyBase();render();
 },aff)}
 await fixture();await p.evaluate(()=>go(0));await p.clock.runFor(600);
