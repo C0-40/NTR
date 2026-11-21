@@ -104,6 +104,43 @@ assert.equal(await p.locator('#cohabSkip').evaluate(e=>e.closest('#gameUI').iner
 await p.locator('#cohabSkip').click();await p.clock.runFor(300);
 assert(await p.evaluate(()=>!S.cohabScene&&S.cohabOffer==null));
 console.log('PASS sleep flow scene reload and one-time completion');
+await fixture(9);
+await p.evaluate(()=>{S.seen=S.seen.filter(id=>id!==30);S.cohabToday=false;render()});
+assert.equal(await p.locator('#cohabOffer[open]').count(),0);
+await p.evaluate(()=>{S.aff=10;render()});
+assert.equal(await p.evaluate(()=>S.cohabOffer),30);
+await p.locator('#cohabOfferSkip').click();
+await p.reload();
+assert(await p.evaluate(()=>S.seen.includes(30)&&S.cohabOffer==null));
+await p.evaluate(()=>{setTab('story')});
+assert((await p.locator('#pane').innerText()).includes('親密度 10 解鎖'));
+console.log('PASS affinity 9/10 boundary, original ID and saved unlock record');
+
+const cases=await p.evaluate(()=>STORY.map((event,index)=>({id:event[0],name:event[1],text:event[2],index,aff:cohabRequiredAff(event)})));
+for(const event of cases){
+  await fixture(event.aff);
+  await p.evaluate(id=>{S.seen=S.seen.filter(value=>value!==id);S.cohabToday=false;S.finalMemoryConfirmed=true;render()},event.id);
+  assert.equal(await p.locator('#cohabOfferTitle').innerText(),event.name);
+  await p.locator('#cohabOfferPlay').click();
+  const lines=event.text.split(/\n+/).filter(Boolean);
+  for(let index=0;index<lines.length;index++){
+    if(index===1){await p.reload();assert.equal(await p.evaluate(()=>S.cohabScene.index),1)}
+    assert.equal(await p.locator('#cohabSpeaker').innerText(),lines[index].split('：')[0]);
+    assert.equal(await p.locator('#cohabText').innerText(),lines[index].slice(lines[index].indexOf('：')+1).trim());
+    await p.locator('#cohabDialogue').click();
+  }
+  assert(await p.evaluate(()=>S.cohabScene==null&&!presentationHeld()));
+  await p.evaluate(index=>replay(index),event.index);
+  assert.equal(await p.locator('#mp').innerText(),event.text);
+  console.log('PASS '+event.name+' natural unlock, exact dialogue, reload and full-text replay');
+}
+await fixture(100);
+await p.evaluate(()=>{S.seen=S.seen.filter(id=>id!==100);S.cohabToday=false;S.finalMemoryConfirmed=false;render()});
+assert.equal(await p.locator('#cohabOffer[open]').count(),0);
+await p.evaluate(()=>{S.finalMemoryConfirmed=true;render()});
+assert.equal(await p.evaluate(()=>S.cohabOffer),100);
+await p.locator('#cohabOfferSkip').click();
+console.log('PASS final memory prerequisite');
 assert.deepEqual(errors,[]);
 }finally{await b.close();server.close()}
 })().catch(e=>{console.error(e);process.exit(1)});

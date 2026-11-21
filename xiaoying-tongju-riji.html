@@ -5663,7 +5663,8 @@ if(freshHomeArc)save();
 scenePresentation.timer=setTimeout(finishReturnPresentation,prefersReducedMotion()?0:760)}finally{backLock=0}}
 function queueSqAsk(){/* 進新天後呼叫：掛 ❓；一天一題。未達門檻的題不上 */migrateSq();if(S.sqDone||S.taken||S.pendingSq!=null)return;var a=sqAvail();if(!a.length)return;S.pendingSq=a[Math.floor(Math.random()*a.length)];try{save()}catch(e){}paintQBtn()}
 function askNavUnlocked(){return !!S&&(S.aff|0)>=15&&!S.endingDone}
-function storyNavUnlocked(){if(!S||!STORY||!STORY.length||S.endingDone)return false;return (S.aff|0)>=(STORY[0][0]|0)}
+function cohabRequiredAff(event){return event[0]===30?10:event[0]}
+function storyNavUnlocked(){if(!S||!STORY||!STORY.length||S.endingDone)return false;return (S.aff|0)>=cohabRequiredAff(STORY[0])}
 function memNavUnlocked(){return !!(S&&MEMORIES.length&&memoryUnlocked(MEMORIES[0]))}
 function chatNavUnlocked(){return !!(S&&(S.endingDone||(S.trip&&!S.taken&&!isOutingPhase())))}
 function setNavLock(el,open,lockHint){if(!el)return;el.classList.toggle("is-off",!open);el.disabled=!open;el.setAttribute("aria-disabled",open?"false":"true");if(lockHint){if(open){if(el.getAttribute("data-lock-title")){el.setAttribute("title","");el.removeAttribute("data-lock-title")}}else{el.setAttribute("data-lock-title","1");el.setAttribute("title",lockHint)}}}
@@ -5718,9 +5719,8 @@ function chooseCohabOffer(play){
   if(id==null)return;
   S.cohabOffer=null;$("cohabOffer").close();
   if(play){
-    if(id===30){if(sleepFlowHeld())rememberSleepQueue({cohabScene:id});showCohabScene(id);return}
-    var event=STORY.find(function(entry){return entry[0]===id});
-    mq.unshift(["📌 同居事件："+event[1],event[2]]);
+    if(sleepFlowHeld())rememberSleepQueue({cohabScene:id});
+    showCohabScene(id);return;
   }else{
     if(S.activeMorningCohab===id){
       S.morningCohab=(S.morningCohab||[]).filter(function(item){return item.id!==id});
@@ -5969,7 +5969,7 @@ function enqueueMorningCohab(){
   });
 }
 function queueCohabUnlock(){if(S.endingDone||S.taken||S.trip||(S.cohabToday&&!deferSleepUnlocks())||!S.momIntroSeen)return;if(!S.seen)S.seen=[];
-var due=[];STORY.forEach(function(s){if((S.aff|0)<s[0])return;if(deferSleepUnlocks()&&s[0]<=S.sleepRun.dailyBefore)return;if(s[0]===100&&!S.finalMemoryConfirmed)return;if(S.seen.indexOf(s[0])>=0)return;due.push(s)});
+var due=[];STORY.forEach(function(s){var need=cohabRequiredAff(s);if((S.aff|0)<need)return;if(deferSleepUnlocks()&&need<=S.sleepRun.dailyBefore)return;if(s[0]===100&&!S.finalMemoryConfirmed)return;if(S.seen.indexOf(s[0])>=0)return;due.push(s)});
 if(!due.length)return;due.sort(function(a,b){return a[0]-b[0]});var s=due[0];S.seen.push(s[0]);
 if(deferSleepUnlocks()){
   if(!S.morningCohab)S.morningCohab=[];
@@ -6154,7 +6154,7 @@ else if(tab=="ask"){QA.forEach(function(q,i){var lk=S.aff<q[2]||!qaGateOk(q),dn=
 else if(tab=="herq"){h='<div class="sm">她有問題時，主畫面會出現「問題」按鈕；點了才打開提問窗。</div>'}
 else if(tab=="journal"){h=""}
 else if(tab=="mem"){ensureMemoryState();h='<p class="memoryIntro">隨著跟小紅的相處愈多，塵封的回憶逐漸浮現</p>';MEMORIES.forEach(function(m,k){if(!memoryUnlocked(m))return;var unread=S.memSeen.indexOf(m[0])<0;h+='<div class="row"><span class="i">'+homeUiIcon("memory")+'</span><div class="m"><b>'+m[1]+'</b></div><button type="button" class="btn" onclick="replayMem('+k+')">'+(unread?"閱讀":"重看")+'</button></div>'});if(!h)h='<p class="sm">暫時沒有可查看的內容。</p>'}
-else if(tab=="story"){h="";h+='<div class="sm" style="margin-bottom:8px;opacity:.75">同居事件紀錄（親密度解鎖）</div>';STORY.forEach(function(s,k){var ok=S.seen.indexOf(s[0])>=0;if(!ok)return;h+='<div class="row '+(ok?"":"lock")+'"><span class="i">'+(ok?"🏠":"🔒")+'</span><div class="m"><b>'+(ok?s[1]:"？？？")+'</b><div class="sm">親密度 '+s[0]+' 解鎖</div></div>'+(ok?'<button class="btn" onclick="replay('+k+')">重看</button>':"")+'</div>'});
+else if(tab=="story"){h="";h+='<div class="sm" style="margin-bottom:8px;opacity:.75">同居事件紀錄（親密度解鎖）</div>';STORY.forEach(function(s,k){var ok=S.seen.indexOf(s[0])>=0;if(!ok)return;h+='<div class="row '+(ok?"":"lock")+'"><span class="i">'+(ok?"🏠":"🔒")+'</span><div class="m"><b>'+(ok?s[1]:"？？？")+'</b><div class="sm">親密度 '+cohabRequiredAff(s)+' 解鎖</div></div>'+(ok?'<button class="btn" onclick="replay('+k+')">重看</button>':"")+'</div>'});
 NSTORY.forEach(function(s,k){if(S.seen.indexOf("n"+s[0])<0)return;h+='<div class="row is-secret"><span class="i">💔</span><div class="m"><b>'+s[1]+'</b><div class="sm">已發生的事件</div></div><button class="btn" onclick="replayN('+k+')">重看</button></div>'})}
 else{h=""}
 var panelNames={home:"互動",go:"外出",ask:"提問",mem:"回憶",story:"日常",journal:"日記",herq:"她想問你"};var side=!!panelNames[tab];

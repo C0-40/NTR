@@ -46,13 +46,13 @@ console.log('PASS room entry, mobile layout, forum pause/reload, deferred automa
 await fixture();await p.evaluate(()=>{S.trip={id:0,place:'超市',end:Date.now()+1000,acts:[],showDetails:true,metUncle:false};render()});
 await p.clock.runFor(2000);assert(await p.locator('#mask.on.return-window').isVisible());
 console.log('PASS automatic return from status screen');
-await fixture(28);
+await fixture(8);
 await p.evaluate(()=>{S.day=2;S.seen=NSTORY.map(x=>'n'+x[0]);S.cohabToday=true;S.memSeen=MEMORIES.map(x=>x[0]);S.outToday=false;Math.random=()=>.99;ensureDailyBase();save();sleepDay()});
 for(let i=0;i<65&&!await p.evaluate(()=>daySummaryOpen());i++){
 await p.clock.runFor(150);
 await p.evaluate(()=>{busy=mbLock=0;if(automaticReviewOpen())continueAutomaticReview();else if(maskOpen())dismissMask()});
 }
-assert(await p.evaluate(()=>daySummaryOpen()));assert(await p.evaluate(()=>S.aff===30&&S.morningCohab.some(x=>x.id===30&&x.day===3)));
+assert(await p.evaluate(()=>daySummaryOpen()));assert(await p.evaluate(()=>S.aff===10&&S.morningCohab.some(x=>x.id===30&&x.day===3)));
 await p.reload();assert(await p.evaluate(()=>daySummaryOpen()&&S.morningCohab.length===1));
 await p.locator('#daySummaryContinue').click();await p.clock.runFor(1600);
 assert(await p.locator('#cohabOffer[open]').isVisible());await p.locator('#cohabOfferPlay').click();assert(await p.locator('#cohabPlay').isVisible());assert(await p.evaluate(()=>S.day===3&&S.activeMorningCohab===30&&!S.cohabToday));
