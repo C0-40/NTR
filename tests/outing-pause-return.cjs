@@ -55,9 +55,9 @@ await p.evaluate(()=>{busy=mbLock=0;if(automaticReviewOpen())continueAutomaticRe
 assert(await p.evaluate(()=>daySummaryOpen()));assert(await p.evaluate(()=>S.aff===30&&S.morningCohab.some(x=>x.id===30&&x.day===3)));
 await p.reload();assert(await p.evaluate(()=>daySummaryOpen()&&S.morningCohab.length===1));
 await p.locator('#daySummaryContinue').click();await p.clock.runFor(1600);
-assert(await p.locator('#mask.on').isVisible());assert(await p.evaluate(()=>S.day===3&&S.activeMorningCohab===30&&!S.cohabToday));
+assert(await p.locator('#cohabPlay').isVisible());assert(await p.evaluate(()=>S.day===3&&S.activeMorningCohab===30&&!S.cohabToday));
 await p.reload();assert(await p.evaluate(()=>S.activeMorningCohab===30&&!S.cohabToday));
-await p.locator('#mb').click();await p.clock.runFor(300);assert(await p.evaluate(()=>!S.morningCohab.length&&!S.cohabToday));
+await p.locator('#cohabSkip').click();await p.clock.runFor(300);assert(await p.evaluate(()=>!S.morningCohab.length&&!S.cohabToday));
 await p.reload();assert(await p.evaluate(()=>!S.morningCohab.length&&!maskOpen()));
 console.log('PASS sleep bonus unlock saved, delivered tomorrow, no quota consumption or duplicate replay');
 await fixture(33);

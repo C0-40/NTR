@@ -3719,6 +3719,20 @@ body:has(#gameUI.homeui.outing-shell){background:#2c221d!important;background-im
  .room-trip .roomTripCard:not(.is-due) .roomTripFlower{animation:outingDaisyNod 6s ease-in-out infinite}
  body:has(#chatRoom.on) .roomTripCard *,#gameUI.reading-room-action .roomTripCard *,#gameUI.presentation-held .roomTripCard *{animation-play-state:paused!important}
 }
+#cohabPlay[hidden]{display:none!important}
+#cohabPlay{position:absolute;inset:0;z-index:15;pointer-events:none}
+.cohabHeading{position:absolute;top:112px;left:18px;right:18px;display:flex;align-items:center;justify-content:space-between;color:#694838}
+#cohabTitle{background:#fff0dce8;border:1px solid #ab896e;border-radius:9px;padding:7px 15px;font:600 18px serif}
+#cohabSkip{pointer-events:auto;min-height:44px;min-width:60px;font:inherit;font-size:13px;color:#735448;background:#fff1dce8;border:1px solid #a3826a;border-radius:10px}
+#cohabDialogue{position:absolute;left:14px;right:14px;bottom:104px;pointer-events:auto;padding:13px 15px 9px;border:1.5px solid #946d55;border-radius:15px;background:#fff0dff5;color:#533c31;box-shadow:0 3px 0 #75543e44;display:grid;gap:7px}
+#cohabSpeaker{justify-self:start;font-size:13px;background:#965d66;color:#fff2dc;border-radius:5px;padding:3px 12px}
+#cohabText{position:relative;display:block;justify-self:center;width:100%;max-width:18em;min-height:3.3em;max-height:6.6em;overflow-y:auto;font-size:15px;line-height:1.65;white-space:pre-wrap}
+#cohabNext{justify-self:end;color:#886450;font-size:11px}
+#cohabDialogue.is-narration #cohabSpeaker{background:#80634c}
+#gameUI.cohab-playing .dock,#gameUI.cohab-playing .dialogueZone,#gameUI.cohab-playing .contextActions{visibility:hidden!important;pointer-events:none!important}
+#gameUI.cohab-playing #av{pointer-events:none}
+#cohabDialogue:focus-visible,#cohabSkip:focus-visible{outline:3px solid #c49a6f;outline-offset:3px}
+@media(prefers-reduced-motion:no-preference){#gameUI.cohab-playing #cohabPlay{animation:roomPlaqueAppear .3s ease-out}}
 </style>
 <!-- Zen Maru Gothic title subset
 Copyright 2021 The Zen Maru Gothic Project Authors (https://github.com/googlefonts/zen-marugothic)
@@ -3891,6 +3905,12 @@ OTHER DEALINGS IN THE FONT SOFTWARE.
       <span class="roomTripFace"><svg class="roomTripFlower" aria-hidden="true" viewBox="0 0 24 24" stroke="currentColor" fill="#fff2d9"><ellipse cx="12" cy="5.8" rx="2.2" ry="4.2" transform="rotate(0 12 12)"/><ellipse cx="12" cy="5.8" rx="2.2" ry="4.2" transform="rotate(45 12 12)"/><ellipse cx="12" cy="5.8" rx="2.2" ry="4.2" transform="rotate(90 12 12)"/><ellipse cx="12" cy="5.8" rx="2.2" ry="4.2" transform="rotate(135 12 12)"/><ellipse cx="12" cy="5.8" rx="2.2" ry="4.2" transform="rotate(180 12 12)"/><ellipse cx="12" cy="5.8" rx="2.2" ry="4.2" transform="rotate(225 12 12)"/><ellipse cx="12" cy="5.8" rx="2.2" ry="4.2" transform="rotate(270 12 12)"/><ellipse cx="12" cy="5.8" rx="2.2" ry="4.2" transform="rotate(315 12 12)"/><circle cx="12" cy="12" r="3" fill="#bb9061"/></svg><strong id="roomTripLabel"></strong><time id="roomTripClock"></time></span>
       <span class="roomTripLink">窺探小紅狀態</span>
     </button>
+    <section id="cohabPlay" aria-label="同居事件" hidden>
+      <div class="cohabHeading"><span id="cohabTitle"></span><button type="button" id="cohabSkip" onclick="finishCohabScene()">跳過</button></div>
+      <div id="cohabDialogue" role="button" tabindex="0" aria-label="輕觸對話繼續" onclick="continueCohabScene()">
+        <b id="cohabSpeaker"></b><span id="cohabText"></span><small id="cohabNext"></small>
+      </div>
+    </section>
     <div class="girl" id="av" role="button" aria-label="和她聊天" tabindex="0"></div>
     <div class="outingActLine" id="outingActLine" hidden role="button" tabindex="0" aria-label="外出行動結果，點一下關閉"></div>
     <div class="note" id="note" aria-live="polite">
@@ -3994,14 +4014,14 @@ function notifyContext(id,token,kind){var el=$(id);if(!el||el._cueToken===token)
 var scenePresentation={phase:"",timer:0,departurePending:false};
 function presentationHeld(){return !!(scenePresentation.phase)}
 function updatePresentationState(){var root=$("gameUI"),hint=$("presentationHint"),phase=scenePresentation.phase;if(!root)return;
-root.classList.toggle("reading-room-action",!!(roomActionReading&&roomActionReading.active));root.classList.toggle("presentation-held",!!phase);root.classList.toggle("presentation-reading",phase==="reaction-reading");root.classList.toggle("departure-pending",scenePresentation.departurePending);root.setAttribute("aria-busy",phase&&phase!=="reaction-reading"?"true":"false");root.querySelectorAll(".topHud,.dock,.sideNav,.contextActions,#pane").forEach(function(el){el.inert=!!phase});
-if(hint){hint.textContent=phase==="leaving"?"小紅準備出門…":phase==="returning"?"小紅回來了…":phase==="hero-arriving"?"小紅來了…":phase==="reaction-reading"?"輕觸對話，繼續閱讀":"";hint.hidden=!phase;}
+root.classList.toggle("cohab-playing",phase==="cohab-reading");root.classList.toggle("reading-room-action",!!(roomActionReading&&roomActionReading.active));root.classList.toggle("presentation-held",!!phase);root.classList.toggle("presentation-reading",phase==="reaction-reading");root.classList.toggle("departure-pending",scenePresentation.departurePending);root.setAttribute("aria-busy",phase&&phase!=="reaction-reading"?"true":"false");root.querySelectorAll(".topHud,.dock,.sideNav,.contextActions,#pane").forEach(function(el){el.inert=!!phase});
+if(hint){hint.textContent=phase==="leaving"?"小紅準備出門…":phase==="returning"?"小紅回來了…":phase==="hero-arriving"?"小紅來了…":phase==="reaction-reading"?"輕觸對話，繼續閱讀":"";hint.hidden=!phase||phase==="cohab-reading";}
 }
-function cancelScenePresentation(){closeRoomActionDialogue();cancelOutingFocus();hideAutomaticReview();hideDaySummary();var root=$("gameUI");if(root)root.classList.remove("hero-arriving","intro-pending");resetReturnReading();clearTimeout(scenePresentation.timer);sqReply=null;scenePresentation.phase="";scenePresentation.departurePending=false;var root=$("gameUI"),mask=$("mask");if(root)root.inert=false;if(mask)mask.classList.remove("return-window");updatePresentationState()}
+function cancelScenePresentation(){stopTyping($("cohabText"),false);$("cohabPlay").hidden=true;closeRoomActionDialogue();cancelOutingFocus();hideAutomaticReview();hideDaySummary();var root=$("gameUI");if(root)root.classList.remove("hero-arriving","intro-pending");resetReturnReading();clearTimeout(scenePresentation.timer);sqReply=null;scenePresentation.phase="";scenePresentation.departurePending=false;var root=$("gameUI"),mask=$("mask");if(root)root.inert=false;if(mask)mask.classList.remove("return-window");updatePresentationState()}
 function beginReactionReading(text){scenePresentation.phase="reaction-reading";say(text,"calm");$("say").scrollTop=0;updatePresentationState();render(false);$("dlg").focus({preventScroll:true})}
 function continueReactionReading(){if(scenePresentation.phase!=="reaction-reading")return false;playUiSound("click");if(stopTyping($("say"),true))return true;if(sqReply&&sqReply.i+1<sqReply.lines.length){sqReply.i++;beginReactionReading(sqReply.lines[sqReply.i]);return true}sqReply=null;scenePresentation.phase="";updatePresentationState();nextPop();render(false);return true}
 function finishReturnPresentation(){scenePresentation.phase="";updatePresentationState();if(isStormNight()){openStormNight();render(false);return}if(hasReturnObservation()&&!(S.sleepRun&&S.sleepRun.autoTrip)&&!mq.some(function(m){return m&&m.returnHome}))mq.unshift({returnHome:true});nextPop();render(false)}
-function guardPresentationInput(e){if(!presentationHeld())return;var target=e.target,reading=scenePresentation.phase==="reaction-reading",allowed=reading&&target&&target.closest&&target.closest("#dlg,#av");if(allowed)return;if(e.type==="keydown"&&["Tab","Enter"," "].indexOf(e.key)<0)return;e.preventDefault();e.stopImmediatePropagation()}
+function guardPresentationInput(e){if(!presentationHeld())return;var target=e.target,reading=scenePresentation.phase==="reaction-reading",allowed=reading&&target&&target.closest&&target.closest("#dlg,#av");if(allowed||(scenePresentation.phase==="cohab-reading"&&target.closest&&target.closest("#cohabPlay")))return;if(e.type==="keydown"&&["Tab","Enter"," "].indexOf(e.key)<0)return;e.preventDefault();e.stopImmediatePropagation()}
 document.addEventListener("click",guardPresentationInput,true);document.addEventListener("keydown",guardPresentationInput,true);
 var navigationFeedback={};function refreshPresentationFeedback(){var unlocked=false;["navAsk","navStory","navMem","navChat"].forEach(function(id){var el=$(id);if(!el)return;var next=!el.disabled;if(navigationFeedback[id]===false&&next){pulsePresentation(el,"nav-unlock",700);unlocked=true}navigationFeedback[id]=next});if(unlocked)playUiSound("unlock");syncSceneAudio()}
 
@@ -4806,7 +4826,7 @@ function restoreSleepQueue(){
   mq=(run.active?[run.active]:[]).concat(run.queued||[]).map(decodeSleepEntry);
 }
 function sleepFlowHeld(){return !!(S&&S.sleepRun&&S.sleepRun.day===(S.day|0))}
-function syncSleepLock(){if(sleepFlowHeld())$("gameUI").inert=true}
+function syncSleepLock(){if(sleepFlowHeld())$("gameUI").inert=scenePresentation.phase!=="cohab-reading"}
 function autoOutingPlace(){
   var ids=[];PLACES.forEach(function(p,i){if(S.aff>=p[3])ids.push(i)});
   return ids.length?ids[Math.floor(Math.random()*ids.length)]:0;
@@ -5632,14 +5652,63 @@ Array.from(el.children).forEach(function(line){run.observer.observe(line)});
 $("mp").addEventListener("click",function(){finishMemoryReveal()});
 $("mp").addEventListener("keydown",function(e){if(memoryReveal&&(e.key==="Enter"||e.key===" ")){e.preventDefault();e.stopPropagation();finishMemoryReveal()}});
 var memoryMotionQuery=window.matchMedia("(prefers-reduced-motion: reduce)");if(memoryMotionQuery.addEventListener)memoryMotionQuery.addEventListener("change",function(e){if(e.matches){finishMemoryReveal();finishAutomaticReviewReveal()}});
+function cohabTurns(event){
+  return event[2].split(/\n+/).filter(function(line){return line.trim()}).map(function(line){
+    var match=line.match(/^(小紅|阿祿)[：:](.*)$/);
+    var text=(match?match[2]:line).trim();
+    if((text.startsWith("「")&&text.endsWith("」"))||(text.startsWith("“")&&text.endsWith("”")))text=text.slice(1,-1);
+    return {speaker:match?match[1]:"旁述",text:text};
+  });
+}
+function showCohabScene(id){
+  var event=STORY.find(function(entry){return entry[0]===id});
+  if(!event)return;
+  if(!S.cohabScene)S.cohabScene={id:id,index:0};
+  scenePresentation.phase="cohab-reading";
+  $("cohabPlay").hidden=false;
+  $("cohabTitle").textContent=event[1];
+  var turns=cohabTurns(event),turn=turns[S.cohabScene.index]||turns[0];
+  $("cohabSpeaker").textContent=turn.speaker;
+  $("cohabDialogue").classList.toggle("is-narration",turn.speaker==="旁述");
+  $("cohabNext").textContent=S.cohabScene.index===turns.length-1?"結束 ▾":"輕觸繼續 ▾";
+  $("cohabText").scrollTop=0;
+  if(turn.speaker==="小紅")setEx(detect(turn.text));
+  typeDialogue($("cohabText"),turn.text);
+  updatePresentationState();$("gameUI").inert=false;save();
+  $("cohabDialogue").focus({preventScroll:true});
+}
+function continueCohabScene(){
+  if(!S.cohabScene||scenePresentation.phase!=="cohab-reading")return;
+  playUiSound("click");
+  if(stopTyping($("cohabText"),true))return;
+  var event=STORY.find(function(entry){return entry[0]===S.cohabScene.id});
+  if(S.cohabScene.index+1>=cohabTurns(event).length){finishCohabScene();return}
+  S.cohabScene.index++;showCohabScene(S.cohabScene.id);
+}
+function finishCohabScene(){
+  if(!S.cohabScene)return;
+  stopTyping($("cohabText"),false);
+  if(S.activeMorningCohab===S.cohabScene.id){
+    S.morningCohab=(S.morningCohab||[]).filter(function(item){return item.id!==S.activeMorningCohab});
+    S.activeMorningCohab=null;
+  }
+  S.cohabScene=null;$("cohabPlay").hidden=true;
+  scenePresentation.phase="";updatePresentationState();
+  if(sleepFlowHeld())acknowledgeSleepEntry();
+  save();render(false);nextPop();
+}
+$("cohabDialogue").addEventListener("keydown",function(event){
+  if(event.key==="Enter"||event.key===" "){event.preventDefault();continueCohabScene()}
+});
 function nextPop(){if(maskOpen()||presentationHeld())return;if(!mq.length){dayLock=0;hideSqOpts();if(moodPeekOn)clearMoodPeek();if(sleepFlowHeld()){rememberSleepQueue(null);resumeSleepRun()}return}var m=mq.shift();if(!m){releaseDayLock();hideSqOpts();if(moodPeekOn)clearMoodPeek();return}
 if(Array.isArray(m)&&typeof m[0]==="string"&&m[0].indexOf("📌 同居事件：")===0){mq=mq.filter(function(entry){return !Array.isArray(entry)||entry[0]!==m[0]||entry[1]!==m[1]})}
 if(sleepFlowHeld())rememberSleepQueue(m);
 if(m.morningCohab!=null){
   var morning=STORY.find(function(event){return event[0]===m.morningCohab});
   if(!morning){nextPop();return}
-  S.activeMorningCohab=m.morningCohab;save();m=["📌 同居事件："+morning[1],morning[2]];
+  S.activeMorningCohab=m.morningCohab;save();m=morning[0]===30?{cohabScene:30}:["📌 同居事件："+morning[1],morning[2]];
 }
+if(m.cohabScene!=null){showCohabScene(m.cohabScene);return}
 if(m.automaticOutingNotice){rememberSleepQueue(null);settleAutomaticOuting();return}
 if(m.automaticOutingReview){showAutomaticOutingNotice();return}
 if(m.stormNight){if(!openStormNight())nextPop();syncSleepLock();return}
@@ -5814,7 +5883,7 @@ function deferSleepUnlocks(){return !!(S.sleepRun&&S.sleepRun.autoTrip&&S.sleepR
 function enqueueMorningCohab(){
   if(!S.morningCohab)S.morningCohab=[];
   S.morningCohab.forEach(function(item){
-    if(item.day>(S.day|0)||mq.some(function(e){return e.morningCohab===item.id}))return;
+    if((S.cohabScene&&S.cohabScene.id===item.id)||item.day>(S.day|0)||mq.some(function(e){return e.morningCohab===item.id}))return;
     mq.push({morningCohab:item.id});
   });
 }
@@ -5826,7 +5895,7 @@ if(deferSleepUnlocks()){
   S.morningCohab.push({id:s[0],day:(S.day|0)+1});save();return;
 }
 S.cohabToday=true;
-mq.push(["📌 同居事件："+s[1],s[2]]);addLog("📌 同居事件・"+s[1]);if(!maskOpen())nextPop()}
+mq.push(s[0]===30?{cohabScene:30}:["📌 同居事件："+s[1],s[2]]);addLog("📌 同居事件・"+s[1]);if(!maskOpen())nextPop()}
 function uncleArcByStep(n){for(var i=0;i<UNCLE_ARC.length;i++)if(UNCLE_ARC[i].step===n)return UNCLE_ARC[i];return null}
 function canAdvanceUncle(){if(isStormNight())return false;var next=(S.uncleStep|0)+1;if(next>11)return false;if((S.day|0)<6)return false;var a=uncleArcByStep(next);if(!a)return false;if(a.needStep5&&!step5Open())return false;/* 第10階段起同居解鎖即完成；最後同居另受回憶確認限制。 */if(next>=10&&!storyComplete())return false;var need=(a.mNeed!=null)?(a.mNeed|0):(UNCLE_STEP_MNEED&&UNCLE_STEP_MNEED[next]!=null?UNCLE_STEP_MNEED[next]|0:0);if((effM()|0)<need)return false;return true}
 function queueUncleStep(){if(!canAdvanceUncle())return false;var next=(S.uncleStep|0)+1;var a=uncleArcByStep(next);if(!a)return false;
@@ -6154,6 +6223,10 @@ var windowSkinObserver=new MutationObserver(skinWindowUi);["mt","thbox","outingA
 function syncUpdatedEarlyThoughts(){var a=uncleArcByStep(S.uncleStep|0);if(a&&a.step>=1&&a.step<=11)S.uncleTh=(a.th||[]).slice()}
 load();
 restoreSleepQueue();
+if(S.cohabScene){
+  mq=mq.filter(function(entry){return entry.cohabScene!==S.cohabScene.id&&entry.morningCohab!==S.cohabScene.id});
+  showCohabScene(S.cohabScene.id);
+}
 enqueueMorningCohab();
 if(!S.pendingDayEnd)S._dayAdvancing=false;
 ensureDailyBase();
