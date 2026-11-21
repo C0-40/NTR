@@ -25,8 +25,15 @@ Object.assign(presentationPrefs,{textSpeed:0,music:0,ambient:0,sfx:0});ensureDai
 
 await fixture(30);
 await p.emulateMedia({reducedMotion:'no-preference'});
+const homeBounds=await p.locator("#dlg").boundingBox();
 await p.evaluate(()=>{presentationPrefs.textSpeed=30;S.seen=S.seen.filter(id=>id!==30);S.cohabToday=false;render()});
-assert(await p.locator('#cohabPlay').isVisible());assert.equal(await p.locator('#mask.on').count(),0);
+assert(await p.locator('#cohabOffer[open]').isVisible());
+await p.locator('#cohabOfferPlay').click();
+assert(await p.locator('#cohabPlay').isVisible());
+assert.deepEqual(await p.locator('#cohabDialogue').boundingBox(),homeBounds);
+assert.equal(await p.locator('.topHud').isVisible(),false);
+assert.equal(await p.locator('#navAsk').isVisible(),false);
+assert.equal(await p.locator('#mask.on').count(),0);
 assert.equal(await p.locator('#cohabSpeaker').innerText(),'阿祿');
 assert(await p.evaluate(()=>isTyping($('cohabText'))));
 await p.locator('#cohabDialogue').dispatchEvent('click');
@@ -52,6 +59,8 @@ assert.equal(await p.locator('#mp').innerText(),await p.evaluate(()=>STORY[0][2]
 console.log('PASS natural first unlock, speaker turns, typewriter completion, reload, ending and full-text replay');
 await fixture(30);
 await p.evaluate(()=>{S.seen=S.seen.filter(id=>id!==30);S.cohabToday=false;render()});
+assert(await p.locator('#cohabOffer[open]').isVisible());
+await p.locator('#cohabOfferPlay').click();
 await p.locator('#cohabSkip').click();
 assert(await p.evaluate(()=>!S.cohabScene&&S.seen.includes(30)&&S.cohabToday&&!presentationHeld()));
 console.log('PASS one-click skip and existing unlock quota');
@@ -61,16 +70,32 @@ for(const width of [320,390,430]){
  await p.setViewportSize({width,height:640});await p.clock.runFor(100);
  assert(await p.locator('#cohabDialogue').evaluate(e=>{const r=e.getBoundingClientRect();return r.left>=0&&r.right<=innerWidth&&r.top>120&&r.bottom<innerHeight}));
  await p.evaluate(()=>typeDialogue($('cohabText'),'水'.repeat(35)));
- console.log(width,await p.locator('#cohabText').evaluate(e=>[e.scrollHeight,e.clientHeight,e.scrollWidth,e.clientWidth,getComputedStyle(e).lineHeight,getComputedStyle(e.parentNode).gridTemplateRows]));
  assert(await p.locator('#cohabText').evaluate(e=>e.scrollHeight<=e.clientHeight+1&&e.scrollWidth<=e.clientWidth+1));
 }
 await p.locator('#cohabSkip').click();
 console.log('PASS 35 Chinese characters and short mobile layouts');
 await fixture(30);
 await p.evaluate(()=>{S.morningCohab=[{id:30,day:S.day}];mq=[{morningCohab:30}];S.cohabToday=false;nextPop()});
+await p.locator('#cohabOfferPlay').click();
 await p.locator('#cohabSkip').click();
 assert(await p.evaluate(()=>!S.morningCohab.length&&!S.cohabToday&&S.activeMorningCohab==null));
 console.log('PASS deferred morning event keeps next-day quota');
+await fixture(40);
+await p.evaluate(()=>{S.seen=S.seen.filter(id=>id!==40);S.cohabToday=false;render()});
+assert.equal(await p.locator('#cohabOfferTitle').innerText(),'起床');
+await p.reload();assert.equal(await p.evaluate(()=>S.cohabOffer),40);
+await p.locator('#cohabOfferSkip').click();
+assert(await p.evaluate(()=>S.cohabOffer==null&&S.seen.includes(40)&&!maskOpen()));
+await p.evaluate(()=>replay(1));assert(await p.locator('#mask.on').isVisible());
+console.log('PASS first-event choice restores, skip preserves unlock and replay remains full text');
+await fixture(30);
+await p.evaluate(()=>{S.sleepRun={day:S.day,phase:'events',active:{cohabOffer:30},queued:[],autoTrip:null};showCohabOffer(30)});
+await p.locator('#cohabOfferPlay').click();await p.reload();
+assert(await p.locator('#cohabPlay').isVisible());
+assert.equal(await p.locator('#cohabSkip').evaluate(e=>e.closest('#gameUI').inert),false);
+await p.locator('#cohabSkip').click();await p.clock.runFor(300);
+assert(await p.evaluate(()=>!S.cohabScene&&S.cohabOffer==null));
+console.log('PASS sleep flow scene reload and one-time completion');
 assert.deepEqual(errors,[]);
 }finally{await b.close();server.close()}
 })().catch(e=>{console.error(e);process.exit(1)});
