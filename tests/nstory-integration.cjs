@@ -9,6 +9,15 @@ const source = fs.readFileSync(path.join(root, 'xiaoying-tongju-riji.html'), 'ut
 const approved = fs.readFileSync(path.join(root, 'docs/nstory-approved-2026-11-21.md'), 'utf8');
 const expected = [...approved.matchAll(/^### NSTORY \d+：([^\n]+)\n([\s\S]*?)(?=^### NSTORY |^## 五、)/gm)]
   .map(match => [match[1].trim(), match[2].trim()]);
+const daisyApproved=fs.readFileSync(path.join(root,'docs/daisy-approved-2026-11-21.md'),'utf8');
+function daisyBody(title){
+  const heading='### '+title+'\n';
+  const start=daisyApproved.indexOf(heading)+heading.length;
+  assert(start>=heading.length,'Missing approved heading '+title);
+  return daisyApproved.slice(start).split(/^### |^## /m)[0].trim();
+}
+const revisedStory={40:['窗邊的雛菊',daisyBody('窗邊的雛菊')],90:['停電',daisyBody('停電')],100:['替她整理頭髮',daisyBody('替她整理頭髮')]};
+expected[4]=['沒有回音的雨夜',daisyBody('NSTORY 5：沒有回音的雨夜')];
 function arrayData(text,name){
   const match=new RegExp('\\b'+name+'\\s*=\\s*\\[').exec(text);
   assert(match,'Missing data '+name);
@@ -32,6 +41,10 @@ const actual=arrayData(source,'NSTORY');
 const previous=require('node:child_process').execFileSync('git',['show','5a06d6b:xiaoying-tongju-riji.html'],{cwd:root,encoding:'utf8',maxBuffer:8*1024*1024});
 for(const name of ['CHAT_THREADS','STORY','MEMORIES','NEAR_SAY','NT','SOFT','HOME','FLAT_NIGHT','NIGHT','SQ','PLACES','PLACE_TH']){
   const expectedData=arrayData(previous,name);
+  if(name==='STORY'){
+    assert.equal(expectedData.length,8);
+    for(const event of expectedData)if(revisedStory[event[0]])event.splice(1,2,...revisedStory[event[0]]);
+  }
   if(name==='PLACES'){
     for(const place of expectedData)place[2]=120;
   }
@@ -129,15 +142,22 @@ const server = http.createServer((request, response) => {
     console.log('PASS automatic outing delivers mandatory story without optional phone or observation');
     await fixture(10); await settle();
     assert(await page.evaluate(() => isStormNight() && S.pendingObs == null));
-    assert.equal(await page.locator('#mt').innerText(), '暴風雨之夜');
-    await dismiss();
     assert.equal(await page.locator('#mt').innerText(), '沒有回音的雨夜');
     assert.equal(await page.locator('#mp').innerText(), expected[4][1]);
     assert(await page.evaluate(() => isStormNight() && !S.trip && !S.pendingObs && !S.nstory.read[100]));
     await page.reload();
     assert.equal(await page.locator('#mt').innerText(), '沒有回音的雨夜');
     await dismiss();
-    assert(await page.evaluate(() => isStormNight() && S.nstory.read[100]));
+    assert(await page.evaluate(() => isStormNight() && S.nstory.read[100] && S.stormStay.nightShown));
+    assert.equal(await page.locator('#mask.on').count(),0);
+    const beforeReview=await page.evaluate(()=>JSON.stringify([S.day,S.aff,S.m,S.trips,S.nstory]));
+    await page.locator('#stormReviewBtn').click();
+    assert.equal(await page.locator('#mp').innerText(),expected[4][1]);
+    await dismiss();
+    assert.equal(await page.evaluate(()=>JSON.stringify([S.day,S.aff,S.m,S.trips,S.nstory])),beforeReview);
+    assert.equal(await page.locator('#mask.on').count(),0);
+    await page.reload();
+    assert.equal(await page.locator('#mask.on').count(),0);
     await page.evaluate(() => sleepDay());
     for (let i = 0; i < 80 && await page.evaluate(() => S.day===24&&!daySummaryOpen()); i++) {
       await page.clock.runFor(100);
@@ -154,7 +174,7 @@ const server = http.createServer((request, response) => {
     assert.equal(await page.locator('#mt').innerText(), '她回來了');
     await dismiss();
     assert(await page.evaluate(() => !isStormNight() && S.nstory.milestones['10-return'] && canAdvanceUncle()));
-    console.log('PASS overnight main scene, NSTORY5, sleep-only day advance, dedicated return, observation reload and step11 gate');
+    console.log('PASS single approved rain scene, side-effect-free review, sleep-only day advance, original return and step11 gate');
 
     await fixture(6);
     await page.evaluate(() => {
@@ -170,9 +190,11 @@ const server = http.createServer((request, response) => {
     await page.evaluate(()=>{delete S.nstory;save()});
     await page.reload();
     assert(await page.evaluate(()=>S.nstory.legacyBefore===9&&S.nstory.milestones[10]&&isStormNight()));
-    await dismiss();
     assert.equal(await page.locator('#mt').innerText(),'沒有回音的雨夜');
-    console.log('PASS legacy overnight save retains its current-night required story');
+    assert.equal(await page.locator('#mp').innerText(),expected[4][1]);
+    await dismiss();
+    assert.equal(await page.locator('#mask.on').count(),0);
+    console.log('PASS legacy overnight save retains one current-night required story');
     await page.evaluate(()=>{
       delete S.nstory;
       S.sleepRun={day:S.day,phase:'events',active:{sleepLine:true,title:'💔 街角的強叔',body:'舊稿'},queued:[['💔 空掉的房間','舊稿'],{endingPrep:1}]};
@@ -201,6 +223,21 @@ const server = http.createServer((request, response) => {
     assert(await page.evaluate(()=>S.nstory.read[20]));
     console.log('PASS old automatic outing save delivers its current pending chapter');
 
+
+    await fixture(10);await settle();
+    await page.evaluate(()=>{
+      S.nstory.active=null;S.stormStay.nightShown=false;
+      S.sleepRun={day:S.day,phase:'events',active:{sleepLine:true,title:'暴風雨之夜',body:uncleArcByStep(10).stormText},queued:[]};
+      save();
+    });
+    await page.reload();
+    assert.equal(await page.locator('#mt').innerText(),'沒有回音的雨夜');
+    assert.equal(await page.locator('#mp').innerText(),expected[4][1]);
+    assert(await page.evaluate(()=>S.sleepRun.active.nstory===100&&S.sleepRun.queued.length===0&&S.trips===1));
+    await page.evaluate(()=>{S.sleepRun=null;save()});await dismiss();
+    assert.equal(await page.locator('#mask.on').count(),0);
+    assert(await page.evaluate(()=>S.nstory.read[100]&&S.stormStay.nightShown));
+    console.log('PASS saved legacy storm body redirects to one current NSTORY5 without duplicate settlement');
 
     assert.deepEqual(errors, []);
   } finally { await browser.close(); server.close(); }

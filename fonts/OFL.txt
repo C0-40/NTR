@@ -1,7 +1,5 @@
-Copyright 2014-2019 Adobe (http://www.adobe.com/), with Reserved Font
-Name 'Source'. Source is a trademark of Adobe in the United States
-and/or other countries.
-
+Copyright 2020-2024 LXGW (https://github.com/lxgw/kose-font)
+Copyright 2014 Nozomi Seto (https://ja.osdn.net/projects/setofont/)
 
 This Font Software is licensed under the SIL Open Font License, Version 1.1.
 This license is copied below, and is also available with a FAQ at:

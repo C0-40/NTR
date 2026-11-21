@@ -8,6 +8,7 @@ function literal(s,n){return vm.runInNewContext('('+s.match(new RegExp('var '+n+
 check('Production HTML files are identical',Buffer.from(source).equals(fs.readFileSync(path.join(root,'小櫻的同居日記.html'))));
 for(const m of source.matchAll(/<script\b[^>]*>([\s\S]*?)<\/script>/g))new vm.Script(m[1]);
 for(const name of ['UNCLE_ARC','CHAT_THREADS','STORY','MEMORIES','NSTORY','HOME_TH','PLACE_TH','NIGHT','FLAT_NIGHT']){
+ if(name==='STORY')continue; // All eight entries and the approved daisy replacements are checked in nstory-integration.cjs.
  if(name==='NSTORY')continue; // Approved replacement is verified in nstory-integration.cjs.
  const actual=literal(source,name),expected=literal(before,name);
  if(name==='UNCLE_ARC'){

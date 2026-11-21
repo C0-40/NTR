@@ -36,20 +36,20 @@ const server=http.createServer((request,response)=>{
     await cdp.send('DOM.enable');await cdp.send('CSS.enable');
     let fonts=await usedFonts();
     assert.equal(fonts.length,1,JSON.stringify(fonts));assert(fonts[0].isCustomFont);
-    assert(fonts[0].familyName.includes('GenSen'),JSON.stringify(fonts));
-    assert(fontRequests.some(url=>url.endsWith('gensen-rounded-tw-regular.woff2')));
-    assert.equal(fontRequests.some(url=>url.endsWith('gensen-rounded-tw-full.woff2')),false);
-    console.log('PASS formerly mixed Chinese characters use one local rounded font, external font services blocked');
+    assert(fonts[0].familyName.includes('小賴')||fonts[0].familyName.includes('Xiaolai'),JSON.stringify(fonts));
+    assert(fontRequests.some(url=>url.endsWith('xiaolai-regular.woff2')));
+    assert.equal(fontRequests.some(url=>url.endsWith('xiaolai-full.woff2')),false);
+    console.log('PASS formerly mixed Chinese characters use one local Xiaolai font, external font services blocked');
     await page.evaluate(async()=>{
       $('fontProbe').textContent='齉';
-      await document.fonts.load('400 20px "GenSen Rounded TW"','齉');
+      await document.fonts.load('400 20px "Xiaolai"','齉');
       await document.fonts.ready;
     });
     fonts=await usedFonts();assert.equal(fonts.length,1,JSON.stringify(fonts));assert(fonts[0].isCustomFont);
-    assert(fontRequests.some(url=>url.endsWith('gensen-rounded-tw-full.woff2')));
-    console.log('PASS additional characters load the full rounded font on demand');
+    assert(fontRequests.some(url=>url.endsWith('xiaolai-full.woff2')));
+    console.log('PASS additional characters load the full Xiaolai font on demand');
     for(const selector of ['body','#cohabTitle','#cohabOffer h2','.daySummary h2','#outChip','#roomTripLabel']){
-      assert((await page.locator(selector).evaluate(element=>getComputedStyle(element).fontFamily)).includes('GenSen Rounded TW'),selector);
+      assert((await page.locator(selector).evaluate(element=>getComputedStyle(element).fontFamily)).includes('Xiaolai'),selector);
     }
     assert.deepEqual(errors,[]);
     console.log('PASS dialogue, action labels, titles and summaries share the same font family');
