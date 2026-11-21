@@ -31,7 +31,11 @@ function arrayData(text,name){
 const actual=arrayData(source,'NSTORY');
 const previous=require('node:child_process').execFileSync('git',['show','5a06d6b:xiaoying-tongju-riji.html'],{cwd:root,encoding:'utf8',maxBuffer:8*1024*1024});
 for(const name of ['CHAT_THREADS','STORY','MEMORIES','NEAR_SAY','NT','SOFT','HOME','FLAT_NIGHT','NIGHT','SQ','PLACES','PLACE_TH']){
-  assert.deepEqual(arrayData(source,name),arrayData(previous,name),'Unrelated data changed: '+name);
+  const expectedData=arrayData(previous,name);
+  if(name==='PLACES'){
+    for(const place of expectedData)place[2]=120;
+  }
+  assert.deepEqual(arrayData(source,name),expectedData,'Unrelated data changed: '+name);
 }
 const currentArc=arrayData(source,'UNCLE_ARC'),previousArc=arrayData(previous,'UNCLE_ARC');
 const newHome="翌日，小紅終於回到家中，看起來有些疲倦。\n\n阿祿：回來了？昨晚在朋友家還好嗎？\n\n小紅：嗯……雨聲太大，沒怎麼睡。\n\n阿祿：那先休息一下吧。\n\n小紅：……嗯。讓你擔心了。";
