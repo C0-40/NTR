@@ -1,4 +1,6 @@
-# 《小櫻的同居日記》玩家可見文案
+# 《褪色的雛菊》玩家可見文案
+
+> 本檔為歷史匯出；2026-11-18 已同步強叔第1～11階段的專屬心聲／回家文字、階段聊天室及第十階段雨夜正文。其他舊條目須先與雙 HTML 核對，不得直接覆蓋現況；現行整合劇本以 `game-script.md` 為準。
 
 Source: `小櫻的同居日記.html` (byte-identical to `xiaoying-tongju-riji.html`).
 Each line: `ID | exact current text | location note` (third column optional; keep it when editing).
@@ -161,12 +163,12 @@ HOME_LINES-sweets-1-2 | 烤箱叮一聲，她先看手機，再看你。 | HOME_
 HOME_LINES-sweets-2-0 | 她把整盤都留給你：「這次不分給別人。」 | HOME_LINES.sweets[2][0]
 HOME_LINES-sweets-2-1 | 說完自己也愣了一下。 | HOME_LINES.sweets[2][1]
 HOME_LINES-sweets-2-2 | 「……吃吧。趁熱。」 | HOME_LINES.sweets[2][2]
-HOME-PANE-HINT | 每天互動一次，增加親密度 | pane()
+HOME-PANE-HINT | 主動互動每天一次・完成 +{當日互動值} | pane(); 新制5，舊檔切換當日7
 HOME-PANE-DONE | ・今天已做過 | pane()
 HOME-PANE-AWAY-TITLE | 她出門了 | pane()
 HOME-PANE-AWAY-BODY | 小櫻在外面時不能做室內互動。你留在家等她回來。 | pane()
 HOME-DOCK-USED | 今天已做過 | mkDock
-STATS-INC | 每天互動一次，增加親密度・外出一次・只有睡覺才會日結 | paintStats #inc
+STATS-INC | 日結 +2・主動互動 +5・每天最多一次 | paintStats #inc
 HOME-ACTS-COMMENT | 無體力；每天室內互動一次 | HOME_ACTS comment (dev note near player tip)
 HOMEACT-INLINE-01 | （親密再高一點，才能做這件事。） | function homeActNow
 HOMEACT-INLINE-02 | 你們一起度過了一段安靜的時間。 | function homeActNow
@@ -671,51 +673,51 @@ JOURNAL-4-1-0-0 | 翻到一半忽然捨不得離開，可是更捨不得你。�
 JOURNAL-4-1-0-1 | 挑選的時間比預期長。不是迷路，是想挑一本配得上『你的提議』的書。 | JOURNAL_POOL[4][1][0][1]
 JOURNAL-4-2-0-0 | 結完帳我把書抱在胸前，像抱著一個被允許的午後。回家的路變短了。茶几空出來的位置，我已經想好要怎麼擺。沒有曖昧的角落，只有想和你分享的目錄頁。 | JOURNAL_POOL[4][2][0][0]
 JOURNAL-4-2-0-1 | 『你建議得真好』——這句話我回家後大概會再說一次。不是客套，是真的。 | JOURNAL_POOL[4][2][0][1]
-UNCLE_ARC-1-HOME | 「……今天巷口有點亂。」她指節擦破了一點，卻很快把手藏進袖子。 | UNCLE_ARC[0].home
-UNCLE_ARC-1-TH-0 | 手好抖，但不能讓他再被打。……就像小時候的我。 | UNCLE_ARC[0].th[0]
-UNCLE_ARC-1-TH-1 | 他流血了，好可憐。一定要幫他。 | UNCLE_ARC[0].th[1]
-UNCLE_ARC-1-TH-2 | 回去阿祿會說我太衝動吧……但他一定會誇我。 | UNCLE_ARC[0].th[2]
-UNCLE_ARC-2-HOME | 「那個……他要人叫他強叔。」她坐下才補完半句，像怕說太多。 | UNCLE_ARC[1].home
-UNCLE_ARC-2-TH-0 | 他說是為了媽媽……母親還去世了。 | UNCLE_ARC[1].th[0]
-UNCLE_ARC-2-TH-1 | 阿祿當年也是這樣擋在我前面的。……所以我才停不下來。 | UNCLE_ARC[1].th[1]
-UNCLE_ARC-2-TH-2 | 這件事要講給阿祿聽。 | UNCLE_ARC[1].th[2]
-UNCLE_ARC-3-HOME | 「晚了二十分鐘。今晚煮你愛吃的。」她語氣得意，又有點心虛。 | UNCLE_ARC[2].home
-UNCLE_ARC-3-TH-0 | 掃掃地板、煮個飯，不算什麼吧。 | UNCLE_ARC[2].th[0]
-UNCLE_ARC-3-TH-1 | 被人需要的感覺，好奇怪，好溫暖。 | UNCLE_ARC[2].th[1]
-UNCLE_ARC-3-TH-2 | 回去要煮阿祿愛吃的。 | UNCLE_ARC[2].th[2]
-UNCLE_ARC-4-HOME | 「有人懂我。」她忽然說完又後悔，「……算了，你會擔心。」 | UNCLE_ARC[3].home
-UNCLE_ARC-4-TH-0 | 他聽我講童年的時候沒有笑得太假。 | UNCLE_ARC[3].th[0]
-UNCLE_ARC-4-TH-1 | 要不要跟阿祿說？算了，他會擔心。 | UNCLE_ARC[3].th[1]
-UNCLE_ARC-4-TH-2 | 終於有人懂我……這種想法好危險。 | UNCLE_ARC[3].th[2]
-UNCLE_ARC-5-HOME | 「我沒有怎樣。」她回來先洗了很久的手，重複這一句。 | UNCLE_ARC[4].home
-UNCLE_ARC-5-TH-0 | 他說太孤單……手卻伸過來了。心跳好快。 | UNCLE_ARC[4].th[0]
-UNCLE_ARC-5-TH-1 | 他馬上道歉。可是界線已經過了。 | UNCLE_ARC[4].th[1]
-UNCLE_ARC-5-TH-2 | 對不起，阿祿。我一直告訴自己：我沒有怎樣。 | UNCLE_ARC[4].th[2]
-UNCLE_ARC-6-HOME | 她很晚才回來，把熱牛奶放在你手邊，不敢提電影。 | UNCLE_ARC[5].home
-UNCLE_ARC-6-TH-0 | 他說撐不住了。我不能不去。 | UNCLE_ARC[5].th[0]
-UNCLE_ARC-6-TH-1 | 說好要陪阿祿的……『沒關係』比罵我還難受。 | UNCLE_ARC[5].th[1]
-UNCLE_ARC-6-TH-2 | 我只去一下就回來。——我騙誰呢。 | UNCLE_ARC[5].th[2]
-UNCLE_ARC-7-HOME | 「最近……比較常不小心。」她笑了一下，笑得很淺。 | UNCLE_ARC[6].home
-UNCLE_ARC-7-TH-0 | 我好像習慣了。被依賴的感覺好危險。 | UNCLE_ARC[6].th[0]
-UNCLE_ARC-7-TH-1 | 他還是很可憐。我走了誰照顧他？ | UNCLE_ARC[6].th[1]
-UNCLE_ARC-7-TH-2 | 阿祿對我那麼溫柔……我更不能讓他知道。 | UNCLE_ARC[6].th[2]
-UNCLE_ARC-8-HOME | 「阿祿不能知道。」她聲音發顫，又改口：「不想讓你擔心。」 | UNCLE_ARC[7].home
-UNCLE_ARC-8-TH-0 | 重病……怎麼會這樣。 | UNCLE_ARC[7].th[0]
-UNCLE_ARC-8-TH-1 | 他一直說不要連累我，可是他明明那麼痛。 | UNCLE_ARC[7].th[1]
-UNCLE_ARC-8-TH-2 | 阿祿不能知道。 | UNCLE_ARC[7].th[2]
-UNCLE_ARC-9-HOME | 她回來先沖澡，水聲開得很滿。出來後只說：「……我活著回來就好。」 | UNCLE_ARC[8].home
-UNCLE_ARC-9-TH-0 | 只要能讓他們別再逼他……就這一次。 | UNCLE_ARC[8].th[0]
-UNCLE_ARC-9-TH-1 | 他在哭。可是是我自己想幫他。 | UNCLE_ARC[8].th[1]
-UNCLE_ARC-9-TH-2 | 對不起，阿祿。我是為了救人。——我一直這樣說服自己。 | UNCLE_ARC[8].th[2]
-UNCLE_ARC-10-HOME | 隔天她回家先洗澡，出來後格外溫柔地替你準備早餐。 | UNCLE_ARC[9].home
-UNCLE_ARC-10-TH-0 | 雨好大，回不去了。我不能把他一個人丟下。 | UNCLE_ARC[9].th[0]
-UNCLE_ARC-10-TH-1 | 他說『我不能害你』。我說我自己願意的。 | UNCLE_ARC[9].th[1]
-UNCLE_ARC-10-TH-2 | 阿祿，對不起……我好想你。可是我也沒辦法放手。 | UNCLE_ARC[9].th[2]
+UNCLE_ARC-1-HOME | 小紅回來時，神情有些疲倦，卻又像是完成了一件值得驕傲的事。\n\n阿祿：怎麼這麼晚？\n\n小紅：路上有人被欺負，我就出手幫了點忙。\n\n阿祿：妳沒受傷吧？\n\n小紅：沒有啦！……不過，只是想著要是以前的你，肯定也會這樣做吧。\n\n阿祿：下次記得不要做危險的事啊\n\n小紅：我知道了，多謝阿祿關心\n\n她說完，有些不好意思地別過臉。 | UNCLE_ARC[0].home
+UNCLE_ARC-1-TH-0 | 那個人好像被欺負了……我該什麼做…… | UNCLE_ARC[0].th[0]
+UNCLE_ARC-1-TH-1 | 周圍明明有人路過，卻沒有一個肯停下來幫忙……我也很害怕啊…… | UNCLE_ARC[0].th[1]
+UNCLE_ARC-1-TH-2 | 換作是以前的阿祿，想必他一定會毫不猶豫地走過去吧？ | UNCLE_ARC[0].th[2]
+UNCLE_ARC-2-HOME | 小紅把買回來的東西放在桌上，卻似乎還在想著別的事。\n\n小紅：阿祿，你說……有人明明很努力，卻一直遇上倒楣事，是不是很不公平？\n\n阿祿：怎麼突然這樣問？\n\n小紅：沒甚麼。只是今天聽到一些事而已。 | UNCLE_ARC[1].home
+UNCLE_ARC-2-TH-0 | 原來發生過這樣的事……難怪他欠債，還看上去十分疲倦。 | UNCLE_ARC[1].th[0]
+UNCLE_ARC-2-TH-1 | 可是……說到底這些事情跟我又沒關係 | UNCLE_ARC[1].th[1]
+UNCLE_ARC-2-TH-2 | ……嗯，不知道有沒有我能幫忙的地方…… | UNCLE_ARC[1].th[2]
+UNCLE_ARC-3-HOME | 今天小紅比以往更晚回來，臉色略帶疲倦\n\n阿祿：妳今天去了哪裡？去做苦力嗎？\n\n小紅：才不是！只是幫上次那強叔一些小忙\n\n她活動了一下肩膀後，然後就一下子躺在沙發\n\n小紅：不過還真累呢……先讓我休息一下 | UNCLE_ARC[2].home
+UNCLE_ARC-3-TH-0 | 鳥鳥真很可愛，來來來，快吃瓜子 | UNCLE_ARC[2].th[0]
+UNCLE_ARC-3-TH-1 | 真奇怪，明明是我來幫忙的，最後卻變成他在關心我 | UNCLE_ARC[2].th[1]
+UNCLE_ARC-3-TH-2 | ……嗯，沒想到比想像中還舒服…… | UNCLE_ARC[2].th[2]
+UNCLE_ARC-4-HOME | 小紅回家後異常安靜，卻不像是心情不好。\n\n阿祿：今天好像很開心？\n\n小紅：……嗯，今天有人聽我講了些以前的事。\n\n阿祿：是嗎？\n\n小紅：他沒有笑我，也沒有露出奇怪的表情。\n\n她輕輕摸了一下自己的臉。\n\n小紅：……沒甚麼。阿祿，今晚一起看電視吧。 | UNCLE_ARC[3].home
+UNCLE_ARC-4-TH-0 | ……原來全身按摩是這麼舒服，感覺整個人都輕鬆…… | UNCLE_ARC[3].th[0]
+UNCLE_ARC-4-TH-1 | 他從來不會一直盯著我臉上的傷，也不會露出那種尷尬的表情…… | UNCLE_ARC[3].th[1]
+UNCLE_ARC-4-TH-2 | ……不知為何跟他相處總是很放鬆的樣子，就像我的爸爸一樣…… | UNCLE_ARC[3].th[2]
+UNCLE_ARC-5-HOME | 小紅回家後，沒有像往常一樣立即打招呼，只是默默坐在沙發的一角。\n\n阿祿：小紅？妳怎麼了？\n\n小紅：……沒甚麼，只是今天有點累。\n\n阿祿：那今晚早點休息吧，我來點外賣。\n\n小紅：……阿祿，今天可以陪我坐一會兒嗎？\n\n她沒有解釋原因，只是悄悄挪近了阿祿一些。 | UNCLE_ARC[4].home
+UNCLE_ARC-5-TH-0 | ……！！！為甚麼？ | UNCLE_ARC[4].th[0]
+UNCLE_ARC-5-TH-1 | 對方的體溫傳過來了，吐息好重…… | UNCLE_ARC[4].th[1]
+UNCLE_ARC-5-TH-2 | 雖然有點突然，但又有點溫暖…… | UNCLE_ARC[4].th[2]
+UNCLE_ARC-6-HOME | 小紅進門後，站在玄關盯著手機看了好一會兒，直到阿祿叫她才回過神。\n\n阿祿：小紅？妳在看甚麼？\n\n小紅：咦？沒甚麼啊！只是一些無聊的訊息。\n\n阿祿：妳最近好像總是心不在焉。\n\n小紅：有、有嗎？一定是你想多了！\n\n她匆匆收起手機，轉身走進廚房。 | UNCLE_ARC[5].home
+UNCLE_ARC-6-TH-0 | ……怎麼會這樣？明明只是打算過來看一眼而已…… | UNCLE_ARC[5].th[0]
+UNCLE_ARC-6-TH-1 | 可是……如果我現在就這樣離開，他該怎麼辦…… | UNCLE_ARC[5].th[1]
+UNCLE_ARC-6-TH-2 | ……先回去吧，不能讓阿祿擔心。 | UNCLE_ARC[5].th[2]
+UNCLE_ARC-7-HOME | 小紅回來後，一言不發地把東西放下，愣了一會兒，才像忽然想起甚麼似的走向阿祿。\n\n阿祿：小紅？妳今天怎麼了？\n\n小紅：咦？沒甚麼啊！只是有點累了。\n\n阿祿：是嗎？妳好像有心事。\n\n小紅：才、才沒有呢！對了，阿祿今晚想吃甚麼？\n\n她露出平日的笑容，卻始終不敢直視阿祿。 | UNCLE_ARC[6].home
+UNCLE_ARC-7-TH-0 | ……明明知道這樣是不對的……但拒絕強叔的話太可憐了…… | UNCLE_ARC[6].th[0]
+UNCLE_ARC-7-TH-1 | ……對不起…… | UNCLE_ARC[6].th[1]
+UNCLE_ARC-7-TH-2 | ……很溫，很暖…… | UNCLE_ARC[6].th[2]
+UNCLE_ARC-8-HOME | 小紅一進門，便像平常一樣興高采烈地把購物袋放在桌上。\n\n小紅：阿祿！看我買了甚麼回來！\n\n阿祿：今天好像回來得比較晚？\n\n小紅：因為逛了好幾家店嘛！真是的，難得替你買了喜歡的東西，你就只會問這個嗎？\n\n阿祿：哈哈，謝謝妳。\n\n小紅：哼，知道就好！今晚想吃甚麼？本小姐心情好，可以特別招待你喔！\n\n她自然地笑著，彷彿今天只是再普通不過的一天。 | UNCLE_ARC[7].home
+UNCLE_ARC-8-TH-0 | ……只有我可以幫助到他…… | UNCLE_ARC[7].th[0]
+UNCLE_ARC-8-TH-1 | ……感覺身體變得奇怪，不像平時的自己…… | UNCLE_ARC[7].th[1]
+UNCLE_ARC-8-TH-2 | ……見到強叔滿足的樣子，我也不知為何有點開心…… | UNCLE_ARC[7].th[2]
+UNCLE_ARC-9-HOME | 小紅像往常一樣提著食材走進家門，向阿祿露出笑容，只是動作比平時慢了些。\n\n小紅：阿祿！今天有乖乖做伸展運動嗎？\n\n阿祿：當然有。妳今天買了不少東西呢。\n\n小紅：哼，誰叫你只會吃現成的……今天還特意多逛了幾家店呢。\n\n阿祿：妳看起來很累。今晚叫外賣吧？\n\n小紅：才不用呢！我都已經買好……\n\n她望著袋中的食材，沉默了一會兒。\n\n小紅：……算了，就今天一次吧。\n\n她坐到阿祿身旁，順手替他拉好膝上的薄毯，然後安靜地靠在沙發上。 | UNCLE_ARC[8].home
+UNCLE_ARC-9-TH-0 | ……只要這一次就好了吧？阿祿……對不起…… | UNCLE_ARC[8].th[0]
+UNCLE_ARC-9-TH-1 | ……沒關係的，只要忍一下，時間就好過了…… | UNCLE_ARC[8].th[1]
+UNCLE_ARC-9-TH-2 | ……很噁心，相比之下，強叔好很多了…… | UNCLE_ARC[8].th[2]
+UNCLE_ARC-10-HOME | 翌日，小紅終於回來，神情略顯疲倦。\n\n阿祿：昨晚在朋友家睡好嗎？\n\n小紅：雨聲那麼大……睡得不太好……\n\n阿祿：那先休息一下吧，坐下來吃早餐。\n\n小紅：……你自己準備的？\n\n阿祿：嗯，腿雖然還傷著，但做個三文治還是辦得到的。\n\n小紅沒有立即回答，只是走過去替他整理好膝上的薄毯。\n\n小紅：……笨蛋，下次記得等我回來。 | UNCLE_ARC[9].home
+UNCLE_ARC-10-TH-0 | ……雨怎麼還不停，阿祿現在應該已經睡了吧…… | UNCLE_ARC[9].th[0]
+UNCLE_ARC-10-TH-1 | 明明說好只留宿一晚，為甚麼事情會變成這樣…… | UNCLE_ARC[9].th[1]
+UNCLE_ARC-10-TH-2 | ……他握住我的手時，我明明可以推開的……可是，為甚麼有一瞬間，我竟然希望他不要放開…… | UNCLE_ARC[9].th[2]
 UNCLE_ARC-10-TH-3 | 先去洗澡。不能讓他聞到。 | UNCLE_ARC[9].th[3]
-UNCLE_ARC-11-HOME | 「他說只有我不會丟下他。」她更黏你，卻也更閃躲。 | UNCLE_ARC[10].home
-UNCLE_ARC-11-TH-0 | 又要出門了。是期待，還是害怕？ | UNCLE_ARC[10].th[0]
-UNCLE_ARC-11-TH-1 | 手機亮了，是阿祿。……我怎麼可以一邊想他，一邊走向另一個人。 | UNCLE_ARC[10].th[1]
-UNCLE_ARC-11-TH-2 | 他的腿快好了。我該回去了嗎？ | UNCLE_ARC[10].th[2]
+UNCLE_ARC-11-HOME | 小紅進門後，熟練地把買來的東西放好，又替阿祿倒了一杯溫水。\n\n阿祿：最近妳好像經常出去幫別人忙。\n\n小紅：怎麼？本小姐不在，你就覺得寂寞了？\n\n阿祿：有一點吧。不過，我更怕妳太勉強自己。\n\n小紅：……放心啦，我知道自己在做甚麼。\n\n她說得十分自然，隨後又像平日一樣，坐到阿祿身旁陪他看電視。 | UNCLE_ARC[10].home
+UNCLE_ARC-11-TH-0 | ……果然強叔沒有我不行…… | UNCLE_ARC[10].th[0]
+UNCLE_ARC-11-TH-1 | ……又不小心被強叔牽著走了，總是讓我做些羞恥的事……可是，又不討厭…… | UNCLE_ARC[10].th[1]
+UNCLE_ARC-11-TH-2 | ……男人也是這副樣子嗎？如果是阿祿的話…… | UNCLE_ARC[10].th[2]
 MOTIF-tired-echo-J | 排隊的時候我一直在想阿祿——想回家把累說給他聽，哪怕只是抱怨兩句也好。 | MOTIF_PACK.tired.echo.j
 MOTIF-tired-echo-TH | 好累……但一想到阿祿在等，好像又能多走幾步。 | MOTIF_PACK.tired.echo.th
 MOTIF-queue-echo-J | 便利店人真的很多。我把布丁選好，心裡卻在數：再多久能推開家門。 | MOTIF_PACK.queue.echo.j
@@ -1144,138 +1146,152 @@ NIGHT-MASK-TITLE | 當晚 | mask title string
 
 ## 聊天室
 
-CHAT-T0-TITLE | 腿傷無聊・隨便刷到 | CHAT_THREADS[0].title
-CHAT-T0-P0-WHO | 匿名 | CHAT_THREADS[0].posts[0].who
-CHAT-T0-P0-META | 昨天・看板 | CHAT_THREADS[0].posts[0].meta
-CHAT-T0-P0-BODY | 又輸光了。這個月的房租在哪裡？什麼時候才輪到我有女朋友。 | CHAT_THREADS[0].posts[0].body
-CHAT-T0-P1-WHO | 匿名 | CHAT_THREADS[0].posts[1].who; dup-of CHAT-T0-P0-WHO
-CHAT-T0-P1-META | 昨天・看板 | CHAT_THREADS[0].posts[1].meta; dup-of CHAT-T0-P0-META
-CHAT-T0-P1-BODY | 沒人陪就算了，連賭桌都嫌我。這日子還有什麼意思。 | CHAT_THREADS[0].posts[1].body
-CHAT-T0-P2-WHO | 路人A | CHAT_THREADS[0].posts[2].who
+2026-11-19 起論壇畫面省略時間 metadata；下列 META 條目仍保留資料來源，版面與新標籤見 `game-script.md` 的 `CHAT-UI`。
+
+CHAT-T0-TITLE | 我的人生是否完蛋了？ | CHAT_THREADS[0].title
+CHAT-T0-P0-WHO | 龜頭孛力丸 | CHAT_THREADS[0].posts[0].who
+CHAT-T0-P0-META | 第3天・發佈 | CHAT_THREADS[0].posts[0].meta
+CHAT-T0-P0-BODY | 我現在已經快五字頭，身邊的人已經結婚生子。反觀自己又肥又窮又宅，還賭到欠得一身屁債。\n\n每次只要出街見到年青男女在放閃，就搞到我一整個人心理不平衡，我也想要大奶白滑的少女做我女朋友\n\n上天真是不公平，甚麼時候才給我翻身的機會？ | CHAT_THREADS[0].posts[0].body
+CHAT-T0-P1-WHO | 人被幹就會爽 | CHAT_THREADS[0].posts[1].who
+CHAT-T0-P1-META | 回覆 | CHAT_THREADS[0].posts[1].meta
+CHAT-T0-P1-BODY | 想翻生就戒賭開始吧 | CHAT_THREADS[0].posts[1].body
+CHAT-T0-P2-WHO | 龜頭孛力丸 | CHAT_THREADS[0].posts[2].who
 CHAT-T0-P2-META | 回覆 | CHAT_THREADS[0].posts[2].meta
-CHAT-T0-P2-BODY | 兄弟別再賭了，先找份工作吧。 | CHAT_THREADS[0].posts[2].body
-CHAT-T0-P3-WHO | 匿名 | CHAT_THREADS[0].posts[3].who; dup-of CHAT-T0-P0-WHO
-CHAT-T0-P3-META | 回覆 | CHAT_THREADS[0].posts[3].meta; dup-of CHAT-T0-P2-META
-CHAT-T0-P3-BODY | 說得容易。誰會看上我這種被丟下的人。 | CHAT_THREADS[0].posts[3].body
-CHAT-T1-TITLE | 還是那個看板 | CHAT_THREADS[1].title
-CHAT-T1-P0-WHO | 匿名 | CHAT_THREADS[1].posts[0].who; dup-of CHAT-T0-P0-WHO
+CHAT-T0-P2-BODY | 閉嘴，我這種人人生已經完蛋了，要翻身只能靠絕地一博 | CHAT_THREADS[0].posts[2].body
+CHAT-T0-P3-WHO | 樹下的孤太狼 | CHAT_THREADS[0].posts[3].who
+CHAT-T0-P3-META | 回覆 | CHAT_THREADS[0].posts[3].meta
+CHAT-T0-P3-BODY | 心動不如行動，嫖妓比較實際 | CHAT_THREADS[0].posts[3].body
+CHAT-T0-P4-WHO | 龜頭孛力丸 | CHAT_THREADS[0].posts[4].who
+CHAT-T0-P4-META | 回覆 | CHAT_THREADS[0].posts[4].meta
+CHAT-T0-P4-BODY | 你給我錢嗎？ | CHAT_THREADS[0].posts[4].body
+CHAT-T1-TITLE | 又輸到血本無歸了 | CHAT_THREADS[1].title
+CHAT-T1-P0-WHO | 龜頭孛力丸 | CHAT_THREADS[1].posts[0].who
 CHAT-T1-P0-META | 今天・看板 | CHAT_THREADS[1].posts[0].meta
-CHAT-T1-P0-BODY | 現在的女人都現實。溫柔？那是裝的。誰真心陪你走到最後。 | CHAT_THREADS[1].posts[0].body
-CHAT-T1-P1-WHO | 匿名 | CHAT_THREADS[1].posts[1].who; dup-of CHAT-T0-P0-WHO
-CHAT-T1-P1-META | 今天・看板 | CHAT_THREADS[1].posts[1].meta; dup-of CHAT-T1-P0-META
-CHAT-T1-P1-BODY | 又輸了一晚。算了。抱怨給空氣聽，總比誰都不理我好。 | CHAT_THREADS[1].posts[1].body
-CHAT-T2-TITLE | 匿名・巷口那晚 | CHAT_THREADS[2].title
-CHAT-T2-P0-WHO | 匿名 | CHAT_THREADS[2].posts[0].who; dup-of CHAT-T0-P0-WHO
-CHAT-T2-P0-META | 新串・剛剛 | CHAT_THREADS[2].posts[0].meta
-CHAT-T2-P0-BODY | 巷口那個戴花髮夾的小妹，心軟得要命。我哭兩聲說醫藥費，她真的衝上來替我擋拳頭。 | CHAT_THREADS[2].posts[0].body
-CHAT-T2-P1-WHO | 路人B | CHAT_THREADS[2].posts[1].who
-CHAT-T2-P1-META | 回覆 | CHAT_THREADS[2].posts[1].meta; dup-of CHAT-T0-P2-META
-CHAT-T2-P1-BODY | 兄弟你講的是真的？別害人家小姑娘。 | CHAT_THREADS[2].posts[1].body
-CHAT-T2-P2-WHO | 匿名 | CHAT_THREADS[2].posts[2].who; dup-of CHAT-T0-P0-WHO
-CHAT-T2-P2-META | 回覆 | CHAT_THREADS[2].posts[2].meta; dup-of CHAT-T0-P2-META
-CHAT-T2-P2-BODY | 真的假的關你什麼事。她自己願意來的。 | CHAT_THREADS[2].posts[2].body
-CHAT-T3-TITLE | 匿名・母親的故事 | CHAT_THREADS[3].title
-CHAT-T3-P0-WHO | 匿名 | CHAT_THREADS[3].posts[0].who; dup-of CHAT-T0-P0-WHO
+CHAT-T1-P0-BODY | 本來收到內幕消息打算穩賺一筆，還借錢下了個重注，誰知血本無歸，現在還被債主追上門了\n\n我的人生已經看不到未來了，只希望死前可以找個大奶騷女好好爽爽 | CHAT_THREADS[1].posts[0].body
+CHAT-T1-P1-WHO | 人被幹就會爽 | CHAT_THREADS[1].posts[1].who
+CHAT-T1-P1-META | 回覆 | CHAT_THREADS[1].posts[1].meta
+CHAT-T1-P1-BODY | 一想到未來我有機會變成這樣的可憐人，就立刻有動力工作了（雙手合十 | CHAT_THREADS[1].posts[1].body
+CHAT-T1-P2-WHO | 龜頭孛力丸 | CHAT_THREADS[1].posts[2].who
+CHAT-T1-P2-META | 回覆 | CHAT_THREADS[1].posts[2].meta
+CHAT-T1-P2-BODY | 滾！你媽生下你才可憐 | CHAT_THREADS[1].posts[2].body
+CHAT-T1-P3-WHO | Cyberpunk2067 | CHAT_THREADS[1].posts[3].who
+CHAT-T1-P3-META | 回覆 | CHAT_THREADS[1].posts[3].meta
+CHAT-T1-P3-BODY | 不要太過悲觀，現在人生開始努力也不遲 | CHAT_THREADS[1].posts[3].body
+CHAT-T1-P4-WHO | 龜頭孛力丸 | CHAT_THREADS[1].posts[4].who
+CHAT-T1-P4-META | 回覆 | CHAT_THREADS[1].posts[4].meta
+CHAT-T1-P4-BODY | 你給我錢就不悲觀了 | CHAT_THREADS[1].posts[4].body
+CHAT-T2-TITLE | 活了大輩子，終於輪到我有豔遇了 | CHAT_THREADS[2].title
+CHAT-T2-P0-WHO | 龜頭孛力介 | CHAT_THREADS[2].posts[0].who
+CHAT-T2-P0-META | 新串 | CHAT_THREADS[2].posts[0].meta
+CHAT-T2-P0-BODY | 今天被追債的人抓到了，心想要被打個半死，誰知幸運女神站在我這邊，竟然來了個妹子出手解圍\n\n那不是重點，重點是那妹子皮膚看起來也白白嫩嫩的，奶子又軟又大，衣服都遮不住，很想一邊狠狠揉搓，一邊舔舐\n\n她長得還可以，可惜臉上有點瑕疵，真的可惜\n\n不過反正這年紀主動搭話的女人就只有清潔阿婆，所以回家立刻用她做素材尻了三發哈哈 | CHAT_THREADS[2].posts[0].body
+CHAT-T2-P1-WHO | 樹下的孤太狼 | CHAT_THREADS[2].posts[1].who
+CHAT-T2-P1-META | 回覆 | CHAT_THREADS[2].posts[1].meta
+CHAT-T2-P1-BODY | 太沒品吧？人家救你，你還在看人家奶子？www | CHAT_THREADS[2].posts[1].body
+CHAT-T2-P2-WHO | 龜頭孛力介 | CHAT_THREADS[2].posts[2].who
+CHAT-T2-P2-META | 回覆 | CHAT_THREADS[2].posts[2].meta
+CHAT-T2-P2-BODY | 不然呢？我只是做了每個男人都會做的事 | CHAT_THREADS[2].posts[2].body
+CHAT-T3-TITLE | 上次那個大奶妹子有下文了 | CHAT_THREADS[3].title
+CHAT-T3-P0-WHO | 龜頭孛力介 | CHAT_THREADS[3].posts[0].who
 CHAT-T3-P0-META | 新串 | CHAT_THREADS[3].posts[0].meta
-CHAT-T3-P0-BODY | 母親的事我一講，她眼睛就紅了。這種好騙……打著燈籠都難找。 | CHAT_THREADS[3].posts[0].body
-CHAT-T3-P1-WHO | 匿名 | CHAT_THREADS[3].posts[1].who; dup-of CHAT-T0-P0-WHO
-CHAT-T3-P1-META | 續 | CHAT_THREADS[3].posts[1].meta
-CHAT-T3-P1-BODY | 她還叫我強叔。哭戲沒白練。 | CHAT_THREADS[3].posts[1].body
-CHAT-T4-TITLE | 匿名・讓她來幫忙 | CHAT_THREADS[4].title
-CHAT-T4-P0-WHO | 匿名 | CHAT_THREADS[4].posts[0].who; dup-of CHAT-T0-P0-WHO
-CHAT-T4-P0-META | 新串 | CHAT_THREADS[4].posts[0].meta; dup-of CHAT-T3-P0-META
-CHAT-T4-P0-BODY | 現在連打掃煮飯都包了。被需要的感覺——她比我還享受。 | CHAT_THREADS[4].posts[0].body
-CHAT-T4-P1-WHO | 匿名 | CHAT_THREADS[4].posts[1].who; dup-of CHAT-T0-P0-WHO
-CHAT-T4-P1-META | 回覆自己 | CHAT_THREADS[4].posts[1].meta
-CHAT-T4-P1-BODY | 小事求助最穩。別一次要太多。 | CHAT_THREADS[4].posts[1].body
-CHAT-T5-TITLE | 匿名・我也曾被幫過 | CHAT_THREADS[5].title
-CHAT-T5-P0-WHO | 匿名 | CHAT_THREADS[5].posts[0].who; dup-of CHAT-T0-P0-WHO
-CHAT-T5-P0-META | 新串 | CHAT_THREADS[5].posts[0].meta; dup-of CHAT-T3-P0-META
-CHAT-T5-P0-BODY | 聽她講童年被欺負，我立刻編『我年輕時也被人幫過』。她真信了。 | CHAT_THREADS[5].posts[0].body
-CHAT-T5-P1-WHO | 匿名 | CHAT_THREADS[5].posts[1].who; dup-of CHAT-T0-P0-WHO
-CHAT-T5-P1-META | 續 | CHAT_THREADS[5].posts[1].meta; dup-of CHAT-T3-P1-META
-CHAT-T5-P1-BODY | 無害人設要演滿。還早。 | CHAT_THREADS[5].posts[1].body
-CHAT-T6-TITLE | 匿名・太孤單的時候 | CHAT_THREADS[6].title
-CHAT-T6-P0-WHO | 匿名 | CHAT_THREADS[6].posts[0].who; dup-of CHAT-T0-P0-WHO
-CHAT-T6-P0-META | 新串 | CHAT_THREADS[6].posts[0].meta; dup-of CHAT-T3-P0-META
-CHAT-T6-P0-BODY | 太孤單的時候伸手，她也只是愣住。後來還替我說話——這種心軟，真的少見。 | CHAT_THREADS[6].posts[0].body
-CHAT-T6-P1-WHO | 匿名 | CHAT_THREADS[6].posts[1].who; dup-of CHAT-T0-P0-WHO
-CHAT-T6-P1-META | 攻略半套 | CHAT_THREADS[6].posts[1].meta
-CHAT-T6-P1-BODY | 裝可憐→讓她覺得只有她能幫你→剩下的，等她自己點頭。 | CHAT_THREADS[6].posts[1].body
-CHAT-T7-TITLE | 匿名・她爽約了別人 | CHAT_THREADS[7].title
-CHAT-T7-P0-WHO | 匿名 | CHAT_THREADS[7].posts[0].who; dup-of CHAT-T0-P0-WHO
-CHAT-T7-P0-META | 新串 | CHAT_THREADS[7].posts[0].meta; dup-of CHAT-T3-P0-META
-CHAT-T7-P0-BODY | 一通電話，她就把別人晾在客廳。為了我。你們懂這種滋味嗎。 | CHAT_THREADS[7].posts[0].body
-CHAT-T7-P1-WHO | 匿名 | CHAT_THREADS[7].posts[1].who; dup-of CHAT-T0-P0-WHO
-CHAT-T7-P1-META | 續 | CHAT_THREADS[7].posts[1].meta; dup-of CHAT-T3-P1-META
-CHAT-T7-P1-BODY | 唯一性養成中。 | CHAT_THREADS[7].posts[1].body
-CHAT-T8-TITLE | 匿名・賭贏的本錢 | CHAT_THREADS[8].title
-CHAT-T8-P0-WHO | 匿名 | CHAT_THREADS[8].posts[0].who; dup-of CHAT-T0-P0-WHO
-CHAT-T8-P0-META | 新串 | CHAT_THREADS[8].posts[0].meta; dup-of CHAT-T3-P0-META
-CHAT-T8-P0-BODY | 今天手氣好，一把翻身。本錢有了，局就能做大。她還以為我可憐。 | CHAT_THREADS[8].posts[0].body
-CHAT-T8-P1-WHO | 匿名 | CHAT_THREADS[8].posts[1].who; dup-of CHAT-T0-P0-WHO
-CHAT-T8-P1-META | 附圖（自稱） | CHAT_THREADS[8].posts[1].meta
-CHAT-T8-P1-BODY | 截圖就不貼了。夠用就行。 | CHAT_THREADS[8].posts[1].body
-CHAT-T9-TITLE | 匿名・債主演得不錯 | CHAT_THREADS[9].title
-CHAT-T9-P0-WHO | 匿名 | CHAT_THREADS[9].posts[0].who; dup-of CHAT-T0-P0-WHO
-CHAT-T9-P0-META | 新串 | CHAT_THREADS[9].posts[0].meta; dup-of CHAT-T3-P0-META
-CHAT-T9-P0-BODY | 債主那幫人演得不錯，病歷都做得像真的。她嚇到了。 | CHAT_THREADS[9].posts[0].body
-CHAT-T9-P1-WHO | 匿名 | CHAT_THREADS[9].posts[1].who; dup-of CHAT-T0-P0-WHO
-CHAT-T9-P1-META | 續 | CHAT_THREADS[9].posts[1].meta; dup-of CHAT-T3-P1-META
-CHAT-T9-P1-BODY | 重病戲碼，穩。 | CHAT_THREADS[9].posts[1].body
-CHAT-T10-TITLE | 匿名・利息的別種算法 | CHAT_THREADS[10].title
-CHAT-T10-P0-WHO | 匿名 | CHAT_THREADS[10].posts[0].who; dup-of CHAT-T0-P0-WHO
-CHAT-T10-P0-META | 新串 | CHAT_THREADS[10].posts[0].meta; dup-of CHAT-T3-P0-META
-CHAT-T10-P0-BODY | 利息可以用『別的方式』抵——我當場哭著拒絕，她卻自己點頭。老天都幫我。 | CHAT_THREADS[10].posts[0].body
-CHAT-T10-P1-WHO | 路人C | CHAT_THREADS[10].posts[1].who
-CHAT-T10-P1-META | 回覆 | CHAT_THREADS[10].posts[1].meta; dup-of CHAT-T0-P2-META
-CHAT-T10-P1-BODY | ……你這樣寫沒問題嗎。 | CHAT_THREADS[10].posts[1].body
-CHAT-T10-P2-WHO | 匿名 | CHAT_THREADS[10].posts[2].who; dup-of CHAT-T0-P0-WHO
-CHAT-T10-P2-META | 回覆 | CHAT_THREADS[10].posts[2].meta; dup-of CHAT-T0-P2-META
-CHAT-T10-P2-BODY | 她自己選的。 | CHAT_THREADS[10].posts[2].body
-CHAT-T11-TITLE | 匿名・暴風雨那晚 | CHAT_THREADS[11].title
-CHAT-T11-P0-WHO | 匿名 | CHAT_THREADS[11].posts[0].who; dup-of CHAT-T0-P0-WHO
-CHAT-T11-P0-META | 當晚 | CHAT_THREADS[11].posts[0].meta; dup-of NIGHT-MASK-TITLE
-CHAT-T11-P0-BODY | 風雨封路。她自己留下來的，我連開口求她都沒有。你們懂的。 | CHAT_THREADS[11].posts[0].body
-CHAT-T11-P1-WHO | 匿名 | CHAT_THREADS[11].posts[1].who; dup-of CHAT-T0-P0-WHO
-CHAT-T11-P1-META | 續 | CHAT_THREADS[11].posts[1].meta; dup-of CHAT-T3-P1-META
-CHAT-T11-P1-BODY | 門一關，外面什麼都看不見。 | CHAT_THREADS[11].posts[1].body
-CHAT-T12-TITLE | 匿名・只有她不會丟下我 | CHAT_THREADS[12].title
-CHAT-T12-P0-WHO | 匿名 | CHAT_THREADS[12].posts[0].who; dup-of CHAT-T0-P0-WHO
-CHAT-T12-P0-META | 康復日前夜 | CHAT_THREADS[12].posts[0].meta
-CHAT-T12-P0-BODY | 只有她不會丟下我。髮夾、雨夜，細節你們自己對。 | CHAT_THREADS[12].posts[0].body
-CHAT-T12-P1-WHO | 匿名 | CHAT_THREADS[12].posts[1].who; dup-of CHAT-T0-P0-WHO
-CHAT-T12-P1-META | 最後一則 | CHAT_THREADS[12].posts[1].meta
-CHAT-T12-P1-BODY | 他腿好了又怎樣？她還是會來。因為——只有我需要她需要到這個份上。 | CHAT_THREADS[12].posts[1].body
+CHAT-T3-P0-BODY | 之前說的那個大奶妹子，因為有F奶（目測），所以就叫做F子吧\n\n自那次之後，我就在相遇的位置附近徘徊，果然被我巧遇到幾次F子，我也借機聊了幾個句\n\n那臉就沒甚麼好看，主要是再探望她那對奶子，哇，真的像有夠大！她一邊走路時奶子還會一邊抖，配上短褲勒緊的大屁股，實在騷爆\n\n其他男人看到我跟F子並肩聊天，雙眼盯大得連羨慕也來不及哈哈\n\n還有我只是隨口編了家人離世欠債的破事，她就聽得眼眶都紅了\n\n看來無論是奶子抑或奶子內裡也是這麼軟，大家覺得我下一步應該什麼做？ | CHAT_THREADS[3].posts[0].body
+CHAT-T3-P1-WHO | 樹下的孤太狼 | CHAT_THREADS[3].posts[1].who
+CHAT-T3-P1-META | 回覆 | CHAT_THREADS[3].posts[1].meta
+CHAT-T3-P1-BODY | 這年頭女拳橫行，這種單純的女生很難得了 | CHAT_THREADS[3].posts[1].body
+CHAT-T4-TITLE | F子得手了！ | CHAT_THREADS[4].title
+CHAT-T4-P0-WHO | 龜頭孛力介 | CHAT_THREADS[4].posts[0].who
+CHAT-T4-P0-META | 新串 | CHAT_THREADS[4].posts[0].meta
+CHAT-T4-P0-BODY | 之前阿姐塞給我養的雀，想不到大派用處\n\n想不到邀請她上我家看雀，她就雙眼發光\n\n上到家後還主動幫我撿拾打理，白撿了個免費女傭哈哈\n\n還在途中悄悄偷拍了幾張照片，留作這幾天的配菜\n\n原本想著找不到機會出手，剛巧見她打掃完而肩膀痠痛，我就說替她按按，結果她真的答應了\n\n那皮膚一摸上去像嬰兒一樣嫰滑，我已經多少年沒碰到女人了，幸好當時她在背後看不到我，下面的30公分硬爆差點頂到了她，當她走後我手也沒洗立刻沖了三發哈哈 | CHAT_THREADS[4].posts[0].body
+CHAT-T4-P1-WHO | 樹下的孤太狼 | CHAT_THREADS[4].posts[1].who
+CHAT-T4-P1-META | 回覆 | CHAT_THREADS[4].posts[1].meta
+CHAT-T4-P1-BODY | 我褲子到脫了，原來所謂的得手，就是按肩膀？ | CHAT_THREADS[4].posts[1].body
+CHAT-T5-TITLE | F子又有新進展 | CHAT_THREADS[5].title
+CHAT-T5-P0-WHO | 龜頭孛力介 | CHAT_THREADS[5].posts[0].who
+CHAT-T5-P0-META | 新串 | CHAT_THREADS[5].posts[0].meta
+CHAT-T5-P0-BODY | 大家又有進展了！\n\n之前說只按肩膀，今天就給來個F子全身按摩了\n\n小腹，大腿，腳板，就差敏感部分以外都被摸過遍了\n\n我在這裡要說多次，那皮膚真的又白又滑，在按摩時，我有偷偷地掏出巨根在她身上磨擦止癢，要不然真的把握不住了\n\n偏偏她還一臉天真，她一邊按摩，一邊聊起她小時候的心事，看來在她眼中我是個值得信任的大叔\n\n不知什麼時候才可以無所顧忌地入肉F子，到時一定狠狠地插她，插到她雙眼反白求饒哈哈 | CHAT_THREADS[5].posts[0].body
+CHAT-T5-P1-WHO | 外揉內肛 | CHAT_THREADS[5].posts[1].who
+CHAT-T5-P1-META | 回覆 | CHAT_THREADS[5].posts[1].meta
+CHAT-T5-P1-BODY | 個女人連全身按摩也讓你做，很明顯這是可以上冠的信號了，衝吧兄弟 | CHAT_THREADS[5].posts[1].body
+CHAT-T6-TITLE | 一切也完蛋了 | CHAT_THREADS[6].title
+CHAT-T6-P0-WHO | 龜頭孛力介 | CHAT_THREADS[6].posts[0].who
+CHAT-T6-P0-META | 新串 | CHAT_THREADS[6].posts[0].meta
+CHAT-T6-P0-BODY | 當初誰跟我說可以出手的？現在甚麼也沒有了\n\n之前不是說F子肯讓我全身按摩嗎？還跟我說心事，最近還跟我提起原來她有個暗戀的對象\n\n聽到自己的女人見異思遷，作為男人當然沉不住氣，一下子從後面抱了她一下。誰知道她整個人在拼命掙扎，我一放開手她就跑走了。臭婊子，不就是抱一下嗎，反應那麼大幹甚麼。\n\n現在愈想愈後悔，早知那時候不只抱一下就放過對方，起碼要親手揉爛那對奶子，然後將舌頭伸進她的嘴唇舐舔乾淨\n\n大概今次是最後一次更新了，這種艷遇不何時何地才會再有第二次，我的人生再無悲喜…… | CHAT_THREADS[6].posts[0].body
+CHAT-T6-P1-WHO | 樹下的孤太狼 | CHAT_THREADS[6].posts[1].who
+CHAT-T6-P1-META | 回覆 | CHAT_THREADS[6].posts[1].meta
+CHAT-T6-P1-BODY | 哈哈哈終於翻車了www | CHAT_THREADS[6].posts[1].body
+CHAT-T7-TITLE | 重大宣布！關乎我下半身的幸福 | CHAT_THREADS[7].title
+CHAT-T7-P0-WHO | 龜頭孛力介 | CHAT_THREADS[7].posts[0].who
+CHAT-T7-P0-META | 新串 | CHAT_THREADS[7].posts[0].meta
+CHAT-T7-P0-BODY | 我一路以來都是星宮彩夢的忠粉，從出道就尻到現在，現在竟然突然宣布引退\n\n那我當初為她奉上過億億萬萬子孫，其意義到底是甚麼？\n\n我的人生再無悲喜，現今以後開始戒尻了 | CHAT_THREADS[7].posts[0].body
+CHAT-T7-P1-WHO | 樹下的孤太狼 | CHAT_THREADS[7].posts[1].who
+CHAT-T7-P1-META | 回覆 | CHAT_THREADS[7].posts[1].meta
+CHAT-T7-P1-BODY | 笑死，看到標題還以為你又發生甚麼事了www | CHAT_THREADS[7].posts[1].body
+CHAT-T8-TITLE | 賭神終於眷顧我了！ | CHAT_THREADS[8].title
+CHAT-T8-P0-WHO | 龜頭孛力介 | CHAT_THREADS[8].posts[0].who
+CHAT-T8-P0-META | 新串 | CHAT_THREADS[8].posts[0].meta
+CHAT-T8-P0-BODY | 兄弟們，我今天終於轉運了！\n\n之前賭甚麼輸甚麼，今天竟然一口氣贏回來了，還額外賺了一大筆！\n\n當初笑我窮到沒錢嫖妓的傢伙，現在可以出來跪拜賭神了！ | CHAT_THREADS[8].posts[0].body
+CHAT-T8-P1-WHO | 外揉內肛 | CHAT_THREADS[8].posts[1].who
+CHAT-T8-P1-META | 回覆 | CHAT_THREADS[8].posts[1].meta
+CHAT-T8-P1-BODY | 是時候乘勝追擊了，財富自由不是夢 | CHAT_THREADS[8].posts[1].body
+CHAT-T9-TITLE | 龜頭孛力介在哪兒 | CHAT_THREADS[9].title
+CHAT-T9-P0-WHO | 樹下的孤太狼 | CHAT_THREADS[9].posts[0].who
+CHAT-T9-P0-META | 新串 | CHAT_THREADS[9].posts[0].meta
+CHAT-T9-P0-BODY | 龜頭孛力介那個混蛋去哪了？\n\n以前三天兩頭就發文，最近連人影都沒有www | CHAT_THREADS[9].posts[0].body
+CHAT-T9-P1-WHO | 外揉內肛 | CHAT_THREADS[9].posts[1].who
+CHAT-T9-P1-META | 回覆 | CHAT_THREADS[9].posts[1].meta
+CHAT-T9-P1-BODY | 對啊，之前不是還在炫耀自己賭錢發財？ | CHAT_THREADS[9].posts[1].body
+CHAT-T10-TITLE | （舊討論串停用，不顯示） | CHAT_THREADS[10].title
+CHAT-T10-P0-WHO | （舊帖已停用，不顯示） | retired CHAT_THREADS[10]
+CHAT-T10-P0-META | （舊帖已停用，不顯示） | retired CHAT_THREADS[10]
+CHAT-T10-P0-BODY | （舊帖已停用，不顯示） | retired CHAT_THREADS[10]
+CHAT-T10-P1-WHO | （舊帖已停用，不顯示） | retired CHAT_THREADS[10]
+CHAT-T10-P1-META | （舊帖已停用，不顯示） | retired CHAT_THREADS[10]
+CHAT-T10-P1-BODY | （舊帖已停用，不顯示） | retired CHAT_THREADS[10]
+CHAT-T10-P2-WHO | （舊帖已停用，不顯示） | retired CHAT_THREADS[10]
+CHAT-T10-P2-META | （舊帖已停用，不顯示） | retired CHAT_THREADS[10]
+CHAT-T10-P2-BODY | （舊帖已停用，不顯示） | retired CHAT_THREADS[10]
+CHAT-T11-TITLE | 終於將F子拿下了 | CHAT_THREADS[11].title
+CHAT-T11-P0-WHO | 龜頭孛力介 | CHAT_THREADS[11].posts[0].who
+CHAT-T11-P0-META | 新串 | CHAT_THREADS[11].posts[0].meta
+CHAT-T11-P0-BODY | 跟大家報告，終於將F子拿下了！\n\n趁著暴風雨讓她留在我家一晚，然後借機跟她睡在一起。在花了我幾小時軟磨硬泡之下，終於讓她親口答應讓肏她\n\n年輕的肉體果然不一樣，身體好滑又好摸，尤其那對奶子已經被吃得一乾二淨\n\n一開始在床上還懶有矜持地壓住嬌喘，當我以打樁機式不斷輸出，立刻發出了像AV女優的騷叫了哈哈\n\n我已經很多年沒碰女人了，昨晚我一下子將幾年的份全部都灌進去，我的子孫袋已經被搾乾了，現在是賢者模式 | CHAT_THREADS[11].posts[0].body
+CHAT-T11-P1-WHO | 樹下的孤太狼 | CHAT_THREADS[11].posts[1].who
+CHAT-T11-P1-META | 回覆 | CHAT_THREADS[11].posts[1].meta
+CHAT-T11-P1-BODY | 嘩，一上水就是來個這麼爆的消息，兄弟從現在起是我偶像了！ | CHAT_THREADS[11].posts[1].body
+CHAT-T12-TITLE | 正式宣佈，F子已經是我的女人了 | CHAT_THREADS[12].title
+CHAT-T12-P0-WHO | 龜頭孛力介 | CHAT_THREADS[12].posts[0].who
+CHAT-T12-P0-META | 新串 | CHAT_THREADS[12].posts[0].meta
+CHAT-T12-P0-BODY | 現在F子已經是我的女人了\n\n當她願意被我上那一刻，就注定陷進去了。女人就是犯賤，即使嘴上說不，只要再上多幾次，她反而就主動倒貼你。\n\n現在即使我不需要開口F子已經自動自覺服務自己，每次見面一定要不同姿勢做過幾次，輪到這年紀我開始身體吃不消了哈哈。\n\n這人已經被我吃定了，想什麼玩就什麼玩，還會照顧我起居飲食，我還有一筆大錢在手不愁生計，真的是天國般的生活。 | CHAT_THREADS[12].posts[0].body
+CHAT-T12-P1-WHO | 樹下的孤太狼 | CHAT_THREADS[12].posts[1].who
+CHAT-T12-P1-META | 回覆 | CHAT_THREADS[12].posts[1].meta
+CHAT-T12-P1-BODY | 還是樓主厲害，看完帖後下面已經硬爆 | CHAT_THREADS[12].posts[1].body
 CHAT-T13-TITLE | 匿名・她出軌之後 | CHAT_THREADS[13].title
-CHAT-T13-P0-WHO | 匿名 | CHAT_THREADS[13].posts[0].who; dup-of CHAT-T0-P0-WHO
+CHAT-T13-P0-WHO | 匿名 | CHAT_THREADS[13].posts[0].who
 CHAT-T13-P0-META | 新串・結局後 | CHAT_THREADS[13].posts[0].meta
 CHAT-T13-P0-BODY | 他們正式在一起了，還住同一屋簷下。可笑——晚上過來的人還是我。她說因為我需要她。 | CHAT_THREADS[13].posts[0].body
-CHAT-T13-P1-WHO | 匿名 | CHAT_THREADS[13].posts[1].who; dup-of CHAT-T0-P0-WHO
+CHAT-T13-P1-WHO | 匿名 | CHAT_THREADS[13].posts[1].who
 CHAT-T13-P1-META | 續 | CHAT_THREADS[13].posts[1].meta; dup-of CHAT-T3-P1-META
 CHAT-T13-P1-BODY | 她一邊愧疚一邊來。髮夾還在她頭上，味道還在我房間。阿祿若問晚歸，她大概又會心虛地笑。 | CHAT_THREADS[13].posts[1].body
 CHAT-T13-P2-WHO | 路人D | CHAT_THREADS[13].posts[2].who
 CHAT-T13-P2-META | 回覆 | CHAT_THREADS[13].posts[2].meta; dup-of CHAT-T0-P2-META
 CHAT-T13-P2-BODY | ……你這樣寫不太好吧。 | CHAT_THREADS[13].posts[2].body
-CHAT-T13-P3-WHO | 匿名 | CHAT_THREADS[13].posts[3].who; dup-of CHAT-T0-P0-WHO
+CHAT-T13-P3-WHO | 匿名 | CHAT_THREADS[13].posts[3].who
 CHAT-T13-P3-META | 回覆 | CHAT_THREADS[13].posts[3].meta; dup-of CHAT-T0-P2-META
 CHAT-T13-P3-BODY | 關你什麼事。她自己沒切斷。 | CHAT_THREADS[13].posts[3].body
 CHAT-T14-TITLE | 匿名・她搬過來了 | CHAT_THREADS[14].title
-CHAT-T14-P0-WHO | 匿名 | CHAT_THREADS[14].posts[0].who; dup-of CHAT-T0-P0-WHO
+CHAT-T14-P0-WHO | 匿名 | CHAT_THREADS[14].posts[0].who
 CHAT-T14-P0-META | 新串・結局後 | CHAT_THREADS[14].posts[0].meta; dup-of CHAT-T13-P0-META
 CHAT-T14-P0-BODY | 她搬過來了。行李不大，心倒很大——說「他比你更需要我」。對，就是我。 | CHAT_THREADS[14].posts[0].body
-CHAT-T14-P1-WHO | 匿名 | CHAT_THREADS[14].posts[1].who; dup-of CHAT-T0-P0-WHO
+CHAT-T14-P1-WHO | 匿名 | CHAT_THREADS[14].posts[1].who
 CHAT-T14-P1-META | 續 | CHAT_THREADS[14].posts[1].meta; dup-of CHAT-T3-P1-META
 CHAT-T14-P1-BODY | 那個阿祿還在等燈嗎？隨便。她現在睡我這邊。 | CHAT_THREADS[14].posts[1].body
-CHAT-T14-P2-WHO | 匿名 | CHAT_THREADS[14].posts[2].who; dup-of CHAT-T0-P0-WHO
+CHAT-T14-P2-WHO | 匿名 | CHAT_THREADS[14].posts[2].who
 CHAT-T14-P2-META | 攻略完結感言 | CHAT_THREADS[14].posts[2].meta
 CHAT-T14-P2-BODY | 裝可憐到最後。你們學不會的。 | CHAT_THREADS[14].posts[2].body
-CHAT-ROOM-TITLE | 匿名聊天室 | HTML
+CHAT-ROOM-TITLE | 匿名討論區 | HTML
 CHAT-ROOM-SUB | 偶然滑到的討論串，不知為何忍不住看下去 | HTML
 CHAT-CLOSE | 關閉 | HTML
 CHAT-BACK | ← 討論串 | HTML
 CHAT-TAP-OUT | 輕觸外側關閉 | HTML
-CHAT-NAV | 💬 聊天室 | navChat
+CHAT-NAV | 討論區 | navChat
 CHAT-OPEN-LOG | 💬 打開匿名聊天室・看見一個愛抱怨的匿名路人 | openChatRoom
 CHAT-BUSY-TRIP | （她出門了。等她回來再滑手機吧。） | openChatRoom
 CHAT-BUSY | （現在不方便看聊天室。） | openChatRoom
@@ -1286,6 +1302,205 @@ CHAT-FEED-02 |  則</span></button> | function paintChatFeed
 CHAT-FEED-03 | <p class="sm">還沒有討論串。</p> | function paintChatFeed
 CHAT-FEED-04 | 偶然滑到的討論串，不知為何忍不住看下去 | function paintChatFeed; dup-of CHAT-ROOM-SUB
 CHAT-FEED-05 | <p class="sm">這個討論串還沒有貼文。</p> | function paintChatFeed
+
+### 本輪新增的階段／聊天室文案欄位
+
+UNCLE_ARC-10-STORM | 雨勢比預報的還要猛烈。\n\n小紅望著手機上不斷出現的交通停駛消息，終於放棄了當晚回家的打算。她向阿祿報了平安，只說自己借住在附近一位認識的人家中，明早便會回去。\n\n強叔：今晚真是麻煩妳了。\n\n小紅：沒甚麼啦。反正現在也走不了。\n\n強叔：那妳睡床吧，我睡外面。\n\n小紅：你不是還在生病嗎？哪有讓病人睡沙發的道理！我睡外面就好。\n\n深夜，雨聲仍未停歇。\n\n小紅聽見房內傳來咳嗽聲，猶豫片刻，還是走了進去。\n\n小紅：強叔？還好嗎？\n\n強叔：抱歉，把妳吵醒了。\n\n小紅：真是的……身體不好就別逞強了。\n\n強叔：妳還肯這樣關心我，我真的不知道該怎麼謝妳。\n\n小紅：……別說這些了。\n\n小紅說完，便在床邊坐了下來。\n\n強叔：不用一直陪著我，妳也累了。\n\n小紅：……我再坐一會兒。\n\n窗外的雨聲掩蓋了房間裡短暫的沉默。\n\n強叔輕輕握住她的手。這一次，小紅沒有立即抽開，卻也沒有忘記自己答應過阿祿甚麼。\n\n她本來只是想再陪強叔一會兒。\n\n然而，那一夜最終沒有停留在普通的陪伴。\n\n畫面逐漸轉向窗外，直到雨聲完全淹沒房間裡的對話。 | UNCLE_ARC[9].stormText
+CHAT-T2-P3-WHO | 外揉內肛 | CHAT_THREADS[2].posts[3].who
+CHAT-T2-P3-META | 回覆 | CHAT_THREADS[2].posts[3].meta
+CHAT-T2-P3-BODY | 沒圖沒真相，我說自己給獸耳蘿莉老太婆也可以 | CHAT_THREADS[2].posts[3].body
+CHAT-T2-P4-WHO | 龜頭孛力介 | CHAT_THREADS[2].posts[4].who
+CHAT-T2-P4-META | 回覆 | CHAT_THREADS[2].posts[4].meta
+CHAT-T2-P4-BODY | 那情況什麼樣拍照呀\n\n不過她走之前還挺擔心我，問了好幾次有沒有事\n\n不知有沒有機會再見面 | CHAT_THREADS[2].posts[4].body
+CHAT-T2-P5-WHO | Cyclebike2067 | CHAT_THREADS[2].posts[5].who
+CHAT-T2-P5-META | 回覆 | CHAT_THREADS[2].posts[5].meta
+CHAT-T2-P5-BODY | 那女生真可憐，人家對你好，你卻滿腦子都是猥褻事 | CHAT_THREADS[2].posts[5].body
+CHAT-T2-P6-WHO | 樹下的孤太狼 | CHAT_THREADS[2].posts[6].who
+CHAT-T2-P6-META | 回覆 | CHAT_THREADS[2].posts[6].meta
+CHAT-T2-P6-BODY | 笑死，樓上是性無能嗎不要裝了 | CHAT_THREADS[2].posts[6].body
+CHAT-T3-P2-WHO | 外揉內肛 | CHAT_THREADS[3].posts[2].who
+CHAT-T3-P2-META | 回覆 | CHAT_THREADS[3].posts[2].meta
+CHAT-T3-P2-BODY | 所以不是在吹牛嗎？有跟她拿聯絡電話嗎？ | CHAT_THREADS[3].posts[2].body
+CHAT-T3-P3-WHO | 龜頭孛力介 | CHAT_THREADS[3].posts[3].who
+CHAT-T3-P3-META | 回覆 | CHAT_THREADS[3].posts[3].meta
+CHAT-T3-P3-BODY | 早拿到了\n\n她還說有甚麼需要幫忙可以找她 | CHAT_THREADS[3].posts[3].body
+CHAT-T3-P4-WHO | 樹下的孤太狼 | CHAT_THREADS[3].posts[4].who
+CHAT-T3-P4-META | 回覆 | CHAT_THREADS[3].posts[4].meta
+CHAT-T3-P4-BODY | 那下一步就是邀請她上家坐坐，畢竟自己地盤易辦事 | CHAT_THREADS[3].posts[4].body
+CHAT-T3-P5-WHO | 人被幹就會爽 | CHAT_THREADS[3].posts[5].who
+CHAT-T3-P5-META | 回覆 | CHAT_THREADS[3].posts[5].meta
+CHAT-T3-P5-BODY | 你不是嫌她臉有瑕疵嗎？現在又那麼主動出擊 | CHAT_THREADS[3].posts[5].body
+CHAT-T3-P6-WHO | 龜頭孛力介 | CHAT_THREADS[3].posts[6].who
+CHAT-T3-P6-META | 回覆 | CHAT_THREADS[3].posts[6].meta
+CHAT-T3-P6-BODY | 臉又不是全部\n\n再說，關了燈誰管臉上那點東西？ | CHAT_THREADS[3].posts[6].body
+CHAT-T3-P7-WHO | Cyclebike2067 | CHAT_THREADS[3].posts[7].who
+CHAT-T3-P7-META | 回覆 | CHAT_THREADS[3].posts[7].meta
+CHAT-T3-P7-BODY | 嘩真噁心，你還是正正經經去嫖娼吧，不要傷害無辜 | CHAT_THREADS[3].posts[7].body
+CHAT-T3-P8-WHO | 樹下的孤太狼 | CHAT_THREADS[3].posts[8].who
+CHAT-T3-P8-META | 回覆 | CHAT_THREADS[3].posts[8].meta
+CHAT-T3-P8-BODY | 哈哈樓上，他就是欠債沒錢嫖妓，所以才要找個免費洞啊 | CHAT_THREADS[3].posts[8].body
+CHAT-T4-P2-WHO | 龜頭孛力介 | CHAT_THREADS[4].posts[2].who
+CHAT-T4-P2-META | 回覆 | CHAT_THREADS[4].posts[2].meta
+CHAT-T4-P2-BODY | 反正你連摸的份也沒有\n\n試想像下一邊按那對奶子就一直晃，還有按到爽點那下呻吟，你一定把持不住 | CHAT_THREADS[4].posts[2].body
+CHAT-T4-P3-WHO | 外揉內肛 | CHAT_THREADS[4].posts[3].who
+CHAT-T4-P3-META | 回覆 | CHAT_THREADS[4].posts[3].meta
+CHAT-T4-P3-BODY | 兄弟厲害，所以什麼時候才揉到大奶子呀？ | CHAT_THREADS[4].posts[3].body
+CHAT-T4-P4-WHO | 龜頭孛力介 | CHAT_THREADS[4].posts[4].who
+CHAT-T4-P4-META | 回覆 | CHAT_THREADS[4].posts[4].meta
+CHAT-T4-P4-BODY | 你猜我不想狠狠揉那對奶子嗎？\n\n要靠大家集思廣益呀 | CHAT_THREADS[4].posts[4].body
+CHAT-T4-P5-WHO | 人被幹就會爽 | CHAT_THREADS[4].posts[5].who
+CHAT-T4-P5-META | 回覆 | CHAT_THREADS[4].posts[5].meta
+CHAT-T4-P5-BODY | 任何女人的奶子可以揉，但只可以揉一次 | CHAT_THREADS[4].posts[5].body
+CHAT-T4-P6-WHO | Cyclebike2067 | CHAT_THREADS[4].posts[6].who
+CHAT-T4-P6-META | 回覆 | CHAT_THREADS[4].posts[6].meta
+CHAT-T4-P6-BODY | 那女生隨便上男人的家，沒半點警戒心嗎？ | CHAT_THREADS[4].posts[6].body
+CHAT-T4-P7-WHO | 龜頭孛力介 | CHAT_THREADS[4].posts[7].who
+CHAT-T4-P7-META | 回覆 | CHAT_THREADS[4].posts[7].meta
+CHAT-T4-P7-BODY | 半點也沒有，誰說我有個人魅力，羨慕也沒用\n\n甚至還會說下次再來 | CHAT_THREADS[4].posts[7].body
+CHAT-T4-P8-WHO | 樹下的孤太狼 | CHAT_THREADS[4].posts[8].who
+CHAT-T4-P8-META | 回覆 | CHAT_THREADS[4].posts[8].meta
+CHAT-T4-P8-BODY | 敲碗求後續 | CHAT_THREADS[4].posts[8].body
+CHAT-T5-P2-WHO | 人被幹就會爽 | CHAT_THREADS[5].posts[2].who
+CHAT-T5-P2-META | 回覆 | CHAT_THREADS[5].posts[2].meta
+CHAT-T5-P2-BODY | 樓上不靠譜啊，那個快就可以得手，誰知是不是仙人跳 | CHAT_THREADS[5].posts[2].body
+CHAT-T5-P3-WHO | 龜頭孛力介 | CHAT_THREADS[5].posts[3].who
+CHAT-T5-P3-META | 回覆 | CHAT_THREADS[5].posts[3].meta
+CHAT-T5-P3-BODY | 我今天才又賭輸了，身無分文才不怕仙人跳，但不想坐牢啊 | CHAT_THREADS[5].posts[3].body
+CHAT-T5-P4-WHO | 樹下的孤太狼 | CHAT_THREADS[5].posts[4].who
+CHAT-T5-P4-META | 回覆 | CHAT_THREADS[5].posts[4].meta
+CHAT-T5-P4-BODY | 樓主還是用你的無敵的人格魅力再想想辦法吧哈哈\n\n說不定跪地請求真的可以來到一發 | CHAT_THREADS[5].posts[4].body
+CHAT-T5-P5-WHO | 人被幹就會爽 | CHAT_THREADS[5].posts[5].who
+CHAT-T5-P5-META | 回覆 | CHAT_THREADS[5].posts[5].meta
+CHAT-T5-P5-BODY | 好奇F子的心事是甚麼？ | CHAT_THREADS[5].posts[5].body
+CHAT-T5-P6-WHO | 龜頭孛力介 | CHAT_THREADS[5].posts[6].who
+CHAT-T5-P6-META | 回覆 | CHAT_THREADS[5].posts[6].meta
+CHAT-T5-P6-BODY | 我顧著摸沒認真聽呀，來來去去都是家庭問題呀，外表自卑之類 | CHAT_THREADS[5].posts[6].body
+CHAT-T5-P7-WHO | Cyclebike2067 | CHAT_THREADS[5].posts[7].who
+CHAT-T5-P7-META | 回覆 | CHAT_THREADS[5].posts[7].meta
+CHAT-T5-P7-BODY | 她連這種事情都敢跟你說，說明已經很信任你吧，你有良知嗎？ | CHAT_THREADS[5].posts[7].body
+CHAT-T5-P8-WHO | 龜頭孛力介 | CHAT_THREADS[5].posts[8].who
+CHAT-T5-P8-META | 回覆 | CHAT_THREADS[5].posts[8].meta
+CHAT-T5-P8-BODY | 性無能不愛看就滾，沒人阻你 | CHAT_THREADS[5].posts[8].body
+CHAT-T5-P9-WHO | 樹下的孤太狼 | CHAT_THREADS[5].posts[9].who
+CHAT-T5-P9-META | 回覆 | CHAT_THREADS[5].posts[9].meta
+CHAT-T5-P9-BODY | 樓上道德勒索笑死 | CHAT_THREADS[5].posts[9].body
+CHAT-T5-P10-WHO | 外揉內肛 | CHAT_THREADS[5].posts[10].who
+CHAT-T5-P10-META | 回覆 | CHAT_THREADS[5].posts[10].meta
+CHAT-T5-P10-BODY | 兄弟不要停下來，支持你！ | CHAT_THREADS[5].posts[10].body
+CHAT-T6-P2-WHO | 外揉內肛 | CHAT_THREADS[6].posts[2].who
+CHAT-T6-P2-META | 回覆 | CHAT_THREADS[6].posts[2].meta
+CHAT-T6-P2-BODY | 你也太猴急了吧，還說自己很有魅力 | CHAT_THREADS[6].posts[2].body
+CHAT-T6-P3-WHO | 龜頭孛力介 | CHAT_THREADS[6].posts[3].who
+CHAT-T6-P3-META | 回覆 | CHAT_THREADS[6].posts[3].meta
+CHAT-T6-P3-BODY | 不要再提了，實在搞不懂女人在想甚麼 | CHAT_THREADS[6].posts[3].body
+CHAT-T6-P4-WHO | 人被幹就會爽 | CHAT_THREADS[6].posts[4].who
+CHAT-T6-P4-META | 回覆 | CHAT_THREADS[6].posts[4].meta
+CHAT-T6-P4-BODY | 我想她跑去警察局了\n\n法庭見，完 | CHAT_THREADS[6].posts[4].body
+CHAT-T6-P5-WHO | 龜頭孛力介 | CHAT_THREADS[6].posts[5].who
+CHAT-T6-P5-META | 回覆 | CHAT_THREADS[6].posts[5].meta
+CHAT-T6-P5-BODY | 我現在已經用手機打了千字文道歉，希望對方原諒看了 | CHAT_THREADS[6].posts[5].body
+CHAT-T6-P6-WHO | Cyclebike2067 | CHAT_THREADS[6].posts[6].who
+CHAT-T6-P6-META | 回覆 | CHAT_THREADS[6].posts[6].meta
+CHAT-T6-P6-BODY | 對方嚇怕了是好事，你不要再出來害人 | CHAT_THREADS[6].posts[6].body
+CHAT-T6-P7-WHO | 樹下的孤太狼 | CHAT_THREADS[6].posts[7].who
+CHAT-T6-P7-META | 回覆 | CHAT_THREADS[6].posts[7].meta
+CHAT-T6-P7-BODY | 樓主其實也是走狗屎運了，難得有個大奶妹子願意陪你聊天，替你打掃，讓你按摩，你知足吧 | CHAT_THREADS[6].posts[7].body
+CHAT-T6-P8-WHO | 龜頭孛力介 | CHAT_THREADS[6].posts[8].who
+CHAT-T6-P8-META | 回覆 | CHAT_THREADS[6].posts[8].meta
+CHAT-T6-P8-BODY | 現在只有一股氣，打個手槍再說 | CHAT_THREADS[6].posts[8].body
+CHAT-T7-P2-WHO | 外揉內肛 | CHAT_THREADS[7].posts[2].who
+CHAT-T7-P2-META | 回覆 | CHAT_THREADS[7].posts[2].meta
+CHAT-T7-P2-BODY | 不要哭\n\n我推薦幾位自己最喜愛的女優給你 | CHAT_THREADS[7].posts[2].body
+CHAT-T7-P3-WHO | 龜頭孛力介 | CHAT_THREADS[7].posts[3].who
+CHAT-T7-P3-META | 回覆 | CHAT_THREADS[7].posts[3].meta
+CHAT-T7-P3-BODY | 多謝大佬！\n\n那我先尻為敬！ | CHAT_THREADS[7].posts[3].body
+CHAT-T8-P2-WHO | 龜頭孛力介 | CHAT_THREADS[8].posts[2].who
+CHAT-T8-P2-META | 回覆 | CHAT_THREADS[8].posts[2].meta
+CHAT-T8-P2-BODY | 我當初也是像你這樣想，然後……翻了好幾倍！夠本了夠本了 | CHAT_THREADS[8].posts[2].body
+CHAT-T8-P3-WHO | 樹下的孤太狼 | CHAT_THREADS[8].posts[3].who
+CHAT-T8-P3-META | 回覆 | CHAT_THREADS[8].posts[3].meta
+CHAT-T8-P3-BODY | 這下不用F子了，AV女優也主動張腿 | CHAT_THREADS[8].posts[3].body
+CHAT-T8-P4-WHO | 人被幹就會爽 | CHAT_THREADS[8].posts[4].who
+CHAT-T8-P4-META | 回覆 | CHAT_THREADS[8].posts[4].meta
+CHAT-T8-P4-BODY | 賭性難改，我賭樓主一個星期內又輸個精光 | CHAT_THREADS[8].posts[4].body
+CHAT-T8-P5-WHO | 龜頭孛力介 | CHAT_THREADS[8].posts[5].who
+CHAT-T8-P5-META | 回覆 | CHAT_THREADS[8].posts[5].meta
+CHAT-T8-P5-BODY | 閉嘴，我先想想如何好好用這筆錢享受一番 | CHAT_THREADS[8].posts[5].body
+CHAT-T9-P2-WHO | 樹下的孤太狼 | CHAT_THREADS[9].posts[2].who
+CHAT-T9-P2-META | 回覆 | CHAT_THREADS[9].posts[2].meta
+CHAT-T9-P2-BODY | 說不定已經又賭錢賠光，人現在被拋到海底了 | CHAT_THREADS[9].posts[2].body
+CHAT-T9-P3-WHO | 人被幹就會爽 | CHAT_THREADS[9].posts[3].who
+CHAT-T9-P3-META | 回覆 | CHAT_THREADS[9].posts[3].meta
+CHAT-T9-P3-BODY | 不會吧，他可是這討論區的明日之星，這樣突然不見了還真有點不習慣 | CHAT_THREADS[9].posts[3].body
+CHAT-T9-P4-WHO | Cyclebike2067 | CHAT_THREADS[9].posts[4].who
+CHAT-T9-P4-META | 回覆 | CHAT_THREADS[9].posts[4].meta
+CHAT-T9-P4-BODY | 他之前說的贏錢都不知道是不是吹牛，被債主打死了也是報應 | CHAT_THREADS[9].posts[4].body
+CHAT-T9-P5-WHO | 人被幹就會爽 | CHAT_THREADS[9].posts[5].who
+CHAT-T9-P5-META | 回覆 | CHAT_THREADS[9].posts[5].meta
+CHAT-T9-P5-BODY | 也可能只是忙著AV女隻十連斬，沒空理我們 | CHAT_THREADS[9].posts[5].body
+CHAT-T9-P6-WHO | 樹下的孤太狼 | CHAT_THREADS[9].posts[6].who
+CHAT-T9-P6-META | 回覆 | CHAT_THREADS[9].posts[6].meta
+CHAT-T9-P6-BODY | 就他那副德性？哈哈哈\n\n不過說真的，那傢伙不出來吹牛，聊天室都冷清了不少 | CHAT_THREADS[9].posts[6].body
+CHAT-T9-P7-WHO | 外揉內肛 | CHAT_THREADS[9].posts[7].who
+CHAT-T9-P7-META | 回覆 | CHAT_THREADS[9].posts[7].meta
+CHAT-T9-P7-BODY | 龜頭孛力介，看到就回覆一下啦\n\n至少讓兄弟知道你還活著 | CHAT_THREADS[9].posts[7].body
+CHAT-T9-P8-WHO | 樹下的孤太狼 | CHAT_THREADS[9].posts[8].who
+CHAT-T9-P8-META | 回覆 | CHAT_THREADS[9].posts[8].meta
+CHAT-T9-P8-BODY | 蓋個龜頭孛力介之墓，RIP | CHAT_THREADS[9].posts[8].body
+CHAT-T11-P2-WHO | 外揉內肛 | CHAT_THREADS[11].posts[2].who
+CHAT-T11-P2-META | 回覆 | CHAT_THREADS[11].posts[2].meta
+CHAT-T11-P2-BODY | 最後還真的被你撿便宜了，這陣子到底躲哪去了？ | CHAT_THREADS[11].posts[2].body
+CHAT-T11-P3-WHO | 龜頭孛力介 | CHAT_THREADS[11].posts[3].who
+CHAT-T11-P3-META | 回覆 | CHAT_THREADS[11].posts[3].meta
+CHAT-T11-P3-BODY | 畢竟人有錢就想找地方花，一半時間就是忙吃喝玩樂，一半時間就在忙拿下F子的事呀 | CHAT_THREADS[11].posts[3].body
+CHAT-T11-P4-WHO | 人被幹就會爽 | CHAT_THREADS[11].posts[4].who
+CHAT-T11-P4-META | 回覆 | CHAT_THREADS[11].posts[4].meta
+CHAT-T11-P4-BODY | 不是說F子臉上有瑕疵嗎？你還幹得下？ | CHAT_THREADS[11].posts[4].body
+CHAT-T11-P5-WHO | 龜頭孛力介 | CHAT_THREADS[11].posts[5].who
+CHAT-T11-P5-META | 回覆 | CHAT_THREADS[11].posts[5].meta
+CHAT-T11-P5-BODY | 那時沒開燈呀，但那肉體實在頂\n\n加上當時精蟲上腦，哪顧得上這些 | CHAT_THREADS[11].posts[5].body
+CHAT-T11-P6-WHO | Cyclebike2067 | CHAT_THREADS[11].posts[6].who
+CHAT-T11-P6-META | 回覆 | CHAT_THREADS[11].posts[6].meta
+CHAT-T11-P6-BODY | 上次你抱她時不是才跑開了嗎？現在又讓你給上？太假了吧？ | CHAT_THREADS[11].posts[6].body
+CHAT-T11-P7-WHO | 龜頭孛力介 | CHAT_THREADS[11].posts[7].who
+CHAT-T11-P7-META | 回覆 | CHAT_THREADS[11].posts[7].meta
+CHAT-T11-P7-BODY | 那已經是前陣子的事，我用了些小手段，那笨女人就傻乎乎上當了，已經離不開我\n\n這裡就賣個關子，有時間再跟大家說明 | CHAT_THREADS[11].posts[7].body
+CHAT-T12-P2-WHO | 外揉內肛 | CHAT_THREADS[12].posts[2].who
+CHAT-T12-P2-META | 回覆 | CHAT_THREADS[12].posts[2].meta
+CHAT-T12-P2-BODY | 有實戰影片嗎？好東西讓兄弟們見識一下吧 | CHAT_THREADS[12].posts[2].body
+CHAT-T12-P3-WHO | 人被幹就會爽 | CHAT_THREADS[12].posts[3].who
+CHAT-T12-P3-META | 回覆 | CHAT_THREADS[12].posts[3].meta
+CHAT-T12-P3-BODY | 當初不是說會交代攻略經過嗎？敲碗求後續 | CHAT_THREADS[12].posts[3].body
+CHAT-T12-P4-WHO | 龜頭孛力介 | CHAT_THREADS[12].posts[4].who
+CHAT-T12-P4-META | 回覆 | CHAT_THREADS[12].posts[4].meta
+CHAT-T12-P4-BODY | 好吧好吧，我現在心情好就給大家說下\n\n那時賭贏一把大錢，第一時間就把債跟還了。可是還額外塞了一筆錢給債主，幫我偽造病歷，還跟我演了一場身患絕症下被追債的好戲。 | CHAT_THREADS[12].posts[4].body
+CHAT-T12-P5-WHO | Cyclebike2067 | CHAT_THREADS[12].posts[5].who
+CHAT-T12-P5-META | 回覆 | CHAT_THREADS[12].posts[5].meta
+CHAT-T12-P5-BODY | F子真的會信嗎？ | CHAT_THREADS[12].posts[5].body
+CHAT-T12-P6-WHO | 龜頭孛力介 | CHAT_THREADS[12].posts[6].who
+CHAT-T12-P6-META | 回覆 | CHAT_THREADS[12].posts[6].meta
+CHAT-T12-P6-BODY | 由我說的話可能半信半疑，可是由債主出手就輪不到她不信了，她那時還聽到我隨時死掉還在丟眼淚，然後甚麼要求也答應了 | CHAT_THREADS[12].posts[6].body
+CHAT-T12-P7-WHO | 人被幹就會爽 | CHAT_THREADS[12].posts[7].who
+CHAT-T12-P7-META | 回覆 | CHAT_THREADS[12].posts[7].meta
+CHAT-T12-P7-BODY | 說到自己是PUA專家，反正只是走狗屎運，女方實在太聖母了 | CHAT_THREADS[12].posts[7].body
+CHAT-T12-P8-WHO | 龜頭孛力介 | CHAT_THREADS[12].posts[8].who
+CHAT-T12-P8-META | 回覆 | CHAT_THREADS[12].posts[8].meta
+CHAT-T12-P8-BODY | 運氣也是實力一部分，這些是你羨慕不來的 | CHAT_THREADS[12].posts[8].body
+CHAT-T12-P9-WHO | Cyclebike2067 | CHAT_THREADS[12].posts[9].who
+CHAT-T12-P9-META | 回覆 | CHAT_THREADS[12].posts[9].meta
+CHAT-T12-P9-BODY | F子人太好才會被你騙，你不怕她發現真相之後會什麼樣嗎？ | CHAT_THREADS[12].posts[9].body
+CHAT-T12-P10-WHO | 龜頭孛力介 | CHAT_THREADS[12].posts[10].who
+CHAT-T12-P10-META | 回覆 | CHAT_THREADS[12].posts[10].meta
+CHAT-T12-P10-BODY | 你不說我不說天知道？\n\n萬一被發現了，我也有信心將她拿捏住 | CHAT_THREADS[12].posts[10].body
+CHAT-T12-P11-WHO | 外揉內肛 | CHAT_THREADS[12].posts[11].who
+CHAT-T12-P11-META | 回覆 | CHAT_THREADS[12].posts[11].meta
+CHAT-T12-P11-BODY | 說實話樓主太人渣了吧？F子可能就這樣被你毀了w | CHAT_THREADS[12].posts[11].body
+CHAT-T12-P12-WHO | 龜頭孛力介 | CHAT_THREADS[12].posts[12].who
+CHAT-T12-P12-META | 回覆 | CHAT_THREADS[12].posts[12].meta
+CHAT-T12-P12-BODY | 有免費穴送上門你不吃嗎？\n\n大家也鼓起勇氣找個後生女吧，幸福的不只下半身，世界從此不一樣吧 | CHAT_THREADS[12].posts[12].body
+CHAT-T12-P13-WHO | 樹下的孤太狼 | CHAT_THREADS[12].posts[13].who
+CHAT-T12-P13-META | 回覆 | CHAT_THREADS[12].posts[13].meta
+CHAT-T12-P13-BODY | 說就容易，這些機會不是屬於我的 | CHAT_THREADS[12].posts[13].body
 
 ## 結局
 
@@ -1341,7 +1556,7 @@ UI-TITLE | 小櫻養成日記 | HTML
 UI-AFF-ALU | ❤️ 阿祿親密度 | HTML
 UI-AFF-UNCLE | ❤️ 大叔親密度 | paintStats
 UI-NAV-ASK | 💬 提問 | HTML; dup-of ASK-UI-01
-UI-NAV-CHAT | 💬 聊天室 | HTML; dup-of CHAT-NAV
+UI-NAV-CHAT | 討論區 | HTML; dup-of CHAT-NAV
 UI-NAV-DAILY | 📖 日常 | HTML
 UI-NAV-MEM | 🌸 回憶 | HTML
 UI-DOCK-HOME | 互動 | mkDock
@@ -1361,8 +1576,8 @@ UI-ARIA-EV | 打開事件 | HTML
 UI-TITLE-LOG | 紀錄 | HTML
 UI-ARIA-LOG | 打開紀錄 | HTML
 UI-ARIA-DAY | 天數 | HTML
-UI-ARIA-ASKCHAT | 提問與聊天室 | HTML
-UI-ARIA-OPENCHAT | 打開匿名聊天室 | HTML
+UI-ARIA-ASKCHAT | 提問與討論區 | HTML
+UI-ARIA-OPENCHAT | 打開匿名討論區 | HTML
 UI-ARIA-DAILYMEM | 日常與回憶 | HTML
 UI-ARIA-GIRL-HOLD | 和她聊天（長按可戳一下） | HTML
 UI-ARIA-OUTING-LINE | 外出行動結果，點一下關閉 | HTML
@@ -1373,7 +1588,7 @@ UI-ARIA-DLG | 和她聊天（點一下對話） | HTML
 UI-ARIA-TH | 外出心聲 | HTML
 UI-ARIA-DOCK | 主要行動 | HTML
 UI-ARIA-SLEEP | 睡覺，進入下一天 | HTML
-UI-ARIA-CHATROOM | 匿名聊天室 | HTML; dup-of CHAT-ROOM-TITLE
+UI-ARIA-CHATROOM | 匿名討論區 | HTML; dup-of CHAT-ROOM-TITLE
 UI-ARIA-MOM | 媽媽的訊息 | HTML; dup-of OPEN-MOM-ARIA
 UI-ARIA-OUTING-DOCK | 外出中的行動 | paintDock
 UI-SPEAKER-SAKURA | 小櫻 | HTML; dup-of END-INLINE-07
@@ -1469,3 +1684,59 @@ DBG-END-CONFIRM | 跳到第30天、阿祿親密度100、大叔親密度99，進�
 4. Send the edited file (or just the changed `ID | text` rows). We grep the location note / original text in both HTML files and replace.
 
 _Entries: 1411_
+
+## 日結介面（2026-11-18）
+
+DAY-SUMMARY-KICKER | 今日合計 | daySummary kicker
+DAY-SUMMARY-TITLE | 第 {day} 天結束 | showDaySummary
+DAY-SUMMARY-AFF | 小紅與阿祿的親密度 | daySummaryAff
+DAY-SUMMARY-AFF-VALUE | ＋{actualGain} | 當日實際增加，上限封頂後以實際差額計算
+DAY-SUMMARY-UNCLE | 小紅與強叔的關係，又近了一些。 | daySummaryUncle; 隱藏精確數值
+DAY-SUMMARY-CONTINUE | 輕觸繼續 | daySummaryContinue
+FORUM-NAV | 討論區 | navChat / paintChatNotice
+FORUM-TITLE | 匿名討論區 | chatRoom heading / aria-label
+
+強叔數值及其門檻提示已對玩家隱藏。本檔其他舊數值條目屬歷史匯出，應先對照現行 HTML，不能直接復原到玩家介面。
+
+## 首頁關係遮掩與回憶圖示（2026-11-19）
+
+HOME-UNCLE-UNKNOWN | 關係不明 | mnum; 固定文字，取代數值
+HOME-UNCLE-UNKNOWN-ARIA | 關係不明，實際進度隱藏 | mbarwrap aria-label / title
+HOME-MEMORY-ICON | 雛菊線條圖示 | navMem SVG / homeUiIcon(memory); 回憶名稱及原功能維持不變
+
+強叔關係列按原條件出現，固定遮掩紋理不隨數值變化；已觸發日結後的一次性加深效果不重播。
+
+## 外出聚焦介面（2026-11-19）
+
+OUTING-FOCUS-HINT | 按住聚焦，讀取她的心聲 | focusHint; 心聲解鎖後首次可操作時顯示一次
+OUTING-FOCUS-TARGET-ARIA | 按住聚焦，讀取她的心聲 | focusPad aria-label
+OUTING-FOCUS-IDLE | 按住聚焦 | focusFeedback; 按鈕閒置標籤
+OUTING-FOCUS-ACTIVE | 聚焦中 | focusFeedback; 按住時取代閒置標籤
+
+操作只改心聲清晰程度，不改剪影、不新增劇本內容或改動原有資料 ID。
+
+## 2026-11-19 行為註記
+
+打電話只提供原有情報，不阻礙強叔事件推進；同居〈電視〉等重溫修正重複排入及關閉干擾，所有對白與事件ID保留原樣。
+
+## 2026-11-19 心聲專用按鈕與外出標題更新（最新版）
+
+取消剪影及整卡聚焦入口，只有心聲解鎖後出現的獨立按鈕能操作。心聲原文不變，聚焦期間固定完整句子。首次提示沿用上列已批准文字；「小紅出門了」仍為原文，只增加圖示、分色、手繪紙牌及動畫，不加其他敘事說明。
+
+## 2026-11-19 v2 日結介面
+
+DAILY-LIFE-GAIN | 共同生活・親密 +{實際值} | 日結發放；上限可能只增1或0
+AUTO-OUTING-REVIEW-TITLE | 第 {day} 天・準備休息 | automaticReviewDay; 日結前過場小標
+AUTO-OUTING-REVIEW-RETURN | 她自行出門了一趟,傍晚才回到家中。 | 普通自動行程回顧；留宿當晚省略
+AUTO-OUTING-REVIEW-MISSED | 你沒有查看她外出期間的心聲及剪影。 | 自動行程日結前提示第二句
+ENDING4-TITLE | 結局四・她的離開 | ENDING4_DRAFT.title
+ENDING4-DRAFT-LABEL | 暫行文本・待結局階段細化 | ENDING4_DRAFT.label
+ENDING4-REVIEW | 重看結局 | reviewEndingFour
+ENDING4-RESTART | 重新開始 | restartEndingFour
+
+結局四正文與觸發分離，暫用稿另見 `game-script.md` 的 `ENDING-4-DRAFT`；未視為使用者最終定稿。
+
+AUTO-OUTING-REVIEW-REVEAL | 輕觸顯示全文 | automaticReviewHint; 演出淡入期間
+AUTO-OUTING-REVIEW-CONTINUE | 輕觸繼續 | automaticReviewHint; 全文顯示後
+
+自動行程的普通回家視窗省略，必要階段正文改用原階段標題；以上兩句原文改為獨立全屏演出，沒有變更正文。
